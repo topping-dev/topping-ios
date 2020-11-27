@@ -1,9 +1,9 @@
 # ToppingEngine
 
-[![CI Status](https://img.shields.io/travis/Deadknight/toppingios.svg?style=flat)](https://travis-ci.org/Deadknight/ToppingEngine)
-[![Version](https://img.shields.io/cocoapods/v/toppingios.svg?style=flat)](https://cocoapods.org/pods/ToppingEngine)
-[![License](https://img.shields.io/cocoapods/l/toppingios.svg?style=flat)](https://cocoapods.org/pods/ToppingEngine)
-[![Platform](https://img.shields.io/cocoapods/p/toppingios.svg?style=flat)](https://cocoapods.org/pods/ToppingEngine)
+[![CI Status](https://img.shields.io/travis/Deadknight/toppingios.svg?style=flat)](https://travis-ci.org/Deadknight/Topping)
+[![Version](https://img.shields.io/cocoapods/v/toppingios.svg?style=flat)](https://cocoapods.org/pods/Topping)
+[![License](https://img.shields.io/cocoapods/l/toppingios.svg?style=flat)](https://cocoapods.org/pods/Topping)
+[![Platform](https://img.shields.io/cocoapods/p/toppingios.svg?style=flat)](https://cocoapods.org/pods/Topping)
 
 ## Installation
 
@@ -11,7 +11,7 @@ Topping Engine is available through [CocoaPods](https://cocoapods.org). To insta
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ToppingEngine'
+pod 'Topping'
 ```
 
 ## Author
