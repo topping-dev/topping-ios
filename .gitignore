@@ -1,0 +1,4 @@
+Pods/**
+.DS_Store
+PodSpec Metadata/toppingios.framework
+PodSpec Metadata/toppingios.zip
