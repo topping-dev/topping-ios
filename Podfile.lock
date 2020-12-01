@@ -1,0 +1,65 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.5.0)
+  - BEMCheckBox (1.4.1)
+  - GDataXML-HTML (1.4.1)
+  - Material (3.1.8):
+    - Material/Core (= 3.1.8)
+  - Material/Core (3.1.8):
+    - Motion (~> 3.1.1)
+  - MaterialComponents/ActivityIndicator (113.2.0):
+    - MaterialComponents/Palettes
+    - MaterialComponents/private/Application
+    - MDFInternationalization
+    - MotionAnimator (~> 2.0)
+  - MaterialComponents/Palettes (113.2.0)
+  - MaterialComponents/private/Application (113.2.0)
+  - MBProgressHUD (1.2.0)
+  - MDFInternationalization (2.0.0)
+  - Motion (3.1.3):
+    - Motion/Core (= 3.1.3)
+  - Motion/Core (3.1.3)
+  - MotionAnimator (2.8.1):
+    - MotionInterchange (~> 1.6)
+  - MotionInterchange (1.6.0)
+  - Toaster (2.2.0)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0
+  - BEMCheckBox
+  - GDataXML-HTML (~> 1.4.1)
+  - Material
+  - MaterialComponents/ActivityIndicator
+  - MBProgressHUD (~> 1.2.0)
+  - Toaster (= 2.2.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Material
+    - MaterialComponents
+    - MDFInternationalization
+    - Motion
+    - MotionAnimator
+    - MotionInterchange
+    - Toaster
+  trunk:
+    - ActionSheetPicker-3.0
+    - BEMCheckBox
+    - GDataXML-HTML
+    - MBProgressHUD
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 6d79f6f3b98e2b21d218dd65a39f634ff37a27e5
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
+  GDataXML-HTML: a4f11079b48d9fe96ff1fe478943a317185227e2
+  Material: a2a3f400a3b549d53ef89e56c58c4535b29db387
+  MaterialComponents: 5124df1e5a48f6ae004f8698ad9aa1ce419f6d77
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
+  Motion: cf1e060e489f6661126374d5c60dbd2ed991605c
+  MotionAnimator: ee16aa30567c5bae0fb2750c132915829cfaaf8a
+  MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
+  Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
+
+PODFILE CHECKSUM: d5cbcad60285ca7f58a7c717ee7db41658b9e661
+
+COCOAPODS: 1.10.0

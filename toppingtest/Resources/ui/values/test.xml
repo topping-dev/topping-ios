@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <dimen name="testdimen">10dp</dimen>
+    <color name="testcolor">#FF0000</color>
+    <color name="transparent">#FFFFFFFF</color>
+    <string name="teststring">bgbgbgbg</string>
+    <integer-array name="mole">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
+    <array name="colors">
+        <item>#FFFF0000</item>
+        <item>#FF00FF00</item>
+        <item>#FF0000FF</item>
+    </array>
+    <integer name="min_speed">5</integer>
+    <item type="id" name="dialog_exit" />
+    <bool name="checkbox_checked">true</bool>
+</resources>

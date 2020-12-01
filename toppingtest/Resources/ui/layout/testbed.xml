@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:id="@+id/mainrootlayout" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:lua="http://schemas.android.com/apk/res/com.Resto" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:background="#7993AB">
+<androidx.appcompat.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:title="test"/>
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    lua:id="ListViewTest"
+    android:background="#ffffff"/>
+</LinearLayout>
