@@ -1,9 +1,9 @@
 # ToppingEngine
 
-[![CI Status](https://img.shields.io/travis/Deadknight/toppingios.svg?style=flat)](https://travis-ci.org/Deadknight/Topping)
-[![Version](https://img.shields.io/cocoapods/v/toppingios.svg?style=flat)](https://cocoapods.org/pods/Topping)
-[![License](https://img.shields.io/cocoapods/l/toppingios.svg?style=flat)](https://cocoapods.org/pods/Topping)
-[![Platform](https://img.shields.io/cocoapods/p/toppingios.svg?style=flat)](https://cocoapods.org/pods/Topping)
+[![CI Status](https://img.shields.io/travis/Deadknight/Topping.svg?style=flat)](https://travis-ci.org/Deadknight/Topping)
+[![Version](https://img.shields.io/cocoapods/v/Topping.svg?style=flat)](https://cocoapods.org/pods/Topping)
+[![License](https://img.shields.io/cocoapods/l/Topping.svg?style=flat)](https://cocoapods.org/pods/Topping)
+[![Platform](https://img.shields.io/cocoapods/p/Topping.svg?style=flat)](https://cocoapods.org/pods/Topping)
 
 ## Installation
 
