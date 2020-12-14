@@ -1,0 +1,5 @@
+module topping {
+    umbrella header "../topping/topping.h"
+    export *
+    module * { export * }
+}

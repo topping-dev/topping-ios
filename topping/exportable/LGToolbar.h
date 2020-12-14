@@ -29,5 +29,6 @@
 @property (nonatomic, retain) NSString* android_titleMarginTop;
 @property (nonatomic, retain) NSString* android_titleTextAppearance;
 @property (nonatomic, retain) NSString* android_titleTextColor;
+@property (nonatomic, retain) UIView *toolbar;
 
 @end

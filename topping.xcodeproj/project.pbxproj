@@ -56,7 +56,7 @@
 		5C43E6D824FE42F1005BEA07 /* LGRecyclerViewAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C43E6D624FE42F1005BEA07 /* LGRecyclerViewAdapter.m */; };
 		5C43E6DB24FE679B005BEA07 /* LGToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C43E6D924FE679B005BEA07 /* LGToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C43E6DC24FE679B005BEA07 /* LGToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C43E6DA24FE679B005BEA07 /* LGToolbar.m */; };
-		5C5A980924E16A4B002A22EA /* toppingios.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A980724E16A4B002A22EA /* toppingios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C5A980924E16A4B002A22EA /* topping.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A980724E16A4B002A22EA /* topping.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98B324E16BCC002A22EA /* LGButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A980F24E16BBB002A22EA /* LGButton.mm */; };
 		5C5A98B424E16BCC002A22EA /* LuaDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A981024E16BBB002A22EA /* LuaDouble.m */; };
 		5C5A98B524E16BCC002A22EA /* LGComboBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A981124E16BBB002A22EA /* LGComboBox.mm */; };
@@ -306,6 +306,7 @@
 		5C9E065A24F6782F00B8D2A4 /* BEMCheckBoxText.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
 		5CB29C612535B49C000E39A5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5CB29C602535B49C000E39A5 /* .gitignore */; };
+		5CB5E13825822C7C00BF2EF5 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5E13725822C7C00BF2EF5 /* Empty.swift */; };
 		5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8582F24E3E6AD006E6B65 /* Empty.swift */; };
 		5CB8583824E3F4D7006E6B65 /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8583624E3F4D7006E6B65 /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CB8583924E3F4D7006E6B65 /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8583724E3F4D7006E6B65 /* CircleAnnotationView.m */; };
@@ -427,7 +428,7 @@
 		5C43E6D924FE679B005BEA07 /* LGToolbar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGToolbar.h; sourceTree = "<group>"; };
 		5C43E6DA24FE679B005BEA07 /* LGToolbar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGToolbar.m; sourceTree = "<group>"; };
 		5C5A980424E16A4B002A22EA /* topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C5A980724E16A4B002A22EA /* toppingios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = toppingios.h; sourceTree = "<group>"; };
+		5C5A980724E16A4B002A22EA /* topping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = topping.h; sourceTree = "<group>"; };
 		5C5A980824E16A4B002A22EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5A980F24E16BBB002A22EA /* LGButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGButton.mm; sourceTree = "<group>"; };
 		5C5A981024E16BBB002A22EA /* LuaDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaDouble.m; sourceTree = "<group>"; };
@@ -681,6 +682,9 @@
 		5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxText.m; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		5CB29C602535B49C000E39A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5CB5E13625822C7C00BF2EF5 /* toppingtest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toppingtest-Bridging-Header.h"; sourceTree = "<group>"; };
+		5CB5E13725822C7C00BF2EF5 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
+		5CB5E1392582304800BF2EF5 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		5CB8582F24E3E6AD006E6B65 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		5CB8583624E3F4D7006E6B65 /* CircleAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleAnnotationView.h; sourceTree = "<group>"; };
 		5CB8583724E3F4D7006E6B65 /* CircleAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotationView.m; sourceTree = "<group>"; };
@@ -774,6 +778,7 @@
 		5C5A97FA24E16A4B002A22EA = {
 			isa = PBXGroup;
 			children = (
+				5CB5E13125821D3F00BF2EF5 /* include */,
 				5CB29C602535B49C000E39A5 /* .gitignore */,
 				5C2B615A254AA7C6003A9705 /* PodSpec Metadata */,
 				5C5A995624E16BEB002A22EA /* lua */,
@@ -804,7 +809,7 @@
 				5CCA827E25060491005689D8 /* DefaultResources */,
 				5C5A9A4324E1B8D5002A22EA /* libs */,
 				5C5A981B24E16BBC002A22EA /* shared */,
-				5C5A980724E16A4B002A22EA /* toppingios.h */,
+				5C5A980724E16A4B002A22EA /* topping.h */,
 				5C5A980824E16A4B002A22EA /* Info.plist */,
 			);
 			path = topping;
@@ -992,6 +997,8 @@
 				5C5ECFDD24EA6475007659B8 /* LaunchScreen.storyboard */,
 				5C5ECFE024EA6475007659B8 /* Info.plist */,
 				5C5ECFE124EA6475007659B8 /* main.m */,
+				5CB5E13725822C7C00BF2EF5 /* Empty.swift */,
+				5CB5E13625822C7C00BF2EF5 /* toppingtest-Bridging-Header.h */,
 			);
 			path = toppingtest;
 			sourceTree = "<group>";
@@ -1194,6 +1201,14 @@
 			path = core;
 			sourceTree = "<group>";
 		};
+		5CB5E13125821D3F00BF2EF5 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				5CB5E1392582304800BF2EF5 /* module.modulemap */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		5CCA827E25060491005689D8 /* DefaultResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1261,7 +1276,7 @@
 				5C5A99EB24E16BEC002A22EA /* usocket.h in Headers */,
 				5C5A991024E16BCC002A22EA /* LuaStore.h in Headers */,
 				5C5A993B24E16BCC002A22EA /* LuaViewInflator.h in Headers */,
-				5C5A980924E16A4B002A22EA /* toppingios.h in Headers */,
+				5C5A980924E16A4B002A22EA /* topping.h in Headers */,
 				5C5A99D824E16BEC002A22EA /* lauxlib.h in Headers */,
 				5C5A9A0624E16BEC002A22EA /* lundump.h in Headers */,
 				5C5A994624E16BCC002A22EA /* LGDatePicker.h in Headers */,
@@ -1450,6 +1465,7 @@
 					};
 					5C5ECFCC24EA6474007659B8 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -1753,6 +1769,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5ECFD124EA6474007659B8 /* AppDelegate.m in Sources */,
+				5CB5E13825822C7C00BF2EF5 /* Empty.swift in Sources */,
 				5C5ECFE224EA6475007659B8 /* main.m in Sources */,
 				5C5ECFD424EA6474007659B8 /* SceneDelegate.m in Sources */,
 			);
@@ -1902,6 +1919,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PURGPF38A5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1916,7 +1934,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 0.1.1;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
 				PRODUCT_NAME = topping;
@@ -1933,6 +1951,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PURGPF38A5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1947,7 +1966,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 0.1.1;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
 				PRODUCT_NAME = topping;
@@ -1962,8 +1981,10 @@
 			baseConfigurationReference = 6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PURGPF38A5;
+				INFOPLIST_FILE = "$(SRCROOT)/toppingtest/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1971,6 +1992,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios.luaiostest;
 				PRODUCT_NAME = toppingtest;
+				SWIFT_OBJC_BRIDGING_HEADER = "toppingtest/toppingtest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1980,8 +2004,10 @@
 			baseConfigurationReference = 904693E7853F639C7613CC8A /* Pods-toppingtest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PURGPF38A5;
+				INFOPLIST_FILE = "$(SRCROOT)/toppingtest/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1989,6 +2015,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios.luaiostest;
 				PRODUCT_NAME = toppingtest;
+				SWIFT_OBJC_BRIDGING_HEADER = "toppingtest/toppingtest-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

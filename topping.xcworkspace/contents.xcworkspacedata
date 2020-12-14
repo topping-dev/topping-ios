@@ -7,7 +7,4 @@
    <FileRef
       location = "group:/Users/edo/Documents/topping-ios/topping.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:topping.xcodeproj">
-   </FileRef>
 </Workspace>

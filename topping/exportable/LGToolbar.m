@@ -1,6 +1,7 @@
 #import "LGToolbar.h"
 #import <Material/Material-Swift.h>
 #import <topping/topping-Swift.h>
+#import "topping.h"
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
 #import "LGDrawableParser.h"
@@ -14,12 +15,13 @@
 
 -(UIView *)CreateComponent
 {
-    return [[LuaToolbar alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    self.toolbar = [LuaToolbar alloc];
+    return [self.toolbar initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
 }
 
 -(void)SetupComponent:(UIView *)view
 {
-    LuaToolbar *toolbar = (LuaToolbar*)self._view;
+    LuaToolbar *toolbar = (LuaToolbar*)self.toolbar;
     toolbar.getView.title = self.android_title;
     toolbar.getView.layer.zPosition = 1000;
     /*IconButton *menuButton = IconButton(image: Icon.cm.menu, tintColor: .white)
