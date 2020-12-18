@@ -1,4 +1,4 @@
-module topping {
+module Topping {
     umbrella header "../topping/topping.h"
     export *
     module * { export * }

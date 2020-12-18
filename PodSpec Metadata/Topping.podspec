@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Topping'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.'
   s.description      = <<-DESC
 ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.
@@ -20,12 +20,13 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.license          = { :type => 'Creative Commons License', :file => 'LICENSE' }
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
-  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.1/topping.zip' }
+  s.source           = { :git => '../' }
+  #s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.2/topping.zip' }
   #s.source           = { :http => 'http://localhost:1313/topping.zip' }
   
   s.social_media_url = 'https://twitter.com/toppingdev'
 
-  s.dependency 'Toaster', '2.2.0'
+  s.dependency 'Toaster', '2.3.0'
   s.dependency 'GDataXML-HTML', '1.4.1'
   s.dependency 'ActionSheetPicker-3.0', '2.5.0'
   s.dependency 'MBProgressHUD', '1.2.0'
@@ -33,7 +34,7 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.dependency 'Material', '3.1.8'
   s.dependency 'MaterialComponents/ActivityIndicator', '113.2'
   
-  s.vendored_frameworks = 'topping.framework'
+  #s.vendored_frameworks = 'Topping.framework'
   s.ios.deployment_target = '10.0'
   s.swift_versions = '4.0'
 end

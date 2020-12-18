@@ -300,8 +300,8 @@
 		5C5ECFDC24EA6475007659B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5ECFDB24EA6475007659B8 /* Assets.xcassets */; };
 		5C5ECFDF24EA6475007659B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5ECFDD24EA6475007659B8 /* LaunchScreen.storyboard */; };
 		5C5ECFE224EA6475007659B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5ECFE124EA6475007659B8 /* main.m */; };
-		5C5ECFEC24EA85C7007659B8 /* topping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* topping.framework */; };
-		5C5ECFED24EA85C7007659B8 /* topping.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* topping.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5C5ECFEC24EA85C7007659B8 /* Topping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; };
+		5C5ECFED24EA85C7007659B8 /* Topping.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C9E065924F6782F00B8D2A4 /* BEMCheckBoxText.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9E065A24F6782F00B8D2A4 /* BEMCheckBoxText.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
@@ -358,7 +358,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5C5ECFED24EA85C7007659B8 /* topping.framework in Embed Frameworks */,
+				5C5ECFED24EA85C7007659B8 /* Topping.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +427,7 @@
 		5C43E6D624FE42F1005BEA07 /* LGRecyclerViewAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGRecyclerViewAdapter.m; sourceTree = "<group>"; };
 		5C43E6D924FE679B005BEA07 /* LGToolbar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGToolbar.h; sourceTree = "<group>"; };
 		5C43E6DA24FE679B005BEA07 /* LGToolbar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGToolbar.m; sourceTree = "<group>"; };
-		5C5A980424E16A4B002A22EA /* topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5A980424E16A4B002A22EA /* Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5A980724E16A4B002A22EA /* topping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = topping.h; sourceTree = "<group>"; };
 		5C5A980824E16A4B002A22EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5A980F24E16BBB002A22EA /* LGButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGButton.mm; sourceTree = "<group>"; };
@@ -669,7 +669,7 @@
 		5C5A9A4C24E1BDEF002A22EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		5C5A9A4E24E1D3B1002A22EA /* DatabaseHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
 		5C5A9A4F24E1D3B1002A22EA /* DatabaseHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
-		5C5ECFCD24EA6474007659B8 /* toppingtest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toppingtest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5ECFCD24EA6474007659B8 /* Toppingtest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toppingtest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5ECFCF24EA6474007659B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5C5ECFD024EA6474007659B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5C5ECFD224EA6474007659B8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -741,7 +741,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C5ECFEC24EA85C7007659B8 /* topping.framework in Frameworks */,
+				5C5ECFEC24EA85C7007659B8 /* Topping.framework in Frameworks */,
 				DA624C05E379F2CE9644EB91 /* Pods_toppingtest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -793,8 +793,8 @@
 		5C5A980524E16A4B002A22EA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5C5A980424E16A4B002A22EA /* topping.framework */,
-				5C5ECFCD24EA6474007659B8 /* toppingtest.app */,
+				5C5A980424E16A4B002A22EA /* Topping.framework */,
+				5C5ECFCD24EA6474007659B8 /* Toppingtest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1408,9 +1408,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5C5A980324E16A4B002A22EA /* topping */ = {
+		5C5A980324E16A4B002A22EA /* Topping */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C5A980C24E16A4B002A22EA /* Build configuration list for PBXNativeTarget "topping" */;
+			buildConfigurationList = 5C5A980C24E16A4B002A22EA /* Build configuration list for PBXNativeTarget "Topping" */;
 			buildPhases = (
 				0C90200434A5ECEC5E989E79 /* [CP] Check Pods Manifest.lock */,
 				5C5A97FF24E16A4B002A22EA /* Headers */,
@@ -1424,14 +1424,14 @@
 			);
 			dependencies = (
 			);
-			name = topping;
+			name = Topping;
 			productName = luaios;
-			productReference = 5C5A980424E16A4B002A22EA /* topping.framework */;
+			productReference = 5C5A980424E16A4B002A22EA /* Topping.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		5C5ECFCC24EA6474007659B8 /* toppingtest */ = {
+		5C5ECFCC24EA6474007659B8 /* Toppingtest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C5ECFE524EA6475007659B8 /* Build configuration list for PBXNativeTarget "toppingtest" */;
+			buildConfigurationList = 5C5ECFE524EA6475007659B8 /* Build configuration list for PBXNativeTarget "Toppingtest" */;
 			buildPhases = (
 				94A6E7703A5B96A3274AD2FA /* [CP] Check Pods Manifest.lock */,
 				5C5ECFC924EA6474007659B8 /* Sources */,
@@ -1445,9 +1445,9 @@
 			dependencies = (
 				5C2B6154254AA075003A9705 /* PBXTargetDependency */,
 			);
-			name = toppingtest;
+			name = Toppingtest;
 			productName = luaiostest;
-			productReference = 5C5ECFCD24EA6474007659B8 /* toppingtest.app */;
+			productReference = 5C5ECFCD24EA6474007659B8 /* Toppingtest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1482,8 +1482,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5C5A980324E16A4B002A22EA /* topping */,
-				5C5ECFCC24EA6474007659B8 /* toppingtest */,
+				5C5A980324E16A4B002A22EA /* Topping */,
+				5C5ECFCC24EA6474007659B8 /* Toppingtest */,
 			);
 		};
 /* End PBXProject section */
@@ -1780,7 +1780,7 @@
 /* Begin PBXTargetDependency section */
 		5C2B6154254AA075003A9705 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5C5A980324E16A4B002A22EA /* topping */;
+			target = 5C5A980324E16A4B002A22EA /* Topping */;
 			targetProxy = 5C2B6153254AA075003A9705 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1934,10 +1934,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
-				PRODUCT_NAME = topping;
+				PRODUCT_NAME = Topping;
 				SKIP_INSTALL = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1966,10 +1966,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
-				PRODUCT_NAME = topping;
+				PRODUCT_NAME = Topping;
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1991,7 +1991,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios.luaiostest;
-				PRODUCT_NAME = toppingtest;
+				PRODUCT_NAME = Toppingtest;
 				SWIFT_OBJC_BRIDGING_HEADER = "toppingtest/toppingtest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2014,7 +2014,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios.luaiostest;
-				PRODUCT_NAME = toppingtest;
+				PRODUCT_NAME = Toppingtest;
 				SWIFT_OBJC_BRIDGING_HEADER = "toppingtest/toppingtest-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2033,7 +2033,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C5A980C24E16A4B002A22EA /* Build configuration list for PBXNativeTarget "topping" */ = {
+		5C5A980C24E16A4B002A22EA /* Build configuration list for PBXNativeTarget "Topping" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5C5A980D24E16A4B002A22EA /* Debug */,
@@ -2042,7 +2042,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C5ECFE524EA6475007659B8 /* Build configuration list for PBXNativeTarget "toppingtest" */ = {
+		5C5ECFE524EA6475007659B8 /* Build configuration list for PBXNativeTarget "Toppingtest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5C5ECFE324EA6475007659B8 /* Debug */,

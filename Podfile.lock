@@ -21,7 +21,7 @@ PODS:
   - MotionAnimator (2.8.1):
     - MotionInterchange (~> 1.6)
   - MotionInterchange (1.6.0)
-  - Toaster (2.2.0)
+  - Toaster (2.3.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - Material
   - MaterialComponents/ActivityIndicator
   - MBProgressHUD (~> 1.2.0)
-  - Toaster (= 2.2.0)
+  - Toaster (= 2.3.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -58,8 +58,8 @@ SPEC CHECKSUMS:
   Motion: cf1e060e489f6661126374d5c60dbd2ed991605c
   MotionAnimator: ee16aa30567c5bae0fb2750c132915829cfaaf8a
   MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
-  Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: d5cbcad60285ca7f58a7c717ee7db41658b9e661
+PODFILE CHECKSUM: 8211b0bbaf21338faf5abe1c7fdb0b1dc6baf9ee
 
 COCOAPODS: 1.10.0

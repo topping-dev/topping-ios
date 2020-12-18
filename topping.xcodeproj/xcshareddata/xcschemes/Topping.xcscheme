@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5C5A980324E16A4B002A22EA"
                BuildableName = "topping.framework"
-               BlueprintName = "topping"
+               BlueprintName = "Topping"
                ReferencedContainer = "container:topping.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -52,7 +52,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5C5A980324E16A4B002A22EA"
             BuildableName = "topping.framework"
-            BlueprintName = "topping"
+            BlueprintName = "Topping"
             ReferencedContainer = "container:topping.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -74,7 +74,7 @@
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "5C5A980324E16A4B002A22EA"
                      BuildableName = "topping.framework"
-                     BlueprintName = "topping"
+                     BlueprintName = "Topping"
                      ReferencedContainer = "container:topping.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
