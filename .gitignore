@@ -1,5 +1,5 @@
 Pods/**
 .DS_Store
-PodSpec Metadata/topping.framework
-PodSpec Metadata/topping.zip
+**/Topping.framework
+**/topping.zip
 topping.xcworkspace/xcuserstate/**

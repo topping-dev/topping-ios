@@ -1,7 +1,7 @@
 #import "LGToolbar.h"
 #import <Material/Material-Swift.h>
 #import <topping/topping-Swift.h>
-#import "topping.h"
+#import "Topping.h"
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
 #import "LGDrawableParser.h"

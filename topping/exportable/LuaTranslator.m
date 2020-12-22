@@ -29,7 +29,19 @@
 -(NSObject*) CallIn:(NSObject *) val, ...
 {
     if(self.nobj != NULL)
-        return [sToppingEngine OnNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
+    {
+        if(self.kFF != NULL)
+        {
+            self.kFF(self.nobj, VarArgs2(val));
+            return nil;
+        }
+        else if(self.kFRetF != NULL)
+        {
+            return (__bridge NSObject *)(self.kFRetF(self.nobj, VarArgs2(val)));
+        }
+        else
+            return [sToppingEngine OnNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
+    }
 	return [sToppingEngine OnGuiEventArgs:obj :func :VarArgs2(val)];
 }
 
@@ -37,7 +49,19 @@
 {
     NSMutableArray *args = VarArgs3(valist, val);
     if(self.nobj != NULL)
-        return [sToppingEngine OnNativeEventArgs:s :[((NSNumber*)self.nobj) intValue] :args];
+    {
+        if(self.kFF != NULL)
+        {
+            self.kFF(self.nobj, args);
+            return nil;
+        }
+        else if(self.kFRetF != NULL)
+        {
+            return (__bridge NSObject *)(self.kFRetF(self.nobj, args));
+        }
+        else
+            return [sToppingEngine OnNativeEventArgs:s :[((NSNumber*)self.nobj) intValue] :args];
+    }
     return [sToppingEngine OnGuiEventArgs:s :func :args];
 }
 
