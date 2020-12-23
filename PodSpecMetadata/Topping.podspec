@@ -20,11 +20,11 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.license          = { :type => 'Creative Commons License', :file => 'LICENSE' }
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
-  #s.source           = { :git => '../' }
-  #s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.2/topping.zip' }
-  s.source           = { :http => 'http://localhost:1313/topping.zip' }
+  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.2/topping.zip' }
+  #s.source           = { :http => 'http://localhost:1313/topping.zip' }
+  #s.source            = { :http => 'https://github.com/Deadknight/topping-ios-local/releases/download/v0.1.2/topping.zip' }
   
-  s.social_media_url = 'https://twitter.com/toppingdev'
+  s.social_media_url = 'https://www.twitter.com/toppingdev'
 
   s.dependency 'Toaster', '2.3.0'
   s.dependency 'GDataXML-HTML', '1.4.1'
@@ -34,7 +34,7 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.dependency 'Material', '3.1.8'
   s.dependency 'MaterialComponents/ActivityIndicator', '113.2'
   
-  #s.vendored_frameworks = 'Topping.framework'
+  s.vendored_frameworks = 'Topping.framework'
   s.ios.deployment_target = '10.0'
   s.swift_versions = '4.0'
 end
