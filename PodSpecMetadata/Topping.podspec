@@ -24,7 +24,7 @@ If you know how to write Android code, learning curve of this engine is very sim
   #s.source           = { :http => 'http://localhost:1313/topping.zip' }
   #s.source            = { :http => 'https://github.com/Deadknight/topping-ios-local/releases/download/v0.1.2/topping.zip' }
   
-  s.social_media_url = 'https://www.twitter.com/toppingdev'
+  #s.social_media_url = 'https://www.twitter.com/toppingdev'
 
   s.dependency 'Toaster', '2.3.0'
   s.dependency 'GDataXML-HTML', '1.4.1'
@@ -37,4 +37,12 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.vendored_frameworks = 'Topping.framework'
   s.ios.deployment_target = '10.0'
   s.swift_versions = '4.0'
+  
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+
 end
