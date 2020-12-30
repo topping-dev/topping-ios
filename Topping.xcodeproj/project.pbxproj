@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		386A214CA35DE192FF182269 /* Pods_topping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410078C561AF0B711310E8D4 /* Pods_topping.framework */; };
+		4FD173E093462938CD3C2ADB /* Pods_Topping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687002D891F8709DD32AB747 /* Pods_Topping.framework */; };
 		5C1639542504DE790084032F /* DefaultStyles.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1639522504DE790084032F /* DefaultStyles.h */; };
 		5C1639552504DE790084032F /* DefaultStyles.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1639532504DE790084032F /* DefaultStyles.m */; };
 		5C1C89672500CD170079C8D2 /* LuaToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C89662500CD170079C8D2 /* LuaToolbar.swift */; };
@@ -336,7 +336,7 @@
 		5CCA8280250604AC005689D8 /* themes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA827F250604AC005689D8 /* themes.xml */; };
 		5CD92592252CA48300EC0A1D /* NSStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD92590252CA48300EC0A1D /* NSStack.h */; };
 		5CD92593252CA48300EC0A1D /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD92591252CA48300EC0A1D /* NSStack.m */; };
-		DA624C05E379F2CE9644EB91 /* Pods_toppingtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B3CEAF4442822F0D4D2217 /* Pods_toppingtest.framework */; };
+		764968FC99A00A4E89C9B3C8 /* Pods_Toppingtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,7 +377,7 @@
 		1D517D58D89174E84C823A88 /* Pods-topping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-topping.debug.xcconfig"; path = "Target Support Files/Pods-topping/Pods-topping.debug.xcconfig"; sourceTree = "<group>"; };
 		28994DBB893F25DC8BE99C3B /* Pods-toppingios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingios.release.xcconfig"; path = "Target Support Files/Pods-toppingios/Pods-toppingios.release.xcconfig"; sourceTree = "<group>"; };
 		3E89D6F17E78D2FB9B5550FF /* Pods-toppingios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingios.debug.xcconfig"; path = "Target Support Files/Pods-toppingios/Pods-toppingios.debug.xcconfig"; sourceTree = "<group>"; };
-		410078C561AF0B711310E8D4 /* Pods_topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48369E1BD4C92AEB47991169 /* Pods-Toppingtest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toppingtest.release.xcconfig"; path = "Target Support Files/Pods-Toppingtest/Pods-Toppingtest.release.xcconfig"; sourceTree = "<group>"; };
 		5C1639522504DE790084032F /* DefaultStyles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultStyles.h; sourceTree = "<group>"; };
 		5C1639532504DE790084032F /* DefaultStyles.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultStyles.m; sourceTree = "<group>"; };
 		5C1C89662500CD170079C8D2 /* LuaToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuaToolbar.swift; sourceTree = "<group>"; };
@@ -714,12 +714,16 @@
 		5CD92590252CA48300EC0A1D /* NSStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		5CD92591252CA48300EC0A1D /* NSStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 		5CEE6382257100A500D80B59 /* Topping.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Topping.podspec; sourceTree = "<group>"; };
+		687002D891F8709DD32AB747 /* Pods_Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-topping.release.xcconfig"; path = "Target Support Files/Pods-topping/Pods-topping.release.xcconfig"; sourceTree = "<group>"; };
 		6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingtest.debug.xcconfig"; path = "Target Support Files/Pods-toppingtest/Pods-toppingtest.debug.xcconfig"; sourceTree = "<group>"; };
 		904693E7853F639C7613CC8A /* Pods-toppingtest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingtest.release.xcconfig"; path = "Target Support Files/Pods-toppingtest/Pods-toppingtest.release.xcconfig"; sourceTree = "<group>"; };
 		A0833D3D9FA9E6C075FB9BF2 /* Pods-toppingiostest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingiostest.debug.xcconfig"; path = "Target Support Files/Pods-toppingiostest/Pods-toppingiostest.debug.xcconfig"; sourceTree = "<group>"; };
 		C89F2EDF963A64B36B845051 /* Pods-toppingiostest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingiostest.release.xcconfig"; path = "Target Support Files/Pods-toppingiostest/Pods-toppingiostest.release.xcconfig"; sourceTree = "<group>"; };
-		F5B3CEAF4442822F0D4D2217 /* Pods_toppingtest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_toppingtest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEB0B50D7EDC144313FA3A8D /* Pods-Toppingtest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toppingtest.debug.xcconfig"; path = "Target Support Files/Pods-Toppingtest/Pods-Toppingtest.debug.xcconfig"; sourceTree = "<group>"; };
+		E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Toppingtest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA90E439F4D02A4714EA28CD /* Pods-Topping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Topping.debug.xcconfig"; path = "Target Support Files/Pods-Topping/Pods-Topping.debug.xcconfig"; sourceTree = "<group>"; };
+		FE0F493256F6C9FD28422B54 /* Pods-Topping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Topping.release.xcconfig"; path = "Target Support Files/Pods-Topping/Pods-Topping.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -731,7 +735,7 @@
 				5C23B60524E592AB0094389F /* CoreLocation.framework in Frameworks */,
 				5C5A9A4224E1A57D002A22EA /* MapKit.framework in Frameworks */,
 				5C5A9A4024E16F0D002A22EA /* UIKit.framework in Frameworks */,
-				386A214CA35DE192FF182269 /* Pods_topping.framework in Frameworks */,
+				4FD173E093462938CD3C2ADB /* Pods_Topping.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,7 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5ECFEC24EA85C7007659B8 /* Topping.framework in Frameworks */,
-				DA624C05E379F2CE9644EB91 /* Pods_toppingtest.framework in Frameworks */,
+				764968FC99A00A4E89C9B3C8 /* Pods_Toppingtest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1226,6 +1230,10 @@
 				6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */,
 				6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */,
 				904693E7853F639C7613CC8A /* Pods-toppingtest.release.xcconfig */,
+				FA90E439F4D02A4714EA28CD /* Pods-Topping.debug.xcconfig */,
+				FE0F493256F6C9FD28422B54 /* Pods-Topping.release.xcconfig */,
+				DEB0B50D7EDC144313FA3A8D /* Pods-Toppingtest.debug.xcconfig */,
+				48369E1BD4C92AEB47991169 /* Pods-Toppingtest.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1237,8 +1245,8 @@
 				5C5A9A4C24E1BDEF002A22EA /* CoreLocation.framework */,
 				5C5A9A4124E1A57D002A22EA /* MapKit.framework */,
 				5C5A9A3F24E16F0D002A22EA /* UIKit.framework */,
-				410078C561AF0B711310E8D4 /* Pods_topping.framework */,
-				F5B3CEAF4442822F0D4D2217 /* Pods_toppingtest.framework */,
+				687002D891F8709DD32AB747 /* Pods_Topping.framework */,
+				E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1524,15 +1532,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toppingtest/Pods-toppingtest-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toppingtest/Pods-toppingtest-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toppingtest/Pods-toppingtest-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		0C90200434A5ECEC5E989E79 /* [CP] Check Pods Manifest.lock */ = {
@@ -1550,7 +1558,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-topping-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Topping-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1563,15 +1571,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-topping/Pods-topping-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Topping/Pods-Topping-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-topping/Pods-topping-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Topping/Pods-Topping-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-topping/Pods-topping-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Topping/Pods-Topping-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		94A6E7703A5B96A3274AD2FA /* [CP] Check Pods Manifest.lock */ = {
@@ -1589,7 +1597,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-toppingtest-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Toppingtest-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1911,7 +1919,7 @@
 		};
 		5C5A980D24E16A4B002A22EA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D517D58D89174E84C823A88 /* Pods-topping.debug.xcconfig */;
+			baseConfigurationReference = FA90E439F4D02A4714EA28CD /* Pods-Topping.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1943,7 +1951,7 @@
 		};
 		5C5A980E24E16A4B002A22EA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */;
+			baseConfigurationReference = FE0F493256F6C9FD28422B54 /* Pods-Topping.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1974,7 +1982,7 @@
 		};
 		5C5ECFE324EA6475007659B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */;
+			baseConfigurationReference = DEB0B50D7EDC144313FA3A8D /* Pods-Toppingtest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1997,7 +2005,7 @@
 		};
 		5C5ECFE424EA6475007659B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 904693E7853F639C7613CC8A /* Pods-toppingtest.release.xcconfig */;
+			baseConfigurationReference = 48369E1BD4C92AEB47991169 /* Pods-Toppingtest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

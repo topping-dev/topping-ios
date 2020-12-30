@@ -3,7 +3,7 @@
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'topping' do
+target 'Topping' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
   use_frameworks! :linkage => :static
@@ -23,7 +23,7 @@ target 'topping' do
 
 end
 
-target 'toppingtest' do
+target 'Toppingtest' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
   use_frameworks! :linkage => :static
