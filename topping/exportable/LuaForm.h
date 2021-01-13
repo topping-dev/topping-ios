@@ -10,7 +10,6 @@
 
 typedef enum FormEvents
 {
-    FORM_EVENT_ZERO,
     FORM_EVENT_CREATE,
     FORM_EVENT_RESUME,
     FORM_EVENT_PAUSE,
