@@ -9,7 +9,7 @@
         android:gravity="center" />
     </item>
     <item android:top="20dp" android:left="20dp">
-        <bitmap android:src="@drawable/merkut"
+        <bitmap android:src="@drawable/indexbutleft"
         android:gravity="center" />
     </item>
 </layer-list>

@@ -21,7 +21,6 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
   s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.3/topping.zip' }
-  #s.source           = { :http => 'http://localhost:1313/topping.zip' }
   #s.source            = { :http => 'https://github.com/Deadknight/topping-ios-local/releases/download/v0.1.3/topping.zip' }
   
   #s.social_media_url = 'https://www.twitter.com/toppingdev'

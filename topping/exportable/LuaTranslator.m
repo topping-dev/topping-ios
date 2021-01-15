@@ -32,12 +32,12 @@
     {
         if(self.kFF != NULL)
         {
-            self.kFF(self.nobj, VarArgs2(val));
+            self.kFF(self.nobj, 0, VarArgs2(val));
             return nil;
         }
         else if(self.kFRetF != NULL)
         {
-            return (__bridge NSObject *)(self.kFRetF(self.nobj, VarArgs2(val)));
+            return self.kFRetF(self.nobj, 0, VarArgs2(val));
         }
         else
             return [sToppingEngine OnNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
@@ -52,12 +52,15 @@
     {
         if(self.kFF != NULL)
         {
-            self.kFF(self.nobj, args);
+            [args insertObject:s atIndex:0];
+            self.kFF(self.nobj, 1, args);
             return nil;
         }
         else if(self.kFRetF != NULL)
         {
-            return (__bridge NSObject *)(self.kFRetF(self.nobj, args));
+            [args insertObject:s atIndex:0];
+            NSObject *ret = self.kFRetF(self.nobj, 1, args);
+            return ret;
         }
         else
             return [sToppingEngine OnNativeEventArgs:s :[((NSNumber*)self.nobj) intValue] :args];

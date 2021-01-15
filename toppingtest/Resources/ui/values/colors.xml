@@ -1,29 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" xmlns:custom="http://schemas.android.com/apk/res-auto">
-    <color name="colorPrimary">#BBBBBB</color>
-    <color name="colorPrimaryDark">#DDDDDD</color>
-    <color name="colorAccent">#EEEEEE</color>
-
-    <color name="qosheBlack">#2d2d30</color>
-    <color name="qosheBlackShade">#28282a</color>
-    <color name="qosheLightBlack">#1F1F21</color>
-    <color name="qosheDarkBlack">#121212</color>
-    <color name="qosheLightGray">#EEEEEE</color>
-    <color name="qosheLighterGray">#DDDDDD</color>
-    <color name="qosheAltugGray">#EAEAEA</color>
-    <color name="qosheWhite">#FFFFFF</color>
-    <color name="qosheSmoothWhite">#F6F6F6</color>
-    <color name="qosheGray">#CCCCCC</color>
-    <color name="qosheDarkGray">#AAAAAA</color>
-    <color name="qosheDarkerGray">#555555</color>
-    <color name="qosheBlue">#6196C8</color>
-    <color name="qosheBlueThirty">#426196C8</color>
-    <color name="qosheDarkBlue">#497199</color>
-    <color name="qosheSepiaBackground">#FAF0D9</color>
-    <color name="qosheSepia">#676767</color>
-    <color name="qosheRed">#FF0000</color>
-    <color name="qosheDarkRed">#990000</color>
-    <color name="qosheYellow">#ffcb08</color>
-    <color name="qosheFiftyAlphaWhite">#876196c8</color>
-    <color name="qosheFontGray">#2D2D30</color>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
 </resources>

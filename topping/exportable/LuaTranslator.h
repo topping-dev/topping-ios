@@ -38,8 +38,8 @@ __args = [__args objectAtIndex:0]; \
 __args; })
 #endif
 
-typedef void (*kF)(void*, NSArray*);
-typedef void* (*kFRet)(void*, NSArray*);
+typedef void (*kF)(void*, int s, NSArray*);
+typedef NSObject* (*kFRet)(void*, int s, NSArray*);
 
 /**
  * Function translator for lua.
