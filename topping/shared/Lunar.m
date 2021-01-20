@@ -93,7 +93,8 @@ static NSMutableDictionary *dictFunctionNames = NULL;
             }
             if(sMethodName == nil)
             {
-                NSLog(APPEND(@"Null method on class name", className));
+                NSLog(APPEND(@"Null method on class name ", className));
+                NSLog(APPEND(@"Null method on func name ", funcName));
                 continue;
             }
             lua_pushstring(L, [sMethodName cStringUsingEncoding:NSASCIIStringEncoding]);

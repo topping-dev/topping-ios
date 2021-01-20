@@ -249,12 +249,8 @@
 
 -(NSString*)GetId
 {
-	if(self.lua_id != nil)
-		return self.lua_id;
-	if(self.android_tag != nil)
-		return self.android_tag;
-	else
-		return [LGMapView className];
+    GETID
+    return [LGMapView className];
 }
 
 + (NSString*)className
@@ -270,8 +266,8 @@
 									   :nil
 									   :[NSArray arrayWithObjects:[NSString class], [LuaTranslator class], nil]]
 			 forKey:@"RegisterEventFunction"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
-										:@selector(Create::)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
+										:@selector(Create:)
 										:[LGTextView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
 										:[LGTextView class]]

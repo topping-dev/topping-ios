@@ -78,19 +78,15 @@
     return self.adapter;
 }
 
--(void)Refresh
+-(void)Notify
 {
     [((UICollectionView*)self._view) reloadData];
 }
 
 -(NSString*)GetId
 {
-    if(self.lua_id != nil)
-        return self.lua_id;
-    if(self.android_tag != nil)
-        return self.android_tag;
-    else
-        return [LGRecyclerView className];
+    GETID
+    return [LGRecyclerView className];
 }
 
 + (NSString*)className
@@ -101,15 +97,15 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
-                                        :@selector(Create::)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
+                                        :@selector(Create:)
                                         :[LGRecyclerView class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGRecyclerView class]]
              forKey:@"Create"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetAdapter:)) :@selector(SetAdapter:) :nil :MakeArray([LGRecyclerViewAdapter class]C nil)] forKey:@"SetAdapter"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetAdapter)) :@selector(GetAdapter) :[LGRecyclerViewAdapter class] :MakeArray(nil)] forKey:@"GetAdapter"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Refresh)) :@selector(Refresh) :nil :MakeArray(nil)] forKey:@"Refresh"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Notify)) :@selector(Notify) :nil :MakeArray(nil)] forKey:@"Notify"];
     return dict;
 }
 

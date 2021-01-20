@@ -167,18 +167,18 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 +(NSMutableDictionary*)luaStaticVars
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[NSNumber numberWithInt:1] forKey:@"FORM_EVENT_CREATE"];
-    [dict setObject:[NSNumber numberWithInt:2] forKey:@"FORM_EVENT_RESUME"];
-    [dict setObject:[NSNumber numberWithInt:3] forKey:@"FORM_EVENT_PAUSE"];
-    [dict setObject:[NSNumber numberWithInt:4] forKey:@"FORM_EVENT_DESTROY"];
-    [dict setObject:[NSNumber numberWithInt:5] forKey:@"FORM_EVENT_UPDATE"];
-    [dict setObject:[NSNumber numberWithInt:6] forKey:@"FORM_EVENT_PAINT"];
-    [dict setObject:[NSNumber numberWithInt:7] forKey:@"FORM_EVENT_MOUSEDOWN"];
-    [dict setObject:[NSNumber numberWithInt:8] forKey:@"FORM_EVENT_MOUSEUP"];
-    [dict setObject:[NSNumber numberWithInt:9] forKey:@"FORM_EVENT_MOUSEMOVE"];
-    [dict setObject:[NSNumber numberWithInt:10] forKey:@"FORM_EVENT_KEYDOWN"];
-    [dict setObject:[NSNumber numberWithInt:11] forKey:@"FORM_EVENT_KEYUP"];
-    [dict setObject:[NSNumber numberWithInt:12] forKey:@"FORM_EVENT_NFC"];
+    [dict setObject:[NSNumber numberWithInt:0] forKey:@"FORM_EVENT_CREATE"];
+    [dict setObject:[NSNumber numberWithInt:1] forKey:@"FORM_EVENT_RESUME"];
+    [dict setObject:[NSNumber numberWithInt:2] forKey:@"FORM_EVENT_PAUSE"];
+    [dict setObject:[NSNumber numberWithInt:3] forKey:@"FORM_EVENT_DESTROY"];
+    [dict setObject:[NSNumber numberWithInt:4] forKey:@"FORM_EVENT_UPDATE"];
+    [dict setObject:[NSNumber numberWithInt:5] forKey:@"FORM_EVENT_PAINT"];
+    [dict setObject:[NSNumber numberWithInt:6] forKey:@"FORM_EVENT_MOUSEDOWN"];
+    [dict setObject:[NSNumber numberWithInt:7] forKey:@"FORM_EVENT_MOUSEUP"];
+    [dict setObject:[NSNumber numberWithInt:8] forKey:@"FORM_EVENT_MOUSEMOVE"];
+    [dict setObject:[NSNumber numberWithInt:9] forKey:@"FORM_EVENT_KEYDOWN"];
+    [dict setObject:[NSNumber numberWithInt:10] forKey:@"FORM_EVENT_KEYUP"];
+    [dict setObject:[NSNumber numberWithInt:11] forKey:@"FORM_EVENT_NFC"];
     return dict;
 }
 

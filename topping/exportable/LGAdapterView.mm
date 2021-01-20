@@ -337,10 +337,8 @@
 
 -(NSString*)GetId
 {
-	if(self.lua_id != nil)
-		return self.lua_id;
-	else
-		return [LGAdapterView className];
+    GETLUAID
+    return [LGAdapterView className];
 }
 
 + (NSString*)className
