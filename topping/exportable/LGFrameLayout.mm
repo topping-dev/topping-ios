@@ -4,9 +4,9 @@
 
 @implementation LGFrameLayout
 
--(void)ComponentAddMethod:(UIView *)par :(UIView *)me
+-(void)InitComponent:(UIView *)view :(LuaContext *)lc
 {
-    [super ComponentAddMethod:par :me];
+    [super InitComponent:view :lc];
     
     self._view.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -50,7 +50,8 @@
            || w.dLayoutGravity & GRAVITY_CENTER_VERTICAL)
         {
             [w._view.centerYAnchor constraintEqualToAnchor:self._view.centerYAnchor constant:w.dMarginBottom - w.dMarginTop].active = YES;
-        }}
+        }
+    }
     
     [self._view layoutIfNeeded];
 }
@@ -65,12 +66,8 @@
 
 -(NSString*)GetId
 {
-    if(self.lua_id != nil)
-        return self.lua_id;
-    if(self.android_tag != nil)
-        return self.android_tag;
-    else
-        return [LGFrameLayout className];
+    GETID
+    return [LGFrameLayout className];
 }
 
 + (NSString*)className
@@ -81,8 +78,8 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
-                                        :@selector(Create::)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
+                                        :@selector(Create:)
                                         :[LGFrameLayout class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGFrameLayout class]]

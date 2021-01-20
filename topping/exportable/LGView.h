@@ -36,6 +36,7 @@ enum GRAVITY
 
 @interface LGView : NSObject <LuaClass, LuaInterface>
 {
+    NSArray *propertyNameCache;
 }
 
 -(void)InitProperties;
@@ -80,6 +81,8 @@ enum GRAVITY
 -(void)SetBackground:(NSString*)background;
 -(void)SetBackgroundRef:(LuaRef*)ref;
 -(void)SetOnClickListener:(LuaTranslator *)lt;
+
+@property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 
 @property (nonatomic, strong) NSString* android_alpha;
 @property (nonatomic, retain) NSString* android_background;

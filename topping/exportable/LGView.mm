@@ -22,6 +22,13 @@
 
 -(BOOL)SetAttributeValue:(NSString*) name :(NSString*) value
 {
+    if(self.xmlProperties == nil)
+        self.xmlProperties = [NSMutableDictionary dictionary];
+    
+    NSArray *nameArr = [name componentsSeparatedByString:@":"];
+    NSString *xmlPropertyName = nameArr[nameArr.count - 1];
+    [self.xmlProperties setObject:value forKey:xmlPropertyName];
+    
     @try
     {
         /*NSObject *val = *(viewPropertyMap[name]);
@@ -51,6 +58,9 @@
 
 - (NSArray *)allPropertyNames
 {
+    if(propertyNameCache != nil)
+        return propertyNameCache;
+    
     NSMutableArray *rv = [NSMutableArray array];
     Class cls = [self class];
     do {
@@ -69,6 +79,7 @@
         cls = [cls superclass];
     } while (cls != nil && cls != [NSObject class]);
 
+    propertyNameCache = [NSArray arrayWithArray:rv];
     return rv;
 }
 
@@ -135,11 +146,11 @@
 		NSArray *arr = SPLIT(self.android_id, @"/");
 		if([arr count] > 1)
 			self.android_id = [arr objectAtIndex:1];
-		else
-			self.android_id = [LGView className];
+		/*else
+			self.android_id = [LGView className];*/
 	}
-	else
-		self.android_id = [LGView className];
+	/*else
+		self.android_id = [LGView className];*/
 	
 	//Setup background if available
 	if(!ISNULLOREMPTY(self.android_background))
@@ -780,12 +791,8 @@
 
 -(NSString*)GetId
 {
-	if(self.lua_id != nil)
-		return self.lua_id;
-	if(self.android_tag != nil)
-		return self.android_tag;
-	else
-		return [LGView className];
+	GETID
+    return [LGView className];
 }
 
 + (NSString*)className
@@ -796,8 +803,8 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::)) 
-										:@selector(Create::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
+										:@selector(Create:)
 										:[LGView class]
 										:[NSArray arrayWithObjects:[LuaContext class], nil]
 										:[LGView class]] 

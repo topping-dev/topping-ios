@@ -67,7 +67,9 @@
     CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(ref, CFRangeMake(0, 0), nil, CGSizeMake(MAXFLOAT, MAXFLOAT), nil);
     return size;*/
 
-    return [text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    CGSize val = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    
+    return val;
     
 //    return [text sizeWithAttributes:@{NSFontAttributeName: font}];
 }
@@ -77,6 +79,7 @@
     int l = [self GetStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
 	if (l > [DisplayMetrics GetMasterView].frame.size.width)
 		l = [DisplayMetrics GetMasterView].frame.size.width - self.dX;
+    l += 4;
 	return l;
 }
 
@@ -207,8 +210,7 @@
 
 -(void)SetTextRef:(LuaRef *)ref
 {
-    UILabel *field = (UILabel*)self._view;
-    NSString *val = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    NSString *val = [[LGValueParser GetInstance] GetValue:((NSString*)ref.idRef)];
     [self SetText:val];
 }
 
@@ -220,12 +222,8 @@
 
 -(NSString*)GetId
 {
-	if(self.lua_id != nil)
-		return self.lua_id;
-	if(self.android_tag != nil)
-		return self.android_tag;
-	else
-		return [LGTextView className];
+    GETID
+    return [LGTextView className];
 }
 
 + (NSString*)className
@@ -236,8 +234,8 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::)) 
-										:@selector(Create::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
+										:@selector(Create:)
 										:[LGTextView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGTextView class]] 

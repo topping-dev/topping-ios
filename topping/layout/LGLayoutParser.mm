@@ -20,6 +20,7 @@
 #import "LGView.h"
 #import "LGRecyclerView.h"
 #import "LGToolbar.h"
+#import "LGConstraintLayout.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -176,11 +177,16 @@
 		|| [name compare:@"LGView"] == 0)
         rootView = [[LGView alloc] init];
     else if([name compare:@"android.support.v7.widget.RecyclerView"] == 0
-        || [name compare:@"androidx.recyclerview.widget.RecyclerView"] == 0)
+        || [name compare:@"androidx.recyclerview.widget.RecyclerView"] == 0
+        || [name compare:@"LGRecyclerView"] == 0)
         rootView = [[LGRecyclerView alloc] init];
     else if([name compare:@"android.support.v7.widget.Toolbar"] == 0
-    || [name compare:@"androidx.appcompat.widget.Toolbar"] == 0)
+        || [name compare:@"androidx.appcompat.widget.Toolbar"] == 0
+        || [name compare:@"LGToolbar"] == 0)
         rootView = [[LGToolbar alloc] init];
+    else if([name compare:@"androidx.constraintlayout.widget.ConstraintLayout"] == 0
+        || [name compare:@"LGConstraintLayout"] == 0)
+        rootView = [[LGConstraintLayout alloc] init];
     else if([ToppingEngine GetViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine GetViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];

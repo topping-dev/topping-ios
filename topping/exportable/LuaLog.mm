@@ -5,36 +5,33 @@
 
 +(void)V:(NSString *)tag :(NSString *)message
 {
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"V-->"];
+    [LuaLog MSG:@"V-->" :tag :message];
 }
 
 +(void)D:(NSString *)tag :(NSString *)message
 {
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"D-->"];
+    [LuaLog MSG:@"D-->" :tag :message];
 }
 
 +(void)I:(NSString *)tag :(NSString *)message
 {
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"I-->"];
+    [LuaLog MSG:@"I-->" :tag :message];
 }
 
 +(void)W:(NSString *)tag :(NSString *)message
 {
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"W-->"];
+    [LuaLog MSG:@"W-->" :tag :message];
 }
 
 +(void)E:(NSString *)tag :(NSString *)message
 {
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"E-->"];
+    [LuaLog MSG:@"E-->" :tag :message];
 }
 
-+(void)MSG:(NSMutableString*)prefix :(NSString *)tag :(NSString *)message
++(void)MSG:(NSString*)pref :(NSString *)tag :(NSString *)message
 {
+    NSMutableString *prefix = [NSMutableString string];
+    [prefix appendString:pref];
     [prefix appendString:tag];
     [prefix appendString:@":"];
     [prefix appendString:message];
@@ -56,31 +53,31 @@
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
         [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(V::))
         :@selector(V::)
-        :[LuaLog class]
+        :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
     forKey:@"V"];
         [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(D::))
         :@selector(D::)
-        :[LuaLog class]
+        :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
     forKey:@"D"];
         [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(I::))
         :@selector(I::)
-        :[LuaLog class]
+        :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
     forKey:@"I"];
         [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(W::))
         :@selector(W::)
-        :[LuaLog class]
+        :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
     forKey:@"W"];
         [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(E::))
         :@selector(E::)
-        :[LuaLog class]
+        :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
     forKey:@"E"];

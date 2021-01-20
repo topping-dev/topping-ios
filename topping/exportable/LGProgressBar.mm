@@ -199,12 +199,8 @@
 
 -(NSString*)GetId
 {
-	if(self.lua_id != nil)
-		return self.lua_id;
-	if(self.android_tag != nil)
-		return self.android_tag;
-	else
-		return [LGProgressBar className];
+    GETID
+    return [LGProgressBar className];
 }
 
 + (NSString*)className
@@ -215,8 +211,8 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::)) 
-										:@selector(Create::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
+										:@selector(Create:)
 										:[LGProgressBar class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGProgressBar class]] 
