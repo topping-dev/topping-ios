@@ -26,8 +26,8 @@
     self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_DRAWABLE_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
-         NSString *aData = ((DynamicResource*)obj1).data;
-         NSString *bData = ((DynamicResource*)obj2).data;
+         NSString *aData = (NSString*)((DynamicResource*)obj1).data;
+         NSString *bData = (NSString*)((DynamicResource*)obj2).data;
          if(COMPARE(aData, bData))
              return NSOrderedSame;
          else if(aData.length > bData.length)
@@ -35,6 +35,16 @@
          else
              return NSOrderedDescending;
      }];
+    self.drawableMap = [NSMutableDictionary dictionary];
+    for(DynamicResource *dr in self.clearedDirectoryList)
+    {
+        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *filename = (NSString *)obj;
+            NSString *fNameNoExt = [filename stringByDeletingPathExtension];
+            [self.drawableMap setObject:fNameNoExt forKey:fNameNoExt];
+        }];
+    }
 }
 
 +(LGDrawableParser *) GetInstance
@@ -820,5 +830,15 @@
                        pointRelativeToCenter.y + CGRectGetMidY(frame));
 }
 
+-(NSDictionary *)GetKeys
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    for(NSString *key in self.drawableMap)
+    {
+        [dict setObject:key forKey:key];
+    }
+
+    return dict;
+}
 
 @end

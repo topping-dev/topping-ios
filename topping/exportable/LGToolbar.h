@@ -1,7 +1,48 @@
 #import <Foundation/Foundation.h>
 #import "LGView.h"
+#import "LuaStream.h"
 
 @interface LGToolbar : LGView
+
+-(void)SetMenu:(LuaRef*)menuRef;
+
+-(void)SetLogo:(LuaStream*)logoStream;
+
+-(void)SetNavigationIcon:(LuaStream*)navigationIconStream;
+
+-(void)SetOverflowIcon:(LuaStream*)overflowIconStream;
+
+-(NSString*)GetTitle;
+
+-(void)SetTitle:(NSString*)title;
+
+-(void)SetTitleRef:(LuaRef*)ref;
+
+-(void)SetTitleTextColor:(NSString*)color;
+
+-(void)SetTitleTextColorRef:(LuaRef*)color;
+
+-(void)SetTitleTextApperance:(LuaRef*)ref;
+
+-(NSString*)GetSubtitle;
+
+-(void)SetSubtitle:(NSString*)subtitle;
+
+-(void)SetSubtitleRef:(LuaRef*)ref;
+
+-(void)SetSubtitleTextColor:(NSString*)color;
+
+-(void)SetSubtitleTextColorRef:(LuaRef*)color;
+
+-(void)SetSubtitleTextApperance:(LuaRef*)ref;
+
+-(void)navigationTap;
+
+-(void)SetNavigationOnClickListener:(LuaTranslator*)lt;
+
+-(void)overflowTap;
+
+-(void)SetMenuItemClickListener:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSString* android_buttonGravity;
 @property (nonatomic, retain) NSString* android_collapseContentDescription;
@@ -30,5 +71,7 @@
 @property (nonatomic, retain) NSString* android_titleTextAppearance;
 @property (nonatomic, retain) NSString* android_titleTextColor;
 @property (nonatomic, retain) UIView *toolbar;
+@property (nonatomic, retain) LuaTranslator *ltNavigationClick;
+@property (nonatomic, retain) LuaTranslator *ltOverflowClick;
 
 @end

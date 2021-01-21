@@ -7,8 +7,26 @@
 #import "LGColorParser.h"
 #import "CommonDelegate.h"
 #import "LGStringParser.h"
+#import "LGStyleParser.h"
 #import "UILabelPadding.h"
 #import "LGValueParser.h"
+
+@implementation LuaTextViewAppearance
+
++(LuaTextViewAppearance *)Parse:(NSString *)name
+{
+    LuaTextViewAppearance *ltva = [[LuaTextViewAppearance alloc] init];
+    NSDictionary *dict = [[LGStyleParser GetInstance] GetStyle:name];
+    if(dict != nil)
+    {
+        ltva.color = [[LGColorParser GetInstance] ParseColor:dict[@"android:textColor"]];
+//        ltva.font = [[android:fontFamily	]]
+        ltva.textSize = [[LGDimensionParser GetInstance] GetDimension:dict[@"android:textSize"]];
+    }
+    return ltva;
+}
+
+@end
 
 @implementation LGTextView
 

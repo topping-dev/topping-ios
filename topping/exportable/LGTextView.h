@@ -3,6 +3,16 @@
 #import "LGView.h"
 #import "LuaRef.h"
 
+@interface LuaTextViewAppearance : NSObject
+
++(LuaTextViewAppearance*)Parse:(NSString*)name;
+
+@property (nonatomic, strong) UIFont *font;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic) CGFloat textSize;
+
+@end
+
 @interface LGTextView : LGView <UITextFieldDelegate>
 {
 }

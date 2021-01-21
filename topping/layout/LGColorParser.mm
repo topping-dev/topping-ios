@@ -117,7 +117,7 @@
                 retVal = [val objectForKey:ORIENTATION_LANDSCAPE_S];
         }
     }
-	if(retVal == nil)
+	if(retVal == nil && STARTS_WITH(color, @"#"))
 		retVal = [self ParseColorInternal:color];
 	return retVal;
 }

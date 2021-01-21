@@ -67,6 +67,7 @@
 #import "LGView.h"
 #import "LGRecyclerView.h"
 #import "LGRecyclerViewAdapter.h"
+#import "LGToolbar.h"
 
 #import "LuaForm.h"
 #import "LuaTabForm.h"
@@ -964,6 +965,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LGView class]];
     [Lunar Register:lu :[LGRecyclerView class]];
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
+    [Lunar Register:lu :[LGToolbar class]];
 	
 	[Lunar Register:lu :[LuaDefines class]];
 	[Lunar Register:lu :[LuaNativeObject class]];

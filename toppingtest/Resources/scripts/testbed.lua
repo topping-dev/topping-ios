@@ -87,7 +87,7 @@ function ListViewTest_Constructor(pGUI, luacontext)
     end);
     pAdapter:SetOnCreateViewHolder(function(adapter, parent, type, context)
         local inflator = LuaViewInflator.Create(context);
-        local viewToRet = inflator:ParseFile("testbedAdapter.xml", pGUI);
+        local viewToRet = inflator:ParseFile("testbedadapter.xml", pGUI);
         return viewToRet;
     end);
     pAdapter:SetOnBindViewHolder(function(adapter, view, index, object)
@@ -111,4 +111,10 @@ function ListViewTest_Constructor(pGUI, luacontext)
     pAdapter:Notify();
 end
 
+function Toolbar_Constructor(pToolbar, luacontext)
+    pToolbar:SetSubtitle("Test title");
+    pToolbar:SetLogo(LuaResource.GetResourceRef(LR.drawable.blueback))
+end
+
 LuaForm.RegisterFormEvent("ListViewTest", LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);
+LuaForm.RegisterFormEvent("ToolbarTest", LuaForm.FORM_EVENT_CREATE, Toolbar_Constructor);

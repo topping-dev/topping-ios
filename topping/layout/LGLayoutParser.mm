@@ -225,9 +225,11 @@
 		for(LGView *w in ((LGViewGroup*)view).subviews)
 		{
 			[w AddSelfToParent:viewRoot :cont];
+            [LuaForm OnFormEvent:w :FORM_EVENT_CREATE :w.lc :0, nil];
 		}
 	}
     [view InitComponent:viewRoot :cont.context];
+    [LuaForm OnFormEvent:view :FORM_EVENT_CREATE :view.lc :0, nil];
     return viewRoot;
 }
 

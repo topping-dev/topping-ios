@@ -115,7 +115,6 @@
     if(generateCell)
     {
         [lview AddSelfToParent:cell.contentView :nil];
-        //[self.cells setObject:cell forKey:indexPath];
     }
     [self.views setObject:lview forKey:indexPath];
     

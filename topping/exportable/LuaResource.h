@@ -3,6 +3,7 @@
 #import "LuaInterface.h"
 #import "LuaClass.h"
 #import "LuaStream.h"
+#import "LuaRef.h"
 
 /**
  * Lua resource class.
@@ -43,6 +44,7 @@
 +(NSObject*)GetResourceSd:(NSString*) path :(NSString*) resName;
 
 +(LuaStream*)GetResource:(NSString*) path :(NSString *)resName;
++(LuaStream*)GetResourceRef:(LuaRef*) ref;
 
 +(NSArray*)GetResourceDirectories:(NSString*) startsWith;
 +(NSArray*)GetResourceFiles:(NSString*) path;

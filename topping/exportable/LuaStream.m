@@ -5,14 +5,12 @@
 
 @implementation LuaStream
 
-@synthesize type, stream;
-
 - (id) init
 {
 	self = [super init];
 	if (self != nil) 
 	{
-		type = -1;
+		self.type = -1;
 	}
 	return self;
 }
@@ -136,7 +134,7 @@
 
 -(void)WriteOne:(int)oneByte
 {
-	if(type == INPUTSTREAM)
+	if(self.type == INPUTSTREAM)
 	{
 		Loge("LuaStream", "Tried to write input stream.");
 		return;
@@ -153,7 +151,7 @@
 
 -(void)Write:(LuaBuffer*) bufferO :(int)offset :(int)length
 {
-	if(type == INPUTSTREAM)
+	if(self.type == INPUTSTREAM)
 	{
 		Loge("LuaStream", "Tried to write input stream.");
 		return;

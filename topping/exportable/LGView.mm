@@ -187,7 +187,6 @@
     }
     
     self.lc = lc;
-    [LuaForm OnFormEvent:self :FORM_EVENT_CREATE :lc :0, nil];
 }
 
 -(void)SetupComponent:(UIView *)view
@@ -199,18 +198,22 @@
     if(backgroundDrawable != nil)
     {
         if(backgroundDrawable.color != nil)
+        {
             self._view.backgroundColor = backgroundDrawable.color;
+            if(view != nil)
+                view.backgroundColor = backgroundDrawable.color;
+        }
         else if(backgroundDrawable.img != nil)
+        {
             self._view.backgroundColor = [UIColor colorWithPatternImage:backgroundDrawable.img];
+            if(view != nil)
+                view.backgroundColor = [UIColor colorWithPatternImage:backgroundDrawable.img];
+        }
     }
 }
 
 -(void)AddSelfToParent:(UIView*)par :(LuaForm*)cont
 {
-	/*
-	 UIView *myView = [[UIView alloc] init];
-	 myView.frame = CGRectMake(dX, dY, dWidth, dHeight);
-	 */
     self.cont = cont;
 	UIView *myView = [self CreateComponent];
 	[self InitComponent:myView :cont.context];

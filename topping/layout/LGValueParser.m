@@ -243,6 +243,7 @@
 -(NSMutableDictionary *)GetAllKeys
 {
     NSMutableDictionary *dictRet = [NSMutableDictionary dictionary];
+    [dictRet setObject:[[LGDrawableParser GetInstance] GetKeys] forKey:@"drawable"];
     [dictRet setObject:[[LGStringParser GetInstance] GetKeys] forKey:@"string"];
     [dictRet setObject:[[LGColorParser GetInstance] GetKeys] forKey:@"color"];
     [dictRet setObject:[[LGDimensionParser GetInstance] GetKeys] forKey:@"dimen"];
