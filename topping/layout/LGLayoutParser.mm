@@ -21,6 +21,7 @@
 #import "LGRecyclerView.h"
 #import "LGToolbar.h"
 #import "LGConstraintLayout.h"
+#import "LGHorizontalScrollView.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -51,8 +52,8 @@
 
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
     {
-        NSString *aData = ((DynamicResource*)obj1).data;
-        NSString *bData = ((DynamicResource*)obj2).data;
+        NSString *aData = (NSString*)((DynamicResource*)obj1).data;
+        NSString *bData = (NSString*)((DynamicResource*)obj2).data;
         if(COMPARE(aData, bData))
             return NSOrderedSame;
         else if(aData.length > bData.length)
@@ -119,10 +120,7 @@
 	if([name compare:@"AbsListView"] == 0
 	   || [name compare:@"LGAbsListView"] == 0)
 		rootView = [[LGAbsListView alloc] init];
-	/*else if([name compare:@"AdapterView"] == 0
-	   || [name compare:@"LGAdapterView"] == 0)
-		rootView = [[LGAdapterView alloc] init];*/
-    if([name compare:@"AutoCompleteTextView"] == 0
+    else if([name compare:@"AutoCompleteTextView"] == 0
        || [name compare:@"LGAutoCompleteTextView"] == 0)
         rootView = [[LGAutoCompleteTextView alloc] init];
 	else if([name compare:@"Button"] == 0
@@ -169,7 +167,7 @@
 		rootView = [[LGScrollView alloc] init];
     else if([name compare:@"HorizontalScrollView"] == 0
         || [name compare:@"LGHorizontalScrollView"] == 0)
-    rootView = [[LGScrollView alloc] init];
+        rootView = [[LGHorizontalScrollView alloc] init];
 	else if([name compare:@"TextView"] == 0
 			|| [name compare:@"LGTextView"] == 0)
 		rootView = [[LGTextView alloc] init];	

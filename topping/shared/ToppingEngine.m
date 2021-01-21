@@ -53,6 +53,7 @@
 #import "LGCheckBox.h"
 #import "LGComboBox.h"
 #import "LGCompoundButton.h"
+#import "LGConstraintLayout.h"
 #import "LGDatePicker.h"
 #import "LGEditText.h"
 #import "LGLinearLayout.h"
@@ -947,9 +948,10 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LGCheckBox class]];
 	[Lunar Register:lu :[LGComboBox class]];
 	[Lunar Register:lu :[LGCompoundButton class]];
+    [Lunar Register:lu :[LGConstraintLayout class]];
 	[Lunar Register:lu :[LGDatePicker class]];
 	[Lunar Register:lu :[LGEditText class]];
-	//[Lunar Register:lu :[LGFrameLayout class]];
+	[Lunar Register:lu :[LGFrameLayout class]];
 	[Lunar Register:lu :[LGLinearLayout class]];
 	[Lunar Register:lu :[LGListView class]];
 	[Lunar Register:lu :[LGProgressBar class]];
@@ -958,11 +960,8 @@ int RegisterTag(lua_State *L)
 	//[Lunar Register:lu :[LGRelativeLayout class]];
 	[Lunar Register:lu :[LGScrollView class]];
     [Lunar Register:lu :[LGHorizontalScrollView class]];
-	//[Lunar Register:lu :[LGTableLayout class]];
-	//[Lunar Register:lu :[LGTableRow class]];
 	[Lunar Register:lu :[LGTextView class]];
 	[Lunar Register:lu :[LGView class]];
-	//[Lunar Register:lu :[LGViewGroup class]];
     [Lunar Register:lu :[LGRecyclerView class]];
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
 	

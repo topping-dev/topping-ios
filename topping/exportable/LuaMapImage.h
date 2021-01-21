@@ -21,8 +21,8 @@
 -(void)SetVisible:(bool)value;
 -(void)SetZIndex:(float)index;
 
-@property(nonatomic, retain) PointAnnotation *image;
-@property(nonatomic, retain) NSString *path, *name;
-@property(nonatomic, retain) PointAnnotationView *view;
+@property(nonatomic, strong) PointAnnotation *image;
+@property(nonatomic, strong) NSString *path, *name;
+@property(nonatomic, strong) PointAnnotationView *view;
 
 @end

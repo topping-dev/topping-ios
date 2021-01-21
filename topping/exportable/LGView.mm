@@ -152,62 +152,39 @@
 	/*else
 		self.android_id = [LGView className];*/
 	
-	//Setup background if available
-	if(!ISNULLOREMPTY(self.android_background))
-	{
-		if(!CONTAINS(self.android_background, @"#"))
-		{
-            LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:self.android_background];
-            if(ldr.img != nil)
-            {
-                self.backgroundImage = ldr.img;
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
-                [self._view addSubview:imageView];
-                [self._view sendSubviewToBack:imageView];
-            }
-            else if(ldr.color != nil)
-            {
-                self._view.backgroundColor = ldr.color;
-            }
+	//Setup background
+    NSObject *obj = nil;
+    if(ISNULLOREMPTY(self.android_background))
+        obj = [[LGStyleParser GetInstance] GetStyleValue:@"android:windowBackground" :[sToppingEngine GetAppStyle]];
+    else
+        obj = [[LGValueParser GetInstance] GetValue:self.android_background];
+    if([obj isKindOfClass:[LGDrawableReturn class]])
+    {
+        LGDrawableReturn *ldr = (LGDrawableReturn*)obj;
+        if(ldr.img != nil)
+        {
+            self.backgroundImage = ldr.img;
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
+            [self._view addSubview:imageView];
+            [self._view sendSubviewToBack:imageView];
+        }
+        else if(ldr.color != nil)
+        {
+            self._view.backgroundColor = ldr.color;
+        }
+        else
+        {
+            UIColor *color = [[LGColorParser GetInstance] ParseColor:self.android_background];
+            if(color != nil)
+                self._view.backgroundColor = color;
             else
-            {
-                UIColor *color = [[LGColorParser GetInstance] ParseColor:self.android_background];
-                if(color != nil)
-                    self._view.backgroundColor = color;
-                else
-                    [Log e:@"LGView.mm" :APPEND(@"Cannot load backgorund image ", self.android_background)];
-            }
-			/*NSArray *arr = SPLIT(background, @"/");
-			if([arr count] > 1)
-			{
-				NSString *filename = @"";
-				filename = FUAPPEND(filename, [arr objectAtIndex:1], @".png", NULL);
-				NSData* data = GetResourceAssetSd(@"Resimler/", filename, nil);
-				if(data != nil)
-				{
-					self.backgroundImage = [UIImage imageWithData:data];
-					self._view.backgroundColor = [UIColor colorWithPatternImage: self.backgroundImage];
-				}
-				else
-				{
-					UIColor *color = [[LGColorParser GetInstance] ParseColor:self.background];
-					if(color != nil)
-						self._view.backgroundColor = color;
-					else
-						[Log e:@"LGView.mm" :APPEND(@"Cannot load backgorund image ", filename)];
-				}
-			}
-			else 
-			{
-				self._view.backgroundColor = [[LGColorParser GetInstance] ParseColorInternal:background];
-			}*/
-		}
-		else 
-		{
-			self._view.backgroundColor = [[LGColorParser GetInstance] ParseColorInternal:self.android_background];
-		}
-
-	}
+                [Log e:@"LGView.mm" :APPEND(@"Cannot load backgorund image ", self.android_background)];
+        }
+    }
+    else if([obj isKindOfClass:[UIColor class]])
+    {
+        self._view.backgroundColor = (UIColor*)obj;
+    }
     
     self.lc = lc;
     [LuaForm OnFormEvent:self :FORM_EVENT_CREATE :lc :0, nil];

@@ -21,6 +21,7 @@
     self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val);
 
     self.fontSize = [UIFont systemFontSize];
+    self.android_background = @"@android:color/transparent";
 }
 
 -(void)Resize

@@ -89,7 +89,7 @@
     return value;
 }
 
--(UICollectionViewCell *)generateCell:(NSIndexPath*)indexPath :(int)type
+-(UICollectionViewCell *)generateCell:(NSIndexPath*)indexPath :(int)type :(BOOL)generateCell
 {
     NSString *MyIdentifier = self.lua_id;
     
@@ -102,14 +102,22 @@
     {
         lview = (LGView*)[self.ltCreateViewHolder CallIn:self.parent, nType, self.lc, nil];
         [self.createdViews setObject:lview forKey:nType];
-        [((UICollectionView*)self.parent._view) registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:APPEND(MyIdentifier, [nType stringValue])];
+    }
+
+    cell = [self.cells objectForKey:indexPath];
+    if(generateCell)
+    {
+        if(cell == nil)
+            [((UICollectionView*)self.parent._view) registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:APPEND(MyIdentifier, [nType stringValue])];
+        cell = [((UICollectionView*)self.parent._view) dequeueReusableCellWithReuseIdentifier:APPEND(MyIdentifier, [nType stringValue]) forIndexPath:indexPath];
     }
     
-    cell = [((UICollectionView*)self.parent._view) dequeueReusableCellWithReuseIdentifier:APPEND(MyIdentifier, [nType stringValue]) forIndexPath:indexPath];
-    
-    [lview AddSelfToParent:cell.contentView :nil];
+    if(generateCell)
+    {
+        [lview AddSelfToParent:cell.contentView :nil];
+        //[self.cells setObject:cell forKey:indexPath];
+    }
     [self.views setObject:lview forKey:indexPath];
-    [self.cells setObject:cell forKey:indexPath];
     
     return cell;
 }
@@ -143,12 +151,13 @@
         int type = 0;
         if(self.ltGetItemViewType != nil)
         {
-            type = [((NSNumber*)[self.ltGetItemViewType CallIn:[NSNumber numberWithInt:indexPath.row]]) intValue], nil;
+            type = [((NSNumber*)[self.ltGetItemViewType CallIn:[NSNumber numberWithInt:indexPath.row], nil]) intValue];
         }
-        cell = [self generateCell:indexPath :type];
+        cell = [self generateCell:indexPath :type :YES];
         LGView *lview = [self.views objectForKey:indexPath];
         NSObject *obj = [self GetObject:indexPath];
         [self.ltBindViewHolder CallIn:lview, [NSNumber numberWithInt:indexPath.row], obj, nil];
+        [cell invalidateIntrinsicContentSize];
     }
 
     return cell;
@@ -172,26 +181,24 @@
         self.cells = [[NSMutableDictionary alloc] init];
     }
     
-    UICollectionViewCell *cell = [self.cells objectForKey:indexPath];
-    if(cell == nil)
+    LGView *lgview = (LGView*)[self.views objectForKey:indexPath];
+    if(lgview == nil)
     {
         int type = 0;
         if(self.ltGetItemViewType != nil)
         {
             type = [((NSNumber*)[self.ltGetItemViewType CallIn:[NSNumber numberWithInt:indexPath.row], nil]) intValue];
         }
-        cell = [self generateCell:indexPath :type];
-        LGView *lview = [self.views objectForKey:indexPath];
+        [self generateCell:indexPath :type :NO];
+        lgview = [self.views objectForKey:indexPath];
         NSObject *obj = [self GetObject:indexPath];
-        [self.ltBindViewHolder CallIn:lview, [NSNumber numberWithInt:indexPath.row], obj, nil];
+        [self.ltBindViewHolder CallIn:lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
     }
-    
-    LGView *lgview = (LGView*)[self.views objectForKey:indexPath];
+
     if(lgview != nil)
     {
         int width = [lgview GetContentW];
         int height = [lgview GetContentH];
-        UICollectionView *collectionView = ((UICollectionView*)self.parent._view);
         return CGSizeMake(width, height);
     }
     else

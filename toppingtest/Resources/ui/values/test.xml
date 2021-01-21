@@ -2,7 +2,6 @@
 <resources>
     <dimen name="testdimen">10dp</dimen>
     <color name="testcolor">#FF0000</color>
-    <color name="transparent">#FFFFFFFF</color>
     <string name="teststring">bgbgbgbg</string>
     <integer-array name="mole">
         <item>1</item>

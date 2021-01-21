@@ -24,8 +24,11 @@
 {
 	if(self.colorMap == nil)
 	{
-		self.colorMap = [[NSMutableDictionary alloc] init];
-		[self.colorMap setObject:[UIColor clearColor] forKey:@"transparent"];
+        self.colorMap = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *transparent = [NSMutableDictionary dictionary];
+        [transparent setObject:[UIColor clearColor] forKey:ORIENTATION_PORTRAIT_S];
+        [transparent setObject:[UIColor clearColor] forKey:ORIENTATION_LANDSCAPE_S];
+        [self.colorMap setObject:transparent forKey:@"transparent"];
 	}
 	
 	NSFileManager *fm = [NSFileManager defaultManager];	

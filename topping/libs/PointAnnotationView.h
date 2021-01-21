@@ -5,12 +5,12 @@
 @interface PointAnnotationView : MKPinAnnotationView {
 }
 
-@property (nonatomic) MKMapView *mapView;
+@property (nonatomic, strong) MKMapView *mapView;
 @property BOOL isMoving;
 @property CGPoint startLocation;
 @property CGPoint originalCenter;
-@property (nonatomic) UIImageView *pinShadow;
-@property (nonatomic) NSTimer *pinTimer;
+@property (nonatomic, strong) UIImageView *pinShadow;
+@property (nonatomic, strong) NSTimer *pinTimer;
 
 
 // Please use this class method to create DDAnnotationView (on iOS 3) or built-in draggble MKPinAnnotationView (on iOS 4).
