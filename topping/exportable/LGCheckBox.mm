@@ -5,6 +5,7 @@
 #import "LGValueParser.h"
 #import "LGDimensionParser.h"
 #import "LGColorParser.h"
+#import "LGStyleParser.h"
 #import "LuaTranslator.h"
 #import "LuaValues.h"
 
@@ -13,7 +14,7 @@
 -(void)InitProperties
 {
 	[super InitProperties];
-    self.checkboxSize = CGSizeMake([[LGDimensionParser GetInstance] GetDimension:@"18dp"], [[LGDimensionParser GetInstance] GetDimension:@"18dp"]);
+    self.checkboxSize = CGSizeMake([[LGDimensionParser GetInstance] GetDimension:@"8dp"], [[LGDimensionParser GetInstance] GetDimension:@"8dp"]);
 }
 
 -(int)GetContentW
@@ -51,8 +52,13 @@
     self.checkbox.delegate = self;
     
     self.checkbox.text = [[LGStringParser GetInstance] GetString:self.android_text];
-    self.checkbox.textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+    UIColor *textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+    if(textColor == nil)
+        textColor = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:@"android:textColor" :[sToppingEngine GetAppStyle]];
+    self.checkbox.textColor = textColor;
     UIColor *colorAccent = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
+    if(colorAccent == nil)
+        colorAccent = textColor;
     self.checkbox.onTintColor = colorAccent;
     self.checkbox.onCheckColor = colorAccent;
     
