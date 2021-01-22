@@ -9,7 +9,7 @@
 +(LGRecyclerView *)Create:(LuaContext *)context;
 -(void)SetAdapter:(LGRecyclerViewAdapter *)val;
 -(LGRecyclerViewAdapter *)GetAdapter;
--(void)Refresh;
+-(void)Notify;
 
 @property(nonatomic, strong) LGRecyclerViewAdapter *adapter;
 @property(nonatomic, strong) UICollectionViewLayout *flowLayout;

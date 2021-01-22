@@ -1,5 +1,8 @@
 #import "LuaResource.h"
 #import "LuaFunction.h"
+#import "LuaRef.h"
+#import "LGValueParser.h"
+#import "LGDrawableParser.h"
 #import "Defines.h"
 
 @implementation LuaResource
@@ -46,6 +49,18 @@
 			return ls;
 		}break;
 	}
+}
+
++(LuaStream *) GetResourceRef:(LuaRef*)ref
+{
+    LuaStream *ls = [[LuaStream alloc] init];
+    NSObject *obj = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    if([obj isKindOfClass:[LGDrawableReturn class]])
+    {
+        LGDrawableReturn *ldr = ((LGDrawableReturn*)obj);
+        ls.nonStreamData = ldr.img;
+    }
+    return ls;
 }
 
 +(NSArray *)GetResourceDirectories:(NSString *)startsWith
@@ -156,6 +171,12 @@
 										:[NSArray arrayWithObjects:[NSString class], [NSString class], nil] 
 										:[LuaResource class]] 
 			 forKey:@"GetResource"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResourceRef:))
+                                        :@selector(GetResourceRef:)
+                                        :[NSObject class]
+                                        :[NSArray arrayWithObjects:[LuaRef class], nil]
+                                        :[LuaResource class]]
+             forKey:@"GetResourceRef"];
 
 	return dict;
 }

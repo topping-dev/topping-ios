@@ -17,7 +17,7 @@
 
 -(void)Initialize
 {
-    NSBundle *bund = [NSBundle bundleWithIdentifier:@"org.sombrenuit.dk.scriptingengine.luaios"];
+    NSBundle *bund = [NSBundle bundleWithIdentifier:@"dev.topping.ios"];
     NSString *themePath = [bund pathForResource:@"themes" ofType:@"xml"];
     NSData *resourceData = [NSData dataWithContentsOfFile:themePath];
     GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:resourceData error:nil];

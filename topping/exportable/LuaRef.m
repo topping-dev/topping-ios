@@ -276,6 +276,14 @@ int readOnlyTable (lua_State *L) {
     lua_pop(L,1);
 }
 
++(LuaRef*)WithValue:(NSString *)val
+{
+    LuaRef *lr = [[LuaRef alloc] init];
+    lr.idRef = val;
+    return lr;
+}
+
+
 +(LuaRef*)GetRef:(LuaContext*)lc :(NSString *)ids
 {
     LuaRef *lr = [[LuaRef alloc] init];
@@ -296,9 +304,15 @@ int readOnlyTable (lua_State *L) {
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(WithValue:))
+                                        :@selector(WithValue:)
+                                        :[LuaRef class]
+                                        :[NSArray arrayWithObjects:[NSString class], nil]
+                                        :[LuaRef class]]
+             forKey:@"WithValue"];
     [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetRef::))
                                         :@selector(GetRef::)
-                                        :[NSObject class]
+                                        :[LuaRef class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LuaRef class]]
              forKey:@"GetRef"];

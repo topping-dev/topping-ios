@@ -10,7 +10,7 @@
 }
 
 -(void)ComponentAddMethod:(UIView*)par :(UIView *)me
-{
+{   
 	[((UISegmentedControl *)par) insertSegmentWithTitle:self.android_text atIndex:[((UISegmentedControl *)par) numberOfSegments] animated:NO];
 	if(self.android_checked != nil && CONTAINS(self.android_checked, @"true"))
 		[((UISegmentedControl *)par) setSelectedSegmentIndex:[((UISegmentedControl *)par) numberOfSegments] - 1];

@@ -38,8 +38,10 @@ typedef NS_OPTIONS(NSUInteger, UIControlStateExtra) {
 -(CGPoint) radialIntersectionWithDegrees:(CGFloat)degrees :(CGRect)frame;
 -(CGPoint) radialIntersectionWithRadians:(CGFloat)radians :(CGRect)frame;
 -(CGPoint) radialIntersectionWithConstrainedRadians:(CGFloat)radians :(CGRect)frame;
+-(NSDictionary *)GetKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *stateListDictionary;
 @property (nonatomic, retain) NSMutableArray *clearedDirectoryList;
+@property (nonatomic, retain) NSMutableDictionary *drawableMap;
 
 @end

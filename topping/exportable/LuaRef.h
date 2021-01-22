@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 +(void)ResourceLoader;
++(LuaRef*)WithValue:(NSString*)val;
 +(LuaRef*)GetRef:(LuaContext*)lc :(NSString *)ids;
 
 @property (nonatomic, strong) NSString *idRef;

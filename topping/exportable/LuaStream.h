@@ -14,9 +14,6 @@
  */
 @interface LuaStream : NSObject <LuaClass, LuaInterface>
 {
-	int type;
-	NSStream *stream;
-    NSData *data;
 }
 
 -(bool)HasStream;
@@ -63,5 +60,6 @@
 @property(nonatomic) int type;
 @property(nonatomic, retain) NSStream *stream;
 @property(nonatomic, retain) NSData *data;
+@property(nonatomic, retain) NSObject *nonStreamData;
 
 @end

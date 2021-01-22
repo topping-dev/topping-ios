@@ -16,9 +16,9 @@ typedef void (^ConnectionDidFailCallback)();
 @property(copy) ConnectionDidFinishLoadingStrBlock connectionDidFinishLoadingStrCallback;
 @property(copy) ConnectionDidFinishLoadingConnectionStrBlock connectionDidFinishLoadingConnectionStrCallback;
 @property(copy) ConnectionDidFailCallback connectionDidFailCallback;
-@property (nonatomic) NSMutableDictionary *receivedData;
-@property (nonatomic) NSString *contentType;
-@property (nonatomic) NSString *boundary;
+@property (nonatomic, strong) NSMutableDictionary *receivedData;
+@property (nonatomic, strong) NSString *contentType;
+@property (nonatomic, strong) NSString *boundary;
 @property int timeout;
 
 - (NSString *)StartLoad:(NSURL *)url;

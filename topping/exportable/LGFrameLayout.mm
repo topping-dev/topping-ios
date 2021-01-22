@@ -8,8 +8,6 @@
 {
     [super InitComponent:view :lc];
     
-    self._view.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [self._view.widthAnchor constraintEqualToConstant:self.dWidth].active = YES;
     [self._view.heightAnchor constraintEqualToConstant:self.dHeight].active = YES;
     

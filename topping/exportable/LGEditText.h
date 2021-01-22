@@ -14,7 +14,7 @@
 
 KEYBOARD_FUNCTIONS
 
-@property(nonatomic) LuaTranslator *ltTextChangedListener, *ltBeforeTextChangedListener, *ltAfterTextChangedListener;
+@property(nonatomic, strong) LuaTranslator *ltTextChangedListener, *ltBeforeTextChangedListener, *ltAfterTextChangedListener;
 @property(nonatomic) bool multiLine;
 
 KEYBOARD_PROPERTIES

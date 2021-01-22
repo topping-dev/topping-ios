@@ -77,13 +77,17 @@ function ListViewTest_Constructor(pGUI, luacontext)
             timePicker:SetMessage("Message");
             timePicker:SetTimeManual(17, 7);
             timePicker:Show();
-        else
+        elseif index == 7 then
             LuaToast.Show(form:GetContext(), "Toast test", 2000);
+        elseif index == 8 then
+            LuaForm.CreateWithUI(form:GetContext(), "frameTest", "frame.xml");
+        elseif index == 9 then
+            LuaForm.CreateWithUI(form:GetContext(), "constraintTest", "constraint.xml");
         end
     end);
     pAdapter:SetOnCreateViewHolder(function(adapter, parent, type, context)
         local inflator = LuaViewInflator.Create(context);
-        local viewToRet = inflator:ParseFile("testbedAdapter.xml", pGUI);
+        local viewToRet = inflator:ParseFile("testbedadapter.xml", pGUI);
         return viewToRet;
     end);
     pAdapter:SetOnBindViewHolder(function(adapter, view, index, object)
@@ -101,7 +105,16 @@ function ListViewTest_Constructor(pGUI, luacontext)
 	pAdapter:AddValue(5, "Date Picker Dialog");
 	pAdapter:AddValue(6, "Time Picker Dialog");
 	pAdapter:AddValue(7, "Toast");
+    pAdapter:AddValue(8, "FrameLayout");
+    pAdapter:AddValue(9, "ConstraintLayout");
 	pGUI:SetAdapter(pAdapter);
+    pAdapter:Notify();
+end
+
+function Toolbar_Constructor(pToolbar, luacontext)
+    pToolbar:SetSubtitle("Test title");
+    pToolbar:SetLogo(LuaResource.GetResourceRef(LR.drawable.blueback))
 end
 
 LuaForm.RegisterFormEvent("ListViewTest", LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);
+LuaForm.RegisterFormEvent("ToolbarTest", LuaForm.FORM_EVENT_CREATE, Toolbar_Constructor);

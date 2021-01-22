@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#f00000"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintEnd_toEndOf="@id/test"
+        app:layout_constraintEnd_toStartOf="@id/test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="asd">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/test4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0f0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="esd">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/test5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00f000"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/test4"
+        app:layout_constraintTop_toBottomOf="@id/test">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bsd">
+
+        </TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000f00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="csd">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/test2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000f0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/test"
+        app:layout_constraintStart_toEndOf="@+id/test"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dsd">
+
+        </TextView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintRight_toLeftOf="@id/t3"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/t3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asdasd"
+        android:layout_marginStart="50dp"
+        app:layout_constraintLeft_toRightOf="@id/t1"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout-->
+
+<!--LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="#FF00FF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_fragment_apply_offer_info"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{(v)->click.onClick(v)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <RadioGroup
+                    android:id="@+id/rg_fragment_apply_offer_customer_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/ll_fragment_apply_offer_teb_customer_root"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_fragment_apply_offer_info"
+                    app:layout_goneMarginBottom="32dp">
+
+                    <RadioButton
+                        android:id="@+id/rb_fragment_apply_offer_bank_customer_care"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:text="test 1" />
+
+                    <RadioButton
+                        android:id="@+id/rb_fragment_apply_offer_seller_customer_care"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:text="test 2" />
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_teb_customer_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/ll_fragment_apply_offer_branch_name_root"
+                    app:layout_constraintEnd_toEndOf="@+id/rg_fragment_apply_offer_customer_type"
+                    app:layout_constraintStart_toStartOf="@+id/rg_fragment_apply_offer_customer_type"
+                    app:layout_goneMarginBottom="32dp"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="spinner" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_teb_customer"
+                        data="@{yesNoList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_branch_name_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_teb_customer_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_teb_customer_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="asd" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_fragment_apply_offer_branch_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{(v)->click.onClick(v)}">
+
+                        <TextView
+                            android:id="@+id/tv_fragment_apply_offer_branch_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:text="bsd"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="7dp"
+                            android:src="@drawable/indexbutleft"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="test"
+                    android:textColor="#00FF00"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_name_surname_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="name surname" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_name_surname"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:inputType="textCapWords"
+                        android:maxLength="100"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_msisdn_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_name_surname_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_name_surname_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="msisdn" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_msisdn"
+                        
+                        isMobile="@{true}"
+                        isPhoneNumber="@{true}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:inputType="phone"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_email_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_msisdn_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_msisdn_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="email" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_province_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_email_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_email_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_email_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="province" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_province"
+                        style="@style/SpinnerInputDark"
+                        data="@{provinceList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_district_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_province_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_province_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_province_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="district" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_district"
+                        data="@{districtList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="product info"
+                    android:textColor="#00FF00"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_district_root"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_district_root" />
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_equipment_type_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                    <TextView
+                        android:id="@+id/label_fragment_apply_offer_equipment_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="equipment type" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_equipment_type"
+                        style="@style/SpinnerInputDark"
+                        data="@{equipmentTypeList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_equipment_name_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_equipment_type_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_equipment_type_root">
+
+                    <TextView
+                        
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="equipment name" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_equipment_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_equipment_piece_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_equipment_name_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_equipment_name_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="equipment piece" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_equipment_piece"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:inputType="number"
+                        android:maxLength="9"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_equipment_cost_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_equipment_piece_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_equipment_piece_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="equipment cost" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_equipment_cost"
+                        
+                        isMoneyAmount="@{true}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_equipment_currency_type_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_equipment_cost_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_equipment_cost_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_equipment_cost_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="currency type" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_equipment_currency_type"
+                        style="@style/SpinnerInputDark"
+                        data="@{exchangeList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_vat_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_equipment_currency_type_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_equipment_currency_type_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_equipment_currency_type_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="vat" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_vat"
+                        style="@style/SpinnerInputDark"
+                        data="@{vatList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_maturity_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_vat_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_vat_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_vat_root">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="maturity" />
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_maturity"
+                        style="@style/SpinnerInputDark"
+                        data="@{installmentList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_loan_currency_type_root"
+                    
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_maturity_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_maturity_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_maturity_root">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:animateLayoutChanges="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center_vertical"
+                            android:text="currency type" />
+
+                        <ImageView
+                            android:id="@+id/iv_fragment_apply_offer_loan_currency_type_info"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:onClick="@{(v)->click.onClick(v)}"
+                            android:src="@drawable/indexbutleft" />
+                    </LinearLayout>
+
+                    <Spinner
+                        android:id="@+id/spn_fragment_apply_offer_loan_currency_type"
+                        style="@style/SpinnerInputDark"
+                        data="@{exchangeList}"
+                        isDarkLayout="@{true}"
+                        onItemSelected="@{itemSelected}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_down_payment_root"
+                    
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_loan_currency_type_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_loan_currency_type_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_loan_currency_type_root">
+
+                    <TextView
+                        
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_weight="2"
+                        android:text="payment" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_down_payment"
+                        
+                        isMoneyAmount="@{true}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:hint="enter"
+                        android:paddingStart="12dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_down_file_root"
+                    
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="24dp"
+                    android:visibility="@{isUserLoggedIn ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_down_payment_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_down_payment_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_down_payment_root">
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_offer_down_file_info"
+                        
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="file info"
+                        android:textSize="14sp"
+                        android:visibility="@{fileName == null || fileName.length() == 0 ? View.VISIBLE : View.GONE}" />
+
+                    <TextView
+                        android:id="@+id/tv_fragment_apply_offer_down_file_name"
+                        
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableEnd="@drawable/indexbutleft"
+                        android:onClick="@{(v)->click.onClick(v)}"
+                        android:text="@{fileName}"
+                        android:textSize="18sp"
+                        android:visibility="@{fileName == null || fileName.length() == 0 ? View.GONE : View.VISIBLE}" />
+
+                    <Button
+                        android:id="@+id/btn_fragment_apply_offer_upload"
+                        
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:onClick="@{(v)->click.onClick(v)}"
+                        android:text="upload" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cb_fragment_apply_offer_down_kvkk"
+                    
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_down_payment_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_down_file_root"
+                    app:layout_goneMarginTop="24dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_fragment_apply_offer_down_kvkk"
+                    
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{(v)->click.onClick(v)}"
+                    android:text="kvk"
+                    android:textColor="#111111"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_down_payment_root"
+                    app:layout_constraintStart_toEndOf="@+id/cb_fragment_apply_offer_down_kvkk"
+                    app:layout_constraintTop_toTopOf="@+id/cb_fragment_apply_offer_down_kvkk" />
+
+                <LinearLayout
+                    android:id="@+id/ll_fragment_apply_offer_down_captcha_root"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_fragment_apply_offer_down_kvkk"
+                    app:layout_constraintStart_toStartOf="@+id/cb_fragment_apply_offer_down_kvkk"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_fragment_apply_offer_down_kvkk">
+
+                    <ImageView
+                        android:id="@+id/iv_fragment_apply_offer_down_captcha"
+                        loadFromBase64="@{captcha64}"
+                        android:layout_width="0dp"
+                        android:layout_height="58dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="2"
+                        android:scaleType="fitXY" />
+
+                    <EditText
+                        android:id="@+id/et_fragment_apply_offer_down_captcha"
+                        
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:hint="enter" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_fragment_apply_offer_get_offer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:onClick="@{(v)->click.onClick(v)}"
+                    android:text="get offer"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_fragment_apply_offer_down_captcha_root"
+                    app:layout_constraintStart_toStartOf="@+id/ll_fragment_apply_offer_down_captcha_root"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_fragment_apply_offer_down_captcha_root" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout-->

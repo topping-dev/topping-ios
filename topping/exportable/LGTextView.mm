@@ -7,8 +7,26 @@
 #import "LGColorParser.h"
 #import "CommonDelegate.h"
 #import "LGStringParser.h"
+#import "LGStyleParser.h"
 #import "UILabelPadding.h"
 #import "LGValueParser.h"
+
+@implementation LuaTextViewAppearance
+
++(LuaTextViewAppearance *)Parse:(NSString *)name
+{
+    LuaTextViewAppearance *ltva = [[LuaTextViewAppearance alloc] init];
+    NSDictionary *dict = [[LGStyleParser GetInstance] GetStyle:name];
+    if(dict != nil)
+    {
+        ltva.color = [[LGColorParser GetInstance] ParseColor:dict[@"android:textColor"]];
+//        ltva.font = [[android:fontFamily	]]
+        ltva.textSize = [[LGDimensionParser GetInstance] GetDimension:dict[@"android:textSize"]];
+    }
+    return ltva;
+}
+
+@end
 
 @implementation LGTextView
 
@@ -18,7 +36,7 @@
     
     self.stringSize = CGSizeZero;
     int val = [[LGDimensionParser GetInstance] GetDimension:@"4dp"];
-    self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val);
+    self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
 
     self.fontSize = [UIFont systemFontSize];
 }
@@ -79,7 +97,7 @@
     int l = [self GetStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
 	if (l > [DisplayMetrics GetMasterView].frame.size.width)
 		l = [DisplayMetrics GetMasterView].frame.size.width - self.dX;
-    l += 4;
+    l += 1;
 	return l;
 }
 

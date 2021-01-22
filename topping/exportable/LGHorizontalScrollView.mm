@@ -8,6 +8,7 @@
 {
 	UIScrollView *iv = [[UIScrollView alloc] init];
 	iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
+    iv.contentSize = CGSizeMake(self.dWidth, self.dHeight);
 	return iv;
 }
 
