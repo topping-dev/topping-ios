@@ -338,6 +338,7 @@
 		5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */; };
 		5CD92592252CA48300EC0A1D /* NSStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD92590252CA48300EC0A1D /* NSStack.h */; };
 		5CD92593252CA48300EC0A1D /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD92591252CA48300EC0A1D /* NSStack.m */; };
+		5CFDE2CF25B9C131000FC4D2 /* LuaToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDE2CE25B9C131000FC4D2 /* LuaToolbarButton.swift */; };
 		764968FC99A00A4E89C9B3C8 /* Pods_Toppingtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */; };
 /* End PBXBuildFile section */
 
@@ -718,6 +719,7 @@
 		5CD92590252CA48300EC0A1D /* NSStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		5CD92591252CA48300EC0A1D /* NSStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 		5CEE6382257100A500D80B59 /* Topping.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Topping.podspec; sourceTree = "<group>"; };
+		5CFDE2CE25B9C131000FC4D2 /* LuaToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuaToolbarButton.swift; sourceTree = "<group>"; };
 		687002D891F8709DD32AB747 /* Pods_Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-topping.release.xcconfig"; path = "Target Support Files/Pods-topping/Pods-topping.release.xcconfig"; sourceTree = "<group>"; };
 		6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingtest.debug.xcconfig"; path = "Target Support Files/Pods-toppingtest/Pods-toppingtest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -987,6 +989,7 @@
 				5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */,
 				5CD92590252CA48300EC0A1D /* NSStack.h */,
 				5CD92591252CA48300EC0A1D /* NSStack.m */,
+				5CFDE2CE25B9C131000FC4D2 /* LuaToolbarButton.swift */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1628,6 +1631,7 @@
 				5C5A99C724E16BEC002A22EA /* lstring.c in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
+				5CFDE2CF25B9C131000FC4D2 /* LuaToolbarButton.swift in Sources */,
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
