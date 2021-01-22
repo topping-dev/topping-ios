@@ -155,7 +155,7 @@
 	//Setup background
     NSObject *obj = nil;
     if(ISNULLOREMPTY(self.android_background))
-        obj = [[LGStyleParser GetInstance] GetStyleValue:@"android:windowBackground" :[sToppingEngine GetAppStyle]];
+        obj = self._view.backgroundColor = [UIColor clearColor];//[[LGStyleParser GetInstance] GetStyleValue:@"android:windowBackground" :[sToppingEngine GetAppStyle]];
     else
         obj = [[LGValueParser GetInstance] GetValue:self.android_background];
     if([obj isKindOfClass:[LGDrawableReturn class]])
@@ -184,6 +184,10 @@
     else if([obj isKindOfClass:[UIColor class]])
     {
         self._view.backgroundColor = (UIColor*)obj;
+    }
+    else
+    {
+        self._view.backgroundColor = [UIColor clearColor];
     }
     
     self.lc = lc;

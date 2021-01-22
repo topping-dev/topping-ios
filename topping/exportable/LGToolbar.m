@@ -26,6 +26,10 @@
     /*IconButton *menuButton = IconButton(image: Icon.cm.menu, tintColor: .white)
     menuButton.pulseColor = .white
     toolbar.leftViews = @[];*/
+    if(self.android_background == nil)
+    {
+        self.android_background = @"@color/colorPrimary";
+    }
     if(self.android_title != nil)
     {
         toolbar.getView.title = [[LGStringParser GetInstance] GetString:self.android_title];

@@ -36,10 +36,9 @@
     
     self.stringSize = CGSizeZero;
     int val = [[LGDimensionParser GetInstance] GetDimension:@"4dp"];
-    self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val);
+    self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
 
     self.fontSize = [UIFont systemFontSize];
-    self.android_background = @"@android:color/transparent";
 }
 
 -(void)Resize
@@ -98,7 +97,7 @@
     int l = [self GetStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
 	if (l > [DisplayMetrics GetMasterView].frame.size.width)
 		l = [DisplayMetrics GetMasterView].frame.size.width - self.dX;
-    l += 4;
+    l += 1;
 	return l;
 }
 
