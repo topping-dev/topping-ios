@@ -29,6 +29,13 @@
 	//}
 }
 
+-(void)InitProperties
+{
+    [super InitProperties];
+    
+    self.fontSize = [UIFont buttonFontSize];
+}
+
 -(UIView*)CreateComponent
 {
 	UIButton *but = nil;

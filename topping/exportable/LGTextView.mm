@@ -10,6 +10,7 @@
 #import "LGStyleParser.h"
 #import "UILabelPadding.h"
 #import "LGValueParser.h"
+#import "LGFontParser.h"
 
 @implementation LuaTextViewAppearance
 
@@ -38,7 +39,7 @@
     int val = [[LGDimensionParser GetInstance] GetDimension:@"4dp"];
     self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
 
-    self.fontSize = [UIFont systemFontSize];
+    self.fontSize = [UIFont labelFontSize];
 }
 
 -(void)Resize
@@ -71,12 +72,21 @@
     if(text == nil || COMPARE(text, @""))
         text = @"R";
     
-    UIFont *font = [UIFont systemFontOfSize:self.fontSize];
-    if(self.android_fontFamily != nil)
+    if(self.font == nil)
     {
-        //LuaFontParser
-        //https://developer.android.com/guide/topics/ui/look-and-feel/fonts-in-xml
-        //TODO:Fix this;
+        self.font = [UIFont systemFontOfSize:self.fontSize];
+        if(self.android_fontFamily != nil)
+        {
+            int style = FONT_STYLE_NORMAL;
+            if(self.android_textStyle != nil)
+            {
+                style = [LGFontParser ParseTextStyle:[[LGStringParser GetInstance] GetString:self.android_textStyle]];
+            }
+            LGFontReturn *lfr = [[LGFontParser GetInstance] GetFont:self.android_fontFamily];
+            LGFontData *lfd = [lfr.fontMap objectForKey:[NSNumber numberWithInt:style]];
+            if(lfd != nil)
+                self.font = [UIFont fontWithName:lfd.fontName size:self.fontSize];
+        }
     }
     
     /*NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:font}];
@@ -85,7 +95,7 @@
     CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(ref, CFRangeMake(0, 0), nil, CGSizeMake(MAXFLOAT, MAXFLOAT), nil);
     return size;*/
 
-    CGSize val = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+    CGSize val = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.font} context:nil].size;
     
     return val;
     
@@ -175,6 +185,27 @@
 
 -(void) SetupComponent:(UIView *)view
 {
+    if(self.font == nil)
+    {
+        self.font = [UIFont systemFontOfSize:self.fontSize];
+        if(self.android_fontFamily != nil)
+        {
+            self.font = [UIFont systemFontOfSize:self.fontSize];
+            if(self.android_fontFamily != nil)
+            {
+                int style = FONT_STYLE_NORMAL;
+                if(self.android_textStyle != nil)
+                {
+                    style = [LGFontParser ParseTextStyle:[[LGStringParser GetInstance] GetString:self.android_textStyle]];
+                }
+                LGFontReturn *lfr = [[LGFontParser GetInstance] GetFont:self.android_fontFamily];
+                LGFontData *lfd = [lfr.fontMap objectForKey:[NSNumber numberWithInt:style]];
+                if(lfd != nil)
+                    self.font = [UIFont fontWithName:lfd.fontName size:self.fontSize];
+            }
+        }
+    }
+    
     if([self._view isKindOfClass:[UILabelPadding class]])
     {
         UILabelPadding *lab = (UILabelPadding*)self._view;
@@ -199,6 +230,16 @@
             [lab setTextAlignment:NSTextAlignmentCenter];
         
         lab.insets = UIEdgeInsetsMake(lab.insets.left + self.dPaddingLeft, lab.insets.top + self.dPaddingTop, self.insets.bottom + self.dPaddingBottom, self.insets.right + self.dPaddingRight);
+        
+        lab.font = self.font;
+    }
+    else if([self._view isKindOfClass:[UITextView class]])
+    {
+        ((UITextView*)self._view).font = self.font;
+    }
+    else if([self._view isKindOfClass:[UITextField class]])
+    {
+        ((UITextField*)self._view).font = self.font;
     }
     
     [super SetupComponent:view];

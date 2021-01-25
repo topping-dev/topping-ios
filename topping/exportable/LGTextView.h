@@ -69,12 +69,13 @@
 @property(nonatomic, retain) NSString *android_textColorLink;
 @property(nonatomic, retain) NSNumber *android_textScaleX;
 @property(nonatomic, retain) NSString *android_textSize;
-@property(nonatomic, retain) NSNumber *android_textStyle;
+@property(nonatomic, retain) NSString *android_textStyle;
 @property(nonatomic, retain) NSString *android_typeface;
 @property(nonatomic, retain) NSString *android_width;
 @property(nonatomic, retain) NSString *android_fontFamily;
 
 @property(nonatomic) float fontSize;
+@property(nonatomic, strong) UIFont *font;
 @property(nonatomic) CGSize stringSize;
 @property(nonatomic) UIEdgeInsets insets;
 

@@ -37,16 +37,22 @@
 		case EXTERNAL_DATA:
 		case INTERNAL_DATA:
 		{
+            NSData *data = GetResourceSdAsset(truePath, resName, nil);
+            if(data == nil)
+                return nil;
             LuaStream *ls = [[LuaStream alloc] init];
-            [ls SetStream:GetResourceSdAsset(truePath, resName, nil)];
+            [ls SetStream:data];
 			return ls;
 		}break;
 		case RESOURCE_DATA:
 		default:
 		{
+            NSData *data = GetResourceAsset(truePath, resName, nil);
+            if(data == nil)
+                return nil;
             LuaStream *ls = [[LuaStream alloc] init];
-            [ls SetStream:GetResourceAsset(truePath, resName, nil)];
-			return ls;
+            [ls SetStream:data];
+            return ls;
 		}break;
 	}
 }

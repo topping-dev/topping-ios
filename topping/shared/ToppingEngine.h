@@ -31,6 +31,7 @@
 #define LUA_VALUES_FOLDER @"values"
 #define LUA_ANIMATORS_FOLDER @"animator"
 #define LUA_ANIMS_FOLDER @"anim"
+#define LUA_FONT_FOLDER @"font"
 
 typedef struct lua_State lua_State;
 

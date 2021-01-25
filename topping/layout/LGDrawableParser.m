@@ -113,40 +113,45 @@
         return ldr;
     }
     
-    LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
-    ldr.img = nil;
-    return ldr;
+    return nil;
 }
 
 -(LGDrawableReturn *) ParseXML:(NSString *)filename :(int)tileMode
 {
-    NSString *drawableBundlePath = [@"res" stringByAppendingPathComponent:@"drawable"];
-    NSData *dat = [[LuaResource GetResource:drawableBundlePath :filename] GetData];
-	//NSData *dat = GetResource(@"drawable/", filename, nil);
-    GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
-	if(xml == nil)
-	{
-		NSLog(@"Cannot read xml file %@", filename);
-		return nil;
-	}
-    
-	GDataXMLElement *root = [xml rootElement];
-    if(COMPARE([root name], @"bitmap")
-       || COMPARE([root name], @"nine-patch"))
+    for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        return [self ParseBitmap:root];
-    }
-    else if(COMPARE([root name], @"layer-list"))
-    {
-        return [self ParseLayer:root];
-    }
-    else if(COMPARE([root name], @"selector"))
-    {
-        return [self ParseStateList:root];
-    }
-    else if(COMPARE([root name], @"shape"))
-    {
-        return [self ParseShape:root];
+        NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
+        LuaStream *ls = [LuaResource GetResource:path :filename];
+        if(ls == NULL)
+            continue;
+        
+        NSData *dat = [ls GetData];
+        
+        GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
+        if(xml == nil)
+        {
+            NSLog(@"Cannot read xml file %@", filename);
+            return nil;
+        }
+        
+        GDataXMLElement *root = [xml rootElement];
+        if(COMPARE([root name], @"bitmap")
+           || COMPARE([root name], @"nine-patch"))
+        {
+            return [self ParseBitmap:root];
+        }
+        else if(COMPARE([root name], @"layer-list"))
+        {
+            return [self ParseLayer:root];
+        }
+        else if(COMPARE([root name], @"selector"))
+        {
+            return [self ParseStateList:root];
+        }
+        else if(COMPARE([root name], @"shape"))
+        {
+            return [self ParseShape:root];
+        }
     }
     
     return nil;

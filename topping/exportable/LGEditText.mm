@@ -9,6 +9,11 @@
 
 @implementation LGEditText
 
+-(void)InitProperties
+{
+    self.fontSize = [UIFont systemFontSize];
+}
+
 -(UIView*)CreateComponent
 {
     self.multiLine = false;

@@ -302,6 +302,8 @@
 		5C5ECFE224EA6475007659B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5ECFE124EA6475007659B8 /* main.m */; };
 		5C5ECFEC24EA85C7007659B8 /* Topping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; };
 		5C5ECFED24EA85C7007659B8 /* Topping.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C609D6125BDC21E006BF4CE /* LGFontParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C609D6225BDC21E006BF4CE /* LGFontParser.m */; };
 		5C9E065924F6782F00B8D2A4 /* BEMCheckBoxText.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9E065A24F6782F00B8D2A4 /* BEMCheckBoxText.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
@@ -679,6 +681,8 @@
 		5C5ECFDE24EA6475007659B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C5ECFE024EA6475007659B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C5ECFE124EA6475007659B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5C609D6125BDC21E006BF4CE /* LGFontParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFontParser.h; sourceTree = "<group>"; };
+		5C609D6225BDC21E006BF4CE /* LGFontParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFontParser.m; sourceTree = "<group>"; };
 		5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxText.h; sourceTree = "<group>"; };
 		5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxText.m; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
@@ -1173,6 +1177,8 @@
 				5C5A986124E16BC2002A22EA /* LGDimensionParser.mm */,
 				5C5A981624E16BBB002A22EA /* LGDrawableParser.h */,
 				5C5A982D24E16BBC002A22EA /* LGDrawableParser.m */,
+				5C609D6125BDC21E006BF4CE /* LGFontParser.h */,
+				5C609D6225BDC21E006BF4CE /* LGFontParser.m */,
 				5C5A987924E16BC4002A22EA /* LGLayoutParser.h */,
 				5C5A984A24E16BBF002A22EA /* LGLayoutParser.mm */,
 				5C5A98AB24E16BCA002A22EA /* LGParser.h */,
@@ -1406,6 +1412,7 @@
 				5C286DEE2557FECF00198DA5 /* LGTableLayout.h in Headers */,
 				5C23B60324E555870094389F /* UIBufferedProgressBar.h in Headers */,
 				5C5A990824E16BCC002A22EA /* LuaDialog.h in Headers */,
+				5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */,
 				5C31C7A3250399A8001773F8 /* LGStyleParser.h in Headers */,
 				5C5A98CB24E16BCC002A22EA /* LGDimensionParser.h in Headers */,
 				5C5A99C824E16BEC002A22EA /* ldo.h in Headers */,
@@ -1732,6 +1739,7 @@
 				5C5A99B924E16BEC002A22EA /* lobject.c in Sources */,
 				5C5A98D524E16BCC002A22EA /* LuaHttpClient.m in Sources */,
 				5CB8584D24E3F710006E6B65 /* PolyAnnotation.m in Sources */,
+				5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */,
 				5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */,
 				5C5A992324E16BCC002A22EA /* LuaBuffer.m in Sources */,
 				5C286DF525582B4900198DA5 /* LuaLog.mm in Sources */,

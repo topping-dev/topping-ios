@@ -11,6 +11,7 @@
 		android:layout_height="wrap_content"
 		lua:id="testBedTitle"
 		android:layout_marginLeft="2dp"
+        android:fontFamily="@font/roboto"
 		android:text="a">
 	</LGTextView>
 </LinearLayout>

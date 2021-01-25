@@ -25,7 +25,7 @@
 +(LGParser*)GetInstance
 {
 	if(sLGParser == nil)
-		[[LGParser alloc] init];
+		sLGParser = [[LGParser alloc] init];
 	return sLGParser;
 }
 
@@ -38,6 +38,7 @@
     self.pString = [[LGStringParser alloc] init];
     self.pValue = [[LGValueParser alloc] init];
     self.pStyle = [[LGStyleParser alloc] init];
+    self.pFont = [[LGFontParser alloc] init];
     
     self.MatchStringStart = [NSMutableArray array];
     self.MatchStringEnd = [NSMutableArray array];
@@ -96,6 +97,7 @@
     [self.MatchStringEnd addObject:lst];
     lst = [NSMutableArray array];
     
+    [self.pFont Initialize];
     [self.pDrawable Initialize];
     [self.pLayout Initialize];
     [self.pValue Initialize];

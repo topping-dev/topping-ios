@@ -7,6 +7,7 @@
 #import "LGStringParser.h"
 #import "LGValueParser.h"
 #import "LGStyleParser.h"
+#import "LGFontParser.h"
 
 @class LGParser;
 
@@ -49,7 +50,6 @@ typedef enum
 
 +(LGParser*) GetInstance;
 -(void)Initialize;
--(UIView *)Parse:(NSString*)filename :(UIView *)parent :(UIViewController*)cont;
 -(NSMutableArray *)Tester:(NSArray*)directoryList :(NSString*)directoryType;
 -(MATCH_ID) Matcher:(MATCH_ID)count :(NSString*)toMatch :(BOOL *) result;
 
@@ -60,6 +60,7 @@ typedef enum
 @property (nonatomic, retain) LGStringParser *pString;
 @property (nonatomic, retain) LGValueParser *pValue;
 @property (nonatomic, retain) LGStyleParser *pStyle;
+@property (nonatomic, retain) LGFontParser *pFont;
 @property (nonatomic, retain) NSMutableArray *MatchStringStart;
 @property (nonatomic, retain) NSMutableArray *MatchStringEnd;
 
