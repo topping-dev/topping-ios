@@ -88,7 +88,7 @@
                     tf.autocorrectionType = UITextAutocorrectionTypeYes;
                 else if(COMPARE(it, @"textMultiLine"))
                 {
-                    //TODO: Bunda textview initialize edilmiş olması gerekiyor
+                    //TODO: text needed to be initalized for this
                 }
                 else if(COMPARE(it, @"textNoSuggestions"))
                     tf.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -165,7 +165,7 @@
                     tf.autocorrectionType = UITextAutocorrectionTypeYes;
                 else if(COMPARE(it, @"textMultiLine"))
                 {
-                    //TODO: Bunda textview initialize edilmiş olması gerekiyor
+                    //TODO: text needed to be initalized for this
                 }
                 else if(COMPARE(it, @"textNoSuggestions"))
                     tf.autocorrectionType = UITextAutocorrectionTypeNo;

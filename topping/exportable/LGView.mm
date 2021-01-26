@@ -260,7 +260,7 @@
 
 -(void)AfterResize:(BOOL)vertical
 {
-    //TODO:Bunu bir kontrol
+    //TODO:Check this
 	/*for(LGView *w in self.subviews)
 	{
 		if([w isKindOfClass:[LGLinearLayout class]])
