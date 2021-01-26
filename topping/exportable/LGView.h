@@ -40,7 +40,6 @@ enum GRAVITY
 }
 
 -(void)InitProperties;
--(void)Destroy;
 -(BOOL)SetAttributeValue:(NSString*) name :(NSString*) value;
 -(void)ApplyStyles;
 

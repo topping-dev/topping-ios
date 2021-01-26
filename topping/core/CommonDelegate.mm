@@ -72,12 +72,10 @@ static LuaForm *sActiveForm;
     if(@available(iOS 13.0, *))
     {
         sbarHeight = ((UIWindowScene*)scene).statusBarManager.statusBarFrame.size.height;
-        height -= sbarHeight;
     }
     else
     {
         sbarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-        height -= sbarHeight;
     }
     
     CGFloat topPadding = 0;
@@ -85,6 +83,10 @@ static LuaForm *sActiveForm;
     if (@available(iOS 11.0, *)) {
         topPadding = self.window.safeAreaInsets.top;
         bottomPadding = self.window.safeAreaInsets.bottom;
+    }
+    else
+    {
+        height -= sbarHeight;
     }
     height -= topPadding;
     height -= bottomPadding;

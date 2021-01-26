@@ -11,7 +11,12 @@
 
 -(void)InitProperties
 {
-    self.fontSize = [UIFont systemFontSize];
+    [super InitProperties];
+    
+    int val = [[LGDimensionParser GetInstance] GetDimension:@"1dp"];
+    self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
+
+    self.fontSize = [UIFont labelFontSize];
 }
 
 -(UIView*)CreateComponent
@@ -28,14 +33,6 @@
     if(self.multiLine)
     {
         UITextView *field = [[UITextView alloc] init];
-        /*//field.borderStyle=UITextBorderStyleNone;
-        field.layer.cornerRadius=8.0f;
-        field.layer.masksToBounds=YES;
-        field.layer.borderColor=[[UIColor blackColor]CGColor];
-        field.layer.borderWidth= 1.0f;*/
-        
-        /*field.backgroundColor = [UIColor whiteColor];
-        field.textColor = [UIColor blackColor];*/
         field.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
         field.text = self.android_text;
         //field.placeholder = self.hint;
@@ -49,14 +46,6 @@
     else
     {
         UITextField *field = [[UITextField alloc] init];
-        /*field.borderStyle=UITextBorderStyleNone;
-        field.layer.cornerRadius=8.0f;
-        field.layer.masksToBounds=YES;
-        field.layer.borderColor=[[UIColor blackColor]CGColor];
-        field.layer.borderWidth= 1.0f;*/
-        
-        /*field.backgroundColor = [UIColor whiteColor];
-        field.textColor = [UIColor blackColor];*/
         field.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
         field.text = self.android_text;
         field.placeholder = self.android_hint;
@@ -74,14 +63,10 @@
     if(self.multiLine)
     {
         UITextView *tf = (UITextView*)self._view;
-        UIView *textFieldShadeView=[[UIView alloc] init];
-        [textFieldShadeView setFrame:self._view.frame];
-        textFieldShadeView.layer.cornerRadius=8.0f;
-        textFieldShadeView.layer.masksToBounds=YES;
-        textFieldShadeView.backgroundColor=[UIColor whiteColor];
-        textFieldShadeView.alpha=0.3;
-        textFieldShadeView.userInteractionEnabled=NO;
-        [view addSubview:textFieldShadeView];
+        CALayer *layer = [[CALayer alloc] init];
+        layer.backgroundColor = tf.textColor.CGColor;
+        layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
+        [tf.layer addSublayer:layer];
         
         if(self.android_inputType != nil)
         {
@@ -155,14 +140,10 @@
     else
     {
         UITextField *tf = (UITextField*)self._view;
-        UIView *textFieldShadeView=[[UIView alloc] init];
-        [textFieldShadeView setFrame:self._view.frame];
-        textFieldShadeView.layer.cornerRadius=8.0f;
-        textFieldShadeView.layer.masksToBounds=YES;
-        textFieldShadeView.backgroundColor=[UIColor whiteColor];
-        textFieldShadeView.alpha=0.3;
-        textFieldShadeView.userInteractionEnabled=NO;
-        [view addSubview:textFieldShadeView];
+        CALayer *layer = [[CALayer alloc] init];
+        layer.backgroundColor = tf.textColor.CGColor;
+        layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
+        [tf.layer addSublayer:layer];
         
         if(self.android_inputType != nil)
         {
@@ -264,7 +245,7 @@
 {
     [sender resignFirstResponder];
 }
-\
+
 -(void)onTouchOutside:(UITapGestureRecognizer*)gesture
 {
     @try {
@@ -281,7 +262,7 @@
     {
     }
 }
-\
+
 -(void)setViewMovedUp:(BOOL)movedUp:(NSNotification*)notif
 {
     [UIView beginAnimations:nil context:NULL];
@@ -303,7 +284,7 @@
                        
                         [UIView commitAnimations];
 }
-\
+
 - (void)keyboardWillShow:(NSNotification *)notif
 {
     CGRect t;
@@ -377,7 +358,7 @@
                         }
                 }
 }
-\
+
 -(void)keyboardWillHide:(NSNotification *)notif
 {
     if(self.movedUpField)
@@ -388,7 +369,7 @@
                     self.selectedKeyboardTextView = nil;
     }
 }
-\
+
 -(IBAction)editingBegin:(id)sender
 {
     if(self.selectedKeyboardTextView != nil)
@@ -396,7 +377,7 @@
     self.selectedKeyboardTextView = nil;
     self.selectedKeyboardTextField = (UITextField*)sender;
 }
-\
+
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     if(self.selectedKeyboardTextField != nil)
         [self keyboardWillHide:nil];
@@ -404,7 +385,7 @@
     self.selectedKeyboardTextView = textView;
     return textView.editable;
 }
-\
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
    

@@ -241,6 +241,10 @@
     {
         ((UITextField*)self._view).font = self.font;
     }
+    else if([self._view isKindOfClass:[UIButton class]])
+    {
+        ((UIButton*)self._view).titleLabel.font = self.font;
+    }
     
     [super SetupComponent:view];
 }

@@ -49,7 +49,9 @@
 
 -(void)SetupComponent:(UIView *)view
 {
-	UIButton *but = (UIButton*)self._view;
+    [super SetupComponent:view];
+    
+    UIButton *but = (UIButton*)self._view;
     but.userInteractionEnabled = YES;
     but.enabled = YES;
     but.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;

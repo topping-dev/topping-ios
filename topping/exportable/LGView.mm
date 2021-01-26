@@ -164,19 +164,21 @@
         if(ldr.img != nil)
         {
             self.backgroundImage = ldr.img;
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:self.backgroundImage];
-            [self._view addSubview:imageView];
-            [self._view sendSubviewToBack:imageView];
+            self._view.backgroundColor = [UIColor colorWithPatternImage:ldr.img];
         }
         else if(ldr.color != nil)
         {
             self._view.backgroundColor = ldr.color;
+            view.backgroundColor = ldr.color;
         }
         else
         {
             UIColor *color = [[LGColorParser GetInstance] ParseColor:self.android_background];
             if(color != nil)
+            {
                 self._view.backgroundColor = color;
+                view.backgroundColor = color;
+            }
             else
                 [Log e:@"LGView.mm" :APPEND(@"Cannot load backgorund image ", self.android_background)];
         }
@@ -184,10 +186,12 @@
     else if([obj isKindOfClass:[UIColor class]])
     {
         self._view.backgroundColor = (UIColor*)obj;
+        view.backgroundColor = (UIColor*)obj;
     }
     else
     {
         self._view.backgroundColor = [UIColor clearColor];
+        view.backgroundColor = [UIColor clearColor];
     }
     
     self.lc = lc;
@@ -197,23 +201,6 @@
 {
     if(![self._view isKindOfClass:[UILabelPadding class]])
         view.layoutMargins = UIEdgeInsetsMake(self.dPaddingTop, self.dPaddingLeft, self.dPaddingBottom, self.dPaddingRight);
-    
-    LGDrawableReturn *backgroundDrawable = [[LGDrawableParser GetInstance] ParseDrawable:self.android_background];
-    if(backgroundDrawable != nil)
-    {
-        if(backgroundDrawable.color != nil)
-        {
-            self._view.backgroundColor = backgroundDrawable.color;
-            if(view != nil)
-                view.backgroundColor = backgroundDrawable.color;
-        }
-        else if(backgroundDrawable.img != nil)
-        {
-            self._view.backgroundColor = [UIColor colorWithPatternImage:backgroundDrawable.img];
-            if(view != nil)
-                view.backgroundColor = [UIColor colorWithPatternImage:backgroundDrawable.img];
-        }
-    }
 }
 
 -(void)AddSelfToParent:(UIView*)par :(LuaForm*)cont
@@ -440,12 +427,13 @@
 				h = [self GetContentH];
 			else
 				h = self.parent.dHeight;
+            h = h - self.dY - self.parent.dPaddingBottom - self.dMarginBottom;
 		}
 		else 
 		{
 			h = [DisplayMetrics GetMasterView].frame.size.height;
+            h = h - self.dY - self.dMarginBottom;
 		}
-		h = h - self.dY - self.dPaddingBottom - self.dMarginBottom;
 	}
 	
 	self.dHeight = h;	
@@ -524,12 +512,15 @@
 				w = [self GetContentW];
 			else
 				w = self.parent.dWidth;
+            w = w - self.dX - self.parent.dPaddingRight - self.dMarginRight /*- self.parent.dPaddingLeft*/ - self.dMarginLeft;
 		}
 		else 
 		{
 			w = [DisplayMetrics GetMasterView].frame.size.width;
+            w = w - self.dMarginRight - self.dMarginLeft;
+            self.dX = self.dMarginLeft;
 		}
-		w = w - self.dX - self.dPaddingRight - self.dMarginRight - self.dPaddingLeft - self.dMarginLeft;
+
 	}
 	if ([self.android_layout_height compare:@"fill_parent"] == 0 ||
 		[self.android_layout_height compare:@"match_parent"] == 0 ||
@@ -540,12 +531,14 @@
 				h = [self GetContentH];
 			else
 				h = self.parent.dHeight;
+            h = h - self.dY - self.dMarginBottom - self.dMarginTop /*- self.parent.dPaddingTop*/ - self.parent.dPaddingBottom;
 		}
 		else 
 		{
 			h = [DisplayMetrics GetMasterView].frame.size.height;
+            h = h - self.dMarginBottom - self.dMarginTop;
+            self.dY = self.dMarginTop;
 		}
-		h = h - self.dY - self.dPaddingBottom - self.dMarginBottom - self.dPaddingTop - self.dMarginTop;
 	}
     
     NSArray *gravitySplit = SPLIT(self.android_layout_gravity, @"|");

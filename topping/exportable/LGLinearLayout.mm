@@ -111,7 +111,7 @@
 	/*if(self.extra < 0)
 		self.extra == 0;*/
 	x = 0;
-	y = 0;
+	y = self.dPaddingTop;
     
 	LGView *lastw;
 	for (LGView *w in self.subviews) 
@@ -133,7 +133,7 @@
                 x = self.dWidth/2 - w.dWidth/2;
             }
 			else
-				x = w.dMarginLeft;
+				x = w.dMarginLeft + self.dPaddingLeft;
 		}
 		else
 		{
@@ -213,6 +213,8 @@
                     w.dWidth += share;
 			}
 		}
+        
+        [w ReadWidthHeight];
 	}
 	//Fix pixels
 	if(self.percentGone != 0)
