@@ -1,5 +1,6 @@
 #import "LGViewGroup.h"
 #import "Defines.h"
+#import "LuaFunction.h"
 
 @implementation LGViewGroup
 
@@ -7,7 +8,8 @@
 {
     [super InitProperties];
     
-    self.subviews = [[NSMutableArray alloc] init];
+    self.subviews = [NSMutableArray array];
+    self.subviewMap = [NSMutableDictionary dictionary];
 }
 
 -(void)AddSubview:(LGView*)val
@@ -16,6 +18,8 @@
     {
         val.parent = self;
         [self.subviews addObject:val];
+        if(val.android_id != nil || val.lua_id != nil)
+            [self.subviewMap setObject:val forKey:[val GetId]];
     }
     /*else
         NSLog(@"Null child");*/
@@ -125,6 +129,19 @@
     }
     
     return retVal;
+}
+
+-(NSDictionary*)GetBindings
+{
+    return self.subviewMap;
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetBindings)) :@selector(GetBindings) :nil :MakeArray(nil)] forKey:@"GetBindings"];
+    return dict;
 }
 
 @end

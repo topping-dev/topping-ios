@@ -304,6 +304,8 @@
 		5C5ECFED24EA85C7007659B8 /* Topping.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C609D6125BDC21E006BF4CE /* LGFontParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C609D6225BDC21E006BF4CE /* LGFontParser.m */; };
+		5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C86213425C0477D00BF23CA /* LuaNativeCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86213525C0477D00BF23CA /* LuaNativeCall.m */; };
 		5C9E065924F6782F00B8D2A4 /* BEMCheckBoxText.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9E065A24F6782F00B8D2A4 /* BEMCheckBoxText.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
@@ -683,6 +685,8 @@
 		5C5ECFE124EA6475007659B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5C609D6125BDC21E006BF4CE /* LGFontParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFontParser.h; sourceTree = "<group>"; };
 		5C609D6225BDC21E006BF4CE /* LGFontParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFontParser.m; sourceTree = "<group>"; };
+		5C86213425C0477D00BF23CA /* LuaNativeCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaNativeCall.h; sourceTree = "<group>"; };
+		5C86213525C0477D00BF23CA /* LuaNativeCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaNativeCall.m; sourceTree = "<group>"; };
 		5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxText.h; sourceTree = "<group>"; };
 		5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxText.m; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
@@ -1139,6 +1143,8 @@
 				5C5A988624E16BC6002A22EA /* LuaTranslator.m */,
 				5C5A989824E16BC7002A22EA /* LuaViewInflator.h */,
 				5C5A983E24E16BBE002A22EA /* LuaViewInflator.m */,
+				5C86213425C0477D00BF23CA /* LuaNativeCall.h */,
+				5C86213525C0477D00BF23CA /* LuaNativeCall.m */,
 			);
 			path = exportable;
 			sourceTree = "<group>";
@@ -1371,6 +1377,7 @@
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
 				5C5A990224E16BCC002A22EA /* LuaShort.h in Headers */,
 				5C5A994424E16BCC002A22EA /* LGView.h in Headers */,
+				5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */,
 				5C5A99C324E16BEC002A22EA /* ldebug.h in Headers */,
 				5C5A995424E16BCC002A22EA /* Defines.h in Headers */,
 				5C5A99E424E16BEC002A22EA /* ltable.h in Headers */,
@@ -1709,6 +1716,7 @@
 				5C5A98CD24E16BCC002A22EA /* LGLinearLayout.mm in Sources */,
 				5C5A99C124E16BEC002A22EA /* Makefile in Sources */,
 				5C5A99BB24E16BEC002A22EA /* print.c in Sources */,
+				5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */,
 				5C5A992F24E16BCC002A22EA /* IPTableBaseAdapter.mm in Sources */,
 				5C5A992924E16BCC002A22EA /* LuaTranslator.m in Sources */,
 				5C5A99BD24E16BEC002A22EA /* loadlib.c in Sources */,

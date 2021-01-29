@@ -43,6 +43,7 @@
 #import "LuaRef.h"
 #import "LuaThread.h"
 #import "LuaLog.h"
+#import "LuaNativeCall.h"
 
 #import "LGParser.h"
 
@@ -995,6 +996,7 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LuaRef class]];
     [Lunar Register:lu :[LuaThread class]];
     [Lunar Register:lu :[LuaLog class]];
+    [Lunar Register:lu :[LuaNativeCall class]];
     
     if(plugins != nil)
     {

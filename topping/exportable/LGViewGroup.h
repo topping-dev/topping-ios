@@ -5,7 +5,9 @@
 
 -(void)AddSubview:(LGView*)val;
 -(void)ClearSubviews;
+-(NSMutableDictionary*)GetBindings;
 
 @property (nonatomic, strong) NSMutableArray *subviews;
+@property (nonatomic, strong) NSMutableDictionary *subviewMap;
 
 @end

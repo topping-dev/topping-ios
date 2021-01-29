@@ -15,6 +15,5 @@
  * Object that sent and received.
  */
 @property (nonatomic, retain) NSObject* obj;
-@property void *nobj;
 
 @end
