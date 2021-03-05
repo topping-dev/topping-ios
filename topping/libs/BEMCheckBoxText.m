@@ -2,25 +2,51 @@
 #import "BEMCheckBoxText.h"
 #import "Defines.h"
 #import <BEMCheckBox/BEMCheckBox.h>
+#import "LGDimensionParser.h"
 
 @implementation BEMCheckBoxText
 
--(void)drawRect:(CGRect)rect
+-(instancetype)initWithFrame:(CGRect)frame
 {
-    [super drawRect:rect];
-    if(self.text != nil)
+    BEMCheckBoxText *cb = [super initWithFrame:frame];
+    self.checkbox = [[BEMCheckBox alloc] initWithFrame:CGRectMake(0, [[LGDimensionParser GetInstance] GetDimension:@"5dp"], self.checkboxSize.width, self.checkboxSize.height)];
+    [cb addSubview:self.checkbox];
+    [cb bringSubviewToFront:self.checkbox];
+    self.userInteractionEnabled = YES;
+    return cb;
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (event.type == UIEventTypeTouches)
     {
-        if(!self.textInit)
-        {
-            self.textInit = YES;
-            self.label = [[UILabel alloc] initWithFrame:CGRectMake(self.checkboxTextInset.left, 0, self.frame.size.width - self.checkboxTextInset.left, self.frame.size.height)];
-            self.label.backgroundColor = [UIColor clearColor];
-            [self addSubview:self.label];
-        }
-        self.label.font = self.font;
-        self.label.textColor = self.textColor;
-        self.label.text = self.text;
+        [self.checkbox performSelector:NSSelectorFromString(@"handleTapCheckBox:") withObject:nil];
     }
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    return YES;
+}
+
+-(CGSize)intrinsicContentSize
+{
+    self.numberOfLines = 0;
+    CGSize s = [super intrinsicContentSize];
+    s.height = s.height + self.checkboxTextInset.top + self.checkboxTextInset.bottom;
+    s.width = s.width + self.checkboxTextInset.left + self.checkboxTextInset.right;
+    return s;
+}
+
+-(void)drawTextInRect:(CGRect)rect
+{
+    CGRect r = UIEdgeInsetsInsetRect(rect, self.checkboxTextInset);
+    [super drawTextInRect:r];
+}
+
+-(CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines
+{
+    CGRect tr = UIEdgeInsetsInsetRect(bounds, self.checkboxTextInset);
+    return [super textRectForBounds:tr limitedToNumberOfLines:0];
 }
 
 @end

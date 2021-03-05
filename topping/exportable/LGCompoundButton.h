@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import "LGButton.h"
 
-@interface LGCompoundButton : LGTextView
+@interface LGCompoundButton : LGButton
 {
 }
 

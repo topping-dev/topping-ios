@@ -71,6 +71,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaMapPolygon.h>
 #import <topping/LuaMapPolyline.h>
 #import <topping/LuaNativeObject.h>
+#import <topping/LuaNativeCall.h>
 #import <topping/LuaObjectStore.h>
 #import <topping/LuaPoint.h>
 #import <topping/LuaRect.h>

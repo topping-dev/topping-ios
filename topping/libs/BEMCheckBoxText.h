@@ -7,14 +7,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BEMCheckBoxText : BEMCheckBox
+@interface BEMCheckBoxText : UILabel
 
-@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) BEMCheckBox *checkbox;
 @property (nonatomic) UIEdgeInsets checkboxTextInset;
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) UIColor *textColor;
-@property (nonatomic, strong) UIFont *font;
 @property (nonatomic) BOOL textInit;
+@property (nonatomic) CGSize checkboxSize;
 
 @end
 

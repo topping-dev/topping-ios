@@ -249,7 +249,12 @@
 
 -(NSString*)GetId
 {
-    GETID
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    if(self.android_tag != nil)
+        return self.android_tag;
     return [LGMapView className];
 }
 
