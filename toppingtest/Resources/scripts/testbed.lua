@@ -114,6 +114,7 @@ end
 function Toolbar_Constructor(pToolbar, luacontext)
     pToolbar:SetSubtitle("Test title");
     pToolbar:SetLogo(LuaResource.GetResourceRef(LR.drawable.blueback))
+    pToolbar:SetNavigationIcon(LuaResource.GetResourceRef(LR.drawable.blueback))
 end
 
 LuaForm.RegisterFormEvent("ListViewTest", LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);

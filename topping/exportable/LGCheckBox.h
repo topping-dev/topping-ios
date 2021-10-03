@@ -1,10 +1,9 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "LGCompoundButton.h"
+#import "CheckBox.h"
 
-#import "BEMCheckBoxText.h"
-
-@interface LGCheckBox : LGCompoundButton<BEMCheckBoxDelegate>
+@interface LGCheckBox : LGCompoundButton
 {
 
 }
@@ -14,7 +13,7 @@
 -(BOOL)IsChecked;
 -(void)SetOnCheckedChangedListener:(LuaTranslator*)lt;
 
-@property (nonatomic, strong) BEMCheckBoxText *checkbox;
+@property (nonatomic, strong) CheckBox *checkbox;
 @property (nonatomic) CGSize checkboxSize;
 @property (nonatomic, strong) LuaTranslator *ltCheckedChanged;
 

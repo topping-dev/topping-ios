@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "LGTextView.h"
+#import "LGEditText.h"
 #import "LuaTranslator.h"
 
 @interface Data : NSObject
@@ -12,7 +12,7 @@
 
 @end
 
-@interface LGComboBox : LGTextView
+@interface LGComboBox : LGEditText
 {
 }
 

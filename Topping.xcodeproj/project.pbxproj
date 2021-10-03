@@ -10,7 +10,6 @@
 		4FD173E093462938CD3C2ADB /* Pods_Topping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687002D891F8709DD32AB747 /* Pods_Topping.framework */; };
 		5C1639542504DE790084032F /* DefaultStyles.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C1639522504DE790084032F /* DefaultStyles.h */; };
 		5C1639552504DE790084032F /* DefaultStyles.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1639532504DE790084032F /* DefaultStyles.m */; };
-		5C1C89672500CD170079C8D2 /* LuaToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1C89662500CD170079C8D2 /* LuaToolbar.swift */; };
 		5C23B60324E555870094389F /* UIBufferedProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C23B60124E555870094389F /* UIBufferedProgressBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C23B60424E555870094389F /* UIBufferedProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23B60224E555870094389F /* UIBufferedProgressBar.m */; };
 		5C23B60524E592AB0094389F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A9A4C24E1BDEF002A22EA /* CoreLocation.framework */; };
@@ -304,10 +303,11 @@
 		5C5ECFED24EA85C7007659B8 /* Topping.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C609D6125BDC21E006BF4CE /* LGFontParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C609D6225BDC21E006BF4CE /* LGFontParser.m */; };
+		5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C64F039262C3C660074EEFE /* CheckBox.xib */; };
+		5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C64F03B262C3F280074EEFE /* CheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C64F03E262C3F280074EEFE /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C64F03C262C3F280074EEFE /* CheckBox.m */; };
 		5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C86213425C0477D00BF23CA /* LuaNativeCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86213525C0477D00BF23CA /* LuaNativeCall.m */; };
-		5C9E065924F6782F00B8D2A4 /* BEMCheckBoxText.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C9E065A24F6782F00B8D2A4 /* BEMCheckBoxText.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
 		5CB5E13825822C7C00BF2EF5 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5E13725822C7C00BF2EF5 /* Empty.swift */; };
 		5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8582F24E3E6AD006E6B65 /* Empty.swift */; };
@@ -342,7 +342,6 @@
 		5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */; };
 		5CD92592252CA48300EC0A1D /* NSStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD92590252CA48300EC0A1D /* NSStack.h */; };
 		5CD92593252CA48300EC0A1D /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD92591252CA48300EC0A1D /* NSStack.m */; };
-		5CFDE2CF25B9C131000FC4D2 /* LuaToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDE2CE25B9C131000FC4D2 /* LuaToolbarButton.swift */; };
 		764968FC99A00A4E89C9B3C8 /* Pods_Toppingtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */; };
 /* End PBXBuildFile section */
 
@@ -387,7 +386,6 @@
 		48369E1BD4C92AEB47991169 /* Pods-Toppingtest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toppingtest.release.xcconfig"; path = "Target Support Files/Pods-Toppingtest/Pods-Toppingtest.release.xcconfig"; sourceTree = "<group>"; };
 		5C1639522504DE790084032F /* DefaultStyles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultStyles.h; sourceTree = "<group>"; };
 		5C1639532504DE790084032F /* DefaultStyles.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefaultStyles.m; sourceTree = "<group>"; };
-		5C1C89662500CD170079C8D2 /* LuaToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuaToolbar.swift; sourceTree = "<group>"; };
 		5C23B60124E555870094389F /* UIBufferedProgressBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIBufferedProgressBar.h; sourceTree = "<group>"; };
 		5C23B60224E555870094389F /* UIBufferedProgressBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIBufferedProgressBar.m; sourceTree = "<group>"; };
 		5C251C7924EBF6E900CCA3B4 /* ui */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ui; sourceTree = "<group>"; };
@@ -685,10 +683,11 @@
 		5C5ECFE124EA6475007659B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5C609D6125BDC21E006BF4CE /* LGFontParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFontParser.h; sourceTree = "<group>"; };
 		5C609D6225BDC21E006BF4CE /* LGFontParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFontParser.m; sourceTree = "<group>"; };
+		5C64F039262C3C660074EEFE /* CheckBox.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBox.xib; sourceTree = "<group>"; };
+		5C64F03B262C3F280074EEFE /* CheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
+		5C64F03C262C3F280074EEFE /* CheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
 		5C86213425C0477D00BF23CA /* LuaNativeCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaNativeCall.h; sourceTree = "<group>"; };
 		5C86213525C0477D00BF23CA /* LuaNativeCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaNativeCall.m; sourceTree = "<group>"; };
-		5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxText.h; sourceTree = "<group>"; };
-		5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxText.m; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		5CB29C602535B49C000E39A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5CB5E13625822C7C00BF2EF5 /* toppingtest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toppingtest-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -727,7 +726,6 @@
 		5CD92590252CA48300EC0A1D /* NSStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		5CD92591252CA48300EC0A1D /* NSStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 		5CEE6382257100A500D80B59 /* Topping.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Topping.podspec; sourceTree = "<group>"; };
-		5CFDE2CE25B9C131000FC4D2 /* LuaToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuaToolbarButton.swift; sourceTree = "<group>"; };
 		687002D891F8709DD32AB747 /* Pods_Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-topping.release.xcconfig"; path = "Target Support Files/Pods-topping/Pods-topping.release.xcconfig"; sourceTree = "<group>"; };
 		6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingtest.debug.xcconfig"; path = "Target Support Files/Pods-toppingtest/Pods-toppingtest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -955,7 +953,6 @@
 			children = (
 				5C5A984C24E16BC0002A22EA /* LuaInterface.h */,
 				5C2B6161254AAB37003A9705 /* LuaToaster.swift */,
-				5C1C89662500CD170079C8D2 /* LuaToolbar.swift */,
 				5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */,
 				5C5A988C24E16BC6002A22EA /* IPTableBaseAdapter.mm */,
 				5C5A983524E16BBD002A22EA /* DataToBeDownloaded.h */,
@@ -991,13 +988,13 @@
 				5C23B60224E555870094389F /* UIBufferedProgressBar.m */,
 				5CBD36EB24F1652F00EB167E /* UILabelPadding.h */,
 				5CBD36EC24F1652F00EB167E /* UILabelPadding.m */,
-				5C9E065724F6782F00B8D2A4 /* BEMCheckBoxText.h */,
-				5C9E065824F6782F00B8D2A4 /* BEMCheckBoxText.m */,
 				5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */,
 				5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */,
 				5CD92590252CA48300EC0A1D /* NSStack.h */,
 				5CD92591252CA48300EC0A1D /* NSStack.m */,
-				5CFDE2CE25B9C131000FC4D2 /* LuaToolbarButton.swift */,
+				5C64F039262C3C660074EEFE /* CheckBox.xib */,
+				5C64F03B262C3F280074EEFE /* CheckBox.h */,
+				5C64F03C262C3F280074EEFE /* CheckBox.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1323,7 +1320,6 @@
 				5C5A99CC24E16BEC002A22EA /* ltm.h in Headers */,
 				5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */,
 				5C5A9A0024E16BEC002A22EA /* socket.h in Headers */,
-				5C9E065924F6782F00B8D2A4 /* BEMCheckBoxText.h in Headers */,
 				5C5A990C24E16BCC002A22EA /* LuaResource.h in Headers */,
 				5C286DF625582B4900198DA5 /* LuaLog.h in Headers */,
 				5C5A98BB24E16BCC002A22EA /* LuaMapMarker.h in Headers */,
@@ -1394,6 +1390,7 @@
 				5C5A98CA24E16BCC002A22EA /* LuaDouble.h in Headers */,
 				5C5A99D124E16BEC002A22EA /* lstate.h in Headers */,
 				5C5A98DE24E16BCC002A22EA /* LGEditText.h in Headers */,
+				5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */,
 				5C5A991E24E16BCC002A22EA /* LuaFloat.h in Headers */,
 				5C5A995524E16BCC002A22EA /* LuaTabForm.h in Headers */,
 				5C5A99E124E16BEC002A22EA /* lfunc.h in Headers */,
@@ -1523,6 +1520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */,
 				5CCA8280250604AC005689D8 /* themes.xml in Resources */,
 				5C2B615E254AA82B003A9705 /* README.md in Resources */,
 				5C2B6160254AA83A003A9705 /* LICENSE in Resources */,
@@ -1641,11 +1639,11 @@
 				5C5A99F224E16BEC002A22EA /* udp.c in Sources */,
 				5C5A994F24E16BCC002A22EA /* LuaChar.m in Sources */,
 				5CD92593252CA48300EC0A1D /* NSStack.m in Sources */,
+				5C64F03E262C3F280074EEFE /* CheckBox.m in Sources */,
 				5C5A98DC24E16BCC002A22EA /* LuaFunction.m in Sources */,
 				5C5A99C724E16BEC002A22EA /* lstring.c in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
-				5CFDE2CF25B9C131000FC4D2 /* LuaToolbarButton.swift in Sources */,
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
@@ -1728,7 +1726,6 @@
 				5C5A98E324E16BCC002A22EA /* LuaPoint.m in Sources */,
 				5C5A99EA24E16BEC002A22EA /* io.c in Sources */,
 				5C5A992A24E16BCC002A22EA /* LuaDefines.m in Sources */,
-				5C1C89672500CD170079C8D2 /* LuaToolbar.swift in Sources */,
 				5C5A99FA24E16BEC002A22EA /* auxiliar.c in Sources */,
 				5C5A98DD24E16BCC002A22EA /* CommonDelegate.mm in Sources */,
 				5C5A99C224E16BEC002A22EA /* lua.c in Sources */,
@@ -1788,7 +1785,6 @@
 				5C5A98E024E16BCC002A22EA /* LuaMapImage.m in Sources */,
 				5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */,
 				5C5A98DA24E16BCC002A22EA /* LGRadioGroup.mm in Sources */,
-				5C9E065A24F6782F00B8D2A4 /* BEMCheckBoxText.m in Sources */,
 				5C5A98D024E16BCC002A22EA /* LGDrawableParser.m in Sources */,
 				5C5A99DB24E16BEC002A22EA /* lcode.c in Sources */,
 				5C5A990124E16BCC002A22EA /* LGMapView.mm in Sources */,
@@ -1951,7 +1947,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PURGPF38A5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1960,13 +1956,13 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/topping/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.1.6;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
 				PRODUCT_NAME = Topping;
@@ -1983,7 +1979,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PURGPF38A5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1992,13 +1988,13 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/topping/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.4;
+				MARKETING_VERSION = 0.1.6;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
 				PRODUCT_NAME = Topping;

@@ -1,6 +1,6 @@
 #import "LGToolbar.h"
-#import <Material/Material-Swift.h>
 #import <topping/topping-Swift.h>
+#import <MaterialComponents/MaterialNavigationBar.h>
 #import "Topping.h"
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
@@ -15,30 +15,26 @@
 
 -(UIView *)CreateComponent
 {
-    self.toolbar = [LuaToolbar alloc];
-    return [self.toolbar initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    self.toolbar = [[MDCNavigationBar alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    return self.toolbar;
 }
 
 -(void)SetupComponent:(UIView *)view
 {
-    LuaToolbar *toolbar = (LuaToolbar*)self.toolbar;
-    toolbar.getView.layer.zPosition = 1000;
-    /*IconButton *menuButton = IconButton(image: Icon.cm.menu, tintColor: .white)
-    menuButton.pulseColor = .white
-    toolbar.leftViews = @[];*/
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
     if(self.android_background == nil)
     {
         self.android_background = @"@color/colorPrimary";
     }
     if(self.android_title != nil)
     {
-        toolbar.getView.title = [[LGStringParser GetInstance] GetString:self.android_title];
+        toolbar.title = [[LGStringParser GetInstance] GetString:self.android_title];
     }
     if(self.android_titleTextColor != nil)
     {
-        toolbar.getView.titleLabel.textColor = [[LGColorParser GetInstance] ParseColor:self.android_titleTextColor];
+        toolbar.titleTextColor = [[LGColorParser GetInstance] ParseColor:self.android_titleTextColor];
     }
-    toolbar.getView.detail = self.android_subtitle;
+    /*toolbar.getView.detail = self.android_subtitle;
     if(self.android_subtitleTextColor != nil)
     {
         toolbar.getView.detailLabel.textColor = [[LGColorParser GetInstance] ParseColor:self.android_titleTextColor];
@@ -49,13 +45,13 @@
         LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:self.android_logo];
         if(ldr != nil)
             toolbar.getView.image = ldr.img;
-    }
+    }*/
     
     if(self.android_background != nil)
     {
         LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:self.android_background];
         if(ldr != nil)
-            toolbar.getView.backgroundColor = ldr.color;
+            toolbar.backgroundColor = ldr.color;
     }
     
     @try {
@@ -79,10 +75,10 @@
         if(dMarginBottom == -1)
             dMarginBottom = 0;
         
-        toolbar.getView.titleLabel.layoutMargins = UIEdgeInsetsMake(dMarginTop, dMarginLeft, dMarginBottom, dMarginRight);
+        toolbar.titleInsets = UIEdgeInsetsMake(dMarginTop, dMarginLeft, dMarginBottom, dMarginRight);
     } @catch (...) {}
     
-    [super SetupComponent:toolbar.getView];
+    [super SetupComponent:toolbar];
 }
 
 -(void)SetMenu:(LuaRef*)menuRef
@@ -92,127 +88,113 @@
 
 -(void)SetLogo:(LuaStream*)logoStream
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    UIImage *img = (UIImage*)logoStream.nonStreamData;
-    LuaToolbarButton *ltb = [[LuaToolbarButton alloc] initWithImage:img];
-    lt.logo = ltb.getView;
+    //Not supported
 }
 
 -(void)SetNavigationIcon:(LuaStream*)navigationIconStream
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
     UIImage *img = (UIImage*)navigationIconStream.nonStreamData;
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:lt.leftViews];
-    LuaToolbarButton *iv = nil;
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:toolbar.leadingBarButtonItems];
+    UIBarButtonItem *iv = nil;
     if(arr.count > 0)
     {
-        iv = [[LuaToolbarButton alloc] initWithIc:[arr objectAtIndex:0]];
-        iv.image = img;
+        iv = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
     }
     else
     {
-        iv = [[LuaToolbarButton alloc] initWithImage:img];
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationTap)];
+        iv = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
+        [arr addObject:iv];
+        /*UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationTap)];
         singleTap.numberOfTapsRequired = 1;
-        [iv.getView setUserInteractionEnabled:YES];
-        [iv.getView addGestureRecognizer:singleTap];
+        [iv setUserInteractionEnabled:YES];
+        [iv.getView addGestureRecognizer:singleTap];*/
     }
-    lt.leftViews = arr;
-        
+    toolbar.leadingBarButtonItems = arr;
 }
 
 -(void)SetOverflowIcon:(LuaStream*)overflowIconStream
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
     UIImage *img = (UIImage*)overflowIconStream.nonStreamData;
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:lt.rightViews];
-    LuaToolbarButton *iv = nil;
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:toolbar.leadingBarButtonItems];
+    UIBarButtonItem *iv = nil;
     if(arr.count > 0)
     {
-        iv = [[LuaToolbarButton alloc] initWithIc:[arr objectAtIndex:0]];
-        iv.image = img;
+        iv = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(overflowTap)];
     }
     else
     {
-        iv = [[LuaToolbarButton alloc] initWithImage:img];
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overflowTap)];
+        iv = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(overflowTap)];
+        [arr addObject:iv];
+        /*UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationTap)];
         singleTap.numberOfTapsRequired = 1;
-        [iv.getView setUserInteractionEnabled:YES];
-        [iv.getView addGestureRecognizer:singleTap];
+        [iv setUserInteractionEnabled:YES];
+        [iv.getView addGestureRecognizer:singleTap];*/
     }
-    lt.rightViews = arr;
+    toolbar.trailingBarButtonItems = arr;
 }
 
 -(NSString*)GetTitle
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    return lt.title;
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    return toolbar.title;
 }
 
 -(void)SetTitle:(NSString*)title
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.title = title;
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    toolbar.title = title;
 }
 
 -(void)SetTitleRef:(LuaRef*)ref
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.title = [[LGStringParser GetInstance] GetString:ref.idRef];
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    toolbar.title = [[LGStringParser GetInstance] GetString:ref.idRef];
 }
 
 -(void)SetTitleTextColor:(NSString*)color
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.titleTextColor = [[LGColorParser GetInstance] ParseColor:color];
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    toolbar.titleTextColor = [[LGColorParser GetInstance] ParseColor:color];
 }
 
 -(void)SetTitleTextColorRef:(LuaRef*)color
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.titleTextColor = [[LGColorParser GetInstance] ParseColor:color.idRef];
+    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    toolbar.titleTextColor = [[LGColorParser GetInstance] ParseColor:color.idRef];
 }
 
 -(void)SetTitleTextApperance:(LuaRef*)ref
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.titleTextAppearance = [LuaTextViewAppearance Parse:ref.idRef];
+    /*MDCBottomAppBarView *toolbar = (MDCBottomAppBarView*)self.toolbar;
+    MDCNavigationBar *navBar = [toolbar valueForKey:@"navBar"];
+    lt.titleTextAppearance = [LuaTextViewAppearance Parse:ref.idRef];*/
 }
 
 -(NSString*)GetSubtitle
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    return lt.subtitle;
+    return @"";
 }
 
 -(void)SetSubtitle:(NSString*)subtitle
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.subtitle = subtitle;
 }
 
 -(void)SetSubtitleRef:(LuaRef*)ref
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.subtitle = [[LGStringParser GetInstance] GetString:ref.idRef];
 }
 
 -(void)SetSubtitleTextColor:(NSString*)color
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.subtitleTextColor = [[LGColorParser GetInstance] ParseColor:color];
 }
 
 -(void)SetSubtitleTextColorRef:(LuaRef*)color
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.subtitleTextColor = [[LGColorParser GetInstance] ParseColor:color.idRef];
 }
 
 -(void)SetSubtitleTextApperance:(LuaRef*)ref
 {
-    LuaToolbar *lt = ((LuaToolbar*)self.toolbar);
-    lt.subtitleTextAppearance = [LuaTextViewAppearance Parse:ref.idRef];
 }
 
 -(void)navigationTap

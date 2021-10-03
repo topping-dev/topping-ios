@@ -33,6 +33,16 @@
 {
     self._view.userInteractionEnabled = YES;
     [self._view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(comboBoxClicked)]];
+    if(self.multiLine)
+    {
+        UITextView *field = (UITextView*)self._view;
+        field.editable = false;
+    }
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return NO;
 }
 
 //Lua

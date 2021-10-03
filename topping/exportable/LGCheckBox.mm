@@ -14,7 +14,7 @@
 -(void)InitProperties
 {
 	[super InitProperties];
-    self.checkboxSize = CGSizeMake([[LGDimensionParser GetInstance] GetDimension:@"8dp"], [[LGDimensionParser GetInstance] GetDimension:@"8dp"]);
+    self.checkboxSize = CGSizeMake(51 + 24, 31 + 6);
 }
 
 -(int)GetContentW
@@ -41,11 +41,11 @@
 
 -(UIView*)CreateComponent
 {
-	self.checkbox = [BEMCheckBoxText alloc];
-    self.checkbox.checkboxSize = self.checkboxSize;
-    self.checkbox.checkboxTextInset = UIEdgeInsetsMake(0, self.checkboxSize.width + [[LGDimensionParser GetInstance] GetDimension:@"4dp"], 0, 0);
+	self.checkbox = [CheckBox alloc];
     self.checkbox = [self.checkbox initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.checkboxSize.height)];
-    self.checkbox.checkbox.boxType = BEMBoxTypeSquare;
+    
+    [self.checkbox.sw addTarget:self action:@selector(didTapCheckBox:) forControlEvents:UIControlEventValueChanged];
+    [self.checkbox.title addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapLabel:)]];
     
 	return self.checkbox;
 }
@@ -53,24 +53,23 @@
 -(void) SetupComponent:(UIView *)view
 {
     BOOL checked = [[LGValueParser GetInstance] GetBoolValueDirect:self.android_checked];
-    self.checkbox.checkbox.on = checked;
-    self.checkbox.checkbox.delegate = self;
+    self.checkbox.sw.on = checked;
     
-    self.checkbox.text = [[LGStringParser GetInstance] GetString:self.android_text];
+    self.checkbox.title.text = [[LGStringParser GetInstance] GetString:self.android_text];
     UIColor *textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
     if(textColor == nil)
         textColor = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:@"android:textColor" :[sToppingEngine GetAppStyle]];
-    self.checkbox.textColor = textColor;
+    self.checkbox.title.textColor = textColor;
     UIColor *colorAccent = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
     if(colorAccent == nil)
         colorAccent = textColor;
-    self.checkbox.checkbox.onTintColor = colorAccent;
-    self.checkbox.checkbox.onCheckColor = colorAccent;
+    self.checkbox.sw.tintColor = colorAccent;
+    self.checkbox.sw.onTintColor = colorAccent;
     
     if(self.android_textSize != nil)
-        self.checkbox.font = [self.checkbox.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
+        self.checkbox.title.font = [self.checkbox.title.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
     
-    if(self.checkbox.text != nil)
+    if(self.checkbox.title.text != nil)
     {
         self.checkbox.frame = CGRectMake(self.dX, self.dY, self.dWidth, [self GetContentH]);
     }
@@ -80,11 +79,17 @@
     v = nil;
 }
 
--(void)didTapCheckBox:(BEMCheckBox *)checkBox
+-(void)didTapLabel:(CheckBox *)checkBox
+{
+    [self.checkbox.sw setOn:!self.checkbox.sw.isOn animated:YES];
+    [self didTapCheckBox:checkBox];
+}
+
+-(void)didTapCheckBox:(CheckBox *)checkBox
 {
     if(self.ltCheckedChanged != nil)
     {
-        [self.ltCheckedChanged CallIn:self.lc, [NSNumber numberWithBool:self.checkbox.checkbox.on], nil];
+        [self.ltCheckedChanged CallIn:self.lc, [NSNumber numberWithBool:self.checkbox.sw.on], nil];
     }
 }
 
@@ -98,7 +103,7 @@
 
 -(BOOL) IsChecked
 {
-	return self.checkbox.checkbox.on;
+	return self.checkbox.sw.on;
 }
 
 -(void)SetOnCheckedChangedListener:(LuaTranslator*)lt

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '11.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 
@@ -16,10 +16,9 @@ target 'Topping' do
   pod 'GDataXML-HTML', '~> 1.4.1'
   pod 'ActionSheetPicker-3.0'
   pod 'MBProgressHUD', '~> 1.2.0'
-  pod 'BEMCheckBox'
-  pod 'ActionSheetPicker-3.0'
-  pod 'Material'
-  pod 'MaterialComponents/ActivityIndicator'
+  pod 'MaterialComponents/BottomAppBar', '119.5.0'
+  pod 'MaterialComponents/ActivityIndicator', '119.5.0'
+  pod 'MDFInternationalization', '2.0.0'
 
 end
 
@@ -36,9 +35,16 @@ target 'Toppingtest' do
   pod 'GDataXML-HTML', '~> 1.4.1'
   pod 'ActionSheetPicker-3.0'
   pod 'MBProgressHUD', '~> 1.2.0'
-  pod 'BEMCheckBox'
-  pod 'ActionSheetPicker-3.0'
-  pod 'Material'
-  pod 'MaterialComponents/ActivityIndicator'
+  pod 'MaterialComponents/BottomAppBar', '119.5.0'
+  pod 'MaterialComponents/ActivityIndicator', '119.5.0'
+  pod 'MDFInternationalization', '2.0.0'
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+    end
+  end
 end

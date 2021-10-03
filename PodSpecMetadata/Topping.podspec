@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Topping'
-  s.version          = '0.1.4'
+  s.version          = '0.1.6'
   s.summary          = 'ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.'
   s.description      = <<-DESC
 ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.
@@ -20,8 +20,9 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.license          = { :type => 'Creative Commons License', :file => 'LICENSE' }
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
-  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.4/topping.zip' }
+  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.5/topping.zip' }
   #s.source            = { :http => 'https://github.com/Deadknight/topping-ios-local/releases/download/v0.1.4/topping.zip' }
+  #s.source = { :http=> 'https://localhost:8080/topping.zip' }
   
   #s.social_media_url = 'https://www.twitter.com/toppingdev'
 
@@ -29,19 +30,21 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.dependency 'GDataXML-HTML', '1.4.1'
   s.dependency 'ActionSheetPicker-3.0', '2.5.0'
   s.dependency 'MBProgressHUD', '1.2.0'
-  s.dependency 'BEMCheckBox', '1.4.1'
-  s.dependency 'Material', '3.1.8'
-  s.dependency 'MaterialComponents/ActivityIndicator', '113.2'
+  s.dependency 'MaterialComponents/AppBar', '119.5.0'
+  s.dependency 'MaterialComponents/ActivityIndicator', '119.5.0'
+  s.dependency 'MDFInternationalization', '2.0.0'
   
   s.vendored_frameworks = 'Topping.framework'
   s.ios.deployment_target = '10.0'
   s.swift_versions = '4.0'
   
   s.pod_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+    'IPHONEOS_DEPLOYMENT_TARGET' => '10.0'
   }
   s.user_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+    'IPHONEOS_DEPLOYMENT_TARGET' => '10.0'
   }
 
 end
