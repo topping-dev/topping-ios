@@ -5,6 +5,7 @@
 #import "LuaFunction.h"
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
+#import "LGValueParser.h"
 #import "LuaTranslator.h"
 
 @implementation LGEditText
@@ -63,6 +64,7 @@
     if(self.multiLine)
     {
         UITextView *tf = (UITextView*)self._view;
+        tf.delegate = self;
         CALayer *layer = [[CALayer alloc] init];
         layer.backgroundColor = tf.textColor.CGColor;
         layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
@@ -248,16 +250,18 @@
 
 -(void)onTouchOutside:(UITapGestureRecognizer*)gesture
 {
-    @try {
+    @try
+    {
         gesture.cancelsTouchesInView = NO;
         if(gesture.state == UIGestureRecognizerStateEnded)
         {
             if(self.selectedKeyboardTextField != nil)
                 [self.selectedKeyboardTextField resignFirstResponder];
-                    if(self.selectedKeyboardTextView != nil)
-                        [self.selectedKeyboardTextView resignFirstResponder];
-                            gesture.cancelsTouchesInView = NO;
-        } }
+            if(self.selectedKeyboardTextView != nil)
+                [self.selectedKeyboardTextView resignFirstResponder];
+            gesture.cancelsTouchesInView = NO;
+        }
+    }
     @catch(NSException *ex)
     {
     }
@@ -266,97 +270,97 @@
 -(void)setViewMovedUp:(BOOL)movedUp:(NSNotification*)notif
 {
     [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.5];
-           
-            CGRect rect = self._view.frame;
-                CGRect t = CGRectMake(0, 0, 0, self.moveDifference);
-                    if (movedUp)
-                    {
-                        rect.origin.y -= t.size.height;
-                            rect.size.height += t.size.height;
-                    }
-                    else
-                    {
-                        rect.origin.y += t.size.height;
-                            rect.size.height -= t.size.height;
-                    }
-                    self._view.frame = rect;
-                       
-                        [UIView commitAnimations];
+    [UIView setAnimationDuration:0.5];
+
+    CGRect rect = self._view.frame;
+    CGRect t = CGRectMake(0, 0, 0, self.moveDifference);
+    if (movedUp)
+    {
+        rect.origin.y -= t.size.height;
+        rect.size.height += t.size.height;
+    }
+    else
+    {
+        rect.origin.y += t.size.height;
+        rect.size.height -= t.size.height;
+    }
+    self._view.frame = rect;
+       
+    [UIView commitAnimations];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notif
 {
     CGRect t;
-        [[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&t];
-            t = [self._view convertRect:t toView:nil];
+    [[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&t];
+    t = [self._view convertRect:t toView:nil];
+       
+    if(self.selectedKeyboardTextField != nil)
+    {
+        int screenY = self.selectedKeyboardTextField.frame.origin.y;
+           
+        if([self._view isKindOfClass:[UIScrollView class]])
+        {
+            screenY = self.selectedKeyboardTextField.frame.origin.y + self._view.frame.origin.y - ((UIScrollView *)self._view).contentOffset.y;
                
-                if(self.selectedKeyboardTextField != nil)
-                {
-                    int screenY = self.selectedKeyboardTextField.frame.origin.y;
+                int screenHeight = self._view.frame.size.height;
+                    int visibleScreenHeight = screenHeight - t.size.width;
                        
-                        if([self._view isKindOfClass:[UIScrollView class]])
+                        if(screenY > visibleScreenHeight)
                         {
-                            screenY = self.selectedKeyboardTextField.frame.origin.y + self._view.frame.origin.y - ((UIScrollView *)self._view).contentOffset.y;
-                               
-                                int screenHeight = self._view.frame.size.height;
-                                    int visibleScreenHeight = screenHeight - t.size.width;
-                                       
-                                        if(screenY > visibleScreenHeight)
-                                        {
-                                            self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextField.frame.size.height;
-                                                [self setViewMovedUp:YES:notif];
-                                                    self.movedUpField = YES;
-                                        }
+                            self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextField.frame.size.height;
+                                [self setViewMovedUp:YES:notif];
+                                    self.movedUpField = YES;
                         }
-                        else
-                        {
-                            screenY = self.selectedKeyboardTextField.frame.origin.y + self._view.frame.origin.y;
-                               
-                                int screenHeight = self._view.frame.size.height;
-                                    int visibleScreenHeight = screenHeight - t.size.width;
-                                       
-                                        if(screenY > visibleScreenHeight)
-                                        {
-                                            self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextField.frame.size.height;
-                                                [self setViewMovedUp:YES:notif];
-                                                    self.movedUpField = YES;
-                                        }
-                        }
-                }
-                else
-                {
-                    int screenY = self.selectedKeyboardTextView.frame.origin.y;
-                       
-                        if([self._view isKindOfClass:[UIScrollView class]])
-                        {
-                            screenY = self.selectedKeyboardTextView.frame.origin.y + self._view.frame.origin.y - ((UIScrollView *)self._view).contentOffset.y;
-                               
-                                int screenHeight = self._view.frame.size.height;
-                                    int visibleScreenHeight = screenHeight - t.size.width;
-                                       
-                                        if(screenY > visibleScreenHeight)
-                                        {
-                                            self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextView.frame.size.height;
-                                                [self setViewMovedUp:YES:notif];
-                                                    self.movedUpField = YES;
-                                        }
-                        }
-                        else
-                        {
-                            screenY = self.selectedKeyboardTextView.frame.origin.y + self._view.frame.origin.y;
-                               
-                                int screenHeight = self._view.frame.size.height;
-                                    int visibleScreenHeight = screenHeight - t.size.width;
-                                       
-                                        if(screenY > visibleScreenHeight)
-                                        {
-                                            self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextView.frame.size.height;
-                                                [self setViewMovedUp:YES:notif];
-                                                    self.movedUpField = YES;
-                                        }
-                        }
-                }
+        }
+        else
+        {
+            screenY = self.selectedKeyboardTextField.frame.origin.y + self._view.frame.origin.y;
+               
+            int screenHeight = self._view.frame.size.height;
+            int visibleScreenHeight = screenHeight - t.size.width;
+                   
+            if(screenY > visibleScreenHeight)
+            {
+                self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextField.frame.size.height;
+                    [self setViewMovedUp:YES:notif];
+                        self.movedUpField = YES;
+            }
+        }
+    }
+    else
+    {
+        int screenY = self.selectedKeyboardTextView.frame.origin.y;
+           
+        if([self._view isKindOfClass:[UIScrollView class]])
+        {
+            screenY = self.selectedKeyboardTextView.frame.origin.y + self._view.frame.origin.y - ((UIScrollView *)self._view).contentOffset.y;
+               
+            int screenHeight = self._view.frame.size.height;
+            int visibleScreenHeight = screenHeight - t.size.width;
+                   
+            if(screenY > visibleScreenHeight)
+            {
+                self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextView.frame.size.height;
+                    [self setViewMovedUp:YES:notif];
+                        self.movedUpField = YES;
+            }
+        }
+        else
+        {
+            screenY = self.selectedKeyboardTextView.frame.origin.y + self._view.frame.origin.y;
+               
+            int screenHeight = self._view.frame.size.height;
+            int visibleScreenHeight = screenHeight - t.size.width;
+                   
+            if(screenY > visibleScreenHeight)
+            {
+                self.moveDifference = screenY - visibleScreenHeight + self.selectedKeyboardTextView.frame.size.height;
+                    [self setViewMovedUp:YES:notif];
+                        self.movedUpField = YES;
+            }
+        }
+    }
 }
 
 -(void)keyboardWillHide:(NSNotification *)notif
@@ -364,9 +368,9 @@
     if(self.movedUpField)
     {
         self.movedUpField = NO;
-            [self setViewMovedUp:NO:notif];
-                self.selectedKeyboardTextField = nil;
-                    self.selectedKeyboardTextView = nil;
+        [self setViewMovedUp:NO:notif];
+        self.selectedKeyboardTextField = nil;
+        self.selectedKeyboardTextView = nil;
     }
 }
 
@@ -383,26 +387,21 @@
         [self keyboardWillHide:nil];
     self.selectedKeyboardTextField = nil;
     self.selectedKeyboardTextView = textView;
+    if(self.ltBeforeTextChangedListener != nil)
+        [self.ltBeforeTextChangedListener CallIn:textView.text];
     return textView.editable;
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
+- (void)textViewDidEndEditing:(UITextView *)textView
 {
-   
+    if(self.ltAfterTextChangedListener != nil)
+        [self.ltAfterTextChangedListener CallIn:textView.text];
 }
 
--(NSString *)GetText
+-(void)textViewDidChange:(UITextView *)textView
 {
-    UILabel *field = (UILabel*)self._view;
-    return [field text];
-}
-
--(void)SetText:(NSString *)val
-{
-    UILabel *field = (UILabel*)self._view;
-    [field setText:val];
-    self.android_text = val;
-    [self ResizeOnText];
+    if(self.ltTextChangedListener != nil)
+        [self.ltTextChangedListener CallIn:textView.text];
 }
 
 //Lua
@@ -413,12 +412,76 @@
 	return lst;
 }
 
+-(NSString *)GetText
+{
+    if(self.multiLine)
+    {
+        UITextView *field = (UITextView*)self._view;
+        return field.text;
+    }
+    else
+    {
+        UITextField *field = (UITextField*)self._view;
+        return field.text;
+    }
+}
+
+-(void)SetText:(NSString *)val
+{
+    if(self.multiLine)
+    {
+        UITextView *field = (UITextView*)self._view;
+        [field setText:val];
+    }
+    else
+    {
+        UITextField *field = (UITextField*)self._view;
+        [field setText:val];
+    }
+    self.android_text = val;
+    [self ResizeOnText];
+}
+
+-(void)SetTextRef:(LuaRef *)ref
+{
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    [self SetText:val];
+}
+
+-(void)SetTextColor:(NSString *)color
+{
+    if(self.multiLine)
+    {
+        UITextView *field = (UITextView*)self._view;
+        [field setTextColor:[[LGColorParser GetInstance] ParseColor:color]];
+    }
+    else
+    {
+        UITextField *field = (UITextField*)self._view;
+        [field setTextColor:[[LGColorParser GetInstance] ParseColor:color]];
+    }
+}
+
+-(void)SetTextColorRef:(LuaRef *)ref
+{
+    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    if(self.multiLine)
+    {
+        UITextView *field = (UITextView*)self._view;
+        [field setTextColor:val];
+    }
+    else
+    {
+        UITextField *field = (UITextField*)self._view;
+        [field setTextColor:val];
+    }
+}
+
 -(void)SetTextChangedListener:(LuaTranslator*)lt
 {
     self.ltTextChangedListener = lt;
     if(self.multiLine)
     {
-        
     }
     else
     {
@@ -432,7 +495,6 @@
     self.ltBeforeTextChangedListener = lt;
     if(self.multiLine)
     {
-        
     }
     else
     {
@@ -480,21 +542,6 @@
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGEditText class]] 
 			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetText:))
-                                       :@selector(SetText:)
-                                       :nil
-                                       :MakeArray([NSString class]C nil)]
-             forKey:@"SetText"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextColor:))
-                                       :@selector(SetTextColor:)
-                                       :nil
-                                       :MakeArray([NSString class]C nil)]
-             forKey:@"SetTextColor"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetText))
-                                       :@selector(GetText)
-                                       :[NSString class]
-                                       :MakeArray(nil)]
-             forKey:@"GetText"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextChangedListener:)) :@selector(SetTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"SetTextChangedListener"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBeforeTextChangedListener:)) :@selector(SetBeforeTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"SetBeforeTextChangedListener"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetAfterTextChangedListener:)) :@selector(SetAfterTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"SetAfterTextChangedListener"];

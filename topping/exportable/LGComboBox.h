@@ -17,7 +17,8 @@
 }
 
 +(LGComboBox*)Create:(LuaContext *)context;
--(void) AddComboItem:(NSString *)name :(NSObject *)value;
+-(void) AddItem:(NSString *)name :(NSObject *)value;
+-(void) SetItems:(NSMutableDictionary *)values;
 -(void) ShowCancel:(int)value;
 -(NSString*) GetSelectedName;
 -(NSObject*) GetSelectedTag;

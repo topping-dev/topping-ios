@@ -101,6 +101,36 @@
 	return lst;
 }
 
+-(NSString *)GetText
+{
+    return self.checkbox.title.text;
+}
+
+-(void)SetText:(NSString *)val
+{
+    [self.checkbox.title setText:val];
+    self.android_text = val;
+    [self ResizeOnText];
+}
+
+-(void)SetTextRef:(LuaRef *)ref
+{
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    [self SetText:val];
+}
+
+-(void)SetTextColor:(NSString *)color
+{
+    UIColor *val = [[LGColorParser GetInstance] ParseColor:color];
+    [self.checkbox.title setTextColor:val];
+}
+
+-(void)SetTextColorRef:(LuaRef *)ref
+{
+    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    [self.checkbox.title setTextColor:val];
+}
+
 -(BOOL) IsChecked
 {
 	return self.checkbox.sw.on;

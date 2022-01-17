@@ -15,6 +15,9 @@
     
     for(LGView *w in self.subviews)
     {
+        if(w._view == nil)
+            continue;
+        
         w._view.translatesAutoresizingMaskIntoConstraints = NO;
         [constraintArr addObject:[w._view.widthAnchor constraintEqualToConstant:w.dWidth - self.dPaddingLeft]];
         [constraintArr addObject:[w._view.heightAnchor constraintEqualToConstant:w.dHeight - self.dPaddingTop]];

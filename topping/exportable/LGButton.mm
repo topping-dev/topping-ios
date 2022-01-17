@@ -2,6 +2,7 @@
 #import "Defines.h"
 #import "LGRadioButton.h"
 #import "LGColorParser.h"
+#import "LGValueParser.h"
 #import "LuaFunction.h"
 #import "LuaTranslator.h"
 
@@ -98,6 +99,49 @@
 	LGButton *lst = [[LGButton alloc] init];
 	[lst InitProperties];
 	return lst;
+}
+
+- (NSString *)GetText
+{
+    UIButton *but = (UIButton*)self._view;
+    return but.currentTitle;
+}
+
+-(void)SetText:(NSString *)val
+{
+    UIButton *but = (UIButton*)self._view;
+    [but setTitle:val forState:UIControlStateNormal];
+    [but setTitle:val forState:UIControlStateFocused];
+    [but setTitle:val forState:UIControlStateDisabled];
+    [but setTitle:val forState:UIControlStateSelected];
+    self.android_text = val;
+    [self ResizeOnText];
+}
+
+-(void)SetTextRef:(LuaRef *)ref
+{
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    [self SetText:val];
+}
+
+-(void)SetTextColor:(NSString *)color
+{
+    UIColor *val = [[LGColorParser GetInstance] ParseColor:color];
+    UIButton *but = (UIButton*)self._view;
+    [but setTitleColor:val forState:UIControlStateNormal];
+    [but setTitleColor:val forState:UIControlStateFocused];
+    [but setTitleColor:val forState:UIControlStateDisabled];
+    [but setTitleColor:val forState:UIControlStateSelected];
+}
+
+-(void)SetTextColorRef:(LuaRef *)ref
+{
+    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    UIButton *but = (UIButton*)self._view;
+    [but setTitleColor:val forState:UIControlStateNormal];
+    [but setTitleColor:val forState:UIControlStateFocused];
+    [but setTitleColor:val forState:UIControlStateDisabled];
+    [but setTitleColor:val forState:UIControlStateSelected];
 }
 
 -(void)SetOnClickListener:(LuaTranslator *)lt

@@ -28,6 +28,7 @@
 -(void)SetText:(NSString *)val;
 -(void)SetTextRef:(LuaRef *)ref;
 -(void)SetTextColor:(NSString *)color;
+-(void)SetTextColorRef:(LuaRef *)ref;
 
 @property(nonatomic, retain) NSNumber *android_autoLink;
 @property(nonatomic, retain) NSNumber *android_autoText;

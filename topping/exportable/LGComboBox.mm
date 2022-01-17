@@ -53,7 +53,7 @@
 	return lst;
 }
 
--(void) AddComboItem:(NSString *)name :(NSObject *)value
+-(void) AddItem:(NSString *)name :(NSObject *)value
 {
 	Data *d = [[Data alloc] init];
 	d.name = name;
@@ -62,6 +62,15 @@
     
     if(((UILabelPadding*)self._view).text == nil && self.comboArray.count > 0)
         ((UILabelPadding*)self._view).text = [[self.comboArray objectAtIndex:0] description];
+}
+
+-(void) SetItems:(NSMutableDictionary *)values
+{
+    [self.comboArray removeAllObjects];
+    for(NSString *key in values.allKeys)
+    {
+        [self AddItem:[values objectForKey:key] :key];
+    }
 }
 
 -(void) ShowCancel:(int)value
@@ -154,7 +163,8 @@
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGComboBox class]] 
 			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddComboItem::)) :@selector(AddComboItem::) :nil :MakeArray([NSString class]C [NSObject class]C nil)] forKey:@"AddComboItem"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddItem::)) :@selector(AddItem::) :nil :MakeArray([NSString class]C [NSObject class]C nil)] forKey:@"AddItem"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetItems:)) :@selector(SetItems:) :nil :MakeArray([NSMutableDictionary class]C nil)] forKey:@"SetItems"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(ShowCancel:)) :@selector(ShowCancel:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"ShowCancel"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetSelectedName)) :@selector(GetSelectedName) :[NSString class] :MakeArray(nil)] forKey:@"GetSelectedName"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetSelectedTag)) :@selector(GetSelectedTag) :[NSObject class] :MakeArray(nil)] forKey:@"GetSelectedTag"];

@@ -273,14 +273,21 @@
 
 -(void)SetTextRef:(LuaRef *)ref
 {
-    NSString *val = [[LGValueParser GetInstance] GetValue:((NSString*)ref.idRef)];
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
     [self SetText:val];
 }
 
--(void)SetTextColor:(NSString *)val
+-(void)SetTextColor:(NSString *)color
 {
 	UILabel *field = (UILabel*)self._view;
-	[field setTextColor:[[LGColorParser GetInstance] ParseColor:val]];
+	[field setTextColor:[[LGColorParser GetInstance] ParseColor:color]];
+}
+
+-(void)SetTextColorRef:(LuaRef *)ref
+{
+    UILabel *field = (UILabel*)self._view;
+    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    [field setTextColor:val];
 }
 
 -(NSString*)GetId
@@ -323,6 +330,11 @@
 									   :nil
 									   :MakeArray([NSString class]C nil)]
 			 forKey:@"SetTextColor"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextColorRef:))
+                                       :@selector(SetTextColorRef:)
+                                       :nil
+                                       :MakeArray([LuaRef class]C nil)]
+             forKey:@"SetTextColorRef"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetText)) 
 									   :@selector(GetText)
 									   :[NSString class]
