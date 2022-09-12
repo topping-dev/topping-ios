@@ -34,11 +34,11 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGDatePicker.h>
 #import <topping/LGEditText.h>
 #import <topping/LGFrameLayout.h>
+#import <topping/LGFragmentContainerView.h>
 #import <topping/LGHorizontalScrollView.h>
 #import <topping/LGImageView.h>
 #import <topping/LGLinearLayout.h>
 #import <topping/LGListView.h>
-#import <topping/LGMapView.h>
 #import <topping/LGProgressBar.h>
 #import <topping/LGRadioButton.h>
 #import <topping/LGRadioGroup.h>
@@ -65,11 +65,6 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaHttpClient.h>
 #import <topping/LuaJSON.h>
 #import <topping/LuaLog.h>
-#import <topping/LuaMapCircle.h>
-#import <topping/LuaMapImage.h>
-#import <topping/LuaMapMarker.h>
-#import <topping/LuaMapPolygon.h>
-#import <topping/LuaMapPolyline.h>
 #import <topping/LuaNativeObject.h>
 #import <topping/LuaNativeCall.h>
 #import <topping/LuaObjectStore.h>
@@ -84,6 +79,13 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaToast.h>
 #import <topping/LuaTranslator.h>
 #import <topping/LuaViewInflator.h>
+#import <topping/LuaLifecycle.h>
+#import <topping/LuaLifecycleObserver.h>
+#import <topping/LuaLifecycleOwner.h>
+#import <topping/LuaMutableLiveData.h>
+#import <topping/LuaViewModel.h>
+#import <topping/LuaViewModelProvider.h>
+#import <topping/ViewModelStore.h>
 
 #import <topping/ToppingEngine.h>
 #import <topping/LuaGlobalFunction.h>

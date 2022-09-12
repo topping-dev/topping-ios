@@ -22,6 +22,7 @@
 #import "LGToolbar.h"
 #import "LGConstraintLayout.h"
 #import "LGHorizontalScrollView.h"
+#import "LGFragmentContainerView.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -76,7 +77,7 @@
     return ls;
 }
 
--(UIView*) ParseXML:(NSString *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview;
+-(UIView*) ParseXML:(NSString *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
 {
     self.lastFileName = filename;
     LuaStream *ls = [self GetLayout:filename];
@@ -99,6 +100,24 @@
 	return [self GenerateUIViewFromLGView:rootView :parentView :parent :cont];
 }
 
+-(LGView*) ParseUI:(NSString*)name :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(NSArray *)attrs {
+    LGView *rootView = nil;
+    
+    rootView = [self GetViewFromName:name :attrs];
+    if(rootView == nil) {
+        NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
+        return nil;
+    }
+    for(GDataXMLNode *node in attrs)
+    {
+        [rootView SetAttributeValue:[node name] :[node stringValue]];
+    }
+    [rootView ApplyStyles];
+        
+    [self GenerateUIViewFromLGView:rootView :parentView :parent :cont];
+    return rootView;
+}
+
 -(Class) ContainsClassNameStringInArray:(NSArray*)arr :(NSString*)str
 {
     for(Class cls : arr)
@@ -111,68 +130,67 @@
     return nil;
 }
 
--(LGView*) ParseChildXML:(LGView*)view :(GDataXMLElement*)parent
+-(LGView*) GetViewFromName:(NSString*)name :(NSArray*)attrs
 {
-	NSString *name = [parent name];
-	LGView *rootView = nil;
+    LGView *rootView = nil;
     Class pluginClass = nil;
-	
-	if([name compare:@"AbsListView"] == 0
-	   || [name compare:@"LGAbsListView"] == 0)
-		rootView = [[LGAbsListView alloc] init];
+    
+    if([name compare:@"AbsListView"] == 0
+       || [name compare:@"LGAbsListView"] == 0)
+        rootView = [[LGAbsListView alloc] init];
     else if([name compare:@"AutoCompleteTextView"] == 0
        || [name compare:@"LGAutoCompleteTextView"] == 0)
         rootView = [[LGAutoCompleteTextView alloc] init];
-	else if([name compare:@"Button"] == 0
-			|| [name compare:@"LGButton"] == 0)
-		rootView = [[LGButton alloc] init];
-	else if([name compare:@"CheckBox"] == 0
-			|| [name compare:@"LGCheckBox"] == 0)
-		rootView = [[LGCheckBox alloc] init];
-	else if([name compare:@"ComboBox"] == 0
-			|| [name compare:@"LGComboBox"] == 0)
-		rootView = [[LGComboBox alloc] init];
-	else if([name compare:@"CompoundButton"] == 0
-			|| [name compare:@"LGCompoundButton"] == 0)
-		rootView = [[LGCompoundButton alloc] init];
-	else if([name compare:@"DatePicker"] == 0
-			|| [name compare:@"LGDatePicker"] == 0)
-		rootView = [[LGDatePicker alloc] init];
-	else if([name compare:@"EditText"] == 0
-			|| [name compare:@"LGEditText"] == 0)
-		rootView = [[LGEditText alloc] init];
-	else if([name compare:@"ImageView"] == 0
-			|| [name compare:@"LGImageView"] == 0)
-		rootView = [[LGImageView alloc] init];	
-	else if([name compare:@"LinearLayout"] == 0
-	   || [name compare:@"LGLinearLayout"] == 0)
-		rootView = [[LGLinearLayout alloc] init];
+    else if([name compare:@"Button"] == 0
+            || [name compare:@"LGButton"] == 0)
+        rootView = [[LGButton alloc] init];
+    else if([name compare:@"CheckBox"] == 0
+            || [name compare:@"LGCheckBox"] == 0)
+        rootView = [[LGCheckBox alloc] init];
+    else if([name compare:@"ComboBox"] == 0
+            || [name compare:@"LGComboBox"] == 0)
+        rootView = [[LGComboBox alloc] init];
+    else if([name compare:@"CompoundButton"] == 0
+            || [name compare:@"LGCompoundButton"] == 0)
+        rootView = [[LGCompoundButton alloc] init];
+    else if([name compare:@"DatePicker"] == 0
+            || [name compare:@"LGDatePicker"] == 0)
+        rootView = [[LGDatePicker alloc] init];
+    else if([name compare:@"EditText"] == 0
+            || [name compare:@"LGEditText"] == 0)
+        rootView = [[LGEditText alloc] init];
+    else if([name compare:@"ImageView"] == 0
+            || [name compare:@"LGImageView"] == 0)
+        rootView = [[LGImageView alloc] init];
+    else if([name compare:@"LinearLayout"] == 0
+       || [name compare:@"LGLinearLayout"] == 0)
+        rootView = [[LGLinearLayout alloc] init];
     else if([name compare:@"FrameLayout"] == 0
        || [name compare:@"LGFrameLayout"] == 0)
         rootView = [[LGFrameLayout alloc] init];
-	else if([name compare:@"ListView"] == 0
-			|| [name compare:@"LGListView"] == 0)
-		rootView = [[LGListView alloc] init];
-	else if([name compare:@"ProgressBar"] == 0
-			|| [name compare:@"LGProgressBar"] == 0)
-		rootView = [[LGProgressBar alloc] init];
-	else if([name compare:@"RadioButton"] == 0
-			|| [name compare:@"LGRadioButton"] == 0)
-		rootView = [[LGRadioButton alloc] init];
-	else if([name compare:@"RadioGroup"] == 0
-			|| [name compare:@"LGRadioGroup"] == 0)
-		rootView = [[LGRadioGroup alloc] init];	
-	else if([name compare:@"ScrollView"] == 0
-			|| [name compare:@"LGScrollView"] == 0)
-		rootView = [[LGScrollView alloc] init];
+    else if([name compare:@"ListView"] == 0
+            || [name compare:@"LGListView"] == 0)
+        rootView = [[LGListView alloc] init];
+    else if([name compare:@"ProgressBar"] == 0
+            || [name compare:@"LGProgressBar"] == 0)
+        rootView = [[LGProgressBar alloc] init];
+    else if([name compare:@"RadioButton"] == 0
+            || [name compare:@"LGRadioButton"] == 0)
+        rootView = [[LGRadioButton alloc] init];
+    else if([name compare:@"RadioGroup"] == 0
+            || [name compare:@"LGRadioGroup"] == 0)
+        rootView = [[LGRadioGroup alloc] init];
+    else if([name compare:@"ScrollView"] == 0
+            || [name compare:@"LGScrollView"] == 0)
+        rootView = [[LGScrollView alloc] init];
     else if([name compare:@"HorizontalScrollView"] == 0
         || [name compare:@"LGHorizontalScrollView"] == 0)
         rootView = [[LGHorizontalScrollView alloc] init];
-	else if([name compare:@"TextView"] == 0
-			|| [name compare:@"LGTextView"] == 0)
-		rootView = [[LGTextView alloc] init];	
-	else if([name compare:@"View"] == 0
-		|| [name compare:@"LGView"] == 0)
+    else if([name compare:@"TextView"] == 0
+            || [name compare:@"LGTextView"] == 0)
+        rootView = [[LGTextView alloc] init];
+    else if([name compare:@"View"] == 0
+        || [name compare:@"LGView"] == 0)
         rootView = [[LGView alloc] init];
     else if([name compare:@"android.support.v7.widget.RecyclerView"] == 0
         || [name compare:@"androidx.recyclerview.widget.RecyclerView"] == 0
@@ -189,14 +207,31 @@
     {
         rootView = [[pluginClass alloc] init];
     }
-	else
-	{
-		NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
-		return nil;
-	}
-	
-	[rootView InitProperties];
-	NSArray *attrs = [parent attributes];
+    else
+    {
+        return nil;
+    }
+    
+    [rootView InitProperties];
+    
+    return rootView;
+}
+
+-(LGView*) ParseChildXML:(LGView*)view :(GDataXMLElement*)parent
+{
+    GDataXMLNodeKind kind = [parent kind];
+    if(kind != GDataXMLElementKind) {
+        return nil;
+    }
+	NSString *name = [parent name];
+	LGView *rootView = nil;
+    NSArray *attrs = [parent attributes];
+    
+    rootView = [self GetViewFromName:name :attrs];
+    if(rootView == nil) {
+        NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
+        return nil;
+    }
 	for(GDataXMLNode *node in attrs)
 	{
 		[rootView SetAttributeValue:[node name] :[node stringValue]];

@@ -25,6 +25,30 @@
         NSLog(@"Null child");*/
 }
 
+-(void)AddSubview:(LGView*)val :(NSInteger)index
+{
+    if(val != nil)
+    {
+        val.parent = self;
+        [self.subviews insertObject:val atIndex:index];
+        if(val.android_id != nil || val.lua_id != nil)
+            [self.subviewMap setObject:val forKey:[val GetId]];
+    }
+    /*else
+        NSLog(@"Null child");*/
+}
+
+-(void)RemoveSubview:(LGView*)val
+{
+    if(val != nil)
+    {
+        [self.subviews removeObject:val];
+        if(val.android_id != nil || val.lua_id != nil)
+            [self.subviewMap removeObjectForKey:[val GetId]];
+        val.parent = nil;
+    }
+}
+
 -(void)ClearSubviews
 {
     [self.subviews removeAllObjects];

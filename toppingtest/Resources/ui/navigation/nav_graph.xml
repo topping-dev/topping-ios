@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFragment">
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="ist.pinsoft.android.temu.fragments.menu.MenuFragment"
+        android:label="@string/receive"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_receiveFragment"
+            app:destination="@id/receiveFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_menuFragment_to_warehouseCountingFragment"
+            app:destination="@id/warehouseCountingFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_fieldCountingFragment"
+            app:destination="@id/fieldCountingFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_stockFragment"
+            app:destination="@id/stockFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_changeFragment"
+            app:destination="@id/changeFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_exitFragment"
+            app:destination="@id/exitFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_outFragment"
+            app:destination="@id/outFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_frontOfficeFragment"
+            app:destination="@id/frontOfficeFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/confirmationFragment"
+        android:name="ist.pinsoft.android.temu.fragments.confirmation.ConfirmationFragment"
+        android:label="fragment_confirmation"
+        tools:layout="@layout/fragment_confirmation" >
+        <argument
+            android:name="packetDetails"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.SpPacketDetailsResponse"
+            app:nullable="true" />
+        <argument
+            android:name="spBulkWrap"
+            app:argType="ist.pinsoft.android.temu.fragments.receive.SpBulkWrapper"
+            app:nullable="true" />
+        <argument
+            android:name="assignType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.ASSIGNTYPE" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto"
+            app:nullable="true" />
+        <argument
+            android:name="countingAssignmentDtoList"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto[]"
+            app:nullable="true" />
+        <argument
+            android:name="countingAssignmentItemDtoList"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentItemDto[]"
+            app:nullable="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/confirmationCompleteFragment"
+        android:name="ist.pinsoft.android.temu.fragments.confirmation.ConfirmationCompleteFragment"
+        android:label="@string/receive"
+        tools:layout="@layout/fragment_confirmation_complete" >
+        <action
+            android:id="@+id/action_confirmationCompleteFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/menuFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="receiveType"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiveFragment"
+        android:name="ist.pinsoft.android.temu.fragments.receive.ReceiveFragment"
+        android:label="@string/receive"
+        tools:layout="@layout/fragment_receive" >
+        <action
+            android:id="@+id/action_receiveFragment_to_serialFragment"
+            app:destination="@id/serialFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_receiveFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_receiveFragment_to_receiveFragment"
+            app:destination="@id/receiveFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/receiveFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_receiveFragment_to_CodeScannerDialogFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:destination="@id/scannerFragment" />
+        <argument
+            android:name="receiveType"
+            app:argType="integer" />
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="poReadyTransactions"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CompleteSimplePORequest[]"
+            app:nullable="true"/>
+        <argument
+            android:name="spReadyTransactions"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CompleteSpPORequest[]"
+            app:nullable="true"/>
+        <argument
+            android:name="selectedPoDetail"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.PurchaseOrderDetail"
+            app:nullable="true" />
+        <argument
+            android:name="poList"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.GetPurchaseOrderDetailResponse"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_receiveFragment_to_confirmationCompleteFragment"
+            app:destination="@id/confirmationCompleteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/menuFragment"/>
+        <action
+            android:id="@+id/action_receiveFragment_to_receiveAddressBSDFragment"
+            app:destination="@id/receiveAddressBSDFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serialFragment"
+        android:name="ist.pinsoft.android.temu.fragments.serial.SerialFragment"
+        android:label="@string/serial_numbers"
+        tools:layout="@layout/fragment_serial" >
+        <action
+            android:id="@+id/action_serialFragment_to_receiveFragment"
+            app:destination="@id/receiveFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_serialFragment_to_ScannerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:destination="@id/scannerFragment" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="serials"
+            app:argType="ist.pinsoft.android.temu.fragments.receive.SerialInventory[]"
+            app:nullable="true" />
+        <argument
+            android:name="target"
+            app:argType="ist.pinsoft.android.temu.fragments.receive.SERIALTAG" />
+        <argument
+            android:name="inventory"
+            app:argType="long"/>
+        <argument
+            android:name="itemCode"
+            app:argType="string"/>
+        <argument
+            android:name="total"
+            app:argType="long"/>
+        <argument
+            android:name="hideAdd"
+            app:argType="boolean" />
+        <argument
+            android:name="hideDelete"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="ist.pinsoft.android.temu.fragments.qrscanner.ScannerFragment"
+        android:label="CodeScannerDialogFragment"
+        tools:layout="@layout/fragment_scanner">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="totalScanCount"
+            app:argType="long" />
+        <argument
+            android:name="codes"
+            app:argType="ist.pinsoft.android.temu.fragments.receive.SerialInventory[]"
+            app:nullable="true" />
+        <argument
+            android:name="target"
+            app:argType="ist.pinsoft.android.temu.fragments.receive.SERIALTAG"/>
+        <argument
+            android:name="inventory"
+            app:argType="long"/>
+        <argument
+            android:name="itemCode"
+            app:argType="string"/>
+        <argument
+            android:name="isSerialReading"
+            app:argType="boolean"/>
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_scannerFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/receiveAddressBSDFragment"
+        android:name="ist.pinsoft.android.temu.fragments.receive.ReceiveAddressBSDFragment"
+        android:label="ReceiveAddressBSDFragment" >
+        <argument
+            android:name="organizationId"
+            app:argType="long" />
+        <argument
+            android:name="subInventoryCode"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/warehouseCountingFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.WarehouseCountingFragment"
+        android:label="@string/warehouse_counting_operations" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.COUNTINGTYPE" />
+        <action
+            android:id="@+id/action_warehouseCountingFragment_to_warehouseCountingDetailFragment"
+            app:destination="@id/warehouseCountingDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/warehouseCountingDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.detail.WarehouseCountingDetailFragment"
+        android:label="@string/counting_order_detail">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingData"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.CountingData" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_warehouseListFragment"
+            app:destination="@id/warehouseListFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_countingAssignFragment"
+            app:destination="@id/countingAssignFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_inventoryListFragment"
+            app:destination="@id/inventoryListFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_countingShowFragment"
+            app:destination="@id/countingShowFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_countingFragment"
+            app:destination="@id/countingFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_confirmationCompleteWarehouseFragment"
+            app:destination="@id/confirmationCompleteWarehouseFragment"
+            app:popUpTo="@id/warehouseCountingFragment" />
+        <action
+            android:id="@+id/action_warehouseCountingDetailFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/warehouseListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.list.WarehouseListFragment"
+        android:label="@string/warehouses">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto" />
+        <argument
+            android:name="countingType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.COUNTINGTYPE" />
+        <action
+            android:id="@+id/action_warehouseListFragment_to_completedAssignmentsFragment"
+            app:destination="@id/completedAssignmentsFragment" />
+        <action
+            android:id="@+id/action_warehouseListFragment_to_countingAssignFragment"
+            app:destination="@id/countingAssignFragment" />
+        <action
+            android:id="@+id/action_warehouseListFragment_to_warehouseListDetailFragment"
+            app:destination="@id/warehouseListDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countingAssignFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.assign.CountingAssignFragment"
+        android:label="@string/counting_assignment_1_2" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto" />
+        <argument
+            android:name="countingAssignmentDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto"
+            app:nullable="true" />
+        <argument
+            android:name="countingType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.COUNTINGTYPE" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_countingAssignFragment_to_countingSearchFragment"
+            app:destination="@id/countingSearchFragment" />
+        <action
+            android:id="@+id/action_countingAssignFragment_to_countingAssignDetailFragment"
+            app:destination="@id/countingAssignDetailFragment" />
+        <action
+            android:id="@+id/action_countingAssignFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countingSearchFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.CountingSearchFragment"
+        android:label="CountingSearchFragment">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable" />
+        <argument
+            android:name="searchType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.SEARCHTYPE" />
+    </fragment>
+    <fragment
+        android:id="@+id/countingAssignDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.assign.CountingAssignDetailFragment"
+        android:label="@string/counting_assignment_2_2">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto" />
+        <argument
+            android:name="selectedWarehouses"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto[]" />
+        <argument
+            android:name="assignType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.ASSIGNTYPE" />
+        <action
+            android:id="@+id/action_countingAssignDetailFragment_to_countingSearchFragment"
+            app:destination="@id/countingSearchFragment" />
+        <action
+            android:id="@+id/action_countingAssignDetailFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_countingAssignDetailFragment_to_completedAssignmentsFragment"
+            app:destination="@id/completedAssignmentsFragment" />
+        <action
+            android:id="@+id/action_countingAssignDetailFragment_to_warehouseCountingDetailFragment"
+            app:destination="@id/warehouseCountingDetailFragment"
+            app:popUpTo="@id/warehouseCountingDetailFragment" />
+        <action
+            android:id="@+id/action_countingAssignDetailFragment_to_confirmationCompleteWarehouseFragment"
+            app:destination="@id/confirmationCompleteWarehouseFragment"
+            app:popUpTo="@id/warehouseCountingDetailFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationCompleteWarehouseFragment"
+        android:name="ist.pinsoft.android.temu.fragments.confirmation.ConfirmationCompleteWarehouseFragment"
+        android:label="@string/counting_assignment" >
+        <argument
+            android:name="countingType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.COUNTINGTYPE" />
+    </fragment>
+    <fragment
+        android:id="@+id/completedAssignmentsFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.assignments.CompletedAssignmentsFragment"
+        android:label="@string/completed_assignments">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto" />
+        <argument
+            android:name="countingAssignmentDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto" />
+        <argument
+            android:name="assignType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.ASSIGNTYPE" />
+        <argument
+            android:name="showNewAssignment"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_completedAssignmentsFragment_to_countingAssignDetailFragment"
+            app:destination="@id/countingAssignDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.list.InventoryListFragment"
+        android:label="@string/counted_inventory">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"/>
+        <action
+            android:id="@+id/action_inventoryListFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countingShowFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.CountingShowFragment"
+        android:label="CountingShowFragment" >
+        <argument
+            android:name="countingAssignmentDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto" />
+        <argument
+            android:name="searchType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.SEARCHTYPE" />
+        <action
+            android:id="@+id/action_countingShowFragment_self"
+            app:destination="@id/countingShowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countingFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.counting.CountingFragment"
+        android:label="@string/counting_screen">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingAssignmentDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto"
+            app:nullable="true" />
+        <argument
+            android:name="fieldCountingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FieldCountingDto"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_countingFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_countingFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+        <action
+            android:id="@+id/action_countingFragment_to_inventoryListFragment"
+            app:destination="@id/inventoryListFragment" />
+        <action
+            android:id="@+id/action_countingFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+        <action
+            android:id="@+id/action_countingFragment_to_unknownSerialDataFragment"
+            app:destination="@id/unknownSerialDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryLocatorListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.list.InventoryLocatorListFragment"
+        android:label="@string/item_code_description">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="searchType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.SEARCHTYPE" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"
+            app:nullable="true"/>
+        <argument
+            android:name="isSerial"
+            app:argType="boolean" />
+        <argument
+            android:name="serialType"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="filterList"
+            app:argType="android.os.Parcelable[]"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_inventoryLocatorListFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSerialDataFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.counting.AddSerialDataFragment"
+        android:label="@string/different_new_inventory" >
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"
+            app:nullable="true"/>
+        <argument
+            android:name="serial"
+            app:argType="string" />
+        <argument
+            android:name="response"
+            app:argType="android.os.Parcelable" />
+        <argument
+            android:name="entryType"
+            app:argType="string" />
+        <argument
+            android:name="rac"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addSerialDataFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/warehouseListDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.detail.WarehouseListDetailFragment"
+        android:label="@string/warehouse_counting_status_detail">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto" />
+        <argument
+            android:name="countingAssignmentDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto"
+            app:nullable="true" />
+        <argument
+            android:name="countingTrackingUser"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingTrackingUser"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_warehouseListDetailFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+        <action
+            android:id="@+id/action_warehouseListDetailFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+        <action
+            android:id="@+id/action_warehouseListDetailFragment_to_countingAssignFragment"
+            app:destination="@id/countingAssignFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.list.UserListFragment"
+        android:label="@string/users" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingDto" />
+        <action
+            android:id="@+id/action_userListFragment_to_warehouseListDetailFragment"
+            app:destination="@id/warehouseListDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldCountingFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.FieldCountingFragment"
+        android:label="@string/menu_field_counting_operations" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="fieldCountingType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.field.FIELDCOUNTINGTYPE" />
+        <action
+            android:id="@+id/action_fieldCountingFragment_to_fieldCountingAssignFragment"
+            app:destination="@id/fieldCountingAssignFragment" />
+        <action
+            android:id="@+id/action_fieldCountingFragment_to_fieldCountingDetailFragment"
+            app:destination="@id/fieldCountingDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldCountingAssignFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.assign.FieldCountingAssignFragment"
+        android:label="@string/new_field_counting_one">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="type"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.field.FIELDCOUNTINGTYPE" />
+        <action
+            android:id="@+id/action_fieldCountingAssignFragment_to_fieldGenericListFragment"
+            app:destination="@id/fieldGenericListFragment" />
+        <action
+            android:id="@+id/action_fieldCountingAssignFragment_to_fieldCountingAssignFinishFragment"
+            app:destination="@id/fieldCountingAssignFinishFragment" />
+        <action
+            android:id="@+id/action_fieldCountingAssignFragment_to_confirmationCompleteFieldFragment"
+            app:destination="@id/confirmationCompleteFieldFragment"
+            app:popUpTo="@id/fieldCountingFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fieldGenericListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.list.FieldGenericListFragment"
+        android:label="@string/search_city" >
+        <argument
+            android:name="type"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.field.list.FIELDGENERICLIST" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"/>
+        <argument
+            android:name="objSecond"
+            app:argType="android.os.Parcelable"
+            app:nullable="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fieldCountingAssignFinishFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.assign.FieldCountingAssignFinishFragment"
+        android:label="@string/new_field_counting_two">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="fcd"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FieldCountingDto" />
+        <argument
+            android:name="summary"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FieldCountingItemSummary" />
+        <argument
+            android:name="siteDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.SiteDto" />
+        <action
+            android:id="@+id/action_fieldCountingAssignFinishFragment_to_confirmationCompleteFieldFragment"
+            app:destination="@id/confirmationCompleteFieldFragment"
+            app:popUpTo="@id/fieldCountingFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationCompleteFieldFragment"
+        android:name="ist.pinsoft.android.temu.fragments.confirmation.ConfirmationCompleteFieldFragment"
+        android:label="@string/create_field_counting" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="finish"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_confirmationCompleteFieldFragment_to_fieldCountingAssignFragment"
+            app:destination="@id/fieldCountingAssignFragment"
+            app:popUpTo="@id/fieldCountingAssignFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldCountingDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.detail.FieldCountingDetailFragment"
+        android:label="@string/field_counting_detail">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_countingFragment"
+            app:destination="@id/countingFragment" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_inventoryListFragment"
+            app:destination="@id/inventoryListFragment" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_fieldCountingDifferenceFragment"
+            app:destination="@id/fieldCountingDifferenceFragment" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_fieldCountingResultFragment"
+            app:destination="@id/fieldCountingResultFragment" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_fieldConfirmFragment"
+            app:destination="@id/fieldConfirmFragment" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_fieldConfirmListFragment"
+            app:destination="@id/fieldConfirmListFragment" />
+        <action
+            android:id="@+id/action_fieldCountingDetailFragment_to_fieldConfirmResultFragment"
+            app:destination="@id/fieldConfirmResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="ist.pinsoft.android.temu.fragments.notification.NotificationFragment"
+        android:label="@string/notifications" />
+    <fragment
+        android:id="@+id/fieldCountingDifferenceFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.difference.FieldCountingDifferenceFragment"
+        android:label="@string/difference_screen">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="fcd"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FieldCountingDto" />
+        <action
+            android:id="@+id/action_fieldCountingDifferenceFragment_to_confirmationCompleteFieldFragment"
+            app:destination="@id/confirmationCompleteFieldFragment"
+            app:popUpTo="@id/fieldCountingFragment"
+            app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_fieldCountingDifferenceFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldCountingResultFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.detail.FieldCountingResultFragment"
+        android:label="@string/field_counting_status_result">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="fcd"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FieldCountingDto" />
+    </fragment>
+    <fragment
+        android:id="@+id/unknownSerialDataFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.warehouse.counting.UnknownSerialDataFragment"
+        android:label="@string/unknown_serial_read" >
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="countingAssignmentDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.CountingAssignmentDto"
+            app:nullable="true" />
+        <argument
+            android:name="fieldCountingDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FieldCountingDto"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_unknownSerialDataFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+        <action
+            android:id="@+id/action_unknownSerialDataFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldConfirmFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.confirm.FieldConfirmFragment"
+        android:label="@string/confirm_screen">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="verificationDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.VerificationDto" />
+        <action
+            android:id="@+id/action_confirmFragment_to_fieldConfirmListFragment"
+            app:destination="@id/fieldConfirmListFragment" />
+        <action
+            android:id="@+id/action_fieldConfirmFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+        <action
+            android:id="@+id/action_fieldConfirmFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_fieldConfirmFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+        <action
+            android:id="@+id/action_fieldConfirmFragment_to_inventoryListFragment"
+            app:destination="@id/inventoryListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldConfirmListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.confirm.list.FieldConfirmListFragment"
+        android:label="@string/confirm_with_select" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="verificationDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.VerificationDto" />
+        <argument
+            android:name="confirmListType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.field.confirm.list.CONFIRMLISTTYPE" />
+        <action
+            android:id="@+id/action_fieldConfirmListFragment_to_fieldConfirmFinishFragment"
+            app:destination="@id/fieldConfirmFinishFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldConfirmFinishFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.confirm.finish.FieldConfirmFinishFragment"
+        android:label="@string/confirmation_confirm_and_send_2_2" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="verificationDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.VerificationDto" />
+        <action
+            android:id="@+id/action_fieldConfirmFinishFragment_to_confirmationCompleteFieldFragment"
+            app:destination="@id/confirmationCompleteFieldFragment"
+            app:popUpTo="@id/fieldCountingFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fieldConfirmResultFragment"
+        android:name="ist.pinsoft.android.temu.fragments.countoperations.field.confirm.result.FieldConfirmResultFragment"
+        android:label="@string/field_confirm_result">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="verificationDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.VerificationDto" />
+        <action
+            android:id="@+id/action_fieldConfirmResultFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.StockFragment"
+        android:label="@string/menu_query_current_stock">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <action
+            android:id="@+id/action_stockFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_stockFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_stockFragment_to_stockSerialFragment"
+            app:destination="@id/stockSerialFragment" />
+        <action
+            android:id="@+id/action_stockFragment_to_itemListFragment"
+            app:destination="@id/itemListFragment" />
+        <action
+            android:id="@+id/action_stockFragment_to_itemStockStatusFragment"
+            app:destination="@id/itemStockStatusFragment" />
+        <action
+            android:id="@+id/action_stockFragment_to_itemFieldStatusFragment"
+            app:destination="@id/itemFieldStatusFragment" />
+        <action
+            android:id="@+id/action_stockFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/genericRadioListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.GenericRadioListFragment"
+        android:label="@string/stock_place_noasterix">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="searchType"
+            app:argType="ist.pinsoft.android.temu.fragments.warehouseoperations.query.SEARCHTYPE" />
+        <argument
+            android:name="obj"
+            app:argType="android.os.Parcelable"
+            app:nullable="true"/>
+        <argument
+            android:name="filterList"
+            app:argType="android.os.Parcelable[]"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockSerialFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.serial.StockSerialFragment"
+        android:label="@string/serial_no_detail">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="serial"
+            app:argType="string" />
+        <argument
+            android:name="itemWithSerialDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.ItemWithSerialDto" />
+        <action
+            android:id="@+id/action_stockSerialFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_stockSerialFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.warehouse.ItemListFragment"
+        android:label="@string/item_code_description">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="itemToSearch"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemStockStatusFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.warehouse.ItemStockStatusFragment"
+        android:label="@string/item_stock_status">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="subInventoryDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.SubInventoryDto" />
+        <argument
+            android:name="itemDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.ItemDto"
+            app:nullable="true" />
+        <argument
+            android:name="mtlStatus"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.MtlStatus"
+            app:nullable="true"/>
+        <argument
+            android:name="mtlStatusResponse"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.MtlStatusResponse" />
+        <action
+            android:id="@+id/action_itemStockStatusFragment_to_itemStockAddressDetailFragment"
+            app:destination="@id/itemStockAddressDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemStockAddressDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.warehouse.ItemStockAddressDetailFragment"
+        android:label="@string/item_stock_address_detail">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="itemWithoutSerialDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.ItemWithoutSerialDto" />
+        <action
+            android:id="@+id/action_itemStockAddressDetailFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemFieldStatusFragment"
+        android:name="ist.pinsoft.android.temu.fragments.warehouseoperations.query.field.ItemFieldStatusFragment"
+        android:label="@string/item_field_status">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="siteDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.SiteDto" />
+        <argument
+            android:name="inventoryItemId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_itemFieldStatusFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.change.ChangeFragment"
+        android:label="@string/field_stock_operations_1_2">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="changeType"
+            app:argType="ist.pinsoft.android.temu.fragments.equipmentoperations.change.CHANGETYPE" />
+        <action
+            android:id="@+id/action_changeFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_changeFragment_to_changeDetailFragment"
+            app:destination="@id/changeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.change.ChangeDetailFragment"
+        android:label="@string/field_stock_operations_2_2" >
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="changeType"
+            app:argType="ist.pinsoft.android.temu.fragments.equipmentoperations.change.CHANGETYPE" />
+        <argument
+            android:name="ticketDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.TicketDto"
+            app:nullable="true" />
+        <argument
+            android:name="workOrderInvChangeDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvChangeDto" />
+        <action
+            android:id="@+id/action_changeDetailFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_changeDetailFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_changeDetailFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+        <action
+            android:id="@+id/action_changeDetailFragment_to_ARItemListFragment"
+            app:destination="@id/ARItemListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ARItemListFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.change.ARItemListFragment"
+        android:label="@string/item_code_description">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="attach"
+            app:argType="boolean" />
+        <argument
+            android:name="arg"
+            app:argType="android.os.Parcelable" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ist.pinsoft.android.temu.fragments.menu.SettingsFragment"
+        android:label="@string/settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_setUserFragment"
+            app:destination="@id/setUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setUserFragment"
+        android:name="ist.pinsoft.android.temu.fragments.menu.SetUserFragment"
+        android:label="@string/set_user" />
+    <fragment
+        android:id="@+id/exitFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.exit.ExitFragment"
+        android:label="@string/workorder_equipment_exit">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <action
+            android:id="@+id/action_exitFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_exitFragment_to_exitSecondFragment"
+            app:destination="@id/exitSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exitSecondFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.exit.ExitSecondFragment"
+        android:label="@string/workorder_equipment_exit_second">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="workOrderInvOutDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvOutInfoDto" />
+        <action
+            android:id="@+id/action_exitSecondFragment_to_exitThirdFragment"
+            app:destination="@id/exitThirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exitThirdFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.exit.ExitThirdFragment"
+        android:label="@string/workorder_equipment_exit_third">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="workOrderInvOutDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvOutInfoDto" />
+        <argument
+            android:name="workOrderInvPlanInfoDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvPlanInfoDto" />
+        <argument
+            android:name="selectedType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.SEARCHTYPE" />
+        <action
+            android:id="@+id/action_exitThirdFragment_to_exitSerialFragment"
+            app:destination="@id/exitSerialFragment" />
+        <action
+            android:id="@+id/action_exitThirdFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_exitThirdFragment_to_exitSupplyFragment"
+            app:destination="@id/exitSupplyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exitSerialFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.exit.ExitSerialFragment"
+        android:label="@string/exit_serial">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="workOrderInvOutDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvOutInfoDto" />
+        <argument
+            android:name="workOrderInvPlanInfoDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvPlanInfoDto" />
+        <argument
+            android:name="fpSerialDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FpSerialDto" />
+    </fragment>
+    <fragment
+        android:id="@+id/exitSupplyFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.exit.ExitSupplyFragment"
+        android:label="@string/exit_supply_title">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="workOrderInvOutDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvOutInfoDto" />
+        <argument
+            android:name="workOrderInvPlanInfoDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvPlanInfoDto" />
+        <argument
+            android:name="fpItemDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.FpItemDto" />
+        <argument
+            android:name="exitType"
+            app:argType="ist.pinsoft.android.temu.fragments.equipmentoperations.exit.ExitType" />
+    </fragment>
+    <fragment
+        android:id="@+id/outFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.out.OutFragment"
+        android:label="@string/workorder_equipment_out" >
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <action
+            android:id="@+id/action_outFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_outFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_outFragment_to_inventoryLocatorListFragment"
+            app:destination="@id/inventoryLocatorListFragment" />
+        <action
+            android:id="@+id/action_outFragment_to_outDetailFragment"
+            app:destination="@id/outDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/outDetailFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.out.OutDetailFragment"
+        android:label="@string/workorder_equipment_out_detail" >
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="workOrderInvOutDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvOutInfoDto" />
+        <argument
+            android:name="selectedType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.SEARCHTYPE" />
+        <argument
+            android:name="itemDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.ItemDto" />
+        <action
+            android:id="@+id/action_outDetailFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_outDetailFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+        <action
+            android:id="@+id/action_outDetailFragment_to_outSerialFragment"
+            app:destination="@id/outSerialFragment" />
+        <action
+            android:id="@+id/action_outDetailFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/outSerialFragment"
+        android:name="ist.pinsoft.android.temu.fragments.equipmentoperations.out.OutSerialFragment"
+        android:label="@string/out_serial">
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="workOrderInvOutDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.WorkOrderInvOutInfoDto" />
+        <argument
+            android:name="itemDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.ItemDto" />
+        <argument
+            android:name="selectedType"
+            app:argType="ist.pinsoft.android.temu.fragments.countoperations.warehouse.SEARCHTYPE" />
+    </fragment>
+    <fragment
+        android:id="@+id/frontOfficeFragment"
+        android:name="ist.pinsoft.android.temu.fragments.fronofficeoperations.frontoffice.FrontOfficeFragment"
+        android:label="@string/front_office_receive">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <action
+            android:id="@+id/action_frontOfficeFragment_to_genericRadioListFragment"
+            app:destination="@id/genericRadioListFragment" />
+        <action
+            android:id="@+id/action_frontOfficeFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_frontOfficeFragment_to_addSerialDataFragment"
+            app:destination="@id/addSerialDataFragment" />
+        <action
+            android:id="@+id/action_frontOfficeFragment_to_frontOfficeSerialFragment"
+            app:destination="@id/frontOfficeSerialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/frontOfficeSerialFragment"
+        android:name="ist.pinsoft.android.temu.fragments.fronofficeoperations.frontoffice.FrontOfficeSerialFragment"
+        android:label="@string/read_serials">
+        <argument android:name="operatingUnit"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.OperatingUnitDto" />
+        <argument
+            android:name="organization"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.UserDepartmentsDto" />
+        <argument
+            android:name="type"
+            app:argType="ist.pinsoft.android.temu.fragments.fronofficeoperations.frontoffice.FRONTOFFICETYPE" />
+        <argument
+            android:name="locatorDto"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.LocatorDto" />
+        <argument
+            android:name="itemWithSerialDtos"
+            app:argType="ist.pinsoft.android.temu.service.restservice.models.ItemWithSerialDto[]" />
+        <action
+            android:id="@+id/action_frontOfficeSerialFragment_to_confirmationCompleteFieldFragment"
+            app:destination="@id/confirmationCompleteFieldFragment"
+            app:popUpTo="@id/frontOfficeFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+</navigation>

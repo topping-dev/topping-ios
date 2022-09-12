@@ -39,6 +39,7 @@
     self.pValue = [[LGValueParser alloc] init];
     self.pStyle = [[LGStyleParser alloc] init];
     self.pFont = [[LGFontParser alloc] init];
+    self.pNavigation = [[LGNavigationParser alloc] init];
     
     self.MatchStringStart = [NSMutableArray array];
     self.MatchStringEnd = [NSMutableArray array];
@@ -101,6 +102,7 @@
     [self.pDrawable Initialize];
     [self.pLayout Initialize];
     [self.pValue Initialize];
+    [self.pNavigation Initialize];
     [self ParseValues];
 }
 

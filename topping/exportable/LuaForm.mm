@@ -6,10 +6,30 @@
 #import "CommonDelegate.h"
 #import "DisplayMetrics.h"
 #import "LuaTranslator.h"
+#import <topping/topping-Swift.h>
 
 @implementation LuaForm
 
 static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.context = [[LuaContext alloc] init];
+        [self.context Setup:self];
+        self.viewModelProvider = [LuaViewModelProvider new];
+        self.lifecycleOwner = [LuaLifecycleOwner new];
+        self.lifecycleRegistry = [[LifecycleRegistry alloc] initWithOwner:self.lifecycleOwner];
+        self.onBackPressedDispatcher = [[LuaFormOnBackPressedDispatcher alloc] initWithForm: self];
+        self.mFragments = [FragmentController createControllerWithFragmentHostCallback:[[LuaFormHostCallback alloc] initWithForm:self]];
+        
+        [[self getSavedStateRegistry] registerSavedStateProviderWithKey:@"android:support:fragments" provider:[[LuaFormSavedStateProvider alloc] initWithForm:self]];
+        
+        self.mStopped = true;
+    }
+    return self;
+}
 
 +(BOOL)OnFormEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...
 {
@@ -89,7 +109,14 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 		[self SetViewXML:self.ui];
 	else
         [LuaForm OnFormEvent:self :FORM_EVENT_CREATE :self.context :0, nil];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_CREATE];
 	[KeyboardHelper KeyboardEnableEventForView:self.view :self];
+    
+    self.mStopped = false;
+    
+    //onCreate
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_CREATE];
+    [self.mFragments dispatchCreate];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -97,6 +124,24 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	[CommonDelegate SetActiveForm:self];
 	[super viewWillAppear:animated];
 	[KeyboardHelper KeyboardEnableEvents:self];
+    
+    //onStart
+    self.mStopped = false;
+    if(!self.mCreated) {
+        self.mCreated = true;
+        [self.mFragments dispatchActivityCreated];
+    }
+    [self.mFragments noteStateNotSaved];
+    [self.mFragments execPendingActions];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_START];
+    [self.mFragments dispatchStart];
+    
+    //onResume
+    self.mResumed = true;
+    [self.mFragments noteStateNotSaved];
+    [self.mFragments execPendingActions];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
+    [self.mFragments dispatchResume];
     [LuaForm OnFormEvent:self :FORM_EVENT_RESUME :self.context :0, nil];
 }
 
@@ -104,13 +149,35 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 {
 	[super viewWillDisappear:animated];
 	[KeyboardHelper KeyboardDisableEvents:self :self.selectedKeyboardTextView];
+    
+    //onPause
 	[LuaForm OnFormEvent:self :FORM_EVENT_PAUSE :self.context :0, nil];
+    [self.mFragments dispatchPause];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_PAUSE];
+    
+    //onStop
+    self.mStopped = true;
+    [self markFragmentsCreated];
+    [self.mFragments dispatchStop];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_STOP];
 }
 
--(void) viewDidUnload
+-(void) viewDidDisappear:(BOOL)animated
 {
-	[super viewDidUnload];
-	[LuaForm OnFormEvent:self :FORM_EVENT_DESTROY :self.context :0, nil];
+    [super viewDidDisappear:animated];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_STOP];
+    
+    [self.mFragments noteStateNotSaved];
+    
+    //onDestroy
+    [self.mFragments dispatchDestroy];
+    [LuaForm OnFormEvent:self :FORM_EVENT_DESTROY :self.context :0, nil];
+    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_DESTROY];
+}
+
+-(void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 -(LuaContext*)GetContext
@@ -120,6 +187,8 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
 -(LGView*)GetViewById:(NSString*)lId
 {
+    if(lId == nil)
+        return nil;
 	return [_lgview GetViewById:lId];
 }
 
@@ -150,6 +219,58 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 -(void)Close
 {
 	[self.context.navController popViewControllerAnimated:YES];
+}
+
+- (BOOL)isChangingConfigurations {
+    return true;
+}
+
+-(void)onBackPressed {
+    
+}
+
+-(ViewModelStore *)getViewModelStore {
+    if(self.viewModelStore == nil) {
+        self.viewModelStore = [[ViewModelStore alloc] init];
+    }
+    return self.viewModelStore;
+}
+
+-(SavedStateRegistry*)getSavedStateRegistry {
+    return [self.savedStateRegistryController getSavedStateRegistry];
+}
+
+-(FragmentManager*)getSupportFragmentManager {
+    return [self.mFragments getSupportFragmentManager];
+}
+
+-(void)markFragmentsCreated {
+    BOOL reiterate;
+    do {
+        reiterate = [self markState:[self getSupportFragmentManager] :LIFECYCLESTATE_CREATED];
+    } while(reiterate);
+}
+
+-(BOOL)markState:(FragmentManager*)manager :(LifecycleState)state {
+    BOOL hadNotMarked = false;
+    NSMutableArray* fragments = [manager getFragments];
+    for(LuaFragment *fragment : fragments) {
+        if(fragment == nil)
+            continue;
+        if(fragment.mHost != nil) {
+            FragmentManager* childFragmentManager = [fragment getChildFragmentManager];
+            hadNotMarked |= [self markState:childFragmentManager :state];
+        }
+        if(fragment.mViewLifecycleOwner != nil && [LuaLifecycle isAtLeast:[[fragment.mViewLifecycleOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_STARTED])  {
+            [fragment.mViewLifecycleOwner setCurrentStateWithState:state];
+            hadNotMarked = true;
+        }
+        if([LuaLifecycle isAtLeast:[fragment.mLifecycleRegistry getCurrentState] :LIFECYCLESTATE_STARTED]) {
+            [fragment.mLifecycleRegistry setCurrentState:state];
+            hadNotMarked = true;
+        }
+    }
+    return hadNotMarked;
 }
 
 -(NSString*)GetId

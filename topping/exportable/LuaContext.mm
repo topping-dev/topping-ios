@@ -33,6 +33,9 @@
         NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[[LGColorParser GetInstance] ParseColor:toolbarTextColor]};
         self.navController.navigationBar.titleTextAttributes = textAttributes;
     }
+    
+    self.form = (LuaForm*)controller;
+    self.packageName = [[NSBundle mainBundle] bundleIdentifier];
 }
 
 -(NSString*)GetId

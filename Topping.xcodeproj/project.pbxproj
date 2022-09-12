@@ -64,7 +64,6 @@
 		5C5A98B824E16BCC002A22EA /* LGColorParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A981424E16BBB002A22EA /* LGColorParser.mm */; };
 		5C5A98B924E16BCC002A22EA /* LuaInt.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A981524E16BBB002A22EA /* LuaInt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98BA24E16BCC002A22EA /* LGDrawableParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A981624E16BBB002A22EA /* LGDrawableParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C5A98BB24E16BCC002A22EA /* LuaMapMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A981724E16BBB002A22EA /* LuaMapMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98BC24E16BCC002A22EA /* LuaShort.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A981824E16BBC002A22EA /* LuaShort.m */; };
 		5C5A98BD24E16BCC002A22EA /* LuaContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A981924E16BBC002A22EA /* LuaContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98BE24E16BCC002A22EA /* LuaGlobalFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A981A24E16BBC002A22EA /* LuaGlobalFunction.m */; };
@@ -76,7 +75,6 @@
 		5C5A98C924E16BCC002A22EA /* LGLinearLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A982624E16BBC002A22EA /* LGLinearLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98CA24E16BCC002A22EA /* LuaDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A982724E16BBC002A22EA /* LuaDouble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98CB24E16BCC002A22EA /* LGDimensionParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A982824E16BBC002A22EA /* LGDimensionParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C5A98CC24E16BCC002A22EA /* LuaMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A982924E16BBC002A22EA /* LuaMapMarker.m */; };
 		5C5A98CD24E16BCC002A22EA /* LGLinearLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A982A24E16BBC002A22EA /* LGLinearLayout.mm */; };
 		5C5A98CE24E16BCC002A22EA /* LuaDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A982B24E16BBC002A22EA /* LuaDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98CF24E16BCC002A22EA /* LGAbsListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A982C24E16BBC002A22EA /* LGAbsListView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -95,13 +93,10 @@
 		5C5A98DD24E16BCC002A22EA /* CommonDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A983A24E16BBE002A22EA /* CommonDelegate.mm */; };
 		5C5A98DE24E16BCC002A22EA /* LGEditText.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A983B24E16BBE002A22EA /* LGEditText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98DF24E16BCC002A22EA /* LuaJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A983C24E16BBE002A22EA /* LuaJSON.m */; };
-		5C5A98E024E16BCC002A22EA /* LuaMapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A983D24E16BBE002A22EA /* LuaMapImage.m */; };
 		5C5A98E124E16BCC002A22EA /* LuaViewInflator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A983E24E16BBE002A22EA /* LuaViewInflator.m */; };
 		5C5A98E324E16BCC002A22EA /* LuaPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984024E16BBE002A22EA /* LuaPoint.m */; };
 		5C5A98E424E16BCC002A22EA /* LGDatePicker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984124E16BBE002A22EA /* LGDatePicker.mm */; };
-		5C5A98E524E16BCC002A22EA /* LuaMapCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984224E16BBE002A22EA /* LuaMapCircle.m */; };
 		5C5A98E624E16BCC002A22EA /* LuaStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984324E16BBF002A22EA /* LuaStore.m */; };
-		5C5A98E724E16BCC002A22EA /* LGMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984424E16BBF002A22EA /* LGMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98E824E16BCC002A22EA /* LGRadioButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984524E16BBF002A22EA /* LGRadioButton.mm */; };
 		5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984624E16BBF002A22EA /* DisplayMetrics.mm */; };
 		5C5A98EA24E16BCC002A22EA /* CommonDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984724E16BBF002A22EA /* CommonDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -113,20 +108,17 @@
 		5C5A98F024E16BCC002A22EA /* LuaTabForm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984D24E16BC0002A22EA /* LuaTabForm.mm */; };
 		5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984E24E16BC0002A22EA /* LuaLong.m */; };
 		5C5A98F224E16BCC002A22EA /* LGAbsListView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */; };
-		5C5A98F324E16BCC002A22EA /* LuaMapImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985024E16BC0002A22EA /* LuaMapImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98F424E16BCC002A22EA /* LuaPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985124E16BC0002A22EA /* LuaPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98F524E16BCC002A22EA /* LG.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985224E16BC0002A22EA /* LG.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98F724E16BCC002A22EA /* LGCompoundButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985424E16BC0002A22EA /* LGCompoundButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98F824E16BCC002A22EA /* LuaDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A985524E16BC0002A22EA /* LuaDialog.m */; };
 		5C5A98F924E16BCC002A22EA /* DisplayMetrics.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985624E16BC1002A22EA /* DisplayMetrics.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C5A98FA24E16BCC002A22EA /* LuaMapPolyline.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985724E16BC1002A22EA /* LuaMapPolyline.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98FB24E16BCC002A22EA /* LGHorizontalScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A985824E16BC1002A22EA /* LGHorizontalScrollView.mm */; };
 		5C5A98FC24E16BCC002A22EA /* LGListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985924E16BC1002A22EA /* LGListView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98FD24E16BCC002A22EA /* LGView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A985A24E16BC1002A22EA /* LGView.mm */; };
 		5C5A98FE24E16BCC002A22EA /* LuaDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A985B24E16BC1002A22EA /* LuaDatabase.m */; };
 		5C5A98FF24E16BCC002A22EA /* LGAdapterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A985C24E16BC1002A22EA /* LGAdapterView.mm */; };
 		5C5A990024E16BCC002A22EA /* LuaCPlusPlusHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985D24E16BC1002A22EA /* LuaCPlusPlusHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C5A990124E16BCC002A22EA /* LGMapView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A985E24E16BC1002A22EA /* LGMapView.mm */; };
 		5C5A990224E16BCC002A22EA /* LuaShort.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985F24E16BC1002A22EA /* LuaShort.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A990324E16BCC002A22EA /* LGStringParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A986024E16BC2002A22EA /* LGStringParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A990424E16BCC002A22EA /* LGDimensionParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A986124E16BC2002A22EA /* LGDimensionParser.mm */; };
@@ -173,7 +165,6 @@
 		5C5A992E24E16BCC002A22EA /* LuaBool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988B24E16BC6002A22EA /* LuaBool.m */; };
 		5C5A992F24E16BCC002A22EA /* IPTableBaseAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988C24E16BC6002A22EA /* IPTableBaseAdapter.mm */; };
 		5C5A993124E16BCC002A22EA /* LuaCPlusPlusHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988E24E16BC6002A22EA /* LuaCPlusPlusHelper.c */; };
-		5C5A993224E16BCC002A22EA /* LuaMapCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A988F24E16BC7002A22EA /* LuaMapCircle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A993424E16BCC002A22EA /* LGScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A989124E16BC7002A22EA /* LGScrollView.mm */; };
 		5C5A993524E16BCC002A22EA /* LuaClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A989224E16BC7002A22EA /* LuaClass.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A993624E16BCC002A22EA /* DataToBeDownloaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A989324E16BC7002A22EA /* DataToBeDownloaded.m */; };
@@ -191,14 +182,11 @@
 		5C5A994724E16BCC002A22EA /* CDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98A424E16BC9002A22EA /* CDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A994824E16BCC002A22EA /* LGColorParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98A524E16BC9002A22EA /* LGColorParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A994924E16BCC002A22EA /* LGEditText.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A98A624E16BC9002A22EA /* LGEditText.mm */; };
-		5C5A994A24E16BCC002A22EA /* LuaMapPolygon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98A724E16BCA002A22EA /* LuaMapPolygon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A994B24E16BCC002A22EA /* LGListView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A98A824E16BCA002A22EA /* LGListView.mm */; };
 		5C5A994C24E16BCC002A22EA /* LuaHttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98A924E16BCA002A22EA /* LuaHttpClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A994D24E16BCC002A22EA /* LGRadioButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98AA24E16BCA002A22EA /* LGRadioButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A994E24E16BCC002A22EA /* LGParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98AB24E16BCA002A22EA /* LGParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A994F24E16BCC002A22EA /* LuaChar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A98AC24E16BCA002A22EA /* LuaChar.m */; };
-		5C5A995024E16BCC002A22EA /* LuaMapPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A98AD24E16BCB002A22EA /* LuaMapPolygon.m */; };
-		5C5A995124E16BCC002A22EA /* LuaMapPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A98AE24E16BCB002A22EA /* LuaMapPolyline.m */; };
 		5C5A995224E16BCC002A22EA /* LuaColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98AF24E16BCB002A22EA /* LuaColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A995324E16BCC002A22EA /* LuaStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98B024E16BCB002A22EA /* LuaStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A995424E16BCC002A22EA /* Defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98B124E16BCB002A22EA /* Defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -303,28 +291,42 @@
 		5C5ECFED24EA85C7007659B8 /* Topping.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A980424E16A4B002A22EA /* Topping.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C609D6125BDC21E006BF4CE /* LGFontParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C609D6225BDC21E006BF4CE /* LGFontParser.m */; };
+		5C64ECB12897CDAB00A4C14B /* LuaFormExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64ECB02897CDAB00A4C14B /* LuaFormExt.swift */; };
 		5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C64F039262C3C660074EEFE /* CheckBox.xib */; };
 		5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C64F03B262C3F280074EEFE /* CheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C64F03E262C3F280074EEFE /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C64F03C262C3F280074EEFE /* CheckBox.m */; };
+		5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2128460152003EC02A /* ArrayExtension.swift */; };
+		5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA232846073E003EC02A /* BackStackRecord.swift */; };
+		5C78BA2628460789003EC02A /* FragmentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2528460789003EC02A /* FragmentTransaction.swift */; };
+		5C78BA28284609EC003EC02A /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA27284609EC003EC02A /* AtomicInteger.swift */; };
+		5C78BA2A2846221B003EC02A /* FragmentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA292846221B003EC02A /* FragmentStore.swift */; };
+		5C78BA2C284622A5003EC02A /* FragmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */; };
+		5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */; };
+		5C78BA3028462498003EC02A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2F28462498003EC02A /* Utils.swift */; };
 		5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C86213425C0477D00BF23CA /* LuaNativeCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86213525C0477D00BF23CA /* LuaNativeCall.m */; };
+		5C91BD60283E134500D4C94F /* LuaLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD5F283E134500D4C94F /* LuaLifecycle.m */; };
+		5C91BD62283E135C00D4C94F /* LuaLifecycle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD61283E135C00D4C94F /* LuaLifecycle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD71283E15FF00D4C94F /* LuaMutableLiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD67283E15FF00D4C94F /* LuaMutableLiveData.m */; };
+		5C91BD72283E15FF00D4C94F /* LuaLifecycleOwner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD68283E15FF00D4C94F /* LuaLifecycleOwner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD73283E15FF00D4C94F /* LuaLifecycleObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD69283E15FF00D4C94F /* LuaLifecycleObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD74283E15FF00D4C94F /* LuaLifecycleOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD6A283E15FF00D4C94F /* LuaLifecycleOwner.m */; };
+		5C91BD75283E15FF00D4C94F /* LuaMutableLiveData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD6B283E15FF00D4C94F /* LuaMutableLiveData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD76283E15FF00D4C94F /* LuaViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD6C283E15FF00D4C94F /* LuaViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD77283E15FF00D4C94F /* LuaViewModelProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD6D283E15FF00D4C94F /* LuaViewModelProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD78283E15FF00D4C94F /* LuaViewModelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD6E283E15FF00D4C94F /* LuaViewModelProvider.m */; };
+		5C91BD79283E15FF00D4C94F /* LuaViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD6F283E15FF00D4C94F /* LuaViewModel.m */; };
+		5C91BD7A283E15FF00D4C94F /* LuaLifecycleObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD70283E15FF00D4C94F /* LuaLifecycleObserver.m */; };
+		5C91BD7C283E25A400D4C94F /* LifecycleRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD7B283E25A400D4C94F /* LifecycleRegistry.m */; };
+		5C91BD7E283E25B500D4C94F /* LifecycleRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD7D283E25B500D4C94F /* LifecycleRegistry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD80283E398B00D4C94F /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD7F283E398B00D4C94F /* OrderedDictionary.m */; };
+		5C91BD82283E39DC00D4C94F /* OrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C91BD81283E39A000D4C94F /* OrderedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C91BD872843647000D4C94F /* FragmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD862843647000D4C94F /* FragmentController.swift */; };
+		5C91BD892843649B00D4C94F /* FragmentHostCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD882843649B00D4C94F /* FragmentHostCallback.swift */; };
+		5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD8A2844B58300D4C94F /* FragmentManager.swift */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
 		5CB5E13825822C7C00BF2EF5 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5E13725822C7C00BF2EF5 /* Empty.swift */; };
 		5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8582F24E3E6AD006E6B65 /* Empty.swift */; };
-		5CB8583824E3F4D7006E6B65 /* CircleAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8583624E3F4D7006E6B65 /* CircleAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8583924E3F4D7006E6B65 /* CircleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8583724E3F4D7006E6B65 /* CircleAnnotationView.m */; };
-		5CB8583C24E3F4E6006E6B65 /* PolyAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8583A24E3F4E6006E6B65 /* PolyAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8583D24E3F4E6006E6B65 /* PolyAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8583B24E3F4E6006E6B65 /* PolyAnnotationView.m */; };
-		5CB8584024E3F570006E6B65 /* CircleAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8583E24E3F570006E6B65 /* CircleAnnotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8584124E3F570006E6B65 /* CircleAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8583F24E3F570006E6B65 /* CircleAnnotation.m */; };
-		5CB8584424E3F613006E6B65 /* PointAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8584224E3F613006E6B65 /* PointAnnotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8584524E3F613006E6B65 /* PointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8584324E3F613006E6B65 /* PointAnnotation.m */; };
-		5CB8584824E3F649006E6B65 /* PointAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8584624E3F649006E6B65 /* PointAnnotationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8584924E3F649006E6B65 /* PointAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8584724E3F649006E6B65 /* PointAnnotationView.m */; };
-		5CB8584C24E3F710006E6B65 /* PolyAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8584A24E3F710006E6B65 /* PolyAnnotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8584D24E3F710006E6B65 /* PolyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8584B24E3F710006E6B65 /* PolyAnnotation.m */; };
-		5CB8585024E42E21006E6B65 /* MapHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8584E24E42E21006E6B65 /* MapHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CB8585124E42E21006E6B65 /* MapHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8584F24E42E21006E6B65 /* MapHelper.m */; };
 		5CB8585424E43007006E6B65 /* URLDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8585224E43007006E6B65 /* URLDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CB8585524E43007006E6B65 /* URLDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8585324E43007006E6B65 /* URLDownloader.m */; };
 		5CB8585824E4306A006E6B65 /* CustomURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8585624E4306A006E6B65 /* CustomURLConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -340,6 +342,27 @@
 		5CCA8280250604AC005689D8 /* themes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA827F250604AC005689D8 /* themes.xml */; };
 		5CCB464525B82AD300CF0F4A /* LGConstraintLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */; };
+		5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D628464EAD00343C6B /* FragmentStateStore.swift */; };
+		5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */; };
+		5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343DA2847886900343C6B /* ViewModelStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD343DD2847886900343C6B /* ViewModelStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343DB2847886900343C6B /* ViewModelStore.m */; };
+		5CD343E12848C81C00343C6B /* LifecycleEventObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343E02848C81C00343C6B /* LifecycleEventObserver.swift */; };
+		5CD343E5284A29D500343C6B /* FragmentManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343E4284A29D500343C6B /* FragmentManagerState.swift */; };
+		5CD343E7284A386C00343C6B /* OnBackPressed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343E6284A386C00343C6B /* OnBackPressed.swift */; };
+		5CD343F32858AF7600343C6B /* RunnableObjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343F22858AF7600343C6B /* RunnableObjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD343F52858B12100343C6B /* SavedStateRegistryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343F42858B12100343C6B /* SavedStateRegistryController.swift */; };
+		5CD343F72859F8EC00343C6B /* FragmentViewLifecycleOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343F62859F8EC00343C6B /* FragmentViewLifecycleOwner.swift */; };
+		5CD343F92859F92500343C6B /* HasDefaultViewModelProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343F82859F92500343C6B /* HasDefaultViewModelProviderFactory.swift */; };
+		5CD343FB2859FA8F00343C6B /* ViewModelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343FA2859FA8F00343C6B /* ViewModelProvider.swift */; };
+		5CD343FE285CBAC900343C6B /* LGNavigationParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343FC285CBAC900343C6B /* LGNavigationParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD343FF285CBAC900343C6B /* LGNavigationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343FD285CBAC900343C6B /* LGNavigationParser.m */; };
+		5CD344022861B7D200343C6B /* LGFragmentContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD344002861B7D200343C6B /* LGFragmentContainerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD344032861B7D200343C6B /* LGFragmentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD344012861B7D200343C6B /* LGFragmentContainerView.m */; };
+		5CD344062861BA8100343C6B /* LGNavHostFragment.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD344042861BA8100343C6B /* LGNavHostFragment.h */; };
+		5CD344072861BA8100343C6B /* LGNavHostFragment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD344052861BA8100343C6B /* LGNavHostFragment.m */; };
+		5CD344092861BB0300343C6B /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD344082861BB0300343C6B /* NavController.swift */; };
+		5CD344162861D42B00343C6B /* Deque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD344152861D42B00343C6B /* Deque.swift */; };
+		5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD34417286D9C5C00343C6B /* NavControllerExtra.swift */; };
 		5CD92592252CA48300EC0A1D /* NSStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD92590252CA48300EC0A1D /* NSStack.h */; };
 		5CD92593252CA48300EC0A1D /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD92591252CA48300EC0A1D /* NSStack.m */; };
 		764968FC99A00A4E89C9B3C8 /* Pods_Toppingtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */; };
@@ -441,7 +464,6 @@
 		5C5A981424E16BBB002A22EA /* LGColorParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGColorParser.mm; sourceTree = "<group>"; };
 		5C5A981524E16BBB002A22EA /* LuaInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaInt.h; sourceTree = "<group>"; };
 		5C5A981624E16BBB002A22EA /* LGDrawableParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGDrawableParser.h; sourceTree = "<group>"; };
-		5C5A981724E16BBB002A22EA /* LuaMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMapMarker.h; sourceTree = "<group>"; };
 		5C5A981824E16BBC002A22EA /* LuaShort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaShort.m; sourceTree = "<group>"; };
 		5C5A981924E16BBC002A22EA /* LuaContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaContext.h; sourceTree = "<group>"; };
 		5C5A981A24E16BBC002A22EA /* LuaGlobalFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaGlobalFunction.m; sourceTree = "<group>"; };
@@ -453,7 +475,6 @@
 		5C5A982624E16BBC002A22EA /* LGLinearLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGLinearLayout.h; sourceTree = "<group>"; };
 		5C5A982724E16BBC002A22EA /* LuaDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaDouble.h; sourceTree = "<group>"; };
 		5C5A982824E16BBC002A22EA /* LGDimensionParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGDimensionParser.h; sourceTree = "<group>"; };
-		5C5A982924E16BBC002A22EA /* LuaMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMapMarker.m; sourceTree = "<group>"; };
 		5C5A982A24E16BBC002A22EA /* LGLinearLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGLinearLayout.mm; sourceTree = "<group>"; };
 		5C5A982B24E16BBC002A22EA /* LuaDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaDefines.h; sourceTree = "<group>"; };
 		5C5A982C24E16BBC002A22EA /* LGAbsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGAbsListView.h; sourceTree = "<group>"; };
@@ -472,13 +493,10 @@
 		5C5A983A24E16BBE002A22EA /* CommonDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CommonDelegate.mm; sourceTree = "<group>"; };
 		5C5A983B24E16BBE002A22EA /* LGEditText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGEditText.h; sourceTree = "<group>"; };
 		5C5A983C24E16BBE002A22EA /* LuaJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaJSON.m; sourceTree = "<group>"; };
-		5C5A983D24E16BBE002A22EA /* LuaMapImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMapImage.m; sourceTree = "<group>"; };
 		5C5A983E24E16BBE002A22EA /* LuaViewInflator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaViewInflator.m; sourceTree = "<group>"; };
 		5C5A984024E16BBE002A22EA /* LuaPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaPoint.m; sourceTree = "<group>"; };
 		5C5A984124E16BBE002A22EA /* LGDatePicker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGDatePicker.mm; sourceTree = "<group>"; };
-		5C5A984224E16BBE002A22EA /* LuaMapCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMapCircle.m; sourceTree = "<group>"; };
 		5C5A984324E16BBF002A22EA /* LuaStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaStore.m; sourceTree = "<group>"; };
-		5C5A984424E16BBF002A22EA /* LGMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMapView.h; sourceTree = "<group>"; };
 		5C5A984524E16BBF002A22EA /* LGRadioButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGRadioButton.mm; sourceTree = "<group>"; };
 		5C5A984624E16BBF002A22EA /* DisplayMetrics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DisplayMetrics.mm; sourceTree = "<group>"; };
 		5C5A984724E16BBF002A22EA /* CommonDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonDelegate.h; sourceTree = "<group>"; };
@@ -490,20 +508,17 @@
 		5C5A984D24E16BC0002A22EA /* LuaTabForm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaTabForm.mm; sourceTree = "<group>"; };
 		5C5A984E24E16BC0002A22EA /* LuaLong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaLong.m; sourceTree = "<group>"; };
 		5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGAbsListView.mm; sourceTree = "<group>"; };
-		5C5A985024E16BC0002A22EA /* LuaMapImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMapImage.h; sourceTree = "<group>"; };
 		5C5A985124E16BC0002A22EA /* LuaPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaPoint.h; sourceTree = "<group>"; };
 		5C5A985224E16BC0002A22EA /* LG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LG.h; sourceTree = "<group>"; };
 		5C5A985424E16BC0002A22EA /* LGCompoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCompoundButton.h; sourceTree = "<group>"; };
 		5C5A985524E16BC0002A22EA /* LuaDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaDialog.m; sourceTree = "<group>"; };
 		5C5A985624E16BC1002A22EA /* DisplayMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMetrics.h; sourceTree = "<group>"; };
-		5C5A985724E16BC1002A22EA /* LuaMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMapPolyline.h; sourceTree = "<group>"; };
 		5C5A985824E16BC1002A22EA /* LGHorizontalScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGHorizontalScrollView.mm; sourceTree = "<group>"; };
 		5C5A985924E16BC1002A22EA /* LGListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGListView.h; sourceTree = "<group>"; };
 		5C5A985A24E16BC1002A22EA /* LGView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGView.mm; sourceTree = "<group>"; };
 		5C5A985B24E16BC1002A22EA /* LuaDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaDatabase.m; sourceTree = "<group>"; };
 		5C5A985C24E16BC1002A22EA /* LGAdapterView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGAdapterView.mm; sourceTree = "<group>"; };
 		5C5A985D24E16BC1002A22EA /* LuaCPlusPlusHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCPlusPlusHelper.h; sourceTree = "<group>"; };
-		5C5A985E24E16BC1002A22EA /* LGMapView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGMapView.mm; sourceTree = "<group>"; };
 		5C5A985F24E16BC1002A22EA /* LuaShort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaShort.h; sourceTree = "<group>"; };
 		5C5A986024E16BC2002A22EA /* LGStringParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGStringParser.h; sourceTree = "<group>"; };
 		5C5A986124E16BC2002A22EA /* LGDimensionParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGDimensionParser.mm; sourceTree = "<group>"; };
@@ -550,7 +565,6 @@
 		5C5A988B24E16BC6002A22EA /* LuaBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaBool.m; sourceTree = "<group>"; };
 		5C5A988C24E16BC6002A22EA /* IPTableBaseAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IPTableBaseAdapter.mm; sourceTree = "<group>"; };
 		5C5A988E24E16BC6002A22EA /* LuaCPlusPlusHelper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LuaCPlusPlusHelper.c; sourceTree = "<group>"; };
-		5C5A988F24E16BC7002A22EA /* LuaMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMapCircle.h; sourceTree = "<group>"; };
 		5C5A989124E16BC7002A22EA /* LGScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGScrollView.mm; sourceTree = "<group>"; };
 		5C5A989224E16BC7002A22EA /* LuaClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaClass.h; sourceTree = "<group>"; };
 		5C5A989324E16BC7002A22EA /* DataToBeDownloaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataToBeDownloaded.m; sourceTree = "<group>"; };
@@ -568,14 +582,11 @@
 		5C5A98A424E16BC9002A22EA /* CDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDefines.h; sourceTree = "<group>"; };
 		5C5A98A524E16BC9002A22EA /* LGColorParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGColorParser.h; sourceTree = "<group>"; };
 		5C5A98A624E16BC9002A22EA /* LGEditText.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGEditText.mm; sourceTree = "<group>"; };
-		5C5A98A724E16BCA002A22EA /* LuaMapPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMapPolygon.h; sourceTree = "<group>"; };
 		5C5A98A824E16BCA002A22EA /* LGListView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGListView.mm; sourceTree = "<group>"; };
 		5C5A98A924E16BCA002A22EA /* LuaHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaHttpClient.h; sourceTree = "<group>"; };
 		5C5A98AA24E16BCA002A22EA /* LGRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGRadioButton.h; sourceTree = "<group>"; };
 		5C5A98AB24E16BCA002A22EA /* LGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGParser.h; sourceTree = "<group>"; };
 		5C5A98AC24E16BCA002A22EA /* LuaChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaChar.m; sourceTree = "<group>"; };
-		5C5A98AD24E16BCB002A22EA /* LuaMapPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMapPolygon.m; sourceTree = "<group>"; };
-		5C5A98AE24E16BCB002A22EA /* LuaMapPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMapPolyline.m; sourceTree = "<group>"; };
 		5C5A98AF24E16BCB002A22EA /* LuaColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaColor.h; sourceTree = "<group>"; };
 		5C5A98B024E16BCB002A22EA /* LuaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaStream.h; sourceTree = "<group>"; };
 		5C5A98B124E16BCB002A22EA /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
@@ -683,31 +694,45 @@
 		5C5ECFE124EA6475007659B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5C609D6125BDC21E006BF4CE /* LGFontParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFontParser.h; sourceTree = "<group>"; };
 		5C609D6225BDC21E006BF4CE /* LGFontParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFontParser.m; sourceTree = "<group>"; };
+		5C64ECB02897CDAB00A4C14B /* LuaFormExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuaFormExt.swift; sourceTree = "<group>"; };
 		5C64F039262C3C660074EEFE /* CheckBox.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBox.xib; sourceTree = "<group>"; };
 		5C64F03B262C3F280074EEFE /* CheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
 		5C64F03C262C3F280074EEFE /* CheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		5C78BA2128460152003EC02A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		5C78BA232846073E003EC02A /* BackStackRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackStackRecord.swift; sourceTree = "<group>"; };
+		5C78BA2528460789003EC02A /* FragmentTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentTransaction.swift; sourceTree = "<group>"; };
+		5C78BA27284609EC003EC02A /* AtomicInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
+		5C78BA292846221B003EC02A /* FragmentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStore.swift; sourceTree = "<group>"; };
+		5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateManager.swift; sourceTree = "<group>"; };
+		5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentLifecycleCallbacksDispatcher.swift; sourceTree = "<group>"; };
+		5C78BA2F28462498003EC02A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5C86213425C0477D00BF23CA /* LuaNativeCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaNativeCall.h; sourceTree = "<group>"; };
 		5C86213525C0477D00BF23CA /* LuaNativeCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaNativeCall.m; sourceTree = "<group>"; };
+		5C91BD5F283E134500D4C94F /* LuaLifecycle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaLifecycle.m; sourceTree = "<group>"; };
+		5C91BD61283E135C00D4C94F /* LuaLifecycle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaLifecycle.h; sourceTree = "<group>"; };
+		5C91BD67283E15FF00D4C94F /* LuaMutableLiveData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMutableLiveData.m; sourceTree = "<group>"; };
+		5C91BD68283E15FF00D4C94F /* LuaLifecycleOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaLifecycleOwner.h; sourceTree = "<group>"; };
+		5C91BD69283E15FF00D4C94F /* LuaLifecycleObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaLifecycleObserver.h; sourceTree = "<group>"; };
+		5C91BD6A283E15FF00D4C94F /* LuaLifecycleOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaLifecycleOwner.m; sourceTree = "<group>"; };
+		5C91BD6B283E15FF00D4C94F /* LuaMutableLiveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMutableLiveData.h; sourceTree = "<group>"; };
+		5C91BD6C283E15FF00D4C94F /* LuaViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaViewModel.h; sourceTree = "<group>"; };
+		5C91BD6D283E15FF00D4C94F /* LuaViewModelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaViewModelProvider.h; sourceTree = "<group>"; };
+		5C91BD6E283E15FF00D4C94F /* LuaViewModelProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaViewModelProvider.m; sourceTree = "<group>"; };
+		5C91BD6F283E15FF00D4C94F /* LuaViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaViewModel.m; sourceTree = "<group>"; };
+		5C91BD70283E15FF00D4C94F /* LuaLifecycleObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaLifecycleObserver.m; sourceTree = "<group>"; };
+		5C91BD7B283E25A400D4C94F /* LifecycleRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LifecycleRegistry.m; sourceTree = "<group>"; };
+		5C91BD7D283E25B500D4C94F /* LifecycleRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LifecycleRegistry.h; sourceTree = "<group>"; };
+		5C91BD7F283E398B00D4C94F /* OrderedDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderedDictionary.m; sourceTree = "<group>"; };
+		5C91BD81283E39A000D4C94F /* OrderedDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
+		5C91BD862843647000D4C94F /* FragmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentController.swift; sourceTree = "<group>"; };
+		5C91BD882843649B00D4C94F /* FragmentHostCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentHostCallback.swift; sourceTree = "<group>"; };
+		5C91BD8A2844B58300D4C94F /* FragmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManager.swift; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		5CB29C602535B49C000E39A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5CB5E13625822C7C00BF2EF5 /* toppingtest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toppingtest-Bridging-Header.h"; sourceTree = "<group>"; };
 		5CB5E13725822C7C00BF2EF5 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		5CB5E1392582304800BF2EF5 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		5CB8582F24E3E6AD006E6B65 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
-		5CB8583624E3F4D7006E6B65 /* CircleAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleAnnotationView.h; sourceTree = "<group>"; };
-		5CB8583724E3F4D7006E6B65 /* CircleAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotationView.m; sourceTree = "<group>"; };
-		5CB8583A24E3F4E6006E6B65 /* PolyAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolyAnnotationView.h; sourceTree = "<group>"; };
-		5CB8583B24E3F4E6006E6B65 /* PolyAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolyAnnotationView.m; sourceTree = "<group>"; };
-		5CB8583E24E3F570006E6B65 /* CircleAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleAnnotation.h; sourceTree = "<group>"; };
-		5CB8583F24E3F570006E6B65 /* CircleAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleAnnotation.m; sourceTree = "<group>"; };
-		5CB8584224E3F613006E6B65 /* PointAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointAnnotation.h; sourceTree = "<group>"; };
-		5CB8584324E3F613006E6B65 /* PointAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointAnnotation.m; sourceTree = "<group>"; };
-		5CB8584624E3F649006E6B65 /* PointAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointAnnotationView.h; sourceTree = "<group>"; };
-		5CB8584724E3F649006E6B65 /* PointAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointAnnotationView.m; sourceTree = "<group>"; };
-		5CB8584A24E3F710006E6B65 /* PolyAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolyAnnotation.h; sourceTree = "<group>"; };
-		5CB8584B24E3F710006E6B65 /* PolyAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolyAnnotation.m; sourceTree = "<group>"; };
-		5CB8584E24E42E21006E6B65 /* MapHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapHelper.h; sourceTree = "<group>"; };
-		5CB8584F24E42E21006E6B65 /* MapHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapHelper.m; sourceTree = "<group>"; };
 		5CB8585224E43007006E6B65 /* URLDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLDownloader.h; sourceTree = "<group>"; };
 		5CB8585324E43007006E6B65 /* URLDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLDownloader.m; sourceTree = "<group>"; };
 		5CB8585624E4306A006E6B65 /* CustomURLConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomURLConnection.h; sourceTree = "<group>"; };
@@ -723,6 +748,27 @@
 		5CCA827F250604AC005689D8 /* themes.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = themes.xml; sourceTree = "<group>"; };
 		5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGConstraintLayout.h; sourceTree = "<group>"; };
 		5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGConstraintLayout.m; sourceTree = "<group>"; };
+		5CD343D628464EAD00343C6B /* FragmentStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateStore.swift; sourceTree = "<group>"; };
+		5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerViewModel.swift; sourceTree = "<group>"; };
+		5CD343DA2847886900343C6B /* ViewModelStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewModelStore.h; sourceTree = "<group>"; };
+		5CD343DB2847886900343C6B /* ViewModelStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewModelStore.m; sourceTree = "<group>"; };
+		5CD343E02848C81C00343C6B /* LifecycleEventObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleEventObserver.swift; sourceTree = "<group>"; };
+		5CD343E4284A29D500343C6B /* FragmentManagerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerState.swift; sourceTree = "<group>"; };
+		5CD343E6284A386C00343C6B /* OnBackPressed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBackPressed.swift; sourceTree = "<group>"; };
+		5CD343F22858AF7600343C6B /* RunnableObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RunnableObjc.h; sourceTree = "<group>"; };
+		5CD343F42858B12100343C6B /* SavedStateRegistryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedStateRegistryController.swift; sourceTree = "<group>"; };
+		5CD343F62859F8EC00343C6B /* FragmentViewLifecycleOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentViewLifecycleOwner.swift; sourceTree = "<group>"; };
+		5CD343F82859F92500343C6B /* HasDefaultViewModelProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasDefaultViewModelProviderFactory.swift; sourceTree = "<group>"; };
+		5CD343FA2859FA8F00343C6B /* ViewModelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProvider.swift; sourceTree = "<group>"; };
+		5CD343FC285CBAC900343C6B /* LGNavigationParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGNavigationParser.h; sourceTree = "<group>"; };
+		5CD343FD285CBAC900343C6B /* LGNavigationParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGNavigationParser.m; sourceTree = "<group>"; };
+		5CD344002861B7D200343C6B /* LGFragmentContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGFragmentContainerView.h; sourceTree = "<group>"; };
+		5CD344012861B7D200343C6B /* LGFragmentContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGFragmentContainerView.m; sourceTree = "<group>"; };
+		5CD344042861BA8100343C6B /* LGNavHostFragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGNavHostFragment.h; sourceTree = "<group>"; };
+		5CD344052861BA8100343C6B /* LGNavHostFragment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGNavHostFragment.m; sourceTree = "<group>"; };
+		5CD344082861BB0300343C6B /* NavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
+		5CD344152861D42B00343C6B /* Deque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deque.swift; sourceTree = "<group>"; };
+		5CD34417286D9C5C00343C6B /* NavControllerExtra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavControllerExtra.swift; sourceTree = "<group>"; };
 		5CD92590252CA48300EC0A1D /* NSStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		5CD92591252CA48300EC0A1D /* NSStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 		5CEE6382257100A500D80B59 /* Topping.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Topping.podspec; sourceTree = "<group>"; };
@@ -951,6 +997,7 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5CD344152861D42B00343C6B /* Deque.swift */,
 				5C5A984C24E16BC0002A22EA /* LuaInterface.h */,
 				5C2B6161254AAB37003A9705 /* LuaToaster.swift */,
 				5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */,
@@ -962,20 +1009,6 @@
 				5C5A9A4E24E1D3B1002A22EA /* DatabaseHelper.h */,
 				5C5A9A4F24E1D3B1002A22EA /* DatabaseHelper.m */,
 				5CB8582F24E3E6AD006E6B65 /* Empty.swift */,
-				5CB8584624E3F649006E6B65 /* PointAnnotationView.h */,
-				5CB8583B24E3F4E6006E6B65 /* PolyAnnotationView.m */,
-				5CB8584A24E3F710006E6B65 /* PolyAnnotation.h */,
-				5CB8584B24E3F710006E6B65 /* PolyAnnotation.m */,
-				5CB8583624E3F4D7006E6B65 /* CircleAnnotationView.h */,
-				5CB8583724E3F4D7006E6B65 /* CircleAnnotationView.m */,
-				5CB8583E24E3F570006E6B65 /* CircleAnnotation.h */,
-				5CB8583F24E3F570006E6B65 /* CircleAnnotation.m */,
-				5CB8584224E3F613006E6B65 /* PointAnnotation.h */,
-				5CB8584324E3F613006E6B65 /* PointAnnotation.m */,
-				5CB8583A24E3F4E6006E6B65 /* PolyAnnotationView.h */,
-				5CB8584724E3F649006E6B65 /* PointAnnotationView.m */,
-				5CB8584E24E42E21006E6B65 /* MapHelper.h */,
-				5CB8584F24E42E21006E6B65 /* MapHelper.m */,
 				5CB8585224E43007006E6B65 /* URLDownloader.h */,
 				5CB8585324E43007006E6B65 /* URLDownloader.m */,
 				5CB8585624E4306A006E6B65 /* CustomURLConnection.h */,
@@ -995,6 +1028,36 @@
 				5C64F039262C3C660074EEFE /* CheckBox.xib */,
 				5C64F03B262C3F280074EEFE /* CheckBox.h */,
 				5C64F03C262C3F280074EEFE /* CheckBox.m */,
+				5C91BD7B283E25A400D4C94F /* LifecycleRegistry.m */,
+				5C91BD7D283E25B500D4C94F /* LifecycleRegistry.h */,
+				5C91BD7F283E398B00D4C94F /* OrderedDictionary.m */,
+				5C91BD81283E39A000D4C94F /* OrderedDictionary.h */,
+				5C91BD862843647000D4C94F /* FragmentController.swift */,
+				5C91BD882843649B00D4C94F /* FragmentHostCallback.swift */,
+				5C91BD8A2844B58300D4C94F /* FragmentManager.swift */,
+				5C78BA2128460152003EC02A /* ArrayExtension.swift */,
+				5C78BA232846073E003EC02A /* BackStackRecord.swift */,
+				5C78BA2528460789003EC02A /* FragmentTransaction.swift */,
+				5C78BA27284609EC003EC02A /* AtomicInteger.swift */,
+				5C78BA292846221B003EC02A /* FragmentStore.swift */,
+				5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */,
+				5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */,
+				5C78BA2F28462498003EC02A /* Utils.swift */,
+				5CD343D628464EAD00343C6B /* FragmentStateStore.swift */,
+				5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */,
+				5CD343DA2847886900343C6B /* ViewModelStore.h */,
+				5CD343DB2847886900343C6B /* ViewModelStore.m */,
+				5CD343E02848C81C00343C6B /* LifecycleEventObserver.swift */,
+				5CD343E4284A29D500343C6B /* FragmentManagerState.swift */,
+				5CD343E6284A386C00343C6B /* OnBackPressed.swift */,
+				5CD343F22858AF7600343C6B /* RunnableObjc.h */,
+				5CD343F42858B12100343C6B /* SavedStateRegistryController.swift */,
+				5CD343F62859F8EC00343C6B /* FragmentViewLifecycleOwner.swift */,
+				5CD343F82859F92500343C6B /* HasDefaultViewModelProviderFactory.swift */,
+				5CD343FA2859FA8F00343C6B /* ViewModelProvider.swift */,
+				5CD344082861BB0300343C6B /* NavController.swift */,
+				5CD34417286D9C5C00343C6B /* NavControllerExtra.swift */,
+				5C64ECB02897CDAB00A4C14B /* LuaFormExt.swift */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1020,6 +1083,22 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5CD344042861BA8100343C6B /* LGNavHostFragment.h */,
+				5CD344052861BA8100343C6B /* LGNavHostFragment.m */,
+				5CD344002861B7D200343C6B /* LGFragmentContainerView.h */,
+				5CD344012861B7D200343C6B /* LGFragmentContainerView.m */,
+				5C91BD61283E135C00D4C94F /* LuaLifecycle.h */,
+				5C91BD5F283E134500D4C94F /* LuaLifecycle.m */,
+				5C91BD69283E15FF00D4C94F /* LuaLifecycleObserver.h */,
+				5C91BD70283E15FF00D4C94F /* LuaLifecycleObserver.m */,
+				5C91BD68283E15FF00D4C94F /* LuaLifecycleOwner.h */,
+				5C91BD6A283E15FF00D4C94F /* LuaLifecycleOwner.m */,
+				5C91BD6B283E15FF00D4C94F /* LuaMutableLiveData.h */,
+				5C91BD67283E15FF00D4C94F /* LuaMutableLiveData.m */,
+				5C91BD6C283E15FF00D4C94F /* LuaViewModel.h */,
+				5C91BD6F283E15FF00D4C94F /* LuaViewModel.m */,
+				5C91BD6D283E15FF00D4C94F /* LuaViewModelProvider.h */,
+				5C91BD6E283E15FF00D4C94F /* LuaViewModelProvider.m */,
 				5C5A982C24E16BBC002A22EA /* LGAbsListView.h */,
 				5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */,
 				5C5A986F24E16BC3002A22EA /* LGAdapterView.h */,
@@ -1050,8 +1129,6 @@
 				5C5A982A24E16BBC002A22EA /* LGLinearLayout.mm */,
 				5C5A985924E16BC1002A22EA /* LGListView.h */,
 				5C5A98A824E16BCA002A22EA /* LGListView.mm */,
-				5C5A984424E16BBF002A22EA /* LGMapView.h */,
-				5C5A985E24E16BC1002A22EA /* LGMapView.mm */,
 				5C5A982F24E16BBC002A22EA /* LGProgressBar.h */,
 				5C5A986624E16BC2002A22EA /* LGProgressBar.mm */,
 				5C5A98AA24E16BCA002A22EA /* LGRadioButton.h */,
@@ -1104,16 +1181,6 @@
 				5C5A983C24E16BBE002A22EA /* LuaJSON.m */,
 				5C286DF425582B4900198DA5 /* LuaLog.h */,
 				5C286DF325582B4900198DA5 /* LuaLog.mm */,
-				5C5A988F24E16BC7002A22EA /* LuaMapCircle.h */,
-				5C5A984224E16BBE002A22EA /* LuaMapCircle.m */,
-				5C5A985024E16BC0002A22EA /* LuaMapImage.h */,
-				5C5A983D24E16BBE002A22EA /* LuaMapImage.m */,
-				5C5A981724E16BBB002A22EA /* LuaMapMarker.h */,
-				5C5A982924E16BBC002A22EA /* LuaMapMarker.m */,
-				5C5A98A724E16BCA002A22EA /* LuaMapPolygon.h */,
-				5C5A98AD24E16BCB002A22EA /* LuaMapPolygon.m */,
-				5C5A985724E16BC1002A22EA /* LuaMapPolyline.h */,
-				5C5A98AE24E16BCB002A22EA /* LuaMapPolyline.m */,
 				5C5A987324E16BC4002A22EA /* LuaNativeObject.h */,
 				5C5A988524E16BC6002A22EA /* LuaNativeObject.m */,
 				5C5A986424E16BC2002A22EA /* LuaObjectStore.h */,
@@ -1192,6 +1259,8 @@
 				5C31C7A2250399A8001773F8 /* LGStyleParser.m */,
 				5C32B2EF24F9783200875355 /* LGValueParser.h */,
 				5C32B2EE24F9783200875355 /* LGValueParser.m */,
+				5CD343FC285CBAC900343C6B /* LGNavigationParser.h */,
+				5CD343FD285CBAC900343C6B /* LGNavigationParser.m */,
 			);
 			path = layout;
 			sourceTree = "<group>";
@@ -1280,7 +1349,7 @@
 				5C5A99B424E16BEC002A22EA /* lzio.h in Headers */,
 				5C5A98BA24E16BCC002A22EA /* LGDrawableParser.h in Headers */,
 				5C5A991224E16BCC002A22EA /* LGAdapterView.h in Headers */,
-				5CB8583C24E3F4E6006E6B65 /* PolyAnnotationView.h in Headers */,
+				5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */,
 				5C5A994324E16BCC002A22EA /* LGImageView.h in Headers */,
 				5C5A98C624E16BCC002A22EA /* ToppingEngine.h in Headers */,
 				5C286DEA2557FDDC00198DA5 /* LGRelativeLayout.h in Headers */,
@@ -1289,13 +1358,12 @@
 				5C5A9A0324E16BEC002A22EA /* unix.h in Headers */,
 				5C5A98F424E16BCC002A22EA /* LuaPoint.h in Headers */,
 				5C5A9A5024E1D3B1002A22EA /* DatabaseHelper.h in Headers */,
-				5C5A98FA24E16BCC002A22EA /* LuaMapPolyline.h in Headers */,
 				5C5A9A4624E1B8EA002A22EA /* Singleton.h in Headers */,
 				5C5A99E824E16BEC002A22EA /* mime.h in Headers */,
-				5CB8583824E3F4D7006E6B65 /* CircleAnnotationView.h in Headers */,
 				5C5A98FC24E16BCC002A22EA /* LGListView.h in Headers */,
 				5C5A9A0224E16BEC002A22EA /* udp.h in Headers */,
 				5CBD36ED24F1652F00EB167E /* UILabelPadding.h in Headers */,
+				5CD343FE285CBAC900343C6B /* LGNavigationParser.h in Headers */,
 				5C5A991724E16BCC002A22EA /* LuaBool.h in Headers */,
 				5C5A99EB24E16BEC002A22EA /* usocket.h in Headers */,
 				5C5A991024E16BCC002A22EA /* LuaStore.h in Headers */,
@@ -1309,26 +1377,24 @@
 				5CD92592252CA48300EC0A1D /* NSStack.h in Headers */,
 				5C5A99B124E16BEC002A22EA /* lmem.h in Headers */,
 				5C5A99DF24E16BEC002A22EA /* lua.h in Headers */,
-				5C5A98E724E16BCC002A22EA /* LGMapView.h in Headers */,
 				5C5A99F424E16BEC002A22EA /* except.h in Headers */,
 				5C5A98F724E16BCC002A22EA /* LGCompoundButton.h in Headers */,
 				5C42E35624EFE8B500F8B012 /* LGFrameLayout.h in Headers */,
 				5C5A98D124E16BCC002A22EA /* LuaForm.h in Headers */,
-				5C5A993224E16BCC002A22EA /* LuaMapCircle.h in Headers */,
 				5C5A9A0424E16BEC002A22EA /* select.h in Headers */,
 				5C5A993F24E16BCC002A22EA /* LGAutoCompleteTextView.h in Headers */,
 				5C5A99CC24E16BEC002A22EA /* ltm.h in Headers */,
 				5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */,
+				5C91BD72283E15FF00D4C94F /* LuaLifecycleOwner.h in Headers */,
 				5C5A9A0024E16BEC002A22EA /* socket.h in Headers */,
 				5C5A990C24E16BCC002A22EA /* LuaResource.h in Headers */,
 				5C286DF625582B4900198DA5 /* LuaLog.h in Headers */,
-				5C5A98BB24E16BCC002A22EA /* LuaMapMarker.h in Headers */,
 				5C5A98B924E16BCC002A22EA /* LuaInt.h in Headers */,
 				5C5A991424E16BCC002A22EA /* LGTextView.h in Headers */,
+				5CD343F32858AF7600343C6B /* RunnableObjc.h in Headers */,
 				5C5A990324E16BCC002A22EA /* LGStringParser.h in Headers */,
 				5C5A98EA24E16BCC002A22EA /* CommonDelegate.h in Headers */,
 				5C5A991B24E16BCC002A22EA /* LuaAll.h in Headers */,
-				5CB8584024E3F570006E6B65 /* CircleAnnotation.h in Headers */,
 				5C5A991F24E16BCC002A22EA /* LGRadioGroup.h in Headers */,
 				5C5A993724E16BCC002A22EA /* LuaJSON.h in Headers */,
 				5C5A995224E16BCC002A22EA /* LuaColor.h in Headers */,
@@ -1340,7 +1406,6 @@
 				5C5A99B524E16BEC002A22EA /* lgc.h in Headers */,
 				5C5A99EE24E16BEC002A22EA /* inet.h in Headers */,
 				5C5A98CF24E16BCC002A22EA /* LGAbsListView.h in Headers */,
-				5CB8585024E42E21006E6B65 /* MapHelper.h in Headers */,
 				5C5A99F324E16BEC002A22EA /* options.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
@@ -1349,10 +1414,11 @@
 				5C5A992224E16BCC002A22EA /* LGHorizontalScrollView.h in Headers */,
 				5C5A98F524E16BCC002A22EA /* LG.h in Headers */,
 				5C5A994724E16BCC002A22EA /* CDefines.h in Headers */,
+				5C91BD76283E15FF00D4C94F /* LuaViewModel.h in Headers */,
 				5C5A98D224E16BCC002A22EA /* LGProgressBar.h in Headers */,
-				5CB8584824E3F649006E6B65 /* PointAnnotationView.h in Headers */,
 				5CB8586824E434CA006E6B65 /* KeyboardHelper.h in Headers */,
 				5C43E6DB24FE679B005BEA07 /* LGToolbar.h in Headers */,
+				5C91BD7E283E25B500D4C94F /* LifecycleRegistry.h in Headers */,
 				5C5A99D224E16BEC002A22EA /* lopcodes.h in Headers */,
 				5C5A992724E16BCC002A22EA /* LGComboBox.h in Headers */,
 				5C5A98C924E16BCC002A22EA /* LGLinearLayout.h in Headers */,
@@ -1368,24 +1434,25 @@
 				5C5A994024E16BCC002A22EA /* Log.h in Headers */,
 				5C5A99E624E16BEC002A22EA /* tcp.h in Headers */,
 				5C286DF12557FF7D00198DA5 /* LGTableRow.h in Headers */,
-				5CB8584424E3F613006E6B65 /* PointAnnotation.h in Headers */,
 				5C5A99B224E16BEC002A22EA /* llimits.h in Headers */,
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
 				5C5A990224E16BCC002A22EA /* LuaShort.h in Headers */,
+				5CD344022861B7D200343C6B /* LGFragmentContainerView.h in Headers */,
 				5C5A994424E16BCC002A22EA /* LGView.h in Headers */,
 				5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */,
 				5C5A99C324E16BEC002A22EA /* ldebug.h in Headers */,
 				5C5A995424E16BCC002A22EA /* Defines.h in Headers */,
 				5C5A99E424E16BEC002A22EA /* ltable.h in Headers */,
-				5CB8584C24E3F710006E6B65 /* PolyAnnotation.h in Headers */,
 				5C5A992524E16BCC002A22EA /* LuaTranslator.h in Headers */,
 				5C5A991524E16BCC002A22EA /* LuaRect.h in Headers */,
 				5C5A994C24E16BCC002A22EA /* LuaHttpClient.h in Headers */,
 				5C5A98BD24E16BCC002A22EA /* LuaContext.h in Headers */,
+				5C91BD73283E15FF00D4C94F /* LuaLifecycleObserver.h in Headers */,
 				5C5A98CE24E16BCC002A22EA /* LuaDefines.h in Headers */,
-				5C5A98F324E16BCC002A22EA /* LuaMapImage.h in Headers */,
 				5CB8585824E4306A006E6B65 /* CustomURLConnection.h in Headers */,
+				5C91BD62283E135C00D4C94F /* LuaLifecycle.h in Headers */,
 				5C5A991824E16BCC002A22EA /* LuaDatabase.h in Headers */,
+				5CD344062861BA8100343C6B /* LGNavHostFragment.h in Headers */,
 				5C5A993A24E16BCC002A22EA /* LGScrollView.h in Headers */,
 				5C5A98CA24E16BCC002A22EA /* LuaDouble.h in Headers */,
 				5C5A99D124E16BEC002A22EA /* lstate.h in Headers */,
@@ -1397,11 +1464,13 @@
 				5C5A99D924E16BEC002A22EA /* lvm.h in Headers */,
 				5C5A98C324E16BCC002A22EA /* Lunar.h in Headers */,
 				5C5A99CA24E16BEC002A22EA /* llex.h in Headers */,
-				5C5A994A24E16BCC002A22EA /* LuaMapPolygon.h in Headers */,
+				5C91BD77283E15FF00D4C94F /* LuaViewModelProvider.h in Headers */,
+				5C91BD75283E15FF00D4C94F /* LuaMutableLiveData.h in Headers */,
 				5C5A991624E16BCC002A22EA /* LuaNativeObject.h in Headers */,
 				5C42E35224EFE1C600F8B012 /* LGViewGroup.h in Headers */,
 				5C1639542504DE790084032F /* DefaultStyles.h in Headers */,
 				5C2CA8432559753600C03879 /* LuaGraphics.h in Headers */,
+				5C91BD82283E39DC00D4C94F /* OrderedDictionary.h in Headers */,
 				5C5A990724E16BCC002A22EA /* LuaObjectStore.h in Headers */,
 				5C2C28D92526139B00F382B0 /* LuaRef.h in Headers */,
 				5C43E6D324FE41E7005BEA07 /* LGRecyclerView.h in Headers */,
@@ -1633,30 +1702,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C5A995124E16BCC002A22EA /* LuaMapPolyline.m in Sources */,
 				5C5A98F824E16BCC002A22EA /* LuaDialog.m in Sources */,
 				5C5A98F024E16BCC002A22EA /* LuaTabForm.mm in Sources */,
 				5C5A99F224E16BEC002A22EA /* udp.c in Sources */,
 				5C5A994F24E16BCC002A22EA /* LuaChar.m in Sources */,
 				5CD92593252CA48300EC0A1D /* NSStack.m in Sources */,
+				5C78BA2C284622A5003EC02A /* FragmentStateManager.swift in Sources */,
+				5C91BD71283E15FF00D4C94F /* LuaMutableLiveData.m in Sources */,
 				5C64F03E262C3F280074EEFE /* CheckBox.m in Sources */,
+				5CD343E12848C81C00343C6B /* LifecycleEventObserver.swift in Sources */,
+				5C91BD7C283E25A400D4C94F /* LifecycleRegistry.m in Sources */,
 				5C5A98DC24E16BCC002A22EA /* LuaFunction.m in Sources */,
 				5C5A99C724E16BEC002A22EA /* lstring.c in Sources */,
+				5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
+				5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
+				5C91BD60283E134500D4C94F /* LuaLifecycle.m in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
 				5C5A99E324E16BEC002A22EA /* llex.c in Sources */,
+				5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */,
 				5C5A99BE24E16BEC002A22EA /* lvm.c in Sources */,
 				5C42E35724EFE8B500F8B012 /* LGFrameLayout.mm in Sources */,
+				5C91BD872843647000D4C94F /* FragmentController.swift in Sources */,
+				5CD343F52858B12100343C6B /* SavedStateRegistryController.swift in Sources */,
 				5C5A98B724E16BCC002A22EA /* LGAutoCompleteTextView.mm in Sources */,
 				5C286DED2557FECF00198DA5 /* LGTableLayout.mm in Sources */,
+				5CD344032861B7D200343C6B /* LGFragmentContainerView.m in Sources */,
 				5C5A99DD24E16BEC002A22EA /* lapi.c in Sources */,
 				5C5A98B624E16BCC002A22EA /* LuaContext.mm in Sources */,
 				5C5A99D624E16BEC002A22EA /* ldblib.c in Sources */,
 				5C5A99D324E16BEC002A22EA /* loslib.c in Sources */,
-				5C5A995024E16BCC002A22EA /* LuaMapPolygon.m in Sources */,
+				5C78BA3028462498003EC02A /* Utils.swift in Sources */,
 				5C2CA8422559753600C03879 /* LuaGraphics.mm in Sources */,
 				5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */,
 				5C5A993124E16BCC002A22EA /* LuaCPlusPlusHelper.c in Sources */,
@@ -1671,39 +1750,42 @@
 				5C5A990924E16BCC002A22EA /* LGProgressBar.mm in Sources */,
 				5C5A99BF24E16BEC002A22EA /* lfunc.c in Sources */,
 				5C5A99F724E16BEC002A22EA /* tcp.c in Sources */,
+				5C91BD80283E398B00D4C94F /* OrderedDictionary.m in Sources */,
+				5C78BA2628460789003EC02A /* FragmentTransaction.swift in Sources */,
 				5C5A990524E16BCC002A22EA /* LuaRect.m in Sources */,
 				5C286DE92557FDDC00198DA5 /* LGRelativeLayout.mm in Sources */,
 				5C5A98B824E16BCC002A22EA /* LGColorParser.mm in Sources */,
 				5C286DF22557FF7D00198DA5 /* LGTableRow.mm in Sources */,
-				5C5A98E524E16BCC002A22EA /* LuaMapCircle.m in Sources */,
 				5C5A99CB24E16BEC002A22EA /* luac.c in Sources */,
 				5C5A990424E16BCC002A22EA /* LGDimensionParser.mm in Sources */,
 				5C1639552504DE790084032F /* DefaultStyles.m in Sources */,
+				5CD343FF285CBAC900343C6B /* LGNavigationParser.m in Sources */,
 				5C5A99ED24E16BEC002A22EA /* timeout.c in Sources */,
 				5C5A98D324E16BCC002A22EA /* Log.m in Sources */,
 				5C5A98B324E16BCC002A22EA /* LGButton.mm in Sources */,
 				5C2CA83F2559728E00C03879 /* LuaFragment.mm in Sources */,
 				5C5A992E24E16BCC002A22EA /* LuaBool.m in Sources */,
+				5CD344162861D42B00343C6B /* Deque.swift in Sources */,
 				5C5A99DC24E16BEC002A22EA /* ltablib.c in Sources */,
-				5C5A98CC24E16BCC002A22EA /* LuaMapMarker.m in Sources */,
 				5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */,
 				5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */,
 				5C5A994924E16BCC002A22EA /* LGEditText.mm in Sources */,
 				5CB8586924E434CA006E6B65 /* KeyboardHelper.m in Sources */,
 				5C5A991324E16BCC002A22EA /* LuaToast.m in Sources */,
+				5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */,
 				5C5A994B24E16BCC002A22EA /* LGListView.mm in Sources */,
 				5C5A98EC24E16BCC002A22EA /* LuaFloat.m in Sources */,
-				5CB8585124E42E21006E6B65 /* MapHelper.m in Sources */,
 				5CB8585524E43007006E6B65 /* URLDownloader.m in Sources */,
+				5CD344072861BA8100343C6B /* LGNavHostFragment.m in Sources */,
 				5C5A99C924E16BEC002A22EA /* lundump.c in Sources */,
 				5C5A98DB24E16BCC002A22EA /* LGStringParser.m in Sources */,
 				5C5A99D724E16BEC002A22EA /* lmem.c in Sources */,
 				5C5A99B624E16BEC002A22EA /* liolib.c in Sources */,
+				5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */,
 				5C32B2F024F9783300875355 /* LGValueParser.m in Sources */,
 				5C5A990624E16BCC002A22EA /* LuaDate.m in Sources */,
-				5CB8584124E3F570006E6B65 /* CircleAnnotation.m in Sources */,
 				5C5A99E524E16BEC002A22EA /* ltm.c in Sources */,
-				5CB8583924E3F4D7006E6B65 /* CircleAnnotationView.m in Sources */,
+				5CD343F72859F8EC00343C6B /* FragmentViewLifecycleOwner.swift in Sources */,
 				5C5A992824E16BCC002A22EA /* LuaNativeObject.m in Sources */,
 				5C5A99C024E16BEC002A22EA /* lstrlib.c in Sources */,
 				5C5A991124E16BCC002A22EA /* LuaResource.m in Sources */,
@@ -1711,6 +1793,9 @@
 				5C43E6D424FE41E7005BEA07 /* LGRecyclerView.m in Sources */,
 				5C5A993624E16BCC002A22EA /* DataToBeDownloaded.m in Sources */,
 				5C5A99E024E16BEC002A22EA /* ldebug.c in Sources */,
+				5CD343F92859F92500343C6B /* HasDefaultViewModelProviderFactory.swift in Sources */,
+				5CD343DD2847886900343C6B /* ViewModelStore.m in Sources */,
+				5CD344092861BB0300343C6B /* NavController.swift in Sources */,
 				5C5A98CD24E16BCC002A22EA /* LGLinearLayout.mm in Sources */,
 				5C5A99C124E16BEC002A22EA /* Makefile in Sources */,
 				5C5A99BB24E16BEC002A22EA /* print.c in Sources */,
@@ -1726,9 +1811,12 @@
 				5C5A98E324E16BCC002A22EA /* LuaPoint.m in Sources */,
 				5C5A99EA24E16BEC002A22EA /* io.c in Sources */,
 				5C5A992A24E16BCC002A22EA /* LuaDefines.m in Sources */,
+				5CD343E5284A29D500343C6B /* FragmentManagerState.swift in Sources */,
 				5C5A99FA24E16BEC002A22EA /* auxiliar.c in Sources */,
 				5C5A98DD24E16BCC002A22EA /* CommonDelegate.mm in Sources */,
 				5C5A99C224E16BEC002A22EA /* lua.c in Sources */,
+				5C91BD78283E15FF00D4C94F /* LuaViewModelProvider.m in Sources */,
+				5CD343E7284A386C00343C6B /* OnBackPressed.swift in Sources */,
 				5C5A993424E16BCC002A22EA /* LGScrollView.mm in Sources */,
 				5C5A98ED24E16BCC002A22EA /* LGLayoutParser.mm in Sources */,
 				5C5A98E424E16BCC002A22EA /* LGDatePicker.mm in Sources */,
@@ -1736,23 +1824,26 @@
 				5C5A99C424E16BEC002A22EA /* linit.c in Sources */,
 				5C5A990B24E16BCC002A22EA /* LuaObjectStore.m in Sources */,
 				5C43E6DC24FE679B005BEA07 /* LGToolbar.m in Sources */,
-				5CB8584924E3F649006E6B65 /* PointAnnotationView.m in Sources */,
 				5C5A99B724E16BEC002A22EA /* lopcodes.c in Sources */,
 				5C25F4E025076B8E0074B6AF /* UIColor+Lum.m in Sources */,
 				5C5A992424E16BCC002A22EA /* LuaStream.m in Sources */,
+				5C64ECB12897CDAB00A4C14B /* LuaFormExt.swift in Sources */,
 				5C23B60424E555870094389F /* UIBufferedProgressBar.m in Sources */,
 				5C5A99B924E16BEC002A22EA /* lobject.c in Sources */,
 				5C5A98D524E16BCC002A22EA /* LuaHttpClient.m in Sources */,
-				5CB8584D24E3F710006E6B65 /* PolyAnnotation.m in Sources */,
 				5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */,
+				5C78BA2A2846221B003EC02A /* FragmentStore.swift in Sources */,
 				5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */,
 				5C5A992324E16BCC002A22EA /* LuaBuffer.m in Sources */,
 				5C286DF525582B4900198DA5 /* LuaLog.mm in Sources */,
+				5C91BD892843649B00D4C94F /* FragmentHostCallback.swift in Sources */,
 				5C5A98FB24E16BCC002A22EA /* LGHorizontalScrollView.mm in Sources */,
 				5C5A992D24E16BCC002A22EA /* CDefines.m in Sources */,
+				5C91BD79283E15FF00D4C94F /* LuaViewModel.m in Sources */,
 				5C5A9A0524E16BEC002A22EA /* ldo.c in Sources */,
 				5CB8585924E4306A006E6B65 /* CustomURLConnection.m in Sources */,
 				5C5A9A5124E1D3B1002A22EA /* DatabaseHelper.m in Sources */,
+				5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */,
 				5C5A98E624E16BCC002A22EA /* LuaStore.m in Sources */,
 				5C5A992624E16BCC002A22EA /* LuaInt.m in Sources */,
 				5CBFA03B2530562200734CAE /* LuaThread.m in Sources */,
@@ -1763,6 +1854,7 @@
 				5C5A99E224E16BEC002A22EA /* lparser.c in Sources */,
 				5C5A99B024E16BEC002A22EA /* lauxlib.c in Sources */,
 				5C5A99FF24E16BEC002A22EA /* except.c in Sources */,
+				5C91BD74283E15FF00D4C94F /* LuaLifecycleOwner.m in Sources */,
 				5C5A98DF24E16BCC002A22EA /* LuaJSON.m in Sources */,
 				5C5A98D724E16BCC002A22EA /* LGCheckBox.mm in Sources */,
 				5C5A99BC24E16BEC002A22EA /* lmathlib.c in Sources */,
@@ -1772,22 +1864,22 @@
 				5C5A98D424E16BCC002A22EA /* LGCompoundButton.mm in Sources */,
 				5C5A98D624E16BCC002A22EA /* LGImageView.mm in Sources */,
 				5CBD36EE24F1652F00EB167E /* UILabelPadding.m in Sources */,
+				5C78BA28284609EC003EC02A /* AtomicInteger.swift in Sources */,
 				5C5A98F224E16BCC002A22EA /* LGAbsListView.mm in Sources */,
-				5CB8584524E3F613006E6B65 /* PointAnnotation.m in Sources */,
 				5C5A9A0124E16BEC002A22EA /* options.c in Sources */,
 				5C5A99F524E16BEC002A22EA /* mime.c in Sources */,
 				5C5A990D24E16BCC002A22EA /* LuaColor.m in Sources */,
 				5C5A98BE24E16BCC002A22EA /* LuaGlobalFunction.m in Sources */,
-				5CB8583D24E3F4E6006E6B65 /* PolyAnnotationView.m in Sources */,
+				5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */,
 				5C5A98C824E16BCC002A22EA /* LuaForm.mm in Sources */,
 				5C5A98FF24E16BCC002A22EA /* LGAdapterView.mm in Sources */,
+				5C91BD7A283E15FF00D4C94F /* LuaLifecycleObserver.m in Sources */,
+				5CD343FB2859FA8F00343C6B /* ViewModelProvider.swift in Sources */,
 				5C5A99CF24E16BEC002A22EA /* ldump.c in Sources */,
-				5C5A98E024E16BCC002A22EA /* LuaMapImage.m in Sources */,
 				5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */,
 				5C5A98DA24E16BCC002A22EA /* LGRadioGroup.mm in Sources */,
 				5C5A98D024E16BCC002A22EA /* LGDrawableParser.m in Sources */,
 				5C5A99DB24E16BEC002A22EA /* lcode.c in Sources */,
-				5C5A990124E16BCC002A22EA /* LGMapView.mm in Sources */,
 				5C5A98E824E16BCC002A22EA /* LGRadioButton.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1947,7 +2039,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PURGPF38A5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1962,7 +2054,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.6;
+				MARKETING_VERSION = 0.1.7;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
 				PRODUCT_NAME = Topping;
@@ -1979,7 +2071,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PURGPF38A5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1994,7 +2086,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.6;
+				MARKETING_VERSION = 0.1.7;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios;
 				PRODUCT_NAME = Topping;

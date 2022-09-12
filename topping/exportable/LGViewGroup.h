@@ -4,6 +4,8 @@
 @interface LGViewGroup : LGView
 
 -(void)AddSubview:(LGView*)val;
+-(void)AddSubview:(LGView*)val :(NSInteger)index;
+-(void)RemoveSubview:(LGView*)val;
 -(void)ClearSubviews;
 -(NSMutableDictionary*)GetBindings;
 

@@ -43,8 +43,7 @@
             NSString *filename = (NSString *)obj;
             NSString *fNameNoExt = [filename stringByDeletingPathExtension];
             [self.drawableMap setObject:fNameNoExt forKey:fNameNoExt];
-        }];
-    }
+        }];    }
 }
 
 +(LGDrawableParser *) GetInstance

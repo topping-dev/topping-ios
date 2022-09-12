@@ -4,6 +4,8 @@
 #import "LuaClass.h"
 #import "LuaInterface.h"
 
+@class LuaForm;
+
 /**
  * Context class that stores various operating system data.
  */
@@ -15,7 +17,9 @@
 
 -(void)Setup:(UIViewController *)controller;
 
+@property (nonatomic, retain) NSString *packageName;
 @property (nonatomic, retain) NSString *lua_id;
 @property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, strong) LuaForm *form;
 
 @end

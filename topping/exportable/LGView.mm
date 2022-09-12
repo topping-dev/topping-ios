@@ -6,6 +6,7 @@
 #import "LGParser.h"
 #import "LuaForm.h"
 #import "LGValueParser.h"
+#import <Topping/Topping-Swift.h>
 
 @implementation LGView
 
@@ -760,6 +761,37 @@
         [self._view setBackgroundColor:ldr.color];
 }
 
+-(NSInteger)GetVisibility {
+    if(self._view.isHidden)
+        return GONE;
+    else {
+        if(self._view.alpha == 0)
+            return INVISIBILE;
+        else
+            return VISIBLE;
+    }
+}
+
+-(void)SetVisibility:(int)visibility {
+    if(visibility == VISIBLE)
+    {
+        self._view.hidden = NO;
+    }
+    else if(visibility == INVISIBILE)
+    {
+        self._view.alpha = 0;
+    }
+    else
+    {
+        self._view.hidden = YES;
+        self._view.alpha = 1;
+    }
+}
+
+-(float)GetAlpha {
+    return self._view.alpha;
+}
+
 -(void)SetOnClickListener:(LuaTranslator *)lt
 {
     self.ltOnClickListener = lt;
@@ -772,8 +804,6 @@
         return self.lua_id;
     if(self.android_id != nil)
         return self.android_id;
-    if(self.android_tag != nil)
-        return self.android_tag;
     return [LGView className];
 }
 

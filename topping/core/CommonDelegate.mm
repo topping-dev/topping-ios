@@ -14,8 +14,11 @@
 
 #import "LGStyleParser.h"
 #import "LGColorParser.h"
+#import "LGNavigationParser.h"
 
 #import "UIColor+Lum.h"
+
+#import <Topping/Topping-Swift.h>
 
 static CommonDelegate *sCommonDelegate;
 static LuaForm *sActiveForm;
@@ -91,8 +94,6 @@ static LuaForm *sActiveForm;
     height -= topPadding;
     height -= bottomPadding;
 	self.startForm = [[LuaForm alloc] init];
-	self.startForm.context = [[LuaContext alloc] init];
-    [self.startForm.context Setup:self.startForm];
     self.window.rootViewController = self.startForm.context.navController;
     if(!self.startForm.context.navController.isNavigationBarHidden)
     {
@@ -155,7 +156,7 @@ static LuaForm *sActiveForm;
 		LGView *lgview = self.startForm.lgview;
         NSLog(@"%@", NSStringFromCGRect(self.window.rootViewController.view.frame));
         NSLog(@"%@", NSStringFromCGRect(self.startForm.view.frame));
-		[self.startForm.view addSubview:[[LGLayoutParser GetInstance] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview]];
+        [self.startForm.view addSubview:[[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview]];
 		self.startForm.lgview = lgview;
     }
 	else

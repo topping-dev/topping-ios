@@ -6,9 +6,11 @@
 #import "LuaRef.h"
 
 @class LuaForm;
+@class LuaFragment;
 @protocol LuaInterface;
+@class NavController;
 
-enum VISIBILITY
+typedef NS_ENUM(NSInteger, VISIBILITY)
 {
 	VISIBLE,
 	INVISIBILE,
@@ -79,6 +81,9 @@ enum GRAVITY
 -(void)SetFocusable:(BOOL)focusable;
 -(void)SetBackground:(NSString*)background;
 -(void)SetBackgroundRef:(LuaRef*)ref;
+-(int)GetVisibility;
+-(void)SetVisibility:(NSInteger)visibility;
+-(float)GetAlpha;
 -(void)SetOnClickListener:(LuaTranslator *)lt;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
@@ -88,6 +93,7 @@ enum GRAVITY
 @property (nonatomic, retain) NSNumber* android_clickable;
 @property (nonatomic, retain) NSString* android_id;
 @property (nonatomic, retain) NSString* android_tag;
+@property (nonatomic, retain) NSString* android_name;
 @property (nonatomic, retain) NSString* android_minHeight;
 @property (nonatomic, retain) NSString* android_minWidth;
 @property (nonatomic, retain) NSString* android_paddingBottom;
@@ -120,6 +126,7 @@ enum GRAVITY
 @property (nonatomic, retain) UIView *_view;
 @property (nonatomic, retain) UIViewController *cont;
 @property (nonatomic, retain) LGView *parent;
+@property (nonatomic, retain) NSString *transitionName;
 
 @property (nonatomic) int dWidth;
 @property (nonatomic) int dHeight;
@@ -143,5 +150,9 @@ enum GRAVITY
 @property(nonatomic, retain) UIImage *backgroundImage;
 
 @property(nonatomic, strong) LuaTranslator *ltOnClickListener;
+
+@property(nonatomic, strong) LuaFragment *fragment;
+
+@property(nonatomic, strong) NavController *navController;
 
 @end

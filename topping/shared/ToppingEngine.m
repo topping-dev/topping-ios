@@ -29,11 +29,6 @@
 #import "LuaDialog.h"
 #import "LuaHttpClient.h"
 #import "LuaJSON.h"
-#import "LuaMapCircle.h"
-#import "LuaMapImage.h"
-#import "LuaMapMarker.h"
-#import "LuaMapPolygon.h"
-#import "LuaMapPolyline.h"
 #import "LuaPoint.h"
 #import "LuaRect.h"
 #import "LuaResource.h"
@@ -981,11 +976,6 @@ int RegisterTag(lua_State *L)
    	[Lunar Register:lu :[LuaHttpClient class]];
 	[Lunar Register:lu :[LuaJSONObject class]];
 	[Lunar Register:lu :[LuaJSONArray class]];
-    [Lunar Register:lu :[LuaMapCircle class]];
-    [Lunar Register:lu :[LuaMapImage class]];
-    [Lunar Register:lu :[LuaMapMarker class]];
-    [Lunar Register:lu :[LuaMapPolygon class]];
-    [Lunar Register:lu :[LuaMapPolyline class]];
     [Lunar Register:lu :[LuaPoint class]];
     [Lunar Register:lu :[LuaRect class]];
 	[Lunar Register:lu :[LuaResource class]];

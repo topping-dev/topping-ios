@@ -8,6 +8,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LuaThread : NSObject <LuaClass, LuaInterface>
 
++(void) RunOnBackgroundInternal:(dispatch_block_t)block;
++(void) RunOnUIThreadInternal:(dispatch_block_t)block;
 +(void)RunOnUIThread:(LuaTranslator *)runnable;
 +(void)RunOnBackground:(LuaTranslator *)runnable;
 +(LuaThread*)New:(LuaTranslator *)runnable;

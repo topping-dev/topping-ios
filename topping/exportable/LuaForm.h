@@ -4,9 +4,19 @@
 #import "LuaClass.h"
 #import "KeyboardHelper.h"
 #import "LuaContext.h"
+#import "LuaViewModelProvider.h"
+#import "LuaLifecycleOwner.h"
+#import "LifecycleRegistry.h"
 #import "LGView.h"
 
 @class LGView;
+@class FragmentController;
+@class FragmentManager;
+@class FragmentHostCallback;
+@class ViewModelStore;
+@class SavedStateRegistryController;
+@class OnBackPressedDispatcher;
+@class LuaFormOnBackPressedDispatcher;
 
 typedef enum FormEvents
 {
@@ -43,6 +53,14 @@ typedef enum FormEvents
 -(void)SetTitle:(NSString *)str;
 -(void)Close;
 
+-(BOOL)isChangingConfigurations;
+-(void)onBackPressed;
+
+-(ViewModelStore*)getViewModelStore;
+
+-(FragmentManager*)getSupportFragmentManager;
+-(void)markFragmentsCreated;
+
 KEYBOARD_FUNCTIONS
 
 KEYBOARD_PROPERTIES
@@ -51,5 +69,16 @@ KEYBOARD_PROPERTIES
 @property(nonatomic, retain) LuaContext *context;
 @property(nonatomic, retain) LGView *lgview;
 @property(nonatomic, retain) NSString *ui;
+@property(nonatomic, retain) LuaViewModelProvider *viewModelProvider;
+@property(nonatomic, retain) LuaLifecycleOwner *lifecycleOwner;
+@property(nonatomic, retain) LifecycleRegistry *lifecycleRegistry;
+@property(nonatomic, retain) FragmentController *mFragments;
+@property(nonatomic, retain) FragmentManager *fragmentManager;
+@property(nonatomic, retain) ViewModelStore *viewModelStore;
+@property(nonatomic, retain) SavedStateRegistryController *savedStateRegistryController;
+@property(nonatomic, retain) OnBackPressedDispatcher *onBackPressedDispatcher;
+@property(nonatomic) BOOL mCreated;
+@property(nonatomic) BOOL mResumed;
+@property(nonatomic) BOOL mStopped;
 
 @end
