@@ -1,11 +1,3 @@
-//
-//  CheckBox.m
-//  Topping
-//
-//  Created by Edo on 18.04.2021.
-//  Copyright © 2021 Deadknight. All rights reserved.
-//
-
 #import "CheckBox.h"
 
 @implementation CheckBox

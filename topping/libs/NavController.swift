@@ -1,7 +1,27 @@
 import UIKit
 
 @objc(NavController)
-open class NavController: NSObject {
+open class NavController: NSObject, LuaClass, LuaInterface {
+    
+    public func getId() -> String! {
+        return "NavController"
+    }
+    
+    public static func className() -> String! {
+        return "NavController"
+    }
+    
+    public static func luaMethods() -> NSMutableDictionary! {
+        let dict = NSMutableDictionary()
+        
+        dict["navigateUp"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateUp)), #selector(navigateUp), nil, [])
+        dict["navigate"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:))), #selector(navigateRef(ref:)), nil, [LuaRef.self])
+        dict["navigateArgs"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:args:))), #selector(navigateRef(ref:args:)), nil, [LuaRef.self, Dictionary<String, NSObject>.self])
+        dict["navigateArgsOptions"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:args:navOptions:))), #selector(navigateRef(ref:args:navOptions:)), nil, [LuaRef.self, Dictionary<String, NSObject>.self,NavOptions.self])
+        dict["navigateArgsOptionsExtras"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:args:navOptions:navigatorExtras:))), #selector(navigateRef(ref:args:navOptions:navigatorExtras:)), nil, [LuaRef.self, Dictionary<String, NSObject>.self,NavOptions.self, NavigatorExtras.self])
+        
+        return dict
+    }
     
     static let KEY_NAVIGATOR_STATE = "android-support-nav:controller:navigatorState"
     static let KEY_NAVIGATOR_STATE_NAMES = "android-support-nav:controller:navigatorState:names"
@@ -137,7 +157,8 @@ open class NavController: NSObject {
         return popped
     }
     
-    func navigateUp() -> Bool {
+    @objc
+    public func navigateUp() -> Bool {
         if(getDestinationCountOnBackStack() == 1) {
             let currentDestination = getCurrentDestination()
             var destId = currentDestination?.idVal
@@ -182,20 +203,20 @@ open class NavController: NSObject {
             
         }
         if(!mBackStack.isEmpty) {
-            var nextResumed = mBackStack.getLast()!.getDestination()
+            var nextResumed: NavDestination? = mBackStack.getLast()!.getDestination()
             var nextStarted: NavDestination? = nil
             /*if(nextResumed) Floating?*/
             var upwardStateTransitions = Dictionary<NavBackStackEntry, LifecycleState>()
-            var iterator = mBackStack.reversedIterator()
-            var entry:NavBackStackEntry? = iterator.next() as? NavBackStackEntry
+            let iterator = mBackStack.reversedIterator()
+            var entry:NavBackStackEntry? = iterator.next()
             while(entry != nil) {
-                var currentMaxLifecycle = entry!.getMaxLifecycle()
+                let currentMaxLifecycle = entry!.getMaxLifecycle()
                 let destination = entry!.getDestination()
-                if(nextResumed != nil && destination.idVal == nextResumed.idVal) {
+                if(nextResumed != nil && destination.idVal == nextResumed!.idVal) {
                     if(currentMaxLifecycle != LifecycleState.LIFECYCLESTATE_RESUMED) {
                         upwardStateTransitions[entry!] = LifecycleState.LIFECYCLESTATE_RESUMED
                     }
-                    nextResumed = nextResumed.mParent
+                    nextResumed = nextResumed?.mParent
                 }
                 else if(nextStarted != nil && destination.idVal == nextStarted?.idVal) {
                     if(currentMaxLifecycle == LifecycleState.LIFECYCLESTATE_RESUMED) {
@@ -208,19 +229,19 @@ open class NavController: NSObject {
                 } else {
                     entry!.setMaxLifecycle(maxState: LifecycleState.LIFECYCLESTATE_CREATED)
                 }
-                entry = iterator.next() as? NavBackStackEntry
+                entry = iterator.next()
             }
-            var iteratorN = mBackStack.iterator()
-            entry = iteratorN.next() as? NavBackStackEntry
+            let iteratorN = mBackStack.iterator()
+            entry = iteratorN.next()
             while(entry != nil) {
-                var newState = upwardStateTransitions[entry!]
+                let newState = upwardStateTransitions[entry!]
                 if(newState != nil) {
                     entry!.setMaxLifecycle(maxState: newState!)
                 } else {
                     entry!.updateState()
                 }
                 
-                entry = iterator.next() as? NavBackStackEntry
+                entry = iteratorN.next()
             }
             
             let backStackEntry = mBackStack.getLast()
@@ -247,7 +268,7 @@ open class NavController: NSObject {
     @objc
     public func setGraph(graphResId: String, startDestinationArgsP: NSMutableDictionary?) {
         let startDestinationArgs = startDestinationArgsP?.swiftDictionaryObj
-        setGraph(graph: getNavInflater().getNavigation(graphResId), startDestinationArgs: startDestinationArgs)
+        setGraph(graph: getNavInflater().getNavigation(self, graphResId), startDestinationArgs: startDestinationArgs)
     }
     
     func setGraph(graph: NavGraph) {
@@ -321,26 +342,50 @@ open class NavController: NSObject {
         return currentGraph?.findNode(destinationId)
     }
     
-    func navigate(resId: String) {
+    @objc
+    public func navigateRef(ref: LuaRef) {
+        navigate(resId: ref.idRef)
+    }
+    
+    @objc
+    public func navigate(resId: String) {
         navigate(resId: resId, args: nil)
     }
     
-    func navigate(resId: String, args: Bundle?) {
+    @objc
+    public func navigateRef(ref: LuaRef, args: Dictionary<String, NSObject>?) {
+        navigate(resId: ref.idRef, args: args)
+    }
+    
+    @objc
+    public func navigate(resId: String, args: Dictionary<String, NSObject>?) {
         navigate(resId: resId, args: args, navOptions: nil)
     }
     
-    func navigate(resId: String, args: Bundle?, navOptions: NavOptions?) {
+    @objc
+    public func navigateRef(ref: LuaRef, args: Dictionary<String, NSObject>?, navOptions: NavOptions?) {
+        navigate(resId: ref.idRef, args: args, navOptions: navOptions)
+    }
+    
+    @objc
+    public func navigate(resId: String, args: Dictionary<String, NSObject>?, navOptions: NavOptions?) {
         navigate(resId: resId, args: args, navOptions: navOptions, navigatorExtras: nil)
     }
     
-    func navigate(resId: String, args: Bundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) {
-        var currentNode = mBackStack.isEmpty ? mGraph : mBackStack.getLast()?.mDestination
+    @objc
+    public func navigateRef(ref: LuaRef, args: Dictionary<String, NSObject>?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) {
+        navigate(resId: ref.idRef, args: args, navOptions: navOptions, navigatorExtras: navigatorExtras)
+    }
+    
+    @objc
+    public func navigate(resId: String, args: Dictionary<String, NSObject>?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) {
+        let currentNode = mBackStack.isEmpty ? mGraph : mBackStack.getLast()?.mDestination
         if(currentNode == nil) {
             //TODO:Excep
             return;
         }
         var destId = resId
-        var navAction = currentNode?.getAction(resId)
+        let navAction = currentNode?.getAction(resId)
         var combinedArgs: Bundle? = nil
         var navOptionsD: NavOptions? = navOptions
         if(navAction != nil) {
@@ -348,10 +393,10 @@ open class NavController: NSObject {
                 navOptionsD = navAction!.mNavOptions
             }
             destId = navAction!.mDestinationId
-            var navActionArgs = navAction!.mDefaultArguments
+            let navActionArgs = navAction!.mDefaultArguments
             if(navActionArgs != nil) {
                 combinedArgs = Bundle()
-                combinedArgs!.merging(navActionArgs!.swiftDictionaryObj) { $1 }
+                combinedArgs = combinedArgs!.merging(navActionArgs!.swiftDictionaryObj) { $1 }
             }
         }
         
@@ -359,7 +404,7 @@ open class NavController: NSObject {
             if(combinedArgs == nil) {
                 combinedArgs = Bundle()
             }
-            combinedArgs!.merging(args!) { $1 }
+            combinedArgs = combinedArgs!.merging(args!) { $1 }
         }
         
         if(destId == "" && navOptions != nil && navOptions?.mPopUpTo != nil) {
@@ -371,7 +416,7 @@ open class NavController: NSObject {
             return;
         }
         
-        var node = findDestination(destinationId: destId)
+        let node = findDestination(destinationId: destId)
         if(node == nil) {
             //TODO:Excep
             return;
@@ -451,11 +496,11 @@ open class NavController: NSObject {
     @objc
     public func saveState() -> NSMutableDictionary? {
         var b: Bundle? = nil
-        var navigatorNames = NSMutableArray()
+        let navigatorNames = NSMutableArray()
         var navigatorState = Bundle()
         for entry in mNavigatiorProvider.getNavigators() {
-            var name = entry.key
-            var savedState = entry.value.onSaveState()
+            let name = entry.key
+            let savedState = entry.value.onSaveState()
             if(savedState != nil) {
                 navigatorNames.add(name)
                 navigatorState[name] = savedState as NSObject?
@@ -524,7 +569,7 @@ open class NavController: NSObject {
     }
     
     func updateOnBackPressedCallbackEnabled() {
-        mOnBackPressedCallback!.setEnabled(enabled: mEnableOnBackPressedCallback && getDestinationCountOnBackStack() > 1)
+        mOnBackPressedCallback?.setEnabled(enabled: mEnableOnBackPressedCallback && getDestinationCountOnBackStack() > 1)
     }
     
     @objc
@@ -542,7 +587,7 @@ open class NavController: NSObject {
         if(mViewModel == nil) {
             
         }
-        var lastFromBackStack = getBackStackEntry(destinationId: navGraphId)
+        let lastFromBackStack = getBackStackEntry(destinationId: navGraphId)
         if(!(lastFromBackStack.getDestination() is NavGraph)) {
             
         }
@@ -551,15 +596,15 @@ open class NavController: NSObject {
     
     func getBackStackEntry(destinationId: String) -> NavBackStackEntry {
         var lastFromBackStack: NavBackStackEntry? = nil
-        var iterator = mBackStack.reversedIterator()
-        var entry:NavBackStackEntry? = iterator.next() as? NavBackStackEntry
+        let iterator = mBackStack.reversedIterator()
+        var entry:NavBackStackEntry? = iterator.next()
         while(entry != nil) {
             let destination = entry!.getDestination()
             if(destination.idVal == destinationId) {
                 lastFromBackStack = entry
                 break
             }
-            entry = iterator.next() as? NavBackStackEntry
+            entry = iterator.next()
         }
         return lastFromBackStack!
     }
@@ -573,16 +618,16 @@ open class NavController: NSObject {
     }
     
     func getPreviousBackStackEntry() -> NavBackStackEntry? {
-        var iterator = mBackStack.reversedIterator()
-        var entry:NavBackStackEntry? = iterator.next() as? NavBackStackEntry
+        let iterator = mBackStack.reversedIterator()
+        var entry:NavBackStackEntry? = iterator.next()
         if(entry != nil) {
-            entry = iterator.next() as? NavBackStackEntry
+            entry = iterator.next()
         }
         while(entry != nil) {
             if(!(entry?.getDestination() is NavGraph)) {
                 return entry
             }
-            entry = iterator.next() as? NavBackStackEntry
+            entry = iterator.next()
         }
         return nil
     }

@@ -10,6 +10,7 @@
 #import "LGView.h"
 
 @class LGView;
+@class LGToolbar;
 @class FragmentController;
 @class FragmentManager;
 @class FragmentHostCallback;
@@ -67,7 +68,9 @@ KEYBOARD_PROPERTIES
 
 @property(nonatomic, retain) NSString *luaId;
 @property(nonatomic, retain) LuaContext *context;
+
 @property(nonatomic, retain) LGView *lgview;
+@property(nonatomic, retain) LGToolbar *toolbar;
 @property(nonatomic, retain) NSString *ui;
 @property(nonatomic, retain) LuaViewModelProvider *viewModelProvider;
 @property(nonatomic, retain) LuaLifecycleOwner *lifecycleOwner;
@@ -80,5 +83,6 @@ KEYBOARD_PROPERTIES
 @property(nonatomic) BOOL mCreated;
 @property(nonatomic) BOOL mResumed;
 @property(nonatomic) BOOL mStopped;
+@property(nonatomic) BOOL createCalled;
 
 @end

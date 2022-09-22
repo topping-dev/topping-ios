@@ -35,7 +35,7 @@ open class LuaFormHostCallbacks: FragmentHostCallback, ViewModelStoreOwner, OnBa
 open class FragmentHostCallback: NSObject, FragmentContainer {
     var form: LuaForm?
     var context: LuaContext
-    var fragmentManager = FragmentManager()
+    @objc public var fragmentManager = FragmentManager()
     var runnableArray = Array<Runnable>()
     
     init(context: LuaContext) {
@@ -199,8 +199,13 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
     
     @objc
     public func instantiate(context: LuaContext, className: String, arguments: Dictionary<String, Any>?) -> LuaFragment {
-        let cls: LuaFragment.Type = Utils.getClassForClassName(className: className)!
-        let val = cls.init()
+        let cls: LuaFragment.Type? = Utils.getClassForClassName(className: className)
+        if(cls == nil)
+        {
+            NSLog("cannot instantiate fragment with class name %@, creating LuaFragment with luaid", className)
+            return LuaFragment.create(context, className)
+        }
+        let val = cls!.init()
         val.setArguments(arguments?.objcDictionary)
         return val
     }

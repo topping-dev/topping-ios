@@ -27,6 +27,10 @@
 
 -(void)AddSubview:(LGView*)val :(NSInteger)index
 {
+    if(index == -1) {
+        [self AddSubview:val];
+        return;
+    }
     if(val != nil)
     {
         val.parent = self;
@@ -45,13 +49,18 @@
         [self.subviews removeObject:val];
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap removeObjectForKey:[val GetId]];
+        [val._view removeFromSuperview];
         val.parent = nil;
+        [self Resize];
     }
 }
 
 -(void)ClearSubviews
 {
+    for(LGView *w in self.subviews)
+        [w._view removeFromSuperview];
     [self.subviews removeAllObjects];
+    [self Resize];
 }
 
 -(void)ClearDimensions
@@ -81,7 +90,7 @@
 {
     [super Resize];
     for(LGView *w in self.subviews)
-        [w Resize];
+        [w ResizeAndInvalidate];
     [super Resize];
 }
 

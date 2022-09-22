@@ -21,6 +21,11 @@ end
 
 function TestButton_Click(pGUI, context)
 	LuaToast.Show(context, "Test button clicked", 1000);
+    print(pGUI)
+    print(LR)
+    print(LR.id)
+    print(LR.id.action_menuFragment_to_receiveFragment)
+    pGUI:findNavController():navigate(LR.id.action_menuFragment_to_receiveFragment)
 end
 
 function TestComboBox_Changed(pGUI, context, name, value)
@@ -28,3 +33,4 @@ function TestComboBox_Changed(pGUI, context, name, value)
 end
 
 LuaForm.RegisterFormEvent("formTestLL", LuaForm.FORM_EVENT_CREATE, FormTestLL_Constructor);
+LuaFragment.RegisterFragmentEvent("formTestLL", LuaFragment.FRAGMENT_EVENT_CREATE, FormTestLL_Constructor);

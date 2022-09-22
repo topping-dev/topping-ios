@@ -128,7 +128,8 @@ open class OnBackPressedDispatcher : NSObject {
         }
     }
     
-    class LifecycleOnBackPressedCancellable : NSObject, LifecycleEventObserver, Cancellable {
+    @objc(LifecycleOnBackPressedCancellable)
+    open class LifecycleOnBackPressedCancellable : NSObject, LifecycleEventObserver, Cancellable {
         var key: String = UUID.init().uuidString
         
         private var mLifecycle: LuaLifecycle
@@ -145,7 +146,11 @@ open class OnBackPressedDispatcher : NSObject {
             lifecycle.add(self)
         }
         
-        func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
+        public func getKey() -> String! {
+            return key
+        }
+        
+        public func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
             if(event == LifecycleEvent.LIFECYCLEEVENT_ON_START) {
                 mCurrentCancellable = mOnBackPressedDispatcher.addCancellableCallback(onBackPressedCallback: mOnBackPressedCallback)
             } else if(event == LifecycleEvent.LIFECYCLEEVENT_ON_STOP) {

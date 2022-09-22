@@ -45,9 +45,14 @@
 		return;
 	
 	GDataXMLElement *root = [xml rootElement];
+    
+    if([root kind] != GDataXMLElementKind)
+        return;
 	
 	for(GDataXMLElement *child in [root children])
 	{
+        if([child kind] != GDataXMLElementKind)
+            continue;
 		NSArray *attrs = [child attributes];
 		for(GDataXMLNode *node in attrs)
 		{
@@ -62,6 +67,9 @@
 	{
 		self.dimensionMap = [[NSMutableDictionary alloc] init];
     }
+    
+    if([element kind] != GDataXMLElementKind)
+        return;
     
     for(GDataXMLNode *attr in element.attributes)
     {

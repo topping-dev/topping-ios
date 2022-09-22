@@ -1,11 +1,3 @@
-//
-//  FragmentManager.swift
-//  Topping
-//
-//  Created by Edo on 30.05.2022.
-//  Copyright © 2022 Deadknight. All rights reserved.
-//
-
 import UIKit
 import CoreMIDI
 
@@ -78,7 +70,7 @@ open class FragmentLifecycleCallbacks: NSObject {
 
     @objc func onFragmentStopped(fm: FragmentManager, f:LuaFragment) {}
 
-    @objc func onFragmentSaveInstanceState(fm: FragmentManager, f:LuaFragment, outState:Dictionary<String, Any>?) {}
+    @objc func onFragmentSaveInstanceState(fm: FragmentManager, f:LuaFragment, outState:Dictionary<String, Any>) {}
 
     @objc func onFragmentViewDestroyed(fm: FragmentManager, f:LuaFragment) {}
 
@@ -176,7 +168,7 @@ class BackStackState {
     func instantiate(fm: FragmentManager, pendingSavedFragments: Dictionary<String, LuaFragment>) -> Array<BackStackRecord> {
         var fragments = Dictionary<String, LuaFragment>()
         for fWho in mFragments {
-            var existingFragment = pendingSavedFragments[fWho]
+            let existingFragment = pendingSavedFragments[fWho]
             if(existingFragment != nil) {
                 fragments[(existingFragment?.mWho)!] = existingFragment
                 continue;
@@ -221,7 +213,7 @@ class PopBackStackState : OpGenerator {
     
     func generateOps(records: inout Array<BackStackRecord>, isRecordPop: inout Array<Bool>) -> Bool {
         if(fm.mPrimaryNav != nil && mId < 0 && mName == nil) {
-            var childManager = fm.mPrimaryNav!.getChildFragmentManager()
+            let childManager = fm.mPrimaryNav!.getChildFragmentManager()
             if(childManager!.popBackStackImmediate()) {
                 return false
             }
@@ -327,27 +319,29 @@ public class LGFragmentLayoutParser: LGLayoutParser {
         super.init()
         super.initialize()
     }
-    
+
     override public func getViewFromName(_ name: String!, _ attrs: [Any]!) -> LGView! {
         if(name == "androidx.fragment.app.FragmentContainerView"
            || name == "LGFragmentContainerView") {
-            return LGFragmentContainerView(fragmentManager: mFragmentManager)
+            let result = LGFragmentContainerView(fragmentManager: mFragmentManager)
+            result?.initProperties()
+            return result
         }
-        var view = super.getViewFromName(name, attrs)
-        return view!
+        return super.getViewFromName(name, attrs)
     }
     
-    override public func parseXML(_ filename: String!, _ parentView: UIView!, _ parent: LGView!, _ cont: LuaForm!, _ lgview: AutoreleasingUnsafeMutablePointer<LGView?>!) -> UIView! {
-        var view = super.parseXML(filename, parentView, parent, cont, lgview)
-        if(!(lgview.pointee is LGFragmentContainerView)) {
-            return view;
+    public override func applyOverrides(_ parent: LGView!, _ lgview: LGView!) {
+        super.applyOverrides(parent, lgview)
+        
+        /*if(!(lgview is LGFragmentContainerView)) {
+            return;
         }
-        let idVal = lgview.pointee?.getId()
-        let tag = lgview.pointee?.android_tag
+        let idVal = lgview.getId()
+        let tag = lgview.android_tag
         let containerId = parent != nil ? parent.getId() : nil
-        let fname = lgview.pointee?.android_name
+        let fname = lgview.android_name
         if(containerId == nil && idVal == nil && tag == nil) {
-            return nil
+            return
         }
         
         var fragment = idVal != nil ? mFragmentManager.findFragmentById(id: idVal!) : nil
@@ -371,7 +365,7 @@ public class LGFragmentLayoutParser: LGLayoutParser {
             fragment?.onInflate(mFragmentManager.getHost()?.context, [:], fragment!.mSavedFragmentState)
             fragmentStateManager = mFragmentManager.addFragment(fragment: fragment!)
         } else if(fragment!.mInLayout) {
-            return nil
+            return
         } else {
             fragment?.mInLayout = true
             fragment?.mFragmentManager = mFragmentManager
@@ -384,24 +378,45 @@ public class LGFragmentLayoutParser: LGLayoutParser {
         fragmentStateManager?.ensureInflatedView()
         
         if(fragment?.lgview == nil) {
-            return nil
+            return
         }
         if(idVal != "") {
             fragment?.lgview.android_id = idVal
         }
         if(fragment?.lgview.android_tag == nil) {
             fragment?.lgview.android_tag = tag
-        }
+        }*/
         //TODO:Add on attach state
         //fragment?.view.addon
-        
-        return fragment?.view
     }
 }
 
 
 @objc(FragmentManager)
-open class FragmentManager: NSObject {
+open class FragmentManager: NSObject, LuaClass, LuaInterface {
+    
+    public func getId() -> String! {
+        return "FragmentManager"
+    }
+    
+    public static func className() -> String! {
+        return "FragmentManager"
+    }
+    
+    public static func luaMethods() -> NSMutableDictionary! {
+        let dict = NSMutableDictionary()
+        
+        dict["findFragmentById"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(findFragmentById(id:))), #selector(findFragmentById(id:)), LuaFragment.self, [NSString.self])
+        dict["findFragmentByTag"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(findFragmentByTag(tag:))), #selector(findFragmentByTag(tag:)), nil, [NSString.self])
+        dict["findFragment"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(findFragment(view:))), #selector(findFragment(view:)), nil, [LGView.self])
+        /*dict["navigate"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector()), #selector(), nil, [LuaRef.self])
+        dict["navigate"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector()), #selector(), nil, [LuaRef.self])
+        dict["navigate"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector()), #selector(), nil, [LuaRef.self])
+        dict["navigate"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector()), #selector(), nil, [LuaRef.self])*/
+        
+        return dict
+    }
+    
     @objc let SAVED_STATE_TAG = "android:support:fragments"
     @objc private var mFragmentFactory: FragmentFactory? = nil
     @objc private var mHostFragmentFactory: HostFragmentFactory?
@@ -602,7 +617,7 @@ open class FragmentManager: NSObject {
     }
     
     func setFragmentResult(requestKey: String, result: Dictionary<String, Any>) {
-        var resultListener = mResultListeners[requestKey]
+        let resultListener = mResultListeners[requestKey]
         if(resultListener != nil && resultListener!.isAtLeast(state: LifecycleState.LIFECYCLESTATE_STARTED)) {
             resultListener?.onFragmentResult(key: requestKey, result: result)
         } else {
@@ -615,14 +630,14 @@ open class FragmentManager: NSObject {
     }
     
     func setFragmentResultListener(requestKey: String, lifecycleOwner: LifecycleOwner, listener: FragmentResultListener) {
-        var lifecycle: LuaLifecycle = lifecycleOwner.getLifecycle()
+        let lifecycle: LuaLifecycle = lifecycleOwner.getLifecycle()
         if(lifecycle.getCurrentState() == LifecycleState.LIFECYCLESTATE_DESTROYED) {
             return
         }
-        var observer = LifecycleEventObserverI { leo in
+        let observer = LifecycleEventObserverI { leo in
             leo.onStateChangedO = { source, event in
                 if(event == LifecycleEvent.LIFECYCLEEVENT_ON_START) {
-                    var storedResult = self.mResults[requestKey]
+                    let storedResult = self.mResults[requestKey]
                     if(storedResult != nil) {
                         listener.onFragmentResult(key: requestKey, result: storedResult!)
                     }
@@ -636,7 +651,7 @@ open class FragmentManager: NSObject {
             return leo
         }
         lifecycle.add(observer)
-        var storedListener = mResultListeners[requestKey]
+        let storedListener = mResultListeners[requestKey]
         if(storedListener != nil) {
             storedListener?.removeObserver()
         }
@@ -646,7 +661,7 @@ open class FragmentManager: NSObject {
     }
     
     func clearFragmentResultListener(requestKey: String) {
-        var listener = mResultListeners[requestKey]
+        let listener = mResultListeners[requestKey]
         if(listener != nil)
         {
             listener?.removeObserver()
@@ -666,13 +681,13 @@ open class FragmentManager: NSObject {
     
     func getFragment(bundle: inout Dictionary<String, Any>, key: String) -> LuaFragment?
     {
-        var who = bundle[key]
+        let who = bundle[key]
             
-        var f = findActiveFragment(who: who as! String)
+        let f = findActiveFragment(who: who as! String)
         return f
     }
     
-    static func findFragment(view: LGView) -> LuaFragment? {
+    @objc public static func findFragment(view: LGView) -> LuaFragment? {
         return findViewFragment(view: view)
     }
     
@@ -697,16 +712,16 @@ open class FragmentManager: NSObject {
     @objc
     public func onContainerAvailable(view: LGView) {
         for fragmentStateManager in mFragmentStore.getActiveFragmentStateManagers() {
-            var fragment = fragmentStateManager.getFragment()
+            let fragment = fragmentStateManager.getFragment()
             if(fragment.mContainerId == view.getId() && fragment.lgview != nil) {
-                fragment.mContainer = view as! LGViewGroup
+                fragment.mContainer = view as? LGViewGroup
                 fragmentStateManager.addViewToContainer()
             }
         }
     }
     
     static func findFragmentManager(view: LGView) -> FragmentManager? {
-        var fragment = findViewFragment(view: view)
+        let fragment = findViewFragment(view: view)
         var fm: FragmentManager? = nil
         if(fragment != nil) {
             if(!fragment!.mAdded) {
@@ -715,8 +730,7 @@ open class FragmentManager: NSObject {
             fm = fragment!.getChildFragmentManager()
         }
         else {
-            var context = view.lc
-            var fragmentActivity = view.lc.form
+            let fragmentActivity = view.lc.form
             if(fragmentActivity != nil) {
                 fm = fragmentActivity!.fragmentManager
             }
@@ -755,7 +769,7 @@ open class FragmentManager: NSObject {
     }
     
     func saveFragmentInstanceState(fragment: LuaFragment) -> SavedState? {
-        var fragmentStateManager = mFragmentStore.getFragmentStateManager(who: fragment.mWho)
+        let fragmentStateManager = mFragmentStore.getFragmentStateManager(who: fragment.mWho)
         if(fragmentStateManager == nil || fragmentStateManager?.getFragment() != fragment) {
             return nil
         }
@@ -785,7 +799,7 @@ open class FragmentManager: NSObject {
     }
     
     func performPendingDeferredStart(fragmentStateManager: FragmentStateManager) {
-        var f = fragmentStateManager.getFragment()
+        let f = fragmentStateManager.getFragment()
         if(f.mDeferStart) {
             if(mExecutingActions) {
                 mHavePendingDeferredStart = true
@@ -834,11 +848,11 @@ open class FragmentManager: NSObject {
     }
     
     private func createOrGetFragmentStateManager(f: LuaFragment) -> FragmentStateManager {
-        var existing = mFragmentStore.getFragmentStateManager(who: f.mWho)
+        let existing = mFragmentStore.getFragmentStateManager(who: f.mWho)
         if(existing != nil) {
             return existing!
         }
-        var fragmentStateManager = FragmentStateManager(dispatcher: mLifeycleCallbackDispatcher!, fragmentStore: mFragmentStore, fragment: f)
+        let fragmentStateManager = FragmentStateManager(dispatcher: mLifeycleCallbackDispatcher!, fragmentStore: mFragmentStore, fragment: f)
         fragmentStateManager.restoreState()
         fragmentStateManager.setFragmentManagerState(state: mCurState)
         return fragmentStateManager
@@ -848,7 +862,7 @@ open class FragmentManager: NSObject {
         if(fragment.mPreviousWho != nil) {
             
         }
-        var fragmentStateManager = createOrGetFragmentStateManager(f: fragment)
+        let fragmentStateManager = createOrGetFragmentStateManager(f: fragment)
         fragment.mFragmentManager = self
         mFragmentStore.makeActive(newlyActive: fragmentStateManager)
         if(!fragment.mDetached) {
@@ -866,7 +880,7 @@ open class FragmentManager: NSObject {
     }
     
     func removeFragment(fragment: LuaFragment) {
-        var inactive = !fragment.isInBackStack()
+        let inactive = !fragment.isInBackStack()
         if(!fragment.mDetached || inactive) {
             mFragmentStore.removeFragment(fragment: fragment)
             //TODO
@@ -974,12 +988,12 @@ open class FragmentManager: NSObject {
     
     func scheduleCommit() {
         synced(self) {
-            var pendingReady = mPendingActions.count == 1
+            let pendingReady = mPendingActions.count == 1
             if(pendingReady) {
                 if(mHost?.runnableArray != nil) {
                     ArrayExtension.remove(list: &mHost!.runnableArray, object: mExecCommit as! Runnable)
                 }
-                DispatchQueue.global().async {
+                DispatchQueue.main.async {
                     self.mExecCommit!.run()
                 }
                 updateOnBackPressedCallbackEnabled()
@@ -1015,7 +1029,7 @@ open class FragmentManager: NSObject {
     }
     
     func execSingleAction(action: OpGenerator, allowStateLoss: Bool) {
-        if(allowStateLoss && (mHost == nil || mDestroyed)) {
+        if(allowStateLoss && (mHost == nil || mDestroyed)) {
             return
         }
         ensureExecReady(allowStateLoss: allowStateLoss)
@@ -1071,10 +1085,10 @@ open class FragmentManager: NSObject {
             //throw RuntimeError("Internal error with the back stack records")
         }
         
-        var numRecords = records.count
+        let numRecords = records.count
         var startIndex = 0
         for var recordNum in 0..<numRecords {
-            var canReorder = records[recordNum].mReorderingAllowed
+            let canReorder = records[recordNum].mReorderingAllowed
             if(!canReorder) {
                 if(startIndex != recordNum) {
                     executeOpsTogether(records: records, isRecordPop: isRecordPop, startIndex: startIndex, endIndex: recordNum)
@@ -1097,7 +1111,7 @@ open class FragmentManager: NSObject {
     }
     
     private func executeOpsTogether(records: Array<BackStackRecord>, isRecordPop: Array<Bool>, startIndex: Int, endIndex: Int) {
-        var allowReordering = records[startIndex].mReorderingAllowed
+        let allowReordering = records[startIndex].mReorderingAllowed
         var addToBackStack = false
         if(mTmpAddedFragments == nil) {
             mTmpAddedFragments = Array()
@@ -1107,8 +1121,8 @@ open class FragmentManager: NSObject {
         mTmpAddedFragments.append(contentsOf: mFragmentStore.getFragments())
         var oldPrimaryNav = getPrimaryNavigationFragment()
         for recordNum in startIndex..<endIndex {
-            var record = records[recordNum]
-            var isPop = isRecordPop[recordNum]
+            let record = records[recordNum]
+            let isPop = isRecordPop[recordNum]
             if(!isPop) {
                 oldPrimaryNav = record.expandOps(added: &mTmpAddedFragments, oldPrimaryNav: &oldPrimaryNav)
             } else {
@@ -1120,11 +1134,11 @@ open class FragmentManager: NSObject {
         
         if(!allowReordering && mCurState >= FragmentState.FS_CREATED.rawValue) {
             for index in startIndex..<endIndex {
-                var record = records[index]
+                let record = records[index]
                 for op in record.mOps {
-                    var fragment = op.mFragment
+                    let fragment = op.mFragment
                     if(fragment != nil && fragment?.mFragmentManager != nil) {
-                        var fragmentStateManager = createOrGetFragmentStateManager(f: fragment!)
+                        let fragmentStateManager = createOrGetFragmentStateManager(f: fragment!)
                         mFragmentStore.makeActive(newlyActive: fragmentStateManager)
                     }
                 }
@@ -1134,21 +1148,21 @@ open class FragmentManager: NSObject {
         
         var isPop = isRecordPop[endIndex - 1]
         for index in startIndex..<endIndex {
-            var record = records[index]
+            let record = records[index]
             if(isPop) {
                 for opIndex in (0..<record.mOps.count).reversed() {
-                    var op = record.mOps[opIndex]
-                    var fragment = op.mFragment
+                    let op = record.mOps[opIndex]
+                    let fragment = op.mFragment
                     if(fragment != nil) {
-                        var fragmentStateManager = createOrGetFragmentStateManager(f: fragment!)
+                        let fragmentStateManager = createOrGetFragmentStateManager(f: fragment!)
                         fragmentStateManager.moveToExpectedState()
                     }
                 }
             } else {
                 for op in record.mOps {
-                    var fragment = op.mFragment
+                    let fragment = op.mFragment
                     if(fragment != nil) {
-                        var fragmentStateManager = createOrGetFragmentStateManager(f: fragment!)
+                        let fragmentStateManager = createOrGetFragmentStateManager(f: fragment!)
                         fragmentStateManager.moveToExpectedState()
                     }
                 }
@@ -1159,7 +1173,7 @@ open class FragmentManager: NSObject {
         //TODO special effects
         
         for recordNum in startIndex..<endIndex {
-            var record = records[recordNum]
+            let record = records[recordNum]
             isPop = isRecordPop[recordNum]
             if(isPop && record.mIndex > 0) {
                 record.mIndex = -1
@@ -1175,8 +1189,8 @@ open class FragmentManager: NSObject {
     
     private static func executeOps(records: Array<BackStackRecord>, isRecordPop: Array<Bool>, startIndex: Int, endIndex: Int) {
         for i in startIndex..<endIndex {
-            var record = records[i]
-            var isPop = isRecordPop[i]
+            let record = records[i]
+            let isPop = isRecordPop[i]
             if(isPop) {
                 record.bumpBackStackNesting(amt: -1)
                 record.executePopOps()
@@ -1203,9 +1217,9 @@ open class FragmentManager: NSObject {
         }
         
         if((mContainer?.onHasView()) != nil) {
-            var view = mContainer?.onFindViewById(idVal: f.mContainerId)
+            let view = mContainer?.onFindViewById(idVal: f.mContainerId)
             if(view is LGViewGroup) {
-                return view as! LGViewGroup
+                return view as? LGViewGroup
             }
         }
         
@@ -1236,7 +1250,7 @@ open class FragmentManager: NSObject {
                         ArrayExtension.remove(list: &mHost!.runnableArray, object: mExecCommit as! Runnable)
                     }
                 }
-                var numActions = mPendingActions.count
+                let numActions = mPendingActions.count
                 for i in 0..<numActions {
                     if(mPendingActions[i].generateOps(records: &records, isRecordPop: &isPop)) {
                         didSomething = true
@@ -1270,7 +1284,7 @@ open class FragmentManager: NSObject {
     }
     
     func restoreBackStackState(records: inout Array<BackStackRecord>, isRecordPop: inout Array<Bool>, name: String) -> Bool {
-        var backStackState = mBackStackStates.removeValue(forKey: name)
+        let backStackState = mBackStackStates.removeValue(forKey: name)
         if(backStackState == nil) {
             return false
         }
@@ -1289,14 +1303,14 @@ open class FragmentManager: NSObject {
         var added = false
         if(backStackRecords != nil) {
             for record in backStackRecords! {
-                added = record.generateOps(records: &records, isRecordPop: &isRecordPop) || added
+                added = record.generateOps(records: &records, isRecordPop: &isRecordPop) || added
             }
         }
         return added
     }
     
     func saveBackStackState(records: inout Array<BackStackRecord>, isRecordPop: inout Array<Bool>, name: String) -> Bool {
-        var index = findBackStackIndex(name: name, id: -1, inclusive: true)
+        let index = findBackStackIndex(name: name, id: -1, inclusive: true)
         if(index < 0) {
             return false
         }
@@ -1306,7 +1320,7 @@ open class FragmentManager: NSObject {
         }
         
         for i in index..<mBackStack!.count {
-            var record = mBackStack![i]
+            let record = mBackStack![i]
             if(!record.mReorderingAllowed) {
                 //TODO Exep
                 return false
@@ -1315,11 +1329,11 @@ open class FragmentManager: NSObject {
         
         var allFragments = Set<LuaFragment>()
         for i in index..<mBackStack!.count {
-            var record = mBackStack![i]
+            let record = mBackStack![i]
             var affectedFragments = Set<LuaFragment>()
             var addedFragments = Set<LuaFragment>()
             for op in record.mOps {
-                var f = op.mFragment
+                let f = op.mFragment
                 if(f == nil) {
                     continue
                 }
@@ -1345,7 +1359,7 @@ open class FragmentManager: NSObject {
         
         var fragmentsToSearch = Deque<LuaFragment>(allFragments)
         while(!fragmentsToSearch.isEmpty) {
-            var currentFragment = fragmentsToSearch.removeFirst()
+            let currentFragment = fragmentsToSearch.removeFirst()
             if(currentFragment.mRetainInstance) {
                 //TODO excep
                 return false
@@ -1367,13 +1381,13 @@ open class FragmentManager: NSObject {
         for i in index..<mBackStack!.count {
             backStackRecordStates.append(nil)
         }
-        var backStackState = BackStackState(fragments: fragments, transactions: backStackRecordStates)
+        let backStackState = BackStackState(fragments: fragments, transactions: backStackRecordStates)
         for i in (index..<mBackStack!.count).reversed() {
-            var record = mBackStack!.remove(at: i)
+            let record = mBackStack!.remove(at: i)
             
-            var copy = BackStackRecord(bse: record)
+            let copy = BackStackRecord(bse: record)
             copy.collapseOps()
-            var state = BackStackRecordState(bse: copy)
+            let state = BackStackRecordState(bse: copy)
             backStackRecordStates[i - index] = state
             
             record.mBeingSaved = true
@@ -1385,7 +1399,7 @@ open class FragmentManager: NSObject {
     }
     
     func clearBackStackState(records: inout Array<BackStackRecord>, isRecordPop: inout Array<Bool>, name: String) -> Bool {
-        var restoredBackStackState = restoreBackStackState(records: &records, isRecordPop: &isRecordPop, name: name)
+        let restoredBackStackState = restoreBackStackState(records: &records, isRecordPop: &isRecordPop, name: name)
         if(!restoredBackStackState) {
             return false
         }
@@ -1393,7 +1407,7 @@ open class FragmentManager: NSObject {
     }
     
     func popBackStackState(records: inout Array<BackStackRecord>, isRecordPop: inout Array<Bool>, name: String?, id: Int, flags: Int) -> Bool {
-        var index = findBackStackIndex(name: name, id: id, inclusive: (flags & FragmentManager.POP_BACK_STACK_INCLUSIVE) != 0)
+        let index = findBackStackIndex(name: name, id: id, inclusive: (flags & FragmentManager.POP_BACK_STACK_INCLUSIVE) != 0)
         if(index < 0) {
             return false
         }
@@ -1420,7 +1434,7 @@ open class FragmentManager: NSObject {
         } else {
             var index = mBackStack!.count - 1
             while(index >= 0) {
-                var bss = mBackStack![index]
+                let bss = mBackStack![index]
                 if(name != nil && name == bss.getName()) {
                     break
                 }
@@ -1434,7 +1448,7 @@ open class FragmentManager: NSObject {
             }
             if(inclusive) {
                 while(index > 0) {
-                    var bss = mBackStack![index - 1]
+                    let bss = mBackStack![index - 1]
                     if((name != nil && name == bss.getName()) || (id >= 0 && id == bss.mIndex)) {
                         index -= 1
                         continue
@@ -1467,19 +1481,19 @@ open class FragmentManager: NSObject {
         mStateSaved = true
         mNonConfig.setIsStateSaved(isStateSaved: true)
         
-        var active = mFragmentStore.saveActiveFragments()
+        let active = mFragmentStore.saveActiveFragments()
         
-        var savedState = mFragmentStore.getAllSavedState()
+        let savedState = mFragmentStore.getAllSavedState()
         
         if(savedState.isEmpty) {
             return nil
         }
         
-        var added = mFragmentStore.saveAddedFragments()
+        let added = mFragmentStore.saveAddedFragments()
         
         var backStack: Array<BackStackRecordState>? = nil
         if(mBackStack != nil) {
-            var size = mBackStack!.count
+            let size = mBackStack!.count
             if(size >= 0) {
                 backStack = Array()
                 backStack!.reserveCapacity(16)
@@ -1489,7 +1503,7 @@ open class FragmentManager: NSObject {
             }
         }
         
-        var fms = FragmentManagerState()
+        let fms = FragmentManagerState()
         fms.mSavedState = savedState
         fms.mActive = active
         fms.mAdded = added
@@ -1525,7 +1539,7 @@ open class FragmentManager: NSObject {
         if(state == nil) {
             return
         }
-        var fms = state
+        let fms = state
         if(fms!.mSavedState == nil) {
             return
         }
@@ -1533,16 +1547,16 @@ open class FragmentManager: NSObject {
         mFragmentStore.restoreSavedState(savedState: fms!.mSavedState!)
         mFragmentStore.resetActiveFragments()
         for who in fms!.mActive ?? [] {
-            var fs = mFragmentStore.setSavedState(who: who, fragmentState: nil)
+            let fs = mFragmentStore.setSavedState(who: who, fragmentState: nil)
             if(fs != nil) {
                 var fragmentStateManager: FragmentStateManager
-                var retainedFragment = mNonConfig.findRetainedFragment(who: fs!.mWho ?? "")
+                let retainedFragment = mNonConfig.findRetainedFragment(who: fs!.mWho ?? "")
                 if(retainedFragment != nil) {
                     fragmentStateManager = FragmentStateManager(dispatcher: mLifeycleCallbackDispatcher!, fragmentStore: mFragmentStore, retainedFragment: retainedFragment!, fs: fs!)
                 } else {
                     fragmentStateManager = FragmentStateManager(dispatcher: mLifeycleCallbackDispatcher!, fragmentStore: mFragmentStore, fragmentFactory: getFragmentFactory()!, fs: fs!)
                 }
-                var f = fragmentStateManager.getFragment()
+                let f = fragmentStateManager.getFragment()
                 f.mFragmentManager = self
                 fragmentStateManager.restoreState()
                 mFragmentStore.makeActive(newlyActive: fragmentStateManager)
@@ -1556,7 +1570,7 @@ open class FragmentManager: NSObject {
             }
             mNonConfig.removeRetainedFragment(fragment: f)
             f.mFragmentManager = self
-            var fragmentStateManager = FragmentStateManager(dispatcher: mLifeycleCallbackDispatcher!, fragmentStore: mFragmentStore, fragment: f)
+            let fragmentStateManager = FragmentStateManager(dispatcher: mLifeycleCallbackDispatcher!, fragmentStore: mFragmentStore, fragment: f)
             fragmentStateManager.setFragmentManagerState(state: FragmentState.FS_CREATED.rawValue)
             fragmentStateManager.moveToExpectedState()
             f.mRemoving = true
@@ -1569,7 +1583,7 @@ open class FragmentManager: NSObject {
             mBackStack = Array()
             mBackStack?.reserveCapacity(fms!.mBackStack!.count)
             for i in 0..<fms!.mBackStack!.count {
-                var bse = fms!.mBackStack![i].instantiate(fm: self)
+                let bse = fms!.mBackStack![i].instantiate(fm: self)
                 mBackStack!.append(bse)
             }
         } else {
@@ -1582,14 +1596,14 @@ open class FragmentManager: NSObject {
             dispatchParentPrimaryNavigationFragmentChanged(f: mPrimaryNav)
         }
         
-        var savedBackStackStateKeys = fms?.mBackStackStateKeys
+        let savedBackStackStateKeys = fms?.mBackStackStateKeys
         if(savedBackStackStateKeys != nil) {
             for i in 0..<savedBackStackStateKeys!.count {
                 mBackStackStates[savedBackStackStateKeys![i]] = fms?.mBackStackStates[i]
             }
         }
                                  
-        var savedResultKeys = fms?.mResultKeys
+        let savedResultKeys = fms?.mResultKeys
         if(savedResultKeys != nil) {
             for i in 0..<savedResultKeys!.count {
                 mResults[savedResultKeys![i]] = fms?.mResults[i]
@@ -1651,16 +1665,16 @@ open class FragmentManager: NSObject {
         }
         
         if(host is OnBackPressedDispatcherOwner) {
-            var dispatchOwner = host as! OnBackPressedDispatcherOwner
+            let dispatchOwner = host as! OnBackPressedDispatcherOwner
             mOnBackPressedDispatcher = dispatchOwner.getOnBackPressedDispatcher()
-            var owner: LifecycleOwner = parent != nil ? parent! : dispatchOwner
+            let owner: LifecycleOwner = parent != nil ? parent! : dispatchOwner
             mOnBackPressedDispatcher?.addCallback(owner: owner, onBackPressedCallback: mOnBackPressedCallback!)
         }
         
         if(parent != nil) {
             mNonConfig = (parent?.mFragmentManager.getChildNonConfig(f: parent!))!
         } else if(host is ViewModelStoreOwner) {
-            var viewModelStore = (host as! ViewModelStoreOwner).getViewModelStore()
+            let viewModelStore = (host as! ViewModelStoreOwner).getViewModelStore()
             mNonConfig = FragmentManagerViewModel.getInstance(viewModelStore: viewModelStore!)
         } else {
             mNonConfig = FragmentManagerViewModel(stateAutomaticallySaved: false)
@@ -1815,8 +1829,8 @@ open class FragmentManager: NSObject {
         if(f != nil && (f != findActiveFragment(who: (f?.mWho!)!) || (f!.mHost != nil && f?.mFragmentManager != self))) {
             return
         }
-        var previousPrimaryNav = mPrimaryNav
-        mPrimaryNav = f!
+        let previousPrimaryNav = mPrimaryNav
+        mPrimaryNav = f
         dispatchParentPrimaryNavigationFragmentChanged(f: previousPrimaryNav)
         dispatchParentPrimaryNavigationFragmentChanged(f: mPrimaryNav)
     }

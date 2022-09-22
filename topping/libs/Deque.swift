@@ -86,20 +86,19 @@ extension Deque {
 
 public class DequeReverseIterator<Element>: IteratorProtocol {
     
-    private var mBuffer: DequeBuffer<Element>
+    private var mDeque: Deque<Element>
     private var mCurrentIndex = 0
     
-    init(buffer: DequeBuffer<Element>) {
-        mBuffer = buffer
-        mCurrentIndex = buffer.count
+    init(deque: Deque<Element>) {
+        mDeque = deque
+        mCurrentIndex = mDeque.count - 1
     }
     
     public func next() -> Element? {
-        if(mCurrentIndex < 1) {
+        if(mCurrentIndex < 0) {
             return nil
         }
-        let valueIndex = mBuffer.bufferIndex(forDequeIndex: mCurrentIndex - 1)
-        let value = mBuffer.elements.advanced(by: valueIndex).move()
+        let value = mDeque[mCurrentIndex]
         mCurrentIndex -= 1
         return value
     }
@@ -107,16 +106,19 @@ public class DequeReverseIterator<Element>: IteratorProtocol {
 
 public class DequeIterator<Element>: IteratorProtocol {
     
-    private var mBuffer: DequeBuffer<Element>
+    private var mDeque: Deque<Element>
     private var mCurrentIndex = 0
     
-    init(buffer: DequeBuffer<Element>) {
-        mBuffer = buffer
-        mCurrentIndex = buffer.start
+    init(deque: Deque<Element>) {
+        mDeque = deque
+        mCurrentIndex = 0
     }
     
     public func next() -> Element? {
-        let value = mBuffer.elements.advanced(by: mBuffer.bufferIndex(forDequeIndex: mCurrentIndex)).move()
+        if(mCurrentIndex >= mDeque.count) {
+            return nil
+        }
+        let value = mDeque[mCurrentIndex]
         mCurrentIndex += 1
         return value
     }
@@ -124,11 +126,11 @@ public class DequeIterator<Element>: IteratorProtocol {
 
 extension Deque {
     public func iterator() -> DequeIterator<Element> {
-        return DequeIterator(buffer: buffer)
+        return DequeIterator(deque: self)
     }
     
     public func reversedIterator() -> DequeReverseIterator<Element> {
-        return DequeReverseIterator(buffer: buffer)
+        return DequeReverseIterator(deque: self)
     }
     
     public func getFirst() -> Element? {

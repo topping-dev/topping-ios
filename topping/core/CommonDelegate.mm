@@ -94,6 +94,7 @@ static LuaForm *sActiveForm;
     height -= topPadding;
     height -= bottomPadding;
 	self.startForm = [[LuaForm alloc] init];
+    self.startForm.luaId = [sToppingEngine GetMainForm];
     self.window.rootViewController = self.startForm.context.navController;
     if(!self.startForm.context.navController.isNavigationBarHidden)
     {

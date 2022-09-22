@@ -1,11 +1,3 @@
-//
-//  FragmentController.swift
-//  Topping
-//
-//  Created by Edo on 29.05.2022.
-//  Copyright © 2022 Deadknight. All rights reserved.
-//
-
 import UIKit
 
 @objc(FragmentController)

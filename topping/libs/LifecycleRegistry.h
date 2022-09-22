@@ -1,11 +1,3 @@
-//
-//  LifecycleRegistry.h
-//  Topping
-//
-//  Created by Edo on 25.05.2022.
-//  Copyright © 2022 Deadknight. All rights reserved.
-//
-
 #ifndef LifecycleRegistry_h
 #define LifecycleRegistry_h
 
@@ -39,7 +31,7 @@
  * if addition_order(observer1) < addition_order(observer2), then
  * state(observer1) >= state(observer2),
  */
-@property (nonatomic, retain) OrderedDictionary* mObserverMap;
+@property (nonatomic, retain) MutableOrderedDictionary* mObserverMap;
 /**
  * Current state
  */

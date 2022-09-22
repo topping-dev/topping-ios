@@ -6,6 +6,7 @@
 #import "LGParser.h"
 #import "LuaForm.h"
 #import "LGValueParser.h"
+#import "LGNavHostFragment.h"
 #import <Topping/Topping-Swift.h>
 
 @implementation LGView
@@ -257,6 +258,12 @@
 -(void)Resize
 {
 	[self ReadWidthHeight];
+}
+
+-(void)ResizeAndInvalidate
+{
+    [self Resize];
+    self._view.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 }
 
 -(void)AfterResize:(BOOL)vertical
@@ -745,7 +752,7 @@
 
 -(void)SetBackground:(NSString*)background
 {
-    LGDrawableReturn *ldr = [[LGValueParser GetInstance] GetValue:background];
+    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser GetInstance] GetValue:background];
     if(ldr.img)
         [self._view setBackgroundColor:[UIColor colorWithPatternImage:ldr.img]];
     else if(ldr.color != nil)
@@ -754,7 +761,7 @@
 
 -(void)SetBackgroundRef:(LuaRef*)ref
 {
-    LGDrawableReturn *ldr = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser GetInstance] GetValue:ref.idRef];
     if(ldr.img)
         [self._view setBackgroundColor:[UIColor colorWithPatternImage:ldr.img]];
     else if(ldr.color != nil)
@@ -772,7 +779,7 @@
     }
 }
 
--(void)SetVisibility:(int)visibility {
+-(void)SetVisibility:(NSInteger)visibility {
     if(visibility == VISIBLE)
     {
         self._view.hidden = NO;
@@ -796,6 +803,30 @@
 {
     self.ltOnClickListener = lt;
     [self._view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self._view action:lt.selector]];
+}
+
+-(LuaFragment*)findFragment {
+    LuaFragment *fragment = self.fragment;
+    if(fragment == nil)
+    {
+        LGView *current = self.parent;
+        while(current != nil) {
+            fragment = current.fragment;
+            if(fragment != nil)
+                return fragment;
+            current = current.parent;
+        }
+    }
+    
+    return fragment;
+}
+
+-(NavController*)findNavController {
+    if(self.navController != nil) {
+        return self.navController;
+    }
+    
+    return [LGNavHostFragment findNavController:[self findFragment]];
 }
 
 -(NSString*)GetId
@@ -827,6 +858,7 @@
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackground:)) :@selector(SetBackground:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetBackground"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackgroundRef:)) :@selector(SetBackgroundRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetBackgroundRef"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnClickListener:)) :@selector(SetOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnClickListener"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavController)) :@selector(findNavController) :[NavController class] :MakeArray(nil)] forKey:@"findNavController"];
 	return dict;
 }
 

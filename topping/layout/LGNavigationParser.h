@@ -3,6 +3,7 @@
 
 @class GDataXMLElement;
 @class Navigator;
+@class NavController;
 
 @interface NavArgument : NSObject
 
@@ -76,8 +77,8 @@
 
 -(void)Initialize;
 +(LGNavigationParser*) GetInstance;
--(NavGraph *) GetNavigation: (NSString*)key;
--(NavGraph *) ParseXML:(NSString*)path :(NSString *)filename;
+-(NavGraph *) GetNavigation:(NavController*)controller :(NSString*)key;
+-(NavGraph *) ParseXML:(NavController*)controller :(NSString*)path :(NSString *)filename;
 
 @property (nonatomic, retain) NSMutableArray *clearedDirectoryList;
 @property (nonatomic, retain) NSMutableDictionary *navigationCache;

@@ -84,7 +84,7 @@ class FragmentStateManager: NSObject {
             if(mFragment.mInLayout) {
                 maxState = max(mFragmentManagerState, FragmentState.FS_VIEW_CREATED.rawValue)
                 
-                if(mFragment.view != nil && mFragment.lgview.parent == nil) {
+                if(mFragment.lgview != nil && mFragment.lgview.parent == nil) {
                     maxState = min(maxState, FragmentState.FS_VIEW_CREATED.rawValue)
                 }
             } else {
@@ -177,13 +177,13 @@ class FragmentStateManager: NSObject {
                 case FragmentState.FS_AWAITING_EXIT_EFFECTS:
                     if(mFragment.mBeingSaved) {
                         saveState()
-                    } else if(mFragment.view != nil) {
+                    } else if(mFragment.lgview != nil) {
                         //TODO
                         /*if(mFragment.mSavedViewState == nil) {
                             saveViewState()
                         }*/
                     }
-                    if(mFragment.view != nil && mFragment.mContainer != nil) {
+                    if(mFragment.lgview != nil && mFragment.mContainer != nil) {
                         //TODO effects
                     }
                     mFragment.mState = FragmentState.FS_AWAITING_EXIT_EFFECTS.rawValue
@@ -219,7 +219,7 @@ class FragmentStateManager: NSObject {
             }
         }
         if(mFragment.mHiddenChanged) {
-            if(mFragment.view != nil && mFragment.mContainer != nil) {
+            if(mFragment.lgview != nil && mFragment.mContainer != nil) {
                 //TODO effects?
             }
             if(mFragment.mFragmentManager != nil) {
@@ -242,7 +242,7 @@ class FragmentStateManager: NSObject {
                 mFragment.lgview.fragment = mFragment
                 if(mFragment.mHidden) { mFragment.lgview.setVisibility(VISIBILITY.GONE.rawValue) }
                 mFragment.performViewCreated()
-                mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState.swiftDictionary, onlyRecursive: false)
+                mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState?.swiftDictionary, onlyRecursive: false)
                 mFragment.mState = FragmentState.FS_VIEW_CREATED.rawValue
             }
         }
@@ -326,7 +326,7 @@ class FragmentStateManager: NSObject {
             }
             //TODO attach work
             mFragment.performViewCreated()
-            mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState.swiftDictionary, onlyRecursive: false)
+            mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState?.swiftDictionary, onlyRecursive: false)
             var postOnViewCreatedVisibility = mFragment.lgview.getVisibility()
             var postOnViewCreatedAlpha = mFragment.lgview.getAlpha()
             /*mFragment.setPostOnViewCreatedAlpha(postOnViewCreatedAlpha)
@@ -386,14 +386,14 @@ class FragmentStateManager: NSObject {
             }
         }
         else {
-            fs.mSavedFragmentState = mFragment.mSavedFragmentState.swiftDictionary
+            fs.mSavedFragmentState = mFragment.mSavedFragmentState?.swiftDictionary
         }
         mFragmentStore.setSavedState(who: mFragment.mWho, fragmentState: fs)
     }
     
     func saveInstanceState() -> SavedState? {
         if(mFragment.mState > FragmentState.FS_INITIALIZING.rawValue) {
-            var result = saveBasicState()
+            let result = saveBasicState()
             return result != nil ? SavedState(state: result!) : nil
         }
         
@@ -421,6 +421,7 @@ class FragmentStateManager: NSObject {
     }
     
     func destroyFragmentView() {
+        //TODO:Remove views here
         if(mFragment.mContainer != nil && mFragment.lgview != nil) {
             mFragment.mContainer.removeSubview(mFragment.lgview)
         }
@@ -429,7 +430,7 @@ class FragmentStateManager: NSObject {
         mFragment.mContainer = nil
         mFragment.lgview = nil
         //mFragment.mViewLifecycleOwner = nil
-        mFragment.mViewLifecycleOwnerLiveData.setValue(nil)
+        mFragment.mViewLifecycleOwnerLiveData?.setValue(nil)
         mFragment.mInLayout = false
     }
     
@@ -487,14 +488,16 @@ class FragmentStateManager: NSObject {
         mFragment.mHost = nil
         mFragment.mParent = nil
         mFragment.mFragmentManager = nil
-        var beingRemoved = mFragment.mRemoving && !mFragment.isInBackStack()
+        let beingRemoved = mFragment.mRemoving && !mFragment.isInBackStack()
         if(beingRemoved || mFragmentStore.getNonConfig().shouldDestroy(fragment: mFragment)) {
             mFragment.initState()
         }
     }
     
     func addViewToContainer() {
-        var index = mFragmentStore.findFragmentIndexInContainer(f: mFragment)
+        let index = mFragmentStore.findFragmentIndexInContainer(f: mFragment)
         mFragment.mContainer.addSubview(mFragment.lgview, index)
+        mFragment.lgview.componentAddMethod(mFragment.mContainer.getView(), mFragment.lgview.getView())
+        mFragment.context.form.lgview.resizeAndInvalidate()
     }
 }

@@ -16,6 +16,7 @@
 }
 
 -(void)Setup:(UIViewController *)controller;
+-(LuaForm*)GetForm;
 
 @property (nonatomic, retain) NSString *packageName;
 @property (nonatomic, retain) NSString *lua_id;

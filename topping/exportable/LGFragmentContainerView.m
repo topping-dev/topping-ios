@@ -43,7 +43,6 @@
 
 -(void)AddSubview:(LGView *)val :(NSInteger)index {
     [super AddSubview:val :index];
-    
 }
 
 - (void)RemoveSubview:(LGView *)val {

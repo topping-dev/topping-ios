@@ -9,6 +9,7 @@
 #import "LGStyleParser.h"
 #import "LGFontParser.h"
 #import "LGNavigationParser.h"
+#import "LGIdParser.h"
 
 @class LGParser;
 
@@ -63,6 +64,7 @@ typedef enum
 @property (nonatomic, retain) LGStyleParser *pStyle;
 @property (nonatomic, retain) LGFontParser *pFont;
 @property (nonatomic, retain) LGNavigationParser *pNavigation;
+@property (nonatomic, retain) LGIdParser *pId;
 @property (nonatomic, retain) NSMutableArray *MatchStringStart;
 @property (nonatomic, retain) NSMutableArray *MatchStringEnd;
 

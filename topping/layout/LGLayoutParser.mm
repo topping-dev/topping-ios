@@ -23,6 +23,7 @@
 #import "LGConstraintLayout.h"
 #import "LGHorizontalScrollView.h"
 #import "LGFragmentContainerView.h"
+#import "LuaFragment.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -62,6 +63,16 @@
         else
             return NSOrderedDescending;
     }];
+    self.layoutMap = [NSMutableDictionary dictionary];
+    for(DynamicResource *dr in self.clearedDirectoryList)
+    {
+        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *filename = (NSString *)obj;
+            NSString *fNameNoExt = [filename stringByDeletingPathExtension];
+            [self.layoutMap setObject:fNameNoExt forKey:fNameNoExt];
+        }];
+    }
 }
 
 -(LuaStream*)GetLayout:(NSString*)name
@@ -217,15 +228,15 @@
     return rootView;
 }
 
--(LGView*) ParseChildXML:(LGView*)view :(GDataXMLElement*)parent
+-(LGView*) ParseChildXML:(LGView*)parent :(GDataXMLElement*)view
 {
-    GDataXMLNodeKind kind = [parent kind];
+    GDataXMLNodeKind kind = [view kind];
     if(kind != GDataXMLElementKind) {
         return nil;
     }
-	NSString *name = [parent name];
+	NSString *name = [view name];
 	LGView *rootView = nil;
-    NSArray *attrs = [parent attributes];
+    NSArray *attrs = [view attributes];
     
     rootView = [self GetViewFromName:name :attrs];
     if(rootView == nil) {
@@ -240,12 +251,13 @@
 	
     if([rootView isKindOfClass:[LGViewGroup class]])
     {
-        for(GDataXMLElement *child in [parent children])
+        for(GDataXMLElement *child in [view children])
         {
             [((LGViewGroup*)rootView) AddSubview:[self ParseChildXML:rootView :child]];
         }
     }
     
+    [self ApplyOverrides:parent :rootView];
 	return rootView;
 }
 
@@ -260,12 +272,33 @@
 		for(LGView *w in ((LGViewGroup*)view).subviews)
 		{
 			[w AddSelfToParent:viewRoot :cont];
-            [LuaForm OnFormEvent:w :FORM_EVENT_CREATE :w.lc :0, nil];
+            if(parent.fragment != nil)
+                [LuaFragment OnFragmentEvent:w :FRAGMENT_EVENT_CREATE :w.lc :0, nil];
+            else
+                [LuaForm OnFormEvent:w :FORM_EVENT_CREATE :w.lc :0, nil];
 		}
 	}
     [view InitComponent:viewRoot :cont.context];
-    [LuaForm OnFormEvent:view :FORM_EVENT_CREATE :view.lc :0, nil];
+    if(parent.fragment != nil)
+        [LuaFragment OnFragmentEvent:view :FRAGMENT_EVENT_CREATE :view.lc :0, nil];
+    else
+        [LuaForm OnFormEvent:view :FORM_EVENT_CREATE :view.lc :0, nil];
     return viewRoot;
+}
+
+-(void)ApplyOverrides:(LGView *)lgview :(LGView*)parent {
+    
+}
+
+-(NSDictionary *)GetKeys
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    for(NSString *key in self.layoutMap)
+    {
+        [dict setObject:key forKey:key];
+    }
+
+    return dict;
 }
 
 @end

@@ -8,7 +8,7 @@
 
 @class LuaTranslator;
 
-@implementation Data
+@implementation ComboData
 
 -(NSString*)description
 {
@@ -55,7 +55,7 @@
 
 -(void) AddItem:(NSString *)name :(NSObject *)value
 {
-	Data *d = [[Data alloc] init];
+	ComboData *d = [[ComboData alloc] init];
 	d.name = name;
 	d.tag = value;
 	[self.comboArray addObject:d];
@@ -97,7 +97,7 @@
     if(index < 0 || index >= self.comboArray.count)
         return;
     
-    Data *d = [self.comboArray objectAtIndex:index];
+    ComboData *d = [self.comboArray objectAtIndex:index];
     ((UILabelPadding*)self._view).text = [d description];
     
     if(self.ltCBoxValueChanged == nil)
@@ -114,7 +114,7 @@
 -(void) comboBoxClicked
 {
     ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-        Data *d = [self.comboArray objectAtIndex:selectedIndex];
+        ComboData *d = [self.comboArray objectAtIndex:selectedIndex];
         ((UILabelPadding*)self._view).text = [d description];
         self.selected = d;
         if(self.ltCBoxValueChanged != nil)

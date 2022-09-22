@@ -11,6 +11,8 @@
 
 @protocol LifecycleEventObserver <LifecycleObserver>
 
+-(NSString*)getKey;
+
 -(void)onStateChanged:(id<LifecycleOwner>)source :(LifecycleEvent) event;
 
 @end
@@ -27,5 +29,7 @@
 @interface LuaLifecycleObserver : NSObject <LuaClass, LuaInterface, LifecycleEventObserver>
 {
 }
+
+@property (nonatomic, retain) NSString *key;
 
 @end

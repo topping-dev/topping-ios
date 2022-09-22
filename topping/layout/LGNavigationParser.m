@@ -148,7 +148,7 @@
     return [LGParser GetInstance].pNavigation;
 }
 
--(NavGraph *) ParseXML:(NSString*)path :(NSString *)filename
+-(NavGraph *) ParseXML:(NavController*)controller :(NSString*)path :(NSString *)filename
 {
     NSString *fontBundlePath = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:path];
     NSData *dat = [[LuaResource GetResource:fontBundlePath :filename] GetData];
@@ -162,13 +162,13 @@
     GDataXMLElement *root = [xml rootElement];
     if(COMPARE([root name], @"navigation"))
     {
-        return [self ParseNavigation:root];
+        return [self ParseNavigation:controller :root];
     }
     
     return nil;
 }
 
--(NavGraph *)GetNavigation:(NSString *)key {
+-(NavGraph *)GetNavigation:(NavController*)controller :(NSString *)key {
     if(key == nil)
         return nil;
     if(self.navigationCache == nil) {
@@ -186,7 +186,7 @@
             NSString *name = [arr objectAtIndex:1];
             for(DynamicResource *dr in self.clearedDirectoryList)
             {
-                retVal = [self ParseXML:(NSString*)dr.data :APPEND(name, @".xml")];
+                retVal = [self ParseXML:controller :(NSString*)dr.data :APPEND(name, @".xml")];
                 if(retVal != nil)
                 {
                     break;
@@ -198,11 +198,11 @@
     return retVal;
 }
 
--(NavGraph*)ParseNavigation:(GDataXMLElement*)root
+-(NavGraph*)ParseNavigation:(NavController*)controller :(GDataXMLElement*)root
 {
     NSArray *children = [root children];
     
-    NavGraph *lnr = [NavGraph new];
+    NavGraph *lnr = [[NavGraph alloc] initWithName:@"navigation"];
     
     lnr.mNodes = [NSMutableDictionary dictionary];
     
@@ -221,7 +221,8 @@
            || [[child name] isEqualToString:@"dialog"]))
             continue;
         
-        NavDestination *lne = [NavDestination new];
+        Navigator *navigator = [[controller getNavigationProvider] getNavigatorWithName:[child name]];
+        NavDestination *lne = [navigator createDestination];
         lne.mActions = [NSMutableDictionary dictionary];
         lne.mArguments = [NSMutableDictionary dictionary];
         
@@ -256,7 +257,7 @@
                 {
                     if(COMPARE([nodeChild name], @"android:id"))
                     {
-                        lna.idVal = [nodeChild stringValue];
+                        lna.idVal = REPLACE([nodeChild stringValue], @"+", @"");
                     }
                     else if(COMPARE([nodeChild name], @"app:destination"))
                     {
@@ -314,7 +315,7 @@
             }
         }
         lne.mParent = lnr;
-        [lnr.mNodes setObject:lne forKey:lne.idVal];
+        [lnr.mNodes setObject:lne forKey:REPLACE(lne.idVal, @"+", @"")];
     }
     
     return lnr;

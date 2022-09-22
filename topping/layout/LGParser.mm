@@ -40,6 +40,7 @@
     self.pStyle = [[LGStyleParser alloc] init];
     self.pFont = [[LGFontParser alloc] init];
     self.pNavigation = [[LGNavigationParser alloc] init];
+    self.pId = [[LGIdParser alloc] init];
     
     self.MatchStringStart = [NSMutableArray array];
     self.MatchStringEnd = [NSMutableArray array];
@@ -103,6 +104,7 @@
     [self.pLayout Initialize];
     [self.pValue Initialize];
     [self.pNavigation Initialize];
+    [self.pId Initialize];
     [self ParseValues];
 }
 
@@ -189,6 +191,17 @@
         }
         [self.pStyle LinkParents];
     }
+    
+    //TODO: Move these to associated classes
+    directoryList = [LuaResource GetResourceDirectories:LUA_LAYOUT_FOLDER];
+    clearedDirectoryList = [self Tester:directoryList :LUA_LAYOUT_FOLDER];
+    [self.pId Parse:LUA_LAYOUT_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource GetResourceDirectories:LUA_VALUES_FOLDER];
+    clearedDirectoryList = [self Tester:directoryList :LUA_VALUES_FOLDER];
+    [self.pId Parse:LUA_VALUES_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource GetResourceDirectories:LUA_NAVIGATION_FOLDER];
+    clearedDirectoryList = [self Tester:directoryList :LUA_NAVIGATION_FOLDER];
+    [self.pId Parse:LUA_NAVIGATION_FOLDER :clearedDirectoryList];
 }
 
 -(NSMutableArray *)Tester:(NSArray*)directoryList :(NSString*)directoryType

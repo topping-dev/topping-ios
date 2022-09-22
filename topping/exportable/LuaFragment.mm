@@ -45,7 +45,7 @@
 
 @implementation LuaFragment
 
-static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
+static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 
 - (instancetype)init
 {
@@ -55,6 +55,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
         self.mMaxState = LIFECYCLESTATE_RESUMED;
         self.mWho = [[NSUUID UUID] UUIDString];
         self.mTargetWho = nil;
+        self.mChildFragmentManager = [[FragmentManager alloc] init];
     }
     return self;
 }
@@ -63,7 +64,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 {
     NSObject <LuaInterface> *s = (NSObject <LuaInterface> *)pGui;
     LuaTranslator *ltToCall;
-    ltToCall = [eventMap objectForKey:APPEND([s GetId], ITOS(EventType))];
+    ltToCall = [eventMapFragment objectForKey:APPEND([s GetId], ITOS(EventType))];
     NSObject *ret = nil;
     if(ltToCall != nil)
     {
@@ -78,7 +79,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
 +(void)RegisterFragmentEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt
 {
-    [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
+    [eventMapFragment setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
 +(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId
@@ -117,6 +118,11 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return [self.mHost getActivity];
 }
 
+-(FragmentManager*)GetFragmentManager
+{
+    return self.mHost.fragmentManager;
+}
+
 -(LGView*)GetViewById:(NSString*)lId
 {
     return [_lgview GetViewById:lId];
@@ -130,14 +136,13 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 -(void)SetView:(LGView*)v
 {
     self.lgview = v;
-    self.view = [v GetView];
 }
 
 -(void)SetViewXML:(NSString *)xml
 {
     LGView *lgview;
     //TODO:Check this
-    self.view = [[LGLayoutParser GetInstance] ParseXML:xml :[DisplayMetrics GetMasterView] :nil :[LuaForm GetActiveForm] :&lgview];
+    [[LGLayoutParser GetInstance] ParseXML:xml :[DisplayMetrics GetMasterView] :nil :[LuaForm GetActiveForm] :&lgview];
     self.lgview = lgview;
 }
 
@@ -167,12 +172,18 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return YES;
 }
 
--(void)onCreate:(NSMutableDictionary *)savedInsanceState {
-    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_CREATE :self.context :1, savedInsanceState, nil];
+-(void)onCreate:(NSMutableDictionary *)savedInstanceState {
+    NSMutableDictionary *sis = savedInstanceState;
+    if(sis == nil)
+        sis = [NSMutableDictionary new];
+    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_CREATE :self.context :1, sis, nil];
 }
 
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
-    return (LGView*)[LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_CREATE_VIEW :self.context :3, inflater, container, savedInstanceState, nil];
+    NSMutableDictionary *sis = savedInstanceState;
+    if(sis == nil)
+        sis = [NSMutableDictionary new];
+    return (LGView*)[LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_CREATE_VIEW :self.context :3, [LuaViewInflator From:inflater], container, sis, nil];
 }
 
 -(void)onViewCreated:(LGView *)view :(NSMutableDictionary *)savedInstanceState {
@@ -378,7 +389,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return [[LuaFragmentContainer alloc] initWithFragment:self];
 }
 
-- (SavedStateRegistry *)getSavedStateRegistry {
+-(SavedStateRegistry *)getSavedStateRegistry {
     return [self.mSavedStateRegistryController getSavedStateRegistry];
 }
 
@@ -439,7 +450,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     self.mPerformedCreateView = true;
     self.mViewLifecycleOwner = [[FragmentViewLifecycleOwner alloc] initWithFragment:self viewModelStore:[self getViewModelStore]];
     self.lgview = [self onCreateView:inflater :container :savedInstanceState];
-    if(self.view != nil) {
+    if(self.lgview != nil) {
         [self.mViewLifecycleOwner initialize];
         //TODO
         //ViewTreeLifecycle?
@@ -636,9 +647,27 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return @"LuaFragment";
 }
 
++(NSMutableDictionary*)luaStaticVars
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:[NSNumber numberWithInt:0] forKey:@"FRAGMENT_EVENT_CREATE"];
+    [dict setObject:[NSNumber numberWithInt:1] forKey:@"FRAGMENT_EVENT_CREATE_VIEW"];
+    [dict setObject:[NSNumber numberWithInt:2] forKey:@"FRAGMENT_EVENT_VIEW_CREATED"];
+    [dict setObject:[NSNumber numberWithInt:3] forKey:@"FRAGMENT_EVENT_RESUME"];
+    [dict setObject:[NSNumber numberWithInt:4] forKey:@"FRAGMENT_EVENT_PAUSE"];
+    [dict setObject:[NSNumber numberWithInt:5] forKey:@"FRAGMENT_EVENT_DESTROY"];
+    return dict;
+}
+
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(RegisterFragmentEvent:::))
+                               :@selector(RegisterFragmentEvent:::)
+                               :nil
+                               :[NSArray arrayWithObjects:[NSString class], [LuaInt class], [LuaTranslator class], nil]
+                               :[LuaFragment class]]
+             forKey:@"RegisterFragmentEvent"];
     [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
                                         :@selector(Create::)
                                         :nil
@@ -661,9 +690,9 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(IsInitialized)) :@selector(IsInitialized) :[LuaBool class] :MakeArray(nil)] forKey:@"IsInitialized"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetFragmentManager)) :@selector(GetFragmentManager) :[FragmentManager class] :MakeArray(nil)] forKey:@"GetFragmentManager"];
+    
     return dict;
 }
-
-KEYBOARD_FUNCTIONS_IMPLEMENTATION
 
 @end

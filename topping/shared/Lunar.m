@@ -11,12 +11,14 @@
 #import "LuaFloat.h"
 #import "LuaDouble.h"
 #import "LuaNativeObject.h"
+#import "LuaRef.h"
 @import ObjectiveC.runtime;
 #include "lstate.h"
 #import "Defines.h"
 #import "LuaGlobalFunction.h"
 #import "LuaTranslator.h"
 #import "NSStack.h"
+#import "LGValueParser.h"
 
 static NSObject *check(lua_State *L, int narg);
 static int sThunk(lua_State *L);
@@ -85,20 +87,26 @@ static NSMutableDictionary *dictFunctionNames = NULL;
         for(NSString *funcName in methodNames)
         {
             LuaFunction *lf = [methodNames objectForKey:funcName];
-            NSString *sMethodName = NSStringFromSelector(method_getName(lf->m));
-            NSRange range = [sMethodName rangeOfString:@":"];
-            if(range.location != NSNotFound)
-            {
-                sMethodName = [sMethodName substringWithRange:NSMakeRange(0, range.location)];
+            NSString *sMethodName = nil;
+            if(lf->manual) {
+                sMethodName = funcName;
+            }
+            else {
+                sMethodName = NSStringFromSelector(method_getName(lf->m));
+                NSRange range = [sMethodName rangeOfString:@":"];
+                if(range.location != NSNotFound)
+                {
+                    sMethodName = [sMethodName substringWithRange:NSMakeRange(0, range.location)];
+                }
             }
             if(sMethodName == nil)
             {
-                NSLog(APPEND(@"Null method on class name ", className));
-                NSLog(APPEND(@"Null method on func name ", funcName));
+                NSLog(@"Null method on class name %@", className);
+                NSLog(@"Null method on func name %@", funcName);
                 continue;
             }
             lua_pushstring(L, [sMethodName cStringUsingEncoding:NSASCIIStringEncoding]);
-            lf->luaName = sMethodName;
+            lf->luaName = [[NSString alloc] initWithString:sMethodName];
             //lua_pushlightuserdata(L, (void*)methods[i]);
             if(arr == nil)
                 arr = [[NSMutableArray alloc] init];
@@ -212,7 +220,7 @@ static NSMutableDictionary *dictFunctionNames = NULL;
 	}
 }
 
-+(int) push:(lua_State*) L :(NSObject*) obj: (bool) gc
++(int) push:(lua_State*)L :(NSObject*)obj : (bool)gc
 {
 	if(!obj)
 	{
@@ -406,7 +414,7 @@ static int sThunk(lua_State *L)
 		   || c == [LuaShort class]
 		   || c == [LuaInt class])
 		{
-			int val = luaL_checkinteger(L, count);
+			int val = (int)luaL_checkinteger(L, count);
 			[ni setArgument:&val atIndex:count+1];
 		}
 		else if(c == [LuaLong class])
@@ -422,6 +430,24 @@ static int sThunk(lua_State *L)
 		}
 		else if(c == [NSString class])
 		{
+            int type = lua_type(L, count);
+            if(type == LUA_TUSERDATA) {
+                void **ptr = lua_touserdata(L, count);
+                if(ptr != NULL) {
+                    void *o = *ptr;
+                    @try {
+                        NSObject *objClass = (NSObject*)o;
+                        if([objClass isKindOfClass:[LuaRef class]])
+                        {
+                            NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                            [ni setArgument:&idRef atIndex:count+1];
+                            continue;
+                        }
+                    }
+                    @catch (NSException *exception) {
+                    }
+                }
+            }
 			const char *val = luaL_checkstring(L, count);
 			NSString *valStr = [NSString stringWithCString:val encoding:NSUTF8StringEncoding];
 			[ni setArgument:&valStr atIndex:count+1];
@@ -555,7 +581,21 @@ static int sThunk(lua_State *L)
 			else
 			{
                 void *o = *ptr;
-				[ni setArgument:&o atIndex:count+1];
+                @try {
+                    NSObject *objClass = (NSObject*)o;
+                    if([objClass isKindOfClass:[LuaRef class]] && c != [LuaRef class])
+                    {
+                        NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                        [ni setArgument:&idRef atIndex:count+1];
+                    }
+                    else
+                    {
+                        [ni setArgument:&o atIndex:count+1];
+                    }
+                }
+                @catch (NSException *exception) {
+                    [ni setArgument:&o atIndex:count+1];
+                }
 			}
 		}
 		++count;
@@ -636,7 +676,7 @@ static int thunk(lua_State *L)
 		   || c == [LuaShort class]
 		   || c == [LuaInt class])
 		{
-			int val = luaL_checkinteger(L, count);
+			int val = (int)luaL_checkinteger(L, count);
 			[ni setArgument:&val atIndex:count+1];
 		}
 		else if(c == [LuaLong class])
@@ -652,9 +692,27 @@ static int thunk(lua_State *L)
 		}
 		else if(c == [NSString class])
 		{
-			const char *val = luaL_checkstring(L, count);
-			NSString *valStr = LUA_COPY_STRING([NSString stringWithCString:val encoding:NSUTF8StringEncoding]);
-			[ni setArgument:&valStr atIndex:count+1];
+            int type = lua_type(L, count);
+            if(type == LUA_TUSERDATA) {
+                void **ptr = lua_touserdata(L, count);
+                if(ptr != NULL) {
+                    void *o = *ptr;
+                    @try {
+                        NSObject *objClass = (NSObject*)o;
+                        if([objClass isKindOfClass:[LuaRef class]])
+                        {
+                            NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                            [ni setArgument:&idRef atIndex:count+1];
+                            continue;
+                        }
+                    }
+                    @catch (NSException *exception) {
+                    }
+                }
+            }
+            const char *val = luaL_checkstring(L, count);
+            NSString *valStr = LUA_COPY_STRING([NSString stringWithCString:val encoding:NSUTF8StringEncoding]);
+            [ni setArgument:&valStr atIndex:count+1];
 		}
         else if(c == [LuaTranslator class] && lua_isfunction(L, count))
         {
@@ -847,7 +905,21 @@ static int thunk(lua_State *L)
 			{
                 //__unsafe_unretained NSObject *o = (__bridge NSObject*)*ptr;
                 void *o = *ptr;
-				[ni setArgument:&o atIndex:count+1];
+                @try {
+                    NSObject *objClass = (NSObject*)o;
+                    if([objClass isKindOfClass:[LuaRef class]] && c != [LuaRef class])
+                    {
+                        NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                        [ni setArgument:&idRef atIndex:count+1];
+                    }
+                    else
+                    {
+                        [ni setArgument:&o atIndex:count+1];
+                    }
+                }
+                @catch (NSException *exception) {
+                    [ni setArgument:&o atIndex:count+1];
+                }
 			}
 		}
 		++count;

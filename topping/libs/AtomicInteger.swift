@@ -298,7 +298,7 @@ extension AtomicInteger {
     
     mutating func getAndIncrement() -> AtomicInteger<Type> {
         _wait(); defer { _signal() }
-        self += 1
+        value += 1
         return self
     }
 

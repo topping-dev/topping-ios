@@ -18,7 +18,6 @@
 @class SavedStateRegistryController;
 @protocol ViewModelProviderFactory;
 @protocol SavedStateRegistryOwner;
-
 @protocol FragmentContainer;
 
 @interface LuaFragmentContainer : NSObject <FragmentContainer>
@@ -63,11 +62,13 @@ typedef enum FragmentEvents
 {
 }
 
++(NSObject*)OnFragmentEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...;
 +(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId;
 +(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId :(NSMutableDictionary*)arguments;
 +(LuaFragment*)CreateWithUI:(LuaContext*)context :(NSString*)luaId :(NSString *)ui;
 -(LuaContext*)GetContext;
 -(LuaForm*)GetForm;
+-(FragmentManager*)GetFragmentManager;
 -(LGView*)GetViewById:(NSString*)lId;
 -(LGView*)GetView;
 -(void)SetView:(LGView*)v;
@@ -77,7 +78,7 @@ typedef enum FragmentEvents
 -(void)Close;
 -(BOOL)IsInitialized;
 
--(void)onCreate:(NSMutableDictionary*)savedInsanceState;
+-(void)onCreate:(NSMutableDictionary*)savedInstanceState;
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup*)container :(NSMutableDictionary*)savedInstanceState;
 -(void)onViewCreated:(LGView*)view :(NSMutableDictionary*)savedInstanceState;
 -(void)onActivityCreated:(NSMutableDictionary*)savedInstanceState;
@@ -108,7 +109,6 @@ typedef enum FragmentEvents
 -(void)onPrimaryNavigationFragmentChanged:(BOOL)isPrimaryNavigationFragment;
 -(void)onAttach:(LuaContext *)context;
 -(void)restoreChildFragmentState:(NSMutableDictionary*) savedInstanceState;
--(void)performSaveInsanceState:(NSMutableDictionary*) outState;
 -(void)onStart;
 -(void)onResume;
 -(void)onSaveInstanceState:(NSMutableDictionary*) outState;
@@ -134,15 +134,10 @@ typedef enum FragmentEvents
 -(void)performDestory;
 -(void)performDetach;
 
-KEYBOARD_FUNCTIONS
-
-KEYBOARD_PROPERTIES
-
 @property(nonatomic, retain) NSString *luaId;
 @property(nonatomic, retain) LuaContext *context;
 @property(nonatomic, retain) LGView *lgview;
 @property(nonatomic, retain) NSString *ui;
-@property(nonatomic, retain) UIView *view;
 
 @property (nonatomic, retain) FragmentHostCallback *mHost;
 @property (nonatomic, retain) FragmentManager *mFragmentManager;
@@ -157,7 +152,7 @@ KEYBOARD_PROPERTIES
 @property (nonatomic, retain) NSMutableDictionary *mSavedViewRegistryState;
 @property (nonatomic, retain) NSNumber *mSavedUserVisibleHint;
 @property LifecycleState mMaxState;
-@property LifecycleRegistry *mLifecycleRegistry;
+@property (nonatomic, retain) LifecycleRegistry *mLifecycleRegistry;
 @property (nonatomic, retain) NSMutableDictionary *mArguments;
 @property (nonatomic, retain) LuaFragment *mTarget;
 @property NSInteger mTargetRequestCode;
@@ -169,8 +164,8 @@ KEYBOARD_PROPERTIES
 
 @property NSInteger mState;
 @property (nonatomic, retain) LGViewGroup *mContainer;
-@property NSString* mContainerId;
-@property NSString* mFragmentId;
+@property (nonatomic, retain) NSString* mContainerId;
+@property (nonatomic, retain) NSString* mFragmentId;
 @property(nonatomic, retain) NSString *mTag;
 @property Boolean mFromLayout;
 @property Boolean mInLayout;

@@ -1,11 +1,3 @@
-//
-//  LifecycleRegistry.m
-//  Topping
-//
-//  Created by Edo on 25.05.2022.
-//  Copyright © 2022 Deadknight. All rights reserved.
-//
-
 #import "LifecycleRegistry.h"
 
 @implementation ObserverWithState
@@ -26,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        self.mObserverMap = [[OrderedDictionary alloc] init];
+        self.mObserverMap = [[MutableOrderedDictionary alloc] init];
         self.mAddingObserverCounter = 0;
         self.mHandlingEvent = false;
         self.mNewEventOccurred = false;
@@ -82,7 +74,7 @@
 
 -(BOOL)isSynced
 {
-    if(self.mObserverMap.count == 0)
+     if([self.mObserverMap count] == 0)
         return true;
     
     NSArray *keys = [self.mObserverMap allKeys];

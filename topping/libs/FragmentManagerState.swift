@@ -1,11 +1,3 @@
-//
-//  FragmentManagerState.swift
-//  Topping
-//
-//  Created by Edo on 3.06.2022.
-//  Copyright © 2022 Deadknight. All rights reserved.
-//
-
 import UIKit
 
 @objc(FragmentManagerState)

@@ -114,9 +114,35 @@ end
 
 function Toolbar_Constructor(pToolbar, luacontext)
     pToolbar:SetSubtitle("Test title");
-    pToolbar:SetLogo(LuaResource.GetResourceRef(LR.drawable.blueback))
-    pToolbar:SetNavigationIcon(LuaResource.GetResourceRef(LR.drawable.blueback))
+end
+
+function Main_Constructor(pForm, luacontext)
+    local navController = pForm:GetFragmentManager():findFragmentById(LR.id.nav_host_fragment):getNavController()
+    local toolbar = pForm:GetViewById("ToolbarTest")
+    NavigationUI.setupWithNavController(toolbar, navController)
 end
 
 LuaForm.RegisterFormEvent("ListViewTest", LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);
 LuaForm.RegisterFormEvent("ToolbarTest", LuaForm.FORM_EVENT_CREATE, Toolbar_Constructor);
+LuaForm.RegisterFormEvent("Main", LuaForm.FORM_EVENT_CREATE, Main_Constructor);
+
+function MenuFragment_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)
+    print(inflater)
+    print(container)
+    print(savedInstanceState)
+    print(LR)
+    print(LR.layout.form)
+    return inflater:Inflate(LR.layout.form, container)
+end
+
+function ReceiveFragment_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)
+    print(inflater)
+    print(container)
+    print(savedInstanceState)
+    print(LR)
+    print(LR.layout.testbed)
+    return inflater:Inflate(LR.layout.frame, container)
+end
+
+LuaFragment.RegisterFragmentEvent("menuFragment", LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, MenuFragment_Create_View);
+LuaFragment.RegisterFragmentEvent("receiveFragment", LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, ReceiveFragment_Create_View);

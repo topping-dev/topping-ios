@@ -8,7 +8,7 @@
 + (NavController *)findNavController:(LuaFragment *)fragment {
     LuaFragment* findFragment = fragment;
     while(findFragment != nil) {
-        if([findFragment isKindOfClass:LGNavHostFragment.class]) {
+        if([findFragment isKindOfClass:[LGNavHostFragment class]]) {
             return [((LGNavHostFragment*)findFragment) getNavController];
         }
         LuaFragment* primaryNavFragment = [[findFragment getParentFragmentManager] getPrimaryNavigationFragment];
@@ -102,8 +102,7 @@
 }
 
 - (void)onCreateNavController:(NavController *)navController {
-    //TODO
-    //[[navController getNavigationProvider] addNavigatorWithNavigator:[DialogFragmentNavigator alloc] init ]
+    [[navController getNavigationProvider] addNavigatorWithNavigator:[[DialogFragmentNavigator alloc] initWithContext:self.context manager:self.mFragmentManager]];
     [[navController getNavigationProvider] addNavigatorWithNavigator:[self createFragmentNavigator]];
 }
 
@@ -121,11 +120,6 @@
     }
     
     self.mArguments = b;
-}
-
-- (void)onAttachFragment:(LuaFragment *)fragment {
-    [super onAttachFragment:fragment];
-    //TODO:Dialog
 }
 
 - (void)onPrimaryNavigationFragmentChanged:(BOOL)isPrimaryNavigationFragment {
@@ -152,6 +146,9 @@
 - (LGView *)onCreateView:(LGLayoutParser *)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
     LGFragmentContainerView *containerView = [LGFragmentContainerView Create:[self GetContext]];
     containerView.android_id = [self getContainerId];
+    containerView.android_layout_width = @"match_parent";
+    containerView.android_layout_height = @"wrap_content";
+    [containerView AddSelfToParent:[container GetView] :self.context.form];
     return containerView;
 }
 
@@ -214,6 +211,14 @@
 + (NSString*)className
 {
     return @"LGNavHostFragment";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getNavController)) :@selector(getNavController) :NavController.class :MakeArray(nil)] forKey:@"getNavController"];
+    return dict;
 }
 
 @end

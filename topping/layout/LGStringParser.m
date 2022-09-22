@@ -63,6 +63,9 @@
 		self.stringMap = [[NSMutableDictionary alloc] init];
     }
     
+    if([element kind] != GDataXMLElementKind)
+        return;
+    
     for(GDataXMLNode *attr in element.attributes)
     {
         if(COMPARE(attr.name, @"name"))

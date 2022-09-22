@@ -64,9 +64,14 @@
 #import "LGRecyclerView.h"
 #import "LGRecyclerViewAdapter.h"
 #import "LGToolbar.h"
+#import "LGFragmentContainerView.h"
+#import "LGNavHostFragment.h"
 
 #import "LuaForm.h"
+#import "LuaFragment.h"
 #import "LuaTabForm.h"
+
+#import <Topping/Topping-Swift.h>
 
 @implementation ToppingEngine
 
@@ -93,9 +98,14 @@ static NSMutableArray *viewPlugins;
     return viewPlugins;
 }
 
+
 +(void)report: (lua_State *) L
 {
-	int count = 20;
+    const char * msg = lua_tostring(L,-1);
+    if(msg != NULL) {
+        NSLog(@"ToppingEngine Lua Error: %@", [NSString stringWithCString:msg encoding:NSUTF8StringEncoding]);
+    }
+	/*int count = 20;
 	const char * msg= lua_tostring(L,-1);
 	while(msg && count > 0)
 	{
@@ -104,7 +114,7 @@ static NSMutableArray *viewPlugins;
 		NSLog(@"%@", [NSString stringWithCString:msg encoding:NSUTF8StringEncoding]);
 		msg=lua_tostring(L,-1);
 		count--;
-	}
+	}*/
 }
 
 -(void)StartupDownload
@@ -907,7 +917,16 @@ static NSMutableArray *viewPlugins;
 		i++;
 	}
 	
-	int r = lua_pcall(lu,i+1,LUA_MULTRET,0);
+#if DEBUG
+    lua_getglobal(lu, "debug");
+    lua_getfield(lu, -1, "traceback");
+    lua_remove(lu, -2);
+    int errorIndex = -(i+1)-2;
+    lua_insert(lu, errorIndex);
+	int r = lua_pcall(lu, i+1, LUA_MULTRET, errorIndex);
+#else
+    int r = lua_pcall(lu,i+1,LUA_MULTRET,0);
+#endif
 	if(r)
     {
 		[ToppingEngine report: lu];
@@ -962,6 +981,8 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LGRecyclerView class]];
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
     [Lunar Register:lu :[LGToolbar class]];
+    [Lunar Register:lu :[LGFragmentContainerView class]];
+    [Lunar Register:lu :[LGNavHostFragment class]];
 	
 	[Lunar Register:lu :[LuaDefines class]];
 	[Lunar Register:lu :[LuaNativeObject class]];
@@ -973,6 +994,7 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LuaDate class]];
     [Lunar Register:lu :[LuaDialog class]];
    	[Lunar Register:lu :[LuaForm class]];
+    [Lunar Register:lu :[LuaFragment class]];
    	[Lunar Register:lu :[LuaHttpClient class]];
 	[Lunar Register:lu :[LuaJSONObject class]];
 	[Lunar Register:lu :[LuaJSONArray class]];
@@ -988,6 +1010,10 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LuaLog class]];
     [Lunar Register:lu :[LuaNativeCall class]];
     
+    [Lunar Register:lu :[NavController class]];
+    [Lunar Register:lu :[NavigationUI class]];
+    [Lunar Register:lu :[FragmentManager class]];
+    
     if(plugins != nil)
     {
         for(Class cls in plugins)
@@ -1000,7 +1026,7 @@ int RegisterTag(lua_State *L)
     lua_pushstring(lu, "iOS");
     lua_setglobal(lu, "OS_TYPE");
 
-    lua_pushinteger(lu, [UIDevice currentDevice].systemVersion);
+    lua_pushstring(lu, [[UIDevice currentDevice].systemVersion cStringUsingEncoding:NSUTF8StringEncoding]);
     lua_setglobal(lu, "OS_VERSION");
 
     //TODO:
@@ -1067,7 +1093,7 @@ int RegisterTag(lua_State *L)
 	if(!created)
 	{
 		created = true;
-		lua_createtable(lu, 0, [val count]);
+		lua_createtable(lu, 0, (int)[val count]);
 	}
 	for(NSObject* key in val) {
 		NSObject* value = [val objectForKey:key];

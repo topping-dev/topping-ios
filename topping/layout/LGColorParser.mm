@@ -48,6 +48,9 @@
 		return;
 	
 	GDataXMLElement *root = [xml rootElement];
+    
+    if([root kind] != GDataXMLElementKind)
+        return;
 	
 	for(GDataXMLElement *child in [root children])
 	{
@@ -69,6 +72,9 @@
         [transparent setObject:[UIColor clearColor] forKey:ORIENTATION_LANDSCAPE_S];
 		[self.colorMap setObject:transparent forKey:@"transparent"];
 	}
+    
+    if([element kind] != GDataXMLElementKind)
+        return;
     
     for(GDataXMLNode *attr in element.attributes)
     {

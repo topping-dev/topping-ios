@@ -40,6 +40,8 @@
 
 -(void)SetNavigationOnClickListener:(LuaTranslator*)lt;
 
+-(void)SetNavigationOnClickListenerInternal:(id<OnClickListenerInternal>)runnable;
+
 -(void)overflowTap;
 
 -(void)SetMenuItemClickListener:(LuaTranslator*)lt;
@@ -73,5 +75,6 @@
 @property (nonatomic, retain) UIView *toolbar;
 @property (nonatomic, retain) LuaTranslator *ltNavigationClick;
 @property (nonatomic, retain) LuaTranslator *ltOverflowClick;
+@property (nonatomic, retain) id<OnClickListenerInternal> inNavigationClick;
 
 @end

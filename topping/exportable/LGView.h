@@ -55,6 +55,7 @@ enum GRAVITY
 //Positioning
 -(void)ClearDimensions;
 -(void)Resize;
+-(void)ResizeAndInvalidate;
 -(void)ReadWidth;
 -(void)ReadHeight;
 -(void)ReadWidthHeight;
@@ -81,7 +82,7 @@ enum GRAVITY
 -(void)SetFocusable:(BOOL)focusable;
 -(void)SetBackground:(NSString*)background;
 -(void)SetBackgroundRef:(LuaRef*)ref;
--(int)GetVisibility;
+-(NSInteger)GetVisibility;
 -(void)SetVisibility:(NSInteger)visibility;
 -(float)GetAlpha;
 -(void)SetOnClickListener:(LuaTranslator *)lt;
@@ -154,5 +155,11 @@ enum GRAVITY
 @property(nonatomic, strong) LuaFragment *fragment;
 
 @property(nonatomic, strong) NavController *navController;
+
+@end
+
+@protocol OnClickListenerInternal <NSObject>
+
+-onClick:(LGView*)view;
 
 @end

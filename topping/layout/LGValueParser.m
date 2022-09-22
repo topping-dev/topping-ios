@@ -246,8 +246,10 @@
     [dictRet setObject:[[LGDrawableParser GetInstance] GetKeys] forKey:@"drawable"];
     [dictRet setObject:[[LGStringParser GetInstance] GetKeys] forKey:@"string"];
     [dictRet setObject:[[LGColorParser GetInstance] GetKeys] forKey:@"color"];
+    [dictRet setObject:[[LGLayoutParser GetInstance] GetKeys] forKey:@"layout"];
     [dictRet setObject:[[LGDimensionParser GetInstance] GetKeys] forKey:@"dimen"];
     [dictRet setObject:[[LGStyleParser GetInstance] GetKeys] forKey:@"style"];
+    [dictRet setObject:[[LGIdParser GetInstance] GetKeys] forKey:@"id"];
     for(NSString *key in self.valueKeyMap)
     {
         [dictRet setObject:[self.valueKeyMap objectForKey:key] forKey:key];

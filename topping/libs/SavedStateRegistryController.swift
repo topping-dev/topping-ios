@@ -215,11 +215,13 @@ class OnRecreation : AutoCreated {
 }
 
 
-class SavedStateHandleController : NSObject, LifecycleEventObserver {
+@objc(SavedStateHandleController)
+open class SavedStateHandleController : NSObject, LifecycleEventObserver {
     static let TAG_SAVED_STATE_HANDLE_CONTROLLER = "androidx.lifecycle.savedstate.vm.tag"
     var mKey: String
     var mIsAttached = false
     var mHandle: SavedStateHandle
+    var key = UUID.init().uuidString
     
     init(key: String, handle: SavedStateHandle) {
         mKey = key
@@ -241,7 +243,11 @@ class SavedStateHandleController : NSObject, LifecycleEventObserver {
         }
     }
     
-    func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
+    public func getKey() -> String! {
+        return key
+    }
+    
+    public func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
         if(event == LifecycleEvent.LIFECYCLEEVENT_ON_DESTROY) {
             mIsAttached = false
             source.getLifecycle().remove(self)
@@ -308,17 +314,24 @@ open class SavedStateViewModelFactory : ViewModelProviderKeyedFactory {
     }
 }
 
-class Recreator : NSObject, LifecycleEventObserver {
+@objc(Recreator)
+open class Recreator : NSObject, LifecycleEventObserver {
     static let CLASSES_KEY = "classes_to_restor"
     static let COMPONENT_KEY = "androidx.savedstate.Restarter"
     
     private let mOwner: SavedStateRegistryOwner
     
+    private let key = UUID.init().uuidString
+    
     init(owner: SavedStateRegistryOwner) {
         self.mOwner = owner
     }
     
-    func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
+    public func getKey() -> String! {
+        return key
+    }
+    
+    public func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
         if(event != LifecycleEvent.LIFECYCLEEVENT_ON_CREATE) {
             return
         }
@@ -345,7 +358,6 @@ class Recreator : NSObject, LifecycleEventObserver {
         let obj = clazzz.new()
         obj.onRecreated(owner: mOwner)
     }
-    
 }
 
 class RecreatorSavedStateProvider : SavedStateProvider {
@@ -374,7 +386,7 @@ protocol AutoCreated {
 @objc(SavedStateRegistry)
 open class SavedStateRegistry : NSObject {
     private static let SAVED_COMPONENTS_KEY = "androidx.lifecycle.BundlableSavedStateRegistry.key"
-    private var mComponents = OrderedDictionary()
+    private var mComponents = MutableOrderedDictionary()
     private var mRestoredState: Dictionary<String, Any>?
     private var mRestored = false
     private var mRecreatorProvider: RecreatorSavedStateProvider?
@@ -405,7 +417,7 @@ open class SavedStateRegistry : NSObject {
     }
     
     func unregisterSavedStateProvider(key: String) {
-        mComponents.remove(key)
+        mComponents.removeObject(forKey: key)
     }
     
     func isRestored() -> Bool {
@@ -452,7 +464,7 @@ open class SavedStateRegistry : NSObject {
             components["bundle"] = mRestoredState
         }
         for key in mComponents.keyEnumerator() {
-            let val = mComponents[key] as! SavedStateProvider
+            let val = mComponents.object(forKey: key) as! SavedStateProvider
             components[key as! String] = val.saveState()
         }
         outBundle[SavedStateRegistry.SAVED_COMPONENTS_KEY] = components

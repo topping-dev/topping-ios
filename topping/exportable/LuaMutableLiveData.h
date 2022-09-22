@@ -40,7 +40,7 @@
 @property (nonatomic, retain) NSObject *mDataLock;
 @property NSInteger START_VERSION;
 @property (nonatomic, retain) NSObject *NOT_SET;
-@property (nonatomic, retain) OrderedDictionary *mObservers;
+@property (nonatomic, retain) MutableOrderedDictionary *mObservers;
 @property NSInteger mActiveCount;
 @property BOOL mChangingActiveState;
 @property NSObject *mData;

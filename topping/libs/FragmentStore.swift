@@ -286,25 +286,30 @@ class FragmentStore: NSObject {
     }
     
     func findFragmentIndexInContainer(f: LuaFragment) -> Int {
-        
-        //TODO
         var container = f.mContainer
         
         if(container == nil) {
             return -1
         }
-        /*var fragmentIndex = mActive.keys.firstIndex(of: f.mWho)
-        for i in mActive.enu
-        if(fragmentIndex == nil) {
-            fragmentIndex = -1
-        }
-        else {
-            fragmentIndex = fragmentIndex!
-        }
+        var fragmentIndex = mActive.keys.distance(to: mActive.keys.firstIndex(of: f.mWho)!)
+        
         for i in (0..<fragmentIndex).reversed() {
             let underFragment = mAdded[i]
-        }*/
+            if(underFragment?.mContainer == container && underFragment?.lgview != nil) {
+                var underIndex = container?.subviews.index(of: underFragment?.lgview!)
+                
+                return underIndex! + 1
+            }
+        }
+        for i in (fragmentIndex + 1)..<mAdded.count {
+            let overFragment = mAdded[i]
+            if(overFragment?.mContainer == container && overFragment?.lgview != nil) {
+                var overIndex = container?.subviews.index(of: overFragment?.lgview!)
+                
+                return overIndex!
+            }
+        }
         
-        return 0
+        return -1
     }
 }

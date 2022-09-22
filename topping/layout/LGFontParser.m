@@ -88,6 +88,8 @@
     }
     
     GDataXMLElement *root = [xml rootElement];
+    if([root kind] != GDataXMLElementKind)
+        return nil;
     if(COMPARE([root name], @"font-family"))
     {
         return [self ParseFont:root];
@@ -105,6 +107,8 @@
        
     for(GDataXMLElement *child in children)
     {
+        if([child kind] != GDataXMLElementKind)
+            continue;
         if(![[child name] isEqualToString:@"font"])
             continue;
         

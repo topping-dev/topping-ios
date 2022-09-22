@@ -62,8 +62,7 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
         }
     }
     
-    func dispatchOnFragmentPreCreated(f: LuaFragment, savedInstanceState: Dictionary<String, Any>, onlyRecursive: Bool) {
-        _ = mFragmentManager.getHost()?.getContext()
+    func dispatchOnFragmentPreCreated(f: LuaFragment, savedInstanceState: Dictionary<String, Any>?, onlyRecursive: Bool) {
         let parent = mFragmentManager.getParent()
         if(parent != nil) {
             let parentManager = (parent?.getParentFragmentManager())!
@@ -76,11 +75,10 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
         }
     }
     
-    func dispatchOnFragmentCreated(f: LuaFragment, savedInstanceState: Dictionary<String, Any>, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+    func dispatchOnFragmentCreated(f: LuaFragment, savedInstanceState: Dictionary<String, Any>?, onlyRecursive: Bool) {
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentCreated(f: f, savedInstanceState: savedInstanceState, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -90,11 +88,10 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
         }
     }
     
-    func dispatchOnFragmentViewCreated(f: LuaFragment, view: LGView, savedInstanceState: Dictionary<String, Any>, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+    func dispatchOnFragmentViewCreated(f: LuaFragment, view: LGView, savedInstanceState: Dictionary<String, Any>?, onlyRecursive: Bool) {
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentViewCreated(f: f, view: view, savedInstanceState: savedInstanceState, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -105,10 +102,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentStarted(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentStarted(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -119,10 +115,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentResumed(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentResumed(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -133,10 +128,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentPaused(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentPaused(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -147,10 +141,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentStopped(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentStopped(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -161,10 +154,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentSaveInstanceState(f: LuaFragment, outState: Dictionary<String, Any>, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentSaveInstanceState(f: f, outState: outState, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -175,10 +167,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentViewDestroyed(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentViewDestroyed(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -189,10 +180,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentDestroyed(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentDestroyed(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {
@@ -203,10 +193,9 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
     }
     
     func dispatchOnFragmentDetached(f: LuaFragment, onlyRecursive: Bool) {
-        var context = mFragmentManager.getHost()?.getContext()
-        var parent = mFragmentManager.getParent()
+        let parent = mFragmentManager.getParent()
         if(parent != nil) {
-            var parentManager = (parent?.getParentFragmentManager())!
+            let parentManager = (parent?.getParentFragmentManager())!
             parentManager.getLifecycleCallbacksDispatcher().dispatchOnFragmentDetached(f: f, onlyRecursive: true)
         }
         for holder in mLifecycleCallbacks {

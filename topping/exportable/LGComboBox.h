@@ -3,7 +3,7 @@
 #import "LGEditText.h"
 #import "LuaTranslator.h"
 
-@interface Data : NSObject
+@interface ComboData : NSObject
 {
 }
 
@@ -26,7 +26,7 @@
 -(void)SetOnComboChangedListener:(LuaTranslator*)lt;
 
 @property(nonatomic) BOOL showCancel;
-@property(nonatomic, strong) Data *selected;
+@property(nonatomic, strong) ComboData *selected;
 @property(nonatomic, strong) NSMutableArray *comboArray;
 @property(nonatomic, strong) LuaTranslator *ltCBoxValueChanged;
 

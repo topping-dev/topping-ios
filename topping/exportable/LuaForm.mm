@@ -107,23 +107,11 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	self.view.frame = [DisplayMetrics GetMasterView].frame;
 	if(self.ui != nil)
 		[self SetViewXML:self.ui];
-	else
-        [LuaForm OnFormEvent:self :FORM_EVENT_CREATE :self.context :0, nil];
-    [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_CREATE];
-	[KeyboardHelper KeyboardEnableEventForView:self.view :self];
-    
-    self.mStopped = false;
     
     //onCreate
+    self.mStopped = false;
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_CREATE];
     [self.mFragments dispatchCreate];
-}
-
--(void) viewWillAppear:(BOOL)animated
-{
-	[CommonDelegate SetActiveForm:self];
-	[super viewWillAppear:animated];
-	[KeyboardHelper KeyboardEnableEvents:self];
     
     //onStart
     self.mStopped = false;
@@ -135,11 +123,26 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [self.mFragments execPendingActions];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_START];
     [self.mFragments dispatchStart];
+    [self.mFragments execPendingActions];
+    
+    [KeyboardHelper KeyboardEnableEventForView:self.view :self];
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+	[CommonDelegate SetActiveForm:self];
+	[super viewWillAppear:animated];
+	[KeyboardHelper KeyboardEnableEvents:self];
     
     //onResume
     self.mResumed = true;
     [self.mFragments noteStateNotSaved];
     [self.mFragments execPendingActions];
+    if(!self.createCalled)
+    {
+        self.createCalled = true;
+        [LuaForm OnFormEvent:self :FORM_EVENT_CREATE :self.context :0, nil];
+    }
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
     [self.mFragments dispatchResume];
     [LuaForm OnFormEvent:self :FORM_EVENT_RESUME :self.context :0, nil];
@@ -273,6 +276,10 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return hadNotMarked;
 }
 
+-(FragmentManager*)GetFragmentManager {
+    return [self.mFragments getSupportFragmentManager];
+}
+
 -(NSString*)GetId
 {
 	if(self.luaId == nil)
@@ -343,6 +350,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewXML:)) :@selector(SetViewXML:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewXML"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
+    InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
 	return dict;
 }
 

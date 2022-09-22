@@ -295,6 +295,8 @@
 		5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C64F039262C3C660074EEFE /* CheckBox.xib */; };
 		5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C64F03B262C3F280074EEFE /* CheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C64F03E262C3F280074EEFE /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C64F03C262C3F280074EEFE /* CheckBox.m */; };
+		5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */; };
+		5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */; };
 		5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2128460152003EC02A /* ArrayExtension.swift */; };
 		5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA232846073E003EC02A /* BackStackRecord.swift */; };
 		5C78BA2628460789003EC02A /* FragmentTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2528460789003EC02A /* FragmentTransaction.swift */; };
@@ -303,6 +305,8 @@
 		5C78BA2C284622A5003EC02A /* FragmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */; };
 		5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */; };
 		5C78BA3028462498003EC02A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2F28462498003EC02A /* Utils.swift */; };
+		5C8614F828D33E8500213CEE /* LGIdParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8614F628D33E8500213CEE /* LGIdParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C8614F928D33E8500213CEE /* LGIdParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8614F728D33E8500213CEE /* LGIdParser.m */; };
 		5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C86213425C0477D00BF23CA /* LuaNativeCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C86213525C0477D00BF23CA /* LuaNativeCall.m */; };
 		5C91BD60283E134500D4C94F /* LuaLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD5F283E134500D4C94F /* LuaLifecycle.m */; };
@@ -698,6 +702,8 @@
 		5C64F039262C3C660074EEFE /* CheckBox.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBox.xib; sourceTree = "<group>"; };
 		5C64F03B262C3F280074EEFE /* CheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
 		5C64F03C262C3F280074EEFE /* CheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		5C78BA2128460152003EC02A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5C78BA232846073E003EC02A /* BackStackRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackStackRecord.swift; sourceTree = "<group>"; };
 		5C78BA2528460789003EC02A /* FragmentTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentTransaction.swift; sourceTree = "<group>"; };
@@ -706,6 +712,8 @@
 		5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateManager.swift; sourceTree = "<group>"; };
 		5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentLifecycleCallbacksDispatcher.swift; sourceTree = "<group>"; };
 		5C78BA2F28462498003EC02A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5C8614F628D33E8500213CEE /* LGIdParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGIdParser.h; sourceTree = "<group>"; };
+		5C8614F728D33E8500213CEE /* LGIdParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGIdParser.m; sourceTree = "<group>"; };
 		5C86213425C0477D00BF23CA /* LuaNativeCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaNativeCall.h; sourceTree = "<group>"; };
 		5C86213525C0477D00BF23CA /* LuaNativeCall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaNativeCall.m; sourceTree = "<group>"; };
 		5C91BD5F283E134500D4C94F /* LuaLifecycle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaLifecycle.m; sourceTree = "<group>"; };
@@ -1058,6 +1066,8 @@
 				5CD344082861BB0300343C6B /* NavController.swift */,
 				5CD34417286D9C5C00343C6B /* NavControllerExtra.swift */,
 				5C64ECB02897CDAB00A4C14B /* LuaFormExt.swift */,
+				5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */,
+				5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1261,6 +1271,8 @@
 				5C32B2EE24F9783200875355 /* LGValueParser.m */,
 				5CD343FC285CBAC900343C6B /* LGNavigationParser.h */,
 				5CD343FD285CBAC900343C6B /* LGNavigationParser.m */,
+				5C8614F628D33E8500213CEE /* LGIdParser.h */,
+				5C8614F728D33E8500213CEE /* LGIdParser.m */,
 			);
 			path = layout;
 			sourceTree = "<group>";
@@ -1354,6 +1366,7 @@
 				5C5A98C624E16BCC002A22EA /* ToppingEngine.h in Headers */,
 				5C286DEA2557FDDC00198DA5 /* LGRelativeLayout.h in Headers */,
 				5C5A993824E16BCC002A22EA /* LuaFunction.h in Headers */,
+				5C8614F828D33E8500213CEE /* LGIdParser.h in Headers */,
 				5C43E6D724FE42F1005BEA07 /* LGRecyclerViewAdapter.h in Headers */,
 				5C5A9A0324E16BEC002A22EA /* unix.h in Headers */,
 				5C5A98F424E16BCC002A22EA /* LuaPoint.h in Headers */,
@@ -1408,6 +1421,7 @@
 				5C5A98CF24E16BCC002A22EA /* LGAbsListView.h in Headers */,
 				5C5A99F324E16BEC002A22EA /* options.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
+				5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
 				5C5A98EB24E16BCC002A22EA /* LGCheckBox.h in Headers */,
 				5C5A991A24E16BCC002A22EA /* LuaChar.h in Headers */,
@@ -1714,6 +1728,7 @@
 				5C91BD7C283E25A400D4C94F /* LifecycleRegistry.m in Sources */,
 				5C5A98DC24E16BCC002A22EA /* LuaFunction.m in Sources */,
 				5C5A99C724E16BEC002A22EA /* lstring.c in Sources */,
+				5C8614F928D33E8500213CEE /* LGIdParser.m in Sources */,
 				5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
 				5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */,
@@ -1791,6 +1806,7 @@
 				5C5A991124E16BCC002A22EA /* LuaResource.m in Sources */,
 				5C5A99E724E16BEC002A22EA /* buffer.c in Sources */,
 				5C43E6D424FE41E7005BEA07 /* LGRecyclerView.m in Sources */,
+				5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */,
 				5C5A993624E16BCC002A22EA /* DataToBeDownloaded.m in Sources */,
 				5C5A99E024E16BEC002A22EA /* ldebug.c in Sources */,
 				5CD343F92859F92500343C6B /* HasDefaultViewModelProviderFactory.swift in Sources */,

@@ -5,6 +5,8 @@
 #import "LuaContext.h"
 
 @class LGView;
+@class LGLayoutParser;
+@class LuaRef;
 
 @interface LuaViewInflator : NSObject <LuaClass, LuaInterface> 
 {
@@ -12,6 +14,10 @@
 }
 
 +(NSObject*)Create:(LuaContext*)lc;
++(LuaViewInflator *)From:(LGLayoutParser*)parser;
 -(LGView*)ParseFile:(NSString*)filename :(LGView*)parent;
+-(LGView*) Inflate:(LuaRef*)ref : (LGView*)parent;
+
+@property (nonatomic, retain) LuaContext* context;
 
 @end

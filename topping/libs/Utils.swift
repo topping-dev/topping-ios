@@ -97,11 +97,15 @@ class Utils: NSObject {
     static func getClassForClassName<T>(className: String) -> T.Type? {
         var cls = NSClassFromString(className) as? T.Type
         if(cls == nil) {
-            var lastClassName = className.components(separatedBy: ".").last
+            let lastClassName = className.components(separatedBy: ".").last
             cls = NSClassFromString(lastClassName!) as? T.Type
             if(cls == nil) {
-                lastClassName = "LG" + lastClassName!
-                cls = NSClassFromString(lastClassName!) as? T.Type
+                let lgLastClassName = "LG" + lastClassName!
+                cls = NSClassFromString(lgLastClassName) as? T.Type
+                if(cls == nil) {
+                    let luaLastClassName = "Lua" + lastClassName!
+                    cls = NSClassFromString(luaLastClassName) as? T.Type
+                }
             }
         }
         return cls
@@ -133,4 +137,15 @@ extension StringProtocol {
     subscript(range: PartialRangeFrom<Int>) -> SubSequence { self[index(startIndex, offsetBy: range.lowerBound)...] }
     subscript(range: PartialRangeThrough<Int>) -> SubSequence { self[...index(startIndex, offsetBy: range.upperBound)] }
     subscript(range: PartialRangeUpTo<Int>) -> SubSequence { self[..<index(startIndex, offsetBy: range.upperBound)] }
+    
+    func distance(of element: Element) -> Int? { firstIndex(of: element)?.distance(in: self) }
+    func distance<S: StringProtocol>(of string: S) -> Int? { range(of: string)?.lowerBound.distance(in: self) }
+}
+
+extension Collection {
+    func distance(to index: Index) -> Int { distance(from: startIndex, to: index) }
+}
+
+extension String.Index {
+    func distance<S: StringProtocol>(in string: S) -> Int { string.distance(to: self) }
 }

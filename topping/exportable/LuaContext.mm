@@ -1,4 +1,6 @@
 #import "LuaContext.h"
+#import "LuaFunction.h"
+#import "LuaForm.h"
 #import "LGAdapterView.h"
 #import "ToppingEngine.h"
 #import "LGStyleParser.h"
@@ -38,6 +40,10 @@
     self.packageName = [[NSBundle mainBundle] bundleIdentifier];
 }
 
+-(LuaForm *)GetForm {
+    return self.form;
+}
+
 -(NSString*)GetId
 {
 	if(self.lua_id != nil)
@@ -54,6 +60,9 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    
+    InstanceMethodNoArg(GetForm, LuaForm, @"GetForm")
+        
 	return dict;
 }
 

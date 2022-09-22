@@ -1,11 +1,3 @@
-//
-//  ArrayExtension.swift
-//  Topping
-//
-//  Created by Edo on 31.05.2022.
-//  Copyright © 2022 Deadknight. All rights reserved.
-//
-
 import Foundation
 
 class ArrayExtension {

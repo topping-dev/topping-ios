@@ -5,6 +5,7 @@
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
 #import "LGDrawableParser.h"
+#import "UIImage+Resize.h"
 
 @implementation LGToolbar
 
@@ -94,30 +95,20 @@
 -(void)SetNavigationIcon:(LuaStream*)navigationIconStream
 {
     MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    if(navigationIconStream == nil) {
+        toolbar.backItem = nil;
+        return;
+    }
     UIImage *img = (UIImage*)navigationIconStream.nonStreamData;
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:toolbar.leadingBarButtonItems];
-    UIBarButtonItem *iv = nil;
-    if(arr.count > 0)
-    {
-        iv = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
-    }
-    else
-    {
-        iv = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
-        [arr addObject:iv];
-        /*UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navigationTap)];
-        singleTap.numberOfTapsRequired = 1;
-        [iv setUserInteractionEnabled:YES];
-        [iv.getView addGestureRecognizer:singleTap];*/
-    }
-    toolbar.leadingBarButtonItems = arr;
+    img = [img imageWithSizeAspect:toolbar.frame.size.height - 4];
+    toolbar.backItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
 }
 
 -(void)SetOverflowIcon:(LuaStream*)overflowIconStream
 {
     MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
     UIImage *img = (UIImage*)overflowIconStream.nonStreamData;
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:toolbar.leadingBarButtonItems];
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:toolbar.trailingBarButtonItems];
     UIBarButtonItem *iv = nil;
     if(arr.count > 0)
     {
@@ -203,11 +194,20 @@
     {
         [self.ltNavigationClick Call:self :nil];
     }
+    if(self.inNavigationClick != nil)
+    {
+        [self.inNavigationClick onClick:self];
+    }
 }
 
 -(void)SetNavigationOnClickListener:(LuaTranslator*)lt
 {
     self.ltNavigationClick = lt;
+}
+
+-(void)SetNavigationOnClickListenerInternal:(id<OnClickListenerInternal>)runnable
+{
+    self.inNavigationClick = runnable;
 }
 
 -(void)overflowTap

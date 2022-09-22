@@ -43,7 +43,8 @@
             NSString *filename = (NSString *)obj;
             NSString *fNameNoExt = [filename stringByDeletingPathExtension];
             [self.drawableMap setObject:fNameNoExt forKey:fNameNoExt];
-        }];    }
+        }];
+    }
 }
 
 +(LGDrawableParser *) GetInstance
@@ -134,6 +135,10 @@
         }
         
         GDataXMLElement *root = [xml rootElement];
+        
+        if([root kind] != GDataXMLElementKind)
+            return nil;
+        
         if(COMPARE([root name], @"bitmap")
            || COMPARE([root name], @"nine-patch"))
         {
@@ -199,6 +204,8 @@
     //Fetch all the child images for maxwidth and maxheight
     for(GDataXMLElement *child in [root children])
 	{
+        if([child kind] != GDataXMLElementKind)
+            continue;
         int left = 0,top = 0,right = 0,bottom = 0;
         LGDrawableReturn *ldr;
         NSString *name = [child name];
@@ -267,6 +274,8 @@
     int count = 0;
     for(GDataXMLElement *child in [root children])
 	{
+        if([child kind] != GDataXMLElementKind)
+            continue;
         int left = 0,top = 0,right = 0,bottom = 0;
         NSString *name = [child name];
         if(COMPARE(name, @"item"))
@@ -314,6 +323,8 @@
     NSMutableDictionary *stateList = [NSMutableDictionary dictionary];
     for(GDataXMLElement *child in [root children])
 	{
+        if([child kind] != GDataXMLElementKind)
+            continue;
         int left,top,right,bottom = 0;
         LGDrawableReturn *ldr;
         NSString *name = [child name];
@@ -392,6 +403,9 @@
 
 -(LGDrawableReturn*)ParseShape:(GDataXMLElement *)root
 {
+    if([root kind] != GDataXMLElementKind)
+        return nil;
+    
     NSString *type = @"rectangle";
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGSize size = CGSizeMake(screenRect.size.width, screenRect.size.height);
@@ -449,6 +463,8 @@
 
     for(GDataXMLElement *child in [root children])
 	{
+        if([child kind] != GDataXMLElementKind)
+            continue;
         NSString *name = [child name];
         if(COMPARE(name, @"corners"))
         {

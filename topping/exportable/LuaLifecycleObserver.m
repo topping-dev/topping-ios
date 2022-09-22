@@ -17,6 +17,12 @@
 
 @implementation LuaLifecycleObserver
 
+- (NSString *)getKey {
+    if(self.key == nil)
+        self.key = [[[NSUUID alloc] init] UUIDString];
+    return self.key;
+}
+
 -(void)onStateChanged:(id<LifecycleOwner>)source :(LifecycleEvent)event {
 
 }

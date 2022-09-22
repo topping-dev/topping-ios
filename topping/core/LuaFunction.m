@@ -79,7 +79,7 @@
 
 -(NSString *) description
 {
-	return [NSString stringWithFormat:@"<LuaFunction> %s, %s", NSStringFromSelector(method_getName(m)), classOfMethod];
+	return [NSString stringWithFormat:@"<LuaFunction> %@, %@", NSStringFromSelector(method_getName(m)), classOfMethod];
 }
 
 @end
