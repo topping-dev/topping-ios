@@ -56,6 +56,7 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
         self.mWho = [[NSUUID UUID] UUIDString];
         self.mTargetWho = nil;
         self.mChildFragmentManager = [[FragmentManager alloc] init];
+        [self initLifecycle];
     }
     return self;
 }
@@ -75,6 +76,11 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
         return ret;
     }
     return ret;
+}
+
++(void)RegisterFragmentEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
+{
+    [LuaFragment RegisterFragmentEvent:[luaId GetCleanId] :event :lt];
 }
 
 +(void)RegisterFragmentEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt
@@ -159,6 +165,11 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 -(void)Close
 {
     [[LuaForm GetActiveForm] Close];
+}
+
+-(LuaNavController*)getNavController
+{
+    return [[LuaNavController alloc] initWithController:[LuaNavHostFragment findNavController:self]];
 }
 
 -(void)initLifecycle {
@@ -592,7 +603,7 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 
 -(void)performDestroyView {
     [self.mChildFragmentManager dispatchDestroyView];
-    if(self.lgview != nil && [LuaLifecycle isAtLeast:[[self.mViewLifecycleOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_CREATED]) {
+    if(self.lgview != nil && [Lifecycle isAtLeast:[[self.mViewLifecycleOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_CREATED]) {
         [self.mViewLifecycleOwner handleLifecycleEventWithEvent:LIFECYCLEEVENT_ON_DESTROY];
     }
     self.mState = FS_CREATED;
@@ -631,8 +642,8 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     }
 }
 
-- (LuaLifecycle *)getLifecycle {
-    return [LuaLifecycle new];
+- (Lifecycle *)getLifecycle {
+    return self.mLifecycleRegistry;
 }
 
 -(NSString*)GetId
@@ -689,6 +700,7 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewId:)) :@selector(SetViewId:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewId"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
+    InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(IsInitialized)) :@selector(IsInitialized) :[LuaBool class] :MakeArray(nil)] forKey:@"IsInitialized"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetFragmentManager)) :@selector(GetFragmentManager) :[FragmentManager class] :MakeArray(nil)] forKey:@"GetFragmentManager"];
     

@@ -18,6 +18,8 @@
 @class SavedStateRegistryController;
 @class OnBackPressedDispatcher;
 @class LuaFormOnBackPressedDispatcher;
+@class LuaLifecycle;
+@protocol ViewModelStoreOwner;
 
 typedef enum FormEvents
 {
@@ -36,10 +38,11 @@ typedef enum FormEvents
     FORM_EVENT_COUNT
 } FormEvents;
 
-@interface LuaForm : UIViewController <LuaClass, LuaInterface>
+@interface LuaForm : UIViewController <LuaClass, LuaInterface, ViewModelStoreOwner>
 {
 }
 
++(void)RegisterFormEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
 +(void)RegisterFormEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt;
 +(BOOL)OnFormEvent:(NSObject*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
 +(void)Create:(LuaContext*)context :(NSString*)luaId;
@@ -48,6 +51,7 @@ typedef enum FormEvents
 +(LuaForm*)GetActiveForm;
 -(LuaContext*)GetContext;
 -(LGView*)GetViewById:(NSString*)lId;
+-(NSDictionary*)GetBindings;
 -(LGView*)GetView;
 -(void)SetView:(LGView*)v;
 -(void)SetViewXML:(NSString *)xml;
@@ -61,6 +65,8 @@ typedef enum FormEvents
 
 -(FragmentManager*)getSupportFragmentManager;
 -(void)markFragmentsCreated;
+-(Lifecycle*)getLifecycle;
+-(LuaLifecycle*)getLifecycleInner;
 
 KEYBOARD_FUNCTIONS
 

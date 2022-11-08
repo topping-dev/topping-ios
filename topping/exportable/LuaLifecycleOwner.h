@@ -2,11 +2,11 @@
 #import <Foundation/Foundation.h>
 #import "LuaClass.h"
 #import "LuaInterface.h"
-#import "LuaLifecycle.h"
+#import "Lifecycle.h"
 
 @protocol LifecycleOwner <NSObject>
 
--(LuaLifecycle*)getLifecycle;
+-(Lifecycle*)getLifecycle;
 
 @end
 

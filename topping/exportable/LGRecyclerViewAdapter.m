@@ -20,7 +20,7 @@
 {
     NSObject *obj = nil;
     if(self.sections == nil)
-        obj = [self.values objectForKey:[NSNumber numberWithInt:indexPath.row]];
+        obj = [self.values objectAtIndex:indexPath.row];
     else
     {
         int count = 0;
@@ -252,20 +252,20 @@
     }
 }
 
--(void)AddValue:(int)idV :(NSObject *)value
+-(void)AddValue:(NSObject *)value
 {
     if(self.values == nil)
-        self.values = [[NSMutableDictionary alloc] init];
+        self.values = [NSMutableArray array];
     
-    [self.values setObject:value forKey:[NSNumber numberWithInt:idV]];
+    [self.values addObject:value];
 }
 
--(void)RemoveValue:(int)idV
+-(void)RemoveValue:(NSObject *)value
 {
     if(self.values == nil)
         return;
     
-    [self.values removeObjectForKey:[NSNumber numberWithInt:idV]];
+    [self.values removeObject:value];
 }
 
 -(void)Clear
@@ -324,8 +324,8 @@
              forKey:@"Create"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddSection::)) :@selector(AddSection::) :[LGRecyclerViewAdapter class] :MakeArray([NSString class]C [NSString class]C nil)] forKey:@"AddSection"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveSection:)) :@selector(RemoveSection:) :nil :MakeArray([NSString class]C nil)] forKey:@"RemoveSection"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddValue::)) :@selector(AddValue::) :nil :MakeArray([LuaInt class]C [NSObject class]C nil)] forKey:@"AddValue"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveValue:)) :@selector(RemoveValue:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"RemoveValue"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddValue:)) :@selector(AddValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"AddValue"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveValue:)) :@selector(RemoveValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"RemoveValue"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Clear)) :@selector(Clear) :nil :MakeArray(nil)] forKey:@"Clear"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Notify)) :@selector(Notify) :nil :MakeArray(nil)] forKey:@"Notify"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnItemSelected:)) :@selector(SetOnItemSelected:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnItemSelected"];

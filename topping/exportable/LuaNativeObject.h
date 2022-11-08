@@ -11,6 +11,8 @@
 	NSObject* obj;
 }
 
+- (instancetype)initWithObject:(NSObject*)object;
+
 /**
  * Object that sent and received.
  */

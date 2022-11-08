@@ -4,7 +4,7 @@
 
 -(void)dispatchEvent:(id<LifecycleOwner>)owner :(LifecycleEvent)event
 {
-    LifecycleState newState = [LuaLifecycle GetTargetState:event];
+    LifecycleState newState = [Lifecycle GetTargetState:event];
     self.state = [LifecycleRegistry min:self.state :newState];
     [self.observer onStateChanged:owner :event];
     self.state = newState;
@@ -53,7 +53,7 @@
 -(void)handleLifecycleEvent:(LifecycleEvent) event
 {
     [self enforceMainThreadIfNeeded:@"handleLifecycleEvent"];
-    [self moveToState:[LuaLifecycle GetTargetState:event]];
+    [self moveToState:[Lifecycle GetTargetState:event]];
 }
 
 -(void)moveToState:(LifecycleState)next
@@ -112,7 +112,7 @@
     self.mAddingObserverCounter++;
     while (statefulObserver.state < targetState && [self.mObserverMap objectForKey:observer]) {
         [self pushParentState:statefulObserver.state];
-        LifecycleEvent event = [LuaLifecycle upFrom:statefulObserver.state];
+        LifecycleEvent event = [Lifecycle upFrom:statefulObserver.state];
         if(event == LIFECYCLEEVENT_NIL)
             return;
         [statefulObserver dispatchEvent:self.mLifecycleOwner: event];
@@ -173,7 +173,7 @@
         ObserverWithState *observer = [self.mObserverMap objectForKey:key];
         while (observer.state < self.mState && !self.mNewEventOccurred && [self.mObserverMap objectForKey:key]) {
             [self pushParentState:observer.state];
-            LifecycleEvent event = [LuaLifecycle upFrom:observer.state];
+            LifecycleEvent event = [Lifecycle upFrom:observer.state];
             if(event == LIFECYCLEEVENT_NIL)
                 return;
             [observer dispatchEvent:lifecycleOwner :event];
@@ -189,10 +189,10 @@
     {
         ObserverWithState *observer = [self.mObserverMap objectForKey:key];
         while (observer.state > self.mState && !self.mNewEventOccurred && [self.mObserverMap objectForKey:key]) {
-            LifecycleEvent event = [LuaLifecycle downFrom:observer.state];
+            LifecycleEvent event = [Lifecycle downFrom:observer.state];
             if(event == LIFECYCLEEVENT_NIL)
                 return;
-            [self pushParentState:[LuaLifecycle GetTargetState:event]];
+            [self pushParentState:[Lifecycle GetTargetState:event]];
             [observer dispatchEvent:lifecycleOwner :event];
             [self popParentState];
         }

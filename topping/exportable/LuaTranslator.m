@@ -11,19 +11,33 @@
 	LuaTranslator *lt = [[LuaTranslator alloc] init];
 	lt.func = function;
 	lt.obj = obj;
-    lt.selector = @selector(Call:);
-    lt.selectorTwo = @selector(Call::);
 	return lt;
 }
 
--(NSObject*) Call:(NSObject *)a
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.selector = @selector(Call);
+        self.selectorOne = @selector(Call:);
+        self.selectorTwo = @selector(Call::);
+    }
+    return self;
+}
+
+-(NSObject*) Call
 {
     return [self CallIn:self.obj, nil];
 }
 
+-(NSObject*) Call:(NSObject *)a
+{
+    return [self CallIn:self.obj, a, nil];
+}
+
 -(NSObject*) Call:(NSObject *)a :(NSObject *)b
 {
-	return [self CallIn:self.obj, nil];
+	return [self CallIn:self.obj, a, b, nil];
 }
 
 -(NSObject*) CallIn:(NSObject *) val, ...

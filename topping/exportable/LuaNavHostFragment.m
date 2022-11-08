@@ -1,19 +1,19 @@
-#import "LGNavHostFragment.h"
+#import "LuaNavHostFragment.h"
 #import "LuaFunction.h"
 #import "Defines.h"
 #import <Topping/Topping-Swift.h>
 
-@implementation LGNavHostFragment
+@implementation LuaNavHostFragment
 
 + (NavController *)findNavController:(LuaFragment *)fragment {
     LuaFragment* findFragment = fragment;
     while(findFragment != nil) {
-        if([findFragment isKindOfClass:[LGNavHostFragment class]]) {
-            return [((LGNavHostFragment*)findFragment) getNavController];
+        if([findFragment isKindOfClass:[LuaNavHostFragment class]]) {
+            return [((LuaNavHostFragment*)findFragment) getNavController];
         }
         LuaFragment* primaryNavFragment = [[findFragment getParentFragmentManager] getPrimaryNavigationFragment];
-        if([primaryNavFragment isKindOfClass:[LGNavHostFragment class]]) {
-            return [((LGNavHostFragment*)findFragment) getNavController];
+        if([primaryNavFragment isKindOfClass:[LuaNavHostFragment class]]) {
+            return [((LuaNavHostFragment*)findFragment) getNavController];
         }
         findFragment = findFragment.mParentFragment;
         
@@ -26,11 +26,15 @@
     return nil;
 }
 
-+(LGNavHostFragment *)create:(NSString *)graphResId{
-    return [LGNavHostFragment create:graphResId :nil];
++ (LuaNavController *)findNavControllerInternal:(LuaFragment *)fragment {
+    return [[LuaNavController alloc] initWithController:[LuaNavHostFragment findNavController:fragment]];
 }
 
-+(LGNavHostFragment *)create:(NSString *)graphResId :(NSMutableDictionary *)startDestinationArgs {
++(LuaNavHostFragment *)create:(NSString *)graphResId{
+    return [LuaNavHostFragment create:graphResId :nil];
+}
+
++(LuaNavHostFragment *)create:(NSString *)graphResId :(NSMutableDictionary *)startDestinationArgs {
     NSMutableDictionary *b = nil;
     if(graphResId != nil) {
         b = [NSMutableDictionary dictionary];
@@ -43,7 +47,7 @@
         [b setObject:startDestinationArgs forKey:@"android-support-nav:fragment:startDestinationArgs"];
     }
     
-    LGNavHostFragment *result = [LGNavHostFragment new];
+    LuaNavHostFragment *result = [LuaNavHostFragment new];
     if(b != nil) {
         result.mArguments = b;
     }
@@ -52,6 +56,10 @@
 
 - (NavController *)getNavController {
     return self.mNavController;
+}
+
+- (LuaNavController *)getNavControllerInternal {
+    return [[LuaNavController alloc] initWithController:self.mNavController];
 }
 
 - (void)onAttach:(LuaContext *)context {
@@ -205,19 +213,20 @@
         return self.mFragmentId;
     if(self.luaId != nil)
         return self.luaId;
-    return [LGNavHostFragment className];
+    return [LuaNavHostFragment className];
 }
 
 + (NSString*)className
 {
-    return @"LGNavHostFragment";
+    return @"LuaNavHostFragment";
 }
 
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    
+    InstanceMethodNoArg(getNavControllerInternal, LuaNavController, @"getNavController")
 
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getNavController)) :@selector(getNavController) :NavController.class :MakeArray(nil)] forKey:@"getNavController"];
     return dict;
 }
 

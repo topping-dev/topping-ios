@@ -14,6 +14,10 @@ it, simply add the following line to your Podfile:
 pod 'Topping'
 ```
 
+## Building From Source
+
+Select device and call Product->Archive, wait for topping.zip to be generated under PodSpecMetadata.
+
 For more info please visit https://topping.dev
 
 ## Author

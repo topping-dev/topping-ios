@@ -98,16 +98,16 @@ function ListViewTest_Constructor(pGUI, luacontext)
     pAdapter:SetGetItemViewType(function(adapter, type)
         return 1;
     end);
-	pAdapter:AddValue(0, "Form Ui");
-	pAdapter:AddValue(1, "Horizontal Scroll View");
-	pAdapter:AddValue(2, "Vertical Scroll View");
-	pAdapter:AddValue(3, "Map");
-	pAdapter:AddValue(4, "Message Box");
-	pAdapter:AddValue(5, "Date Picker Dialog");
-	pAdapter:AddValue(6, "Time Picker Dialog");
-	pAdapter:AddValue(7, "Toast");
-    pAdapter:AddValue(8, "FrameLayout");
-    pAdapter:AddValue(9, "ConstraintLayout");
+	pAdapter:AddValue("Form Ui");
+	pAdapter:AddValue("Horizontal Scroll View");
+	pAdapter:AddValue("Vertical Scroll View");
+	pAdapter:AddValue("Map");
+	pAdapter:AddValue("Message Box");
+	pAdapter:AddValue("Date Picker Dialog");
+	pAdapter:AddValue("Time Picker Dialog");
+	pAdapter:AddValue("Toast");
+    pAdapter:AddValue("FrameLayout");
+    pAdapter:AddValue("ConstraintLayout");
 	pGUI:SetAdapter(pAdapter);
     pAdapter:Notify();
 end
@@ -119,7 +119,7 @@ end
 function Main_Constructor(pForm, luacontext)
     local navController = pForm:GetFragmentManager():findFragmentById(LR.id.nav_host_fragment):getNavController()
     local toolbar = pForm:GetViewById("ToolbarTest")
-    NavigationUI.setupWithNavController(toolbar, navController)
+    LuaNavigationUI.setupWithNavController(toolbar, navController)
 end
 
 LuaForm.RegisterFormEvent("ListViewTest", LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);

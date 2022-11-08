@@ -3,6 +3,8 @@
 #import "LuaThread.h"
 #import <Topping/Topping-Swift.h>
 
+@class LuaTranslatorObserver;
+
 @implementation ObserverWrapper
 
 -(instancetype)initWithLiveData:(LuaMutableLiveData*)livedata :(id<Observer>) observer {
@@ -49,7 +51,7 @@
 }
 
 -(BOOL)shouldBeActive {
-    return [LuaLifecycle isAtLeast:[[self.mOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_STARTED];
+    return [Lifecycle isAtLeast:[[self.mOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_STARTED];
 }
 
 - (void)onStateChanged:(id<LifecycleOwner>)source :(LifecycleEvent)event {
@@ -86,6 +88,23 @@
 
 -(BOOL)shouldBeActive {
     return true;
+}
+
+@end
+
+@implementation LuaTranslatorObserver
+
+- (instancetype)initWithLuaTranslator:(LuaTranslator*) lt
+{
+    self = [super init];
+    if (self) {
+        self.lt = lt;
+    }
+    return self;
+}
+
+-(void)onChanged:(NSObject *)obj {
+    [self.lt CallIn:obj, nil];
 }
 
 @end
@@ -271,6 +290,35 @@
     }
 }
 
++(LuaMutableLiveData*)create
+{
+    return [LuaMutableLiveData new];
+}
+
+-(void)observeLua:(LuaLifecycleOwner*) owner :(LuaTranslator*)lt
+{
+    if(luaObserverMap == nil)
+        luaObserverMap = [NSMapTable strongToStrongObjectsMapTable];
+    
+    if([luaObserverMap objectForKey:lt] != nil) {
+        LuaTranslatorObserver *lto = [luaObserverMap objectForKey:lt];
+        [self removeObserver:lto];
+    }
+    
+    LuaTranslatorObserver *lto = [[LuaTranslatorObserver alloc] initWithLuaTranslator:lt];
+    [luaObserverMap setObject:lto forKey:lt];
+    [self observe:owner :lto];
+}
+
+-(void)removeObserverLua:(LuaTranslator*)lt
+{
+    if([luaObserverMap objectForKey:lt] != nil) {
+        LuaTranslatorObserver *lto = [luaObserverMap objectForKey:lt];
+        [self removeObserver:lto];
+        [luaObserverMap removeObjectForKey:lto];
+    }
+}
+
 -(NSString*)GetId
 {
     return @"LuaMutableLiveData";
@@ -284,6 +332,11 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    
+    ClassMethodNoArg(create, LuaMutableLiveData, @"create")
+    InstanceMethodNoRet(observeLua::, MakeArray([LuaLifecycleOwner class]C [LuaTranslator class]C nil), @"observe")
+    InstanceMethodNoRet(removeObserver:, MakeArray([LuaTranslator class]C nil), @"removeObserver")
+    
     return dict;
 }
 

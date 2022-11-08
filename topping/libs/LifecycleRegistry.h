@@ -2,7 +2,7 @@
 #define LifecycleRegistry_h
 
 #import <Foundation/Foundation.h>
-#import "LuaLifecycle.h"
+#import "Lifecycle.h"
 #import "LuaLifecycleOwner.h"
 #import "OrderedDictionary.h"
 #import "LuaLifecycleObserver.h"
@@ -12,11 +12,11 @@
 -(void)dispatchEvent:(id<LifecycleOwner>)owner :(LifecycleEvent)event;
 
 @property LifecycleState state;
-@property (nonatomic, retain) LuaLifecycleObserver *observer;
+@property (nonatomic, retain) LifecycleObserver *observer;
 
 @end
 
-@interface LifecycleRegistry : LuaLifecycle
+@interface LifecycleRegistry : Lifecycle
 
 -(id) initWithOwner:(id<LifecycleOwner>)owner;
 -(void)handleLifecycleEvent:(LifecycleEvent) event;

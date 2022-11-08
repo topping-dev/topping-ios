@@ -14,7 +14,7 @@ open class LuaFormHostCallbacks: FragmentHostCallback, ViewModelStoreOwner, OnBa
         super.init(form: form, context: form.context)
     }
     
-    public func getLifecycle() -> LuaLifecycle! {
+    public func getLifecycle() -> Lifecycle! {
         return form?.lifecycleRegistry
     }
     

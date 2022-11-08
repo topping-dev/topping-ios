@@ -45,6 +45,7 @@
 	else
 		but = [UIButton buttonWithType:UIButtonTypeCustom];
 	but.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
+    [but addTarget:self action:@selector(didClickButton) forControlEvents:UIControlEventTouchUpInside];
 	return but;	
 }
 
@@ -144,11 +145,16 @@
     [but setTitleColor:val forState:UIControlStateSelected];
 }
 
+-(void)didClickButton
+{
+    if(self.ltOnClickListener != nil) {
+        [self.ltOnClickListener CallIn:self.lc, nil];
+    }
+}
+
 -(void)SetOnClickListener:(LuaTranslator *)lt
 {
     self.ltOnClickListener = lt;
-    UIButton *but = (UIButton*)self._view;
-    [but addTarget:self.ltOnClickListener action:self.ltOnClickListener.selector forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(NSString*)GetId

@@ -3,7 +3,7 @@
 
 @implementation LuaLifecycleOwner
 
-- (LuaLifecycle *)getLifecycle {
+- (Lifecycle *)getLifecycle {
     //TODO
     return nil;
 }

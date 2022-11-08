@@ -33,7 +33,8 @@ class ViewModelProviderAndroidViewModelFactory : ViewModelProviderNewInstanceFac
     }
 }
 
-class ViewModelProvider: NSObject {
+@objc(ViewModelProvider)
+open class ViewModelProvider: NSObject {
     let store: ViewModelStore
     let factory: ViewModelProviderFactory
     
@@ -46,11 +47,11 @@ class ViewModelProvider: NSObject {
         }
     }
     
-    convenience init(owner: ViewModelStoreOwner) {
+    @objc public convenience init(owner: ViewModelStoreOwner) {
         self.init(owner: owner, factory: ViewModelProvider.defaultFactory(owner: owner))
     }
     
-    init(owner: ViewModelStoreOwner, factory: ViewModelProviderFactory) {
+    @objc public init(owner: ViewModelStoreOwner, factory: ViewModelProviderFactory) {
         self.store = owner.getViewModelStore()
         self.factory = factory
     }

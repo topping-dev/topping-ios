@@ -9,6 +9,7 @@
 @class LuaFragment;
 @protocol LuaInterface;
 @class NavController;
+@class LuaNavController;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
 {
@@ -86,6 +87,10 @@ enum GRAVITY
 -(void)SetVisibility:(NSInteger)visibility;
 -(float)GetAlpha;
 -(void)SetOnClickListener:(LuaTranslator *)lt;
+
+-(LuaFragment*)findFragment;
+-(NavController*)findNavController;
+-(LuaNavController*)findNavControllerInternal;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 

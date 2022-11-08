@@ -13,6 +13,16 @@
     return self;
 }
 
+-(void)SetObject:(NSString *)key :(NSObject *)obj
+{
+    [self.objectMap setObject:obj forKey:key];
+}
+
+-(NSObject *)GetObject:(NSString *)key
+{
+    return [self.objectMap objectForKey:key];
+}
+
 -(void)onCleared
 {
     

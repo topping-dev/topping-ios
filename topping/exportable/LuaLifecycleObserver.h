@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import "LuaClass.h"
 #import "LuaInterface.h"
-#import "LuaLifecycle.h"
+#import "Lifecycle.h"
 #import "LuaLifecycleOwner.h"
 
 @protocol LifecycleObserver <NSObject>
@@ -26,10 +26,33 @@
 
 @end
 
-@interface LuaLifecycleObserver : NSObject <LuaClass, LuaInterface, LifecycleEventObserver>
+@interface LifecycleObserver : NSObject <LifecycleEventObserver>
 {
 }
 
 @property (nonatomic, retain) NSString *key;
+
+@end
+
+@protocol FullLifecycleObserver <LifecycleObserver>
+
+-(void) onCreate:(id<LifecycleOwner>) owner;
+-(void) onStart:(id<LifecycleOwner>) owner;
+-(void) onResume:(id<LifecycleOwner>) owner;
+-(void) onPause:(id<LifecycleOwner>) owner;
+-(void) onStop:(id<LifecycleOwner>) owner;
+-(void) onDestroy:(id<LifecycleOwner>) owner;
+
+@end
+
+@interface DefaultLifecycleObserver : NSObject <FullLifecycleObserver>
+
+@end
+
+@interface LuaLifecycleObserver : DefaultLifecycleObserver <LuaClass, LuaInterface>
+
++(LuaLifecycleObserver*)create:(LuaTranslator*)lt;
+
+@property (nonatomic, retain) LuaTranslator *lt;
 
 @end

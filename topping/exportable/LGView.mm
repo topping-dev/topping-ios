@@ -6,7 +6,8 @@
 #import "LGParser.h"
 #import "LuaForm.h"
 #import "LGValueParser.h"
-#import "LGNavHostFragment.h"
+#import "LuaNavHostFragment.h"
+#import "KotlinExports.h"
 #import <Topping/Topping-Swift.h>
 
 @implementation LGView
@@ -826,7 +827,13 @@
         return self.navController;
     }
     
-    return [LGNavHostFragment findNavController:[self findFragment]];
+    return [LuaNavHostFragment findNavController:[self findFragment]];
+}
+
+-(LuaNavController*)findNavControllerInternal {
+    NavController *controller = [self findNavController];
+    
+    return [[LuaNavController alloc] initWithController:controller];
 }
 
 -(NSString*)GetId
@@ -846,6 +853,7 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    
 	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
 										:@selector(Create:)
 										:[LGView class]
@@ -858,7 +866,7 @@
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackground:)) :@selector(SetBackground:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetBackground"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackgroundRef:)) :@selector(SetBackgroundRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetBackgroundRef"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnClickListener:)) :@selector(SetOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnClickListener"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavController)) :@selector(findNavController) :[NavController class] :MakeArray(nil)] forKey:@"findNavController"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavControllerInternal)) :@selector(findNavControllerInternal) :[LuaNavController class] :MakeArray(nil)] forKey:@"findNavController"];
 	return dict;
 }
 

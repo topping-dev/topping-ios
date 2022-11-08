@@ -19,8 +19,8 @@
 +(LGAdapterView*)Create:(LuaContext *)context :(NSString*)lid;
 -(LGAdapterView*)AddSection:(NSString *)header :(NSString*) idV;
 -(void)RemoveSection:(NSString*) header;
--(void)AddValue:(int)idV :(NSObject *)value;
--(void)RemoveValue:(int)idV;
+-(void)AddValue:(NSObject *)value;
+-(void)RemoveValue:(NSObject *)value;
 -(void)RemoveAllValues;
 -(void)Clear;
 -(void)SetOnAdapterView:(LuaTranslator *)lt;
@@ -31,7 +31,7 @@
 @property (nonatomic, strong) LGListView *parent;
 @property (nonatomic, strong) NSMutableDictionary *sections;
 @property (nonatomic, strong) NSMutableDictionary *headers;
-@property (nonatomic, strong) NSMutableDictionary *values;
+@property (nonatomic, strong) NSMutableArray *values;
 
 @property (nonatomic, strong) NSMutableDictionary *cells;
 @property (nonatomic, strong) NSMutableDictionary *views;

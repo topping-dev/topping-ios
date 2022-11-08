@@ -11,9 +11,9 @@
     });
 }
 
--(void)launchDispatcher:(LuaInt *)dispatcher :(LuaTranslator *)lt
+-(void)launchDispatcher:(int)dispatcher :(LuaTranslator *)lt
 {
-    switch([dispatcher intValue]) {
+    switch(dispatcher) {
         case DEFAULT:
         {
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){

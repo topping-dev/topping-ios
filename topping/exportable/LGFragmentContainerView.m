@@ -1,7 +1,7 @@
 #import "LGFragmentContainerView.h"
 #import "LuaFunction.h"
 #import "Defines.h"
-#import "LGNavHostFragment.h"
+#import "LuaNavHostFragment.h"
 #import "Topping/Topping-Swift.h"
 
 @implementation LGFragmentContainerView

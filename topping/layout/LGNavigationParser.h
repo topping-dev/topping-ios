@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "LuaClass.h"
+#import "LuaRef.h"
 
 @class GDataXMLElement;
 @class Navigator;
@@ -14,7 +16,9 @@
 
 @end
 
-@interface NavOptions : NSObject
+@interface NavOptions : NSObject <LuaClass>
+
++(NavOptions*)create:(BOOL)singleTop :(LuaRef*)popUpTo :(BOOL)popUpToInclusive :(LuaRef*)enterAnim :(LuaRef*)exitAnim :(LuaRef*)popEnterAnim :(LuaRef*)popExitAnim;
 
 @property BOOL mSingleTop;
 @property (nonatomic, retain) NSString *mEnterAnim;

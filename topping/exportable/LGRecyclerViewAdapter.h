@@ -16,8 +16,8 @@
 +(LGRecyclerViewAdapter*)Create:(LuaContext *)context :(NSString*)lid;
 -(LGRecyclerViewAdapter*)AddSection:(NSString *)header :(NSString*) idV;
 -(void)RemoveSection:(NSString*) header;
--(void)AddValue:(int)idV :(NSObject *)value;
--(void)RemoveValue:(int)idV;
+-(void)AddValue:(NSObject *)value;
+-(void)RemoveValue:(NSObject *)value;
 -(void)Clear;
 -(void)Notify;
 -(void)SetOnItemSelected:(LuaTranslator*)lt;
@@ -30,7 +30,7 @@
 @property (nonatomic, strong) LGRecyclerView *parent;
 @property (nonatomic, strong) NSMutableDictionary *sections;
 @property (nonatomic, strong) NSMutableDictionary *headers;
-@property (nonatomic, strong) NSMutableDictionary *values;
+@property (nonatomic, strong) NSMutableArray *values;
 
 @property (nonatomic, strong) NSMutableDictionary *createdViews;
 @property (nonatomic, strong) NSMutableDictionary *cells;

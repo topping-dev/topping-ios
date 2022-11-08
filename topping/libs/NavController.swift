@@ -1,28 +1,7 @@
 import UIKit
 
 @objc(NavController)
-open class NavController: NSObject, LuaClass, LuaInterface {
-    
-    public func getId() -> String! {
-        return "NavController"
-    }
-    
-    public static func className() -> String! {
-        return "NavController"
-    }
-    
-    public static func luaMethods() -> NSMutableDictionary! {
-        let dict = NSMutableDictionary()
-        
-        dict["navigateUp"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateUp)), #selector(navigateUp), nil, [])
-        dict["navigate"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:))), #selector(navigateRef(ref:)), nil, [LuaRef.self])
-        dict["navigateArgs"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:args:))), #selector(navigateRef(ref:args:)), nil, [LuaRef.self, Dictionary<String, NSObject>.self])
-        dict["navigateArgsOptions"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:args:navOptions:))), #selector(navigateRef(ref:args:navOptions:)), nil, [LuaRef.self, Dictionary<String, NSObject>.self,NavOptions.self])
-        dict["navigateArgsOptionsExtras"] = LuaFunction.create(true, class_getInstanceMethod(self, #selector(navigateRef(ref:args:navOptions:navigatorExtras:))), #selector(navigateRef(ref:args:navOptions:navigatorExtras:)), nil, [LuaRef.self, Dictionary<String, NSObject>.self,NavOptions.self, NavigatorExtras.self])
-        
-        return dict
-    }
-    
+open class NavController: NSObject {    
     static let KEY_NAVIGATOR_STATE = "android-support-nav:controller:navigatorState"
     static let KEY_NAVIGATOR_STATE_NAMES = "android-support-nav:controller:navigatorState:names"
     static let KEY_BACK_STACK = "android-support-nav:controller:backSTack"
@@ -54,11 +33,12 @@ open class NavController: NSObject, LuaClass, LuaInterface {
         mContext = context
         mActivity = context.form
         super.init()
-        /*mLifecycleObserver = LifecycleEventObserverI { leo in
+        mLifecycleObserver = LifecycleEventObserverI { leo in
             leo.onStateChangedO = { source, event in
-                //TODO
-                for entry in self.mBackStack {
-                    entry.handleLifecycleEvent(event: event)
+                if(self.mGraph != nil) {
+                    for entry in self.mBackStack {
+                        entry.handleLifecycleEvent(event: event)
+                    }
                 }
             }
             return leo
@@ -70,7 +50,7 @@ open class NavController: NSObject, LuaClass, LuaInterface {
             }
             
             return obpc
-        }*/
+        }
         
         mNavigatiorProvider.addNavigator(navigator: NavGraphNavigator(navigationProvider: mNavigatiorProvider))
     }
@@ -142,7 +122,7 @@ open class NavController: NSObject, LuaClass, LuaInterface {
         for navigator in popOperations {
             if(navigator.popBackStack()) {
                 let entry = mBackStack.removeLast()
-                if(LuaLifecycle.is(atLeast: entry.getLifecycle().getCurrentState(), LifecycleState.LIFECYCLESTATE_CREATED)) {
+                if(Lifecycle.is(atLeast: entry.getLifecycle().getCurrentState(), LifecycleState.LIFECYCLESTATE_CREATED)) {
                     entry.setMaxLifecycle(maxState: LifecycleState.LIFECYCLESTATE_DESTROYED)
                 }
                 if(mViewModel != nil) {

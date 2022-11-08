@@ -7,6 +7,6 @@
 @interface LuaCoroutineScope : NSObject <LuaClass>
 
 -(void)launch:(LuaTranslator*)lt;
--(void)launchDispatcher:(LuaInt*)dispatcher :(LuaTranslator*)lt;
+-(void)launchDispatcher:(int)dispatcher :(LuaTranslator*)lt;
 
 @end

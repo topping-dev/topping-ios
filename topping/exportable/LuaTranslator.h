@@ -55,6 +55,7 @@ typedef NSObject* (*kFRet)(void*, int s, NSArray*);
  */
 +(NSObject*) Register:(NSObject*)obj :(NSString*)function;
 
+-(NSObject*)Call;
 -(NSObject*)CallIn:(NSObject*) val, ...;
 -(NSObject*)CallInSelf:(NSObject*) s :(NSObject*) val :(va_list) valist;
 -(NSObject*)Call:(NSObject*)a :(NSObject*)b;
@@ -64,7 +65,7 @@ typedef NSObject* (*kFRet)(void*, int s, NSArray*);
 
 @property (nonatomic, retain) NSObject *obj;
 @property (nonatomic, retain) NSString *func;
-@property (nonatomic) SEL selector, selectorTwo;
+@property (nonatomic) SEL selector, selectorOne, selectorTwo;
 @property void *nobj;
 @property kF kFF;
 @property kFRet kFRetF;

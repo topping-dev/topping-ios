@@ -1,6 +1,6 @@
 import Foundation
 
-class LifecycleEventObserverI: LuaLifecycleObserver {
+class LifecycleEventObserverI: LifecycleObserver {
     
     var onStateChangedO:(LifecycleOwner, LifecycleEvent) -> () = {_,_ in }
     

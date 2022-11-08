@@ -31,7 +31,7 @@ open class FragmentViewLifecycleOwner: NSObject, HasDefaultViewModelProviderFact
         return mLifecycleRegistry != nil
     }
     
-    @objc public func getLifecycle() -> LuaLifecycle! {
+    @objc public func getLifecycle() -> Lifecycle! {
         initialize()
         return mLifecycleRegistry;
     }

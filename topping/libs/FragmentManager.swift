@@ -24,18 +24,18 @@ protocol FragmentResultListener {
 
 @objc(LifecycleAwareResultListener)
 open class LifecycleAwareResultListener : NSObject, FragmentResultListener {
-    var mLifecycle: LuaLifecycle
+    var mLifecycle: Lifecycle
     var mListener: FragmentResultListener
-    var mObserver: LuaLifecycleObserver
+    var mObserver: LifecycleObserver
     
-    init(lifecycle: LuaLifecycle, listener: FragmentResultListener, observer: LuaLifecycleObserver) {
+    init(lifecycle: Lifecycle, listener: FragmentResultListener, observer: LifecycleObserver) {
         mLifecycle = lifecycle
         mListener = listener
         mObserver = observer
     }
     
     @objc func isAtLeast(state: LifecycleState) -> Bool {
-        return LuaLifecycle.is(atLeast: mLifecycle.getCurrentState(), state)
+        return Lifecycle.is(atLeast: mLifecycle.getCurrentState(), state)
     }
     
     @objc func onFragmentResult(key: String, result: Dictionary<String, Any>) {
@@ -630,7 +630,7 @@ open class FragmentManager: NSObject, LuaClass, LuaInterface {
     }
     
     func setFragmentResultListener(requestKey: String, lifecycleOwner: LifecycleOwner, listener: FragmentResultListener) {
-        let lifecycle: LuaLifecycle = lifecycleOwner.getLifecycle()
+        let lifecycle: Lifecycle = lifecycleOwner.getLifecycle()
         if(lifecycle.getCurrentState() == LifecycleState.LIFECYCLESTATE_DESTROYED) {
             return
         }

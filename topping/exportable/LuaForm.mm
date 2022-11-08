@@ -47,6 +47,11 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return NO;
 }
 
++(void)RegisterFormEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
+{
+    [LuaForm RegisterFormEvent:[luaId GetCleanId] :event :lt];
+}
+
 +(void)RegisterFormEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt
 {
     [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
@@ -195,6 +200,15 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	return [_lgview GetViewById:lId];
 }
 
+-(NSDictionary*)GetBindings
+{
+    if([self.lgview isKindOfClass:[LGViewGroup class]])
+    {
+        return [((LGViewGroup*)self.lgview) GetBindings];
+    }
+    return [NSDictionary dictionary];
+}
+
 -(LGView *)GetView
 {
 	return self.lgview;
@@ -264,11 +278,11 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
             FragmentManager* childFragmentManager = [fragment getChildFragmentManager];
             hadNotMarked |= [self markState:childFragmentManager :state];
         }
-        if(fragment.mViewLifecycleOwner != nil && [LuaLifecycle isAtLeast:[[fragment.mViewLifecycleOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_STARTED])  {
+        if(fragment.mViewLifecycleOwner != nil && [Lifecycle isAtLeast:[[fragment.mViewLifecycleOwner getLifecycle] getCurrentState] :LIFECYCLESTATE_STARTED])  {
             [fragment.mViewLifecycleOwner setCurrentStateWithState:state];
             hadNotMarked = true;
         }
-        if([LuaLifecycle isAtLeast:[fragment.mLifecycleRegistry getCurrentState] :LIFECYCLESTATE_STARTED]) {
+        if([Lifecycle isAtLeast:[fragment.mLifecycleRegistry getCurrentState] :LIFECYCLESTATE_STARTED]) {
             [fragment.mLifecycleRegistry setCurrentState:state];
             hadNotMarked = true;
         }
@@ -278,6 +292,14 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
 -(FragmentManager*)GetFragmentManager {
     return [self.mFragments getSupportFragmentManager];
+}
+
+-(Lifecycle *)getLifecycle {
+    return [self.lifecycleOwner getLifecycle];
+}
+
+-(LuaLifecycle *)getLifecycleInner {
+    return [LuaLifecycle CreateForm:self];
 }
 
 -(NSString*)GetId
@@ -345,11 +367,13 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 			 forKey:@"GetActiveForm"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetContext)) :@selector(GetContext) :[LuaContext class] :MakeArray(nil)] forKey:@"GetContext"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([NSString class]C nil)] forKey:@"GetViewById"];
+    InstanceMethodNoArg(GetBindings, MakeArray([NSDictionary class]C nil), @"GetBindings")
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetView)) :@selector(GetView) :[LGView class] :MakeArray(nil)] forKey:@"GetView"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetView:)) :@selector(SetView:) :nil :MakeArray([LGView class] C nil)] forKey:@"SetView"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewXML:)) :@selector(SetViewXML:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewXML"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
+    InstanceMethodNoArg(getLifecycleInner, LuaLifecycle, @"GetLifecycle")
     InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
 	return dict;
 }

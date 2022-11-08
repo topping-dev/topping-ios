@@ -6,6 +6,7 @@
 #import "LuaLifecycleOwner.h"
 #import "LuaLifecycleObserver.h"
 #import "RunnableObjc.h"
+#import "LuaTranslator.h"
 
 @protocol Observer <NSObject>
 
@@ -17,6 +18,7 @@
 
 @interface LuaMutableLiveData : NSObject <LuaClass, LuaInterface>
 {
+    NSMapTable *luaObserverMap;
 }
 
 -(instancetype)initWithData:(NSObject *)value;
@@ -36,6 +38,9 @@
 -(BOOL)hasActiveObservers;
 -(void)changeActiveCounter:(NSInteger)change;
 
++(LuaMutableLiveData*)create;
+-(void)observeLua:(LuaLifecycleOwner*) owner :(LuaTranslator*)lt;
+-(void)removeObserverLua:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSObject *mDataLock;
 @property NSInteger START_VERSION;
@@ -76,5 +81,13 @@
 @end
 
 @interface AlwaysActiveObserver : ObserverWrapper
+
+@end
+
+@interface LuaTranslatorObserver : NSObject <Observer>
+
+- (instancetype)initWithLuaTranslator:(LuaTranslator*) lt;
+
+@property (nonatomic, retain) LuaTranslator *lt;
 
 @end

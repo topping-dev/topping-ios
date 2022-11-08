@@ -232,7 +232,7 @@ open class SavedStateHandleController : NSObject, LifecycleEventObserver {
         return mIsAttached
     }
     
-    func attachToLifecycle(registry: SavedStateRegistry, lifecycle: LuaLifecycle) {
+    func attachToLifecycle(registry: SavedStateRegistry, lifecycle: Lifecycle) {
         if(mIsAttached) {
             return
         }
@@ -258,7 +258,7 @@ open class SavedStateHandleController : NSObject, LifecycleEventObserver {
         return mHandle
     }
     
-    static func create(registry: SavedStateRegistry, lifecycle: LuaLifecycle, key: String, defaultArgs: Dictionary<String, NSObject>?) -> SavedStateHandleController {
+    static func create(registry: SavedStateRegistry, lifecycle: Lifecycle, key: String, defaultArgs: Dictionary<String, NSObject>?) -> SavedStateHandleController {
         let restoredState = registry.consumeRestoredStateForKey(key: key)
         let handle = SavedStateHandle.createHandle(restoredState: restoredState, defaultState: defaultArgs)
         let controller = SavedStateHandleController(key: key, handle: handle)
@@ -267,7 +267,7 @@ open class SavedStateHandleController : NSObject, LifecycleEventObserver {
         return controller
     }
     
-    static func attachHandleIfNeeded(viewModel: LuaViewModel, registry: SavedStateRegistry, lifecycle: LuaLifecycle) {
+    static func attachHandleIfNeeded(viewModel: LuaViewModel, registry: SavedStateRegistry, lifecycle: Lifecycle) {
         let controller: SavedStateHandleController? = viewModel.getTag(TAG_SAVED_STATE_HANDLE_CONTROLLER) as! SavedStateHandleController?
         if(controller != nil && !controller!.isAttached()) {
             controller!.attachToLifecycle(registry: registry, lifecycle: lifecycle)
@@ -275,9 +275,9 @@ open class SavedStateHandleController : NSObject, LifecycleEventObserver {
         }
     }
     
-    static func tryToAddRecreator(registry: SavedStateRegistry, lifecycle: LuaLifecycle) {
+    static func tryToAddRecreator(registry: SavedStateRegistry, lifecycle: Lifecycle) {
         let currentState = lifecycle.getCurrentState()
-        if(currentState == LifecycleState.LIFECYCLESTATE_INITIALIZED || LuaLifecycle.is(atLeast: currentState, LifecycleState.LIFECYCLESTATE_STARTED)) {
+        if(currentState == LifecycleState.LIFECYCLESTATE_INITIALIZED || Lifecycle.is(atLeast: currentState, LifecycleState.LIFECYCLESTATE_STARTED)) {
             registry.runOnNextRecreation(clazz: OnRecreation.self)
         }
     }
@@ -288,7 +288,7 @@ open class SavedStateViewModelFactory : ViewModelProviderKeyedFactory {
     var mContext: LuaContext?
     var mFactory: ViewModelProviderFactory
     var mDefaultArgs: Dictionary<String, Any>?
-    var mLifecycle: LuaLifecycle?
+    var mLifecycle: Lifecycle?
     var mSavedStateRegistry: SavedStateRegistry?
     
     convenience init(context: LuaContext, owner: SavedStateRegistryOwner) {
@@ -434,7 +434,7 @@ open class SavedStateRegistry : NSObject {
         mRecreatorProvider?.add(className: NSStringFromClass(clazz as! AnyClass))
     }
     
-    func performRestore(lifecycle: LuaLifecycle, savedState: Dictionary<String, Any>?) {
+    func performRestore(lifecycle: Lifecycle, savedState: Dictionary<String, Any>?) {
         if(mRestored) {
             return
         }

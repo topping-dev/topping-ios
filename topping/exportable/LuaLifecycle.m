@@ -1,144 +1,54 @@
 #import "LuaLifecycle.h"
-#import "LuaAll.h"
-#import "LuaLifecycleObserver.h"
+#import "LuaFunction.h"
 
 @implementation LuaLifecycle
 
-
-/**
- * Returns the {@link Lifecycle.Event} that will be reported by a {@link Lifecycle}
- * leaving the specified {@link Lifecycle.State} to a lower state, or {@code null}
- * if there is no valid event that can move down from the given state.
- *
- * @param state the higher state that the returned event will transition down from
- * @return the event moving down the lifecycle phases from state
- */
-+(LifecycleEvent)downFrom:(LifecycleState)state {
-    switch (state) {
-        case LIFECYCLESTATE_CREATED:
-            return LIFECYCLEEVENT_ON_DESTROY;
-        case LIFECYCLESTATE_STARTED:
-            return LIFECYCLEEVENT_ON_STOP;
-        case LIFECYCLESTATE_RESUMED:
-            return LIFECYCLEEVENT_ON_PAUSE;
-        default:
-            return LIFECYCLEEVENT_NIL;
-    }
-}
-
-/**
- * Returns the {@link Lifecycle.Event} that will be reported by a {@link Lifecycle}
- * entering the specified {@link Lifecycle.State} from a higher state, or {@code null}
- * if there is no valid event that can move down to the given state.
- *
- * @param state the lower state that the returned event will transition down to
- * @return the event moving down the lifecycle phases to state
- */
-+(LifecycleEvent)downTo:(LifecycleState)state {
-    switch (state) {
-        case LIFECYCLESTATE_DESTROYED:
-            return LIFECYCLEEVENT_ON_DESTROY;
-        case LIFECYCLESTATE_CREATED:
-            return LIFECYCLEEVENT_ON_STOP;
-        case LIFECYCLESTATE_STARTED:
-            return LIFECYCLEEVENT_ON_PAUSE;
-        default:
-            return LIFECYCLEEVENT_NIL;
-    }
-}
-
-/**
- * Returns the {@link Lifecycle.Event} that will be reported by a {@link Lifecycle}
- * leaving the specified {@link Lifecycle.State} to a higher state, or {@code null}
- * if there is no valid event that can move up from the given state.
- *
- * @param state the lower state that the returned event will transition up from
- * @return the event moving up the lifecycle phases from state
- */
-+(LifecycleEvent)upFrom:(LifecycleState)state {
-    switch (state) {
-        case LIFECYCLESTATE_INITIALIZED:
-            return LIFECYCLEEVENT_ON_CREATE;
-        case LIFECYCLESTATE_CREATED:
-            return LIFECYCLEEVENT_ON_START;
-        case LIFECYCLESTATE_STARTED:
-            return LIFECYCLEEVENT_ON_RESUME;
-        default:
-            return LIFECYCLEEVENT_NIL;
-    }
-}
-
-/**
- * Returns the {@link Lifecycle.Event} that will be reported by a {@link Lifecycle}
- * entering the specified {@link Lifecycle.State} from a lower state, or {@code null}
- * if there is no valid event that can move up to the given state.
- *
- * @param state the higher state that the returned event will transition up to
- * @return the event moving up the lifecycle phases to state
- */
-+(LifecycleEvent)upTo:(LifecycleState)state {
-    switch (state) {
-        case LIFECYCLESTATE_CREATED:
-            return LIFECYCLEEVENT_ON_CREATE;
-        case LIFECYCLESTATE_STARTED:
-            return LIFECYCLEEVENT_ON_START;
-        case LIFECYCLESTATE_RESUMED:
-            return LIFECYCLEEVENT_ON_RESUME;
-        default:
-            return LIFECYCLEEVENT_NIL;
-    }
-}
-
-+(LifecycleState)GetTargetState:(LifecycleEvent)event
+- (instancetype)initWithLifecycle:(Lifecycle*)lifecycle :(LuaCoroutineScope*)scope
 {
-    switch (event) {
-        case LIFECYCLEEVENT_ON_CREATE:
-        case LIFECYCLEEVENT_ON_STOP:
-            return LIFECYCLESTATE_CREATED;
-        case LIFECYCLEEVENT_ON_START:
-        case LIFECYCLEEVENT_ON_PAUSE:
-            return LIFECYCLESTATE_STARTED;
-        case LIFECYCLEEVENT_ON_RESUME:
-            return LIFECYCLESTATE_RESUMED;
-        case LIFECYCLEEVENT_ON_DESTROY:
-            return LIFECYCLESTATE_DESTROYED;
-        case LIFECYCLEEVENT_ON_ANY:
-            break;
+    self = [super init];
+    if (self) {
+        self.lifecycle = lifecycle;
+        self.scope = scope;
     }
-    
-    return LIFECYCLESTATE_NIL;
+    return self;
 }
 
-+(BOOL)isAtLeast:(LifecycleState)stateSelf :(LifecycleState)targetState
-{
-    return stateSelf >= targetState;
++ (LuaLifecycle*)CreateForm:(LuaForm*)form {
+    return [[LuaLifecycle alloc] initWithLifecycle:[form getLifecycle] :[[form getLifecycle] getCoroutineScope]];
 }
 
--(void)addObserver:(id<LifecycleObserver>)observer {
-    
++ (LuaLifecycle*)CreateFragment:(LuaFragment*)fragment {
+    return [[LuaLifecycle alloc] initWithLifecycle:[fragment getLifecycle] :[[fragment getLifecycle] getCoroutineScope]];
 }
 
--(void)removeObserver:(id<LifecycleObserver>)observer {
-    
+-(void)addObserver:(LuaLifecycleObserver *)observer {
+    [self.lifecycle addObserver:observer];
 }
 
--(LifecycleState)getCurrentState {
-    return LIFECYCLESTATE_NIL;
+-(void)removeObserver:(LuaLifecycleObserver *)observer {
+    [self.lifecycle removeObserver:observer];
 }
 
--(NSString*)GetId
-{
+-(void)launch:(LuaTranslator *)lt {
+    [self.scope launch:lt];
+}
+
+-(void)launchDispatcher:(int)dispatcher :(LuaTranslator *)lt {
+    [self.scope launchDispatcher:dispatcher :lt];
+}
+
++ (NSString *)className {
     return @"LuaLifecycle";
 }
 
-+ (NSString*)className
-{
-    return @"LuaLifecycle";
-}
-
-+(NSMutableDictionary*)luaMethods
-{
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
++ (NSMutableDictionary *)luaMethods {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    InstanceMethodNoRet(addObserver:, MakeArray([LuaLifecycleObserver class]C nil), @"addObserver")
+    InstanceMethodNoRet(removeObserver:, MakeArray([LuaLifecycleObserver class]C nil), @"removeObserver")
+    InstanceMethodNoRet(launch:, MakeArray([LuaTranslator class]C nil), @"launch")
+    InstanceMethodNoRet(launchDispatcher::, MakeArray([LuaInt class]C [LuaTranslator class]C nil), @"launchDispatcher")
+    
     return dict;
 }
 

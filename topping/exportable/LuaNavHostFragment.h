@@ -2,19 +2,22 @@
 #import <Foundation/Foundation.h>
 #import "LuaFragment.h"
 #import "LuaRef.h"
+#import "KotlinExports.h"
 
 @class NavHostController;
 @class NavController;
 @class Navigation;
 @class DialogFragmentNavigator;
 
-@interface LGNavHostFragment : LuaFragment
+@interface LuaNavHostFragment : LuaFragment
 
 +(NavController*)findNavController:(LuaFragment*)fragment;
-+(LGNavHostFragment*)create:(NSString*)graphResId;
-+(LGNavHostFragment*)create:(NSString*)graphResId :(NSMutableDictionary*)startDestinationArgs;
++(LuaNavController*)findNavControllerInternal:(LuaFragment*)fragment;
++(LuaNavHostFragment*)create:(NSString*)graphResId;
++(LuaNavHostFragment*)create:(NSString*)graphResId :(NSMutableDictionary*)startDestinationArgs;
 
 -(NavController*)getNavController;
+-(LuaNavController*)getNavControllerInternal;
 -(void)onCreateNavController:(NavController*)navController;
 -(void)setNavGraph:(NSString*)graphResId :(NSMutableDictionary*)startDestinationArgs;
 

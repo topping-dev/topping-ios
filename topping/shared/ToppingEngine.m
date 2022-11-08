@@ -65,7 +65,7 @@
 #import "LGRecyclerViewAdapter.h"
 #import "LGToolbar.h"
 #import "LGFragmentContainerView.h"
-#import "LGNavHostFragment.h"
+#import "LuaNavHostFragment.h"
 
 #import "LuaForm.h"
 #import "LuaFragment.h"
@@ -898,6 +898,10 @@ static NSMutableArray *viewPlugins;
 {
 	if(FunctionName == nil)
 		return nil;
+    
+#ifdef DEBUG
+    NSLog(@"Calling %@", FunctionName);
+#endif
 	
 	//m_Lock.Acquire();
 	lua_pushstring(lu, [FunctionName cStringUsingEncoding:NSASCIIStringEncoding]);
@@ -955,7 +959,6 @@ int RegisterTag(lua_State *L)
 	
 	[Lunar Register:lu :[LuaContext class]];
 	
-	//[Lunar Register:lu :[LuaEventArgs class]];
 	[Lunar Register:lu :[LuaViewInflator class]];
 	[Lunar Register:lu :[LGAbsListView class]];
 	[Lunar Register:lu :[LGAdapterView class]];
@@ -973,7 +976,6 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LGProgressBar class]];
 	[Lunar Register:lu :[LGRadioButton class]];
 	[Lunar Register:lu :[LGRadioGroup class]];
-	//[Lunar Register:lu :[LGRelativeLayout class]];
 	[Lunar Register:lu :[LGScrollView class]];
     [Lunar Register:lu :[LGHorizontalScrollView class]];
 	[Lunar Register:lu :[LGTextView class]];
@@ -982,7 +984,6 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
     [Lunar Register:lu :[LGToolbar class]];
     [Lunar Register:lu :[LGFragmentContainerView class]];
-    [Lunar Register:lu :[LGNavHostFragment class]];
 	
 	[Lunar Register:lu :[LuaDefines class]];
 	[Lunar Register:lu :[LuaNativeObject class]];
@@ -1010,9 +1011,21 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LuaLog class]];
     [Lunar Register:lu :[LuaNativeCall class]];
     
-    [Lunar Register:lu :[NavController class]];
+    [Lunar Register:lu :[LuaNavController class]];
     [Lunar Register:lu :[NavigationUI class]];
     [Lunar Register:lu :[FragmentManager class]];
+    [Lunar Register:lu :[LuaNavHostFragment class]];
+    [Lunar Register:lu :[LuaAppBarConfiguration class]];
+    [Lunar Register:lu :[LuaCoroutineScope class]];
+    [Lunar Register:lu :[LuaDispatchers class]];
+    [Lunar Register:lu :[LuaLifecycle class]];
+    [Lunar Register:lu :[LuaLifecycleObserver class]];
+    [Lunar Register:lu :[LuaLifecycleOwner class]];
+    [Lunar Register:lu :[LuaMutableLiveData class]];
+    [Lunar Register:lu :[LuaNavController class]];
+    [Lunar Register:lu :[NavOptions class]];
+    [Lunar Register:lu :[LuaViewModel class]];
+    [Lunar Register:lu :[LuaViewModelProvider class]];
     
     if(plugins != nil)
     {
@@ -1028,14 +1041,9 @@ int RegisterTag(lua_State *L)
 
     lua_pushstring(lu, [[UIDevice currentDevice].systemVersion cStringUsingEncoding:NSUTF8StringEncoding]);
     lua_setglobal(lu, "OS_VERSION");
-
-    //TODO:
-//    String s = GetContext().getResources().getString(R.string.deviceType);
-//    com.dk.scriptingengine.luagui.DisplayMetrics.isTablet = (s.compareTo("Tablet") == 0);
-//    Lua.lua_pushboolean(L, com.dk.scriptingengine.luagui.DisplayMetrics.isTablet);
-//    UIDevice.current.userInterfaceIdiom == UIDevice.
-//    [UIDevice currentDevice].
-//    Lua.lua_setglobal(L, "IS_TABLET")
+    
+    lua_pushboolean(lu, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+    lua_setglobal(lu, "IS_TABLET");
 }
 
 -(lua_State *)GetLuaState

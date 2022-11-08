@@ -3,7 +3,7 @@ open class AbstractSavedStateViewModelFactory: ViewModelProviderKeyedFactory {
     let TAG_SAVED_STATE_HANDLE_COTNROLLER = "androidx.lifecycle.savedstate.vm.tag"
     
     let mSavedStateRegistry: SavedStateRegistry
-    let mLifecycle: LuaLifecycle
+    let mLifecycle: Lifecycle
     let mDefaultArgs: Bundle?
     
     init(owner: SavedStateRegistryOwner, defaultArgs: Bundle?) {
@@ -180,7 +180,7 @@ open class NavBackStackEntry : NSObject, LifecycleOwner, ViewModelStoreOwner, Ha
         mArgs = newArgs
     }
     
-    public func getLifecycle() -> LuaLifecycle! {
+    public func getLifecycle() -> Lifecycle! {
         return mLifecycle
     }
     
@@ -794,13 +794,13 @@ class ToolbarOnDestinationChangedListener : AbstractAppBarOnDestinationChangedLi
     }
 }
 
-@objc
+@objc(AppBarConfiguration)
 open class AppBarConfiguration: NSObject {
-    var mTopLevelDestinations: NSMutableSet
+    @objc public var mTopLevelDestinations: NSMutableSet
     var mOpenableLayout: LGView?
     var mFallbackOnNavigateUpListener: OnNavigateUpListener?
     
-    override init() {
+    @objc override public init() {
         mTopLevelDestinations = NSMutableSet()
     }
     
@@ -828,36 +828,44 @@ open class AppBarConfiguration: NSObject {
 open class NavigationUI : NSObject, LuaClass, LuaInterface
 {
     public func getId() -> String! {
-        return "NavigationUI"
+        return "LuaNavigationUI"
     }
     
     public static func className() -> String! {
-        return "NavigationUI"
+        return "LuaNavigationUI"
     }
     
     public static func luaMethods() -> NSMutableDictionary! {
         let dict = NSMutableDictionary()
         
-        dict["navigateUp"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(navigateUp(navController:configuration:))), #selector(navigateUp(navController:configuration:)), LuaBool.self, [NavController.self, AppBarConfiguration.self], NavigationUI.self)
-        dict["navigateUpView"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(navigateUp(navController:openableLayout:))), #selector(navigateUp(navController:openableLayout:)), LuaBool.self, [NavController.self, LGView.self], NavigationUI.self)
-        dict["setupActionBarWithNavController"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupActionBarWithNavController(form:navController:))), #selector(setupActionBarWithNavController(form:navController:)), nil, [LuaForm.self, NavController.self], NavigationUI.self)
-        dict["setupActionBarWithNavControllerView"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupActionBarWithNavController(form:navController:openableLayout:))), #selector(setupActionBarWithNavController(form:navController:openableLayout:)), nil, [LuaForm.self, NavController.self, LGView.self], NavigationUI.self)
-        dict["setupActionBarWithNavControllerConfiguration"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupActionBarWithNavController(form:navController:configuration:))), #selector(setupActionBarWithNavController(form:navController:configuration:)), nil, [LuaForm.self, NavController.self, AppBarConfiguration.self], NavigationUI.self)
-        dict["setupWithNavController"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupWithNavController(toolbar:navController:))), #selector(setupWithNavController(toolbar:navController:)), nil, [LGToolbar.self, NavController.self], NavigationUI.self)
-        dict["setupWithNavControllerView"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupWithNavController(toolbar:navController:openableLayout:))), #selector(setupWithNavController(toolbar:navController:openableLayout:)), nil, [LGToolbar.self, NavController.self, LGView.self], NavigationUI.self)
-        dict["setupWithNavControllerConfiguration"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupWithNavController(toolbar:navController:configuration:))), #selector(setupWithNavController(toolbar:navController:configuration:)), nil, [LGToolbar.self, NavController.self, AppBarConfiguration.self], NavigationUI.self)
+        dict["navigateUp"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(navigateUp(navController:configuration:))), #selector(navigateUp(navController:configuration:)), LuaBool.self, [LuaNavController.self, LuaAppBarConfiguration.self], NavigationUI.self)
+        dict["navigateUpView"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(navigateUp(navController:openableLayout:))), #selector(navigateUp(navController:openableLayout:)), LuaBool.self, [LuaNavController.self, LGView.self], NavigationUI.self)
+        dict["setupActionBarWithNavController"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupActionBarWithNavController(form:navController:))), #selector(setupActionBarWithNavController(form:navController:)), nil, [LuaForm.self, LuaNavController.self], NavigationUI.self)
+        dict["setupActionBarWithNavControllerView"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupActionBarWithNavController(form:navController:openableLayout:))), #selector(setupActionBarWithNavController(form:navController:openableLayout:)), nil, [LuaForm.self, LuaNavController.self, LGView.self], NavigationUI.self)
+        dict["setupActionBarWithNavControllerConfiguration"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupActionBarWithNavController(form:navController:configuration:))), #selector(setupActionBarWithNavController(form:navController:configuration:)), nil, [LuaForm.self, LuaNavController.self, LuaAppBarConfiguration.self], NavigationUI.self)
+        dict["setupWithNavController"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupWithNavController(toolbar:navController:))), #selector(setupWithNavController(toolbar:navController:)), nil, [LGToolbar.self, LuaNavController.self], NavigationUI.self)
+        dict["setupWithNavControllerView"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupWithNavController(toolbar:navController:openableLayout:))), #selector(setupWithNavController(toolbar:navController:openableLayout:)), nil, [LGToolbar.self, LuaNavController.self, LGView.self], NavigationUI.self)
+        dict["setupWithNavControllerConfiguration"] = LuaFunction.createC(true, class_getClassMethod(self, #selector(setupWithNavController(toolbar:navController:configuration:))), #selector(setupWithNavController(toolbar:navController:configuration:)), nil, [LGToolbar.self, LuaNavController.self, LuaAppBarConfiguration.self], NavigationUI.self)
         
         return dict
     }
     
-    @objc static func navigateUp(navController: NavController, openableLayout: LGView) -> Bool {
+    @objc public static func navigateUp(navController: LuaNavController, openableLayout: LGView) -> Bool {
+        return NavigationUI.navigateUpI(navController: navController.no, openableLayout: openableLayout)
+    }
+    
+    @objc public static func navigateUpI(navController: NavController, openableLayout: LGView) -> Bool {
         let controller = AppBarConfiguration()
         controller.Builder(navGraph: navController.getGraph())
         controller.mOpenableLayout = openableLayout
-        return NavigationUI.navigateUp(navController: navController, configuration: controller)
+        return NavigationUI.navigateUpI(navController: navController, configuration: controller)
     }
     
-    @objc static func navigateUp(navController: NavController, configuration: AppBarConfiguration) -> Bool {
+    @objc public static func navigateUp(navController: LuaNavController, configuration: LuaAppBarConfiguration) -> Bool {
+        NavigationUI.navigateUpI(navController: navController.no, configuration: configuration.no)
+    }
+    
+    @objc public static func navigateUpI(navController: NavController, configuration: AppBarConfiguration) -> Bool {
         let openableLayout = configuration.mOpenableLayout
         let currentDestination = navController.getCurrentDestination()
         let topLevelDestinations = configuration.getTopLevelDestinations()
@@ -878,34 +886,54 @@ open class NavigationUI : NSObject, LuaClass, LuaInterface
         }
     }
     
-    @objc static func setupActionBarWithNavController(form: LuaForm, navController: NavController) {
-        let configuration = AppBarConfiguration()
-        configuration.Builder(navGraph: navController .getGraph())
-        setupActionBarWithNavController(form: form, navController: navController, configuration: configuration)
+    @objc public static func setupActionBarWithNavController(form: LuaForm, navController: LuaNavController) {
+        NavigationUI.setupActionBarWithNavControllerI(form: form, navController: navController.no)
     }
     
-    @objc static func setupActionBarWithNavController(form: LuaForm, navController: NavController, openableLayout: LGView) {
+    @objc public static func setupActionBarWithNavControllerI(form: LuaForm, navController: NavController) {
+        let configuration = AppBarConfiguration()
+        configuration.Builder(navGraph: navController .getGraph())
+        setupActionBarWithNavControllerI(form: form, navController: navController, configuration: configuration)
+    }
+    
+    @objc public static func setupActionBarWithNavController(form: LuaForm, navController: LuaNavController, openableLayout: LGView) {
+        NavigationUI.setupActionBarWithNavControllerI(form: form, navController: navController.no, openableLayout: openableLayout)
+    }
+    
+    @objc public static func setupActionBarWithNavControllerI(form: LuaForm, navController: NavController, openableLayout: LGView) {
         let configuration = AppBarConfiguration()
         configuration.Builder(navGraph: navController .getGraph())
         configuration.mOpenableLayout = openableLayout
-        setupActionBarWithNavController(form: form, navController: navController, configuration: configuration)
+        setupActionBarWithNavControllerI(form: form, navController: navController, configuration: configuration)
     }
     
-    @objc static func setupActionBarWithNavController(form: LuaForm, navController: NavController, configuration: AppBarConfiguration) {
+    @objc public static func setupActionBarWithNavController(form: LuaForm, navController: LuaNavController, configuration: LuaAppBarConfiguration) {
+        NavigationUI.setupActionBarWithNavControllerI(form: form, navController: navController.no, configuration: configuration.no)
+    }
+    
+    @objc public static func setupActionBarWithNavControllerI(form: LuaForm, navController: NavController, configuration: AppBarConfiguration) {
         navController.addOnDestinationChangedListener(listener: ActionBarOnDestinationChangedListener(form: form, configuration: configuration))
     }
     
-    @objc static func setupWithNavController(toolbar: LGToolbar, navController: NavController) {
-        let configuration = AppBarConfiguration()
-        configuration.Builder(navGraph: navController.getGraph())
-        setupWithNavController(toolbar: toolbar, navController: navController, configuration: configuration)
+    @objc public static func setupWithNavController(toolbar: LGToolbar, navController: LuaNavController) {
+        NavigationUI.setupWithNavControllerI(toolbar: toolbar, navController: navController.no)
     }
     
-    @objc static func setupWithNavController(toolbar: LGToolbar, navController: NavController, openableLayout: LGView) {
+    @objc public static func setupWithNavControllerI(toolbar: LGToolbar, navController: NavController) {
+        let configuration = AppBarConfiguration()
+        configuration.Builder(navGraph: navController.getGraph())
+        setupWithNavControllerI(toolbar: toolbar, navController: navController, configuration: configuration)
+    }
+    
+    @objc public static func setupWithNavController(toolbar: LGToolbar, navController: LuaNavController, openableLayout: LGView) {
+        NavigationUI.setupWithNavControllerI(toolbar: toolbar, navController: navController.no, openableLayout: openableLayout)
+    }
+    
+    @objc public static func setupWithNavControllerI(toolbar: LGToolbar, navController: NavController, openableLayout: LGView) {
         let configuration = AppBarConfiguration()
         configuration.Builder(navGraph: navController.getGraph())
         configuration.mOpenableLayout = openableLayout
-        setupWithNavController(toolbar: toolbar, navController: navController, configuration: configuration)
+        setupWithNavControllerI(toolbar: toolbar, navController: navController, configuration: configuration)
     }
     
     class ClickListener : NSObject, OnClickListenerInternal {
@@ -918,16 +946,20 @@ open class NavigationUI : NSObject, LuaClass, LuaInterface
         }
         
         func onClick(_ view: LGView!) -> Any! {
-            NavigationUI.navigateUp(navController:navController, configuration:configuration)
+            NavigationUI.navigateUpI(navController:navController, configuration:configuration)
         }
     }
     
-    @objc static func setupWithNavController(toolbar: LGToolbar, navController: NavController, configuration: AppBarConfiguration) {
+    @objc public static func setupWithNavController(toolbar: LGToolbar, navController: LuaNavController, configuration: LuaAppBarConfiguration) {
+        NavigationUI.setupWithNavControllerI(toolbar: toolbar, navController: navController.no, configuration: configuration.no)
+    }
+    
+    @objc public static func setupWithNavControllerI(toolbar: LGToolbar, navController: NavController, configuration: AppBarConfiguration) {
         navController.addOnDestinationChangedListener(listener: ToolbarOnDestinationChangedListener(toolbar: toolbar, configuration: configuration))
         toolbar.setNavigationOnClickListenerInternal(ClickListener(navController: navController, configuration: configuration))
     }
     
-    @objc static func matchDestination(destination: NavDestination, destId: String) -> Bool {
+    @objc public static func matchDestination(destination: NavDestination, destId: String) -> Bool {
         var currentDestination = destination;
         while (currentDestination.idVal != destId && currentDestination.mParent != nil) {
             currentDestination = currentDestination.mParent
@@ -935,7 +967,7 @@ open class NavigationUI : NSObject, LuaClass, LuaInterface
         return currentDestination.idVal == destId;
     }
     
-    @objc static func matchDestinations(destination: NavDestination, destinationIds: NSSet) -> Bool {
+    @objc public static func matchDestinations(destination: NavDestination, destinationIds: NSSet) -> Bool {
         var currentDestination: NavDestination? = destination;
         repeat {
             if(destinationIds.contains(currentDestination?.idVal)) {
@@ -946,7 +978,7 @@ open class NavigationUI : NSObject, LuaClass, LuaInterface
         return false;
     }
     
-    @objc static func findStartDestination(graph: NavGraph) -> NavDestination {
+    @objc public static func findStartDestination(graph: NavGraph) -> NavDestination {
         var startDestination = graph as NSObject
         while (startDestination.isKind(of: NavGraph.self)) {
             let parent = startDestination as! NavGraph

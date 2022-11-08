@@ -3,3 +3,6 @@ module Topping {
     export *
     module * { export * }
 }
+module Topping.Swift {
+    exclude header "Topping-Swift.h"
+}

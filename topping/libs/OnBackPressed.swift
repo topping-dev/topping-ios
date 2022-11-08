@@ -132,13 +132,13 @@ open class OnBackPressedDispatcher : NSObject {
     open class LifecycleOnBackPressedCancellable : NSObject, LifecycleEventObserver, Cancellable {
         var key: String = UUID.init().uuidString
         
-        private var mLifecycle: LuaLifecycle
+        private var mLifecycle: Lifecycle
         private var mOnBackPressedCallback: OnBackPressedCallback
         private var mCurrentCancellable: Cancellable?
         
         private var mOnBackPressedDispatcher: OnBackPressedDispatcher
         
-        init(lifecycle: LuaLifecycle, onBackPressedCallback: OnBackPressedCallback, onBackPressedDispatcher: OnBackPressedDispatcher) {
+        init(lifecycle: Lifecycle, onBackPressedCallback: OnBackPressedCallback, onBackPressedDispatcher: OnBackPressedDispatcher) {
             mLifecycle = lifecycle
             mOnBackPressedCallback = onBackPressedCallback
             mOnBackPressedDispatcher = onBackPressedDispatcher

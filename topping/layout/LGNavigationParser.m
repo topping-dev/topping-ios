@@ -4,6 +4,7 @@
 #import "DisplayMetrics.h"
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
+#import "LuaValues.h"
 #import <topping/topping-Swift.h>
 
 @implementation NavArgument
@@ -11,6 +12,31 @@
 @end
 
 @implementation NavOptions
+
++(NavOptions*)create:(BOOL)singleTop :(LuaRef *)popUpTo :(BOOL)popUpToInclusive :(LuaRef *)enterAnim :(LuaRef *)exitAnim :(LuaRef *)popEnterAnim :(LuaRef *)popExitAnim {
+    NavOptions *no = [NavOptions new];
+    no.mSingleTop = singleTop;
+    no.mPopUpTo = popUpTo.idRef;
+    no.mPopUpToInclusive = popUpToInclusive;
+    no.mEnterAnim = enterAnim.idRef;
+    no.mExitAnim = exitAnim.idRef;
+    no.mPopEnterAnim = popEnterAnim.idRef;
+    no.mPopExitAnim = popExitAnim.idRef;
+    
+    return no;
+}
+
++ (NSString *)className {
+    return @"LuaNavOptions";
+}
+
++ (NSMutableDictionary *)luaMethods {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+
+    ClassMethod(create:::::::, NavOptions, MakeArray([LuaBool class]C [LuaRef class]C [LuaBool class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C nil), @"create")
+    
+    return dict;
+}
 
 @end
 

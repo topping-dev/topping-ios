@@ -4,7 +4,7 @@
 
 @implementation LuaFunction
 
-+(LuaFunction*)CreateC:(bool)manP :(Method) methodP :(SEL)selP :(Class)returnsP :(NSArray *)argArrayP: (Class)classOfMethodP
++(LuaFunction*)CreateC:(bool)manP :(Method) methodP :(SEL)selP :(Class)returnsP :(NSArray *)argArrayP :(Class)classOfMethodP
 {
 	LuaFunction *lf = [[LuaFunction alloc] init];
 	lf->manual = manP;
@@ -28,10 +28,10 @@
 	return lf;
 }
 
-+(LuaFunction*)CreateC:(Method) methodP :(SEL)selP :(Class)returnsP :(NSArray *)argArrayP: (Class)classOfMethodP
++(LuaFunction*)CreateC:(Method) methodP :(SEL)selP :(Class)returnsP :(NSArray *)argArrayP :(Class)classOfMethodP
 {
 	LuaFunction *lf = [[LuaFunction alloc] init];
-	lf->manual = false;
+	lf->manual = true;
 	lf->m = methodP;
 	lf->classOfMethod = classOfMethodP;
 	lf->selector = selP;
@@ -43,7 +43,7 @@
 +(LuaFunction*)Create:(Method) methodP :(SEL)selP :(Class)returnsP :(NSArray *)argArrayP
 {
 	LuaFunction *lf = [[LuaFunction alloc] init];
-	lf->manual = false;
+	lf->manual = true;
 	lf->m = methodP;
 	lf->classOfMethod = NULL;	
 	lf->selector = selP;
@@ -56,7 +56,7 @@
 +(LuaFunction*)CreateC:(Method) methodP :(SEL)selP :(Class)returnsP :(Class)classOfMethodP
 {
 	LuaFunction *lf = [[LuaFunction alloc] init];
-	lf->manual = false;
+	lf->manual = true;
 	lf->m = methodP;
 	lf->classOfMethod = classOfMethodP;
 	lf->selector = selP;
@@ -68,7 +68,7 @@
 +(LuaFunction*)Create:(Method) methodP :(SEL)selP :(Class)returnsP
 {
 	LuaFunction *lf = [[LuaFunction alloc] init];
-	lf->manual = false;
+	lf->manual = true;
 	lf->m = methodP;
 	lf->classOfMethod = NULL;
 	lf->selector = selP;
