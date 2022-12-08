@@ -30,9 +30,6 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.dependency 'GDataXML-HTML', '1.4.1'
   s.dependency 'ActionSheetPicker-3.0', '2.5.0'
   s.dependency 'MBProgressHUD', '1.2.0'
-  s.dependency 'MaterialComponents/AppBar', '119.5.0'
-  s.dependency 'MaterialComponents/ActivityIndicator', '119.5.0'
-  s.dependency 'MDFInternationalization', '2.0.0'
   
   s.vendored_frameworks = 'Topping.framework'
   s.ios.deployment_target = '10.0'

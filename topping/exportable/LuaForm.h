@@ -19,6 +19,7 @@
 @class OnBackPressedDispatcher;
 @class LuaFormOnBackPressedDispatcher;
 @class LuaLifecycle;
+@class LuaRef;
 @protocol ViewModelStoreOwner;
 
 typedef enum FormEvents

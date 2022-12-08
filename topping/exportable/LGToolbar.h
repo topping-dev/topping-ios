@@ -73,6 +73,11 @@
 @property (nonatomic, retain) NSString* android_titleTextAppearance;
 @property (nonatomic, retain) NSString* android_titleTextColor;
 @property (nonatomic, retain) UIView *toolbar;
+@property (nonatomic, retain) UILabel *titleLabel;
+@property (nonatomic, retain) UIBarButtonItem *title;
+@property (nonatomic, retain) UIBarButtonItem *spacer;
+@property (nonatomic, retain) NSMutableArray *startItems;
+@property (nonatomic, retain) NSMutableArray *endItems;
 @property (nonatomic, retain) LuaTranslator *ltNavigationClick;
 @property (nonatomic, retain) LuaTranslator *ltOverflowClick;
 @property (nonatomic, retain) id<OnClickListenerInternal> inNavigationClick;

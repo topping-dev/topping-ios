@@ -1,6 +1,5 @@
 #import "LGToolbar.h"
 #import <topping/topping-Swift.h>
-#import <MaterialComponents/MaterialNavigationBar.h>
 #import "Topping.h"
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
@@ -16,24 +15,37 @@
 
 -(UIView *)CreateComponent
 {
-    self.toolbar = [[MDCNavigationBar alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    self.toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.titleLabel.text = @"";
+    self.title = [[UIBarButtonItem alloc] initWithCustomView:self.titleLabel];
+    
+    self.spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                            target:nil
+                                                                action:nil];
+    
+    self.startItems = [NSMutableArray array];
+    self.endItems = [NSMutableArray array];
+    
+    [self SetItems];
+    
     return self.toolbar;
 }
 
 -(void)SetupComponent:(UIView *)view
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    UIToolbar *toolbar = (UIToolbar*)self.toolbar;
     if(self.android_background == nil)
     {
         self.android_background = @"@color/colorPrimary";
     }
     if(self.android_title != nil)
     {
-        toolbar.title = [[LGStringParser GetInstance] GetString:self.android_title];
+        self.titleLabel.text = [[LGStringParser GetInstance] GetString:self.android_title];
     }
     if(self.android_titleTextColor != nil)
     {
-        toolbar.titleTextColor = [[LGColorParser GetInstance] ParseColor:self.android_titleTextColor];
+        self.titleLabel.textColor = [[LGColorParser GetInstance] ParseColor:self.android_titleTextColor];
     }
     /*toolbar.getView.detail = self.android_subtitle;
     if(self.android_subtitleTextColor != nil)
@@ -52,7 +64,7 @@
     {
         LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:self.android_background];
         if(ldr != nil)
-            toolbar.backgroundColor = ldr.color;
+            toolbar.barTintColor = ldr.color;
     }
     
     @try {
@@ -76,10 +88,24 @@
         if(dMarginBottom == -1)
             dMarginBottom = 0;
         
-        toolbar.titleInsets = UIEdgeInsetsMake(dMarginTop, dMarginLeft, dMarginBottom, dMarginRight);
+        //toolbar.titleInsets = UIEdgeInsetsMake(dMarginTop, dMarginLeft, dMarginBottom, dMarginRight);
     } @catch (...) {}
     
+    
+    CGSize val = [self.titleLabel.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size;
+    self.titleLabel.frame = CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.origin.y, val.width, val.height);
+    
     [super SetupComponent:toolbar];
+}
+
+-(void)SetItems {
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObjectsFromArray:self.startItems];
+    [arr addObject:self.spacer];
+    [arr addObject:self.title];
+    [arr addObject:self.spacer];
+    [arr addObjectsFromArray:self.endItems];
+    [((UIToolbar*)self.toolbar) setItems:arr];
 }
 
 -(void)SetMenu:(LuaRef*)menuRef
@@ -94,21 +120,25 @@
 
 -(void)SetNavigationIcon:(LuaStream*)navigationIconStream
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
+    UIToolbar *toolbar = (UIToolbar*)self.toolbar;
+    [self.startItems removeAllObjects];
     if(navigationIconStream == nil) {
-        toolbar.backItem = nil;
+        [self SetItems];
         return;
     }
     UIImage *img = (UIImage*)navigationIconStream.nonStreamData;
     img = [img imageWithSizeAspect:toolbar.frame.size.height - 4];
-    toolbar.backItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
+    
+    [self.startItems addObject:leftItem];
+    
+    [self SetItems];
 }
 
 -(void)SetOverflowIcon:(LuaStream*)overflowIconStream
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
     UIImage *img = (UIImage*)overflowIconStream.nonStreamData;
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:toolbar.trailingBarButtonItems];
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:self.endItems];
     UIBarButtonItem *iv = nil;
     if(arr.count > 0)
     {
@@ -123,37 +153,33 @@
         [iv setUserInteractionEnabled:YES];
         [iv.getView addGestureRecognizer:singleTap];*/
     }
-    toolbar.trailingBarButtonItems = arr;
+    self.endItems = arr;
+    [self SetItems];
 }
 
 -(NSString*)GetTitle
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
-    return toolbar.title;
+    return self.titleLabel.text;
 }
 
 -(void)SetTitle:(NSString*)title
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
-    toolbar.title = title;
+    self.titleLabel.text = title;
 }
 
 -(void)SetTitleRef:(LuaRef*)ref
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
-    toolbar.title = [[LGStringParser GetInstance] GetString:ref.idRef];
+    self.titleLabel.text = [[LGStringParser GetInstance] GetString:ref.idRef];
 }
 
 -(void)SetTitleTextColor:(NSString*)color
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
-    toolbar.titleTextColor = [[LGColorParser GetInstance] ParseColor:color];
+    self.titleLabel.textColor = [[LGColorParser GetInstance] ParseColor:color];
 }
 
 -(void)SetTitleTextColorRef:(LuaRef*)color
 {
-    MDCNavigationBar *toolbar = (MDCNavigationBar*)self.toolbar;
-    toolbar.titleTextColor = [[LGColorParser GetInstance] ParseColor:color.idRef];
+    self.titleLabel.textColor = [[LGColorParser GetInstance] ParseColor:color.idRef];
 }
 
 -(void)SetTitleTextApperance:(LuaRef*)ref

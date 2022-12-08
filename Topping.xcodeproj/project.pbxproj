@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -324,6 +324,60 @@
 		5C91BD872843647000D4C94F /* FragmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD862843647000D4C94F /* FragmentController.swift */; };
 		5C91BD892843649B00D4C94F /* FragmentHostCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD882843649B00D4C94F /* FragmentHostCallback.swift */; };
 		5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91BD8A2844B58300D4C94F /* FragmentManager.swift */; };
+		5C9EC7A32935F25D008D2909 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7A22935F25D008D2909 /* CircularProgressView.swift */; };
+		5C9EC7B02935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7A52935FBE2008D2909 /* MDCActivityIndicatorMotionSpec.m */; };
+		5C9EC7B12935FBE3008D2909 /* MaterialActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7A62935FBE2008D2909 /* MaterialActivityIndicator.h */; };
+		5C9EC7B22935FBE3008D2909 /* MDCActivityIndicator+Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7A72935FBE2008D2909 /* MDCActivityIndicator+Interface.h */; };
+		5C9EC7B32935FBE3008D2909 /* MaterialActivityIndicatorStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7A82935FBE2008D2909 /* MaterialActivityIndicatorStrings.h */; };
+		5C9EC7B42935FBE3008D2909 /* MDCActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7A92935FBE2008D2909 /* MDCActivityIndicator.m */; };
+		5C9EC7B52935FBE3008D2909 /* MDCActivityIndicator+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7AA2935FBE2008D2909 /* MDCActivityIndicator+Private.h */; };
+		5C9EC7B62935FBE3008D2909 /* MDCActivityIndicatorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7AB2935FBE2008D2909 /* MDCActivityIndicatorDelegate.h */; };
+		5C9EC7B72935FBE3008D2909 /* MDCActivityIndicator+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7AC2935FBE2008D2909 /* MDCActivityIndicator+Subclassing.h */; };
+		5C9EC7B82935FBE3008D2909 /* MDCActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7AD2935FBE2008D2909 /* MDCActivityIndicator.h */; };
+		5C9EC7B92935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7AE2935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h */; };
+		5C9EC7BA2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7AF2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h */; };
+		5C9EC7D02935FD41008D2909 /* MDMSpringTimingCurveGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7BC2935FD40008D2909 /* MDMSpringTimingCurveGenerator.h */; };
+		5C9EC7D12935FD41008D2909 /* MDMMotionCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7BD2935FD40008D2909 /* MDMMotionCurve.h */; };
+		5C9EC7D22935FD41008D2909 /* MDMAnimationTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7BE2935FD40008D2909 /* MDMAnimationTraits.h */; };
+		5C9EC7D32935FD41008D2909 /* MDMSpringTimingCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7BF2935FD40008D2909 /* MDMSpringTimingCurve.h */; };
+		5C9EC7D42935FD41008D2909 /* MDMSubclassingRestricted.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7C02935FD40008D2909 /* MDMSubclassingRestricted.h */; };
+		5C9EC7D52935FD41008D2909 /* MDMTimingCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7C12935FD40008D2909 /* MDMTimingCurve.h */; };
+		5C9EC7D62935FD41008D2909 /* MDMRepetition.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7C22935FD40008D2909 /* MDMRepetition.h */; };
+		5C9EC7D72935FD42008D2909 /* MDMAnimationTraits.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7C32935FD40008D2909 /* MDMAnimationTraits.m */; };
+		5C9EC7D82935FD42008D2909 /* MDMRepetitionOverTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7C42935FD40008D2909 /* MDMRepetitionOverTime.m */; };
+		5C9EC7D92935FD42008D2909 /* MDMRepetition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7C52935FD41008D2909 /* MDMRepetition.m */; };
+		5C9EC7DA2935FD42008D2909 /* MDMRepetitionTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7C62935FD41008D2909 /* MDMRepetitionTraits.h */; };
+		5C9EC7DB2935FD42008D2909 /* MotionInterchange.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7C72935FD41008D2909 /* MotionInterchange.h */; };
+		5C9EC7DC2935FD42008D2909 /* MDMSpringTimingCurveGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7C82935FD41008D2909 /* MDMSpringTimingCurveGenerator.m */; };
+		5C9EC7DD2935FD42008D2909 /* MDMRepetitionOverTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7C92935FD41008D2909 /* MDMRepetitionOverTime.h */; };
+		5C9EC7DE2935FD42008D2909 /* MDMMotionCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7CA2935FD41008D2909 /* MDMMotionCurve.m */; };
+		5C9EC7DF2935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7CB2935FD41008D2909 /* CAMediaTimingFunction+MDMTimingCurve.m */; };
+		5C9EC7E02935FD42008D2909 /* MDMMotionTiming.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7CC2935FD41008D2909 /* MDMMotionTiming.h */; };
+		5C9EC7E12935FD42008D2909 /* MDMSpringTimingCurve.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7CD2935FD41008D2909 /* MDMSpringTimingCurve.m */; };
+		5C9EC7E22935FD42008D2909 /* MDMMotionRepetition.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7CE2935FD41008D2909 /* MDMMotionRepetition.h */; };
+		5C9EC7E32935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7CF2935FD41008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h */; };
+		5C9EC7FB29360141008D2909 /* CABasicAnimation+MotionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7E529360140008D2909 /* CABasicAnimation+MotionAnimator.h */; };
+		5C9EC7FC29360141008D2909 /* MDMMotionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7E629360140008D2909 /* MDMMotionAnimator.h */; };
+		5C9EC7FD29360141008D2909 /* CATransaction+MotionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7E729360140008D2909 /* CATransaction+MotionAnimator.h */; };
+		5C9EC7FE29360141008D2909 /* MDMAnimationRegistrar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7E829360140008D2909 /* MDMAnimationRegistrar.m */; };
+		5C9EC7FF29360141008D2909 /* CABasicAnimation+MotionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7E929360140008D2909 /* CABasicAnimation+MotionAnimator.m */; };
+		5C9EC80029360141008D2909 /* MDMAnimatableKeyPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7EA29360140008D2909 /* MDMAnimatableKeyPaths.m */; };
+		5C9EC80129360141008D2909 /* MDMCoreAnimationTraceable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7EB29360140008D2909 /* MDMCoreAnimationTraceable.h */; };
+		5C9EC80229360141008D2909 /* MDMDragCoefficient.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7EC29360140008D2909 /* MDMDragCoefficient.h */; };
+		5C9EC80329360141008D2909 /* MDMRegisteredAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7ED29360140008D2909 /* MDMRegisteredAnimation.h */; };
+		5C9EC80429360141008D2909 /* MDMUIKitValueCoercion.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7EE29360140008D2909 /* MDMUIKitValueCoercion.h */; };
+		5C9EC80529360141008D2909 /* CAMediaTimingFunction+MotionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7EF29360140008D2909 /* CAMediaTimingFunction+MotionAnimator.m */; };
+		5C9EC80629360141008D2909 /* MDMBlockAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7F029360140008D2909 /* MDMBlockAnimations.m */; };
+		5C9EC80729360141008D2909 /* MDMDragCoefficient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7F129360140008D2909 /* MDMDragCoefficient.m */; };
+		5C9EC80829360141008D2909 /* MDMBlockAnimations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7F229360140008D2909 /* MDMBlockAnimations.h */; };
+		5C9EC80929360141008D2909 /* MDMAnimationRegistrar.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7F329360141008D2909 /* MDMAnimationRegistrar.h */; };
+		5C9EC80A29360141008D2909 /* CATransaction+MotionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7F429360141008D2909 /* CATransaction+MotionAnimator.m */; };
+		5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7F529360141008D2909 /* MDMMotionAnimator.m */; };
+		5C9EC80C29360141008D2909 /* MotionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7F629360141008D2909 /* MotionAnimator.h */; };
+		5C9EC80D29360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7F729360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h */; };
+		5C9EC80E29360141008D2909 /* MDMAnimatableKeyPaths.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9EC7F829360141008D2909 /* MDMAnimatableKeyPaths.h */; };
+		5C9EC80F29360141008D2909 /* MDMRegisteredAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7F929360141008D2909 /* MDMRegisteredAnimation.m */; };
+		5C9EC81029360141008D2909 /* MDMUIKitValueCoercion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EC7FA29360141008D2909 /* MDMUIKitValueCoercion.m */; };
 		5C9ED84128FECEBD00305A74 /* KotlinExports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9ED84028FECEBD00305A74 /* KotlinExports.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9ED84328FECF4200305A74 /* KotlinExports.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ED84228FECF4200305A74 /* KotlinExports.m */; };
 		5C9ED84628FED7B300305A74 /* LuaCoroutineScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ED84428FED7B200305A74 /* LuaCoroutineScope.m */; };
@@ -735,6 +789,60 @@
 		5C91BD862843647000D4C94F /* FragmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentController.swift; sourceTree = "<group>"; };
 		5C91BD882843649B00D4C94F /* FragmentHostCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentHostCallback.swift; sourceTree = "<group>"; };
 		5C91BD8A2844B58300D4C94F /* FragmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManager.swift; sourceTree = "<group>"; };
+		5C9EC7A22935F25D008D2909 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		5C9EC7A52935FBE2008D2909 /* MDCActivityIndicatorMotionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCActivityIndicatorMotionSpec.m; sourceTree = "<group>"; };
+		5C9EC7A62935FBE2008D2909 /* MaterialActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialActivityIndicator.h; sourceTree = "<group>"; };
+		5C9EC7A72935FBE2008D2909 /* MDCActivityIndicator+Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCActivityIndicator+Interface.h"; sourceTree = "<group>"; };
+		5C9EC7A82935FBE2008D2909 /* MaterialActivityIndicatorStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialActivityIndicatorStrings.h; sourceTree = "<group>"; };
+		5C9EC7A92935FBE2008D2909 /* MDCActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCActivityIndicator.m; sourceTree = "<group>"; };
+		5C9EC7AA2935FBE2008D2909 /* MDCActivityIndicator+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCActivityIndicator+Private.h"; sourceTree = "<group>"; };
+		5C9EC7AB2935FBE2008D2909 /* MDCActivityIndicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCActivityIndicatorDelegate.h; sourceTree = "<group>"; };
+		5C9EC7AC2935FBE2008D2909 /* MDCActivityIndicator+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCActivityIndicator+Subclassing.h"; sourceTree = "<group>"; };
+		5C9EC7AD2935FBE2008D2909 /* MDCActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCActivityIndicator.h; sourceTree = "<group>"; };
+		5C9EC7AE2935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialActivityIndicatorStrings_table.h; sourceTree = "<group>"; };
+		5C9EC7AF2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCActivityIndicatorMotionSpec.h; sourceTree = "<group>"; };
+		5C9EC7BC2935FD40008D2909 /* MDMSpringTimingCurveGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMSpringTimingCurveGenerator.h; sourceTree = "<group>"; };
+		5C9EC7BD2935FD40008D2909 /* MDMMotionCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMMotionCurve.h; sourceTree = "<group>"; };
+		5C9EC7BE2935FD40008D2909 /* MDMAnimationTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMAnimationTraits.h; sourceTree = "<group>"; };
+		5C9EC7BF2935FD40008D2909 /* MDMSpringTimingCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMSpringTimingCurve.h; sourceTree = "<group>"; };
+		5C9EC7C02935FD40008D2909 /* MDMSubclassingRestricted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMSubclassingRestricted.h; sourceTree = "<group>"; };
+		5C9EC7C12935FD40008D2909 /* MDMTimingCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMTimingCurve.h; sourceTree = "<group>"; };
+		5C9EC7C22935FD40008D2909 /* MDMRepetition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMRepetition.h; sourceTree = "<group>"; };
+		5C9EC7C32935FD40008D2909 /* MDMAnimationTraits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMAnimationTraits.m; sourceTree = "<group>"; };
+		5C9EC7C42935FD40008D2909 /* MDMRepetitionOverTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMRepetitionOverTime.m; sourceTree = "<group>"; };
+		5C9EC7C52935FD41008D2909 /* MDMRepetition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMRepetition.m; sourceTree = "<group>"; };
+		5C9EC7C62935FD41008D2909 /* MDMRepetitionTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMRepetitionTraits.h; sourceTree = "<group>"; };
+		5C9EC7C72935FD41008D2909 /* MotionInterchange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionInterchange.h; sourceTree = "<group>"; };
+		5C9EC7C82935FD41008D2909 /* MDMSpringTimingCurveGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMSpringTimingCurveGenerator.m; sourceTree = "<group>"; };
+		5C9EC7C92935FD41008D2909 /* MDMRepetitionOverTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMRepetitionOverTime.h; sourceTree = "<group>"; };
+		5C9EC7CA2935FD41008D2909 /* MDMMotionCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMotionCurve.m; sourceTree = "<group>"; };
+		5C9EC7CB2935FD41008D2909 /* CAMediaTimingFunction+MDMTimingCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+MDMTimingCurve.m"; sourceTree = "<group>"; };
+		5C9EC7CC2935FD41008D2909 /* MDMMotionTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMMotionTiming.h; sourceTree = "<group>"; };
+		5C9EC7CD2935FD41008D2909 /* MDMSpringTimingCurve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMSpringTimingCurve.m; sourceTree = "<group>"; };
+		5C9EC7CE2935FD41008D2909 /* MDMMotionRepetition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMMotionRepetition.h; sourceTree = "<group>"; };
+		5C9EC7CF2935FD41008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+MDMTimingCurve.h"; sourceTree = "<group>"; };
+		5C9EC7E529360140008D2909 /* CABasicAnimation+MotionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CABasicAnimation+MotionAnimator.h"; sourceTree = "<group>"; };
+		5C9EC7E629360140008D2909 /* MDMMotionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMMotionAnimator.h; sourceTree = "<group>"; };
+		5C9EC7E729360140008D2909 /* CATransaction+MotionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CATransaction+MotionAnimator.h"; sourceTree = "<group>"; };
+		5C9EC7E829360140008D2909 /* MDMAnimationRegistrar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMAnimationRegistrar.m; sourceTree = "<group>"; };
+		5C9EC7E929360140008D2909 /* CABasicAnimation+MotionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CABasicAnimation+MotionAnimator.m"; sourceTree = "<group>"; };
+		5C9EC7EA29360140008D2909 /* MDMAnimatableKeyPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMAnimatableKeyPaths.m; sourceTree = "<group>"; };
+		5C9EC7EB29360140008D2909 /* MDMCoreAnimationTraceable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMCoreAnimationTraceable.h; sourceTree = "<group>"; };
+		5C9EC7EC29360140008D2909 /* MDMDragCoefficient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMDragCoefficient.h; sourceTree = "<group>"; };
+		5C9EC7ED29360140008D2909 /* MDMRegisteredAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMRegisteredAnimation.h; sourceTree = "<group>"; };
+		5C9EC7EE29360140008D2909 /* MDMUIKitValueCoercion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMUIKitValueCoercion.h; sourceTree = "<group>"; };
+		5C9EC7EF29360140008D2909 /* CAMediaTimingFunction+MotionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+MotionAnimator.m"; sourceTree = "<group>"; };
+		5C9EC7F029360140008D2909 /* MDMBlockAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMBlockAnimations.m; sourceTree = "<group>"; };
+		5C9EC7F129360140008D2909 /* MDMDragCoefficient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMDragCoefficient.m; sourceTree = "<group>"; };
+		5C9EC7F229360140008D2909 /* MDMBlockAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMBlockAnimations.h; sourceTree = "<group>"; };
+		5C9EC7F329360141008D2909 /* MDMAnimationRegistrar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMAnimationRegistrar.h; sourceTree = "<group>"; };
+		5C9EC7F429360141008D2909 /* CATransaction+MotionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CATransaction+MotionAnimator.m"; sourceTree = "<group>"; };
+		5C9EC7F529360141008D2909 /* MDMMotionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMotionAnimator.m; sourceTree = "<group>"; };
+		5C9EC7F629360141008D2909 /* MotionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionAnimator.h; sourceTree = "<group>"; };
+		5C9EC7F729360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+MotionAnimator.h"; sourceTree = "<group>"; };
+		5C9EC7F829360141008D2909 /* MDMAnimatableKeyPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMAnimatableKeyPaths.h; sourceTree = "<group>"; };
+		5C9EC7F929360141008D2909 /* MDMRegisteredAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMRegisteredAnimation.m; sourceTree = "<group>"; };
+		5C9EC7FA29360141008D2909 /* MDMUIKitValueCoercion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMUIKitValueCoercion.m; sourceTree = "<group>"; };
 		5C9ED84028FECEBD00305A74 /* KotlinExports.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KotlinExports.h; sourceTree = "<group>"; };
 		5C9ED84228FECF4200305A74 /* KotlinExports.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KotlinExports.m; sourceTree = "<group>"; };
 		5C9ED84428FED7B200305A74 /* LuaCoroutineScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaCoroutineScope.m; sourceTree = "<group>"; };
@@ -1013,6 +1121,9 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5C9EC7E42936002A008D2909 /* MotionAnimator */,
+				5C9EC7BB2935FD1E008D2909 /* MotionInterchange */,
+				5C9EC7A42935F703008D2909 /* MaterialProgress */,
 				5CD344152861D42B00343C6B /* Deque.swift */,
 				5C5A984C24E16BC0002A22EA /* LuaInterface.h */,
 				5C2B6161254AAB37003A9705 /* LuaToaster.swift */,
@@ -1076,6 +1187,7 @@
 				5C64ECB02897CDAB00A4C14B /* LuaFormExt.swift */,
 				5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */,
 				5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */,
+				5C9EC7A22935F25D008D2909 /* CircularProgressView.swift */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1314,6 +1426,80 @@
 			path = core;
 			sourceTree = "<group>";
 		};
+		5C9EC7A42935F703008D2909 /* MaterialProgress */ = {
+			isa = PBXGroup;
+			children = (
+				5C9EC7A62935FBE2008D2909 /* MaterialActivityIndicator.h */,
+				5C9EC7AE2935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h */,
+				5C9EC7A82935FBE2008D2909 /* MaterialActivityIndicatorStrings.h */,
+				5C9EC7AD2935FBE2008D2909 /* MDCActivityIndicator.h */,
+				5C9EC7A92935FBE2008D2909 /* MDCActivityIndicator.m */,
+				5C9EC7A72935FBE2008D2909 /* MDCActivityIndicator+Interface.h */,
+				5C9EC7AA2935FBE2008D2909 /* MDCActivityIndicator+Private.h */,
+				5C9EC7AC2935FBE2008D2909 /* MDCActivityIndicator+Subclassing.h */,
+				5C9EC7AB2935FBE2008D2909 /* MDCActivityIndicatorDelegate.h */,
+				5C9EC7AF2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h */,
+				5C9EC7A52935FBE2008D2909 /* MDCActivityIndicatorMotionSpec.m */,
+			);
+			path = MaterialProgress;
+			sourceTree = "<group>";
+		};
+		5C9EC7BB2935FD1E008D2909 /* MotionInterchange */ = {
+			isa = PBXGroup;
+			children = (
+				5C9EC7CF2935FD41008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h */,
+				5C9EC7CB2935FD41008D2909 /* CAMediaTimingFunction+MDMTimingCurve.m */,
+				5C9EC7BE2935FD40008D2909 /* MDMAnimationTraits.h */,
+				5C9EC7C32935FD40008D2909 /* MDMAnimationTraits.m */,
+				5C9EC7BD2935FD40008D2909 /* MDMMotionCurve.h */,
+				5C9EC7CA2935FD41008D2909 /* MDMMotionCurve.m */,
+				5C9EC7CE2935FD41008D2909 /* MDMMotionRepetition.h */,
+				5C9EC7CC2935FD41008D2909 /* MDMMotionTiming.h */,
+				5C9EC7C22935FD40008D2909 /* MDMRepetition.h */,
+				5C9EC7C52935FD41008D2909 /* MDMRepetition.m */,
+				5C9EC7C92935FD41008D2909 /* MDMRepetitionOverTime.h */,
+				5C9EC7C42935FD40008D2909 /* MDMRepetitionOverTime.m */,
+				5C9EC7C62935FD41008D2909 /* MDMRepetitionTraits.h */,
+				5C9EC7BF2935FD40008D2909 /* MDMSpringTimingCurve.h */,
+				5C9EC7CD2935FD41008D2909 /* MDMSpringTimingCurve.m */,
+				5C9EC7BC2935FD40008D2909 /* MDMSpringTimingCurveGenerator.h */,
+				5C9EC7C82935FD41008D2909 /* MDMSpringTimingCurveGenerator.m */,
+				5C9EC7C02935FD40008D2909 /* MDMSubclassingRestricted.h */,
+				5C9EC7C12935FD40008D2909 /* MDMTimingCurve.h */,
+				5C9EC7C72935FD41008D2909 /* MotionInterchange.h */,
+			);
+			path = MotionInterchange;
+			sourceTree = "<group>";
+		};
+		5C9EC7E42936002A008D2909 /* MotionAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				5C9EC7E529360140008D2909 /* CABasicAnimation+MotionAnimator.h */,
+				5C9EC7E929360140008D2909 /* CABasicAnimation+MotionAnimator.m */,
+				5C9EC7F729360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h */,
+				5C9EC7EF29360140008D2909 /* CAMediaTimingFunction+MotionAnimator.m */,
+				5C9EC7E729360140008D2909 /* CATransaction+MotionAnimator.h */,
+				5C9EC7F429360141008D2909 /* CATransaction+MotionAnimator.m */,
+				5C9EC7F829360141008D2909 /* MDMAnimatableKeyPaths.h */,
+				5C9EC7EA29360140008D2909 /* MDMAnimatableKeyPaths.m */,
+				5C9EC7F329360141008D2909 /* MDMAnimationRegistrar.h */,
+				5C9EC7E829360140008D2909 /* MDMAnimationRegistrar.m */,
+				5C9EC7F229360140008D2909 /* MDMBlockAnimations.h */,
+				5C9EC7F029360140008D2909 /* MDMBlockAnimations.m */,
+				5C9EC7EB29360140008D2909 /* MDMCoreAnimationTraceable.h */,
+				5C9EC7EC29360140008D2909 /* MDMDragCoefficient.h */,
+				5C9EC7F129360140008D2909 /* MDMDragCoefficient.m */,
+				5C9EC7E629360140008D2909 /* MDMMotionAnimator.h */,
+				5C9EC7F529360141008D2909 /* MDMMotionAnimator.m */,
+				5C9EC7ED29360140008D2909 /* MDMRegisteredAnimation.h */,
+				5C9EC7F929360141008D2909 /* MDMRegisteredAnimation.m */,
+				5C9EC7EE29360140008D2909 /* MDMUIKitValueCoercion.h */,
+				5C9EC7FA29360141008D2909 /* MDMUIKitValueCoercion.m */,
+				5C9EC7F629360141008D2909 /* MotionAnimator.h */,
+			);
+			path = MotionAnimator;
+			sourceTree = "<group>";
+		};
 		5CB5E13125821D3F00BF2EF5 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -1369,6 +1555,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C9EC7E02935FD42008D2909 /* MDMMotionTiming.h in Headers */,
 				5C5A99F924E16BEC002A22EA /* io.h in Headers */,
 				5C5A99B424E16BEC002A22EA /* lzio.h in Headers */,
 				5C5A98BA24E16BCC002A22EA /* LGDrawableParser.h in Headers */,
@@ -1376,7 +1563,10 @@
 				5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */,
 				5C5A994324E16BCC002A22EA /* LGImageView.h in Headers */,
 				5C5A98C624E16BCC002A22EA /* ToppingEngine.h in Headers */,
+				5C9EC7D12935FD41008D2909 /* MDMMotionCurve.h in Headers */,
+				5C9EC7B32935FBE3008D2909 /* MaterialActivityIndicatorStrings.h in Headers */,
 				5C286DEA2557FDDC00198DA5 /* LGRelativeLayout.h in Headers */,
+				5C9EC7D32935FD41008D2909 /* MDMSpringTimingCurve.h in Headers */,
 				5C5A993824E16BCC002A22EA /* LuaFunction.h in Headers */,
 				5C8614F828D33E8500213CEE /* LGIdParser.h in Headers */,
 				5C9ED84728FED7B300305A74 /* LuaCoroutineScope.h in Headers */,
@@ -1392,6 +1582,7 @@
 				5CD343FE285CBAC900343C6B /* LGNavigationParser.h in Headers */,
 				5C5A991724E16BCC002A22EA /* LuaBool.h in Headers */,
 				5C5A99EB24E16BEC002A22EA /* usocket.h in Headers */,
+				5C9EC7D22935FD41008D2909 /* MDMAnimationTraits.h in Headers */,
 				5C5A991024E16BCC002A22EA /* LuaStore.h in Headers */,
 				5C5A993B24E16BCC002A22EA /* LuaViewInflator.h in Headers */,
 				5C5A980924E16A4B002A22EA /* Topping.h in Headers */,
@@ -1406,6 +1597,7 @@
 				5C5A99F424E16BEC002A22EA /* except.h in Headers */,
 				5C5A98F724E16BCC002A22EA /* LGCompoundButton.h in Headers */,
 				5C9ED84B28FFE89B00305A74 /* LuaDispatchers.h in Headers */,
+				5C9EC7D02935FD41008D2909 /* MDMSpringTimingCurveGenerator.h in Headers */,
 				5C42E35624EFE8B500F8B012 /* LGFrameLayout.h in Headers */,
 				5C5A98D124E16BCC002A22EA /* LuaForm.h in Headers */,
 				5C5A9A0424E16BEC002A22EA /* select.h in Headers */,
@@ -1421,8 +1613,13 @@
 				5CD343F32858AF7600343C6B /* RunnableObjc.h in Headers */,
 				5C5A990324E16BCC002A22EA /* LGStringParser.h in Headers */,
 				5C5A98EA24E16BCC002A22EA /* CommonDelegate.h in Headers */,
+				5C9EC7E22935FD42008D2909 /* MDMMotionRepetition.h in Headers */,
+				5C9EC7E32935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h in Headers */,
+				5C9EC7B92935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h in Headers */,
+				5C9EC80E29360141008D2909 /* MDMAnimatableKeyPaths.h in Headers */,
 				5C5A991B24E16BCC002A22EA /* LuaAll.h in Headers */,
 				5C5A991F24E16BCC002A22EA /* LGRadioGroup.h in Headers */,
+				5C9EC7FC29360141008D2909 /* MDMMotionAnimator.h in Headers */,
 				5C5A993724E16BCC002A22EA /* LuaJSON.h in Headers */,
 				5C5A995224E16BCC002A22EA /* LuaColor.h in Headers */,
 				5C5A994D24E16BCC002A22EA /* LGRadioButton.h in Headers */,
@@ -1430,10 +1627,15 @@
 				5C5A990F24E16BCC002A22EA /* LuaGlobalFunction.h in Headers */,
 				5C5A99CE24E16BEC002A22EA /* lparser.h in Headers */,
 				5C5A99DA24E16BEC002A22EA /* lstring.h in Headers */,
+				5C9EC80129360141008D2909 /* MDMCoreAnimationTraceable.h in Headers */,
 				5C5A99B524E16BEC002A22EA /* lgc.h in Headers */,
 				5C5A99EE24E16BEC002A22EA /* inet.h in Headers */,
+				5C9EC80929360141008D2909 /* MDMAnimationRegistrar.h in Headers */,
 				5C5A98CF24E16BCC002A22EA /* LGAbsListView.h in Headers */,
 				5C5A99F324E16BEC002A22EA /* options.h in Headers */,
+				5C9EC80429360141008D2909 /* MDMUIKitValueCoercion.h in Headers */,
+				5C9EC7D42935FD41008D2909 /* MDMSubclassingRestricted.h in Headers */,
+				5C9EC7B22935FBE3008D2909 /* MDCActivityIndicator+Interface.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
 				5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
@@ -1442,12 +1644,16 @@
 				5C5A992224E16BCC002A22EA /* LGHorizontalScrollView.h in Headers */,
 				5C5A98F524E16BCC002A22EA /* LG.h in Headers */,
 				5C5A994724E16BCC002A22EA /* CDefines.h in Headers */,
+				5C9EC7D52935FD41008D2909 /* MDMTimingCurve.h in Headers */,
+				5C9EC7B62935FBE3008D2909 /* MDCActivityIndicatorDelegate.h in Headers */,
 				5C91BD76283E15FF00D4C94F /* LuaViewModel.h in Headers */,
 				5C5A98D224E16BCC002A22EA /* LGProgressBar.h in Headers */,
 				5CB8586824E434CA006E6B65 /* KeyboardHelper.h in Headers */,
 				5C43E6DB24FE679B005BEA07 /* LGToolbar.h in Headers */,
 				5C91BD7E283E25B500D4C94F /* LifecycleRegistry.h in Headers */,
+				5C9EC7FD29360141008D2909 /* CATransaction+MotionAnimator.h in Headers */,
 				5C5A99D224E16BEC002A22EA /* lopcodes.h in Headers */,
+				5C9EC7B82935FBE3008D2909 /* MDCActivityIndicator.h in Headers */,
 				5C5A992724E16BCC002A22EA /* LGComboBox.h in Headers */,
 				5C5A98C924E16BCC002A22EA /* LGLinearLayout.h in Headers */,
 				5C32B2F124F9783300875355 /* LGValueParser.h in Headers */,
@@ -1455,9 +1661,11 @@
 				5C5A98F924E16BCC002A22EA /* DisplayMetrics.h in Headers */,
 				5C5A992C24E16BCC002A22EA /* LuaDate.h in Headers */,
 				5C5A99F624E16BEC002A22EA /* buffer.h in Headers */,
+				5C9EC7B52935FBE3008D2909 /* MDCActivityIndicator+Private.h in Headers */,
 				5C5A99C624E16BEC002A22EA /* lapi.h in Headers */,
 				5C5A99E924E16BEC002A22EA /* auxiliar.h in Headers */,
 				5C5A991C24E16BCC002A22EA /* LGLayoutParser.h in Headers */,
+				5C9EC7DA2935FD42008D2909 /* MDMRepetitionTraits.h in Headers */,
 				5C5A99EC24E16BEC002A22EA /* luasocket.h in Headers */,
 				5C5A994024E16BCC002A22EA /* Log.h in Headers */,
 				5C5A99E624E16BEC002A22EA /* tcp.h in Headers */,
@@ -1465,12 +1673,17 @@
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
 				5C5A990224E16BCC002A22EA /* LuaShort.h in Headers */,
 				5CD344022861B7D200343C6B /* LGFragmentContainerView.h in Headers */,
+				5C9EC7BA2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h in Headers */,
 				5C5A994424E16BCC002A22EA /* LGView.h in Headers */,
+				5C9EC7D62935FD41008D2909 /* MDMRepetition.h in Headers */,
 				5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */,
+				5C9EC7B12935FBE3008D2909 /* MaterialActivityIndicator.h in Headers */,
 				5C5A99C324E16BEC002A22EA /* ldebug.h in Headers */,
+				5C9EC80829360141008D2909 /* MDMBlockAnimations.h in Headers */,
 				5C5A995424E16BCC002A22EA /* Defines.h in Headers */,
 				5C5A99E424E16BEC002A22EA /* ltable.h in Headers */,
 				5C5A992524E16BCC002A22EA /* LuaTranslator.h in Headers */,
+				5C9EC80C29360141008D2909 /* MotionAnimator.h in Headers */,
 				5C5A991524E16BCC002A22EA /* LuaRect.h in Headers */,
 				5C5A994C24E16BCC002A22EA /* LuaHttpClient.h in Headers */,
 				5C5A98BD24E16BCC002A22EA /* LuaContext.h in Headers */,
@@ -1478,6 +1691,7 @@
 				5C5A98CE24E16BCC002A22EA /* LuaDefines.h in Headers */,
 				5CB8585824E4306A006E6B65 /* CustomURLConnection.h in Headers */,
 				5C91BD62283E135C00D4C94F /* Lifecycle.h in Headers */,
+				5C9EC7DB2935FD42008D2909 /* MotionInterchange.h in Headers */,
 				5C5A991824E16BCC002A22EA /* LuaDatabase.h in Headers */,
 				5CD344062861BA8100343C6B /* LuaNavHostFragment.h in Headers */,
 				5C5A993A24E16BCC002A22EA /* LGScrollView.h in Headers */,
@@ -1485,13 +1699,17 @@
 				5C5A99D124E16BEC002A22EA /* lstate.h in Headers */,
 				5C5A98DE24E16BCC002A22EA /* LGEditText.h in Headers */,
 				5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */,
+				5C9EC7B72935FBE3008D2909 /* MDCActivityIndicator+Subclassing.h in Headers */,
+				5C9EC80D29360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h in Headers */,
 				5C5A991E24E16BCC002A22EA /* LuaFloat.h in Headers */,
 				5C5A995524E16BCC002A22EA /* LuaTabForm.h in Headers */,
 				5C5A99E124E16BEC002A22EA /* lfunc.h in Headers */,
 				5C5A99D924E16BEC002A22EA /* lvm.h in Headers */,
 				5C9ED84E2900022A00305A74 /* LuaLifecycle.h in Headers */,
 				5C5A98C324E16BCC002A22EA /* Lunar.h in Headers */,
+				5C9EC7FB29360141008D2909 /* CABasicAnimation+MotionAnimator.h in Headers */,
 				5C5A99CA24E16BEC002A22EA /* llex.h in Headers */,
+				5C9EC80329360141008D2909 /* MDMRegisteredAnimation.h in Headers */,
 				5C91BD77283E15FF00D4C94F /* LuaViewModelProvider.h in Headers */,
 				5C91BD75283E15FF00D4C94F /* LuaMutableLiveData.h in Headers */,
 				5C5A991624E16BCC002A22EA /* LuaNativeObject.h in Headers */,
@@ -1504,6 +1722,7 @@
 				5C43E6D324FE41E7005BEA07 /* LGRecyclerView.h in Headers */,
 				5C5A993C24E16BCC002A22EA /* Common.h in Headers */,
 				5C5A99BA24E16BEC002A22EA /* lualib.h in Headers */,
+				5C9EC7DD2935FD42008D2909 /* MDMRepetitionOverTime.h in Headers */,
 				5C5A990A24E16BCC002A22EA /* LuaLong.h in Headers */,
 				5C5A994E24E16BCC002A22EA /* LGParser.h in Headers */,
 				5C5A993524E16BCC002A22EA /* LuaClass.h in Headers */,
@@ -1524,6 +1743,7 @@
 				5C9ED84128FECEBD00305A74 /* KotlinExports.h in Headers */,
 				5CB8587024E4354C006E6B65 /* NSQueue.h in Headers */,
 				5C5A98EE24E16BCC002A22EA /* IPTableBaseAdapter.h in Headers */,
+				5C9EC80229360141008D2909 /* MDMDragCoefficient.h in Headers */,
 				5C5A98EF24E16BCC002A22EA /* LuaInterface.h in Headers */,
 				5CBFA03A2530562200734CAE /* LuaThread.h in Headers */,
 			);
@@ -1542,7 +1762,6 @@
 				5C5A980124E16A4B002A22EA /* Frameworks */,
 				5C5A980224E16A4B002A22EA /* Resources */,
 				5C5ECFF324EAB1F0007659B8 /* Embed Frameworks */,
-				8BA991CA36D8B6974E5D4F8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1562,7 +1781,6 @@
 				5C5ECFCA24EA6474007659B8 /* Frameworks */,
 				5C5ECFCB24EA6474007659B8 /* Resources */,
 				5C5ECFEE24EA85C7007659B8 /* Embed Frameworks */,
-				040830A2A612AA31CDE78305 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1645,23 +1863,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		040830A2A612AA31CDE78305 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		0C90200434A5ECEC5E989E79 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1682,23 +1883,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8BA991CA36D8B6974E5D4F8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Topping/Pods-Topping-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Topping/Pods-Topping-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Topping/Pods-Topping-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		94A6E7703A5B96A3274AD2FA /* [CP] Check Pods Manifest.lock */ = {
@@ -1751,6 +1935,7 @@
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C91BD60283E134500D4C94F /* Lifecycle.m in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
+				5C9EC7DE2935FD42008D2909 /* MDMMotionCurve.m in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
 				5C5A99E324E16BEC002A22EA /* llex.c in Sources */,
 				5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */,
@@ -1758,10 +1943,12 @@
 				5C42E35724EFE8B500F8B012 /* LGFrameLayout.mm in Sources */,
 				5C91BD872843647000D4C94F /* FragmentController.swift in Sources */,
 				5CD343F52858B12100343C6B /* SavedStateRegistryController.swift in Sources */,
+				5C9EC80F29360141008D2909 /* MDMRegisteredAnimation.m in Sources */,
 				5C5A98B724E16BCC002A22EA /* LGAutoCompleteTextView.mm in Sources */,
 				5CD344032861B7D200343C6B /* LGFragmentContainerView.m in Sources */,
 				5C5A99DD24E16BEC002A22EA /* lapi.c in Sources */,
 				5C5A98B624E16BCC002A22EA /* LuaContext.mm in Sources */,
+				5C9EC80629360141008D2909 /* MDMBlockAnimations.m in Sources */,
 				5C5A99D624E16BEC002A22EA /* ldblib.c in Sources */,
 				5C5A99D324E16BEC002A22EA /* loslib.c in Sources */,
 				5C78BA3028462498003EC02A /* Utils.swift in Sources */,
@@ -1799,6 +1986,7 @@
 				5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */,
 				5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */,
 				5C5A994924E16BCC002A22EA /* LGEditText.mm in Sources */,
+				5C9EC7B42935FBE3008D2909 /* MDCActivityIndicator.m in Sources */,
 				5CB8586924E434CA006E6B65 /* KeyboardHelper.m in Sources */,
 				5C5A991324E16BCC002A22EA /* LuaToast.m in Sources */,
 				5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */,
@@ -1812,6 +2000,7 @@
 				5C5A99B624E16BEC002A22EA /* liolib.c in Sources */,
 				5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */,
 				5C32B2F024F9783300875355 /* LGValueParser.m in Sources */,
+				5C9EC7A32935F25D008D2909 /* CircularProgressView.swift in Sources */,
 				5C5A990624E16BCC002A22EA /* LuaDate.m in Sources */,
 				5C5A99E524E16BEC002A22EA /* ltm.c in Sources */,
 				5CD343F72859F8EC00343C6B /* FragmentViewLifecycleOwner.swift in Sources */,
@@ -1833,6 +2022,7 @@
 				5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */,
 				5C5A992F24E16BCC002A22EA /* IPTableBaseAdapter.mm in Sources */,
 				5C5A992924E16BCC002A22EA /* LuaTranslator.m in Sources */,
+				5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */,
 				5C5A99BD24E16BEC002A22EA /* loadlib.c in Sources */,
 				5C5A98FE24E16BCC002A22EA /* LuaDatabase.m in Sources */,
 				5C2C28DA2526139B00F382B0 /* LuaRef.m in Sources */,
@@ -1853,16 +2043,21 @@
 				5C5A98E424E16BCC002A22EA /* LGDatePicker.mm in Sources */,
 				5C5A98B424E16BCC002A22EA /* LuaDouble.m in Sources */,
 				5C5A99C424E16BEC002A22EA /* linit.c in Sources */,
+				5C9EC80529360141008D2909 /* CAMediaTimingFunction+MotionAnimator.m in Sources */,
 				5C5A990B24E16BCC002A22EA /* LuaObjectStore.m in Sources */,
 				5C43E6DC24FE679B005BEA07 /* LGToolbar.m in Sources */,
 				5C5A99B724E16BEC002A22EA /* lopcodes.c in Sources */,
 				5C25F4E025076B8E0074B6AF /* UIColor+Lum.m in Sources */,
+				5C9EC80729360141008D2909 /* MDMDragCoefficient.m in Sources */,
+				5C9EC7B02935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.m in Sources */,
 				5C5A992424E16BCC002A22EA /* LuaStream.m in Sources */,
 				5C64ECB12897CDAB00A4C14B /* LuaFormExt.swift in Sources */,
 				5C23B60424E555870094389F /* UIBufferedProgressBar.m in Sources */,
 				5C5A99B924E16BEC002A22EA /* lobject.c in Sources */,
+				5C9EC80029360141008D2909 /* MDMAnimatableKeyPaths.m in Sources */,
 				5C5A98D524E16BCC002A22EA /* LuaHttpClient.m in Sources */,
 				5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */,
+				5C9EC7DF2935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.m in Sources */,
 				5C78BA2A2846221B003EC02A /* FragmentStore.swift in Sources */,
 				5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */,
 				5C5A992324E16BCC002A22EA /* LuaBuffer.m in Sources */,
@@ -1872,15 +2067,20 @@
 				5C5A992D24E16BCC002A22EA /* CDefines.m in Sources */,
 				5C91BD79283E15FF00D4C94F /* LuaViewModel.m in Sources */,
 				5C5A9A0524E16BEC002A22EA /* ldo.c in Sources */,
+				5C9EC7DC2935FD42008D2909 /* MDMSpringTimingCurveGenerator.m in Sources */,
 				5CB8585924E4306A006E6B65 /* CustomURLConnection.m in Sources */,
 				5C5A9A5124E1D3B1002A22EA /* DatabaseHelper.m in Sources */,
 				5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */,
 				5C9ED84328FECF4200305A74 /* KotlinExports.m in Sources */,
 				5C5A98E624E16BCC002A22EA /* LuaStore.m in Sources */,
+				5C9EC7E12935FD42008D2909 /* MDMSpringTimingCurve.m in Sources */,
 				5C5A992624E16BCC002A22EA /* LuaInt.m in Sources */,
 				5CBFA03B2530562200734CAE /* LuaThread.m in Sources */,
 				5C42E35324EFE1C600F8B012 /* LGViewGroup.m in Sources */,
 				5C5A99D424E16BEC002A22EA /* lgc.c in Sources */,
+				5C9EC7D82935FD42008D2909 /* MDMRepetitionOverTime.m in Sources */,
+				5C9EC7D92935FD42008D2909 /* MDMRepetition.m in Sources */,
+				5C9EC81029360141008D2909 /* MDMUIKitValueCoercion.m in Sources */,
 				5C5A99FB24E16BEC002A22EA /* inet.c in Sources */,
 				5C43E6D824FE42F1005BEA07 /* LGRecyclerViewAdapter.m in Sources */,
 				5C5A99E224E16BEC002A22EA /* lparser.c in Sources */,
@@ -1890,6 +2090,7 @@
 				5C5A98DF24E16BCC002A22EA /* LuaJSON.m in Sources */,
 				5C5A98D724E16BCC002A22EA /* LGCheckBox.mm in Sources */,
 				5C5A99BC24E16BEC002A22EA /* lmathlib.c in Sources */,
+				5C9EC7D72935FD42008D2909 /* MDMAnimationTraits.m in Sources */,
 				5C5A991924E16BCC002A22EA /* LGParser.mm in Sources */,
 				5C5A98BC24E16BCC002A22EA /* LuaShort.m in Sources */,
 				5CB8587124E4354C006E6B65 /* NSQueue.m in Sources */,
@@ -1903,16 +2104,19 @@
 				5C5A990D24E16BCC002A22EA /* LuaColor.m in Sources */,
 				5C5A98BE24E16BCC002A22EA /* LuaGlobalFunction.m in Sources */,
 				5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */,
+				5C9EC7FE29360141008D2909 /* MDMAnimationRegistrar.m in Sources */,
 				5C5A98C824E16BCC002A22EA /* LuaForm.mm in Sources */,
 				5C5A98FF24E16BCC002A22EA /* LGAdapterView.mm in Sources */,
 				5C91BD7A283E15FF00D4C94F /* LuaLifecycleObserver.m in Sources */,
 				5CD343FB2859FA8F00343C6B /* ViewModelProvider.swift in Sources */,
+				5C9EC7FF29360141008D2909 /* CABasicAnimation+MotionAnimator.m in Sources */,
 				5C5A99CF24E16BEC002A22EA /* ldump.c in Sources */,
 				5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */,
 				5C5A98DA24E16BCC002A22EA /* LGRadioGroup.mm in Sources */,
 				5C5A98D024E16BCC002A22EA /* LGDrawableParser.m in Sources */,
 				5C5A99DB24E16BEC002A22EA /* lcode.c in Sources */,
 				5C5A98E824E16BCC002A22EA /* LGRadioButton.mm in Sources */,
+				5C9EC80A29360141008D2909 /* CATransaction+MotionAnimator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2077,7 +2281,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/topping/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2110,7 +2314,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/topping/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
