@@ -41,10 +41,7 @@
 @property (nonatomic, strong) NSMutableDictionary *headers;
 @property (nonatomic, strong) NSMutableArray *values;
 
-@property (nonatomic, strong) NSMutableDictionary *createdViews;
 @property (nonatomic, strong) NSMutableDictionary *cells;
-@property (nonatomic, strong) NSMutableDictionary *views;
-@property (nonatomic, strong) NSMutableDictionary *addedViews;
 
 @property(nonatomic, strong) LuaTranslator *ltItemSelected, *ltCreateViewHolder, *ltBindViewHolder, *ltGetItemViewType;
 
