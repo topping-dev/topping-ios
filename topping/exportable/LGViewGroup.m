@@ -1,6 +1,7 @@
 #import "LGViewGroup.h"
 #import "Defines.h"
 #import "LuaFunction.h"
+#import "LGValueParser.h"
 
 @implementation LGViewGroup
 
@@ -70,15 +71,21 @@
         [w ClearDimensions];
 }
 
--(LGView *)GetViewById:(NSString *)lId
+-(LGView *)GetViewById:(LuaRef*)lId
 {
-    if([[self GetId] compare:lId] == 0)
+    NSString *sId = (NSString*)[[LGValueParser GetInstance] GetValue: lId.idRef];
+    return [self GetViewByIdInternal:sId];
+}
+
+-(LGView *)GetViewByIdInternal:(NSString *)sId
+{
+    if([[self GetId] compare:sId] == 0)
        return self;
     else
     {
         for(LGView *v in self.subviews)
         {
-            LGView *a = [v GetViewById:lId];
+            LGView *a = [v GetViewByIdInternal:sId];
             if(a != nil)
                 return a;
         }

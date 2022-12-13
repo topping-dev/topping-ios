@@ -51,12 +51,14 @@ typedef enum FormEvents
 +(NSObject*)CreateForTab:(LuaContext *)context :(NSString*)luaId;
 +(LuaForm*)GetActiveForm;
 -(LuaContext*)GetContext;
--(LGView*)GetViewById:(NSString*)lId;
+-(LGView*)GetViewById:(LuaRef*)lId;
+-(LGView*)GetViewByIdInternal:(NSString*)sId;
 -(NSDictionary*)GetBindings;
 -(LGView*)GetView;
 -(void)SetView:(LGView*)v;
 -(void)SetViewXML:(NSString *)xml;
 -(void)SetTitle:(NSString *)str;
+-(void)SetTitleRef:(LuaRef *)str;
 -(void)Close;
 
 -(BOOL)isChangingConfigurations;
@@ -91,5 +93,6 @@ KEYBOARD_PROPERTIES
 @property(nonatomic) BOOL mResumed;
 @property(nonatomic) BOOL mStopped;
 @property(nonatomic) BOOL createCalled;
+@property(nonatomic) BOOL rootConstraintsSet;
 
 @end

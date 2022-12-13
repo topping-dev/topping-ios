@@ -734,11 +734,17 @@
 	return lst; 
 }
 
--(LGView *)GetViewById:(NSString *)lId
+-(LGView *)GetViewById:(LuaRef *)lId
 {
-	if([[self GetId] compare:lId] == 0)
-	   return self;
-	return nil;
+    NSString *sId = (NSString*)[[LGValueParser GetInstance] GetValue: lId.idRef];
+    return [self GetViewByIdInternal:sId];
+}
+
+-(LGView *)GetViewByIdInternal:(NSString*)sId
+{
+    if([[self GetId] compare:sId] == 0)
+       return self;
+    return nil;
 }
 
 -(void)SetEnabled:(BOOL)enabled
@@ -751,18 +757,10 @@
     //self._view  = focusable;
 }
 
--(void)SetBackground:(NSString*)background
+-(void)SetBackground:(LuaRef*)background
 {
-    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser GetInstance] GetValue:background];
-    if(ldr.img)
-        [self._view setBackgroundColor:[UIColor colorWithPatternImage:ldr.img]];
-    else if(ldr.color != nil)
-        [self._view setBackgroundColor:ldr.color];
-}
-
--(void)SetBackgroundRef:(LuaRef*)ref
-{
-    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    NSString *sId = (NSString*)[[LGValueParser GetInstance] GetValue: background.idRef];
+    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser GetInstance] GetValue:sId];
     if(ldr.img)
         [self._view setBackgroundColor:[UIColor colorWithPatternImage:ldr.img]];
     else if(ldr.color != nil)
@@ -860,11 +858,10 @@
 										:[NSArray arrayWithObjects:[LuaContext class], nil]
 										:[LGView class]] 
 			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([NSString class]C nil)] forKey:@"GetViewById"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([LuaRef class]C nil)] forKey:@"GetViewById"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetEnabled:)) :@selector(SetEnabled:) :nil :MakeArray([LuaBool class]C nil)] forKey:@"SetEnabled"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetFocusable:)) :@selector(SetFocusable:) :nil :MakeArray([LuaBool class]C nil)] forKey:@"SetFocusable"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackground:)) :@selector(SetBackground:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetBackground"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackgroundRef:)) :@selector(SetBackgroundRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetBackgroundRef"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackground:)) :@selector(SetBackground:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetBackground"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnClickListener:)) :@selector(SetOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnClickListener"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavControllerInternal)) :@selector(findNavControllerInternal) :[LuaNavController class] :MakeArray(nil)] forKey:@"findNavController"];
 	return dict;

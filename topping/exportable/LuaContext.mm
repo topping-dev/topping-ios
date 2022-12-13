@@ -20,7 +20,7 @@
     
     NSString *windowActionBar = [styleMap objectForKey:@"windowActionBar"];
     if(windowActionBar != nil)
-        self.navController.navigationBarHidden = [[LGValueParser GetInstance] GetBoolValueDirect:windowActionBar];
+        self.navController.navigationBarHidden = ![[LGValueParser GetInstance] GetBoolValueDirect:windowActionBar];
 
     NSString *actionBarColor = [styleMap objectForKey:@"colorPrimary"];
     if(actionBarColor != nil)

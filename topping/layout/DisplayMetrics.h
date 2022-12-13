@@ -8,6 +8,8 @@
 
 +(UIView *)GetMasterView;
 +(void)SetMasterView:(UIView *)view;
++(CGRect)GetBaseFrame;
++(void)SetBaseFrame:(CGRect)frame;
 +(void)SetDensity:(float)d :(float)sd;
 +(int)readSize:(NSString *)sz;
 

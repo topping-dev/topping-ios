@@ -65,10 +65,10 @@
     {
         UITextView *tf = (UITextView*)self._view;
         tf.delegate = self;
-        CALayer *layer = [[CALayer alloc] init];
-        layer.backgroundColor = tf.textColor.CGColor;
-        layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
-        [tf.layer addSublayer:layer];
+        self.layer = [[CALayer alloc] init];
+        self.layer.backgroundColor = tf.textColor.CGColor;
+        self.layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
+        [tf.layer addSublayer:self.layer];
         
         if(self.android_inputType != nil)
         {
@@ -142,10 +142,10 @@
     else
     {
         UITextField *tf = (UITextField*)self._view;
-        CALayer *layer = [[CALayer alloc] init];
-        layer.backgroundColor = tf.textColor.CGColor;
-        layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
-        [tf.layer addSublayer:layer];
+        self.layer = [[CALayer alloc] init];
+        self.layer.backgroundColor = tf.textColor.CGColor;
+        self.layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
+        [tf.layer addSublayer:self.layer];
         
         if(self.android_inputType != nil)
         {
@@ -267,7 +267,13 @@
     }
 }
 
--(void)setViewMovedUp:(BOOL)movedUp:(NSNotification*)notif
+-(void)Resize {
+    [super Resize];
+    
+    self.layer.frame = CGRectMake(0, self._view.frame.size.height - 1, self._view.frame.size.width, 1);
+}
+
+-(void)setViewMovedUp:(BOOL)movedUp :(NSNotification*)notif
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.5];
@@ -426,7 +432,7 @@
     }
 }
 
--(void)SetText:(NSString *)val
+-(void)SetTextInternal:(NSString *)val
 {
     if(self.multiLine)
     {
@@ -442,10 +448,10 @@
     [self ResizeOnText];
 }
 
--(void)SetTextRef:(LuaRef *)ref
+-(void)SetText:(LuaRef *)ref
 {
     NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetText:val];
+    [self SetTextInternal:val];
 }
 
 -(void)SetTextColor:(NSString *)color

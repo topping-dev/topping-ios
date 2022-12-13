@@ -9,7 +9,6 @@
     UICollectionView *cv = ((UICollectionView*)self._view);
     if(cv != nil)
     {
-        
         /*LGAdapterView *adapterL = (LGAdapterView*)table.delegate;
         if(adapterL != nil)
         {
@@ -59,6 +58,11 @@
     ((UICollectionView*)self._view).dataSource = val;
     val.parent = self;
     self.adapter = val;
+    
+    [((UICollectionView*)self._view) setFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    
+    [((UICollectionView*)self._view) reloadData];
+    
     LGView *parToFind = self.parent;
     while(parToFind != nil)
     {
@@ -67,10 +71,8 @@
             break;
         parToFind = findView;
     }
-    
-    [((UICollectionView*)self._view) setFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
-    
-    [((UICollectionView*)self._view) reloadData];
+    /*if(parToFind != nil)
+       [parToFind ResizeAndInvalidate];*/
 }
 
 -(LGRecyclerViewAdapter *)GetAdapter

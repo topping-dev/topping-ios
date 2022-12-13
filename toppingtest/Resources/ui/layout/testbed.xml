@@ -7,22 +7,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#7993AB">
-<androidx.appcompat.widget.Toolbar
-    lua:id="ToolbarTest"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:title="test"/>
-<androidx.fragment.app.FragmentContainerView
-    android:id="@+id/nav_host_fragment"
-    android:name="androidx.navigation.fragment.NavHostFragment"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:defaultNavHost="true"
-    app:navGraph="@navigation/nav_graph"/>
-<!--androidx.recyclerview.widget.RecyclerView
+<androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     lua:id="ListViewTest"
-    android:background="#ffffff"/-->
+    android:background="#ffffff"/>
 </LinearLayout>
 

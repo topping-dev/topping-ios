@@ -61,10 +61,11 @@
         textColor = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:@"android:textColor" :[sToppingEngine GetAppStyle]];
     self.checkbox.title.textColor = textColor;
     UIColor *colorAccent = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
-    if(colorAccent == nil)
-        colorAccent = textColor;
-    self.checkbox.sw.tintColor = colorAccent;
-    self.checkbox.sw.onTintColor = colorAccent;
+    if(colorAccent != nil)
+    {
+        self.checkbox.sw.tintColor = colorAccent;
+        self.checkbox.sw.onTintColor = colorAccent;
+    }
     
     if(self.android_textSize != nil)
         self.checkbox.title.font = [self.checkbox.title.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
@@ -93,7 +94,6 @@
     }
 }
 
-//Lua
 +(LGCheckBox*)Create:(LuaContext *)context
 {
 	LGCheckBox *lst = [[LGCheckBox alloc] init];
@@ -106,17 +106,17 @@
     return self.checkbox.title.text;
 }
 
--(void)SetText:(NSString *)val
+-(void)SetTextInternal:(NSString *)val
 {
     [self.checkbox.title setText:val];
     self.android_text = val;
     [self ResizeOnText];
 }
 
--(void)SetTextRef:(LuaRef *)ref
+-(void)SetText:(LuaRef *)ref
 {
     NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetText:val];
+    [self SetTextInternal:val];
 }
 
 -(void)SetTextColor:(NSString *)color

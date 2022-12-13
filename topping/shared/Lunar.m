@@ -982,13 +982,13 @@ static int gc_T(lua_State *L)
 	lua_getfield(L, LUA_REGISTRYINDEX, "DO NOT TRASH");
 	if(lua_istable(L,-1) )
 	{
-		NSString *className = NSStringFromClass([obj class]);
+		/*NSString *className = NSStringFromClass([obj class]);
 		lua_getfield(L,-1, [className cStringUsingEncoding:NSASCIIStringEncoding]);
 		if(lua_isnil(L,-1))
 		{
-			/*delete obj;
-			obj = NULL;*/
-		}
+			delete obj;
+			obj = NULL;
+		}*/
 	}
 	lua_pop(L,3);
 	return 0;

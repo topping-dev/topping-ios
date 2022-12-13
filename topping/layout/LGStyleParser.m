@@ -70,6 +70,7 @@
         return;
     
     [self.styleMap setObject:dict forKey:nameAttr.stringValue];
+    
     if(parentAttr != nil)
         [self.parentMap setObject:parentAttr.stringValue forKey:nameAttr.stringValue];
 }
@@ -121,11 +122,11 @@
 
 -(NSObject *)GetStyleValue:(NSString *)style :(NSString *)key
 {
-    NSMutableDictionary *dict = [self.styleMap objectForKey:key];
+    NSMutableDictionary *dict = [self.styleMap objectForKey:style];
     
     if(dict != nil)
     {
-        NSString *valRef = [dict objectForKey:style];
+        NSString *valRef = [dict objectForKey:key];
         NSObject *val = [[LGValueParser GetInstance] GetValue:valRef];
         return val;
     }

@@ -136,6 +136,20 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 -(void) viewWillAppear:(BOOL)animated
 {
 	[CommonDelegate SetActiveForm:self];
+    
+    if(self.view.superview != nil && !self.rootConstraintsSet) {
+        self.rootConstraintsSet = true;
+        [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.view.superview.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = true;
+        [self.view.superview.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = true;
+        NSString *val = (NSString*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"iosBottomSafeArea"];
+        if([val isEqualToString:@"true"])
+            [self.view.superview.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = true;
+        else
+            [self.view.superview.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = true;
+        [self.view.superview.safeAreaLayoutGuide.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = true;
+    }
+    
 	[super viewWillAppear:animated];
 	[KeyboardHelper KeyboardEnableEvents:self];
     
@@ -183,6 +197,20 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_DESTROY];
 }
 
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.lgview ResizeAndInvalidate];
+    }];
+}
+
+-(void)viewDidLayoutSubviews {
+    [self.lgview ResizeAndInvalidate];
+}
+
 -(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -193,11 +221,14 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	return self.context;
 }
 
--(LGView*)GetViewById:(NSString*)lId
+-(LGView*)GetViewById:(LuaRef*)lId
 {
-    if(lId == nil)
-        return nil;
 	return [_lgview GetViewById:lId];
+}
+
+-(LGView*)GetViewByIdInternal:(NSString *)sId
+{
+    return [_lgview GetViewByIdInternal:sId];
 }
 
 -(NSDictionary*)GetBindings
@@ -231,6 +262,12 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 -(void)SetTitle:(NSString *)str
 {
 	self.title = str;
+}
+
+-(void)SetTitleRef:(LuaRef *)ref
+{
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    [self SetTitle:val];
 }
 
 -(void)Close
@@ -366,12 +403,13 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 										:[LuaForm class]] 
 			 forKey:@"GetActiveForm"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetContext)) :@selector(GetContext) :[LuaContext class] :MakeArray(nil)] forKey:@"GetContext"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([NSString class]C nil)] forKey:@"GetViewById"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([LuaRef class]C nil)] forKey:@"GetViewById"];
     InstanceMethodNoArg(GetBindings, MakeArray([NSDictionary class]C nil), @"GetBindings")
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetView)) :@selector(GetView) :[LGView class] :MakeArray(nil)] forKey:@"GetView"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetView:)) :@selector(SetView:) :nil :MakeArray([LGView class] C nil)] forKey:@"SetView"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewXML:)) :@selector(SetViewXML:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewXML"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleRef:)) :@selector(SetTitleRef:) :nil :MakeArray([LuaRef class] C nil)] forKey:@"SetTitleRef"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
     InstanceMethodNoArg(getLifecycleInner, LuaLifecycle, @"GetLifecycle")
     InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")

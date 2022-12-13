@@ -71,12 +71,14 @@ typedef enum FragmentEvents
 -(LuaContext*)GetContext;
 -(LuaForm*)GetForm;
 -(FragmentManager*)GetFragmentManager;
--(LGView*)GetViewById:(NSString*)lId;
+-(LGView*)GetViewById:(LuaRef*)lId;
+-(LGView*)GetViewByIdInternal:(NSString*)sId;
 -(LGView*)GetView;
 -(void)SetView:(LGView*)v;
 -(void)SetViewId:(NSString*)luaId;
 -(void)SetViewXML:(NSString *)xml;
 -(void)SetTitle:(NSString *)str;
+-(void)SetTitleRef:(LuaRef *)ref;
 -(void)Close;
 -(LuaNavController*)getNavController;
 -(BOOL)IsInitialized;

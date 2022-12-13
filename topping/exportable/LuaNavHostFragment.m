@@ -155,7 +155,8 @@
     LGFragmentContainerView *containerView = [LGFragmentContainerView Create:[self GetContext]];
     containerView.android_id = [self getContainerId];
     containerView.android_layout_width = @"match_parent";
-    containerView.android_layout_height = @"wrap_content";
+    containerView.android_layout_height = @"match_parent";
+    containerView.parent = container;
     [containerView AddSelfToParent:[container GetView] :self.context.form];
     return containerView;
 }

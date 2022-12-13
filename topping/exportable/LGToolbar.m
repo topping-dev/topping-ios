@@ -108,25 +108,29 @@
     [((UIToolbar*)self.toolbar) setItems:arr];
 }
 
--(void)SetMenu:(LuaRef*)menuRef
+-(void)SetMenu:(LuaRef*)menu
 {
     
 }
 
--(void)SetLogo:(LuaStream*)logoStream
+-(void)SetLogo:(LuaRef*)logo
 {
     //Not supported
 }
 
--(void)SetNavigationIcon:(LuaStream*)navigationIconStream
+-(void)SetNavigationIcon:(LuaRef*)navigationIcon
 {
     UIToolbar *toolbar = (UIToolbar*)self.toolbar;
     [self.startItems removeAllObjects];
-    if(navigationIconStream == nil) {
+    if(navigationIcon == nil) {
         [self SetItems];
         return;
     }
-    UIImage *img = (UIImage*)navigationIconStream.nonStreamData;
+
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:navigationIcon.idRef];
+    
+    LGDrawableReturn *lgr = [[LGDrawableParser GetInstance] ParseDrawable:val];
+    UIImage *img = lgr.img;
     img = [img imageWithSizeAspect:toolbar.frame.size.height - 4];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
     
@@ -135,9 +139,27 @@
     [self SetItems];
 }
 
--(void)SetOverflowIcon:(LuaStream*)overflowIconStream
+-(void)SetNavigationIconImage:(UIImage *)img {
+    UIToolbar *toolbar = (UIToolbar*)self.toolbar;
+    [self.startItems removeAllObjects];
+    if(img == nil) {
+        [self SetItems];
+        return;
+    }
+    
+    img = [img imageWithSizeAspect:toolbar.frame.size.height - 4];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
+    
+    [self.startItems addObject:leftItem];
+    
+    [self SetItems];
+}
+
+-(void)SetOverflowIcon:(LuaRef*)overflowIcon
 {
-    UIImage *img = (UIImage*)overflowIconStream.nonStreamData;
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:overflowIcon.idRef];
+    LGDrawableReturn *lgr = [[LGDrawableParser GetInstance] ParseDrawable:val];
+    UIImage *img = lgr.img;
     NSMutableArray *arr = [NSMutableArray arrayWithArray:self.endItems];
     UIBarButtonItem *iv = nil;
     if(arr.count > 0)
@@ -162,22 +184,17 @@
     return self.titleLabel.text;
 }
 
--(void)SetTitle:(NSString*)title
+-(void)SetTitleInternal:(NSString*)title
 {
     self.titleLabel.text = title;
 }
 
--(void)SetTitleRef:(LuaRef*)ref
+-(void)SetTitle:(LuaRef*)ref
 {
     self.titleLabel.text = [[LGStringParser GetInstance] GetString:ref.idRef];
 }
 
--(void)SetTitleTextColor:(NSString*)color
-{
-    self.titleLabel.textColor = [[LGColorParser GetInstance] ParseColor:color];
-}
-
--(void)SetTitleTextColorRef:(LuaRef*)color
+-(void)SetTitleTextColor:(LuaRef*)color
 {
     self.titleLabel.textColor = [[LGColorParser GetInstance] ParseColor:color.idRef];
 }
@@ -194,19 +211,15 @@
     return @"";
 }
 
--(void)SetSubtitle:(NSString*)subtitle
+-(void)SetSubtitleInternal:(NSString*)subtitle
 {
 }
 
--(void)SetSubtitleRef:(LuaRef*)ref
+-(void)SetSubtitle:(LuaRef*)ref
 {
 }
 
--(void)SetSubtitleTextColor:(NSString*)color
-{
-}
-
--(void)SetSubtitleTextColorRef:(LuaRef*)color
+-(void)SetSubtitleTextColor:(LuaRef*)color
 {
 }
 
@@ -274,19 +287,17 @@
              forKey:@"Create"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMenu:)) :@selector(SetMenu:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetMenu"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetLogo:)) :@selector(SetLogo:) :nil :MakeArray([LuaStream class]C nil)] forKey:@"SetLogo"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetNavigationIcon:)) :@selector(SetNavigationIcon:) :nil :MakeArray([LuaStream class]C nil)] forKey:@"SetNavigationIcon"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOverflowIcon:)) :@selector(SetOverflowIcon:) :nil :MakeArray([LuaStream class]C nil)] forKey:@"SetOverflowIcon"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetNavigationIcon:)) :@selector(SetNavigationIcon:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetNavigationIcon"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOverflowIcon:)) :@selector(SetOverflowIcon:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetOverflowIcon"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetTitle)) :@selector(GetTitle) :[NSString class] :MakeArray(nil)] forKey:@"GetTitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetTitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleRef:)) :@selector(SetTitleRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetTitleRef"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleTextColor:)) :@selector(SetTitleTextColor:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetTitleTextColor"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleTextColorRef:)) :@selector(SetTitleTextColorRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetTitleTextColorRef"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleInternal:)) :@selector(SetTitleInternal:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetTitle"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetTitleRef"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleTextColor:)) :@selector(SetTitleTextColor:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetTitleTextColor"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleTextApperance:)) :@selector(SetTitleTextApperance:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetTitleTextApperance"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetSubtitle)) :@selector(GetSubtitle) :[NSString class] :MakeArray(nil)] forKey:@"GetSubtitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitle:)) :@selector(SetSubtitle:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetSubtitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitleRef:)) :@selector(SetSubtitleRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetSubtitleRef"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitleTextColor:)) :@selector(SetSubtitleTextColor:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetSubtitleTextColor"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitleTextColorRef::)) :@selector(SetSubtitleTextColorRef::) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetSubtitleTextColorRef:"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitleInternal:)) :@selector(SetSubtitleInternal:) :nil :MakeArray([NSString class]C nil)] forKey:@"SetSubtitle"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitle:)) :@selector(SetSubtitle:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetSubtitleRef"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitleTextColor:)) :@selector(SetSubtitleTextColor:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetSubtitleTextColor"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSubtitleTextApperance:)) :@selector(SetSubtitleTextApperance:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetSubtitleTextApperance"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetNavigationOnClickListener:)) :@selector(SetNavigationOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetNavigationOnClickListener"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMenuItemClickListener:)) :@selector(SetMenuItemClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetMenuItemClickListener"];

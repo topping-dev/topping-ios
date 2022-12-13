@@ -60,14 +60,14 @@ static LuaForm *sActiveForm;
 
 -(void)InitMain:(UIWindow *)windw :(UIScene *)scene
 {
-    [DisplayMetrics SetDensity:[[UIScreen mainScreen] scale] :1.0f];
+    [DisplayMetrics SetDensity:windw.screen.scale :1.0f];
 
 	//[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 	self.statusBarHidden = YES;
 	self.window = windw;
 	
     // Override point for customization after application launch.
-	self.window.rootViewController.wantsFullScreenLayout = NO;
+	//self.window.rootViewController.wantsFullScreenLayout = NO;
 	
 	[sToppingEngine Startup];
 	int height = self.window.frame.size.height;
@@ -101,6 +101,12 @@ static LuaForm *sActiveForm;
         //Subtract nav bar
         height -= self.startForm.context.navController.navigationBar.frame.size.height;
     }
+
+    self.startForm.view.frame = CGRectMake(0, 0, self.window.frame.size.width, height);
+    self.window.rootViewController.view.autoresizesSubviews = YES;
+    
+    [DisplayMetrics SetMasterView:self.startForm.view];
+    [DisplayMetrics SetBaseFrame:CGRectMake(0, 0, self.window.frame.size.width, height)];
     
     //Apply styles
     NSString *style = [sToppingEngine GetAppStyle];
@@ -145,19 +151,17 @@ static LuaForm *sActiveForm;
     }
     //Apply styles end
     
-    self.startForm.view.frame = CGRectMake(0, 0, self.window.frame.size.width, height);
-    self.window.rootViewController.view.autoresizesSubviews = YES;
-    
-    [DisplayMetrics SetMasterView:self.startForm.view];
 	self.startForm.luaId = [sToppingEngine GetMainForm];
 	NSString *initUI = [sToppingEngine GetMainUI];
     [self.window makeKeyAndVisible];
 	if([initUI compare:@""] != 0)
 	{
 		LGView *lgview = self.startForm.lgview;
-        NSLog(@"%@", NSStringFromCGRect(self.window.rootViewController.view.frame));
-        NSLog(@"%@", NSStringFromCGRect(self.startForm.view.frame));
-        [self.startForm.view addSubview:[[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview]];
+        NSLog(@"Window Frame: %@", NSStringFromCGRect(self.window.rootViewController.view.frame));
+        NSLog(@"Form Frame: %@", NSStringFromCGRect(self.startForm.view.frame));
+        UIView *viewToAdd = [[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview];
+        NSLog(@"View To Add Frame: %@", NSStringFromCGRect(viewToAdd.frame));
+        [self.startForm.view addSubview:viewToAdd];
 		self.startForm.lgview = lgview;
     }
 	else

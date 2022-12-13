@@ -16,6 +16,7 @@ KEYBOARD_FUNCTIONS
 
 @property(nonatomic, strong) LuaTranslator *ltTextChangedListener, *ltBeforeTextChangedListener, *ltAfterTextChangedListener;
 @property(nonatomic) bool multiLine;
+@property(nonatomic, strong) CALayer *layer;
 
 KEYBOARD_PROPERTIES
 

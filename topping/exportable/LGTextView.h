@@ -25,8 +25,8 @@
 //Lua
 +(LGTextView*)Create:(LuaContext *)context;
 -(NSString *)GetText;
--(void)SetText:(NSString *)val;
--(void)SetTextRef:(LuaRef *)ref;
+-(void)SetTextInternal:(NSString *)val;
+-(void)SetText:(LuaRef *)ref;
 -(void)SetTextColor:(NSString *)color;
 -(void)SetTextColorRef:(LuaRef *)ref;
 

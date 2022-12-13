@@ -17,10 +17,11 @@
 {
 	[super Resize];
 	[self ResizeInternal];
-	NSLog(@"\n %@", [self DebugDescription:nil]);
+	//NSLog(@"\n %@", [self DebugDescription:nil]);
 	BOOL vertical = YES;
 	if(self.android_orientation != nil)
 		vertical = [self.android_orientation compare:@"vertical"] == 0;
+    [super Resize];
 	//[super AfterResize:vertical];
 	NSLog(@"\n %@", [self DebugDescription:nil]);
 }

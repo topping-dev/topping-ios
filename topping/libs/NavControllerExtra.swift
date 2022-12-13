@@ -36,7 +36,7 @@ open class AbstractSavedStateViewModelFactory: ViewModelProviderKeyedFactory {
 open class Navigation: NSObject {
     @objc
     public static func findNavController(form: LuaForm, viewId: String) -> NavController {
-        let view = form.getViewById(viewId)
+        let view = form.getViewByIdInternal(viewId)
         let navController = findViewNavController(view: view!)
         return navController!
     }
@@ -746,7 +746,7 @@ class ActionBarOnDestinationChangedListener : AbstractAppBarOnDestinationChanged
     
     override func setTitle(title: String) {
         let toolbar = form.toolbar
-        toolbar?.setTitle(title)
+        toolbar?.setTitleInternal(title)
     }
     
     override func setNavigationIcon(drawable: UIImage?) {
@@ -755,9 +755,7 @@ class ActionBarOnDestinationChangedListener : AbstractAppBarOnDestinationChanged
             toolbar?.setNavigationIcon(nil)
         }
         else {
-            let stream = LuaStream()
-            stream.nonStreamData = drawable
-            toolbar?.setNavigationIcon(stream)
+            toolbar?.setNavigationIconImage(drawable)
         }
     }
 }
@@ -779,7 +777,7 @@ class ToolbarOnDestinationChangedListener : AbstractAppBarOnDestinationChangedLi
     }
     
     override func setTitle(title: String) {
-        self.toolbar?.setTitle(title)
+        self.toolbar?.setTitleInternal(title)
     }
     
     override func setNavigationIcon(drawable: UIImage?) {
@@ -787,9 +785,7 @@ class ToolbarOnDestinationChangedListener : AbstractAppBarOnDestinationChangedLi
             toolbar?.setNavigationIcon(nil)
         }
         else {
-            let stream = LuaStream()
-            stream.nonStreamData = drawable
-            toolbar?.setNavigationIcon(stream)
+            toolbar?.setNavigationIconImage(drawable)
         }
     }
 }

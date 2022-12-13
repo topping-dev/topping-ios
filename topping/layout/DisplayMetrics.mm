@@ -10,17 +10,28 @@ static float MM_TO_IN = 0.0393700787f;
 static float PT_TO_IN = 1/72.0f;
 
 static UIView *masterView;
+static CGRect baseFrame;
 
 @implementation DisplayMetrics
 
 +(UIView *)GetMasterView
 {
-	return  masterView;
+	return masterView;
 }
 
 +(void)SetMasterView:(UIView *)view
 {
 	masterView = view;
+}
+
++(CGRect)GetBaseFrame
+{
+    return baseFrame;
+}
+
++(void)SetBaseFrame:(CGRect )frame
+{
+    baseFrame = frame;
 }
 
 +(void)SetDensity:(float)d :(float)sd

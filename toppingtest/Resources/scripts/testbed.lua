@@ -91,7 +91,7 @@ function ListViewTest_Constructor(pGUI, luacontext)
         return viewToRet;
     end);
     pAdapter:SetOnBindViewHolder(function(adapter, view, index, object)
-        local tvTitle = view:GetViewById("testBedTitle");
+        local tvTitle = view:GetViewById(LR.id.testBedTitle);
         tvTitle:SetText(object);
         tvTitle:SetTextColorRef(LR.color.colorAccent);
     end);
@@ -118,7 +118,7 @@ end
 
 function Main_Constructor(pForm, luacontext)
     local navController = pForm:GetFragmentManager():findFragmentById(LR.id.nav_host_fragment):getNavController()
-    local toolbar = pForm:GetViewById("ToolbarTest")
+    local toolbar = pForm:GetViewById(LR.id.ToolbarTest)
     LuaNavigationUI.setupWithNavController(toolbar, navController)
 end
 
@@ -127,22 +127,13 @@ LuaForm.RegisterFormEvent("ToolbarTest", LuaForm.FORM_EVENT_CREATE, Toolbar_Cons
 LuaForm.RegisterFormEvent("Main", LuaForm.FORM_EVENT_CREATE, Main_Constructor);
 
 function MenuFragment_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)
-    print(inflater)
-    print(container)
-    print(savedInstanceState)
-    print(LR)
-    print(LR.layout.form)
     return inflater:Inflate(LR.layout.form, container)
 end
 
 function ReceiveFragment_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)
-    print(inflater)
-    print(container)
-    print(savedInstanceState)
-    print(LR)
-    print(LR.layout.testbed)
-    return inflater:Inflate(LR.layout.frame, container)
+    return inflater:Inflate(LR.layout.testbed, container)
 end
 
+LuaFragment.RegisterFragmentEvent("ListViewTest", LuaFragment.FRAGMENT_EVENT_CREATE, ListViewTest_Constructor);
 LuaFragment.RegisterFragmentEvent("menuFragment", LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, MenuFragment_Create_View);
 LuaFragment.RegisterFragmentEvent("receiveFragment", LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, ReceiveFragment_Create_View);

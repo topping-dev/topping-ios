@@ -53,7 +53,7 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
     
     @objc
     public func onFindViewById(idVal: String?) -> LGView? {
-        return form?.getViewById(idVal)
+        return form?.getViewByIdInternal(idVal)
     }
     
     @objc

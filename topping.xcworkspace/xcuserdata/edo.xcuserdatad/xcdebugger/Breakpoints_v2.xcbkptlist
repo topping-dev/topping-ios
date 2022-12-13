@@ -18,146 +18,6 @@
             endingLineNumber = "70"
             landmarkName = "-SetItems:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "36D37069-BBCB-41A5-BD71-744CDD1DF57E - 5dab35782c5de8b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGComboBox SetItems:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/exportable/LGComboBox.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "162">
-               </Location>
-               <Location
-                  uuid = "36D37069-BBCB-41A5-BD71-744CDD1DF57E - 5dab35782c5de8b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGComboBox SetItems:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/exportable/LGComboBox.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "193">
-               </Location>
-               <Location
-                  uuid = "36D37069-BBCB-41A5-BD71-744CDD1DF57E - 5dab35782c5de8b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGComboBox SetItems:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/exportable/LGComboBox.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "182">
-               </Location>
-               <Location
-                  uuid = "36D37069-BBCB-41A5-BD71-744CDD1DF57E - 5dab35782c5de8b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGComboBox SetItems:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/exportable/LGComboBox.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "176">
-               </Location>
-               <Location
-                  uuid = "36D37069-BBCB-41A5-BD71-744CDD1DF57E - 5dab35782c5de8b7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGComboBox SetItems:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/exportable/LGComboBox.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "207">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EE960574-C85F-44F6-89EC-BA71102488E5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "topping/shared/ToppingEngine.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1128"
-            endingLineNumber = "1128"
-            landmarkName = "-PushTable:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "EE960574-C85F-44F6-89EC-BA71102488E5 - a1d526dd40486d5d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ToppingEngine PushTable:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/shared/ToppingEngine.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1126"
-                  endingLineNumber = "1126"
-                  offsetFromSymbolStart = "1254">
-               </Location>
-               <Location
-                  uuid = "EE960574-C85F-44F6-89EC-BA71102488E5 - a1d526dd40486d9b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ToppingEngine PushTable:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/shared/ToppingEngine.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1124"
-                  endingLineNumber = "1124"
-                  offsetFromSymbolStart = "1222">
-               </Location>
-               <Location
-                  uuid = "EE960574-C85F-44F6-89EC-BA71102488E5 - a1d526dd40486d1f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ToppingEngine PushTable:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/shared/ToppingEngine.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1128"
-                  endingLineNumber = "1128"
-                  offsetFromSymbolStart = "1124">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,53 +34,6 @@
             endingLineNumber = "717"
             landmarkName = "onContainerAvailable(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A2B9B11E-1D8E-4745-8F08-8A2C1BAA61D7 - 4881c3c9adf31ddf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Topping.FragmentManager.findFragmentManager(view: __C.LGView) -&gt; Swift.Optional&lt;Topping.FragmentManager&gt;"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "717"
-                  endingLineNumber = "717"
-                  offsetFromSymbolStart = "1482">
-               </Location>
-               <Location
-                  uuid = "A2B9B11E-1D8E-4745-8F08-8A2C1BAA61D7 - e877f861bc9e833a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "717"
-                  endingLineNumber = "717"
-                  offsetFromSymbolStart = "958">
-               </Location>
-               <Location
-                  uuid = "A2B9B11E-1D8E-4745-8F08-8A2C1BAA61D7 - e877f861bc9e833a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "717"
-                  endingLineNumber = "717"
-                  offsetFromSymbolStart = "1363">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -237,53 +50,6 @@
             endingLineNumber = "716"
             landmarkName = "onContainerAvailable(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D08213F2-7CFF-4E91-BBC3-FB8EC5102768 - 4881c3c9adf31dfc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Topping.FragmentManager.findFragmentManager(view: __C.LGView) -&gt; Swift.Optional&lt;Topping.FragmentManager&gt;"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "716"
-                  endingLineNumber = "716"
-                  offsetFromSymbolStart = "1425">
-               </Location>
-               <Location
-                  uuid = "D08213F2-7CFF-4E91-BBC3-FB8EC5102768 - e877f861bc9e8319"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "716"
-                  endingLineNumber = "716"
-                  offsetFromSymbolStart = "359">
-               </Location>
-               <Location
-                  uuid = "D08213F2-7CFF-4E91-BBC3-FB8EC5102768 - e877f861bc9e8319"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "716"
-                  endingLineNumber = "716"
-                  offsetFromSymbolStart = "371">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -300,38 +66,22 @@
             endingLineNumber = "118"
             landmarkName = "-ParseUI:::::"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2715C813-E81E-4791-9C42-B6CD2D136397 - f17c467924120bed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGLayoutParser ParseUI:::::]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/layout/LGLayoutParser.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "337">
-               </Location>
-               <Location
-                  uuid = "2715C813-E81E-4791-9C42-B6CD2D136397 - f17c467924120bed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGLayoutParser ParseUI:::::]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/topping-ios/topping/layout/LGLayoutParser.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "323">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B74BDD6F-F40F-46C0-BECB-FB6A7D346571"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/exportable/LGTextView.mm"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-SetText:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

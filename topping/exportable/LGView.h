@@ -78,11 +78,11 @@ enum GRAVITY
 //Lua
 -(UIView*)GetView;
 +(LGView*)Create:(LuaContext *)context;
--(LGView*)GetViewById:(NSString*)lId;
+-(LGView*)GetViewById:(LuaRef*)lId;
+-(LGView*)GetViewByIdInternal:(NSString*)sId;
 -(void)SetEnabled:(BOOL)enabled;
 -(void)SetFocusable:(BOOL)focusable;
--(void)SetBackground:(NSString*)background;
--(void)SetBackgroundRef:(LuaRef*)ref;
+-(void)SetBackground:(LuaRef*)ref;
 -(NSInteger)GetVisibility;
 -(void)SetVisibility:(NSInteger)visibility;
 -(float)GetAlpha;

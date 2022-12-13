@@ -108,34 +108,25 @@
     return but.currentTitle;
 }
 
--(void)SetText:(NSString *)val
+-(void)SetTextInternal:(NSString *)val
 {
     UIButton *but = (UIButton*)self._view;
     [but setTitle:val forState:UIControlStateNormal];
     [but setTitle:val forState:UIControlStateFocused];
     [but setTitle:val forState:UIControlStateDisabled];
     [but setTitle:val forState:UIControlStateSelected];
+    [but setTitle:val forState:UIControlStateHighlighted];
     self.android_text = val;
     [self ResizeOnText];
 }
 
--(void)SetTextRef:(LuaRef *)ref
+-(void)SetText:(LuaRef *)ref
 {
     NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetText:val];
+    [self SetTextInternal:val];
 }
 
--(void)SetTextColor:(NSString *)color
-{
-    UIColor *val = [[LGColorParser GetInstance] ParseColor:color];
-    UIButton *but = (UIButton*)self._view;
-    [but setTitleColor:val forState:UIControlStateNormal];
-    [but setTitleColor:val forState:UIControlStateFocused];
-    [but setTitleColor:val forState:UIControlStateDisabled];
-    [but setTitleColor:val forState:UIControlStateSelected];
-}
-
--(void)SetTextColorRef:(LuaRef *)ref
+-(void)SetTextColor:(LuaRef *)ref
 {
     UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
     UIButton *but = (UIButton*)self._view;
@@ -143,6 +134,7 @@
     [but setTitleColor:val forState:UIControlStateFocused];
     [but setTitleColor:val forState:UIControlStateDisabled];
     [but setTitleColor:val forState:UIControlStateSelected];
+    [but setTitleColor:val forState:UIControlStateHighlighted];
 }
 
 -(void)didClickButton

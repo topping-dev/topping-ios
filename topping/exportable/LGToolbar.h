@@ -4,35 +4,33 @@
 
 @interface LGToolbar : LGView
 
--(void)SetMenu:(LuaRef*)menuRef;
+-(void)SetMenu:(LuaRef*)menu;
 
--(void)SetLogo:(LuaStream*)logoStream;
+-(void)SetLogo:(LuaRef*)logo;
 
--(void)SetNavigationIcon:(LuaStream*)navigationIconStream;
+-(void)SetNavigationIcon:(LuaRef*)navigationIcon;
 
--(void)SetOverflowIcon:(LuaStream*)overflowIconStream;
+-(void)SetNavigationIconImage:(UIImage*)img;
+
+-(void)SetOverflowIcon:(LuaRef*)overflowIcon;
 
 -(NSString*)GetTitle;
 
--(void)SetTitle:(NSString*)title;
+-(void)SetTitleInternal:(NSString*)title;
 
--(void)SetTitleRef:(LuaRef*)ref;
+-(void)SetTitle:(LuaRef*)ref;
 
--(void)SetTitleTextColor:(NSString*)color;
-
--(void)SetTitleTextColorRef:(LuaRef*)color;
+-(void)SetTitleTextColor:(LuaRef*)color;
 
 -(void)SetTitleTextApperance:(LuaRef*)ref;
 
 -(NSString*)GetSubtitle;
 
--(void)SetSubtitle:(NSString*)subtitle;
+-(void)SetSubtitleInternal:(NSString*)subtitle;
 
--(void)SetSubtitleRef:(LuaRef*)ref;
+-(void)SetSubtitle:(LuaRef*)ref;
 
--(void)SetSubtitleTextColor:(NSString*)color;
-
--(void)SetSubtitleTextColorRef:(LuaRef*)color;
+-(void)SetSubtitleTextColor:(LuaRef*)color;
 
 -(void)SetSubtitleTextApperance:(LuaRef*)ref;
 

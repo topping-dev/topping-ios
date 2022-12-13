@@ -3,10 +3,19 @@
 #import "LuaInterface.h"
 #import "LuaContext.h"
 
+@class LGView;
 @class LGRecyclerView;
 @protocol LuaInterface;
 
+@interface LGViewUICollectionViewCell : UICollectionViewCell
+
+@property (nonatomic, strong) LGView *lgview;
+
+@end
+
 @interface LGRecyclerViewAdapter : UICollectionViewCell <LuaClass, LuaInterface, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+- (instancetype)initWithContext:(LuaContext *)context :(NSString*)lua_id;
 
 -(NSObject *)GetObject:(NSIndexPath*)indexPath;
 -(int)GetCount;
@@ -35,6 +44,7 @@
 @property (nonatomic, strong) NSMutableDictionary *createdViews;
 @property (nonatomic, strong) NSMutableDictionary *cells;
 @property (nonatomic, strong) NSMutableDictionary *views;
+@property (nonatomic, strong) NSMutableDictionary *addedViews;
 
 @property(nonatomic, strong) LuaTranslator *ltItemSelected, *ltCreateViewHolder, *ltBindViewHolder, *ltGetItemViewType;
 

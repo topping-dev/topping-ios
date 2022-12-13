@@ -263,7 +263,7 @@
 	return [field text];
 }
 
--(void)SetText:(NSString *)val
+-(void)SetTextInternal:(NSString *)val
 {
     UILabel *field = (UILabel*)self._view;
 	[field setText:val];
@@ -271,10 +271,10 @@
 	[self ResizeOnText];
 }
 
--(void)SetTextRef:(LuaRef *)ref
+-(void)SetText:(LuaRef *)ref
 {
     NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetText:val];
+    [self SetTextInternal:val];
 }
 
 -(void)SetTextColor:(NSString *)color
@@ -313,13 +313,13 @@
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGTextView class]] 
 			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetText:)) 
-									   :@selector(SetText:)
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextInternal:))
+									   :@selector(SetTextInternal:)
 									   :nil
 									   :MakeArray([NSString class]C nil)]
 			 forKey:@"SetText"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextRef:))
-                              :@selector(SetTextRef:)
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetText:))
+                              :@selector(SetText:)
                               :nil
                               :MakeArray([LuaRef class]C nil)]
              forKey:@"SetTextRef"];

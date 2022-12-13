@@ -1,16 +1,17 @@
 function FormTestLL_Constructor(pGUI, luacontext)
-	local button = pGUI:GetViewById("formTestButton");
+	local button = pGUI:GetViewById(LR.id.formTestButton);
 	button:SetOnClickListener(LuaTranslator.Register(button, "TestButton_Click"));
-	local checkbox = pGUI:GetViewById("formTestCheckBox");
+    button:SetTextRef(LR.string.teststring);
+	local checkbox = pGUI:GetViewById(LR.id.formTestCheckBox);
 	checkbox:SetOnCheckedChangedListener(LuaTranslator.Register(checkbox, "TestCheckBox_CheckedChanged"));
-	local combobox = pGUI:GetViewById("formTestComboBox");
+	local combobox = pGUI:GetViewById(LR.id.formTestComboBox);
     combobox:AddItem("Item 1", 1);
     combobox:AddItem("Item 2", 2);
     combobox:AddItem("Item 3", 3);
     combobox:AddItem("Item 4", 4);
 	combobox:SetOnComboChangedListener(LuaTranslator.Register(combobox, "TestComboBox_Changed"));
-	local edittext = pGUI:GetViewById("formTestEt");
-    local pb = pGUI:GetViewById("formTestProgressBar");
+	local edittext = pGUI:GetViewById(LR.id.formTestEt);
+    local pb = pGUI:GetViewById(LR.id.formTestProgressBar);
     pb:SetMax(100);
     pb:SetProgress(35);
 end
