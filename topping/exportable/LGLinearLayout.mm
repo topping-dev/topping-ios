@@ -37,10 +37,9 @@
 	
 	BOOL vertical = [self.android_orientation compare:@"vertical"] == 0;
 	
-	NSLog(@"Resize Internal for %@ with parent %@", [[self class] description], self.parent == nil ? @"nil" : [[self.parent class] description]);
+//	NSLog(@"Resize Internal for %@ with parent %@", [[self class] description], self.parent == nil ? @"nil" : [[self.parent class] description]);
 	for (LGView *w in self.subviews) 
 	{
-		NSLog(@"Subview %@", [[w class] description]);
 		if (!vertical) 
 		{
 			if (!(w.layout))

@@ -171,6 +171,13 @@
     return retVal;
 }
 
+-(void)viewDidLayoutSubviews {
+    for(LGView *w in self.subviews)
+    {
+        [w viewDidLayoutSubviews];
+    }
+}
+
 -(NSDictionary*)GetBindings
 {
     return self.subviewMap;

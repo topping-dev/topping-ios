@@ -86,6 +86,10 @@
     return rv;
 }
 
+-(void)viewDidLayoutSubviews {
+    
+}
+
 -(void)ApplyStyles
 {
     NSString *sty = self.style;

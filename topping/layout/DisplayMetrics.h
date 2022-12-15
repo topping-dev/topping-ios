@@ -10,6 +10,8 @@
 +(void)SetMasterView:(UIView *)view;
 +(CGRect)GetBaseFrame;
 +(void)SetBaseFrame:(CGRect)frame;
++(float)GetStatusBarHeight;
++(void)SetStatusBarHeight:(float)height;
 +(void)SetDensity:(float)d :(float)sd;
 +(int)readSize:(NSString *)sz;
 

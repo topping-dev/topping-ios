@@ -11,6 +11,7 @@ static float PT_TO_IN = 1/72.0f;
 
 static UIView *masterView;
 static CGRect baseFrame;
+static float statusBarHeight;
 
 @implementation DisplayMetrics
 
@@ -32,6 +33,16 @@ static CGRect baseFrame;
 +(void)SetBaseFrame:(CGRect )frame
 {
     baseFrame = frame;
+}
+
++(float)GetStatusBarHeight
+{
+    return statusBarHeight;
+}
+
++(void)SetStatusBarHeight:(float)height
+{
+    statusBarHeight = height;
 }
 
 +(void)SetDensity:(float)d :(float)sd

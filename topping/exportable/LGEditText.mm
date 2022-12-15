@@ -223,8 +223,8 @@
 -(int)GetContentW
 {
     int l = [self GetStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
-    if (l > [DisplayMetrics GetMasterView].frame.size.width)
-        l = [DisplayMetrics GetMasterView].frame.size.width - self.dX;
+    if (l > [DisplayMetrics GetBaseFrame].size.width)
+        l = [DisplayMetrics GetBaseFrame].size.width - self.dX;
     return l;
 }
 

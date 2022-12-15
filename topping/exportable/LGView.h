@@ -75,6 +75,8 @@ enum GRAVITY
 
 -(NSArray*)allPropertyNames;
 
+-(void)viewDidLayoutSubviews;
+
 //Lua
 -(UIView*)GetView;
 +(LGView*)Create:(LuaContext *)context;

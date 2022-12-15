@@ -12,12 +12,11 @@
 
 static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
-- (instancetype)init
+- (instancetype)initWithContext:(LuaContext *)context
 {
     self = [super init];
     if (self) {
-        self.context = [[LuaContext alloc] init];
-        [self.context Setup:self];
+        self.context = context;
         self.viewModelProvider = [LuaViewModelProvider new];
         self.lifecycleOwner = [LuaLifecycleOwner new];
         self.lifecycleRegistry = [[LifecycleRegistry alloc] initWithOwner:self.lifecycleOwner];
@@ -59,26 +58,23 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
 +(void)Create:(LuaContext*)context :(NSString*)luaId
 {
-	LuaForm *form = [[LuaForm alloc] init];
+	LuaForm *form = [[LuaForm alloc] initWithContext:context];
 	form.luaId = luaId;
-	form.context = context;
 	[context.navController pushViewController:form animated:YES];
 }
 
 +(void)CreateWithUI:(LuaContext *)context :(NSString *)luaId :(NSString*)ui
 {
-	LuaForm *form = [[LuaForm alloc] init];
+	LuaForm *form = [[LuaForm alloc] initWithContext:context];
 	form.luaId = luaId;
-	form.context = context;
 	form.ui = ui;
 	[context.navController pushViewController:form animated:YES];
 }
 
 +(NSObject*)CreateForTab:(LuaContext*)context :(NSString*)luaId
 {
-	LuaForm *form = [[LuaForm alloc] init];
+	LuaForm *form = [[LuaForm alloc] initWithContext:context];
 	form.luaId = luaId;
-	form.context = context;
 	return form;
 }
 
@@ -131,23 +127,33 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [self.mFragments execPendingActions];
     
     [KeyboardHelper KeyboardEnableEventForView:self.view :self];
+    
+    UIColor *statusBarColor = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"colorPrimaryDark"];
+    if(statusBarColor != nil)
+    {
+        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -[DisplayMetrics GetStatusBarHeight], [UIScreen mainScreen].bounds.size.width, [DisplayMetrics GetStatusBarHeight])];
+        statusBarView.backgroundColor = statusBarColor;
+        BOOL statusBarIsDark = [CommonDelegate GetInstance].statusBarIsDark;
+        if(!self.context.navController.isNavigationBarHidden)
+        {
+            if(statusBarIsDark)
+                self.context.navController.navigationBar.barStyle = UIBarStyleBlack;
+            else
+                self.context.navController.navigationBar.barStyle = UIBarStyleDefault;
+            [self.context.navController.navigationBar addSubview:statusBarView];
+        }
+        else
+            [self.view insertSubview:statusBarView atIndex:0];
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
 	[CommonDelegate SetActiveForm:self];
+    [DisplayMetrics SetMasterView:self.view];
     
     if(self.view.superview != nil && !self.rootConstraintsSet) {
-        self.rootConstraintsSet = true;
-        [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.view.superview.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = true;
-        [self.view.superview.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = true;
-        NSString *val = (NSString*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"iosBottomSafeArea"];
-        if([val isEqualToString:@"true"])
-            [self.view.superview.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = true;
-        else
-            [self.view.superview.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = true;
-        [self.view.superview.safeAreaLayoutGuide.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = true;
+        [self setConstraints];
     }
     
 	[super viewWillAppear:animated];
@@ -167,6 +173,12 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [LuaForm OnFormEvent:self :FORM_EVENT_RESUME :self.context :0, nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    if(self.view.superview != nil && !self.rootConstraintsSet && [NSStringFromClass([self.view.superview class]) isEqualToString:@"UIViewControllerWrapperView"]) {
+        [self setConstraints];
+    }
+}
+
 -(void) viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
@@ -182,6 +194,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [self markFragmentsCreated];
     [self.mFragments dispatchStop];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_STOP];
+    self.rootConstraintsSet = false;
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -203,17 +216,55 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        //NSLog(@"Transition Size %@", NSStringFromCGSize(size));
         [self.lgview ResizeAndInvalidate];
     }];
 }
 
 -(void)viewDidLayoutSubviews {
+    /*NSLog(@"superview 2 %@ %@", self.luaId, self.view.superview);
+    NSLog(@"superview frame %@ %@", self.luaId, NSStringFromCGRect(self.view.frame));
+    NSLog(@"superview class string %@", NSStringFromClass([self.view.superview class]));*/
+    [self.lgview viewDidLayoutSubviews];
     [self.lgview ResizeAndInvalidate];
 }
 
 -(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(void)setConstraints {
+    self.rootConstraintsSet = true;
+    [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSLayoutConstraint *constraint;
+    if(self.context.navController.isNavigationBarHidden)
+    {
+        constraint = [self.view.superview.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:self.view.topAnchor];
+    }
+    else
+    {
+        constraint = [self.view.superview.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:-self.context.navController.navigationBar.frame.size.height];
+    }
+    constraint.priority = UILayoutPriority(999);
+    constraint.active = true;
+    constraint = [self.view.superview.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:self.view.rightAnchor];
+    constraint.priority = UILayoutPriority(999);
+    constraint.active = true;
+    NSString *val = (NSString*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"iosBottomSafeArea"];
+    if([val isEqualToString:@"true"]) {
+        constraint = [self.view.superview.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
+        constraint.priority = UILayoutPriority(999);
+        constraint.active = true;
+    }
+    else {
+        constraint = [self.view.superview.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
+        constraint.priority = UILayoutPriority(999);
+        constraint.active = true;
+    }
+    constraint = [self.view.superview.safeAreaLayoutGuide.leftAnchor constraintEqualToAnchor:self.view.leftAnchor];
+    constraint.priority = UILayoutPriority(999);
+    constraint.active = true;
 }
 
 -(LuaContext*)GetContext
@@ -254,8 +305,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 -(void)SetViewXML:(NSString *)xml
 {
 	LGView *lgview;
-    //TODO:Check this
-	self.view = [[LGLayoutParser GetInstance] ParseXML:xml :[DisplayMetrics GetMasterView] :nil :self :&lgview];
+    [self AddMainView:[[LGLayoutParser GetInstance] ParseXML:xml :[DisplayMetrics GetMasterView] :nil :self :&lgview]];
 	self.lgview = lgview;
 }
 
@@ -337,6 +387,32 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
 -(LuaLifecycle *)getLifecycleInner {
     return [LuaLifecycle CreateForm:self];
+}
+
+-(void)AddMainView:(UIView *)viewToAdd {
+    [self.view addSubview:viewToAdd];
+    [viewToAdd setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSLayoutConstraint *constraint;
+    constraint = [self.view.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:viewToAdd.topAnchor];
+    constraint.priority = UILayoutPriority(999);
+    constraint.active = true;
+    constraint = [self.view.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:viewToAdd.rightAnchor];
+    constraint.priority = UILayoutPriority(999);
+    constraint.active = true;
+    NSString *val = (NSString*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"iosBottomSafeArea"];
+    if([val isEqualToString:@"true"]) {
+        constraint = [self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
+        constraint.priority = UILayoutPriority(999);
+        constraint.active = true;
+    }
+    else {
+        constraint = [self.view.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
+        constraint.priority = UILayoutPriority(999);
+        constraint.active = true;
+    }
+    constraint = [self.view.safeAreaLayoutGuide.leftAnchor constraintEqualToAnchor:viewToAdd.leftAnchor];
+    constraint.priority = UILayoutPriority(999);
+    constraint.active = true;
 }
 
 -(NSString*)GetId

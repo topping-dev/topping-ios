@@ -71,7 +71,7 @@ static LuaForm *sActiveForm;
 	
 	[sToppingEngine Startup];
 	int height = self.window.frame.size.height;
-    int sbarHeight = 0;
+    float sbarHeight = 0;
     if(@available(iOS 13.0, *))
     {
         sbarHeight = ((UIWindowScene*)scene).statusBarManager.statusBarFrame.size.height;
@@ -80,6 +80,7 @@ static LuaForm *sActiveForm;
     {
         sbarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     }
+    [DisplayMetrics SetStatusBarHeight:sbarHeight];
     
     CGFloat topPadding = 0;
     CGFloat bottomPadding = 0;
@@ -93,7 +94,10 @@ static LuaForm *sActiveForm;
     }
     height -= topPadding;
     height -= bottomPadding;
-	self.startForm = [[LuaForm alloc] init];
+    LuaContext *context = [[LuaContext alloc] init];
+	self.startForm = [[LuaForm alloc] initWithContext:context];
+    [context Setup:self.startForm];
+    self.startForm.context = context;
     self.startForm.luaId = [sToppingEngine GetMainForm];
     self.window.rootViewController = self.startForm.context.navController;
     if(!self.startForm.context.navController.isNavigationBarHidden)
@@ -105,7 +109,7 @@ static LuaForm *sActiveForm;
     self.startForm.view.frame = CGRectMake(0, 0, self.window.frame.size.width, height);
     self.window.rootViewController.view.autoresizesSubviews = YES;
     
-    [DisplayMetrics SetMasterView:self.startForm.view];
+    [DisplayMetrics SetMasterView:self.window.rootViewController.view];
     [DisplayMetrics SetBaseFrame:CGRectMake(0, 0, self.window.frame.size.width, height)];
     
     //Apply styles
@@ -135,8 +139,6 @@ static LuaForm *sActiveForm;
     {
         UIColor *color = [[LGColorParser GetInstance] ParseColor:statusBarColor];
 
-        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -sbarHeight, [UIScreen mainScreen].bounds.size.width, sbarHeight)];
-        statusBarView.backgroundColor = color;
         self.statusBarIsDark = [color isDarkColor];
         if(!self.startForm.context.navController.isNavigationBarHidden)
         {
@@ -144,10 +146,7 @@ static LuaForm *sActiveForm;
                 self.startForm.context.navController.navigationBar.barStyle = UIBarStyleBlack;
             else
                 self.startForm.context.navController.navigationBar.barStyle = UIBarStyleDefault;
-            [self.startForm.context.navController.navigationBar addSubview:statusBarView];
         }
-        else
-            [self.startForm.view addSubview:statusBarView];
     }
     //Apply styles end
     
@@ -161,7 +160,7 @@ static LuaForm *sActiveForm;
         NSLog(@"Form Frame: %@", NSStringFromCGRect(self.startForm.view.frame));
         UIView *viewToAdd = [[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview];
         NSLog(@"View To Add Frame: %@", NSStringFromCGRect(viewToAdd.frame));
-        [self.startForm.view addSubview:viewToAdd];
+        [self.startForm AddMainView:viewToAdd];
 		self.startForm.lgview = lgview;
     }
 	else
