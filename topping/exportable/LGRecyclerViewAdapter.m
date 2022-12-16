@@ -164,15 +164,16 @@
         {
             type = [((NSNumber*)[self.ltGetItemViewType CallIn:[NSNumber numberWithInt:indexPath.row], nil]) intValue];
         }
-        cell = [self generateCell:indexPath :type];
+        cell = (LGViewUICollectionViewCell*)[self generateCell:indexPath :type];
         NSObject *obj = [self GetObject:indexPath];
         [self.ltBindViewHolder CallIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
     }
 
     if(cell.lgview != nil)
     {
-        int width = [cell.lgview GetContentW];
-        int height = [cell.lgview GetContentH];
+        [cell.lgview ReadWidthHeight];
+        int width = cell.lgview.dWidth;
+        int height = cell.lgview.dHeight;
         return CGSizeMake(width, height);
     }
     else

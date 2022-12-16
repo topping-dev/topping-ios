@@ -35,7 +35,7 @@
 -(UIView *) CreateComponent
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    ((UICollectionViewFlowLayout*)self.flowLayout).sectionInsetReference = UICollectionViewFlowLayoutSectionInsetFromSafeArea;
+    ((UICollectionViewFlowLayout*)self.flowLayout).sectionInsetReference = UICollectionViewFlowLayoutSectionInsetFromContentInset;
     UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight) collectionViewLayout:self.flowLayout];
     return cv;
 }
@@ -43,7 +43,7 @@
 -(void) SetupComponent:(UIView *)view
 {
     UICollectionView *tv = (UICollectionView*)self._view;
-    //tv.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
+    tv.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
     /*if(self.android_divider != nil)
         tv.separatorColor = [[LGColorParser GetInstance] ParseColor:self.android_divider];*/
 }
