@@ -73,12 +73,9 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-                                        :@selector(Create:)
-                                        :[LGFragmentContainerView class]
-                                        :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
-                                        :[LGFragmentContainerView class]]
-             forKey:@"Create"];
+    
+    ClassMethod(Create:, LGFragmentContainerView, @[[LuaContext class]C [NSString class]], @"Create", [LGFragmentContainerView class])
+
     return dict;
 }
 

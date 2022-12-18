@@ -78,12 +78,12 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     return ret;
 }
 
-+(void)RegisterFragmentEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
++(void)RegisterFragmentEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
 {
-    [LuaFragment RegisterFragmentEvent:[luaId GetCleanId] :event :lt];
+    [LuaFragment RegisterFragmentEventInternal:[luaId GetCleanId] :event :lt];
 }
 
-+(void)RegisterFragmentEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt
++(void)RegisterFragmentEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt
 {
     [eventMapFragment setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
@@ -684,37 +684,24 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(RegisterFragmentEvent:::))
-                               :@selector(RegisterFragmentEvent:::)
-                               :nil
-                               :[NSArray arrayWithObjects:[NSString class], [LuaInt class], [LuaTranslator class], nil]
-                               :[LuaFragment class]]
-             forKey:@"RegisterFragmentEvent"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
-                                        :@selector(Create::)
-                                        :nil
-                                        :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
-                                        :[LuaFragment class]]
-             forKey:@"Create"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateWithUI:::))
-                                        :@selector(CreateWithUI:::)
-                                        :nil
-                                        :[NSArray arrayWithObjects:[LuaContext class], [NSString class], [NSString class], nil]
-                                        :[LuaFragment class]]
-             forKey:@"CreateWithUI"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetContext)) :@selector(GetContext) :[LuaContext class] :MakeArray(nil)] forKey:@"GetContext"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetForm)) :@selector(GetForm) :[LuaContext class] :MakeArray(nil)] forKey:@"GetForm"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([LuaRef class]C nil)] forKey:@"GetViewById"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetView)) :@selector(GetView) :[LGView class] :MakeArray(nil)] forKey:@"GetView"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetView:)) :@selector(SetView:) :nil :MakeArray([LGView class] C nil)] forKey:@"SetView"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewXML:)) :@selector(SetViewXML:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewXML"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewId:)) :@selector(SetViewId:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewId"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleRef:)) :@selector(SetTitleRef:) :nil :MakeArray([LuaRef class] C nil)] forKey:@"SetTitleRef"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
+    ClassMethodNoRet(RegisterFragmentEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterFragmentEvent", [LuaFragment class])
+    ClassMethod(Create::, LuaFragment, @[[LuaContext class]C [NSString class]], @"Create", [LuaFragment class])
+    ClassMethod(CreateWithUI:::, LuaFragment, @[[LuaContext class]C [NSString class]C [NSString class]], @"CreateWithUI", [LuaFragment class])
+    
+   
+    InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")
+    InstanceMethodNoArg(GetForm, LuaForm, @"GetForm")
+    InstanceMethod(GetViewById:, LGView, @[[LuaRef class]], @"GetViewById")
+    InstanceMethodNoArg(GetView, LGView, @"GetView")
+    InstanceMethodNoRet(SetView:, @[[LGView class]], @"SetView")
+    InstanceMethodNoRet(SetViewXML:, @[[NSString class]], @"SetViewXML")
+    InstanceMethodNoRet(SetViewId:, @[[NSString class]], @"SetViewId")
+    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitle")
+    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitleRef")
+    InstanceMethodNoRetNoArg(Close, @"Close")
     InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(IsInitialized)) :@selector(IsInitialized) :[LuaBool class] :MakeArray(nil)] forKey:@"IsInitialized"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetFragmentManager)) :@selector(GetFragmentManager) :[FragmentManager class] :MakeArray(nil)] forKey:@"GetFragmentManager"];
+    InstanceMethodNoArg(IsInitialized, LuaBool, @"IsInitialized")
+    InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
     
     return dict;
 }

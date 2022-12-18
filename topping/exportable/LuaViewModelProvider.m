@@ -53,8 +53,8 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(OfForm:, LuaViewModelProvider, MakeArray([LuaForm class]C nil), @"OfForm")
-    ClassMethod(OfFragment:, LuaViewModelProvider, MakeArray([LuaFragment class]C nil), @"OfFragment")
+    ClassMethod(OfForm:, LuaViewModelProvider, MakeArray([LuaForm class]C nil), @"OfForm", [LuaViewModelProvider class])
+    ClassMethod(OfFragment:, LuaViewModelProvider, MakeArray([LuaFragment class]C nil), @"OfFragment", [LuaViewModelProvider class])
     InstanceMethod(Get:, LuaViewModel, MakeArray([NSString class]C nil), @"Get")
     
     return dict;

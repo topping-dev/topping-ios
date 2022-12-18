@@ -45,8 +45,7 @@ typedef enum FormEvents
 
 - (instancetype)initWithContext:(LuaContext *)context;
 
-+(void)RegisterFormEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
-+(void)RegisterFormEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt;
++(void)RegisterFormEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
 +(BOOL)OnFormEvent:(NSObject*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
 +(void)Create:(LuaContext*)context :(NSString*)luaId;
 +(void)CreateWithUI:(LuaContext*)context :(NSString*)luaId :(NSString *)ui;

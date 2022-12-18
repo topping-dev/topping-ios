@@ -115,7 +115,7 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(create:, LuaLifecycleObserver, MakeArray([LuaTranslator class]C nil), @"create");
+    ClassMethod(create:, LuaLifecycleObserver, MakeArray([LuaTranslator class]C nil), @"create", [LuaLifecycleObserver class]);
     
     return dict;
 }

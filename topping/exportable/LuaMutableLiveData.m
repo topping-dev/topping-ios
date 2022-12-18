@@ -333,7 +333,7 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethodNoArg(create, LuaMutableLiveData, @"create")
+    ClassMethodNoArg(create, LuaMutableLiveData, @"create", [LuaMutableLiveData class])
     InstanceMethodNoRet(observeLua::, MakeArray([LuaLifecycleOwner class]C [LuaTranslator class]C nil), @"observe")
     InstanceMethodNoRet(removeObserver:, MakeArray([LuaTranslator class]C nil), @"removeObserver")
     

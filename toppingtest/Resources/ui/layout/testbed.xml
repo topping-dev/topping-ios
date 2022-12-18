@@ -8,9 +8,9 @@
     android:orientation="vertical"
     android:background="#7993AB">
 <androidx.recyclerview.widget.RecyclerView
+    android:id="@id/ListViewTest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    lua:id="ListViewTest"
     android:background="#ffffff"/>
 </LinearLayout>
 

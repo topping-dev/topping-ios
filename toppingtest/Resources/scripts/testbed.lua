@@ -122,9 +122,9 @@ function Main_Constructor(pForm, luacontext)
     LuaNavigationUI.setupWithNavController(toolbar, navController)
 end
 
-LuaForm.RegisterFormEvent("ListViewTest", LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);
-LuaForm.RegisterFormEvent("ToolbarTest", LuaForm.FORM_EVENT_CREATE, Toolbar_Constructor);
-LuaForm.RegisterFormEvent("Main", LuaForm.FORM_EVENT_CREATE, Main_Constructor);
+LuaForm.RegisterFormEvent(LR.id.ListViewTest, LuaForm.FORM_EVENT_CREATE, ListViewTest_Constructor);
+LuaForm.RegisterFormEvent(LR.id.ToolbarTest, LuaForm.FORM_EVENT_CREATE, Toolbar_Constructor);
+LuaForm.RegisterFormEvent(LR.id.Main, LuaForm.FORM_EVENT_CREATE, Main_Constructor);
 
 function MenuFragment_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)
     return inflater:Inflate(LR.layout.form, container)
@@ -134,6 +134,6 @@ function ReceiveFragment_Create_View(pFragment, luacontext, inflater, container,
     return inflater:Inflate(LR.layout.testbed, container)
 end
 
-LuaFragment.RegisterFragmentEvent("ListViewTest", LuaFragment.FRAGMENT_EVENT_CREATE, ListViewTest_Constructor);
-LuaFragment.RegisterFragmentEvent("menuFragment", LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, MenuFragment_Create_View);
-LuaFragment.RegisterFragmentEvent("receiveFragment", LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, ReceiveFragment_Create_View);
+LuaFragment.RegisterFragmentEvent(LR.id.ListViewTest, LuaFragment.FRAGMENT_EVENT_CREATE, ListViewTest_Constructor);
+LuaFragment.RegisterFragmentEvent(LR.id.menuFragment, LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, MenuFragment_Create_View);
+LuaFragment.RegisterFragmentEvent(LR.id.receiveFragment, LuaFragment.FRAGMENT_EVENT_CREATE_VIEW, ReceiveFragment_Create_View);

@@ -63,8 +63,7 @@ typedef enum FragmentEvents
 }
 
 +(NSObject*)OnFragmentEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...;
-+(void)RegisterFragmentEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
-+(void)RegisterFragmentEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt;
++(void)RegisterFragmentEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
 +(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId;
 +(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId :(NSMutableDictionary*)arguments;
 +(LuaFragment*)CreateWithUI:(LuaContext*)context :(NSString*)luaId :(NSString *)ui;

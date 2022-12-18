@@ -46,12 +46,12 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     return NO;
 }
 
-+(void)RegisterFormEventRef:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
++(void)RegisterFormEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
 {
-    [LuaForm RegisterFormEvent:[luaId GetCleanId] :event :lt];
+    [LuaForm RegisterFormEventInternal:[luaId GetCleanId] :event :lt];
 }
 
-+(void)RegisterFormEvent:(NSString *)luaId :(int)event :(LuaTranslator *)lt
++(void)RegisterFormEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt
 {
     [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
@@ -448,47 +448,24 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(RegisterFormEvent:::))
-                               :@selector(RegisterFormEvent:::)
-                               :nil
-                               :[NSArray arrayWithObjects:[NSString class], [LuaInt class], [LuaTranslator class], nil]
-                               :[LuaForm class]]
-             forKey:@"RegisterFormEvent"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::)) 
-										:@selector(Create::) 
-										:nil
-										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
-										:[LuaForm class]] 
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateWithUI:::)) 
-										:@selector(CreateWithUI:::) 
-										:nil
-										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], [NSString class], nil] 
-										:[LuaForm class]] 
-			 forKey:@"CreateWithUI"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateForTab::)) 
-										:@selector(CreateForTab::) 
-										:[NSObject class]
-										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
-										:[LuaForm class]] 
-			 forKey:@"CreateForTab"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetActiveForm)) 
-										:@selector(GetActiveForm) 
-										:[NSObject class]
-										:[NSArray arrayWithObjects:nil] 
-										:[LuaForm class]] 
-			 forKey:@"GetActiveForm"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetContext)) :@selector(GetContext) :[LuaContext class] :MakeArray(nil)] forKey:@"GetContext"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetViewById:)) :@selector(GetViewById:) :[LGView class] :MakeArray([LuaRef class]C nil)] forKey:@"GetViewById"];
-    InstanceMethodNoArg(GetBindings, MakeArray([NSDictionary class]C nil), @"GetBindings")
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetView)) :@selector(GetView) :[LGView class] :MakeArray(nil)] forKey:@"GetView"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetView:)) :@selector(SetView:) :nil :MakeArray([LGView class] C nil)] forKey:@"SetView"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetViewXML:)) :@selector(SetViewXML:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetViewXML"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil :MakeArray([NSString class] C nil)] forKey:@"SetTitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleRef:)) :@selector(SetTitleRef:) :nil :MakeArray([LuaRef class] C nil)] forKey:@"SetTitleRef"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Close)) :@selector(Close) :nil :MakeArray(nil)] forKey:@"Close"];
+    ClassMethodNoRet(RegisterFormEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterFormEvent", [LuaForm class])
+    ClassMethod(Create::, LuaForm, @[[LuaContext class]C [NSString class]], @"Create", [LuaForm class])
+    ClassMethod(CreateWithUI:::, LuaForm, @[[LuaContext class]C [NSString class]C [NSString class]], @"CreateWithUI", [LuaForm class])
+    ClassMethod(CreateForTab::, NSObject, @[[LuaContext class]C [NSString class]], @"CreateForTab", [LuaForm class])
+    ClassMethodNoRetNoArg(GetActiveForm, @"GetActiveForm", [LuaForm class])
+
+    InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")
+    InstanceMethod(GetViewById:, LGView, @[[LuaRef class]], @"GetViewById")
+    InstanceMethodNoArg(GetBindings, NSDictionary, @"GetBindings")
+    InstanceMethodNoArg(GetView, LGView, @"GetView")
+    InstanceMethodNoRet(SetView:, @[[LGView class]], @"SetView")
+    InstanceMethodNoRet(SetViewXML:, @[[NSString class]], @"SetViewXML")
+    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitle")
+    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitleRef")
+    InstanceMethodNoRetNoArg(Close, @"Close")
     InstanceMethodNoArg(getLifecycleInner, LuaLifecycle, @"GetLifecycle")
     InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
+    
 	return dict;
 }
 

@@ -6,13 +6,13 @@
 //#define MakeArray(V) (V == nil) ? [[NSArray alloc] init] : [[NSArray alloc] initWithObjects:V]
 #define MakeArray(V) [[NSArray alloc] initWithObjects:V]
 #define InstanceMethod(SEL, RET, ARGS, KEY) [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SEL)) :@selector(SEL) :[RET class] :ARGS] forKey:KEY];
-#define ClassMethod(SEL, RET, ARGS, KEY) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :[RET class] :ARGS] forKey:KEY];
+#define ClassMethod(SEL, RET, ARGS, KEY, CLS) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :[RET class] :ARGS :CLS] forKey:KEY];
 #define InstanceMethodNoRet(SEL, ARGS, KEY) [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SEL)) :@selector(SEL) :nil :ARGS] forKey:KEY];
-#define ClassMethodNoRet(SEL, ARGS, KEY) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :nil :ARGS] forKey:KEY];
+#define ClassMethodNoRet(SEL, ARGS, KEY, CLS) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :nil :ARGS :CLS] forKey:KEY];
 #define InstanceMethodNoArg(SEL, RET, KEY) [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SEL)) :@selector(SEL) :[RET class] :[[NSArray alloc] initWithObjects:nil]] forKey:KEY];
-#define ClassMethodNoArg(SEL, RET, KEY) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :[RET class] :[[NSArray alloc] initWithObjects:nil]] forKey:KEY];
+#define ClassMethodNoArg(SEL, RET, KEY, CLS) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :[RET class] :[[NSArray alloc] initWithObjects:nil] :CLS] forKey:KEY];
 #define InstanceMethodNoRetNoArg(SEL, KEY) [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SEL)) :@selector(SEL) :nil :[[NSArray alloc] initWithObjects:nil]] forKey:KEY];
-#define ClassMethodNoRetNoArg(SEL, KEY) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :nil :[[NSArray alloc] initWithObjects:nil]] forKey:KEY];
+#define ClassMethodNoRetNoArg(SEL, KEY, CLS) [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SEL)) :@selector(SEL) :nil :[[NSArray alloc] initWithObjects:nil] :CLS] forKey:KEY];
 
 @interface LuaFunction : NSObject 
 {

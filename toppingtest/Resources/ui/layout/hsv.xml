@@ -8,7 +8,7 @@
 	        android:layout_height="wrap_content"
 	        android:orientation="horizontal">
 	        <LGButton
-			    lua:id="formTestButton"
+                android:id="@+id/formTestButton"
 			    android:layout_width="wrap_content"
 		    	android:layout_height="wrap_content"
 		    	android:text="Button Text">

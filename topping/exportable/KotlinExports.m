@@ -35,7 +35,7 @@
 + (NSMutableDictionary *)luaMethods {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
-    ClassMethod(create:::::::, LuaAppBarConfiguration, MakeArray([LuaBool class]C [LuaRef class]C [LuaBool class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C nil), @"create")
+    ClassMethod(create:::::::, LuaAppBarConfiguration, @[[LuaBool class]C [LuaRef class]C [LuaBool class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C], @"create", [LuaAppBarConfiguration class])
     InstanceMethodNoRet(setTopLevelDestinations:, MakeArray([NSMutableArray class]C nil), @"setTopLevelDestinations")
     
     return dict;

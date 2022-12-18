@@ -33,7 +33,7 @@
 + (NSMutableDictionary *)luaMethods {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
-    ClassMethod(create:::::::, NavOptions, MakeArray([LuaBool class]C [LuaRef class]C [LuaBool class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C nil), @"create")
+    ClassMethod(create:::::::, NavOptions, @[[LuaBool class]C [LuaRef class]C [LuaBool class]C [LuaRef class]C [LuaRef class]C [LuaRef class]C [LuaRef class]], @"create", [LGNavigationParser class])
     
     return dict;
 }
