@@ -970,7 +970,9 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LGConstraintLayout class]];
 	[Lunar Register:lu :[LGDatePicker class]];
 	[Lunar Register:lu :[LGEditText class]];
+    [Lunar Register:lu :[LGFragmentContainerView class]];
 	[Lunar Register:lu :[LGFrameLayout class]];
+    [Lunar Register:lu :[LGImageView class]];
 	[Lunar Register:lu :[LGLinearLayout class]];
 	[Lunar Register:lu :[LGListView class]];
 	[Lunar Register:lu :[LGProgressBar class]];
@@ -983,7 +985,6 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LGRecyclerView class]];
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
     [Lunar Register:lu :[LGToolbar class]];
-    [Lunar Register:lu :[LGFragmentContainerView class]];
 	
 	[Lunar Register:lu :[LuaDefines class]];
 	[Lunar Register:lu :[LuaNativeObject class]];
@@ -999,31 +1000,30 @@ int RegisterTag(lua_State *L)
    	[Lunar Register:lu :[LuaHttpClient class]];
 	[Lunar Register:lu :[LuaJSONObject class]];
 	[Lunar Register:lu :[LuaJSONArray class]];
-    [Lunar Register:lu :[LuaPoint class]];
-    [Lunar Register:lu :[LuaRect class]];
-	[Lunar Register:lu :[LuaResource class]];
-	[Lunar Register:lu :[LuaStream class]];
-	[Lunar Register:lu :[LuaTabForm class]];
-	[Lunar Register:lu :[LuaToast class]];
-	[Lunar Register:lu :[LuaStore class]];
-    [Lunar Register:lu :[LuaRef class]];
-    [Lunar Register:lu :[LuaThread class]];
     [Lunar Register:lu :[LuaLog class]];
     [Lunar Register:lu :[LuaNativeCall class]];
+    [Lunar Register:lu :[LuaPoint class]];
+    [Lunar Register:lu :[LuaRect class]];
+    [Lunar Register:lu :[LuaRef class]];
+	[Lunar Register:lu :[LuaResource class]];
+    [Lunar Register:lu :[LuaStore class]];
+	[Lunar Register:lu :[LuaStream class]];
+	[Lunar Register:lu :[LuaTabForm class]];
+    [Lunar Register:lu :[LuaThread class]];
+	[Lunar Register:lu :[LuaToast class]];
     
-    [Lunar Register:lu :[LuaNavController class]];
-    [Lunar Register:lu :[NavigationUI class]];
-    [Lunar Register:lu :[FragmentManager class]];
-    [Lunar Register:lu :[LuaNavHostFragment class]];
     [Lunar Register:lu :[LuaAppBarConfiguration class]];
     [Lunar Register:lu :[LuaCoroutineScope class]];
     [Lunar Register:lu :[LuaDispatchers class]];
+    [Lunar Register:lu :[FragmentManager class]];
     [Lunar Register:lu :[LuaLifecycle class]];
     [Lunar Register:lu :[LuaLifecycleObserver class]];
     [Lunar Register:lu :[LuaLifecycleOwner class]];
     [Lunar Register:lu :[LuaMutableLiveData class]];
     [Lunar Register:lu :[LuaNavController class]];
+    [Lunar Register:lu :[NavigationUI class]];
     [Lunar Register:lu :[NavOptions class]];
+    [Lunar Register:lu :[LuaNavHostFragment class]];
     [Lunar Register:lu :[LuaViewModel class]];
     [Lunar Register:lu :[LuaViewModelProvider class]];
     
