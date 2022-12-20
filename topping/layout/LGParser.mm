@@ -154,6 +154,9 @@
                         {
                             [self.pValue ParseXML:dr.orientation :child];
                         }
+                        else {
+                            NSLog(@"Unknown resource type LGParser ParseValues %@", childName);
+                        }
                     }
                 }
             }

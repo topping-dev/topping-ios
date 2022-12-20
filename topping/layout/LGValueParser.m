@@ -140,7 +140,8 @@
     }
     else if(COMPARE(type, @"id"))
     {
-        //TODO: Fix this
+        NSString *value = APPEND(@"id/", name);
+        [[LGIdParser GetInstance] AddKey:name :value];
     }
     else if(COMPARE(type, @"array"))
     {

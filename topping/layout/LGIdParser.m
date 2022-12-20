@@ -80,4 +80,9 @@
     return self.idMap;
 }
 
+-(void)AddKey:(NSString *)key :(NSString *)value
+{
+    [self.idMap setObject:value forKey:key];
+}
+
 @end

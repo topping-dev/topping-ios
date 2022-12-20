@@ -16,6 +16,7 @@ UIRoot = "ui";
 -- Leaving this "", will create empty view for tab system
 -- if you want to use tab system, overload the create event of the
 -- MainForm(LuaForm) and add tab using LuaTabForm.
+-- you must create <item name="" type="id"/> in values folder
 MainUI = "main.xml"
 
 -- Startup Form

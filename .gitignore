@@ -1,5 +1,7 @@
 Pods/**
 .DS_Store
 PodSpecMetadata/Topping.framework
+PodSpecMetadata/Topping.xcframework
 PodSpecMetadata/topping.zip
 **/xcuserdata/
+Podfile.lock
