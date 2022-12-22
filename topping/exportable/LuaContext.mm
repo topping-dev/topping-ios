@@ -29,7 +29,7 @@
         self.navController.navigationBar.translucent = NO;
     }
     
-    NSString *toolbarTextColor = [styleMap objectForKey:@"ios:toolbarTextColor"];
+    NSString *toolbarTextColor = [styleMap objectForKey:@"iosToolbarTextColor"];
     if(toolbarTextColor != nil)
     {
         NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[[LGColorParser GetInstance] ParseColor:toolbarTextColor]};

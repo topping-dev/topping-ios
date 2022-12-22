@@ -23,9 +23,9 @@
 @property(nonatomic, retain) NSNumber *android_progress;
 @property(nonatomic, retain) NSString *android_progressDrawable;
 @property(nonatomic, retain) NSNumber *android_secondaryProgress;
-@property(nonatomic, retain) NSNumber *ios_horizontalProgress;
-@property(nonatomic, retain) NSNumber *ios_darkProgress;
-@property(nonatomic, retain) NSNumber *ios_smallProgress;
+@property(nonatomic, retain) NSNumber *iosHorizontalProgress;
+@property(nonatomic, retain) NSNumber *iosDarkProgress;
+@property(nonatomic, retain) NSNumber *iosSmallProgress;
 
 @property(nonatomic) BOOL horizontal;
 @property(nonatomic) int maxProgress;

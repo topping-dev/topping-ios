@@ -118,7 +118,7 @@ static LuaForm *sActiveForm;
     
     if (@available(iOS 13.0, *))
     {
-        NSString *iosTheme = [styleMap objectForKey:@"ios:theme"];
+        NSString *iosTheme = [styleMap objectForKey:@"iosTheme"];
         if(COMPARE(iosTheme, @"1"))
         {
             self.window.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
