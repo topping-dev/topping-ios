@@ -68,13 +68,30 @@
     }
 }
 
-+(void) MessageBox:(LuaContext *)context :(NSString *)title :(NSString *)content
++(void) MessageBox:(LuaContext *)context :(LuaRef *)title :(LuaRef *)content
+{
+    [LuaDialog MessageBoxInternal:context :(NSString*)[[LGValueParser GetInstance] GetValue:title.idRef] :(NSString*)[[LGValueParser GetInstance] GetValue:content.idRef]];
+}
+
++(void) MessageBoxInternal:(LuaContext *)context :(NSString *)title :(NSString *)content
 {
     UIAlertController *controller = [[UIAlertController alloc] init];
     controller.title = title;
     controller.message = content;
     UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", nil) style:UIAlertActionStyleDefault handler:nil];
     [controller addAction:action];
+    if(IS_IPAD) {
+        [controller setModalPresentationStyle:UIModalPresentationPopover];
+
+        UIPopoverPresentationController *popPresenter = [controller
+                                                      popoverPresentationController];
+        popPresenter.sourceView = [[LuaForm GetActiveForm].lgview GetView];
+        CGRect bounds = [[LuaForm GetActiveForm].lgview GetView].bounds;
+        CGFloat x = CGRectGetMidX(bounds);
+        CGFloat y = CGRectGetMidY(bounds);
+        popPresenter.sourceRect = CGRectMake(x, y, 0, 0);
+        popPresenter.permittedArrowDirections = UIPopoverArrowDirectionUnknown;
+    }
     [[LuaForm GetActiveForm] presentViewController:controller animated:YES completion:nil];
 }
 
@@ -143,7 +160,7 @@
     self.cancellable = val;
 }
 
--(void)SetPositiveButton:(NSString *)title :(LuaTranslator *)action
+-(void)SetPositiveButtonInternal:(NSString *)title :(LuaTranslator *)action
 {
     if(self.alertController != nil)
     {
@@ -161,7 +178,11 @@
 	self.ltPositiveAction = action;
 }
 
--(void)SetNegativeButton:(NSString *)title :(LuaTranslator *)action
+-(void)SetPositiveButton:(LuaRef *)title :(LuaTranslator *)action {
+    [self SetPositiveButtonInternal:(NSString*)[[LGValueParser GetInstance] GetValue:title.idRef] :action];
+}
+
+-(void)SetNegativeButtonInternal:(NSString *)title :(LuaTranslator *)action
 {
     if(self.alertController != nil)
     {
@@ -179,6 +200,10 @@
 	self.ltNegativeAction = action;
 }
 
+-(void)SetNegativeButton:(LuaRef *)title :(LuaTranslator *)action {
+    [self SetNegativeButtonInternal:(NSString*)[[LGValueParser GetInstance] GetValue:title.idRef] :action];
+}
+
 -(void)SetTitle:(NSString *)title
 {
     self.title = title;
@@ -192,7 +217,7 @@
 
 -(void)SetTitleRef:(LuaRef *)ref
 {
-    NSString *title = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    NSString *title = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
     [self SetTitle:title];
 }
 
@@ -206,7 +231,7 @@
 
 -(void)SetMessageRef:(LuaRef *)ref
 {
-    NSString *title = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    NSString *title = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
     [self SetMessage:title];
 }
 
@@ -246,7 +271,7 @@
     if(self.dialogType == DIALOG_TYPE_DATEPICKER)
     {
         NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *dateComponents = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
+        NSDateComponents *dateComponents = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:[NSDate date]];
         [dateComponents setDay:day];
         [dateComponents setMonth:month];
         [dateComponents setYear:year];
@@ -267,7 +292,7 @@
     if(self.dialogType == DIALOG_TYPE_TIMEPICKER)
     {
         NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *dateComponents = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:[NSDate date]];
+        NSDateComponents *dateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
         [dateComponents setHour:hour];
         [dateComponents setMinute:minute];
         [self.datePicker setValue:[calendar dateFromComponents:dateComponents] forKey:@"selectedDate"];
@@ -360,35 +385,28 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(MessageBox:::))
-										:@selector(MessageBox:::)
-										:nil
-										:MakeArray([LuaContext class]C [NSString class]C [NSString class]C nil)
-										:[LuaDialog class]] 
-			 forKey:@"MessageBox"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
-										:@selector(Create::)
-										:[LuaDialog class]
-										:[NSArray arrayWithObjects:[LuaContext class], [LuaInt class], nil]
-										:[LuaDialog class]] 
-			 forKey:@"Create"];
-   	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetCancellable:)) :@selector(SetCancellable:) :nil	:MakeArray([LuaBool class]C nil)] forKey:@"SetCancellable"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetPositiveButton::)) :@selector(SetPositiveButton::) :nil	:MakeArray([NSString class]C [LuaTranslator class]C nil)] forKey:@"SetPositiveButton"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetNegativeButton::)) :@selector(SetNegativeButton::) :nil	:MakeArray([NSString class]C [LuaTranslator class]C nil)] forKey:@"SetNegativeButton"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitle:)) :@selector(SetTitle:) :nil	:MakeArray([NSString class]C nil)] forKey:@"SetTitle"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTitleRef:)) :@selector(SetTitleRef:) :nil    :MakeArray([LuaRef class]C nil)] forKey:@"SetTitleRef"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMessage:)) :@selector(SetMessage:) :nil	:MakeArray([NSString class]C nil)] forKey:@"SetMessage"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMessageRef:)) :@selector(SetMessageRef:) :nil    :MakeArray([LuaRef class]C nil)] forKey:@"SetMessageRef"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetProgress:)) :@selector(SetProgress:) :nil	:MakeArray([LuaInt class]C nil)] forKey:@"SetProgress"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMax:)) :@selector(SetMax:) :nil	:MakeArray([LuaInt class]C nil)] forKey:@"SetMax"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetDate:)) :@selector(SetDate:) :nil	:MakeArray([LuaDate class]C nil)] forKey:@"SetDate"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetDateManual:::)) :@selector(SetDateManual:::) :nil :MakeArray([LuaInt class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"SetDateManual"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTime:)) :@selector(SetTime:) :nil	:MakeArray([LuaDate class]C nil)] forKey:@"SetTime"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTimeManual::)) :@selector(SetTimeManual::) :nil :MakeArray([LuaInt class]C [LuaInt class]C nil)] forKey:@"SetTimeManual"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Show)) :@selector(Show) :nil :MakeArray(nil)] forKey:@"Show"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Dismiss)) :@selector(Dismiss) :nil :MakeArray(nil)] forKey:@"Dismiss"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetDateSelectedListener:)) :@selector(SetDateSelectedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetDateSelectedListener"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTimeSelectedListener:)) :@selector(SetTimeSelectedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetTimeSelectedListener"];
+    ClassMethodNoRet(MessageBoxInternal:::, @[[LuaContext class]C [NSString class]C [NSString class]], @"MessageBoxInternal", [LuaDialog class])
+    ClassMethodNoRet(MessageBox:::, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"MessageBox", [LuaDialog class])
+    ClassMethod(Create::, LuaDialog, @[[LuaContext class]C [LuaInt class]], @"Create", [LuaDialog class])
+    
+    InstanceMethodNoRet(SetCancellable:, @[[LuaBool class]], @"SetCancellable")
+    InstanceMethodNoRet(SetPositiveButton::, @[[NSString class]C [LuaTranslator class]], @"SetPositiveButton")
+    InstanceMethodNoRet(SetNegativeButton::, @[[NSString class]C [LuaTranslator class]], @"SetNegativeButton")
+    
+    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitleRef")
+    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitle")
+    InstanceMethodNoRet(SetMessageRef:, @[[LuaRef class]], @"SetMessageRef")
+    InstanceMethodNoRet(SetMessage:, @[[NSString class]], @"SetMessage")
+    InstanceMethodNoRet(SetProgress:, @[[LuaInt class]], @"SetProgress")
+    InstanceMethodNoRet(SetMax:, @[[LuaInt class]], @"SetMax")
+    InstanceMethodNoRet(SetDate:, @[[LuaDate class]], @"SetDate")
+    InstanceMethodNoRet(SetDateManual:::, @[[LuaInt class]C [LuaInt class]C [LuaInt class]], @"SetDateManual")
+    InstanceMethodNoRet(SetTime:, @[[LuaDate class]], @"SetTime")
+    InstanceMethodNoRet(SetTimeManual::, @[[LuaInt class]C [LuaInt class]], @"SetTimeManual")
+    InstanceMethodNoRetNoArg(Show, @"Show")
+    InstanceMethodNoRetNoArg(Dismiss, @"Dismiss")
+    InstanceMethodNoRet(SetDateSelectedListener:, @[[LuaTranslator class]], @"SetDateSelectedListener")
+    InstanceMethodNoRet(SetTimeSelectedListener:, @[[LuaTranslator class]], @"SetTimeSelectedListener")
 	
 	return dict;
 }

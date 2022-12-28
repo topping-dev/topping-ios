@@ -401,6 +401,14 @@
 		5CBD36EE24F1652F00EB167E /* UILabelPadding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBD36EC24F1652F00EB167E /* UILabelPadding.m */; };
 		5CBFA03A2530562200734CAE /* LuaThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CBFA0382530562100734CAE /* LuaThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CBFA03B2530562200734CAE /* LuaThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBFA0392530562200734CAE /* LuaThread.m */; };
+		5CC17C162959C85F000B5BB0 /* ToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C102959C85F000B5BB0 /* ToastCenter.swift */; };
+		5CC17C172959C85F000B5BB0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C112959C85F000B5BB0 /* Toast.swift */; };
+		5CC17C182959C85F000B5BB0 /* ToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C122959C85F000B5BB0 /* ToastWindow.swift */; };
+		5CC17C192959C85F000B5BB0 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C132959C85F000B5BB0 /* ToastView.swift */; };
+		5CC17C1A2959C85F000B5BB0 /* UIApplication+Load.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C142959C85F000B5BB0 /* UIApplication+Load.swift */; };
+		5CC17C1B2959C85F000B5BB0 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C152959C85F000B5BB0 /* KeyboardObserver.swift */; };
+		5CC17C1F2959E2BB000B5BB0 /* compat-5.2.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C1D2959E2BB000B5BB0 /* compat-5.2.h */; };
+		5CC17C202959E2BB000B5BB0 /* compat-5.2.c in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C1E2959E2BB000B5BB0 /* compat-5.2.c */; };
 		5CCA8280250604AC005689D8 /* themes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA827F250604AC005689D8 /* themes.xml */; };
 		5CCB464525B82AD300CF0F4A /* LGConstraintLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */; };
@@ -869,6 +877,15 @@
 		5CBD36EC24F1652F00EB167E /* UILabelPadding.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILabelPadding.m; sourceTree = "<group>"; };
 		5CBFA0382530562100734CAE /* LuaThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaThread.h; sourceTree = "<group>"; };
 		5CBFA0392530562200734CAE /* LuaThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaThread.m; sourceTree = "<group>"; };
+		5CC17C0E2954D033000B5BB0 /* Toppingtest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Toppingtest.entitlements; path = Toppingtest/Toppingtest.entitlements; sourceTree = "<group>"; };
+		5CC17C102959C85F000B5BB0 /* ToastCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastCenter.swift; sourceTree = "<group>"; };
+		5CC17C112959C85F000B5BB0 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		5CC17C122959C85F000B5BB0 /* ToastWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastWindow.swift; sourceTree = "<group>"; };
+		5CC17C132959C85F000B5BB0 /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		5CC17C142959C85F000B5BB0 /* UIApplication+Load.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Load.swift"; sourceTree = "<group>"; };
+		5CC17C152959C85F000B5BB0 /* KeyboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
+		5CC17C1D2959E2BB000B5BB0 /* compat-5.2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "compat-5.2.h"; sourceTree = "<group>"; };
+		5CC17C1E2959E2BB000B5BB0 /* compat-5.2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "compat-5.2.c"; sourceTree = "<group>"; };
 		5CCA827F250604AC005689D8 /* themes.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = themes.xml; sourceTree = "<group>"; };
 		5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGConstraintLayout.h; sourceTree = "<group>"; };
 		5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGConstraintLayout.m; sourceTree = "<group>"; };
@@ -962,6 +979,7 @@
 		5C5A97FA24E16A4B002A22EA = {
 			isa = PBXGroup;
 			children = (
+				5CC17C0E2954D033000B5BB0 /* Toppingtest.entitlements */,
 				5CB29C602535B49C000E39A5 /* .gitignore */,
 				5CB5E13125821D3F00BF2EF5 /* include */,
 				5C2B615A254AA7C6003A9705 /* PodSpecMetadata */,
@@ -1121,6 +1139,8 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5CC17C1C2959E288000B5BB0 /* LuaCompat */,
+				5CC17C0F2959C812000B5BB0 /* Toaster */,
 				5C9EC7E42936002A008D2909 /* MotionAnimator */,
 				5C9EC7BB2935FD1E008D2909 /* MotionInterchange */,
 				5C9EC7A42935F703008D2909 /* MaterialProgress */,
@@ -1508,6 +1528,28 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		5CC17C0F2959C812000B5BB0 /* Toaster */ = {
+			isa = PBXGroup;
+			children = (
+				5CC17C152959C85F000B5BB0 /* KeyboardObserver.swift */,
+				5CC17C112959C85F000B5BB0 /* Toast.swift */,
+				5CC17C102959C85F000B5BB0 /* ToastCenter.swift */,
+				5CC17C132959C85F000B5BB0 /* ToastView.swift */,
+				5CC17C122959C85F000B5BB0 /* ToastWindow.swift */,
+				5CC17C142959C85F000B5BB0 /* UIApplication+Load.swift */,
+			);
+			path = Toaster;
+			sourceTree = "<group>";
+		};
+		5CC17C1C2959E288000B5BB0 /* LuaCompat */ = {
+			isa = PBXGroup;
+			children = (
+				5CC17C1D2959E2BB000B5BB0 /* compat-5.2.h */,
+				5CC17C1E2959E2BB000B5BB0 /* compat-5.2.c */,
+			);
+			path = LuaCompat;
+			sourceTree = "<group>";
+		};
 		5CCA827E25060491005689D8 /* DefaultResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1595,6 +1637,7 @@
 				5C5A99B124E16BEC002A22EA /* lmem.h in Headers */,
 				5C5A99DF24E16BEC002A22EA /* lua.h in Headers */,
 				5C5A99F424E16BEC002A22EA /* except.h in Headers */,
+				5CC17C1F2959E2BB000B5BB0 /* compat-5.2.h in Headers */,
 				5C5A98F724E16BCC002A22EA /* LGCompoundButton.h in Headers */,
 				5C9ED84B28FFE89B00305A74 /* LuaDispatchers.h in Headers */,
 				5C9EC7D02935FD41008D2909 /* MDMSpringTimingCurveGenerator.h in Headers */,
@@ -1931,11 +1974,13 @@
 				5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
 				5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */,
+				5CC17C172959C85F000B5BB0 /* Toast.swift in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C91BD60283E134500D4C94F /* Lifecycle.m in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
 				5C9EC7DE2935FD42008D2909 /* MDMMotionCurve.m in Sources */,
+				5CC17C182959C85F000B5BB0 /* ToastWindow.swift in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
 				5C5A99E324E16BEC002A22EA /* llex.c in Sources */,
 				5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */,
@@ -1954,6 +1999,7 @@
 				5C78BA3028462498003EC02A /* Utils.swift in Sources */,
 				5C2CA8422559753600C03879 /* LuaGraphics.mm in Sources */,
 				5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */,
+				5CC17C162959C85F000B5BB0 /* ToastCenter.swift in Sources */,
 				5C5A993124E16BCC002A22EA /* LuaCPlusPlusHelper.c in Sources */,
 				5C2B6162254AAB37003A9705 /* LuaToaster.swift in Sources */,
 				5C5A99F024E16BEC002A22EA /* select.c in Sources */,
@@ -2008,6 +2054,7 @@
 				5C9ED84F2900022A00305A74 /* LuaLifecycle.m in Sources */,
 				5C5A99C024E16BEC002A22EA /* lstrlib.c in Sources */,
 				5C5A991124E16BCC002A22EA /* LuaResource.m in Sources */,
+				5CC17C192959C85F000B5BB0 /* ToastView.swift in Sources */,
 				5C5A99E724E16BEC002A22EA /* buffer.c in Sources */,
 				5C43E6D424FE41E7005BEA07 /* LGRecyclerView.m in Sources */,
 				5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */,
@@ -2039,6 +2086,7 @@
 				5C91BD78283E15FF00D4C94F /* LuaViewModelProvider.m in Sources */,
 				5CD343E7284A386C00343C6B /* OnBackPressed.swift in Sources */,
 				5C5A993424E16BCC002A22EA /* LGScrollView.mm in Sources */,
+				5CC17C202959E2BB000B5BB0 /* compat-5.2.c in Sources */,
 				5C5A98ED24E16BCC002A22EA /* LGLayoutParser.mm in Sources */,
 				5C5A98E424E16BCC002A22EA /* LGDatePicker.mm in Sources */,
 				5C5A98B424E16BCC002A22EA /* LuaDouble.m in Sources */,
@@ -2086,7 +2134,9 @@
 				5C5A99E224E16BEC002A22EA /* lparser.c in Sources */,
 				5C5A99B024E16BEC002A22EA /* lauxlib.c in Sources */,
 				5C5A99FF24E16BEC002A22EA /* except.c in Sources */,
+				5CC17C1A2959C85F000B5BB0 /* UIApplication+Load.swift in Sources */,
 				5C91BD74283E15FF00D4C94F /* LuaLifecycleOwner.m in Sources */,
+				5CC17C1B2959C85F000B5BB0 /* KeyboardObserver.swift in Sources */,
 				5C5A98DF24E16BCC002A22EA /* LuaJSON.m in Sources */,
 				5C5A98D724E16BCC002A22EA /* LGCheckBox.mm in Sources */,
 				5C5A99BC24E16BEC002A22EA /* lmathlib.c in Sources */,
@@ -2343,8 +2393,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Toppingtest/Toppingtest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PURGPF38A5;
+				DEVELOPMENT_TEAM = 6489A6VDZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/toppingtest/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2354,6 +2405,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios.luaiostest;
 				PRODUCT_NAME = Toppingtest;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2367,8 +2419,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Toppingtest/Toppingtest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PURGPF38A5;
+				DEVELOPMENT_TEAM = 6489A6VDZ9;
 				INFOPLIST_FILE = "$(SRCROOT)/toppingtest/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2377,6 +2430,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topping.ios.luaiostest;
 				PRODUCT_NAME = Toppingtest;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

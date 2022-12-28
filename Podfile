@@ -12,7 +12,6 @@ target 'Topping' do
 
   # Pods for luaios
 
-  pod 'Toaster', '2.3.0'
   pod 'GDataXML-HTML', '~> 1.4.1'
   pod 'ActionSheetPicker-3.0'
   pod 'MBProgressHUD', '~> 1.2.0'
@@ -28,7 +27,6 @@ target 'Toppingtest' do
 
   # Pods for luaiostest
 
-  pod 'Toaster', '2.3.0'
   pod 'GDataXML-HTML', '~> 1.4.1'
   pod 'ActionSheetPicker-3.0'
   pod 'MBProgressHUD', '~> 1.2.0'

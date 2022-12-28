@@ -64,9 +64,9 @@ typedef enum FragmentEvents
 
 +(NSObject*)OnFragmentEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...;
 +(void)RegisterFragmentEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
-+(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId;
-+(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId :(NSMutableDictionary*)arguments;
-+(LuaFragment*)CreateWithUI:(LuaContext*)context :(NSString*)luaId :(NSString *)ui;
++(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId;
++(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments;
++(LuaFragment*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
 -(LuaContext*)GetContext;
 -(LuaForm*)GetForm;
 -(FragmentManager*)GetFragmentManager;
@@ -75,7 +75,7 @@ typedef enum FragmentEvents
 -(LGView*)GetView;
 -(void)SetView:(LGView*)v;
 -(void)SetViewId:(NSString*)luaId;
--(void)SetViewXML:(NSString *)xml;
+-(void)SetViewXML:(LuaRef *)xml;
 -(void)SetTitle:(NSString *)str;
 -(void)SetTitleRef:(LuaRef *)ref;
 -(void)Close;
@@ -141,7 +141,7 @@ typedef enum FragmentEvents
 @property(nonatomic, retain) NSString *luaId;
 @property(nonatomic, retain) LuaContext *context;
 @property(nonatomic, retain) LGView *lgview;
-@property(nonatomic, retain) NSString *ui;
+@property(nonatomic, retain) LuaRef *ui;
 
 @property (nonatomic, retain) FragmentHostCallback *mHost;
 @property (nonatomic, retain) FragmentManager *mFragmentManager;

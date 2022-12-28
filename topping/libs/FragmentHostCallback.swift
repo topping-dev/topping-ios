@@ -194,7 +194,7 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
     
     @objc
     public func instantiate(context: LuaContext, arguments: Dictionary<String, Any>?) -> LuaFragment {
-        return LuaFragment.create(context, "", arguments?.objcDictionary)
+        return LuaFragment.create(context, LuaRef.withValue(""), arguments?.objcDictionary)
     }
     
     @objc
@@ -203,7 +203,7 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
         if(cls == nil)
         {
             NSLog("cannot instantiate fragment with class name %@, creating LuaFragment with luaid", className)
-            return LuaFragment.create(context, className)
+            return LuaFragment.create(context, LuaRef.withValue(className))
         }
         let val = cls!.init()
         val.setArguments(arguments?.objcDictionary)

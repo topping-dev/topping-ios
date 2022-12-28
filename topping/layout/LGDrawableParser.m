@@ -22,8 +22,8 @@
 
 -(void)Initialize
 {
-    NSArray *layoutDirectories = [LuaResource GetResourceDirectories:LUA_DRAWABLE_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_DRAWABLE_FOLDER];
+    NSArray *drawableDirectories = [LuaResource GetResourceDirectories:LUA_DRAWABLE_FOLDER];
+    self.clearedDirectoryList = [[LGParser GetInstance] Tester:drawableDirectories :LUA_DRAWABLE_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
          NSString *aData = (NSString*)((DynamicResource*)obj1).data;

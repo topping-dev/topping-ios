@@ -11,6 +11,7 @@
 #import "lualib.h"
 #import "lua.h"
 #import "lauxlib.h"
+#import "compat-5.2.h"
 
 #import "Lunar.h"
 
@@ -98,23 +99,17 @@ static NSMutableArray *viewPlugins;
     return viewPlugins;
 }
 
-
 +(void)report: (lua_State *) L
 {
     const char * msg = lua_tostring(L,-1);
     if(msg != NULL) {
-        NSLog(@"ToppingEngine Lua Error: %@", [NSString stringWithCString:msg encoding:NSUTF8StringEncoding]);
+        NSString *str = [NSString stringWithCString:msg encoding:NSUTF8StringEncoding];
+        str = REPLACE(str, [[NSBundle mainBundle] bundlePath], @"");
+        NSLog(@"ToppingEngine Lua Error: %@", str);
+#ifdef DEBUG
+        [LuaDialog MessageBoxInternal:nil :@"error" :str];
+#endif
     }
-	/*int count = 20;
-	const char * msg= lua_tostring(L,-1);
-	while(msg && count > 0)
-	{
-		lua_pop(L,-1);
-		printf("\t%s\n", msg);
-		NSLog(@"%@", [NSString stringWithCString:msg encoding:NSUTF8StringEncoding]);
-		msg=lua_tostring(L,-1);
-		count--;
-	}*/
 }
 
 -(void)StartupDownload
@@ -125,6 +120,29 @@ static NSMutableArray *viewPlugins;
 	TagMap = [[NSMutableDictionary alloc] init];
 	
 	[self LoadScriptsDownload];
+}
+
+int handleLuaError(lua_State* L) {
+    const char * msg = lua_tostring(L, -1);
+    luaL_traceback(L, L, msg, 2);
+    lua_remove(L, -2); // Remove error/"msg" from stack.
+    return 1; // Traceback is returned.
+}
+
+int lua_mypcall( lua_State* L, int nargs, int nret ) {
+  /* calculate stack position for message handler */
+  int hpos = lua_gettop( L ) - nargs;
+  int ret = 0;
+  /* push custom error message handler */
+  lua_pushcfunction( L, handleLuaError );
+  /* move it before function and arguments */
+  lua_insert( L, hpos );
+  /* call lua_pcall function with custom handler */
+  ret = lua_pcall( L, nargs, nret, hpos );
+  /* remove custom error message handler from stack */
+  lua_remove( L, hpos );
+  /* pass return value of lua_pcall */
+  return ret;
 }
 
 -(void)LoadScriptsDownload
@@ -385,27 +403,23 @@ static NSMutableArray *viewPlugins;
 						[fm removeItemAtPath:myStr error:nil];
 						continue;
 					}
-					/*NSString *readTo = [scriptPath stringByAppendingPathComponent:myStr];
-					NSFileHandle *f = [NSFileHandle fileHandleForReadingAtPath:readTo];
-					NSData *dat = [f readDataToEndOfFile];
-					NSDictionary *attrs = [fm attributesOfItemAtPath:readTo error:NULL];
-					unsigned long long fSize = [attrs fileSize];
-					const char *fileName = [myStr cStringUsingEncoding:NSASCIIStringEncoding];
-					const char *byt = (const char *)[dat bytes];
-					if(luaL_loadbuffer(lu, byt, fSize, fileName) != 0)*/
+                    lua_pushcfunction(lu, handleLuaError);
 					if(luaL_loadfile(lu, [myStr cStringUsingEncoding:NSASCIIStringEncoding]) != 0)
 					{
 						NSLog(@"LUAEngine: loading %@ failed.(could not load)", myStr);
 						[ToppingEngine report: lu];
+                        lua_pop(lu, 1);
 					}
 					else
 					{
-						if(lua_pcall(lu, 0, 0, 0) != 0)
+						if(lua_pcall(lu, 0, 0, -2) != 0) //-2 error func
 						{
 							NSLog(@"LUAEngine: loading %@ failed.(could not load)", myStr);
 							[ToppingEngine report: lu];
+                            lua_pop(lu, 1); //pop traceback
 						}
 					}
+                    lua_pop(lu, 1); //pop handleLuaError
 					
 					//[f closeFile];
 				}
@@ -441,13 +455,16 @@ static NSMutableArray *viewPlugins;
 		case RESOURCE_DATA:
 		default:
 		{
-			
 			NSBundle *bund = [NSBundle mainBundle];
-			
+#if TARGET_OS_MACCATALYST
+            NSString *pathToSearch = [bund resourcePath];
+#else
+            NSString *pathToSearch = [bund bundlePath];
+#endif
 			//Scripts
 			{
 				//NSArray *paths = [bund pathsForResourcesOfType:@"lua" inDirectory:nil];
-                NSArray *paths = recursivePathsForResourceOfType(@"lua", [bund bundlePath]);
+                NSArray *paths = recursivePathsForResourceOfType(@"lua", pathToSearch);
 				for(NSString *myStr in paths)
 				{	
 					NSString *filename = myStr;
@@ -467,25 +484,29 @@ static NSMutableArray *viewPlugins;
 					NSData *dat = [f readDataToEndOfFile];
 					NSDictionary *attrs = [fm attributesOfItemAtPath:myStr error:NULL];
 					unsigned long long fSize = [attrs fileSize];
-					const char *fileName = [myStr cStringUsingEncoding:NSASCIIStringEncoding];
+					const char *fileName = [[myStr lastPathComponent] cStringUsingEncoding:NSASCIIStringEncoding];
 					const char *byt = (const char *)[dat bytes];
+                    lua_pushcfunction(lu, handleLuaError);
 					if(luaL_loadbuffer(lu, byt, fSize, fileName) != 0)
 					{
-						NSLog(@"LUAEngine: \033[22;31m loading %@ failed.(could not load)", myStr);
+						NSLog(@"LUAEngine: loading '%@' failed.(could not load)", filename);
 						[ToppingEngine report: lu];
+                        lua_pop(lu, 1);
 					}
 					else
 					{
-						if(lua_pcall(lu, 0, 0, 0) != 0)
+						if(lua_pcall(lu, 0, 0, -2) != 0)
 						{
-							NSLog(@"LUAEngine: \033[22;31m loading %@ failed.(could not load)", myStr);
+                            NSLog(@"LUAEngine: loading '%@' failed.(could not load)", filename);
 							[ToppingEngine report: lu];
+                            lua_pop(lu, 1);
                         }
                         else
                         {
                             NSLog(@"LuaEngine: Loaded %@", filename);
                         }
 					}
+                    lua_pop(lu, 1);
 					
 					[f closeFile];
 				}
@@ -884,7 +905,7 @@ static NSMutableArray *viewPlugins;
         i++;
     }
     
-    int r = lua_pcall(lu,i+1,LUA_MULTRET,0);
+    int r = lua_mypcall(lu, i+1, LUA_MULTRET);
     if(r)
     {
         [ToppingEngine report: lu];
@@ -1036,13 +1057,17 @@ int RegisterTag(lua_State *L)
 
 -(void)RegisterGlobals
 {
+#if TARGET_OS_MACCATALYST
     lua_pushstring(lu, "iOS");
+#else
+    lua_pushstring(lu, "iOS");
+#endif
     lua_setglobal(lu, "OS_TYPE");
 
     lua_pushstring(lu, [[UIDevice currentDevice].systemVersion cStringUsingEncoding:NSUTF8StringEncoding]);
     lua_setglobal(lu, "OS_VERSION");
     
-    lua_pushboolean(lu, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+    lua_pushboolean(lu, [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
     lua_setglobal(lu, "IS_TABLET");
 }
 

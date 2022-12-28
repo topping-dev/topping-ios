@@ -32,9 +32,10 @@
 	return lgview;
 }
 
--(LGView*) Inflate:(LuaRef*)ref : (LGView*)parent {
-    NSArray *arr = SPLIT(ref.idRef, @"/");
-    return [self ParseFile:[[arr lastObject] stringByAppendingString:@".xml"] :parent];
+-(LGView*)Inflate:(LuaRef*)ref : (LGView*)parent {
+    LGView *lgview = nil;
+    [[LGLayoutParser GetInstance] ParseRef:ref :[parent GetView] :parent :self.context.form :&lgview];
+    return lgview;
 }
 
 -(NSString*)GetId

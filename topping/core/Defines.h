@@ -2,10 +2,9 @@
 #import "Log.h"
 #import "ToppingEngine.h"
 
-#define SET_SEPERATOR_COLOR(V) [V setSeparatorColor:[UIColor darkGrayColor]]
+//#define DEBUG_DESCRIPTION
 
-//#define SUPPORT_LOW_RES_KURAN
-//#define DEFINE_SUB_CATEGORIES
+#define SET_SEPERATOR_COLOR(V) [V setSeparatorColor:[UIColor darkGrayColor]]
 
 #define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #define IS_IPHONE [[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad
@@ -81,65 +80,6 @@ NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData \
                                                      options:NSJSONReadingMutableContainers \
                                                        error:nil]; \
 TO = [[CLAZZ alloc] initWithDictionary:json]; \
-}
-
-static NSString* GETINVARIANTSTRING(NSString* str);
-static NSString* GETINVARIANTSTRING(NSString* str)
-{
-    NSMutableString *strRet = [NSMutableString string];
-	unichar c;
-	for(int i = 0; i < [str length]; i++)
-	{
-		c = [str characterAtIndex:i];
-		switch (c) 
-		{
-			case 0xE2:
-			case 0xC2:
-				c = 'a';
-				break;
-				
-			case 0x131:
-			case 'I':
-			case 0x130:
-			case 0xEE:
-			case 0xCE:
-				c = 'i';
-				break;
-				
-			case 0x11F:
-			case 0x11E:
-				c = 'g';
-				break;
-				
-			case 0x15F:
-			case 0x15E:
-				c = 's';
-				break;
-				
-			case 0xFC:
-			case 0xDC:
-			case 0xFB:
-			case 0xDB:
-				c = 'u';
-				break;
-				
-			case 0xE7:
-			case 0xC7:
-				c = 'c';
-				break;
-				
-			case 0xF6:
-			case 0xD6:
-			case 0xF4:
-			case 0xD4:
-				c = 'o';
-				break;
-		}
-		
-		[strRet appendString:[NSString stringWithCharacters:&c length:1]];
-	}
-	
-	return [NSString stringWithString:strRet];
 }
 
 static NSString* FUAPPEND(NSString *str, NSString* what,...);
@@ -223,7 +163,11 @@ static NSData* GetResourceAsset(NSString *path, NSString *name, NSString **url)
 	if([arr count] < 2)
 		return nil;
     NSBundle *bund = [NSBundle mainBundle];
+#if TARGET_OS_MACCATALYST
+    NSString *bundlePath = [bund resourcePath];
+#else
     NSString *bundlePath = [bund bundlePath];
+#endif
     NSString *internalPath = SUBSTRING(path, bundlePath.length, path.length);
 	NSString* resourcePath = [[NSBundle mainBundle] pathForResource:[arr objectAtIndex:0] ofType:[arr objectAtIndex:1] inDirectory:internalPath];
 	if(url != nil)
@@ -251,8 +195,8 @@ static NSData* GetResourceSd(NSString *path, NSString *name, NSString **url)
 	return nil;
 }
 
-static NSData* GetResource(NSString *path, NSString *name, NSString **url);
-static NSData* GetResource(NSString *path, NSString *name, NSString **url)
+static NSData* GetResourceValue(NSString *path, NSString *name, NSString **url);
+static NSData* GetResourceValue(NSString *path, NSString *name, NSString **url)
 {
 	int primaryLoad = [sToppingEngine GetPrimaryLoad];
 	switch (primaryLoad)

@@ -52,42 +52,47 @@ function ListViewTest_Constructor(pGUI, luacontext)
 	pAdapter:SetOnItemSelected(function(adapter, parent, detail, index, object)
         local form = LuaForm.GetActiveForm();
         if index == 0 then
-            LuaForm.CreateWithUI(form:GetContext(), "formTest", "form.xml");
+            local to = LuaForm.CreateWithUI(form:GetContext(), LR.id.formTestLL, LR.layout.form);
+            luacontext:StartForm(to)
         elseif index == 1 then
-            LuaForm.CreateWithUI(form:GetContext(), "hsvTest", "hsv.xml");
+            local to = LuaForm.CreateWithUI(form:GetContext(), LR.id.hsvTestLL, LR.layout.hsv);
+            luacontext:StartForm(to)
         elseif index == 2 then
-            LuaForm.CreateWithUI(form:GetContext(), "svTest", "sv.xml");
+            local to = LuaForm.CreateWithUI(form:GetContext(), LR.id.svTestLL, LR.layout.sv);
+            luacontext:StartForm(to)
         elseif index == 3 then
             --Map
         elseif index == 4 then
-            LuaDialog.MessageBox(form:GetContext(), "Title", "Message");
+            LuaDialog.MessageBox(form:GetContext(), LR.string.teststring, LR.string.teststring);
         elseif index == 5 then
             local datePicker = LuaDialog.Create(form:GetContext(), LuaDialog.DIALOG_TYPE_DATEPICKER);
-            datePicker:SetPositiveButton("Ok", LuaTranslator.Register(datePicker, "DatePicker_PositiveButton"));
-            datePicker:SetNegativeButton("Cancel", LuaTranslator.Register(datePicker, "DatePicker_NegativeButton"));
-            datePicker:SetTitle("Title");
-            datePicker:SetMessage("Message");
+            datePicker:SetPositiveButton(LR.string.ok, LuaTranslator.Register(datePicker, "DatePicker_PositiveButton"));
+            datePicker:SetNegativeButton(LR.string.cancel, LuaTranslator.Register(datePicker, "DatePicker_NegativeButton"));
+            datePicker:SetTitle(LR.string.title);
+            datePicker:SetMessage(LR.string.message);
             datePicker:SetDateManual(17, 7, 1985);
             datePicker:Show();
         elseif index == 6 then
             local timePicker = LuaDialog.Create(form:GetContext(), LuaDialog.DIALOG_TYPE_TIMEPICKER);
-            timePicker:SetPositiveButton("Ok", LuaTranslator.Register(timePicker, "TimePicker_PositiveButton"));
-            timePicker:SetNegativeButton("Cancel", LuaTranslator.Register(timePicker, "TimePicker_NegativeButton"));
-            timePicker:SetTitle("Title");
-            timePicker:SetMessage("Message");
+            timePicker:SetPositiveButton(LR.string.ok, LuaTranslator.Register(timePicker, "TimePicker_PositiveButton"));
+            timePicker:SetNegativeButton(LR.string.cancel, LuaTranslator.Register(timePicker, "TimePicker_NegativeButton"));
+            timePicker:SetTitle(LR.string.title);
+            timePicker:SetMessage(LR.string.message);
             timePicker:SetTimeManual(17, 7);
             timePicker:Show();
         elseif index == 7 then
-            LuaToast.Show(form:GetContext(), "Toast test", 2000);
+            LuaToast.Show(form:GetContext(), LR.string.toast_message, 2000);
         elseif index == 8 then
-            LuaForm.CreateWithUI(form:GetContext(), "frameTest", "frame.xml");
+            local to = LuaForm.CreateWithUI(form:GetContext(), LR.id.frameTest, LR.layout.frame);
+            luacontext:StartForm(to)
         elseif index == 9 then
-            LuaForm.CreateWithUI(form:GetContext(), "constraintTest", "constraint.xml");
+            local to = LuaForm.CreateWithUI(form:GetContext(), LR.id.constraintTest, LR.layout.constraint);
+            luacontext:StartForm(to)
         end
     end);
     pAdapter:SetOnCreateViewHolder(function(adapter, parent, type, context)
         local inflator = LuaViewInflator.Create(context);
-        local viewToRet = inflator:ParseFile("testbedadapter.xml", pGUI);
+        local viewToRet = inflator:Inflate(LR.layout.testbedadapter, pGUI);
         return viewToRet;
     end);
     pAdapter:SetOnBindViewHolder(function(adapter, view, index, object)

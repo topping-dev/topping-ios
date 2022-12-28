@@ -71,6 +71,7 @@ enum GRAVITY
 -(void)ReduceHeight:(int)share;
 -(int)GetCalculatedHeight;
 -(int)GetCalculatedWidth;
+-(void)ConfigChange;
 -(NSString *) DebugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;

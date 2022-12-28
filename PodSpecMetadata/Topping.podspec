@@ -26,7 +26,6 @@ If you know how to write Android code, learning curve of this engine is very sim
   
   #s.social_media_url = 'https://www.twitter.com/toppingdev'
 
-  s.dependency 'Toaster', '2.3.0'
   s.dependency 'GDataXML-HTML', '1.4.1'
   s.dependency 'ActionSheetPicker-3.0', '2.5.0'
   s.dependency 'MBProgressHUD', '1.2.0'

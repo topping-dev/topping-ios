@@ -7,9 +7,13 @@
 
 @implementation LuaToast
 
-+(void) Show:(LuaContext *)context :(NSString *)text :(int)duration
++(void) ShowInternal:(LuaContext *)context :(NSString *)text :(int)duration
 {
     [[[LuaToaster alloc] initWithText:text delay:0 duration:(((float)duration) / 1000.0f)] showToast];
+}
+
++(void)Show:(LuaContext *)context :(LuaRef*)text :(int)duration {
+    [LuaToast ShowInternal:context :(NSString*)[[LGValueParser GetInstance] GetValue:text.idRef] :duration];
 }
 
 -(NSString*)GetId
@@ -25,12 +29,10 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Show:::)) 
-										:@selector(Show:::) 
-										:nil
-										:MakeArray([LuaContext class]C [NSString class]C [LuaInt class]C nil)
-										:[LuaToast class]] 
-			 forKey:@"Show"];
+    
+    ClassMethodNoRet(ShowInternal:::, @[[LuaContext class]C [NSString class]C [LuaInt class]], @"ShowInternal", [LuaToast class])
+    ClassMethodNoRet(Show:::, @[[LuaContext class]C [LuaRef class]C [LuaInt class]], @"Show", [LuaToast class])
+    
 	return dict;
 }
 

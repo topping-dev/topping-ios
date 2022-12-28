@@ -44,6 +44,10 @@
     return self.form;
 }
 
+-(void)StartForm:(LuaNativeObject*)obj {
+    [navController pushViewController:(LuaForm*)obj.obj animated:true];
+}
+
 -(NSString*)GetId
 {
 	if(self.lua_id != nil)
@@ -62,6 +66,7 @@
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
     InstanceMethodNoArg(GetForm, LuaForm, @"GetForm")
+    InstanceMethodNoRet(StartForm:, @[[LuaNativeObject class]], @"StartForm")
         
 	return dict;
 }

@@ -3,6 +3,12 @@
     <dimen name="testdimen">10dp</dimen>
     <color name="testcolor">#FF0000</color>
     <string name="teststring">bgbgbgbg</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="toast_message">Toast test</string>
+    <string name="test_button_clicked">Test button clicked</string>
     <integer-array name="mole">
         <item>1</item>
         <item>2</item>

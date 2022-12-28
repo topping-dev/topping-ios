@@ -16,9 +16,9 @@
 }
 
 +(LuaTabForm*)Create:(LuaContext*)context :(NSString *)luaId;
--(void)AddTab:(LuaForm*)form :(NSString*)title :(LuaStream*)image :(NSString*)ui;
+-(void)AddTab:(LuaForm*)form :(NSString*)title :(LuaStream*)image :(LuaRef*)ui;
 -(void)AddTabStream:(LuaForm *)form :(NSString *)title :(LuaStream *)image :(LGView*)ui;
--(void)AddTabSrc:(LuaForm*)form :(NSString*)title :(NSString*)path :(NSString *)image :(NSString*)ui;
+-(void)AddTabSrc:(LuaForm*)form :(NSString*)title :(NSString*)path :(NSString *)image :(LuaRef*)ui;
 -(void)AddTabSrcStream:(LuaForm*)form :(NSString*)title :(NSString*)path :(NSString *)image :(LGView*)ui;
 -(void)Setup:(LuaForm*)form;
 

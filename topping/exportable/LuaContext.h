@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import "LuaClass.h"
 #import "LuaInterface.h"
+#import "LuaNativeObject.h"
 
 @class LuaForm;
 
@@ -17,6 +18,7 @@
 
 -(void)Setup:(UIViewController *)controller;
 -(LuaForm*)GetForm;
+-(void)StartForm:(LuaNativeObject*)obj;
 
 @property (nonatomic, retain) NSString *packageName;
 @property (nonatomic, retain) NSString *lua_id;

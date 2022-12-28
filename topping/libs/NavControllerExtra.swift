@@ -827,9 +827,15 @@ open class NavigationUI : NSObject, LuaClass, LuaInterface
         return "LuaNavigationUI"
     }
     
+    #if targetEnvironment(macCatalyst)
+    open override class func className() -> String {
+        return "LuaNavigationUI"
+    }
+    #else
     public static func className() -> String! {
         return "LuaNavigationUI"
     }
+    #endif
     
     public static func luaMethods() -> NSMutableDictionary! {
         let dict = NSMutableDictionary()

@@ -30,11 +30,14 @@
 {
 }
 
-+(void)MessageBox:(LuaContext*)context :(NSString*)title :(NSString*)content;
++(void)MessageBox:(LuaContext*)context :(LuaRef*)title :(LuaRef*)content;
++(void)MessageBoxInternal:(LuaContext*)context :(NSString*)title :(NSString*)content;
 +(LuaDialog*)Create:(LuaContext*)context :(int)dialogType;
 -(void)SetCancellable:(bool)val;
--(void)SetPositiveButton:(NSString*)title :(LuaTranslator*)action;
--(void)SetNegativeButton:(NSString*)title :(LuaTranslator*)action;
+-(void)SetPositiveButtonInternal:(NSString*)title :(LuaTranslator*)action;
+-(void)SetPositiveButton:(LuaRef*)title :(LuaTranslator*)action;
+-(void)SetNegativeButtonInternal:(NSString*)title :(LuaTranslator*)action;
+-(void)SetNegativeButton:(LuaRef*)title :(LuaTranslator*)action;
 -(void)SetTitle:(NSString*)title;
 -(void)SetTitleRef:(LuaRef*)ref;
 -(void)SetMessage:(NSString*)message;

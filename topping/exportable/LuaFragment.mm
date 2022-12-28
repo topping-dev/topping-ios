@@ -30,7 +30,7 @@
 }
 
 -(LuaFragment *)instantiateWithContext:(LuaContext *)context arguments:(NSDictionary<NSString *,id> *)arguments {
-    return [LuaFragment Create:context :@""];
+    return [LuaFragment Create:context :[LuaRef WithValue:@""]];
 }
 
 @end
@@ -88,27 +88,27 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     [eventMapFragment setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
-+(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId
++(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = luaId;
+    lf.luaId = [luaId GetCleanId];
     lf.context = context;
     return lf;
 }
 
-+(LuaFragment*)Create:(LuaContext*)context :(NSString*)luaId :(NSMutableDictionary*)arguments
++(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = luaId;
+    lf.luaId = [luaId GetCleanId];
     lf.context = context;
     lf.mArguments = arguments;
     return lf;
 }
 
-+(LuaFragment*)CreateWithUI:(LuaContext *)context :(NSString *)luaId :(NSString*)ui
++(LuaFragment*)CreateWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = luaId;
+    lf.luaId = [luaId GetCleanId];
     lf.context = context;
     lf.ui = ui;
     return lf;
@@ -149,11 +149,10 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     self.lgview = v;
 }
 
--(void)SetViewXML:(NSString *)xml
+-(void)SetViewXML:(LuaRef *)xml
 {
     LGView *lgview;
-    //TODO:Check this
-    [[LGLayoutParser GetInstance] ParseXML:xml :[DisplayMetrics GetMasterView] :nil :[LuaForm GetActiveForm] :&lgview];
+    [[LGLayoutParser GetInstance] ParseRef:xml :[DisplayMetrics GetMasterView] :nil :[LuaForm GetActiveForm] :&lgview];
     self.lgview = lgview;
 }
 
@@ -685,19 +684,19 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     ClassMethodNoRet(RegisterFragmentEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterFragmentEvent", [LuaFragment class])
-    ClassMethod(Create::, LuaFragment, @[[LuaContext class]C [NSString class]], @"Create", [LuaFragment class])
-    ClassMethod(CreateWithUI:::, LuaFragment, @[[LuaContext class]C [NSString class]C [NSString class]], @"CreateWithUI", [LuaFragment class])
+    ClassMethod(Create::, LuaFragment, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaFragment class])
+    ClassMethod(Create:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [NSDictionary class]], @"CreateWithArgs", [LuaFragment class])
+    ClassMethod(CreateWithUI:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaFragment class])
     
-   
     InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")
     InstanceMethodNoArg(GetForm, LuaForm, @"GetForm")
     InstanceMethod(GetViewById:, LGView, @[[LuaRef class]], @"GetViewById")
     InstanceMethodNoArg(GetView, LGView, @"GetView")
     InstanceMethodNoRet(SetView:, @[[LGView class]], @"SetView")
-    InstanceMethodNoRet(SetViewXML:, @[[NSString class]], @"SetViewXML")
+    InstanceMethodNoRet(SetViewXML:, @[[LuaRef class]], @"SetViewXML")
     InstanceMethodNoRet(SetViewId:, @[[NSString class]], @"SetViewId")
-    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitle")
-    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitleRef")
+    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitleInternal")
+    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitle")
     InstanceMethodNoRetNoArg(Close, @"Close")
     InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
     InstanceMethodNoArg(IsInitialized, LuaBool, @"IsInitialized")

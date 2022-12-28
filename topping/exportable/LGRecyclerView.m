@@ -87,6 +87,10 @@
     [((UICollectionView*)self._view) reloadData];
 }
 
+-(void)ConfigChange {
+    [self Notify];
+}
+
 -(NSString*)GetId
 {
     if(self.lua_id != nil)

@@ -88,6 +88,12 @@
     return ls;
 }
 
+-(UIView*) ParseRef:(LuaRef *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
+{
+    NSArray *arr = SPLIT(filename.idRef, @"/");
+    return [self ParseXML:[[arr lastObject] stringByAppendingString:@".xml"] :parentView :parent :cont :lgview];
+}
+
 -(UIView*) ParseXML:(NSString *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
 {
     self.lastFileName = filename;

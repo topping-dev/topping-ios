@@ -47,9 +47,9 @@ typedef enum FormEvents
 
 +(void)RegisterFormEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
 +(BOOL)OnFormEvent:(NSObject*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
-+(void)Create:(LuaContext*)context :(NSString*)luaId;
-+(void)CreateWithUI:(LuaContext*)context :(NSString*)luaId :(NSString *)ui;
-+(NSObject*)CreateForTab:(LuaContext *)context :(NSString*)luaId;
++(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId;
++(LuaNativeObject*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
++(LuaNativeObject*)CreateForTab:(LuaContext *)context :(LuaRef*)luaId;
 +(LuaForm*)GetActiveForm;
 -(LuaContext*)GetContext;
 -(LGView*)GetViewById:(LuaRef*)lId;
@@ -57,7 +57,7 @@ typedef enum FormEvents
 -(NSDictionary*)GetBindings;
 -(LGView*)GetView;
 -(void)SetView:(LGView*)v;
--(void)SetViewXML:(NSString *)xml;
+-(void)SetViewXML:(LuaRef *)xml;
 -(void)SetTitle:(NSString *)str;
 -(void)SetTitleRef:(LuaRef *)str;
 -(void)Close;
@@ -83,7 +83,7 @@ KEYBOARD_PROPERTIES
 
 @property(nonatomic, retain) LGView *lgview;
 @property(nonatomic, retain) LGToolbar *toolbar;
-@property(nonatomic, retain) NSString *ui;
+@property(nonatomic, retain) LuaRef *ui;
 @property(nonatomic, retain) LuaViewModelProvider *viewModelProvider;
 @property(nonatomic, retain) LuaLifecycleOwner *lifecycleOwner;
 @property(nonatomic, retain) LifecycleRegistry *lifecycleRegistry;

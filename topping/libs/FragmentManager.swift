@@ -142,13 +142,13 @@ open class FragmentFactory : NSObject {
     @objc
     public func instantiate() -> LuaFragment? {
         //TODO find context here
-        LuaFragment.create(LuaContext.init(), "")
+        LuaFragment.create(LuaContext.init(), LuaRef.withValue(""))
     }
     
     @objc
     public func instantiate(className: String) -> LuaFragment? {
         let cls: LuaFragment.Type = Utils.getClassForClassName(className: className)!
-        return cls.create(LuaContext.init(), "")
+        return cls.create(LuaContext.init(), LuaRef.withValue(""))
     }
 }
 
@@ -399,9 +399,15 @@ open class FragmentManager: NSObject, LuaClass, LuaInterface {
         return "FragmentManager"
     }
     
-    public static func className() -> String! {
+    #if targetEnvironment(macCatalyst)
+    open override class func className() -> String {
         return "FragmentManager"
     }
+    #else
+    public static func className() -> String {
+        return "FragmentManager"
+    }
+    #endif
     
     public static func luaMethods() -> NSMutableDictionary! {
         let dict = NSMutableDictionary()

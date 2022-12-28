@@ -29,7 +29,7 @@
 	return tabHost;
 }
 
--(void) AddTab:(LuaForm *)form :(NSString *)title :(LuaStream *)image :(NSString*)ui
+-(void) AddTab:(LuaForm *)form :(NSString *)title :(LuaStream *)image :(LuaRef*)ui
 {
 	form.context.navController =[[UINavigationController alloc]initWithRootViewController:form];
 	form.context.navController.tabBarItem.title=title;
@@ -49,7 +49,7 @@
 	[self.localLGViewControllersArray addObject:form];
 }
 
--(void) AddTabSrc:(LuaForm *)form :(NSString *)title :(NSString*)path :(NSString *)image :(NSString*)ui
+-(void) AddTabSrc:(LuaForm *)form :(NSString *)title :(NSString*)path :(NSString *)image :(LuaRef*)ui
 {
 	form.context.navController =[[UINavigationController alloc]initWithRootViewController:form];
 	form.context.navController.tabBarItem.title=title;
@@ -105,10 +105,10 @@
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], NSSelectorFromString(@"AddTab::::")) 
 									   :NSSelectorFromString(@"AddTab::::") 
 									   :nil 
-									   :MakeArray([LuaForm class]C [NSString class]C [LuaStream class]C [NSString class]C nil)]
+									   :MakeArray([LuaForm class]C [NSString class]C [LuaStream class]C [LuaRef class]C nil)]
 			 forKey:@"AddTab"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], NSSelectorFromString(@"AddTabStream::::")) :NSSelectorFromString(@"AddTabStream::::") :nil :MakeArray([LuaForm class]C [NSString class]C [LuaStream class]C [LGView class]C nil)] forKey:@"AddTabStream"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], NSSelectorFromString(@"AddTabSrc:::::")) :NSSelectorFromString(@"AddTabSrc:::::") :nil :MakeArray([LuaForm class]C [NSString class]C [NSString class]C [NSString class]C [NSString class]C nil)] forKey:@"AddTabSrc"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], NSSelectorFromString(@"AddTabSrc:::::")) :NSSelectorFromString(@"AddTabSrc:::::") :nil :MakeArray([LuaForm class]C [NSString class]C [NSString class]C [NSString class]C [LuaRef class]C nil)] forKey:@"AddTabSrc"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], NSSelectorFromString(@"AddTabSrcStream:::::")) :NSSelectorFromString(@"AddTabSrcStream:::::") :nil :MakeArray([LuaForm class]C [NSString class]C [NSString class]C [NSString class]C [LGView class]C nil)] forKey:@"AddTabSrcStream"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Setup:)) :@selector(Setup:) :nil :MakeArray([LuaForm class] C nil)] forKey:@"Setup"];
 	return dict;

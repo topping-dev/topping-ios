@@ -56,26 +56,26 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
-+(void)Create:(LuaContext*)context :(NSString*)luaId
++(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = luaId;
-	[context.navController pushViewController:form animated:YES];
+	form.luaId = [luaId GetCleanId];
+    return [[LuaNativeObject alloc] initWithObject:form];
 }
 
-+(void)CreateWithUI:(LuaContext *)context :(NSString *)luaId :(NSString*)ui
++(LuaNativeObject*)CreateWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = luaId;
-	form.ui = ui;
-	[context.navController pushViewController:form animated:YES];
+	form.luaId = [luaId GetCleanId];
+    form.ui = ui;
+    return [[LuaNativeObject alloc] initWithObject:form];
 }
 
-+(NSObject*)CreateForTab:(LuaContext*)context :(NSString*)luaId
++(LuaNativeObject*)CreateForTab:(LuaContext*)context :(LuaRef*)luaId
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = luaId;
-	return form;
+	form.luaId = [luaId GetCleanId];
+    return [[LuaNativeObject alloc] initWithObject:form];
 }
 
 +(LuaForm*)GetActiveForm
@@ -214,10 +214,10 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         //NSLog(@"Transition Size %@", NSStringFromCGSize(size));
         [self.lgview ResizeAndInvalidate];
+        [self.lgview ConfigChange];
     }];
 }
 
@@ -302,10 +302,10 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	self.view = [v GetView];
 }
 
--(void)SetViewXML:(NSString *)xml
+-(void)SetViewXML:(LuaRef *)xml
 {
 	LGView *lgview;
-    [self AddMainView:[[LGLayoutParser GetInstance] ParseXML:xml :[DisplayMetrics GetMasterView] :nil :self :&lgview]];
+    [self AddMainView:[[LGLayoutParser GetInstance] ParseRef:xml :[DisplayMetrics GetMasterView] :nil :self :&lgview]];
 	self.lgview = lgview;
 }
 
@@ -449,17 +449,17 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     ClassMethodNoRet(RegisterFormEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterFormEvent", [LuaForm class])
-    ClassMethod(Create::, LuaForm, @[[LuaContext class]C [NSString class]], @"Create", [LuaForm class])
-    ClassMethod(CreateWithUI:::, LuaForm, @[[LuaContext class]C [NSString class]C [NSString class]], @"CreateWithUI", [LuaForm class])
-    ClassMethod(CreateForTab::, NSObject, @[[LuaContext class]C [NSString class]], @"CreateForTab", [LuaForm class])
-    ClassMethodNoRetNoArg(GetActiveForm, @"GetActiveForm", [LuaForm class])
+    ClassMethod(Create::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaForm class])
+    ClassMethod(CreateWithUI:::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaForm class])
+    ClassMethod(CreateForTab::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"CreateForTab", [LuaForm class])
+    ClassMethodNoArg(GetActiveForm, [LuaForm class], @"GetActiveForm", [LuaForm class])
 
     InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")
     InstanceMethod(GetViewById:, LGView, @[[LuaRef class]], @"GetViewById")
     InstanceMethodNoArg(GetBindings, NSDictionary, @"GetBindings")
     InstanceMethodNoArg(GetView, LGView, @"GetView")
     InstanceMethodNoRet(SetView:, @[[LGView class]], @"SetView")
-    InstanceMethodNoRet(SetViewXML:, @[[NSString class]], @"SetViewXML")
+    InstanceMethodNoRet(SetViewXML:, @[[LuaRef class]], @"SetViewXML")
     InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitle")
     InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitleRef")
     InstanceMethodNoRetNoArg(Close, @"Close")

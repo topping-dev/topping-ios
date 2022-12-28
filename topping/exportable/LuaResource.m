@@ -30,7 +30,11 @@
 +(LuaStream *) GetResource:(NSString *)path :(NSString *)resName
 {
     NSBundle *bund = [NSBundle mainBundle];
+#if TARGET_OS_MACCATALYST
+    NSString *bundlePath = [bund resourcePath];
+#else
     NSString *bundlePath = [bund bundlePath];
+#endif
     NSString *truePath = [bundlePath stringByAppendingPathComponent:path];
 	switch([sToppingEngine GetPrimaryLoad])
 	{
@@ -85,9 +89,12 @@
         case RESOURCE_DATA:
         {
             NSBundle *bund = [NSBundle mainBundle];
-            NSString *bundlePath = [bund bundlePath];
             NSString *uiRoot = [sToppingEngine GetUIRoot];
-            NSString *resBundlePath = [bundlePath stringByAppendingPathComponent:uiRoot];
+#if TARGET_OS_MACCATALYST
+            NSString *resBundlePath = [[bund resourcePath] stringByAppendingPathComponent:uiRoot];
+#else
+            NSString *resBundlePath = [[bund bundlePath] stringByAppendingPathComponent:uiRoot];
+#endif
             NSArray *fileList = [fm directoryContentsAtPath:resBundlePath];
             for(NSString *file in fileList)
             {
@@ -124,7 +131,11 @@
         default:
         {
             NSBundle *bund = [NSBundle mainBundle];
+#if TARGET_OS_MACCATALYST
+            NSString *bundlePath = [bund resourcePath];
+#else
             NSString *bundlePath = [bund bundlePath];
+#endif
             NSString *uiRoot = [sToppingEngine GetUIRoot];
             NSString *resBundlePath = [bundlePath stringByAppendingPathComponent:uiRoot];
             NSString *folderPath = [resBundlePath stringByAppendingPathComponent:path];

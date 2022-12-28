@@ -15,8 +15,8 @@
 	[super GetContentW];
 	int width = self.dWidth;
     BOOL horizontalProgress = NO;
-    if(self.ios_horizontalProgress != nil)
-        horizontalProgress = [self.ios_horizontalProgress boolValue];
+    if(self.iosHorizontalProgress != nil)
+        horizontalProgress = [self.iosHorizontalProgress boolValue];
     if(!horizontalProgress && width == 0)
     {
         MDCActivityIndicator *temp = [MDCActivityIndicator new];
@@ -40,8 +40,8 @@
     if(height == 0)
     {
         BOOL horizontalProgress = NO;
-        if(self.ios_horizontalProgress != nil)
-            horizontalProgress = [self.ios_horizontalProgress boolValue];
+        if(self.iosHorizontalProgress != nil)
+            horizontalProgress = [self.iosHorizontalProgress boolValue];
         
         if(horizontalProgress)
             height = [[LGDimensionParser GetInstance] GetDimension:@"5dp"];
@@ -65,8 +65,8 @@
 -(UIView*)CreateComponent
 {
     BOOL horizontalProgress = NO;
-    if(self.ios_horizontalProgress != nil)
-        horizontalProgress = [self.ios_horizontalProgress boolValue];
+    if(self.iosHorizontalProgress != nil)
+        horizontalProgress = [self.iosHorizontalProgress boolValue];
 
     self.horizontal = horizontalProgress;
     if(horizontalProgress)
@@ -103,10 +103,10 @@
         BOOL smallProgress = YES;
         BOOL darkProgress = NO;
         self.maxProgress = 100;
-        if(self.ios_smallProgress != nil)
-            smallProgress = [self.ios_smallProgress boolValue];
-        if(self.ios_darkProgress != nil)
-            darkProgress = [self.ios_darkProgress boolValue];
+        if(self.iosSmallProgress != nil)
+            smallProgress = [self.iosSmallProgress boolValue];
+        if(self.iosDarkProgress != nil)
+            darkProgress = [self.iosDarkProgress boolValue];
         
         
         MDCActivityIndicator *pv = [[MDCActivityIndicator alloc] init];
@@ -136,8 +136,8 @@
     [super ComponentAddMethod:par :me];
     
     BOOL horizontalProgress = NO;
-    if(self.ios_horizontalProgress != nil)
-        horizontalProgress = [self.ios_horizontalProgress boolValue];
+    if(self.iosHorizontalProgress != nil)
+        horizontalProgress = [self.iosHorizontalProgress boolValue];
     
     if(!horizontalProgress)
         [((MDCActivityIndicator*)self._view) startAnimating];

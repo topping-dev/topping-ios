@@ -74,7 +74,7 @@ open class FragmentTransaction : NSObject {
     
     private func createFragment(type: LuaFragment.Type, args: Dictionary<String, Any>?) -> LuaFragment {
         //TODO
-        return LuaFragment.create(LuaContext.init(), "")
+        return LuaFragment.create(LuaContext.init(), LuaRef.withValue(""))
     }
     
     @objc public func add(type: LuaFragment.Type, args: Dictionary<String, Any>?, tag: String?) -> FragmentTransaction {

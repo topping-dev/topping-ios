@@ -48,8 +48,8 @@
 
 -(void)Initialize
 {
-    NSArray *layoutDirectories = [LuaResource GetResourceDirectories:LUA_FONT_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_FONT_FOLDER];
+    NSArray *fontDirectories = [LuaResource GetResourceDirectories:LUA_FONT_FOLDER];
+    self.clearedDirectoryList = [[LGParser GetInstance] Tester:fontDirectories :LUA_FONT_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
          NSString *aData = (NSString*)((DynamicResource*)obj1).data;

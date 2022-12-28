@@ -23,7 +23,9 @@
 		vertical = [self.android_orientation compare:@"vertical"] == 0;
     [super Resize];
 	//[super AfterResize:vertical];
+#ifdef DEBUG_DESCRIPTION
 	NSLog(@"\n %@", [self DebugDescription:nil]);
+#endif
 }
 
 -(void)ResizeInternal

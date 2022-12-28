@@ -17,17 +17,16 @@ function FormTestLL_Constructor(pGUI, luacontext)
 end
 
 function TestCheckBox_CheckedChanged(pGUI, context, isChecked)
-	LuaToast.Show(context, "CheckBox value is " .. tostring(isChecked), 1000);
+	LuaToast.ShowInternal(context, "CheckBox value is " .. tostring(isChecked), 1000);
 end
 
 function TestButton_Click(pGUI, context)
-	LuaToast.Show(context, "Test button clicked", 1000);
- print(pGUI)
+	LuaToast.Show(context, LR.string.test_button_clicked, 1000);
     pGUI:findNavController():navigate(LR.id.action_menuFragment_to_receiveFragment)
 end
 
 function TestComboBox_Changed(pGUI, context, name, value)
-	LuaToast.Show(context, "Combobox id " .. name, 1000);
+	LuaToast.ShowInternal(context, "Combobox id " .. name, 1000);
 end
 
 LuaForm.RegisterFormEvent(LR.id.formTestLL, LuaForm.FORM_EVENT_CREATE, FormTestLL_Constructor);

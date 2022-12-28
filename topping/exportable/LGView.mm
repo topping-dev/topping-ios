@@ -712,6 +712,10 @@
     return self.dWidth;
 }
 
+-(void)ConfigChange {
+    
+}
+
 -(NSString *) DebugDescription:(NSString *)val
 {
 	NSString *retVal = @"";

@@ -159,6 +159,15 @@
     [super ReduceHeight:share];
 }
 
+-(void)ConfigChange
+{
+    for(LGView *w in [self subviews])
+    {
+        [w ConfigChange];
+    }
+    [super ConfigChange];
+}
+
 -(NSString *)DebugDescription:(NSString *)val
 {
     NSString *retVal = [super DebugDescription:val];
