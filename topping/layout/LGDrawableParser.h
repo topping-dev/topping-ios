@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "LuaRef.h"
 
 @class GDataXMLElement;
 
@@ -27,6 +28,8 @@ typedef NS_OPTIONS(NSUInteger, UIControlStateExtra) {
 
 +(LGDrawableParser*) GetInstance;
 -(void)Initialize;
+-(LGDrawableReturn*) ParseDrawableRef:(LuaRef *)drawable;
+-(LGDrawableReturn*) ParseDrawableRef:(LuaRef *)drawable :(int)tileMode;
 -(LGDrawableReturn*) ParseDrawable:(NSString *)drawable;
 -(LGDrawableReturn*) ParseDrawable:(NSString *)drawable :(int)tileMode;
 -(LGDrawableReturn*) ParseXML:(NSString *)filename;

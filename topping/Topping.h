@@ -46,6 +46,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGRecyclerViewAdapter.h>
 #import <topping/LGRelativeLayout.h>
 #import <topping/LGScrollView.h>
+#import <topping/LGTabLayout.h>
 #import <topping/LGTextView.h>
 #import <topping/LGToolbar.h>
 #import <topping/LGView.h>
@@ -72,7 +73,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaResource.h>
 #import <topping/LuaStore.h>
 #import <topping/LuaStream.h>
-#import <topping/LuaTabForm.h>
+#import <topping/LuaTab.h>
 #import <topping/LuaThread.h>
 #import <topping/LuaToast.h>
 #import <topping/LuaTranslator.h>

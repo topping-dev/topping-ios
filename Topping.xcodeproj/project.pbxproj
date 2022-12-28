@@ -37,6 +37,16 @@
 		5C2CA83F2559728E00C03879 /* LuaFragment.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CA83D2559728D00C03879 /* LuaFragment.mm */; };
 		5C2CA8422559753600C03879 /* LuaGraphics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CA8402559753300C03879 /* LuaGraphics.mm */; };
 		5C2CA8432559753600C03879 /* LuaGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2CA8412559753500C03879 /* LuaGraphics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F99EC295C3A9600C443A8 /* MDCBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99E8295C3A9600C443A8 /* MDCBadgeView.h */; };
+		5C2F99ED295C3A9600C443A8 /* MDCDotBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99E9295C3A9600C443A8 /* MDCDotBadgeView.m */; };
+		5C2F99EE295C3A9600C443A8 /* MDCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99EA295C3A9600C443A8 /* MDCBadgeView.m */; };
+		5C2F99EF295C3A9600C443A8 /* MDCDotBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99EB295C3A9600C443A8 /* MDCDotBadgeView.h */; };
+		5C2F99F4295C3AA300C443A8 /* MDCDotBadgeAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99F0295C3AA300C443A8 /* MDCDotBadgeAppearance.m */; };
+		5C2F99F5295C3AA300C443A8 /* MDCBadgeAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99F1295C3AA300C443A8 /* MDCBadgeAppearance.h */; };
+		5C2F99F6295C3AA300C443A8 /* MDCDotBadgeAppearance.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99F2295C3AA300C443A8 /* MDCDotBadgeAppearance.h */; };
+		5C2F99F7295C3AA300C443A8 /* MDCBadgeAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99F3295C3AA300C443A8 /* MDCBadgeAppearance.m */; };
+		5C2F99FA295C47E800C443A8 /* LuaTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99F8295C47E800C443A8 /* LuaTab.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F99FB295C47E800C443A8 /* LuaTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99F9295C47E800C443A8 /* LuaTab.m */; };
 		5C31C7A3250399A8001773F8 /* LGStyleParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C31C7A1250399A8001773F8 /* LGStyleParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C31C7A2250399A8001773F8 /* LGStyleParser.m */; };
 		5C32B2F024F9783300875355 /* LGValueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32B2EE24F9783200875355 /* LGValueParser.m */; };
@@ -101,7 +111,6 @@
 		5C5A98ED24E16BCC002A22EA /* LGLayoutParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984A24E16BBF002A22EA /* LGLayoutParser.mm */; };
 		5C5A98EE24E16BCC002A22EA /* IPTableBaseAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98EF24E16BCC002A22EA /* LuaInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984C24E16BC0002A22EA /* LuaInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C5A98F024E16BCC002A22EA /* LuaTabForm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984D24E16BC0002A22EA /* LuaTabForm.mm */; };
 		5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984E24E16BC0002A22EA /* LuaLong.m */; };
 		5C5A98F224E16BCC002A22EA /* LGAbsListView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */; };
 		5C5A98F424E16BCC002A22EA /* LuaPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A985124E16BC0002A22EA /* LuaPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -186,7 +195,6 @@
 		5C5A995224E16BCC002A22EA /* LuaColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98AF24E16BCB002A22EA /* LuaColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A995324E16BCC002A22EA /* LuaStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98B024E16BCB002A22EA /* LuaStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A995424E16BCC002A22EA /* Defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98B124E16BCB002A22EA /* Defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5C5A995524E16BCC002A22EA /* LuaTabForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A98B224E16BCB002A22EA /* LuaTabForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A99B024E16BEC002A22EA /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A995824E16BEB002A22EA /* lauxlib.c */; };
 		5C5A99B124E16BEC002A22EA /* lmem.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A995924E16BEB002A22EA /* lmem.h */; };
 		5C5A99B224E16BEC002A22EA /* llimits.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A995A24E16BEB002A22EA /* llimits.h */; };
@@ -301,6 +309,28 @@
 		5C78BA2C284622A5003EC02A /* FragmentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */; };
 		5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */; };
 		5C78BA3028462498003EC02A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2F28462498003EC02A /* Utils.swift */; };
+		5C810B06295C3BB000C2A93D /* MDCRippleTouchControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810AFA295C3BB000C2A93D /* MDCRippleTouchControllerDelegate.h */; };
+		5C810B07295C3BB000C2A93D /* MDCStatefulRippleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810AFB295C3BB000C2A93D /* MDCStatefulRippleView.h */; };
+		5C810B08295C3BB000C2A93D /* MDCRippleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810AFC295C3BB000C2A93D /* MDCRippleLayer.m */; };
+		5C810B09295C3BB000C2A93D /* MaterialRipple.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810AFD295C3BB000C2A93D /* MaterialRipple.h */; };
+		5C810B0A295C3BB000C2A93D /* MDCRippleLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810AFE295C3BB000C2A93D /* MDCRippleLayer.h */; };
+		5C810B0B295C3BB000C2A93D /* MDCRippleTouchController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810AFF295C3BB000C2A93D /* MDCRippleTouchController.h */; };
+		5C810B0C295C3BB000C2A93D /* MDCRippleLayerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B00295C3BB000C2A93D /* MDCRippleLayerDelegate.h */; };
+		5C810B0D295C3BB000C2A93D /* MDCRippleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B01295C3BB000C2A93D /* MDCRippleView.h */; };
+		5C810B0E295C3BB000C2A93D /* MDCRippleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B02295C3BB000C2A93D /* MDCRippleView.m */; };
+		5C810B0F295C3BB000C2A93D /* MDCRippleTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B03295C3BB000C2A93D /* MDCRippleTouchController.m */; };
+		5C810B10295C3BB000C2A93D /* MDCStatefulRippleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B04295C3BB000C2A93D /* MDCStatefulRippleView.m */; };
+		5C810B11295C3BB000C2A93D /* MDCRippleViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B05295C3BB000C2A93D /* MDCRippleViewDelegate.h */; };
+		5C810B18295C3C2F00C2A93D /* UIView+MDCTimingFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B13295C3C2F00C2A93D /* UIView+MDCTimingFunction.m */; };
+		5C810B19295C3C2F00C2A93D /* MaterialAnimationTiming.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B14295C3C2F00C2A93D /* MaterialAnimationTiming.h */; };
+		5C810B1A295C3C2F00C2A93D /* UIView+MDCTimingFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B15295C3C2F00C2A93D /* UIView+MDCTimingFunction.h */; };
+		5C810B1B295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B16295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h */; };
+		5C810B1C295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B17295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.m */; };
+		5C810B20295C3C8200C2A93D /* MaterialMathDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B1D295C3C8200C2A93D /* MaterialMathDummy.m */; };
+		5C810B21295C3C8200C2A93D /* MDCMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B1E295C3C8200C2A93D /* MDCMath.h */; };
+		5C810B22295C3C8200C2A93D /* MaterialMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B1F295C3C8200C2A93D /* MaterialMath.h */; };
+		5C810B25295C410B00C2A93D /* LGTabLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C810B23295C410B00C2A93D /* LGTabLayout.m */; };
+		5C810B26295C410B00C2A93D /* LGTabLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C810B24295C410B00C2A93D /* LGTabLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C8614F828D33E8500213CEE /* LGIdParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8614F628D33E8500213CEE /* LGIdParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C8614F928D33E8500213CEE /* LGIdParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8614F728D33E8500213CEE /* LGIdParser.m */; };
 		5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C86213425C0477D00BF23CA /* LuaNativeCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -409,6 +439,27 @@
 		5CC17C1B2959C85F000B5BB0 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C152959C85F000B5BB0 /* KeyboardObserver.swift */; };
 		5CC17C1F2959E2BB000B5BB0 /* compat-5.2.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C1D2959E2BB000B5BB0 /* compat-5.2.h */; };
 		5CC17C202959E2BB000B5BB0 /* compat-5.2.c in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C1E2959E2BB000B5BB0 /* compat-5.2.c */; };
+		5CC17C38295C38F1000B5BB0 /* MaterialTabs+TabBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C23295C38F1000B5BB0 /* MaterialTabs+TabBarView.h */; };
+		5CC17C39295C38F1000B5BB0 /* MDCTabBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C24295C38F1000B5BB0 /* MDCTabBarView.h */; };
+		5CC17C3A295C38F1000B5BB0 /* MDCTabBarViewItemViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C25295C38F1000B5BB0 /* MDCTabBarViewItemViewDelegate.h */; };
+		5CC17C3B295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C26295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h */; };
+		5CC17C3C295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C27295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h */; };
+		5CC17C3D295C38F1000B5BB0 /* MDCTabBarViewIndicatorTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C28295C38F1000B5BB0 /* MDCTabBarViewIndicatorTemplate.h */; };
+		5CC17C3E295C38F1000B5BB0 /* MDCTabBarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C29295C38F1000B5BB0 /* MDCTabBarItem.h */; };
+		5CC17C3F295C38F1000B5BB0 /* MDCTabBarViewIndicatorContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C2A295C38F1000B5BB0 /* MDCTabBarViewIndicatorContext.h */; };
+		5CC17C40295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C2B295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m */; };
+		5CC17C41295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C2C295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.h */; };
+		5CC17C42295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C2D295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m */; };
+		5CC17C43295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C2E295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.m */; };
+		5CC17C44295C38F1000B5BB0 /* MDCTabBarViewItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C2F295C38F1000B5BB0 /* MDCTabBarViewItemView.h */; };
+		5CC17C45295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C30295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.h */; };
+		5CC17C46295C38F1000B5BB0 /* MDCTabBarItemCustomViewing.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C31295C38F1000B5BB0 /* MDCTabBarItemCustomViewing.h */; };
+		5CC17C47295C38F1000B5BB0 /* MDCTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C32295C38F1000B5BB0 /* MDCTabBarView.m */; };
+		5CC17C48295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C33295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h */; };
+		5CC17C49295C38F1000B5BB0 /* MDCTabBarViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC17C34295C38F1000B5BB0 /* MDCTabBarViewDelegate.h */; };
+		5CC17C4A295C38F1000B5BB0 /* MDCTabBarViewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C35295C38F1000B5BB0 /* MDCTabBarViewItemView.m */; };
+		5CC17C4B295C38F1000B5BB0 /* MDCTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C36295C38F1000B5BB0 /* MDCTabBarItem.m */; };
+		5CC17C4C295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17C37295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.m */; };
 		5CCA8280250604AC005689D8 /* themes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA827F250604AC005689D8 /* themes.xml */; };
 		5CCB464525B82AD300CF0F4A /* LGConstraintLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */; };
@@ -505,6 +556,16 @@
 		5C2CA83D2559728D00C03879 /* LuaFragment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaFragment.mm; sourceTree = "<group>"; };
 		5C2CA8402559753300C03879 /* LuaGraphics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaGraphics.mm; sourceTree = "<group>"; };
 		5C2CA8412559753500C03879 /* LuaGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaGraphics.h; sourceTree = "<group>"; };
+		5C2F99E8295C3A9600C443A8 /* MDCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBadgeView.h; sourceTree = "<group>"; };
+		5C2F99E9295C3A9600C443A8 /* MDCDotBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCDotBadgeView.m; sourceTree = "<group>"; };
+		5C2F99EA295C3A9600C443A8 /* MDCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBadgeView.m; sourceTree = "<group>"; };
+		5C2F99EB295C3A9600C443A8 /* MDCDotBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCDotBadgeView.h; sourceTree = "<group>"; };
+		5C2F99F0295C3AA300C443A8 /* MDCDotBadgeAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCDotBadgeAppearance.m; sourceTree = "<group>"; };
+		5C2F99F1295C3AA300C443A8 /* MDCBadgeAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBadgeAppearance.h; sourceTree = "<group>"; };
+		5C2F99F2295C3AA300C443A8 /* MDCDotBadgeAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCDotBadgeAppearance.h; sourceTree = "<group>"; };
+		5C2F99F3295C3AA300C443A8 /* MDCBadgeAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBadgeAppearance.m; sourceTree = "<group>"; };
+		5C2F99F8295C47E800C443A8 /* LuaTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaTab.h; sourceTree = "<group>"; };
+		5C2F99F9295C47E800C443A8 /* LuaTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaTab.m; sourceTree = "<group>"; };
 		5C31C7A1250399A8001773F8 /* LGStyleParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGStyleParser.h; sourceTree = "<group>"; };
 		5C31C7A2250399A8001773F8 /* LGStyleParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGStyleParser.m; sourceTree = "<group>"; };
 		5C32B2EE24F9783200875355 /* LGValueParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGValueParser.m; sourceTree = "<group>"; };
@@ -571,7 +632,6 @@
 		5C5A984A24E16BBF002A22EA /* LGLayoutParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGLayoutParser.mm; sourceTree = "<group>"; };
 		5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPTableBaseAdapter.h; sourceTree = "<group>"; };
 		5C5A984C24E16BC0002A22EA /* LuaInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaInterface.h; sourceTree = "<group>"; };
-		5C5A984D24E16BC0002A22EA /* LuaTabForm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaTabForm.mm; sourceTree = "<group>"; };
 		5C5A984E24E16BC0002A22EA /* LuaLong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaLong.m; sourceTree = "<group>"; };
 		5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGAbsListView.mm; sourceTree = "<group>"; };
 		5C5A985124E16BC0002A22EA /* LuaPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaPoint.h; sourceTree = "<group>"; };
@@ -656,7 +716,6 @@
 		5C5A98AF24E16BCB002A22EA /* LuaColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaColor.h; sourceTree = "<group>"; };
 		5C5A98B024E16BCB002A22EA /* LuaStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaStream.h; sourceTree = "<group>"; };
 		5C5A98B124E16BCB002A22EA /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
-		5C5A98B224E16BCB002A22EA /* LuaTabForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaTabForm.h; sourceTree = "<group>"; };
 		5C5A995824E16BEB002A22EA /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lauxlib.c; sourceTree = "<group>"; };
 		5C5A995924E16BEB002A22EA /* lmem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmem.h; sourceTree = "<group>"; };
 		5C5A995A24E16BEB002A22EA /* llimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = llimits.h; sourceTree = "<group>"; };
@@ -774,6 +833,28 @@
 		5C78BA2B284622A5003EC02A /* FragmentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateManager.swift; sourceTree = "<group>"; };
 		5C78BA2D28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentLifecycleCallbacksDispatcher.swift; sourceTree = "<group>"; };
 		5C78BA2F28462498003EC02A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5C810AFA295C3BB000C2A93D /* MDCRippleTouchControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCRippleTouchControllerDelegate.h; sourceTree = "<group>"; };
+		5C810AFB295C3BB000C2A93D /* MDCStatefulRippleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCStatefulRippleView.h; sourceTree = "<group>"; };
+		5C810AFC295C3BB000C2A93D /* MDCRippleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCRippleLayer.m; sourceTree = "<group>"; };
+		5C810AFD295C3BB000C2A93D /* MaterialRipple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialRipple.h; sourceTree = "<group>"; };
+		5C810AFE295C3BB000C2A93D /* MDCRippleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCRippleLayer.h; sourceTree = "<group>"; };
+		5C810AFF295C3BB000C2A93D /* MDCRippleTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCRippleTouchController.h; sourceTree = "<group>"; };
+		5C810B00295C3BB000C2A93D /* MDCRippleLayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCRippleLayerDelegate.h; sourceTree = "<group>"; };
+		5C810B01295C3BB000C2A93D /* MDCRippleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCRippleView.h; sourceTree = "<group>"; };
+		5C810B02295C3BB000C2A93D /* MDCRippleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCRippleView.m; sourceTree = "<group>"; };
+		5C810B03295C3BB000C2A93D /* MDCRippleTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCRippleTouchController.m; sourceTree = "<group>"; };
+		5C810B04295C3BB000C2A93D /* MDCStatefulRippleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCStatefulRippleView.m; sourceTree = "<group>"; };
+		5C810B05295C3BB000C2A93D /* MDCRippleViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCRippleViewDelegate.h; sourceTree = "<group>"; };
+		5C810B13295C3C2F00C2A93D /* UIView+MDCTimingFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MDCTimingFunction.m"; sourceTree = "<group>"; };
+		5C810B14295C3C2F00C2A93D /* MaterialAnimationTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialAnimationTiming.h; sourceTree = "<group>"; };
+		5C810B15295C3C2F00C2A93D /* UIView+MDCTimingFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MDCTimingFunction.h"; sourceTree = "<group>"; };
+		5C810B16295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+MDCAnimationTiming.h"; sourceTree = "<group>"; };
+		5C810B17295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+MDCAnimationTiming.m"; sourceTree = "<group>"; };
+		5C810B1D295C3C8200C2A93D /* MaterialMathDummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialMathDummy.m; sourceTree = "<group>"; };
+		5C810B1E295C3C8200C2A93D /* MDCMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCMath.h; sourceTree = "<group>"; };
+		5C810B1F295C3C8200C2A93D /* MaterialMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialMath.h; sourceTree = "<group>"; };
+		5C810B23295C410B00C2A93D /* LGTabLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGTabLayout.m; sourceTree = "<group>"; };
+		5C810B24295C410B00C2A93D /* LGTabLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGTabLayout.h; sourceTree = "<group>"; };
 		5C8614F628D33E8500213CEE /* LGIdParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGIdParser.h; sourceTree = "<group>"; };
 		5C8614F728D33E8500213CEE /* LGIdParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGIdParser.m; sourceTree = "<group>"; };
 		5C86213425C0477D00BF23CA /* LuaNativeCall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaNativeCall.h; sourceTree = "<group>"; };
@@ -886,6 +967,27 @@
 		5CC17C152959C85F000B5BB0 /* KeyboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		5CC17C1D2959E2BB000B5BB0 /* compat-5.2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "compat-5.2.h"; sourceTree = "<group>"; };
 		5CC17C1E2959E2BB000B5BB0 /* compat-5.2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "compat-5.2.c"; sourceTree = "<group>"; };
+		5CC17C23295C38F1000B5BB0 /* MaterialTabs+TabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MaterialTabs+TabBarView.h"; sourceTree = "<group>"; };
+		5CC17C24295C38F1000B5BB0 /* MDCTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarView.h; sourceTree = "<group>"; };
+		5CC17C25295C38F1000B5BB0 /* MDCTabBarViewItemViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewItemViewDelegate.h; sourceTree = "<group>"; };
+		5CC17C26295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewCustomViewable.h; sourceTree = "<group>"; };
+		5CC17C27295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewIndicatorView.h; sourceTree = "<group>"; };
+		5CC17C28295C38F1000B5BB0 /* MDCTabBarViewIndicatorTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewIndicatorTemplate.h; sourceTree = "<group>"; };
+		5CC17C29295C38F1000B5BB0 /* MDCTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarItem.h; sourceTree = "<group>"; };
+		5CC17C2A295C38F1000B5BB0 /* MDCTabBarViewIndicatorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewIndicatorContext.h; sourceTree = "<group>"; };
+		5CC17C2B295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarViewIndicatorView.m; sourceTree = "<group>"; };
+		5CC17C2C295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewPrivateIndicatorContext.h; sourceTree = "<group>"; };
+		5CC17C2D295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarViewPrivateIndicatorContext.m; sourceTree = "<group>"; };
+		5CC17C2E295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarViewUnderlineIndicatorTemplate.m; sourceTree = "<group>"; };
+		5CC17C2F295C38F1000B5BB0 /* MDCTabBarViewItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewItemView.h; sourceTree = "<group>"; };
+		5CC17C30295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewIndicatorAttributes.h; sourceTree = "<group>"; };
+		5CC17C31295C38F1000B5BB0 /* MDCTabBarItemCustomViewing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarItemCustomViewing.h; sourceTree = "<group>"; };
+		5CC17C32295C38F1000B5BB0 /* MDCTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarView.m; sourceTree = "<group>"; };
+		5CC17C33295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewUnderlineIndicatorTemplate.h; sourceTree = "<group>"; };
+		5CC17C34295C38F1000B5BB0 /* MDCTabBarViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTabBarViewDelegate.h; sourceTree = "<group>"; };
+		5CC17C35295C38F1000B5BB0 /* MDCTabBarViewItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarViewItemView.m; sourceTree = "<group>"; };
+		5CC17C36295C38F1000B5BB0 /* MDCTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarItem.m; sourceTree = "<group>"; };
+		5CC17C37295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTabBarViewIndicatorAttributes.m; sourceTree = "<group>"; };
 		5CCA827F250604AC005689D8 /* themes.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = themes.xml; sourceTree = "<group>"; };
 		5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGConstraintLayout.h; sourceTree = "<group>"; };
 		5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGConstraintLayout.m; sourceTree = "<group>"; };
@@ -974,6 +1076,29 @@
 				5C2B615F254AA83A003A9705 /* LICENSE */,
 			);
 			path = PodSpecMetadata;
+			sourceTree = "<group>";
+		};
+		5C2F99E6295C3A7400C443A8 /* MaterialBadges */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F99E8295C3A9600C443A8 /* MDCBadgeView.h */,
+				5C2F99EA295C3A9600C443A8 /* MDCBadgeView.m */,
+				5C2F99EB295C3A9600C443A8 /* MDCDotBadgeView.h */,
+				5C2F99E9295C3A9600C443A8 /* MDCDotBadgeView.m */,
+				5C2F99E7295C3A7A00C443A8 /* Appearance */,
+			);
+			path = MaterialBadges;
+			sourceTree = "<group>";
+		};
+		5C2F99E7295C3A7A00C443A8 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F99F1295C3AA300C443A8 /* MDCBadgeAppearance.h */,
+				5C2F99F3295C3AA300C443A8 /* MDCBadgeAppearance.m */,
+				5C2F99F2295C3AA300C443A8 /* MDCDotBadgeAppearance.h */,
+				5C2F99F0295C3AA300C443A8 /* MDCDotBadgeAppearance.m */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		5C5A97FA24E16A4B002A22EA = {
@@ -1139,6 +1264,10 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5C810B12295C3C0F00C2A93D /* MaterialAnimationTiming */,
+				5C810AF9295C3B9200C2A93D /* MaterialRipple */,
+				5C2F99E6295C3A7400C443A8 /* MaterialBadges */,
+				5CC17C22295C35A9000B5BB0 /* MaterialTabs */,
 				5CC17C1C2959E288000B5BB0 /* LuaCompat */,
 				5CC17C0F2959C812000B5BB0 /* Toaster */,
 				5C9EC7E42936002A008D2909 /* MotionAnimator */,
@@ -1230,9 +1359,47 @@
 			path = toppingtest;
 			sourceTree = "<group>";
 		};
+		5C810AF9295C3B9200C2A93D /* MaterialRipple */ = {
+			isa = PBXGroup;
+			children = (
+				5C810AFD295C3BB000C2A93D /* MaterialRipple.h */,
+				5C810AFE295C3BB000C2A93D /* MDCRippleLayer.h */,
+				5C810AFC295C3BB000C2A93D /* MDCRippleLayer.m */,
+				5C810B00295C3BB000C2A93D /* MDCRippleLayerDelegate.h */,
+				5C810AFF295C3BB000C2A93D /* MDCRippleTouchController.h */,
+				5C810B03295C3BB000C2A93D /* MDCRippleTouchController.m */,
+				5C810AFA295C3BB000C2A93D /* MDCRippleTouchControllerDelegate.h */,
+				5C810B01295C3BB000C2A93D /* MDCRippleView.h */,
+				5C810B02295C3BB000C2A93D /* MDCRippleView.m */,
+				5C810B05295C3BB000C2A93D /* MDCRippleViewDelegate.h */,
+				5C810AFB295C3BB000C2A93D /* MDCStatefulRippleView.h */,
+				5C810B04295C3BB000C2A93D /* MDCStatefulRippleView.m */,
+			);
+			path = MaterialRipple;
+			sourceTree = "<group>";
+		};
+		5C810B12295C3C0F00C2A93D /* MaterialAnimationTiming */ = {
+			isa = PBXGroup;
+			children = (
+				5C810B1F295C3C8200C2A93D /* MaterialMath.h */,
+				5C810B1D295C3C8200C2A93D /* MaterialMathDummy.m */,
+				5C810B1E295C3C8200C2A93D /* MDCMath.h */,
+				5C810B16295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h */,
+				5C810B17295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.m */,
+				5C810B14295C3C2F00C2A93D /* MaterialAnimationTiming.h */,
+				5C810B15295C3C2F00C2A93D /* UIView+MDCTimingFunction.h */,
+				5C810B13295C3C2F00C2A93D /* UIView+MDCTimingFunction.m */,
+			);
+			path = MaterialAnimationTiming;
+			sourceTree = "<group>";
+		};
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5C2F99F8295C47E800C443A8 /* LuaTab.h */,
+				5C2F99F9295C47E800C443A8 /* LuaTab.m */,
+				5C810B24295C410B00C2A93D /* LGTabLayout.h */,
+				5C810B23295C410B00C2A93D /* LGTabLayout.m */,
 				5C9ED84928FFE89B00305A74 /* LuaDispatchers.h */,
 				5C9ED84828FFE89B00305A74 /* LuaDispatchers.m */,
 				5C9ED84528FED7B300305A74 /* LuaCoroutineScope.h */,
@@ -1347,8 +1514,6 @@
 				5C5A984324E16BBF002A22EA /* LuaStore.m */,
 				5C5A98B024E16BCB002A22EA /* LuaStream.h */,
 				5C5A988124E16BC5002A22EA /* LuaStream.m */,
-				5C5A98B224E16BCB002A22EA /* LuaTabForm.h */,
-				5C5A984D24E16BC0002A22EA /* LuaTabForm.mm */,
 				5CBFA0382530562100734CAE /* LuaThread.h */,
 				5CBFA0392530562200734CAE /* LuaThread.m */,
 				5C5A988824E16BC6002A22EA /* LuaToast.h */,
@@ -1550,6 +1715,34 @@
 			path = LuaCompat;
 			sourceTree = "<group>";
 		};
+		5CC17C22295C35A9000B5BB0 /* MaterialTabs */ = {
+			isa = PBXGroup;
+			children = (
+				5CC17C23295C38F1000B5BB0 /* MaterialTabs+TabBarView.h */,
+				5CC17C29295C38F1000B5BB0 /* MDCTabBarItem.h */,
+				5CC17C36295C38F1000B5BB0 /* MDCTabBarItem.m */,
+				5CC17C31295C38F1000B5BB0 /* MDCTabBarItemCustomViewing.h */,
+				5CC17C24295C38F1000B5BB0 /* MDCTabBarView.h */,
+				5CC17C32295C38F1000B5BB0 /* MDCTabBarView.m */,
+				5CC17C26295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h */,
+				5CC17C34295C38F1000B5BB0 /* MDCTabBarViewDelegate.h */,
+				5CC17C30295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.h */,
+				5CC17C37295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.m */,
+				5CC17C2A295C38F1000B5BB0 /* MDCTabBarViewIndicatorContext.h */,
+				5CC17C28295C38F1000B5BB0 /* MDCTabBarViewIndicatorTemplate.h */,
+				5CC17C27295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h */,
+				5CC17C2B295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m */,
+				5CC17C2F295C38F1000B5BB0 /* MDCTabBarViewItemView.h */,
+				5CC17C35295C38F1000B5BB0 /* MDCTabBarViewItemView.m */,
+				5CC17C25295C38F1000B5BB0 /* MDCTabBarViewItemViewDelegate.h */,
+				5CC17C2C295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.h */,
+				5CC17C2D295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m */,
+				5CC17C33295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h */,
+				5CC17C2E295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.m */,
+			);
+			path = MaterialTabs;
+			sourceTree = "<group>";
+		};
 		5CCA827E25060491005689D8 /* DefaultResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1601,8 +1794,11 @@
 				5C5A99F924E16BEC002A22EA /* io.h in Headers */,
 				5C5A99B424E16BEC002A22EA /* lzio.h in Headers */,
 				5C5A98BA24E16BCC002A22EA /* LGDrawableParser.h in Headers */,
+				5C810B06295C3BB000C2A93D /* MDCRippleTouchControllerDelegate.h in Headers */,
 				5C5A991224E16BCC002A22EA /* LGAdapterView.h in Headers */,
+				5CC17C3A295C38F1000B5BB0 /* MDCTabBarViewItemViewDelegate.h in Headers */,
 				5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */,
+				5CC17C49295C38F1000B5BB0 /* MDCTabBarViewDelegate.h in Headers */,
 				5C5A994324E16BCC002A22EA /* LGImageView.h in Headers */,
 				5C5A98C624E16BCC002A22EA /* ToppingEngine.h in Headers */,
 				5C9EC7D12935FD41008D2909 /* MDMMotionCurve.h in Headers */,
@@ -1611,11 +1807,13 @@
 				5C9EC7D32935FD41008D2909 /* MDMSpringTimingCurve.h in Headers */,
 				5C5A993824E16BCC002A22EA /* LuaFunction.h in Headers */,
 				5C8614F828D33E8500213CEE /* LGIdParser.h in Headers */,
+				5C810B21295C3C8200C2A93D /* MDCMath.h in Headers */,
 				5C9ED84728FED7B300305A74 /* LuaCoroutineScope.h in Headers */,
 				5C43E6D724FE42F1005BEA07 /* LGRecyclerViewAdapter.h in Headers */,
 				5C5A9A0324E16BEC002A22EA /* unix.h in Headers */,
 				5C5A98F424E16BCC002A22EA /* LuaPoint.h in Headers */,
 				5C5A9A5024E1D3B1002A22EA /* DatabaseHelper.h in Headers */,
+				5CC17C3E295C38F1000B5BB0 /* MDCTabBarItem.h in Headers */,
 				5C5A9A4624E1B8EA002A22EA /* Singleton.h in Headers */,
 				5C5A99E824E16BEC002A22EA /* mime.h in Headers */,
 				5C5A98FC24E16BCC002A22EA /* LGListView.h in Headers */,
@@ -1640,19 +1838,28 @@
 				5CC17C1F2959E2BB000B5BB0 /* compat-5.2.h in Headers */,
 				5C5A98F724E16BCC002A22EA /* LGCompoundButton.h in Headers */,
 				5C9ED84B28FFE89B00305A74 /* LuaDispatchers.h in Headers */,
+				5CC17C46295C38F1000B5BB0 /* MDCTabBarItemCustomViewing.h in Headers */,
 				5C9EC7D02935FD41008D2909 /* MDMSpringTimingCurveGenerator.h in Headers */,
+				5C2F99EC295C3A9600C443A8 /* MDCBadgeView.h in Headers */,
 				5C42E35624EFE8B500F8B012 /* LGFrameLayout.h in Headers */,
+				5CC17C41295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.h in Headers */,
 				5C5A98D124E16BCC002A22EA /* LuaForm.h in Headers */,
 				5C5A9A0424E16BEC002A22EA /* select.h in Headers */,
+				5C810B1A295C3C2F00C2A93D /* UIView+MDCTimingFunction.h in Headers */,
 				5C5A993F24E16BCC002A22EA /* LGAutoCompleteTextView.h in Headers */,
 				5C5A99CC24E16BEC002A22EA /* ltm.h in Headers */,
 				5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */,
 				5C91BD72283E15FF00D4C94F /* LuaLifecycleOwner.h in Headers */,
+				5CC17C45295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.h in Headers */,
 				5C5A9A0024E16BEC002A22EA /* socket.h in Headers */,
+				5CC17C39295C38F1000B5BB0 /* MDCTabBarView.h in Headers */,
+				5CC17C3C295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h in Headers */,
 				5C5A990C24E16BCC002A22EA /* LuaResource.h in Headers */,
 				5C286DF625582B4900198DA5 /* LuaLog.h in Headers */,
 				5C5A98B924E16BCC002A22EA /* LuaInt.h in Headers */,
+				5C2F99EF295C3A9600C443A8 /* MDCDotBadgeView.h in Headers */,
 				5C5A991424E16BCC002A22EA /* LGTextView.h in Headers */,
+				5C810B0A295C3BB000C2A93D /* MDCRippleLayer.h in Headers */,
 				5CD343F32858AF7600343C6B /* RunnableObjc.h in Headers */,
 				5C5A990324E16BCC002A22EA /* LGStringParser.h in Headers */,
 				5C5A98EA24E16BCC002A22EA /* CommonDelegate.h in Headers */,
@@ -1660,6 +1867,7 @@
 				5C9EC7E32935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h in Headers */,
 				5C9EC7B92935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h in Headers */,
 				5C9EC80E29360141008D2909 /* MDMAnimatableKeyPaths.h in Headers */,
+				5C810B22295C3C8200C2A93D /* MaterialMath.h in Headers */,
 				5C5A991B24E16BCC002A22EA /* LuaAll.h in Headers */,
 				5C5A991F24E16BCC002A22EA /* LGRadioGroup.h in Headers */,
 				5C9EC7FC29360141008D2909 /* MDMMotionAnimator.h in Headers */,
@@ -1675,15 +1883,18 @@
 				5C5A99EE24E16BEC002A22EA /* inet.h in Headers */,
 				5C9EC80929360141008D2909 /* MDMAnimationRegistrar.h in Headers */,
 				5C5A98CF24E16BCC002A22EA /* LGAbsListView.h in Headers */,
+				5CC17C3F295C38F1000B5BB0 /* MDCTabBarViewIndicatorContext.h in Headers */,
 				5C5A99F324E16BEC002A22EA /* options.h in Headers */,
 				5C9EC80429360141008D2909 /* MDMUIKitValueCoercion.h in Headers */,
 				5C9EC7D42935FD41008D2909 /* MDMSubclassingRestricted.h in Headers */,
+				5CC17C3D295C38F1000B5BB0 /* MDCTabBarViewIndicatorTemplate.h in Headers */,
 				5C9EC7B22935FBE3008D2909 /* MDCActivityIndicator+Interface.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
 				5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
 				5C5A98EB24E16BCC002A22EA /* LGCheckBox.h in Headers */,
 				5C5A991A24E16BCC002A22EA /* LuaChar.h in Headers */,
+				5CC17C48295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h in Headers */,
 				5C5A992224E16BCC002A22EA /* LGHorizontalScrollView.h in Headers */,
 				5C5A98F524E16BCC002A22EA /* LG.h in Headers */,
 				5C5A994724E16BCC002A22EA /* CDefines.h in Headers */,
@@ -1696,9 +1907,11 @@
 				5C91BD7E283E25B500D4C94F /* LifecycleRegistry.h in Headers */,
 				5C9EC7FD29360141008D2909 /* CATransaction+MotionAnimator.h in Headers */,
 				5C5A99D224E16BEC002A22EA /* lopcodes.h in Headers */,
+				5C2F99FA295C47E800C443A8 /* LuaTab.h in Headers */,
 				5C9EC7B82935FBE3008D2909 /* MDCActivityIndicator.h in Headers */,
 				5C5A992724E16BCC002A22EA /* LGComboBox.h in Headers */,
 				5C5A98C924E16BCC002A22EA /* LGLinearLayout.h in Headers */,
+				5C810B0D295C3BB000C2A93D /* MDCRippleView.h in Headers */,
 				5C32B2F124F9783300875355 /* LGValueParser.h in Headers */,
 				5C5A99B324E16BEC002A22EA /* luaconf.h in Headers */,
 				5C5A98F924E16BCC002A22EA /* DisplayMetrics.h in Headers */,
@@ -1711,6 +1924,7 @@
 				5C9EC7DA2935FD42008D2909 /* MDMRepetitionTraits.h in Headers */,
 				5C5A99EC24E16BEC002A22EA /* luasocket.h in Headers */,
 				5C5A994024E16BCC002A22EA /* Log.h in Headers */,
+				5CC17C3B295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h in Headers */,
 				5C5A99E624E16BEC002A22EA /* tcp.h in Headers */,
 				5C5A99B224E16BEC002A22EA /* llimits.h in Headers */,
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
@@ -1719,6 +1933,7 @@
 				5C9EC7BA2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h in Headers */,
 				5C5A994424E16BCC002A22EA /* LGView.h in Headers */,
 				5C9EC7D62935FD41008D2909 /* MDMRepetition.h in Headers */,
+				5CC17C44295C38F1000B5BB0 /* MDCTabBarViewItemView.h in Headers */,
 				5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */,
 				5C9EC7B12935FBE3008D2909 /* MaterialActivityIndicator.h in Headers */,
 				5C5A99C324E16BEC002A22EA /* ldebug.h in Headers */,
@@ -1731,12 +1946,14 @@
 				5C5A994C24E16BCC002A22EA /* LuaHttpClient.h in Headers */,
 				5C5A98BD24E16BCC002A22EA /* LuaContext.h in Headers */,
 				5C91BD73283E15FF00D4C94F /* LuaLifecycleObserver.h in Headers */,
+				5C2F99F5295C3AA300C443A8 /* MDCBadgeAppearance.h in Headers */,
 				5C5A98CE24E16BCC002A22EA /* LuaDefines.h in Headers */,
 				5CB8585824E4306A006E6B65 /* CustomURLConnection.h in Headers */,
 				5C91BD62283E135C00D4C94F /* Lifecycle.h in Headers */,
 				5C9EC7DB2935FD42008D2909 /* MotionInterchange.h in Headers */,
 				5C5A991824E16BCC002A22EA /* LuaDatabase.h in Headers */,
 				5CD344062861BA8100343C6B /* LuaNavHostFragment.h in Headers */,
+				5C810B0C295C3BB000C2A93D /* MDCRippleLayerDelegate.h in Headers */,
 				5C5A993A24E16BCC002A22EA /* LGScrollView.h in Headers */,
 				5C5A98CA24E16BCC002A22EA /* LuaDouble.h in Headers */,
 				5C5A99D124E16BEC002A22EA /* lstate.h in Headers */,
@@ -1745,7 +1962,7 @@
 				5C9EC7B72935FBE3008D2909 /* MDCActivityIndicator+Subclassing.h in Headers */,
 				5C9EC80D29360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h in Headers */,
 				5C5A991E24E16BCC002A22EA /* LuaFloat.h in Headers */,
-				5C5A995524E16BCC002A22EA /* LuaTabForm.h in Headers */,
+				5C810B26295C410B00C2A93D /* LGTabLayout.h in Headers */,
 				5C5A99E124E16BEC002A22EA /* lfunc.h in Headers */,
 				5C5A99D924E16BEC002A22EA /* lvm.h in Headers */,
 				5C9ED84E2900022A00305A74 /* LuaLifecycle.h in Headers */,
@@ -1760,6 +1977,7 @@
 				5C1639542504DE790084032F /* DefaultStyles.h in Headers */,
 				5C2CA8432559753600C03879 /* LuaGraphics.h in Headers */,
 				5C91BD82283E39DC00D4C94F /* OrderedDictionary.h in Headers */,
+				5C810B07295C3BB000C2A93D /* MDCStatefulRippleView.h in Headers */,
 				5C5A990724E16BCC002A22EA /* LuaObjectStore.h in Headers */,
 				5C2C28D92526139B00F382B0 /* LuaRef.h in Headers */,
 				5C43E6D324FE41E7005BEA07 /* LGRecyclerView.h in Headers */,
@@ -1769,24 +1987,31 @@
 				5C5A990A24E16BCC002A22EA /* LuaLong.h in Headers */,
 				5C5A994E24E16BCC002A22EA /* LGParser.h in Headers */,
 				5C5A993524E16BCC002A22EA /* LuaClass.h in Headers */,
+				5C810B19295C3C2F00C2A93D /* MaterialAnimationTiming.h in Headers */,
 				5C5A992B24E16BCC002A22EA /* LuaToast.h in Headers */,
 				5C5A99FD24E16BEC002A22EA /* timeout.h in Headers */,
 				5C5A990024E16BCC002A22EA /* LuaCPlusPlusHelper.h in Headers */,
+				5C2F99F6295C3AA300C443A8 /* MDCDotBadgeAppearance.h in Headers */,
 				5C23B60324E555870094389F /* UIBufferedProgressBar.h in Headers */,
 				5C5A990824E16BCC002A22EA /* LuaDialog.h in Headers */,
 				5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */,
 				5C31C7A3250399A8001773F8 /* LGStyleParser.h in Headers */,
 				5C5A98CB24E16BCC002A22EA /* LGDimensionParser.h in Headers */,
+				5C810B09295C3BB000C2A93D /* MaterialRipple.h in Headers */,
 				5C5A99C824E16BEC002A22EA /* ldo.h in Headers */,
 				5C5A995324E16BCC002A22EA /* LuaStream.h in Headers */,
+				5C810B11295C3BB000C2A93D /* MDCRippleViewDelegate.h in Headers */,
 				5CB8585424E43007006E6B65 /* URLDownloader.h in Headers */,
 				5C5A994824E16BCC002A22EA /* LGColorParser.h in Headers */,
 				5C5A98D824E16BCC002A22EA /* DataToBeDownloaded.h in Headers */,
 				5CCB464525B82AD300CF0F4A /* LGConstraintLayout.h in Headers */,
 				5C9ED84128FECEBD00305A74 /* KotlinExports.h in Headers */,
+				5CC17C38295C38F1000B5BB0 /* MaterialTabs+TabBarView.h in Headers */,
 				5CB8587024E4354C006E6B65 /* NSQueue.h in Headers */,
 				5C5A98EE24E16BCC002A22EA /* IPTableBaseAdapter.h in Headers */,
 				5C9EC80229360141008D2909 /* MDMDragCoefficient.h in Headers */,
+				5C810B0B295C3BB000C2A93D /* MDCRippleTouchController.h in Headers */,
+				5C810B1B295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h in Headers */,
 				5C5A98EF24E16BCC002A22EA /* LuaInterface.h in Headers */,
 				5CBFA03A2530562200734CAE /* LuaThread.h in Headers */,
 			);
@@ -1958,7 +2183,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5A98F824E16BCC002A22EA /* LuaDialog.m in Sources */,
-				5C5A98F024E16BCC002A22EA /* LuaTabForm.mm in Sources */,
 				5C5A99F224E16BEC002A22EA /* udp.c in Sources */,
 				5C5A994F24E16BCC002A22EA /* LuaChar.m in Sources */,
 				5CD92593252CA48300EC0A1D /* NSStack.m in Sources */,
@@ -1968,11 +2192,13 @@
 				5CD343E12848C81C00343C6B /* LifecycleEventObserver.swift in Sources */,
 				5C91BD7C283E25A400D4C94F /* LifecycleRegistry.m in Sources */,
 				5C9ED84628FED7B300305A74 /* LuaCoroutineScope.m in Sources */,
+				5C2F99F7295C3AA300C443A8 /* MDCBadgeAppearance.m in Sources */,
 				5C5A98DC24E16BCC002A22EA /* LuaFunction.m in Sources */,
 				5C5A99C724E16BEC002A22EA /* lstring.c in Sources */,
 				5C8614F928D33E8500213CEE /* LGIdParser.m in Sources */,
 				5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
+				5C2F99F4295C3AA300C443A8 /* MDCDotBadgeAppearance.m in Sources */,
 				5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */,
 				5CC17C172959C85F000B5BB0 /* Toast.swift in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
@@ -1993,15 +2219,18 @@
 				5CD344032861B7D200343C6B /* LGFragmentContainerView.m in Sources */,
 				5C5A99DD24E16BEC002A22EA /* lapi.c in Sources */,
 				5C5A98B624E16BCC002A22EA /* LuaContext.mm in Sources */,
+				5C810B10295C3BB000C2A93D /* MDCStatefulRippleView.m in Sources */,
 				5C9EC80629360141008D2909 /* MDMBlockAnimations.m in Sources */,
 				5C5A99D624E16BEC002A22EA /* ldblib.c in Sources */,
 				5C5A99D324E16BEC002A22EA /* loslib.c in Sources */,
+				5CC17C47295C38F1000B5BB0 /* MDCTabBarView.m in Sources */,
 				5C78BA3028462498003EC02A /* Utils.swift in Sources */,
 				5C2CA8422559753600C03879 /* LuaGraphics.mm in Sources */,
 				5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */,
 				5CC17C162959C85F000B5BB0 /* ToastCenter.swift in Sources */,
 				5C5A993124E16BCC002A22EA /* LuaCPlusPlusHelper.c in Sources */,
 				5C2B6162254AAB37003A9705 /* LuaToaster.swift in Sources */,
+				5C810B1C295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.m in Sources */,
 				5C5A99F024E16BEC002A22EA /* select.c in Sources */,
 				5C5A99D524E16BEC002A22EA /* lzio.c in Sources */,
 				5C5A99F124E16BEC002A22EA /* unix.c in Sources */,
@@ -2013,6 +2242,7 @@
 				5C5A990924E16BCC002A22EA /* LGProgressBar.mm in Sources */,
 				5C5A99BF24E16BEC002A22EA /* lfunc.c in Sources */,
 				5C5A99F724E16BEC002A22EA /* tcp.c in Sources */,
+				5CC17C4A295C38F1000B5BB0 /* MDCTabBarViewItemView.m in Sources */,
 				5C91BD80283E398B00D4C94F /* OrderedDictionary.m in Sources */,
 				5C78BA2628460789003EC02A /* FragmentTransaction.swift in Sources */,
 				5C5A990524E16BCC002A22EA /* LuaRect.m in Sources */,
@@ -2028,11 +2258,13 @@
 				5C2CA83F2559728E00C03879 /* LuaFragment.mm in Sources */,
 				5C5A992E24E16BCC002A22EA /* LuaBool.m in Sources */,
 				5CD344162861D42B00343C6B /* Deque.swift in Sources */,
+				5C2F99ED295C3A9600C443A8 /* MDCDotBadgeView.m in Sources */,
 				5C5A99DC24E16BEC002A22EA /* ltablib.c in Sources */,
 				5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */,
 				5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */,
 				5C5A994924E16BCC002A22EA /* LGEditText.mm in Sources */,
 				5C9EC7B42935FBE3008D2909 /* MDCActivityIndicator.m in Sources */,
+				5C810B20295C3C8200C2A93D /* MaterialMathDummy.m in Sources */,
 				5CB8586924E434CA006E6B65 /* KeyboardHelper.m in Sources */,
 				5C5A991324E16BCC002A22EA /* LuaToast.m in Sources */,
 				5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */,
@@ -2042,10 +2274,12 @@
 				5CD344072861BA8100343C6B /* LuaNavHostFragment.m in Sources */,
 				5C5A99C924E16BEC002A22EA /* lundump.c in Sources */,
 				5C5A98DB24E16BCC002A22EA /* LGStringParser.m in Sources */,
+				5C810B08295C3BB000C2A93D /* MDCRippleLayer.m in Sources */,
 				5C5A99D724E16BEC002A22EA /* lmem.c in Sources */,
 				5C5A99B624E16BEC002A22EA /* liolib.c in Sources */,
 				5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */,
 				5C32B2F024F9783300875355 /* LGValueParser.m in Sources */,
+				5CC17C42295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m in Sources */,
 				5C9EC7A32935F25D008D2909 /* CircularProgressView.swift in Sources */,
 				5C5A990624E16BCC002A22EA /* LuaDate.m in Sources */,
 				5C5A99E524E16BEC002A22EA /* ltm.c in Sources */,
@@ -2055,6 +2289,7 @@
 				5C5A99C024E16BEC002A22EA /* lstrlib.c in Sources */,
 				5C5A991124E16BCC002A22EA /* LuaResource.m in Sources */,
 				5CC17C192959C85F000B5BB0 /* ToastView.swift in Sources */,
+				5CC17C40295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m in Sources */,
 				5C5A99E724E16BEC002A22EA /* buffer.c in Sources */,
 				5C43E6D424FE41E7005BEA07 /* LGRecyclerView.m in Sources */,
 				5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */,
@@ -2089,6 +2324,7 @@
 				5CC17C202959E2BB000B5BB0 /* compat-5.2.c in Sources */,
 				5C5A98ED24E16BCC002A22EA /* LGLayoutParser.mm in Sources */,
 				5C5A98E424E16BCC002A22EA /* LGDatePicker.mm in Sources */,
+				5C810B25295C410B00C2A93D /* LGTabLayout.m in Sources */,
 				5C5A98B424E16BCC002A22EA /* LuaDouble.m in Sources */,
 				5C5A99C424E16BEC002A22EA /* linit.c in Sources */,
 				5C9EC80529360141008D2909 /* CAMediaTimingFunction+MotionAnimator.m in Sources */,
@@ -2102,10 +2338,12 @@
 				5C64ECB12897CDAB00A4C14B /* LuaFormExt.swift in Sources */,
 				5C23B60424E555870094389F /* UIBufferedProgressBar.m in Sources */,
 				5C5A99B924E16BEC002A22EA /* lobject.c in Sources */,
+				5CC17C4C295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.m in Sources */,
 				5C9EC80029360141008D2909 /* MDMAnimatableKeyPaths.m in Sources */,
 				5C5A98D524E16BCC002A22EA /* LuaHttpClient.m in Sources */,
 				5C609D6425BDC21F006BF4CE /* LGFontParser.m in Sources */,
 				5C9EC7DF2935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.m in Sources */,
+				5CC17C4B295C38F1000B5BB0 /* MDCTabBarItem.m in Sources */,
 				5C78BA2A2846221B003EC02A /* FragmentStore.swift in Sources */,
 				5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */,
 				5C5A992324E16BCC002A22EA /* LuaBuffer.m in Sources */,
@@ -2131,12 +2369,15 @@
 				5C9EC81029360141008D2909 /* MDMUIKitValueCoercion.m in Sources */,
 				5C5A99FB24E16BEC002A22EA /* inet.c in Sources */,
 				5C43E6D824FE42F1005BEA07 /* LGRecyclerViewAdapter.m in Sources */,
+				5C810B0E295C3BB000C2A93D /* MDCRippleView.m in Sources */,
 				5C5A99E224E16BEC002A22EA /* lparser.c in Sources */,
 				5C5A99B024E16BEC002A22EA /* lauxlib.c in Sources */,
 				5C5A99FF24E16BEC002A22EA /* except.c in Sources */,
+				5C810B0F295C3BB000C2A93D /* MDCRippleTouchController.m in Sources */,
 				5CC17C1A2959C85F000B5BB0 /* UIApplication+Load.swift in Sources */,
 				5C91BD74283E15FF00D4C94F /* LuaLifecycleOwner.m in Sources */,
 				5CC17C1B2959C85F000B5BB0 /* KeyboardObserver.swift in Sources */,
+				5C810B18295C3C2F00C2A93D /* UIView+MDCTimingFunction.m in Sources */,
 				5C5A98DF24E16BCC002A22EA /* LuaJSON.m in Sources */,
 				5C5A98D724E16BCC002A22EA /* LGCheckBox.mm in Sources */,
 				5C5A99BC24E16BEC002A22EA /* lmathlib.c in Sources */,
@@ -2161,12 +2402,15 @@
 				5CD343FB2859FA8F00343C6B /* ViewModelProvider.swift in Sources */,
 				5C9EC7FF29360141008D2909 /* CABasicAnimation+MotionAnimator.m in Sources */,
 				5C5A99CF24E16BEC002A22EA /* ldump.c in Sources */,
+				5C2F99EE295C3A9600C443A8 /* MDCBadgeView.m in Sources */,
+				5C2F99FB295C47E800C443A8 /* LuaTab.m in Sources */,
 				5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */,
 				5C5A98DA24E16BCC002A22EA /* LGRadioGroup.mm in Sources */,
 				5C5A98D024E16BCC002A22EA /* LGDrawableParser.m in Sources */,
 				5C5A99DB24E16BEC002A22EA /* lcode.c in Sources */,
 				5C5A98E824E16BCC002A22EA /* LGRadioButton.mm in Sources */,
 				5C9EC80A29360141008D2909 /* CATransaction+MotionAnimator.m in Sources */,
+				5CC17C43295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

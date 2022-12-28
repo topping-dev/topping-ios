@@ -52,6 +52,18 @@
 	return [LGParser GetInstance].pDrawable;
 }
 
+-(LGDrawableReturn *) ParseDrawableRef:(LuaRef *)drawable
+{
+    return [self ParseDrawableRef:drawable :0];
+}
+
+-(LGDrawableReturn *) ParseDrawableRef:(LuaRef *)drawable :(int)tileMode
+{
+    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:drawable.idRef];
+    return [self ParseDrawable:val :tileMode];
+}
+
+
 -(LGDrawableReturn *) ParseDrawable:(NSString *)drawable
 {
 	return [self ParseDrawable:drawable :0];

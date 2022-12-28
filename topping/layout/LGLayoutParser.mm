@@ -16,6 +16,7 @@
 #import "LGRadioButton.h"
 #import "LGRadioGroup.h"
 #import "LGScrollView.h"
+#import "LGTabLayout.h"
 #import "LGTextView.h"
 #import "LGView.h"
 #import "LGRecyclerView.h"
@@ -220,6 +221,12 @@
     else if([name compare:@"androidx.constraintlayout.widget.ConstraintLayout"] == 0
         || [name compare:@"LGConstraintLayout"] == 0)
         rootView = [[LGConstraintLayout alloc] init];
+    else if([name compare:@"com.google.android.material.tabs.TabLayout"] == 0
+        || [name compare:@"LGTabLayout"] == 0)
+        rootView = [[LGTabLayout alloc] init];
+    else if([name compare:@"com.google.android.material.tabs.TabItem"] == 0
+        || [name compare:@"LuaTab"] == 0)
+        rootView = [[LuaTab alloc] init];
     else if([ToppingEngine GetViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine GetViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];

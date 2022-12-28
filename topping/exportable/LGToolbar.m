@@ -127,9 +127,7 @@
         return;
     }
 
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:navigationIcon.idRef];
-    
-    LGDrawableReturn *lgr = [[LGDrawableParser GetInstance] ParseDrawable:val];
+    LGDrawableReturn *lgr = [[LGDrawableParser GetInstance] ParseDrawableRef:navigationIcon];
     UIImage *img = lgr.img;
     img = [img imageWithSizeAspect:toolbar.frame.size.height - 4];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(navigationTap)];
@@ -157,8 +155,7 @@
 
 -(void)SetOverflowIcon:(LuaRef*)overflowIcon
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:overflowIcon.idRef];
-    LGDrawableReturn *lgr = [[LGDrawableParser GetInstance] ParseDrawable:val];
+    LGDrawableReturn *lgr = [[LGDrawableParser GetInstance] ParseDrawableRef:overflowIcon];
     UIImage *img = lgr.img;
     NSMutableArray *arr = [NSMutableArray arrayWithArray:self.endItems];
     UIBarButtonItem *iv = nil;

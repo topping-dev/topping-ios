@@ -70,7 +70,6 @@
 
 #import "LuaForm.h"
 #import "LuaFragment.h"
-#import "LuaTabForm.h"
 
 #import <Topping/Topping-Swift.h>
 
@@ -1001,6 +1000,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LGRadioGroup class]];
 	[Lunar Register:lu :[LGScrollView class]];
     [Lunar Register:lu :[LGHorizontalScrollView class]];
+    [Lunar Register:lu :[LGTabLayout class]];
 	[Lunar Register:lu :[LGTextView class]];
 	[Lunar Register:lu :[LGView class]];
     [Lunar Register:lu :[LGRecyclerView class]];
@@ -1029,7 +1029,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LuaResource class]];
     [Lunar Register:lu :[LuaStore class]];
 	[Lunar Register:lu :[LuaStream class]];
-	[Lunar Register:lu :[LuaTabForm class]];
+    [Lunar Register:lu :[LuaTab class]];
     [Lunar Register:lu :[LuaThread class]];
 	[Lunar Register:lu :[LuaToast class]];
     
