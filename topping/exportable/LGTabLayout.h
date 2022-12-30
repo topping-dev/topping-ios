@@ -4,6 +4,12 @@
 
 @protocol MDCTabBarViewDelegate;
 
+@protocol LGTabBarDelegate <NSObject>
+
+-(void)didSelectTab:(LuaTab*)tab atIndex:(int)pos;
+
+@end
+
 @interface LGTabLayout : LGScrollView <MDCTabBarViewDelegate>
 
 -(void)AddTab:(LuaTab*)tab;
@@ -49,6 +55,7 @@
 
 @property (nonatomic, retain) UIView *tab;
 @property (nonatomic, retain) NSMutableArray *items;
+@property (nonatomic, retain) id<LGTabBarDelegate> delegate;
 @property (nonatomic, retain) LuaTranslator *ltTabSelectedListener;
 
 @end

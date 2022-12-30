@@ -58,6 +58,7 @@ typedef NSObject* (*kFRet)(void*, int s, NSArray*);
 -(NSObject*)Call;
 -(NSObject*)CallIn:(NSObject*) val, ...;
 -(NSObject*)CallInSelf:(NSObject*) s :(NSObject*) val :(va_list) valist;
+-(NSObject*)Call:(NSObject*)a;
 -(NSObject*)Call:(NSObject*)a :(NSObject*)b;
 -(NSObject *)GetObject;
 -(NSString *)GetFunction;

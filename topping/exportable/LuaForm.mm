@@ -1,4 +1,5 @@
 #import "LuaForm.h"
+#import "LuaEvent.h"
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LuaValues.h"
@@ -9,8 +10,6 @@
 #import <topping/topping-Swift.h>
 
 @implementation LuaForm
-
-static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 
 - (instancetype)initWithContext:(LuaContext *)context
 {
@@ -28,32 +27,6 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
         self.mStopped = true;
     }
     return self;
-}
-
-+(BOOL)OnFormEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...
-{
-    NSObject <LuaInterface> *s = (NSObject <LuaInterface> *)pGui;
-    LuaTranslator *ltToCall;
-    ltToCall = [eventMap objectForKey:APPEND([s GetId], ITOS(EventType))];
-    if(ltToCall != nil)
-    {
-        va_list ap;
-        va_start(ap, ArgCount);
-        [ltToCall CallInSelf:pGui :lc :ap];
-        va_end(ap);
-        return YES;
-    }
-    return NO;
-}
-
-+(void)RegisterFormEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
-{
-    [LuaForm RegisterFormEventInternal:[luaId GetCleanId] :event :lt];
-}
-
-+(void)RegisterFormEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt
-{
-    [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
 +(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId
@@ -166,11 +139,11 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     if(!self.createCalled)
     {
         self.createCalled = true;
-        [LuaForm OnFormEvent:self :FORM_EVENT_CREATE :self.context :0, nil];
+        [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
     }
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
     [self.mFragments dispatchResume];
-    [LuaForm OnFormEvent:self :FORM_EVENT_RESUME :self.context :0, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -185,7 +158,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	[KeyboardHelper KeyboardDisableEvents:self :self.selectedKeyboardTextView];
     
     //onPause
-	[LuaForm OnFormEvent:self :FORM_EVENT_PAUSE :self.context :0, nil];
+	[LuaEvent OnUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
     [self.mFragments dispatchPause];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_PAUSE];
     
@@ -206,7 +179,7 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
     
     //onDestroy
     [self.mFragments dispatchDestroy];
-    [LuaForm OnFormEvent:self :FORM_EVENT_DESTROY :self.context :0, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_DESTROY];
 }
 
@@ -427,28 +400,9 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 	return @"LuaForm";
 }
 
-+(NSMutableDictionary*)luaStaticVars
-{
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[NSNumber numberWithInt:0] forKey:@"FORM_EVENT_CREATE"];
-    [dict setObject:[NSNumber numberWithInt:1] forKey:@"FORM_EVENT_RESUME"];
-    [dict setObject:[NSNumber numberWithInt:2] forKey:@"FORM_EVENT_PAUSE"];
-    [dict setObject:[NSNumber numberWithInt:3] forKey:@"FORM_EVENT_DESTROY"];
-    [dict setObject:[NSNumber numberWithInt:4] forKey:@"FORM_EVENT_UPDATE"];
-    [dict setObject:[NSNumber numberWithInt:5] forKey:@"FORM_EVENT_PAINT"];
-    [dict setObject:[NSNumber numberWithInt:6] forKey:@"FORM_EVENT_MOUSEDOWN"];
-    [dict setObject:[NSNumber numberWithInt:7] forKey:@"FORM_EVENT_MOUSEUP"];
-    [dict setObject:[NSNumber numberWithInt:8] forKey:@"FORM_EVENT_MOUSEMOVE"];
-    [dict setObject:[NSNumber numberWithInt:9] forKey:@"FORM_EVENT_KEYDOWN"];
-    [dict setObject:[NSNumber numberWithInt:10] forKey:@"FORM_EVENT_KEYUP"];
-    [dict setObject:[NSNumber numberWithInt:11] forKey:@"FORM_EVENT_NFC"];
-    return dict;
-}
-
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    ClassMethodNoRet(RegisterFormEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterFormEvent", [LuaForm class])
     ClassMethod(Create::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaForm class])
     ClassMethod(CreateWithUI:::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaForm class])
     ClassMethod(CreateForTab::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"CreateForTab", [LuaForm class])

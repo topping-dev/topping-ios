@@ -1,9 +1,10 @@
 import UIKit
 
-class SavedState {
-    var mState: Dictionary<String, Any>
+@objc(SavedState)
+open class SavedState: NSObject {
+    @objc public var mState: Dictionary<String, Any>
     
-    init(state: Dictionary<String, Any>) {
+    @objc public init(state: Dictionary<String, Any>) {
         mState = state
     }
 }

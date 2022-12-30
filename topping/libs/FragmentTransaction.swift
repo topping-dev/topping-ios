@@ -268,4 +268,10 @@ open class FragmentTransaction : NSObject {
     @objc public func commitAllowingStateLoss() -> Int {
         return 0
     }
+    
+    @objc public func commitNow() -> Void {
+    }
+    
+    @objc public func commitNowAllowingStateLoss() -> Void {
+    }
 }

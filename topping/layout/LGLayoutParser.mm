@@ -24,7 +24,9 @@
 #import "LGConstraintLayout.h"
 #import "LGHorizontalScrollView.h"
 #import "LGFragmentContainerView.h"
+#import "LGViewPager.h"
 #import "LuaFragment.h"
+#import "LuaEvent.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -115,6 +117,7 @@
 	GDataXMLElement *root = [xml rootElement];
 	LGView *rootView = [self ParseChildXML:nil :root];
 	*lgview = rootView;
+    cont.lgview = rootView;
 	return [self GenerateUIViewFromLGView:rootView :parentView :parent :cont];
 }
 
@@ -227,6 +230,10 @@
     else if([name compare:@"com.google.android.material.tabs.TabItem"] == 0
         || [name compare:@"LuaTab"] == 0)
         rootView = [[LuaTab alloc] init];
+    else if([name compare:@"androidx.viewpager2.widget.ViewPager2"] == 0
+        || [name compare:@"android.support.v4.view.ViewPager"] == 0
+        || [name compare:@"LGViewPager"] == 0)
+        rootView = [[LGViewPager alloc] init];
     else if([ToppingEngine GetViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine GetViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];
@@ -260,6 +267,7 @@
 	{
 		[rootView SetAttributeValue:[node name] :[node stringValue]];
 	}
+    rootView.attrs = attrs;
     [rootView ApplyStyles];
 	
     if([rootView isKindOfClass:[LGViewGroup class]])
@@ -285,17 +293,11 @@
 		for(LGView *w in ((LGViewGroup*)view).subviews)
 		{
 			[w AddSelfToParent:viewRoot :cont];
-            if(parent.fragment != nil)
-                [LuaFragment OnFragmentEvent:w :FRAGMENT_EVENT_CREATE :w.lc :0, nil];
-            else
-                [LuaForm OnFormEvent:w :FORM_EVENT_CREATE :w.lc :0, nil];
+            [LuaEvent OnUIEvent:w :UI_EVENT_CREATE :w.lc :0, nil];
 		}
 	}
     [view InitComponent:viewRoot :cont.context];
-    if(parent.fragment != nil)
-        [LuaFragment OnFragmentEvent:view :FRAGMENT_EVENT_CREATE :view.lc :0, nil];
-    else
-        [LuaForm OnFormEvent:view :FORM_EVENT_CREATE :view.lc :0, nil];
+    [LuaEvent OnUIEvent:view :UI_EVENT_CREATE :view.lc :0, nil];
     return viewRoot;
 }
 

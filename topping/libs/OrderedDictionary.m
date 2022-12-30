@@ -269,17 +269,23 @@
 
 - (id)keyAtIndex:(NSUInteger)index
 {
-    return _keys[index];
+    if(index < _keys.count)
+        return _keys[index];
+    return nil;
 }
 
 - (id)objectAtIndex:(NSUInteger)index
 {
-    return _values[index];
+    if(index < _values.count)
+        return _values[index];
+    return nil;
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index
 {
-    return _values[index];
+    if(index < _values.count)
+        return _values[index];
+    return nil;
 }
 
 - (NSString *)descriptionWithLocale:(nullable id)locale indent:(NSUInteger)level

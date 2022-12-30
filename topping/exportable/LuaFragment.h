@@ -47,23 +47,10 @@ typedef NS_ENUM(NSInteger, FragmentState)
     FS_RESUMED
 };
 
-typedef enum FragmentEvents
-{
-    FRAGMENT_EVENT_CREATE,
-    FRAGMENT_EVENT_CREATE_VIEW,
-    FRAGMENT_EVENT_VIEW_CREATED,
-    FRAGMENT_EVENT_RESUME,
-    FRAGMENT_EVENT_PAUSE,
-    FRAGMENT_EVENT_DESTROY,
-    FRAGMENT_EVENT_COUNT
-} FragmentEvents;
-
 @interface LuaFragment : NSObject <LuaClass, LuaInterface, LifecycleOwner, SavedStateRegistryOwner, ViewModelStoreOwner>
 {
 }
 
-+(NSObject*)OnFragmentEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...;
-+(void)RegisterFragmentEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
 +(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId;
 +(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments;
 +(LuaFragment*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;

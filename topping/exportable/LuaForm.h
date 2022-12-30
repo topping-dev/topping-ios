@@ -22,31 +22,12 @@
 @class LuaRef;
 @protocol ViewModelStoreOwner;
 
-typedef enum FormEvents
-{
-    FORM_EVENT_CREATE,
-    FORM_EVENT_RESUME,
-    FORM_EVENT_PAUSE,
-    FORM_EVENT_DESTROY,
-    FORM_EVENT_UPDATE,
-    FORM_EVENT_PAINT,
-    FORM_EVENT_MOUSEDOWN,
-    FORM_EVENT_MOUSEUP,
-    FORM_EVENT_MOUSEMOVE,
-    FORM_EVENT_KEYDOWN,
-    FORM_EVENT_KEYUP,
-    FORM_EVENT_NFC,
-    FORM_EVENT_COUNT
-} FormEvents;
-
 @interface LuaForm : UIViewController <LuaClass, LuaInterface, ViewModelStoreOwner>
 {
 }
 
 - (instancetype)initWithContext:(LuaContext *)context;
 
-+(void)RegisterFormEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
-+(BOOL)OnFormEvent:(NSObject*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
 +(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId;
 +(LuaNativeObject*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
 +(LuaNativeObject*)CreateForTab:(LuaContext *)context :(LuaRef*)luaId;
@@ -88,7 +69,6 @@ KEYBOARD_PROPERTIES
 @property(nonatomic, retain) LuaLifecycleOwner *lifecycleOwner;
 @property(nonatomic, retain) LifecycleRegistry *lifecycleRegistry;
 @property(nonatomic, retain) FragmentController *mFragments;
-@property(nonatomic, retain) FragmentManager *fragmentManager;
 @property(nonatomic, retain) ViewModelStore *viewModelStore;
 @property(nonatomic, retain) SavedStateRegistryController *savedStateRegistryController;
 @property(nonatomic, retain) OnBackPressedDispatcher *onBackPressedDispatcher;

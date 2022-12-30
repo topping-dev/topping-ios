@@ -149,3 +149,14 @@ extension Collection {
 extension String.Index {
     func distance<S: StringProtocol>(in string: S) -> Int { string.distance(to: self) }
 }
+
+extension UICollectionView {
+  var visibleCurrentCellIndexPath: IndexPath? {
+    for cell in self.visibleCells {
+      let indexPath = self.indexPath(for: cell)
+      return indexPath
+    }
+    
+    return nil
+  }
+}

@@ -6,6 +6,7 @@
 -(void)AddSubview:(LGView*)val;
 -(void)AddSubview:(LGView*)val :(NSInteger)index;
 -(void)RemoveSubview:(LGView*)val;
+-(void)RemoveAllSubViews;
 -(void)ClearSubviews;
 -(NSMutableDictionary*)GetBindings;
 

@@ -47,6 +47,13 @@
 		5C2F99F7295C3AA300C443A8 /* MDCBadgeAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99F3295C3AA300C443A8 /* MDCBadgeAppearance.m */; };
 		5C2F99FA295C47E800C443A8 /* LuaTab.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99F8295C47E800C443A8 /* LuaTab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C2F99FB295C47E800C443A8 /* LuaTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99F9295C47E800C443A8 /* LuaTab.m */; };
+		5C2F99FE295C6EF200C443A8 /* LGViewPager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F99FC295C6EF200C443A8 /* LGViewPager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F99FF295C6EF200C443A8 /* LGViewPager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F99FD295C6EF200C443A8 /* LGViewPager.m */; };
+		5C2F9A01295C717D00C443A8 /* SnappingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A00295C717D00C443A8 /* SnappingLayout.swift */; };
+		5C2F9A04295C799800C443A8 /* LGFragmentStateAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A02295C799800C443A8 /* LGFragmentStateAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F9A05295C799800C443A8 /* LGFragmentStateAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A03295C799800C443A8 /* LGFragmentStateAdapter.m */; };
+		5C2F9A08295ED9D100C443A8 /* LuaEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A06295ED9D100C443A8 /* LuaEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F9A09295ED9D100C443A8 /* LuaEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */; };
 		5C31C7A3250399A8001773F8 /* LGStyleParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C31C7A1250399A8001773F8 /* LGStyleParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C31C7A2250399A8001773F8 /* LGStyleParser.m */; };
 		5C32B2F024F9783300875355 /* LGValueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32B2EE24F9783200875355 /* LGValueParser.m */; };
@@ -109,7 +116,6 @@
 		5C5A98EB24E16BCC002A22EA /* LGCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984824E16BBF002A22EA /* LGCheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98EC24E16BCC002A22EA /* LuaFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984924E16BBF002A22EA /* LuaFloat.m */; };
 		5C5A98ED24E16BCC002A22EA /* LGLayoutParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984A24E16BBF002A22EA /* LGLayoutParser.mm */; };
-		5C5A98EE24E16BCC002A22EA /* IPTableBaseAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98EF24E16BCC002A22EA /* LuaInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A984C24E16BC0002A22EA /* LuaInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984E24E16BC0002A22EA /* LuaLong.m */; };
 		5C5A98F224E16BCC002A22EA /* LGAbsListView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */; };
@@ -168,7 +174,6 @@
 		5C5A992C24E16BCC002A22EA /* LuaDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A988924E16BC6002A22EA /* LuaDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A992D24E16BCC002A22EA /* CDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988A24E16BC6002A22EA /* CDefines.m */; };
 		5C5A992E24E16BCC002A22EA /* LuaBool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988B24E16BC6002A22EA /* LuaBool.m */; };
-		5C5A992F24E16BCC002A22EA /* IPTableBaseAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988C24E16BC6002A22EA /* IPTableBaseAdapter.mm */; };
 		5C5A993124E16BCC002A22EA /* LuaCPlusPlusHelper.c in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A988E24E16BC6002A22EA /* LuaCPlusPlusHelper.c */; };
 		5C5A993424E16BCC002A22EA /* LGScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A989124E16BC7002A22EA /* LGScrollView.mm */; };
 		5C5A993524E16BCC002A22EA /* LuaClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A989224E16BC7002A22EA /* LuaClass.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -566,6 +571,13 @@
 		5C2F99F3295C3AA300C443A8 /* MDCBadgeAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBadgeAppearance.m; sourceTree = "<group>"; };
 		5C2F99F8295C47E800C443A8 /* LuaTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaTab.h; sourceTree = "<group>"; };
 		5C2F99F9295C47E800C443A8 /* LuaTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaTab.m; sourceTree = "<group>"; };
+		5C2F99FC295C6EF200C443A8 /* LGViewPager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGViewPager.h; sourceTree = "<group>"; };
+		5C2F99FD295C6EF200C443A8 /* LGViewPager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGViewPager.m; sourceTree = "<group>"; };
+		5C2F9A00295C717D00C443A8 /* SnappingLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnappingLayout.swift; sourceTree = "<group>"; };
+		5C2F9A02295C799800C443A8 /* LGFragmentStateAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGFragmentStateAdapter.h; sourceTree = "<group>"; };
+		5C2F9A03295C799800C443A8 /* LGFragmentStateAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGFragmentStateAdapter.m; sourceTree = "<group>"; };
+		5C2F9A06295ED9D100C443A8 /* LuaEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEvent.h; sourceTree = "<group>"; };
+		5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaEvent.mm; sourceTree = "<group>"; };
 		5C31C7A1250399A8001773F8 /* LGStyleParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGStyleParser.h; sourceTree = "<group>"; };
 		5C31C7A2250399A8001773F8 /* LGStyleParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGStyleParser.m; sourceTree = "<group>"; };
 		5C32B2EE24F9783200875355 /* LGValueParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGValueParser.m; sourceTree = "<group>"; };
@@ -630,7 +642,6 @@
 		5C5A984824E16BBF002A22EA /* LGCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCheckBox.h; sourceTree = "<group>"; };
 		5C5A984924E16BBF002A22EA /* LuaFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaFloat.m; sourceTree = "<group>"; };
 		5C5A984A24E16BBF002A22EA /* LGLayoutParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGLayoutParser.mm; sourceTree = "<group>"; };
-		5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPTableBaseAdapter.h; sourceTree = "<group>"; };
 		5C5A984C24E16BC0002A22EA /* LuaInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaInterface.h; sourceTree = "<group>"; };
 		5C5A984E24E16BC0002A22EA /* LuaLong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaLong.m; sourceTree = "<group>"; };
 		5C5A984F24E16BC0002A22EA /* LGAbsListView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGAbsListView.mm; sourceTree = "<group>"; };
@@ -689,7 +700,6 @@
 		5C5A988924E16BC6002A22EA /* LuaDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaDate.h; sourceTree = "<group>"; };
 		5C5A988A24E16BC6002A22EA /* CDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDefines.m; sourceTree = "<group>"; };
 		5C5A988B24E16BC6002A22EA /* LuaBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaBool.m; sourceTree = "<group>"; };
-		5C5A988C24E16BC6002A22EA /* IPTableBaseAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IPTableBaseAdapter.mm; sourceTree = "<group>"; };
 		5C5A988E24E16BC6002A22EA /* LuaCPlusPlusHelper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LuaCPlusPlusHelper.c; sourceTree = "<group>"; };
 		5C5A989124E16BC7002A22EA /* LGScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGScrollView.mm; sourceTree = "<group>"; };
 		5C5A989224E16BC7002A22EA /* LuaClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaClass.h; sourceTree = "<group>"; };
@@ -1276,8 +1286,6 @@
 				5CD344152861D42B00343C6B /* Deque.swift */,
 				5C5A984C24E16BC0002A22EA /* LuaInterface.h */,
 				5C2B6161254AAB37003A9705 /* LuaToaster.swift */,
-				5C5A984B24E16BBF002A22EA /* IPTableBaseAdapter.h */,
-				5C5A988C24E16BC6002A22EA /* IPTableBaseAdapter.mm */,
 				5C5A983524E16BBD002A22EA /* DataToBeDownloaded.h */,
 				5C5A989324E16BC7002A22EA /* DataToBeDownloaded.m */,
 				5C5A9A4424E1B8EA002A22EA /* Singleton.h */,
@@ -1337,6 +1345,7 @@
 				5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */,
 				5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */,
 				5C9EC7A22935F25D008D2909 /* CircularProgressView.swift */,
+				5C2F9A00295C717D00C443A8 /* SnappingLayout.swift */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1396,6 +1405,12 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5C2F9A06295ED9D100C443A8 /* LuaEvent.h */,
+				5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */,
+				5C2F9A02295C799800C443A8 /* LGFragmentStateAdapter.h */,
+				5C2F9A03295C799800C443A8 /* LGFragmentStateAdapter.m */,
+				5C2F99FC295C6EF200C443A8 /* LGViewPager.h */,
+				5C2F99FD295C6EF200C443A8 /* LGViewPager.m */,
 				5C2F99F8295C47E800C443A8 /* LuaTab.h */,
 				5C2F99F9295C47E800C443A8 /* LuaTab.m */,
 				5C810B24295C410B00C2A93D /* LGTabLayout.h */,
@@ -1925,6 +1940,7 @@
 				5C5A99EC24E16BEC002A22EA /* luasocket.h in Headers */,
 				5C5A994024E16BCC002A22EA /* Log.h in Headers */,
 				5CC17C3B295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h in Headers */,
+				5C2F9A04295C799800C443A8 /* LGFragmentStateAdapter.h in Headers */,
 				5C5A99E624E16BEC002A22EA /* tcp.h in Headers */,
 				5C5A99B224E16BEC002A22EA /* llimits.h in Headers */,
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
@@ -1973,6 +1989,8 @@
 				5C91BD77283E15FF00D4C94F /* LuaViewModelProvider.h in Headers */,
 				5C91BD75283E15FF00D4C94F /* LuaMutableLiveData.h in Headers */,
 				5C5A991624E16BCC002A22EA /* LuaNativeObject.h in Headers */,
+				5C2F9A08295ED9D100C443A8 /* LuaEvent.h in Headers */,
+				5C2F99FE295C6EF200C443A8 /* LGViewPager.h in Headers */,
 				5C42E35224EFE1C600F8B012 /* LGViewGroup.h in Headers */,
 				5C1639542504DE790084032F /* DefaultStyles.h in Headers */,
 				5C2CA8432559753600C03879 /* LuaGraphics.h in Headers */,
@@ -2008,7 +2026,6 @@
 				5C9ED84128FECEBD00305A74 /* KotlinExports.h in Headers */,
 				5CC17C38295C38F1000B5BB0 /* MaterialTabs+TabBarView.h in Headers */,
 				5CB8587024E4354C006E6B65 /* NSQueue.h in Headers */,
-				5C5A98EE24E16BCC002A22EA /* IPTableBaseAdapter.h in Headers */,
 				5C9EC80229360141008D2909 /* MDMDragCoefficient.h in Headers */,
 				5C810B0B295C3BB000C2A93D /* MDCRippleTouchController.h in Headers */,
 				5C810B1B295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h in Headers */,
@@ -2205,6 +2222,7 @@
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C91BD60283E134500D4C94F /* Lifecycle.m in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
+				5C2F99FF295C6EF200C443A8 /* LGViewPager.m in Sources */,
 				5C9EC7DE2935FD42008D2909 /* MDMMotionCurve.m in Sources */,
 				5CC17C182959C85F000B5BB0 /* ToastWindow.swift in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
@@ -2225,6 +2243,7 @@
 				5C5A99D324E16BEC002A22EA /* loslib.c in Sources */,
 				5CC17C47295C38F1000B5BB0 /* MDCTabBarView.m in Sources */,
 				5C78BA3028462498003EC02A /* Utils.swift in Sources */,
+				5C2F9A05295C799800C443A8 /* LGFragmentStateAdapter.m in Sources */,
 				5C2CA8422559753600C03879 /* LuaGraphics.mm in Sources */,
 				5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */,
 				5CC17C162959C85F000B5BB0 /* ToastCenter.swift in Sources */,
@@ -2248,6 +2267,7 @@
 				5C5A990524E16BCC002A22EA /* LuaRect.m in Sources */,
 				5C286DE92557FDDC00198DA5 /* LGRelativeLayout.mm in Sources */,
 				5C5A98B824E16BCC002A22EA /* LGColorParser.mm in Sources */,
+				5C2F9A01295C717D00C443A8 /* SnappingLayout.swift in Sources */,
 				5C5A99CB24E16BEC002A22EA /* luac.c in Sources */,
 				5C5A990424E16BCC002A22EA /* LGDimensionParser.mm in Sources */,
 				5C1639552504DE790084032F /* DefaultStyles.m in Sources */,
@@ -2262,6 +2282,7 @@
 				5C5A99DC24E16BEC002A22EA /* ltablib.c in Sources */,
 				5C5A98F124E16BCC002A22EA /* LuaLong.m in Sources */,
 				5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */,
+				5C2F9A09295ED9D100C443A8 /* LuaEvent.mm in Sources */,
 				5C5A994924E16BCC002A22EA /* LGEditText.mm in Sources */,
 				5C9EC7B42935FBE3008D2909 /* MDCActivityIndicator.m in Sources */,
 				5C810B20295C3C8200C2A93D /* MaterialMathDummy.m in Sources */,
@@ -2302,7 +2323,6 @@
 				5C5A99C124E16BEC002A22EA /* Makefile in Sources */,
 				5C5A99BB24E16BEC002A22EA /* print.c in Sources */,
 				5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */,
-				5C5A992F24E16BCC002A22EA /* IPTableBaseAdapter.mm in Sources */,
 				5C5A992924E16BCC002A22EA /* LuaTranslator.m in Sources */,
 				5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */,
 				5C5A99BD24E16BEC002A22EA /* loadlib.c in Sources */,

@@ -20,16 +20,23 @@
     app:defaultNavHost="true"
     app:navGraph="@navigation/nav_graph"/-->
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
-        <com.google.android.material.tabs.TabItem
+        <!--com.google.android.material.tabs.TabItem
                 android:text="@string/ok"
                 android:icon="@drawable/redback"/>
 
         <com.google.android.material.tabs.TabItem
-                android:text="@string/cancel"/>
+                android:text="@string/cancel"/-->
 
     </com.google.android.material.tabs.TabLayout>
+    
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>
 

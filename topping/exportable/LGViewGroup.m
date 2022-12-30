@@ -56,6 +56,13 @@
     }
 }
 
+-(void)RemoveAllSubViews {
+    for(LGView *subview in self.subviews)
+    {
+        [self RemoveSubview:subview];
+    }
+}
+
 -(void)ClearSubviews
 {
     for(LGView *w in self.subviews)
@@ -178,6 +185,16 @@
     }
     
     return retVal;
+}
+
+-(NSMutableDictionary *)OnSaveInstanceState {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    for(LGView *w in self.subviews)
+    {
+        [dict addEntriesFromDictionary:[w OnSaveInstanceState]];
+    }
+    
+    return dict;
 }
 
 -(void)viewDidLayoutSubviews {

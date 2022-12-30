@@ -219,6 +219,16 @@ class BackStackRecord : FragmentTransaction, BackStackEntry, OpGenerator {
         return commitInternal(allowStateLoss: true)
     }
     
+    override func commitNow() -> Void {
+        disallowAddToBackStack()
+        mManager.execSingleAction(action: self, allowStateLoss: false)
+    }
+    
+    override func commitNowAllowingStateLoss() -> Void {
+        disallowAddToBackStack()
+        mManager.execSingleAction(action: self, allowStateLoss: true)
+    }
+    
     func commitInternal(allowStateLoss: Bool) -> Int {
         if(mCommitted)
         {

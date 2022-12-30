@@ -4,7 +4,6 @@
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
 #import "LGDrawableParser.h"
-#import "UIImage+Resize.h"
 #import "MaterialTabs+TabBarView.h"
 
 @implementation LGTabLayout
@@ -30,6 +29,7 @@
 -(UIView *)CreateComponent
 {
     self.tab = [[MDCTabBarView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+    ((MDCTabBarView*)self.tab).tabBarDelegate = self;
     
     self.items = [NSMutableArray new];
     
@@ -64,6 +64,8 @@
     for(LuaTab* tab in self.items)
         [arr addObject:tab.item];
     [((MDCTabBarView*)self.tab) setItems:arr];
+    [self.tab layoutSubviews];
+    [self ResizeAndInvalidate];
 }
 
 -(void)AddTab:(LuaTab*)tab {
@@ -106,6 +108,18 @@
     self.ltTabSelectedListener = lt;
 }
 
+-(int)getTabIndexForUITabBarItem:(UITabBarItem*)item {
+    int count = 0;
+    for(LuaTab *tabItem in self.items) {
+        if(tabItem.item == item)
+        {
+            return count;
+        }
+        count++;
+    }
+    return -1;
+}
+
 -(LuaTab*)getTabForUITabBarItem:(UITabBarItem*)item {
     for(LuaTab *tabItem in self.items) {
         if(tabItem.item == item)
@@ -117,6 +131,10 @@
 }
 
 -(void)tabBarView:(MDCTabBarView *)tabBarView didSelectItem:(UITabBarItem *)item {
+    if(self.delegate != nil) {
+        [self.delegate didSelectTab:[self getTabForUITabBarItem:item] atIndex:[self getTabIndexForUITabBarItem:item]];
+    }
+    
     if(self.ltTabSelectedListener == nil)
         return;
     

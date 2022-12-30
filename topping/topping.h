@@ -58,6 +58,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaDate.h>
 #import <topping/LuaDefines.h>
 #import <topping/LuaDialog.h>
+#import <topping/LuaEvent.h>
 #import <topping/LuaForm.h>
 #import <topping/LuaFragment.h>
 #import <topping/LuaGraphics.h>
@@ -88,6 +89,8 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaCoroutineScope.h>
 #import <topping/LuaDispatchers.h>
 #import <topping/LuaNavHostFragment.h>
+#import <topping/LGFragmentStateAdapter.h>
+#import <topping/LGViewPager.h>
 
 #import <topping/KotlinExports.h>
 

@@ -9,6 +9,7 @@
 #import "LuaNavHostFragment.h"
 #import "KotlinExports.h"
 #import <Topping/Topping-Swift.h>
+#import "GDataXMLNode.h"
 
 @implementation LGView
 
@@ -21,6 +22,13 @@
 	self.baseLine = 14;
 	self.android_layout_width = @"wrap_content";
 	self.android_layout_height = @"wrap_content";
+}
+
+-(void)CopyAttributesTo:(LGView*)viewToCopy {
+    for(GDataXMLNode *node in self.attrs)
+    {
+        [viewToCopy SetAttributeValue:[node name] :[node stringValue]];
+    }
 }
 
 -(BOOL)SetAttributeValue:(NSString*) name :(NSString*) value
@@ -84,6 +92,10 @@
 
     propertyNameCache = [NSArray arrayWithArray:rv];
     return rv;
+}
+
+-(NSMutableDictionary*)OnSaveInstanceState {
+    return [NSMutableDictionary new];
 }
 
 -(void)viewDidLayoutSubviews {

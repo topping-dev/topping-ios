@@ -4,6 +4,7 @@
 #import "LuaFunction.h"
 #import "LuaValues.h"
 #import "LuaTranslator.h"
+#import "LGViewPager.h"
 
 @implementation LGViewUICollectionViewCell
 
@@ -142,6 +143,12 @@
     [self.ltBindViewHolder CallIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
     
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if(self.onPageChangedListener != nil) {
+        [self.onPageChangedListener onPageChanged:indexPath.row];
+    }
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

@@ -30,42 +30,10 @@
             filePath = "topping/libs/FragmentManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "723"
-            endingLineNumber = "723"
+            startingLineNumber = "722"
+            endingLineNumber = "722"
             landmarkName = "onContainerAvailable(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A2B9B11E-1D8E-4745-8F08-8A2C1BAA61D7 - a362eb185d91ac89"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "717"
-                  endingLineNumber = "717"
-                  offsetFromSymbolStart = "788">
-               </Location>
-               <Location
-                  uuid = "A2B9B11E-1D8E-4745-8F08-8A2C1BAA61D7 - a362eb185d91adcf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "723"
-                  endingLineNumber = "723"
-                  offsetFromSymbolStart = "788">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,42 +46,10 @@
             filePath = "topping/libs/FragmentManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "722"
-            endingLineNumber = "722"
+            startingLineNumber = "721"
+            endingLineNumber = "721"
             landmarkName = "onContainerAvailable(view:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D08213F2-7CFF-4E91-BBC3-FB8EC5102768 - a362eb185d91ace8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "716"
-                  endingLineNumber = "716"
-                  offsetFromSymbolStart = "288">
-               </Location>
-               <Location
-                  uuid = "D08213F2-7CFF-4E91-BBC3-FB8EC5102768 - a362eb185d91ac2e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Topping.FragmentManager.onContainerAvailable(view: __C.LGView) -&gt; ()"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/FragmentManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "722"
-                  endingLineNumber = "722"
-                  offsetFromSymbolStart = "288">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -161,6 +97,38 @@
             startingLineNumber = "34"
             endingLineNumber = "34"
             landmarkName = "+create:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "55663EA5-C25B-47CD-893F-A0479D87E7C6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/exportable/LGViewGroup.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-AddSubview::"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "259AE98B-5732-43C6-BB9A-4BC48EBB14C2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/exportable/LGViewGroup.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-RemoveSubview:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

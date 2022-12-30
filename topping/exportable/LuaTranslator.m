@@ -32,12 +32,12 @@
 
 -(NSObject*) Call:(NSObject *)a
 {
-    return [self CallIn:self.obj, a, nil];
+    return [self CallIn:a, nil];
 }
 
 -(NSObject*) Call:(NSObject *)a :(NSObject *)b
 {
-	return [self CallIn:self.obj, a, b, nil];
+	return [self CallIn:a, b, nil];
 }
 
 -(NSObject*) CallIn:(NSObject *) val, ...
@@ -56,7 +56,7 @@
         else
             return [sToppingEngine OnNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
     }
-	return [sToppingEngine OnGuiEventArgs:obj :func :VarArgs2(val)];
+	return [sToppingEngine OnGuiEventArgs:self.obj :func :VarArgs2(val)];
 }
 
 -(NSObject*) CallInSelf:(NSObject *)s :(NSObject *)val :(va_list)valist

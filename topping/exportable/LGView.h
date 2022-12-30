@@ -43,6 +43,7 @@ enum GRAVITY
 }
 
 -(void)InitProperties;
+-(void)CopyAttributesTo:(LGView*)viewToCopy;
 -(BOOL)SetAttributeValue:(NSString*) name :(NSString*) value;
 -(void)ApplyStyles;
 
@@ -76,6 +77,8 @@ enum GRAVITY
 
 -(NSArray*)allPropertyNames;
 
+-(NSMutableDictionary*)OnSaveInstanceState;
+
 -(void)viewDidLayoutSubviews;
 
 //Lua
@@ -96,6 +99,7 @@ enum GRAVITY
 -(LuaNavController*)findNavControllerInternal;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
+@property (nonatomic, strong) NSArray *attrs;
 
 @property (nonatomic, strong) NSString* android_alpha;
 @property (nonatomic, retain) NSString* android_background;

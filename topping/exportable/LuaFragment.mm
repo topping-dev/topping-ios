@@ -1,4 +1,5 @@
 #import "LuaFragment.h"
+#import "LuaEvent.h"
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LuaValues.h"
@@ -45,8 +46,6 @@
 
 @implementation LuaFragment
 
-static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
-
 - (instancetype)init
 {
     self = [super init];
@@ -59,33 +58,6 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
         [self initLifecycle];
     }
     return self;
-}
-
-+(NSObject*)OnFragmentEvent:(NSObject*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...
-{
-    NSObject <LuaInterface> *s = (NSObject <LuaInterface> *)pGui;
-    LuaTranslator *ltToCall;
-    ltToCall = [eventMapFragment objectForKey:APPEND([s GetId], ITOS(EventType))];
-    NSObject *ret = nil;
-    if(ltToCall != nil)
-    {
-        va_list ap;
-        va_start(ap, ArgCount);
-        ret = [ltToCall CallInSelf:pGui :lc :ap];
-        va_end(ap);
-        return ret;
-    }
-    return ret;
-}
-
-+(void)RegisterFragmentEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
-{
-    [LuaFragment RegisterFragmentEventInternal:[luaId GetCleanId] :event :lt];
-}
-
-+(void)RegisterFragmentEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt
-{
-    [eventMapFragment setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
 +(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId
@@ -197,18 +169,19 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     NSMutableDictionary *sis = savedInstanceState;
     if(sis == nil)
         sis = [NSMutableDictionary new];
-    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_CREATE :self.context :1, sis, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :1, sis, nil];
 }
 
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
     NSMutableDictionary *sis = savedInstanceState;
     if(sis == nil)
         sis = [NSMutableDictionary new];
-    return (LGView*)[LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_CREATE_VIEW :self.context :3, [LuaViewInflator From:inflater], container, sis, nil];
+    return (LGView*)[LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
+                     [LuaViewInflator From:inflater], container, sis, nil];
 }
 
 -(void)onViewCreated:(LGView *)view :(NSMutableDictionary *)savedInstanceState {
-    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_VIEW_CREATED :self.context :2, view, savedInstanceState, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, savedInstanceState, nil];
 }
 
 -(void)onActivityCreated:(NSMutableDictionary *)savedInstanceState {
@@ -225,15 +198,16 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 
 -(void)onResume {
     self.mCalled = true;
-    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_RESUME :self.context :0, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
 }
 
 - (void)onSaveInstanceState:(NSMutableDictionary *)outState {
+    [outState addEntriesFromDictionary:[self.lgview OnSaveInstanceState]];
 }
 
 -(void)onPause {
     self.mCalled = true;
-    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_PAUSE :self.context :0, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
 }
 
 -(void)onStop {
@@ -246,7 +220,7 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
 
 -(void)onDestroyView {
     self.mCalled = true;
-    [LuaFragment OnFragmentEvent:self :FRAGMENT_EVENT_DESTROY :self.context :0, nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
 }
 
 -(void)onDestroy {
@@ -668,22 +642,9 @@ static NSMutableDictionary* eventMapFragment = [NSMutableDictionary dictionary];
     return @"LuaFragment";
 }
 
-+(NSMutableDictionary*)luaStaticVars
-{
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[NSNumber numberWithInt:0] forKey:@"FRAGMENT_EVENT_CREATE"];
-    [dict setObject:[NSNumber numberWithInt:1] forKey:@"FRAGMENT_EVENT_CREATE_VIEW"];
-    [dict setObject:[NSNumber numberWithInt:2] forKey:@"FRAGMENT_EVENT_VIEW_CREATED"];
-    [dict setObject:[NSNumber numberWithInt:3] forKey:@"FRAGMENT_EVENT_RESUME"];
-    [dict setObject:[NSNumber numberWithInt:4] forKey:@"FRAGMENT_EVENT_PAUSE"];
-    [dict setObject:[NSNumber numberWithInt:5] forKey:@"FRAGMENT_EVENT_DESTROY"];
-    return dict;
-}
-
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    ClassMethodNoRet(RegisterFragmentEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterFragmentEvent", [LuaFragment class])
     ClassMethod(Create::, LuaFragment, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaFragment class])
     ClassMethod(Create:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [NSDictionary class]], @"CreateWithArgs", [LuaFragment class])
     ClassMethod(CreateWithUI:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaFragment class])

@@ -76,7 +76,7 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
     @objc
     public func onGetHost() -> Any?
     {
-        return form?.fragmentManager.getHost()
+        return form?.getSupportFragmentManager().getHost()
     }
     
     @objc

@@ -6,6 +6,7 @@
 @class LGView;
 @class LGRecyclerView;
 @protocol LuaInterface;
+@protocol OnPageChangeCallback;
 
 @interface LGViewUICollectionViewCell : UICollectionViewCell
 
@@ -13,7 +14,7 @@
 
 @end
 
-@interface LGRecyclerViewAdapter : UICollectionViewCell <LuaClass, LuaInterface, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface LGRecyclerViewAdapter : NSObject <LuaClass, LuaInterface, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 - (instancetype)initWithContext:(LuaContext *)context :(NSString*)lua_id;
 
@@ -44,5 +45,7 @@
 @property (nonatomic, strong) NSMutableDictionary *cells;
 
 @property(nonatomic, strong) LuaTranslator *ltItemSelected, *ltCreateViewHolder, *ltBindViewHolder, *ltGetItemViewType;
+
+@property(nonatomic, strong) id<OnPageChangeCallback> onPageChangedListener;
 
 @end

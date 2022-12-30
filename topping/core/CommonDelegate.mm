@@ -10,6 +10,7 @@
 
 #import "LGLayoutParser.h"
 #import "LuaForm.h"
+#import "LuaEvent.h"
 #import "DisplayMetrics.h"
 
 #import "LGStyleParser.h"
@@ -96,6 +97,7 @@ static LuaForm *sActiveForm;
     height -= bottomPadding;
     LuaContext *context = [[LuaContext alloc] init];
 	self.startForm = [[LuaForm alloc] initWithContext:context];
+    [CommonDelegate SetActiveForm:self.startForm];
     [context Setup:self.startForm];
     self.startForm.context = context;
     self.startForm.luaId = [sToppingEngine GetMainForm];
@@ -155,17 +157,16 @@ static LuaForm *sActiveForm;
     [self.window makeKeyAndVisible];
 	if([initUI compare:@""] != 0)
 	{
-		LGView *lgview = self.startForm.lgview;
+		LGView *lgview = nil;
         NSLog(@"Window Frame: %@", NSStringFromCGRect(self.window.rootViewController.view.frame));
         NSLog(@"Form Frame: %@", NSStringFromCGRect(self.startForm.view.frame));
         UIView *viewToAdd = [[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview];
         NSLog(@"View To Add Frame: %@", NSStringFromCGRect(viewToAdd.frame));
         [self.startForm AddMainView:viewToAdd];
-		self.startForm.lgview = lgview;
     }
 	else
 	{
-        [LuaForm OnFormEvent:self.startForm :FORM_EVENT_CREATE :self.startForm.context :0, nil];
+        [LuaEvent OnUIEvent:self.startForm :UI_EVENT_CREATE :self.startForm.context :0, nil];
 	}
 }
 

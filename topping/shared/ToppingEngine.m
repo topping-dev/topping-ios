@@ -765,7 +765,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
         retVal = nil;
     else if(lua_isboolean(lu, -1))
         retVal = [NSNumber numberWithBool:(lua_toboolean(lu, -1) == 1) ? YES : NO];
-    else if(lua_isnumber(lu, -1) > 0)
+    else if(lua_type(lu, -1) == LUA_TNUMBER)
         retVal = [NSNumber numberWithDouble:lua_tonumber(lu, -1)];
     else if(lua_isstring(lu, -1) > 0)
         retVal = [NSString stringWithCString:lua_tostring(lu, -1) encoding:NSUTF8StringEncoding];
@@ -991,6 +991,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LGDatePicker class]];
 	[Lunar Register:lu :[LGEditText class]];
     [Lunar Register:lu :[LGFragmentContainerView class]];
+    [Lunar Register:lu :[LGFragmentStateAdapter class]];
 	[Lunar Register:lu :[LGFrameLayout class]];
     [Lunar Register:lu :[LGImageView class]];
 	[Lunar Register:lu :[LGLinearLayout class]];
@@ -1003,6 +1004,8 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LGTabLayout class]];
 	[Lunar Register:lu :[LGTextView class]];
 	[Lunar Register:lu :[LGView class]];
+    [Lunar Register:lu :[LGViewGroup class]];
+    [Lunar Register:lu :[LGViewPager class]];
     [Lunar Register:lu :[LGRecyclerView class]];
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
     [Lunar Register:lu :[LGToolbar class]];
@@ -1016,6 +1019,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LuaDatabase class]];
     [Lunar Register:lu :[LuaDate class]];
     [Lunar Register:lu :[LuaDialog class]];
+    [Lunar Register:lu :[LuaEvent class]];
    	[Lunar Register:lu :[LuaForm class]];
     [Lunar Register:lu :[LuaFragment class]];
    	[Lunar Register:lu :[LuaHttpClient class]];

@@ -48,36 +48,35 @@ open class LifecycleAwareResultListener : NSObject, FragmentResultListener {
 }
 
 @objc(FragmentLifecycleCallbacks)
-open class FragmentLifecycleCallbacks: NSObject {
+public protocol FragmentLifecycleCallbacks: NSObjectProtocol {
     
-    @objc func onFragmentPreAttached(fm: FragmentManager, f:LuaFragment, context:LuaContext) {}
+    @objc func onFragmentPreAttached(fm: FragmentManager, f:LuaFragment, context:LuaContext)
     
-    @objc func onFragmentAttached(fm: FragmentManager, f:LuaFragment, context:LuaContext) {}
+    @objc func onFragmentAttached(fm: FragmentManager, f:LuaFragment, context:LuaContext)
 
-    @objc func onFragmentPreCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?) {}
+    @objc func onFragmentPreCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?)
 
-    @objc func onFragmentCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?) {}
+    @objc func onFragmentCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?)
 
-    @objc func onFragmentActivityCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?) {}
+    @objc func onFragmentActivityCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?)
 
-    @objc func onFragmentViewCreated(fm: FragmentManager, f:LuaFragment, v:LGView, savedInstanceState:Dictionary<String, Any>?) {}
+    @objc func onFragmentViewCreated(fm: FragmentManager, f:LuaFragment, v:LGView, savedInstanceState:Dictionary<String, Any>?)
 
-    @objc func onFragmentStarted(fm: FragmentManager, f:LuaFragment) {}
+    @objc func onFragmentStarted(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentResumed(fm: FragmentManager, f:LuaFragment) {}
+    @objc func onFragmentResumed(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentPaused(fm: FragmentManager, f:LuaFragment) {}
+    @objc func onFragmentPaused(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentStopped(fm: FragmentManager, f:LuaFragment) {}
+    @objc func onFragmentStopped(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentSaveInstanceState(fm: FragmentManager, f:LuaFragment, outState:Dictionary<String, Any>) {}
+    @objc func onFragmentSaveInstanceState(fm: FragmentManager, f:LuaFragment, outState:Dictionary<String, Any>)
 
-    @objc func onFragmentViewDestroyed(fm: FragmentManager, f:LuaFragment) {}
+    @objc func onFragmentViewDestroyed(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentDestroyed(fm: FragmentManager, f:LuaFragment) {}
+    @objc func onFragmentDestroyed(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentDetached(fm: FragmentManager, f:LuaFragment) {}
-    
+    @objc func onFragmentDetached(fm: FragmentManager, f:LuaFragment)
 }
 
 @objc(Op)
@@ -738,7 +737,7 @@ open class FragmentManager: NSObject, LuaClass, LuaInterface {
         else {
             let fragmentActivity = view.lc.form
             if(fragmentActivity != nil) {
-                fm = fragmentActivity!.fragmentManager
+                fm = fragmentActivity!.getSupportFragmentManager()
             }
         }
         
@@ -774,7 +773,8 @@ open class FragmentManager: NSObject, LuaClass, LuaInterface {
         return mFragmentStore.getActiveFragmentCount()
     }
     
-    func saveFragmentInstanceState(fragment: LuaFragment) -> SavedState? {
+    @objc
+    public func saveFragmentInstanceState(fragment: LuaFragment) -> SavedState? {
         let fragmentStateManager = mFragmentStore.getFragmentStateManager(who: fragment.mWho)
         if(fragmentStateManager == nil || fragmentStateManager?.getFragment() != fragment) {
             return nil
@@ -1892,11 +1892,13 @@ open class FragmentManager: NSObject, LuaClass, LuaInterface {
         return mLifeycleCallbackDispatcher!
     }
     
-    func registerFragmentLifecycleCallbacks(cb: FragmentLifecycleCallbacks, recursive: Bool) {
+    @objc
+    public func registerFragmentLifecycleCallbacks(cb: FragmentLifecycleCallbacks, recursive: Bool) {
         mLifeycleCallbackDispatcher!.registerFragmentLifecycleCallbacks(cb: cb, recursive: recursive)
     }
     
-    func unregisterFragmentLifecycleCallbacks(cb: FragmentLifecycleCallbacks) {
+    @objc
+    public func unregisterFragmentLifecycleCallbacks(cb: FragmentLifecycleCallbacks) {
         mLifeycleCallbackDispatcher!.unregisterFragmentLifecycleCallbacks(cb: cb)
     }
     

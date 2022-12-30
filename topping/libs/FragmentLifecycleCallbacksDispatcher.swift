@@ -26,7 +26,7 @@ class FragmentLifecycleCallbacksDispatcher: NSObject {
         synced(self) {
             let count = mLifecycleCallbacks.count
             for i in 0..<count {
-                if(mLifecycleCallbacks[i].mCallback == cb) {
+                if(mLifecycleCallbacks[i].mCallback === cb) {
                     mLifecycleCallbacks.remove(at: i)
                     break
                 }
