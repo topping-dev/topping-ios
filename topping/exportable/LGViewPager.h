@@ -4,11 +4,13 @@
 @class LGViewPager;
 @class LGTabLayout;
 @protocol LGTabBarDelegate;
+@protocol OnScrollCallback;
 
 @protocol LGViewPagerAdapter <NSObject>
 
 -(void)setParentView:(LGView*)parent;
 -(void)setReceiver:(LGView*)view;
+-(void)setScroller:(id<OnScrollCallback>)delegate;
 -(int)getItemCount;
 
 @end
@@ -41,6 +43,8 @@
 -(void)registerOnPageChangeCallback:(id<OnPageChangeCallback>) callback;
 -(void)unRegisterOnPageChangeCallback:(id<OnPageChangeCallback>) callback;
 -(int)getCurrentItem;
+
+-(void)Notify;
 
 @property (nonatomic, retain) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, retain) LGView *lgview;

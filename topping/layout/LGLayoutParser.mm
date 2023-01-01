@@ -117,7 +117,8 @@
 	GDataXMLElement *root = [xml rootElement];
 	LGView *rootView = [self ParseChildXML:nil :root];
 	*lgview = rootView;
-    cont.lgview = rootView;
+    if(cont.lgview == nil)
+        cont.lgview = rootView;
 	return [self GenerateUIViewFromLGView:rootView :parentView :parent :cont];
 }
 
@@ -293,11 +294,11 @@
 		for(LGView *w in ((LGViewGroup*)view).subviews)
 		{
 			[w AddSelfToParent:viewRoot :cont];
-            [LuaEvent OnUIEvent:w :UI_EVENT_CREATE :w.lc :0, nil];
+            [LuaEvent OnUIEvent:w :UI_EVENT_VIEW_CREATE :w.lc :0, nil];
 		}
 	}
     [view InitComponent:viewRoot :cont.context];
-    [LuaEvent OnUIEvent:view :UI_EVENT_CREATE :view.lc :0, nil];
+    [LuaEvent OnUIEvent:view :UI_EVENT_VIEW_CREATE :view.lc :0, nil];
     return viewRoot;
 }
 

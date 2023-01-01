@@ -11,6 +11,12 @@
 @class LGFragmentStateAdapter;
 @class LuaFragmentUICollectionViewCell;
 
+@protocol OnScrollCallback <NSObject>
+
+-(void)didScroll:(CGPoint)contentOffset;
+
+@end
+
 @interface AdapterDataObserver : NSObject
 
 -(void)onChanged;
@@ -136,6 +142,7 @@
 @property (nonatomic, strong) LuaContext *lc;
 @property (nonatomic, strong) LGView *parent;
 @property (nonatomic, strong) LGView *receiverDelegate;
+@property (nonatomic, strong) id<OnScrollCallback> scrollDelegate;
 @property (nonatomic, strong) MutableOrderedDictionary *savedStates;
 @property (nonatomic, strong) FragmentMaxLifecycleEnforcer *maxLifecyleEnforcer;
 @property (nonatomic) BOOL hasStaleFragments;

@@ -1205,6 +1205,38 @@ static NSString *const kBadgeColorKeyPath = @"badgeColor";
   [self invalidateInteractionsForItemViews];
 }
 
+-(UIView *)getSelectionIndicatorView {
+    return self.selectionIndicatorView;
+}
+
+-(CGPoint) calculateMovement:(int)direction :(int)isIndex {
+    NSInteger index;
+    if(isIndex == -1) {
+        index = [self.items indexOfObject:self.selectedItem];
+        if(direction > 0)
+            index++;
+        else if(direction < 0)
+            index--;
+        if (index < 0 || index == NSNotFound || index >= self.itemViews.count) {
+          index = 0;
+        }
+    }
+    else {
+        index = isIndex;
+    }
+    if (self.itemViews.count == 0U) {
+      return CGPointZero;
+    }
+    CGPoint ret = CGPointZero;
+    if ([self effectiveLayoutStyle] == MDCTabBarViewLayoutStyleScrollableCentered) {
+      ret = [self contentOffsetNeededToCenterItemView:self.itemViews[index]];
+    } else {
+      CGRect estimatedItemFrame = [self estimatedFrameForItemAtIndex:index];
+        ret = CGPointMake(estimatedItemFrame.origin.x, estimatedItemFrame.origin.y);
+    }
+    return ret;
+}
+
 - (void)invalidateInteractionsForItemViews {
 #ifdef __IPHONE_13_4
   if (@available(iOS 13.4, *)) {

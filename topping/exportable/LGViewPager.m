@@ -16,7 +16,7 @@
 
 - (void)onPageChanged:(int)page {
     MDCTabBarView *mtbv = ((MDCTabBarView*)self.tabLayout.tab);
-    [mtbv setSelectedItem:[mtbv.items objectAtIndex:page] animated:true];
+    [mtbv setSelectedItem:[mtbv.items objectAtIndex:page] animated:false];
 }
 
 @end
@@ -33,6 +33,7 @@
     self.lgview.android_layout_width = @"match_parent";
     self.lgview.android_layout_height = @"match_parent";
     self.lgview._view = [[UICollectionView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight) collectionViewLayout:self.flowLayout];
+    ((UICollectionView*)self.lgview._view).decelerationRate = UIScrollViewDecelerationRateFast;
 }
 
 -(void)ComponentAddMethod:(UIView *)par :(UIView *)me {
@@ -66,16 +67,20 @@
     [self registerOnPageChangeCallback:[[TabLayoutOnPageChangeCallback alloc] initWithTabLayout:tabLayout]];
     int count = [self.adapterValue getItemCount];
     for(int i = 0; i < count; i++) {
-        LuaTab *tab = [LuaTab Create];
-        [tab SetText:(NSString*)[ltTabTitle Call:[NSNumber numberWithInt:i]]];
-        [tabLayout AddTab:tab];
+        [tabLayout AddTab:(LuaTab*)[ltTabTitle Call:[NSNumber numberWithInt:i]]];
     }
     tabLayout.delegate = self;
+    [self.adapterValue setScroller:tabLayout];
 }
 
 -(void)Notify
 {
     [((UICollectionView*)self.lgview._view) reloadData];
+}
+
+-(void)ResizeAndInvalidate {
+    [super ResizeAndInvalidate];
+    [self Notify];
 }
 
 -(void)ConfigChange {

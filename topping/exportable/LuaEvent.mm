@@ -46,20 +46,22 @@ static NSMutableDictionary* eventMap = [NSMutableDictionary dictionary];
 +(NSMutableDictionary*)luaStaticVars
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[NSNumber numberWithInt:0] forKey:@"UI_EVENT_CREATE"];
-    [dict setObject:[NSNumber numberWithInt:1] forKey:@"UI_EVENT_FRAGMENT_CREATE_VIEW"];
-    [dict setObject:[NSNumber numberWithInt:2] forKey:@"UI_EVENT_FRAGMENT_VIEW_CREATED"];
-    [dict setObject:[NSNumber numberWithInt:3] forKey:@"UI_EVENT_RESUME"];
-    [dict setObject:[NSNumber numberWithInt:4] forKey:@"UI_EVENT_PAUSE"];
-    [dict setObject:[NSNumber numberWithInt:5] forKey:@"UI_EVENT_DESTROY"];
-    [dict setObject:[NSNumber numberWithInt:6] forKey:@"UI_EVENT_UPDATE"];
-    [dict setObject:[NSNumber numberWithInt:7] forKey:@"UI_EVENT_PAINT"];
-    [dict setObject:[NSNumber numberWithInt:8] forKey:@"UI_EVENT_MOUSEDOWN"];
-    [dict setObject:[NSNumber numberWithInt:9] forKey:@"UI_EVENT_MOUSEUP"];
-    [dict setObject:[NSNumber numberWithInt:10] forKey:@"UI_EVENT_MOUSEMOVE"];
-    [dict setObject:[NSNumber numberWithInt:11] forKey:@"UI_EVENT_KEYDOWN"];
-    [dict setObject:[NSNumber numberWithInt:12] forKey:@"UI_EVENT_KEYUP"];
-    [dict setObject:[NSNumber numberWithInt:13] forKey:@"UI_EVENT_NFC"];
+    int count = 0;
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_CREATE"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_VIEW_CREATE"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_FRAGMENT_CREATE_VIEW"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_FRAGMENT_VIEW_CREATED"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_RESUME"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_PAUSE"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_DESTROY"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_UPDATE"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_PAINT"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_MOUSEDOWN"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_MOUSEUP"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_MOUSEMOVE"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_KEYDOWN"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_KEYUP"];
+    [dict setObject:[NSNumber numberWithInt:count++] forKey:@"UI_EVENT_NFC"];
     return dict;
 }
 

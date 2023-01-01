@@ -135,13 +135,14 @@ function Pager_Constructor(pViewPager, luacontext)
         return LuaFragment.CreateWithArgs(luacontext, LR.id.formTestLL, args)
     end)
     pagerAdapter:SetGetItemCount(function(adapter)
-        return 2
+        return 4
     end)
     pViewPager:SetAdapter(pagerAdapter)
     local tabLayout = luacontext:GetForm():GetViewById(LR.id.tab)
     pViewPager:SetTabLayout(tabLayout, function(pager, pos)
-        print(pos)
-        return tostring(pos)
+        local tab = LuaTab.Create()
+        tab:SetText(tostring(pos))
+        return tab
     end)
 end
 
@@ -157,10 +158,10 @@ function FormTest_Create_View(pFragment, luacontext, inflater, container, savedI
     return inflater:Inflate(LR.layout.form, container)
 end
 
-LuaEvent.RegisterUIEvent(LR.id.ListViewTest, LuaEvent.UI_EVENT_CREATE, ListViewTest_Constructor);
-LuaEvent.RegisterUIEvent(LR.id.ToolbarTest, LuaEvent.UI_EVENT_CREATE, Toolbar_Constructor);
+LuaEvent.RegisterUIEvent(LR.id.ListViewTest, LuaEvent.UI_EVENT_VIEW_CREATE, ListViewTest_Constructor);
+LuaEvent.RegisterUIEvent(LR.id.ToolbarTest, LuaEvent.UI_EVENT_VIEW_CREATE, Toolbar_Constructor);
 LuaEvent.RegisterUIEvent(LR.id.Main, LuaEvent.UI_EVENT_CREATE, Main_Constructor);
-LuaEvent.RegisterUIEvent(LR.id.pager, LuaEvent.UI_EVENT_CREATE, Pager_Constructor);
+LuaEvent.RegisterUIEvent(LR.id.pager, LuaEvent.UI_EVENT_VIEW_CREATE, Pager_Constructor);
 LuaEvent.RegisterUIEvent(LR.id.menuFragment, LuaEvent.UI_EVENT_FRAGMENT_CREATE_VIEW, MenuFragment_Create_View);
 LuaEvent.RegisterUIEvent(LR.id.receiveFragment, LuaEvent.UI_EVENT_FRAGMENT_CREATE_VIEW, ReceiveFragment_Create_View);
 LuaEvent.RegisterUIEvent(LR.id.formTestLL, LuaEvent.UI_EVENT_FRAGMENT_CREATE_VIEW, FormTest_Create_View);

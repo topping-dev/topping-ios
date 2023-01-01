@@ -271,6 +271,10 @@ __attribute__((objc_subclassing_restricted)) @interface MDCTabBarView : UIScroll
  */
 - (void)scrollToItem:(UITabBarItem *)item animated:(BOOL)animated;
 
+-(UIView*)getSelectionIndicatorView;
+
+-(CGPoint) calculateMovement:(int)direction :(int)isIndex;
+
 /**
  The color for the Ripple effect for touch feedback.
  */

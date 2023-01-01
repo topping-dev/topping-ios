@@ -5,6 +5,7 @@
 #import "LGDimensionParser.h"
 #import "LGDrawableParser.h"
 #import "MaterialTabs+TabBarView.h"
+#import <math.h>
 
 @implementation LGTabLayout
 
@@ -61,10 +62,17 @@
 
 -(void)UpdateTabs {
     NSMutableArray *arr = [NSMutableArray array];
-    for(LuaTab* tab in self.items)
+    LuaTab *firstTab = nil;
+    for(LuaTab* tab in self.items) {
+        if(firstTab == nil)
+            firstTab = tab;
         [arr addObject:tab.item];
+    }
     [((MDCTabBarView*)self.tab) setItems:arr];
     [self.tab layoutSubviews];
+    if(self.items.count == 1) {
+        [((MDCTabBarView*)self.tab) setSelectedItem:(UITabBarItem*)firstTab.item animated:NO];
+    }
     [self ResizeAndInvalidate];
 }
 
@@ -147,6 +155,34 @@
 
 -(BOOL)tabBarView:(MDCTabBarView *)tabBarView shouldSelectItem:(UITabBarItem *)item {
     return true;
+}
+
+-(void)didScroll:(CGPoint)contentOffset {
+    if(((MDCTabBarView*)self.tab).preferredLayoutStyle == MDCTabBarViewLayoutStyleFixed)
+    {
+        CGPoint nextMove = CGPointZero;
+        if(self.lastContentOffset.x <= contentOffset.x) {
+            nextMove = [((MDCTabBarView*)self.tab) calculateMovement:1 :-1];
+        } else {
+            nextMove = [((MDCTabBarView*)self.tab) calculateMovement:-1 :-1];
+        }
+        self.lastContentOffset = contentOffset;
+        CGRect frameToSet = [((MDCTabBarView*)self.tab) getSelectionIndicatorView].frame;
+        [((MDCTabBarView*)self.tab) getSelectionIndicatorView].frame = CGRectMake((contentOffset.x / self.items.count), frameToSet.origin.y, frameToSet.size.width, frameToSet.size.height);
+    }
+    else {
+        CGPoint nextMove = CGPointZero;
+        if(self.lastContentOffset.x <= contentOffset.x) {
+            nextMove = [((MDCTabBarView*)self.tab) calculateMovement:0 :-1];
+        } else {
+            nextMove = [((MDCTabBarView*)self.tab) calculateMovement:-1 :-1];
+        }
+        self.lastContentOffset = contentOffset;
+        CGRect frameToSet = [((MDCTabBarView*)self.tab) getSelectionIndicatorView].frame;
+        float contentModX = contentOffset.x / ([((MDCTabBarView*)self.tab).items indexOfObject:((MDCTabBarView*)self.tab).selectedItem] + 1);
+        float calc = ((contentModX / self.tab.frame.size.width) * frameToSet.size.width) + nextMove.x;
+        [((MDCTabBarView*)self.tab) getSelectionIndicatorView].frame = CGRectMake(calc, frameToSet.origin.y, frameToSet.size.width, frameToSet.size.height);
+    }
 }
 
 -(NSString*)GetId

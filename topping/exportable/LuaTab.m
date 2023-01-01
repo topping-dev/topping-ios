@@ -63,7 +63,7 @@
 + (NSMutableDictionary *)luaMethods {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethodNoArg(Create, LuaTab, @"LuaTab", [LuaTab class])
+    ClassMethodNoArg(Create, LuaTab, @"Create", [LuaTab class])
     
     InstanceMethodNoRet(SetText:, @[[NSString class]], @"SetText")
     InstanceMethodNoRet(SetTextRef:, @[[LuaRef class]], @"SetTextRef")

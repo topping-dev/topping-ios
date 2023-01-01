@@ -3,6 +3,7 @@
 #import "LuaTab.h"
 
 @protocol MDCTabBarViewDelegate;
+@protocol OnScrollCallback;
 
 @protocol LGTabBarDelegate <NSObject>
 
@@ -10,7 +11,7 @@
 
 @end
 
-@interface LGTabLayout : LGScrollView <MDCTabBarViewDelegate>
+@interface LGTabLayout : LGScrollView <MDCTabBarViewDelegate, OnScrollCallback>
 
 -(void)AddTab:(LuaTab*)tab;
 
@@ -57,5 +58,7 @@
 @property (nonatomic, retain) NSMutableArray *items;
 @property (nonatomic, retain) id<LGTabBarDelegate> delegate;
 @property (nonatomic, retain) LuaTranslator *ltTabSelectedListener;
+
+@property (nonatomic) CGPoint lastContentOffset;
 
 @end

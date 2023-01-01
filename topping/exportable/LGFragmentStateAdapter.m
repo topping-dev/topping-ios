@@ -2,6 +2,7 @@
 #import "LGFrameLayout.h"
 #import "Defines.h"
 #import "LGViewPager.h"
+#import "Defines.h"
 #import <Topping/Topping-Swift.h>
 
 @implementation OnPostEventListener_DUMMY
@@ -316,12 +317,12 @@
     LuaFragmentUICollectionViewCell *cell;
 
     @try {
-        cell = [((UICollectionView*)self.parent._view) dequeueReusableCellWithReuseIdentifier:@"LuaFragmentCell" forIndexPath:indexPath];
+        cell = [((UICollectionView*)self.parent._view) dequeueReusableCellWithReuseIdentifier:APPEND(@"LuaFragmentCell", LTOS(indexPath.row))  forIndexPath:indexPath];
     } @catch (NSException *exception) {
     } @finally {
         if(cell == nil) {
-            [((UICollectionView*)self.parent._view) registerClass:[LuaFragmentUICollectionViewCell class] forCellWithReuseIdentifier:@"LuaFragmentCell"];
-            cell = [((UICollectionView*)self.parent._view) dequeueReusableCellWithReuseIdentifier:@"LuaFragmentCell" forIndexPath:indexPath];
+            [((UICollectionView*)self.parent._view) registerClass:[LuaFragmentUICollectionViewCell class] forCellWithReuseIdentifier:APPEND(@"LuaFragmentCell", LTOS(indexPath.row))];
+            cell = [((UICollectionView*)self.parent._view) dequeueReusableCellWithReuseIdentifier:APPEND(@"LuaFragmentCell", LTOS(indexPath.row)) forIndexPath:indexPath];
         }
     }
     
@@ -495,6 +496,10 @@
     self.receiverDelegate = view;
 }
 
+-(void)setScroller:(id<OnScrollCallback>)delegate {
+    self.scrollDelegate = delegate;
+}
+
 -(void)onAttachToLGViewPager:(LGViewPager *)viewPager {
     self.maxLifecyleEnforcer = [[FragmentMaxLifecycleEnforcer alloc] initWithAdapter:self];
     [self.maxLifecyleEnforcer register:viewPager];
@@ -529,7 +534,10 @@
     
     [container AddSubview:v];
     [container ComponentAddMethod:container._view :v._view];
-    [container ResizeAndInvalidate];
+    [self.lc.form.lgview ResizeAndInvalidate];
+    if([self.receiverDelegate isKindOfClass:[LGViewPager class]]) {
+        [((LGViewPager*)self.receiverDelegate) Notify];
+    }
 }
 
 -(NSString*)getItemId:(int)position {
@@ -566,6 +574,12 @@
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     self.possibleQuantumPage = [self currentPageEventIfInBetween:scrollView];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(self.scrollDelegate != nil) {
+        [self.scrollDelegate didScroll:scrollView.contentOffset];
+    }
 }
 
 -(int)currentPageEventIfInBetween:(UIScrollView*)scrollView
