@@ -44,13 +44,6 @@
     return [[LuaNativeObject alloc] initWithObject:form];
 }
 
-+(LuaNativeObject*)CreateForTab:(LuaContext*)context :(LuaRef*)luaId
-{
-	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = [luaId GetCleanId];
-    return [[LuaNativeObject alloc] initWithObject:form];
-}
-
 +(LuaForm*)GetActiveForm
 {
 	return [CommonDelegate GetActiveForm];
@@ -405,7 +398,6 @@
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     ClassMethod(Create::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaForm class])
     ClassMethod(CreateWithUI:::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaForm class])
-    ClassMethod(CreateForTab::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"CreateForTab", [LuaForm class])
     ClassMethodNoArg(GetActiveForm, [LuaForm class], @"GetActiveForm", [LuaForm class])
 
     InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")

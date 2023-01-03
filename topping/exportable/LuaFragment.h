@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, FragmentState)
 
 +(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId;
 +(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments;
-+(LuaFragment*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
++(LuaFragment*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui :(NSMutableDictionary*)arguments;
 -(LuaContext*)GetContext;
 -(LuaForm*)GetForm;
 -(FragmentManager*)GetFragmentManager;

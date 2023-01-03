@@ -5,6 +5,7 @@
 @class LGTabLayout;
 @protocol LGTabBarDelegate;
 @protocol OnScrollCallback;
+@protocol LGTabBarDelegate;
 
 @protocol LGViewPagerAdapter <NSObject>
 
@@ -34,7 +35,7 @@
 
 @interface TabLayoutOnPageChangeCallback : NSObject <OnPageChangeCallback>
 
-@property LGTabLayout *tabLayout;
+@property (nonatomic, retain) LGTabLayout *tabLayout;
 
 @end
 
@@ -45,6 +46,9 @@
 -(int)getCurrentItem;
 
 -(void)Notify;
+
+-(void)SetAdapter:(id<LGViewPagerAdapter>)adapter;
+-(void)SetTabLayout:(LGTabLayout*)tabLayout :(LuaTranslator*)ltTabTitle;
 
 @property (nonatomic, retain) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, retain) LGView *lgview;

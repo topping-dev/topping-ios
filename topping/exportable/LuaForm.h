@@ -30,7 +30,6 @@
 
 +(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId;
 +(LuaNativeObject*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
-+(LuaNativeObject*)CreateForTab:(LuaContext *)context :(LuaRef*)luaId;
 +(LuaForm*)GetActiveForm;
 -(LuaContext*)GetContext;
 -(LGView*)GetViewById:(LuaRef*)lId;

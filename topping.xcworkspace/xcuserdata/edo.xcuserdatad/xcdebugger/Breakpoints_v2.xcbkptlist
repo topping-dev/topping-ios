@@ -142,9 +142,9 @@
             filePath = "topping/exportable/LuaForm.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "-SetView:"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "-GetView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

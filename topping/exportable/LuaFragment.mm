@@ -77,12 +77,13 @@
     return lf;
 }
 
-+(LuaFragment*)CreateWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
++(LuaFragment*)CreateWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui :(NSMutableDictionary*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
     lf.luaId = [luaId GetCleanId];
     lf.context = context;
     lf.ui = ui;
+    lf.mArguments = arguments;
     return lf;
 }
 
