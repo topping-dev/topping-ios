@@ -116,6 +116,10 @@
     self.ltTabSelectedListener = lt;
 }
 
+-(void)SetCanSelectTab:(LuaTranslator*)lt {
+    self.ltCanSelectTab = lt;
+}
+
 -(int)getTabIndexForUITabBarItem:(UITabBarItem*)item {
     int count = 0;
     for(LuaTab *tabItem in self.items) {
@@ -154,7 +158,16 @@
 }
 
 -(BOOL)tabBarView:(MDCTabBarView *)tabBarView shouldSelectItem:(UITabBarItem *)item {
-    return true;
+    if(self.ltTabSelectedListener == nil)
+        return YES;
+    
+    LuaTab *tabItem = [self getTabForUITabBarItem:item];
+    if(tabItem != nil)
+    {
+        return [self.ltCanSelectTab Call:self :tabItem];
+    }
+    
+    return YES;
 }
 
 -(void)didScroll:(CGPoint)contentOffset {

@@ -40,6 +40,7 @@
     self.pStyle = [[LGStyleParser alloc] init];
     self.pFont = [[LGFontParser alloc] init];
     self.pNavigation = [[LGNavigationParser alloc] init];
+    self.pMenu = [[LGMenuParser alloc] init];
     self.pId = [[LGIdParser alloc] init];
     
     self.MatchStringStart = [NSMutableArray array];
@@ -104,6 +105,7 @@
     [self.pLayout Initialize];
     [self.pValue Initialize];
     [self.pNavigation Initialize];
+    [self.pMenu Initialize];
     [self.pId Initialize];
     [self ParseValues];
 }
@@ -155,9 +157,12 @@
                             [self.pValue ParseXML:dr.orientation :child];
                         }
                         else {
-                            NSLog(@"Unknown resource type LGParser ParseValues %@", childName);
+                            NSLog(@"Unknown resource type resources LGParser ParseValues %@", childName);
                         }
                     }
+                }
+                else {
+                    NSLog(@"Unknown parent resource type LGParser ParseValues %@", root.name);
                 }
             }
         }
@@ -205,6 +210,9 @@
     directoryList = [LuaResource GetResourceDirectories:LUA_NAVIGATION_FOLDER];
     clearedDirectoryList = [self Tester:directoryList :LUA_NAVIGATION_FOLDER];
     [self.pId Parse:LUA_NAVIGATION_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource GetResourceDirectories:LUA_MENU_FOLDER];
+    clearedDirectoryList = [self Tester:directoryList :LUA_MENU_FOLDER];
+    [self.pId Parse:LUA_MENU_FOLDER :clearedDirectoryList];
 }
 
 -(NSMutableArray *)Tester:(NSArray*)directoryList :(NSString*)directoryType

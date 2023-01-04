@@ -240,6 +240,8 @@
 			total = [self sumWeights];
 		}
 		float percent = (total - share) / total;
+        if(percent == 0)
+            percent = 1;
 		double res = floor(percent * self.extra);
 		double real = percent * self.extra;
 		self.percentGone += real - res;

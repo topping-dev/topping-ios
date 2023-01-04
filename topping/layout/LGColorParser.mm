@@ -2,6 +2,7 @@
 #import "Defines.h"
 #import "GDataXMLNode.h"
 #import "LGParser.h"
+#import <math.h>
 
 @implementation LGColorParser
 
@@ -155,6 +156,24 @@
 		[scan scanHexInt:&bI];		
 	}
 	return [UIColor colorWithRed:rI/255.0f green:gI/255.0f blue:bI/255.0f alpha:aI/255.0f];
+}
+
+-(UIColor *)GetTextColorFromColor:(UIColor *)color {
+    CGFloat r, g, b, a;
+    BOOL success = [color getRed:&r green:&g blue:&b alpha:&a];
+    if(success) {
+        r = r * 255;
+        g = g * 255;
+        b = b * 255;
+        float brightness = round(((r * 299) +
+                              (g * 587) +
+                              (b * 114)) / 1000);
+        if(brightness > 125)
+            return UIColor.blackColor;
+        else
+            return UIColor.whiteColor;
+    }
+    return UIColor.whiteColor;
 }
 
 -(NSDictionary *)GetKeys

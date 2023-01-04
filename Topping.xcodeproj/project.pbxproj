@@ -54,6 +54,91 @@
 		5C2F9A05295C799800C443A8 /* LGFragmentStateAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A03295C799800C443A8 /* LGFragmentStateAdapter.m */; };
 		5C2F9A08295ED9D100C443A8 /* LuaEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A06295ED9D100C443A8 /* LuaEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C2F9A09295ED9D100C443A8 /* LuaEvent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */; };
+		5C2F9A0C2964194500C443A8 /* LGBottomNavigationView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A0A2964194500C443A8 /* LGBottomNavigationView.mm */; };
+		5C2F9A0D2964194500C443A8 /* LGBottomNavigationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A0B2964194500C443A8 /* LGBottomNavigationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F9A2229641A4500C443A8 /* MDCBottomNavigationBarControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A0F29641A4500C443A8 /* MDCBottomNavigationBarControllerDelegate.h */; };
+		5C2F9A2329641A4500C443A8 /* MDCBottomNavigationSystemDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A1029641A4500C443A8 /* MDCBottomNavigationSystemDialogView.m */; };
+		5C2F9A2429641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A1129641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.m */; };
+		5C2F9A2529641A4500C443A8 /* MDCBottomNavigationBar+ItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A1229641A4500C443A8 /* MDCBottomNavigationBar+ItemView.m */; };
+		5C2F9A2629641A4500C443A8 /* MDCBottomNavigationBarDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1329641A4500C443A8 /* MDCBottomNavigationBarDelegate.h */; };
+		5C2F9A2729641A4500C443A8 /* MaterialBottomNavigation+BottomNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1429641A4500C443A8 /* MaterialBottomNavigation+BottomNavigationController.h */; };
+		5C2F9A2829641A4500C443A8 /* MDCBottomNavigationItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1529641A4500C443A8 /* MDCBottomNavigationItemView.h */; };
+		5C2F9A2929641A4500C443A8 /* MDCBottomNavigationSystemDialogView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1629641A4500C443A8 /* MDCBottomNavigationSystemDialogView.h */; };
+		5C2F9A2A29641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1729641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h */; };
+		5C2F9A2B29641A4500C443A8 /* MDCBottomNavigationBar+ShadowsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1829641A4500C443A8 /* MDCBottomNavigationBar+ShadowsPrivate.h */; };
+		5C2F9A2C29641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1929641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.h */; };
+		5C2F9A2D29641A4500C443A8 /* MDCBottomNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1A29641A4500C443A8 /* MDCBottomNavigationBar.h */; };
+		5C2F9A2E29641A4500C443A8 /* MDCBottomNavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A1B29641A4500C443A8 /* MDCBottomNavigationBarController.m */; };
+		5C2F9A2F29641A4500C443A8 /* MDCBottomNavigationBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1C29641A4500C443A8 /* MDCBottomNavigationBarController.h */; };
+		5C2F9A3029641A4500C443A8 /* MDCBottomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A1D29641A4500C443A8 /* MDCBottomNavigationBar.m */; };
+		5C2F9A3129641A4500C443A8 /* MaterialBottomNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1E29641A4500C443A8 /* MaterialBottomNavigation.h */; };
+		5C2F9A3229641A4500C443A8 /* MDCBottomNavigationBar+ItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A1F29641A4500C443A8 /* MDCBottomNavigationBar+ItemView.h */; };
+		5C2F9A3329641A4500C443A8 /* MDCBottomNavigationItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A2029641A4500C443A8 /* MDCBottomNavigationItemView.m */; };
+		5C2F9A3429641A4500C443A8 /* MDCBottomNavigationBar+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A2129641A4500C443A8 /* MDCBottomNavigationBar+Private.h */; };
+		5C2F9A3D29641AF800C443A8 /* UIColor+MaterialElevation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A3629641AF800C443A8 /* UIColor+MaterialElevation.m */; };
+		5C2F9A3E29641AF800C443A8 /* MDCElevationOverriding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A3729641AF800C443A8 /* MDCElevationOverriding.h */; };
+		5C2F9A3F29641AF800C443A8 /* UIColor+MaterialElevation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A3829641AF800C443A8 /* UIColor+MaterialElevation.h */; };
+		5C2F9A4029641AF800C443A8 /* MaterialElevation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A3929641AF800C443A8 /* MaterialElevation.h */; };
+		5C2F9A4129641AF800C443A8 /* MDCElevatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A3A29641AF800C443A8 /* MDCElevatable.h */; };
+		5C2F9A4229641AF800C443A8 /* UIView+MaterialElevationResponding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A3B29641AF800C443A8 /* UIView+MaterialElevationResponding.h */; };
+		5C2F9A4329641AF800C443A8 /* UIView+MaterialElevationResponding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A3C29641AF800C443A8 /* UIView+MaterialElevationResponding.m */; };
+		5C2F9A4729641B8700C443A8 /* UIColor+MaterialBlending.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A4529641B8700C443A8 /* UIColor+MaterialBlending.m */; };
+		5C2F9A4829641B8700C443A8 /* UIColor+MaterialBlending.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A4629641B8700C443A8 /* UIColor+MaterialBlending.h */; };
+		5C2F9A4D29641BCD00C443A8 /* UIView+MDCShadowAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A4B29641BCD00C443A8 /* UIView+MDCShadowAnimations.m */; };
+		5C2F9A4E29641BCD00C443A8 /* UIView+MDCShadowAnimations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A4C29641BCD00C443A8 /* UIView+MDCShadowAnimations.h */; };
+		5C2F9A5429641BDB00C443A8 /* MDCShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A4F29641BDB00C443A8 /* MDCShadow.m */; };
+		5C2F9A5529641BDB00C443A8 /* MDCShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A5029641BDB00C443A8 /* MDCShadow.h */; };
+		5C2F9A5629641BDB00C443A8 /* MaterialShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A5129641BDB00C443A8 /* MaterialShadow.h */; };
+		5C2F9A5729641BDB00C443A8 /* MDCShadowsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A5229641BDB00C443A8 /* MDCShadowsCollection.m */; };
+		5C2F9A5829641BDB00C443A8 /* MDCShadowsCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A5329641BDB00C443A8 /* MDCShadowsCollection.h */; };
+		5C2F9A5D29641C4B00C443A8 /* MaterialShadowElevations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A5A29641C4B00C443A8 /* MaterialShadowElevations.h */; };
+		5C2F9A5E29641C4B00C443A8 /* MaterialShadowElevationsDummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A5B29641C4B00C443A8 /* MaterialShadowElevationsDummy.m */; };
+		5C2F9A5F29641C4B00C443A8 /* MDCShadowElevations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A5C29641C4B00C443A8 /* MDCShadowElevations.h */; };
+		5C2F9A6829641CB900C443A8 /* MDCPalettes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A6129641CB900C443A8 /* MDCPalettes.m */; };
+		5C2F9A6929641CB900C443A8 /* MDCPaletteNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A6229641CB900C443A8 /* MDCPaletteNames.m */; };
+		5C2F9A6A29641CB900C443A8 /* MDCPalettes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A6329641CB900C443A8 /* MDCPalettes.h */; };
+		5C2F9A6B29641CB900C443A8 /* MaterialPalettes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A6429641CB900C443A8 /* MaterialPalettes.h */; };
+		5C2F9A6C29641CB900C443A8 /* MDCPaletteExpansions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A6529641CB900C443A8 /* MDCPaletteExpansions.m */; };
+		5C2F9A6D29641CB900C443A8 /* MDCPaletteExpansions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A6629641CB900C443A8 /* MDCPaletteExpansions.h */; };
+		5C2F9A6E29641CB900C443A8 /* MDCPaletteNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A6729641CB900C443A8 /* MDCPaletteNames.h */; };
+		5C2F9A7329641E2700C443A8 /* MaterialShadowLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A7029641E2700C443A8 /* MaterialShadowLayer.h */; };
+		5C2F9A7429641E2700C443A8 /* MDCShadowLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A7129641E2700C443A8 /* MDCShadowLayer.h */; };
+		5C2F9A7529641E2700C443A8 /* MDCShadowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A7229641E2700C443A8 /* MDCShadowLayer.m */; };
+		5C2F9A7A29641F1200C443A8 /* MDCTypographyFontLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A7929641F1200C443A8 /* MDCTypographyFontLoader.h */; };
+		5C2F9A7D29641F1900C443A8 /* MDCFontScaler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A7B29641F1900C443A8 /* MDCFontScaler.m */; };
+		5C2F9A7E29641F1900C443A8 /* MDCFontScaler.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A7C29641F1900C443A8 /* MDCFontScaler.h */; };
+		5C2F9A9129641F2900C443A8 /* UIFont+MaterialTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A7F29641F2900C443A8 /* UIFont+MaterialTypography.m */; };
+		5C2F9A9229641F2900C443A8 /* MDCFontTraits.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A8029641F2900C443A8 /* MDCFontTraits.m */; };
+		5C2F9A9329641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A8129641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m */; };
+		5C2F9A9429641F2900C443A8 /* UIFont+MaterialTypographyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8229641F2900C443A8 /* UIFont+MaterialTypographyPrivate.h */; };
+		5C2F9A9529641F2900C443A8 /* MaterialTypography.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8329641F2900C443A8 /* MaterialTypography.h */; };
+		5C2F9A9629641F2900C443A8 /* MDCTypography.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8429641F2900C443A8 /* MDCTypography.h */; };
+		5C2F9A9729641F2900C443A8 /* MDCFontTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8529641F2900C443A8 /* MDCFontTextStyle.h */; };
+		5C2F9A9829641F2900C443A8 /* UIFont+MaterialScalable.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A8629641F2900C443A8 /* UIFont+MaterialScalable.m */; };
+		5C2F9A9929641F2900C443A8 /* UIFontDescriptor+MaterialTypography.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8729641F2900C443A8 /* UIFontDescriptor+MaterialTypography.h */; };
+		5C2F9A9A29641F2900C443A8 /* UIFont+MaterialTypography.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8829641F2900C443A8 /* UIFont+MaterialTypography.h */; };
+		5C2F9A9B29641F2900C443A8 /* UIFont+MaterialSimpleEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A8929641F2900C443A8 /* UIFont+MaterialSimpleEquality.m */; };
+		5C2F9A9C29641F2900C443A8 /* UIFont+MaterialScalable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8A29641F2900C443A8 /* UIFont+MaterialScalable.h */; };
+		5C2F9A9D29641F2900C443A8 /* UIFont+MaterialSimpleEquality.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8B29641F2900C443A8 /* UIFont+MaterialSimpleEquality.h */; };
+		5C2F9A9E29641F2900C443A8 /* MDCFontTraits.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8C29641F2900C443A8 /* MDCFontTraits.h */; };
+		5C2F9A9F29641F2900C443A8 /* MDCTypographyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A8D29641F2900C443A8 /* MDCTypographyUtilities.m */; };
+		5C2F9AA029641F2900C443A8 /* MDCTypographyUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9A8E29641F2900C443A8 /* MDCTypographyUtilities.h */; };
+		5C2F9AA129641F2900C443A8 /* UIFont+MaterialTypographyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A8F29641F2900C443A8 /* UIFont+MaterialTypographyPrivate.m */; };
+		5C2F9AA229641F2900C443A8 /* MDCTypography.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9A9029641F2900C443A8 /* MDCTypography.m */; };
+		5C2F9AA729641FDC00C443A8 /* UIApplication+MDCAppExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9AA429641FDB00C443A8 /* UIApplication+MDCAppExtensions.m */; };
+		5C2F9AA829641FDC00C443A8 /* UIApplication+MDCAppExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AA529641FDB00C443A8 /* UIApplication+MDCAppExtensions.h */; };
+		5C2F9AA929641FDC00C443A8 /* MaterialApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AA629641FDB00C443A8 /* MaterialApplication.h */; };
+		5C2F9AB22964207E00C443A8 /* MDFTextAccessibility-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AAB2964207E00C443A8 /* MDFTextAccessibility-Bridging-Header.h */; };
+		5C2F9AB32964207E00C443A8 /* MDFTextAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9AAC2964207E00C443A8 /* MDFTextAccessibility.m */; };
+		5C2F9AB42964207E00C443A8 /* NSArray+MDFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AAD2964207E00C443A8 /* NSArray+MDFUtils.h */; };
+		5C2F9AB52964207E00C443A8 /* MDFColorCalculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9AAE2964207E00C443A8 /* MDFColorCalculations.m */; };
+		5C2F9AB62964207E00C443A8 /* MDFTextAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AAF2964207E00C443A8 /* MDFTextAccessibility.h */; };
+		5C2F9AB72964207E00C443A8 /* MDFColorCalculations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AB02964207E00C443A8 /* MDFColorCalculations.h */; };
+		5C2F9AB82964207E00C443A8 /* NSArray+MDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9AB12964207E00C443A8 /* NSArray+MDFUtils.m */; };
+		5C2F9ABB29642AD200C443A8 /* LGMenuParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9AB929642AD100C443A8 /* LGMenuParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F9ABC29642AD200C443A8 /* LGMenuParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9ABA29642AD200C443A8 /* LGMenuParser.m */; };
+		5C2F9ABF29642CE700C443A8 /* LuaMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2F9ABD29642CE700C443A8 /* LuaMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2F9AC029642CE700C443A8 /* LuaMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F9ABE29642CE700C443A8 /* LuaMenu.m */; };
 		5C31C7A3250399A8001773F8 /* LGStyleParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C31C7A1250399A8001773F8 /* LGStyleParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C31C7A2250399A8001773F8 /* LGStyleParser.m */; };
 		5C32B2F024F9783300875355 /* LGValueParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C32B2EE24F9783200875355 /* LGValueParser.m */; };
@@ -304,6 +389,15 @@
 		5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C64F039262C3C660074EEFE /* CheckBox.xib */; };
 		5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C64F03B262C3F280074EEFE /* CheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C64F03E262C3F280074EEFE /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C64F03C262C3F280074EEFE /* CheckBox.m */; };
+		5C65694C29659F1B002EA9C8 /* XmlParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694329659F1B002EA9C8 /* XmlParsing.swift */; };
+		5C65694D29659F1B002EA9C8 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694429659F1B002EA9C8 /* Arc.swift */; };
+		5C65694E29659F1B002EA9C8 /* VectorDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694529659F1B002EA9C8 /* VectorDrawable.swift */; };
+		5C65694F29659F1B002EA9C8 /* VectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694629659F1B002EA9C8 /* VectorView.swift */; };
+		5C65695029659F1B002EA9C8 /* XMLSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694729659F1B002EA9C8 /* XMLSchema.swift */; };
+		5C65695129659F1B002EA9C8 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694829659F1B002EA9C8 /* SwiftUIView.swift */; };
+		5C65695229659F1B002EA9C8 /* ParserPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694929659F1B002EA9C8 /* ParserPrimitives.swift */; };
+		5C65695329659F1B002EA9C8 /* VectorDrawableParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694A29659F1B002EA9C8 /* VectorDrawableParser.swift */; };
+		5C65695429659F1B002EA9C8 /* DrawingCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694B29659F1B002EA9C8 /* DrawingCommand.swift */; };
 		5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */; };
 		5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */; };
 		5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2128460152003EC02A /* ArrayExtension.swift */; };
@@ -578,6 +672,91 @@
 		5C2F9A03295C799800C443A8 /* LGFragmentStateAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGFragmentStateAdapter.m; sourceTree = "<group>"; };
 		5C2F9A06295ED9D100C443A8 /* LuaEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEvent.h; sourceTree = "<group>"; };
 		5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaEvent.mm; sourceTree = "<group>"; };
+		5C2F9A0A2964194500C443A8 /* LGBottomNavigationView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGBottomNavigationView.mm; sourceTree = "<group>"; };
+		5C2F9A0B2964194500C443A8 /* LGBottomNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGBottomNavigationView.h; sourceTree = "<group>"; };
+		5C2F9A0F29641A4500C443A8 /* MDCBottomNavigationBarControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationBarControllerDelegate.h; sourceTree = "<group>"; };
+		5C2F9A1029641A4500C443A8 /* MDCBottomNavigationSystemDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBottomNavigationSystemDialogView.m; sourceTree = "<group>"; };
+		5C2F9A1129641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBottomNavigationLargeItemDialogView.m; sourceTree = "<group>"; };
+		5C2F9A1229641A4500C443A8 /* MDCBottomNavigationBar+ItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MDCBottomNavigationBar+ItemView.m"; sourceTree = "<group>"; };
+		5C2F9A1329641A4500C443A8 /* MDCBottomNavigationBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationBarDelegate.h; sourceTree = "<group>"; };
+		5C2F9A1429641A4500C443A8 /* MaterialBottomNavigation+BottomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MaterialBottomNavigation+BottomNavigationController.h"; sourceTree = "<group>"; };
+		5C2F9A1529641A4500C443A8 /* MDCBottomNavigationItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationItemView.h; sourceTree = "<group>"; };
+		5C2F9A1629641A4500C443A8 /* MDCBottomNavigationSystemDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationSystemDialogView.h; sourceTree = "<group>"; };
+		5C2F9A1729641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCBottomNavigationItemView+Testing.h"; sourceTree = "<group>"; };
+		5C2F9A1829641A4500C443A8 /* MDCBottomNavigationBar+ShadowsPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCBottomNavigationBar+ShadowsPrivate.h"; sourceTree = "<group>"; };
+		5C2F9A1929641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationLargeItemDialogView.h; sourceTree = "<group>"; };
+		5C2F9A1A29641A4500C443A8 /* MDCBottomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationBar.h; sourceTree = "<group>"; };
+		5C2F9A1B29641A4500C443A8 /* MDCBottomNavigationBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBottomNavigationBarController.m; sourceTree = "<group>"; };
+		5C2F9A1C29641A4500C443A8 /* MDCBottomNavigationBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCBottomNavigationBarController.h; sourceTree = "<group>"; };
+		5C2F9A1D29641A4500C443A8 /* MDCBottomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBottomNavigationBar.m; sourceTree = "<group>"; };
+		5C2F9A1E29641A4500C443A8 /* MaterialBottomNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialBottomNavigation.h; sourceTree = "<group>"; };
+		5C2F9A1F29641A4500C443A8 /* MDCBottomNavigationBar+ItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCBottomNavigationBar+ItemView.h"; sourceTree = "<group>"; };
+		5C2F9A2029641A4500C443A8 /* MDCBottomNavigationItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCBottomNavigationItemView.m; sourceTree = "<group>"; };
+		5C2F9A2129641A4500C443A8 /* MDCBottomNavigationBar+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDCBottomNavigationBar+Private.h"; sourceTree = "<group>"; };
+		5C2F9A3629641AF800C443A8 /* UIColor+MaterialElevation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MaterialElevation.m"; sourceTree = "<group>"; };
+		5C2F9A3729641AF800C443A8 /* MDCElevationOverriding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCElevationOverriding.h; sourceTree = "<group>"; };
+		5C2F9A3829641AF800C443A8 /* UIColor+MaterialElevation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MaterialElevation.h"; sourceTree = "<group>"; };
+		5C2F9A3929641AF800C443A8 /* MaterialElevation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialElevation.h; sourceTree = "<group>"; };
+		5C2F9A3A29641AF800C443A8 /* MDCElevatable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCElevatable.h; sourceTree = "<group>"; };
+		5C2F9A3B29641AF800C443A8 /* UIView+MaterialElevationResponding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MaterialElevationResponding.h"; sourceTree = "<group>"; };
+		5C2F9A3C29641AF800C443A8 /* UIView+MaterialElevationResponding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MaterialElevationResponding.m"; sourceTree = "<group>"; };
+		5C2F9A4529641B8700C443A8 /* UIColor+MaterialBlending.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MaterialBlending.m"; sourceTree = "<group>"; };
+		5C2F9A4629641B8700C443A8 /* UIColor+MaterialBlending.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MaterialBlending.h"; sourceTree = "<group>"; };
+		5C2F9A4B29641BCD00C443A8 /* UIView+MDCShadowAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MDCShadowAnimations.m"; sourceTree = "<group>"; };
+		5C2F9A4C29641BCD00C443A8 /* UIView+MDCShadowAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MDCShadowAnimations.h"; sourceTree = "<group>"; };
+		5C2F9A4F29641BDB00C443A8 /* MDCShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCShadow.m; sourceTree = "<group>"; };
+		5C2F9A5029641BDB00C443A8 /* MDCShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCShadow.h; sourceTree = "<group>"; };
+		5C2F9A5129641BDB00C443A8 /* MaterialShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialShadow.h; sourceTree = "<group>"; };
+		5C2F9A5229641BDB00C443A8 /* MDCShadowsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCShadowsCollection.m; sourceTree = "<group>"; };
+		5C2F9A5329641BDB00C443A8 /* MDCShadowsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCShadowsCollection.h; sourceTree = "<group>"; };
+		5C2F9A5A29641C4B00C443A8 /* MaterialShadowElevations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialShadowElevations.h; sourceTree = "<group>"; };
+		5C2F9A5B29641C4B00C443A8 /* MaterialShadowElevationsDummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialShadowElevationsDummy.m; sourceTree = "<group>"; };
+		5C2F9A5C29641C4B00C443A8 /* MDCShadowElevations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCShadowElevations.h; sourceTree = "<group>"; };
+		5C2F9A6129641CB900C443A8 /* MDCPalettes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCPalettes.m; sourceTree = "<group>"; };
+		5C2F9A6229641CB900C443A8 /* MDCPaletteNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCPaletteNames.m; sourceTree = "<group>"; };
+		5C2F9A6329641CB900C443A8 /* MDCPalettes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCPalettes.h; sourceTree = "<group>"; };
+		5C2F9A6429641CB900C443A8 /* MaterialPalettes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialPalettes.h; sourceTree = "<group>"; };
+		5C2F9A6529641CB900C443A8 /* MDCPaletteExpansions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCPaletteExpansions.m; sourceTree = "<group>"; };
+		5C2F9A6629641CB900C443A8 /* MDCPaletteExpansions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCPaletteExpansions.h; sourceTree = "<group>"; };
+		5C2F9A6729641CB900C443A8 /* MDCPaletteNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCPaletteNames.h; sourceTree = "<group>"; };
+		5C2F9A7029641E2700C443A8 /* MaterialShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialShadowLayer.h; sourceTree = "<group>"; };
+		5C2F9A7129641E2700C443A8 /* MDCShadowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCShadowLayer.h; sourceTree = "<group>"; };
+		5C2F9A7229641E2700C443A8 /* MDCShadowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCShadowLayer.m; sourceTree = "<group>"; };
+		5C2F9A7929641F1200C443A8 /* MDCTypographyFontLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTypographyFontLoader.h; sourceTree = "<group>"; };
+		5C2F9A7B29641F1900C443A8 /* MDCFontScaler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCFontScaler.m; sourceTree = "<group>"; };
+		5C2F9A7C29641F1900C443A8 /* MDCFontScaler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCFontScaler.h; sourceTree = "<group>"; };
+		5C2F9A7F29641F2900C443A8 /* UIFont+MaterialTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MaterialTypography.m"; sourceTree = "<group>"; };
+		5C2F9A8029641F2900C443A8 /* MDCFontTraits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCFontTraits.m; sourceTree = "<group>"; };
+		5C2F9A8129641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFontDescriptor+MaterialTypography.m"; sourceTree = "<group>"; };
+		5C2F9A8229641F2900C443A8 /* UIFont+MaterialTypographyPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MaterialTypographyPrivate.h"; sourceTree = "<group>"; };
+		5C2F9A8329641F2900C443A8 /* MaterialTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialTypography.h; sourceTree = "<group>"; };
+		5C2F9A8429641F2900C443A8 /* MDCTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTypography.h; sourceTree = "<group>"; };
+		5C2F9A8529641F2900C443A8 /* MDCFontTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCFontTextStyle.h; sourceTree = "<group>"; };
+		5C2F9A8629641F2900C443A8 /* UIFont+MaterialScalable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MaterialScalable.m"; sourceTree = "<group>"; };
+		5C2F9A8729641F2900C443A8 /* UIFontDescriptor+MaterialTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFontDescriptor+MaterialTypography.h"; sourceTree = "<group>"; };
+		5C2F9A8829641F2900C443A8 /* UIFont+MaterialTypography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MaterialTypography.h"; sourceTree = "<group>"; };
+		5C2F9A8929641F2900C443A8 /* UIFont+MaterialSimpleEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MaterialSimpleEquality.m"; sourceTree = "<group>"; };
+		5C2F9A8A29641F2900C443A8 /* UIFont+MaterialScalable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MaterialScalable.h"; sourceTree = "<group>"; };
+		5C2F9A8B29641F2900C443A8 /* UIFont+MaterialSimpleEquality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+MaterialSimpleEquality.h"; sourceTree = "<group>"; };
+		5C2F9A8C29641F2900C443A8 /* MDCFontTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCFontTraits.h; sourceTree = "<group>"; };
+		5C2F9A8D29641F2900C443A8 /* MDCTypographyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTypographyUtilities.m; sourceTree = "<group>"; };
+		5C2F9A8E29641F2900C443A8 /* MDCTypographyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCTypographyUtilities.h; sourceTree = "<group>"; };
+		5C2F9A8F29641F2900C443A8 /* UIFont+MaterialTypographyPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+MaterialTypographyPrivate.m"; sourceTree = "<group>"; };
+		5C2F9A9029641F2900C443A8 /* MDCTypography.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCTypography.m; sourceTree = "<group>"; };
+		5C2F9AA429641FDB00C443A8 /* UIApplication+MDCAppExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+MDCAppExtensions.m"; sourceTree = "<group>"; };
+		5C2F9AA529641FDB00C443A8 /* UIApplication+MDCAppExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+MDCAppExtensions.h"; sourceTree = "<group>"; };
+		5C2F9AA629641FDB00C443A8 /* MaterialApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialApplication.h; sourceTree = "<group>"; };
+		5C2F9AAB2964207E00C443A8 /* MDFTextAccessibility-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MDFTextAccessibility-Bridging-Header.h"; sourceTree = "<group>"; };
+		5C2F9AAC2964207E00C443A8 /* MDFTextAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDFTextAccessibility.m; sourceTree = "<group>"; };
+		5C2F9AAD2964207E00C443A8 /* NSArray+MDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MDFUtils.h"; sourceTree = "<group>"; };
+		5C2F9AAE2964207E00C443A8 /* MDFColorCalculations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDFColorCalculations.m; sourceTree = "<group>"; };
+		5C2F9AAF2964207E00C443A8 /* MDFTextAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDFTextAccessibility.h; sourceTree = "<group>"; };
+		5C2F9AB02964207E00C443A8 /* MDFColorCalculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDFColorCalculations.h; sourceTree = "<group>"; };
+		5C2F9AB12964207E00C443A8 /* NSArray+MDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MDFUtils.m"; sourceTree = "<group>"; };
+		5C2F9AB929642AD100C443A8 /* LGMenuParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGMenuParser.h; sourceTree = "<group>"; };
+		5C2F9ABA29642AD200C443A8 /* LGMenuParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGMenuParser.m; sourceTree = "<group>"; };
+		5C2F9ABD29642CE700C443A8 /* LuaMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaMenu.h; sourceTree = "<group>"; };
+		5C2F9ABE29642CE700C443A8 /* LuaMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaMenu.m; sourceTree = "<group>"; };
 		5C31C7A1250399A8001773F8 /* LGStyleParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGStyleParser.h; sourceTree = "<group>"; };
 		5C31C7A2250399A8001773F8 /* LGStyleParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGStyleParser.m; sourceTree = "<group>"; };
 		5C32B2EE24F9783200875355 /* LGValueParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGValueParser.m; sourceTree = "<group>"; };
@@ -833,6 +1012,15 @@
 		5C64F039262C3C660074EEFE /* CheckBox.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBox.xib; sourceTree = "<group>"; };
 		5C64F03B262C3F280074EEFE /* CheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
 		5C64F03C262C3F280074EEFE /* CheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		5C65694329659F1B002EA9C8 /* XmlParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XmlParsing.swift; sourceTree = "<group>"; };
+		5C65694429659F1B002EA9C8 /* Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
+		5C65694529659F1B002EA9C8 /* VectorDrawable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorDrawable.swift; sourceTree = "<group>"; };
+		5C65694629659F1B002EA9C8 /* VectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorView.swift; sourceTree = "<group>"; };
+		5C65694729659F1B002EA9C8 /* XMLSchema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLSchema.swift; sourceTree = "<group>"; };
+		5C65694829659F1B002EA9C8 /* SwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		5C65694929659F1B002EA9C8 /* ParserPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserPrimitives.swift; sourceTree = "<group>"; };
+		5C65694A29659F1B002EA9C8 /* VectorDrawableParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorDrawableParser.swift; sourceTree = "<group>"; };
+		5C65694B29659F1B002EA9C8 /* DrawingCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCommand.swift; sourceTree = "<group>"; };
 		5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		5C78BA2128460152003EC02A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
@@ -1111,6 +1299,179 @@
 			path = Appearance;
 			sourceTree = "<group>";
 		};
+		5C2F9A0E29641A0300C443A8 /* MaterialBottomNavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A1E29641A4500C443A8 /* MaterialBottomNavigation.h */,
+				5C2F9A1429641A4500C443A8 /* MaterialBottomNavigation+BottomNavigationController.h */,
+				5C2F9A1A29641A4500C443A8 /* MDCBottomNavigationBar.h */,
+				5C2F9A1D29641A4500C443A8 /* MDCBottomNavigationBar.m */,
+				5C2F9A1F29641A4500C443A8 /* MDCBottomNavigationBar+ItemView.h */,
+				5C2F9A1229641A4500C443A8 /* MDCBottomNavigationBar+ItemView.m */,
+				5C2F9A2129641A4500C443A8 /* MDCBottomNavigationBar+Private.h */,
+				5C2F9A1829641A4500C443A8 /* MDCBottomNavigationBar+ShadowsPrivate.h */,
+				5C2F9A1C29641A4500C443A8 /* MDCBottomNavigationBarController.h */,
+				5C2F9A1B29641A4500C443A8 /* MDCBottomNavigationBarController.m */,
+				5C2F9A0F29641A4500C443A8 /* MDCBottomNavigationBarControllerDelegate.h */,
+				5C2F9A1329641A4500C443A8 /* MDCBottomNavigationBarDelegate.h */,
+				5C2F9A1529641A4500C443A8 /* MDCBottomNavigationItemView.h */,
+				5C2F9A2029641A4500C443A8 /* MDCBottomNavigationItemView.m */,
+				5C2F9A1729641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h */,
+				5C2F9A1929641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.h */,
+				5C2F9A1129641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.m */,
+				5C2F9A1629641A4500C443A8 /* MDCBottomNavigationSystemDialogView.h */,
+				5C2F9A1029641A4500C443A8 /* MDCBottomNavigationSystemDialogView.m */,
+			);
+			path = MaterialBottomNavigationView;
+			sourceTree = "<group>";
+		};
+		5C2F9A3529641AD200C443A8 /* MaterialElevation */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A3929641AF800C443A8 /* MaterialElevation.h */,
+				5C2F9A3A29641AF800C443A8 /* MDCElevatable.h */,
+				5C2F9A3729641AF800C443A8 /* MDCElevationOverriding.h */,
+				5C2F9A3829641AF800C443A8 /* UIColor+MaterialElevation.h */,
+				5C2F9A3629641AF800C443A8 /* UIColor+MaterialElevation.m */,
+				5C2F9A3B29641AF800C443A8 /* UIView+MaterialElevationResponding.h */,
+				5C2F9A3C29641AF800C443A8 /* UIView+MaterialElevationResponding.m */,
+			);
+			path = MaterialElevation;
+			sourceTree = "<group>";
+		};
+		5C2F9A4429641B6F00C443A8 /* MaterialColor */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A4629641B8700C443A8 /* UIColor+MaterialBlending.h */,
+				5C2F9A4529641B8700C443A8 /* UIColor+MaterialBlending.m */,
+			);
+			path = MaterialColor;
+			sourceTree = "<group>";
+		};
+		5C2F9A4929641B9500C443A8 /* MaterialShadow */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A5129641BDB00C443A8 /* MaterialShadow.h */,
+				5C2F9A5029641BDB00C443A8 /* MDCShadow.h */,
+				5C2F9A4F29641BDB00C443A8 /* MDCShadow.m */,
+				5C2F9A5329641BDB00C443A8 /* MDCShadowsCollection.h */,
+				5C2F9A5229641BDB00C443A8 /* MDCShadowsCollection.m */,
+				5C2F9A4A29641BBB00C443A8 /* Animations */,
+			);
+			path = MaterialShadow;
+			sourceTree = "<group>";
+		};
+		5C2F9A4A29641BBB00C443A8 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A4C29641BCD00C443A8 /* UIView+MDCShadowAnimations.h */,
+				5C2F9A4B29641BCD00C443A8 /* UIView+MDCShadowAnimations.m */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		5C2F9A5929641C2900C443A8 /* MaterialShadowElevations */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A5A29641C4B00C443A8 /* MaterialShadowElevations.h */,
+				5C2F9A5B29641C4B00C443A8 /* MaterialShadowElevationsDummy.m */,
+				5C2F9A5C29641C4B00C443A8 /* MDCShadowElevations.h */,
+			);
+			path = MaterialShadowElevations;
+			sourceTree = "<group>";
+		};
+		5C2F9A6029641C9400C443A8 /* MaterialPalettes */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A6429641CB900C443A8 /* MaterialPalettes.h */,
+				5C2F9A6629641CB900C443A8 /* MDCPaletteExpansions.h */,
+				5C2F9A6529641CB900C443A8 /* MDCPaletteExpansions.m */,
+				5C2F9A6729641CB900C443A8 /* MDCPaletteNames.h */,
+				5C2F9A6229641CB900C443A8 /* MDCPaletteNames.m */,
+				5C2F9A6329641CB900C443A8 /* MDCPalettes.h */,
+				5C2F9A6129641CB900C443A8 /* MDCPalettes.m */,
+			);
+			path = MaterialPalettes;
+			sourceTree = "<group>";
+		};
+		5C2F9A6F29641E0A00C443A8 /* MaterialShadowLayer */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A7029641E2700C443A8 /* MaterialShadowLayer.h */,
+				5C2F9A7129641E2700C443A8 /* MDCShadowLayer.h */,
+				5C2F9A7229641E2700C443A8 /* MDCShadowLayer.m */,
+			);
+			path = MaterialShadowLayer;
+			sourceTree = "<group>";
+		};
+		5C2F9A7629641E3600C443A8 /* MaterialTypography */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A8329641F2900C443A8 /* MaterialTypography.h */,
+				5C2F9A8529641F2900C443A8 /* MDCFontTextStyle.h */,
+				5C2F9A8C29641F2900C443A8 /* MDCFontTraits.h */,
+				5C2F9A8029641F2900C443A8 /* MDCFontTraits.m */,
+				5C2F9A8429641F2900C443A8 /* MDCTypography.h */,
+				5C2F9A9029641F2900C443A8 /* MDCTypography.m */,
+				5C2F9A8E29641F2900C443A8 /* MDCTypographyUtilities.h */,
+				5C2F9A8D29641F2900C443A8 /* MDCTypographyUtilities.m */,
+				5C2F9A8A29641F2900C443A8 /* UIFont+MaterialScalable.h */,
+				5C2F9A8629641F2900C443A8 /* UIFont+MaterialScalable.m */,
+				5C2F9A8B29641F2900C443A8 /* UIFont+MaterialSimpleEquality.h */,
+				5C2F9A8929641F2900C443A8 /* UIFont+MaterialSimpleEquality.m */,
+				5C2F9A8829641F2900C443A8 /* UIFont+MaterialTypography.h */,
+				5C2F9A7F29641F2900C443A8 /* UIFont+MaterialTypography.m */,
+				5C2F9A8229641F2900C443A8 /* UIFont+MaterialTypographyPrivate.h */,
+				5C2F9A8F29641F2900C443A8 /* UIFont+MaterialTypographyPrivate.m */,
+				5C2F9A8729641F2900C443A8 /* UIFontDescriptor+MaterialTypography.h */,
+				5C2F9A8129641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m */,
+				5C2F9A7829641EF300C443A8 /* FontLoader */,
+				5C2F9A7729641E8F00C443A8 /* FontScaler */,
+			);
+			path = MaterialTypography;
+			sourceTree = "<group>";
+		};
+		5C2F9A7729641E8F00C443A8 /* FontScaler */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A7C29641F1900C443A8 /* MDCFontScaler.h */,
+				5C2F9A7B29641F1900C443A8 /* MDCFontScaler.m */,
+			);
+			path = FontScaler;
+			sourceTree = "<group>";
+		};
+		5C2F9A7829641EF300C443A8 /* FontLoader */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9A7929641F1200C443A8 /* MDCTypographyFontLoader.h */,
+			);
+			path = FontLoader;
+			sourceTree = "<group>";
+		};
+		5C2F9AA329641F7600C443A8 /* MaterialApplication */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9AA629641FDB00C443A8 /* MaterialApplication.h */,
+				5C2F9AA529641FDB00C443A8 /* UIApplication+MDCAppExtensions.h */,
+				5C2F9AA429641FDB00C443A8 /* UIApplication+MDCAppExtensions.m */,
+			);
+			path = MaterialApplication;
+			sourceTree = "<group>";
+		};
+		5C2F9AAA2964205700C443A8 /* MaterialTextAccessibility */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F9AB02964207E00C443A8 /* MDFColorCalculations.h */,
+				5C2F9AAE2964207E00C443A8 /* MDFColorCalculations.m */,
+				5C2F9AAB2964207E00C443A8 /* MDFTextAccessibility-Bridging-Header.h */,
+				5C2F9AAF2964207E00C443A8 /* MDFTextAccessibility.h */,
+				5C2F9AAC2964207E00C443A8 /* MDFTextAccessibility.m */,
+				5C2F9AAD2964207E00C443A8 /* NSArray+MDFUtils.h */,
+				5C2F9AB12964207E00C443A8 /* NSArray+MDFUtils.m */,
+			);
+			path = MaterialTextAccessibility;
+			sourceTree = "<group>";
+		};
 		5C5A97FA24E16A4B002A22EA = {
 			isa = PBXGroup;
 			children = (
@@ -1274,15 +1635,10 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				5C810B12295C3C0F00C2A93D /* MaterialAnimationTiming */,
-				5C810AF9295C3B9200C2A93D /* MaterialRipple */,
-				5C2F99E6295C3A7400C443A8 /* MaterialBadges */,
-				5CC17C22295C35A9000B5BB0 /* MaterialTabs */,
+				5C65692C29656263002EA9C8 /* Cyborg */,
+				5C65692B29656223002EA9C8 /* Material */,
 				5CC17C1C2959E288000B5BB0 /* LuaCompat */,
 				5CC17C0F2959C812000B5BB0 /* Toaster */,
-				5C9EC7E42936002A008D2909 /* MotionAnimator */,
-				5C9EC7BB2935FD1E008D2909 /* MotionInterchange */,
-				5C9EC7A42935F703008D2909 /* MaterialProgress */,
 				5CD344152861D42B00343C6B /* Deque.swift */,
 				5C5A984C24E16BC0002A22EA /* LuaInterface.h */,
 				5C2B6161254AAB37003A9705 /* LuaToaster.swift */,
@@ -1368,6 +1724,46 @@
 			path = toppingtest;
 			sourceTree = "<group>";
 		};
+		5C65692B29656223002EA9C8 /* Material */ = {
+			isa = PBXGroup;
+			children = (
+				5C9EC7E42936002A008D2909 /* MotionAnimator */,
+				5C9EC7BB2935FD1E008D2909 /* MotionInterchange */,
+				5C9EC7A42935F703008D2909 /* MaterialProgress */,
+				5C2F9AAA2964205700C443A8 /* MaterialTextAccessibility */,
+				5C2F9AA329641F7600C443A8 /* MaterialApplication */,
+				5C2F9A7629641E3600C443A8 /* MaterialTypography */,
+				5C2F9A6F29641E0A00C443A8 /* MaterialShadowLayer */,
+				5C2F9A6029641C9400C443A8 /* MaterialPalettes */,
+				5C2F9A5929641C2900C443A8 /* MaterialShadowElevations */,
+				5C2F9A4929641B9500C443A8 /* MaterialShadow */,
+				5C2F9A4429641B6F00C443A8 /* MaterialColor */,
+				5C2F9A3529641AD200C443A8 /* MaterialElevation */,
+				5C2F9A0E29641A0300C443A8 /* MaterialBottomNavigationView */,
+				5C810B12295C3C0F00C2A93D /* MaterialAnimationTiming */,
+				5C810AF9295C3B9200C2A93D /* MaterialRipple */,
+				5C2F99E6295C3A7400C443A8 /* MaterialBadges */,
+				5CC17C22295C35A9000B5BB0 /* MaterialTabs */,
+			);
+			path = Material;
+			sourceTree = "<group>";
+		};
+		5C65692C29656263002EA9C8 /* Cyborg */ = {
+			isa = PBXGroup;
+			children = (
+				5C65694429659F1B002EA9C8 /* Arc.swift */,
+				5C65694B29659F1B002EA9C8 /* DrawingCommand.swift */,
+				5C65694929659F1B002EA9C8 /* ParserPrimitives.swift */,
+				5C65694829659F1B002EA9C8 /* SwiftUIView.swift */,
+				5C65694529659F1B002EA9C8 /* VectorDrawable.swift */,
+				5C65694A29659F1B002EA9C8 /* VectorDrawableParser.swift */,
+				5C65694629659F1B002EA9C8 /* VectorView.swift */,
+				5C65694329659F1B002EA9C8 /* XmlParsing.swift */,
+				5C65694729659F1B002EA9C8 /* XMLSchema.swift */,
+			);
+			path = Cyborg;
+			sourceTree = "<group>";
+		};
 		5C810AF9295C3B9200C2A93D /* MaterialRipple */ = {
 			isa = PBXGroup;
 			children = (
@@ -1405,6 +1801,10 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5C2F9ABD29642CE700C443A8 /* LuaMenu.h */,
+				5C2F9ABE29642CE700C443A8 /* LuaMenu.m */,
+				5C2F9A0B2964194500C443A8 /* LGBottomNavigationView.h */,
+				5C2F9A0A2964194500C443A8 /* LGBottomNavigationView.mm */,
 				5C2F9A06295ED9D100C443A8 /* LuaEvent.h */,
 				5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */,
 				5C2F9A02295C799800C443A8 /* LGFragmentStateAdapter.h */,
@@ -1571,6 +1971,8 @@
 		5C95FAFB2508A48500CAE66A /* layout */ = {
 			isa = PBXGroup;
 			children = (
+				5C2F9AB929642AD100C443A8 /* LGMenuParser.h */,
+				5C2F9ABA29642AD200C443A8 /* LGMenuParser.m */,
 				5C1639522504DE790084032F /* DefaultStyles.h */,
 				5C1639532504DE790084032F /* DefaultStyles.m */,
 				5C5A985624E16BC1002A22EA /* DisplayMetrics.h */,
@@ -1809,10 +2211,12 @@
 				5C5A99F924E16BEC002A22EA /* io.h in Headers */,
 				5C5A99B424E16BEC002A22EA /* lzio.h in Headers */,
 				5C5A98BA24E16BCC002A22EA /* LGDrawableParser.h in Headers */,
+				5C2F9A2929641A4500C443A8 /* MDCBottomNavigationSystemDialogView.h in Headers */,
 				5C810B06295C3BB000C2A93D /* MDCRippleTouchControllerDelegate.h in Headers */,
 				5C5A991224E16BCC002A22EA /* LGAdapterView.h in Headers */,
 				5CC17C3A295C38F1000B5BB0 /* MDCTabBarViewItemViewDelegate.h in Headers */,
 				5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */,
+				5C2F9AB42964207E00C443A8 /* NSArray+MDFUtils.h in Headers */,
 				5CC17C49295C38F1000B5BB0 /* MDCTabBarViewDelegate.h in Headers */,
 				5C5A994324E16BCC002A22EA /* LGImageView.h in Headers */,
 				5C5A98C624E16BCC002A22EA /* ToppingEngine.h in Headers */,
@@ -1823,8 +2227,10 @@
 				5C5A993824E16BCC002A22EA /* LuaFunction.h in Headers */,
 				5C8614F828D33E8500213CEE /* LGIdParser.h in Headers */,
 				5C810B21295C3C8200C2A93D /* MDCMath.h in Headers */,
+				5C2F9A7429641E2700C443A8 /* MDCShadowLayer.h in Headers */,
 				5C9ED84728FED7B300305A74 /* LuaCoroutineScope.h in Headers */,
 				5C43E6D724FE42F1005BEA07 /* LGRecyclerViewAdapter.h in Headers */,
+				5C2F9A2C29641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.h in Headers */,
 				5C5A9A0324E16BEC002A22EA /* unix.h in Headers */,
 				5C5A98F424E16BCC002A22EA /* LuaPoint.h in Headers */,
 				5C5A9A5024E1D3B1002A22EA /* DatabaseHelper.h in Headers */,
@@ -1834,11 +2240,14 @@
 				5C5A98FC24E16BCC002A22EA /* LGListView.h in Headers */,
 				5C5A9A0224E16BEC002A22EA /* udp.h in Headers */,
 				5CBD36ED24F1652F00EB167E /* UILabelPadding.h in Headers */,
+				5C2F9A9D29641F2900C443A8 /* UIFont+MaterialSimpleEquality.h in Headers */,
+				5C2F9A6A29641CB900C443A8 /* MDCPalettes.h in Headers */,
 				5CD343FE285CBAC900343C6B /* LGNavigationParser.h in Headers */,
 				5C5A991724E16BCC002A22EA /* LuaBool.h in Headers */,
 				5C5A99EB24E16BEC002A22EA /* usocket.h in Headers */,
 				5C9EC7D22935FD41008D2909 /* MDMAnimationTraits.h in Headers */,
 				5C5A991024E16BCC002A22EA /* LuaStore.h in Headers */,
+				5C2F9A3129641A4500C443A8 /* MaterialBottomNavigation.h in Headers */,
 				5C5A993B24E16BCC002A22EA /* LuaViewInflator.h in Headers */,
 				5C5A980924E16A4B002A22EA /* Topping.h in Headers */,
 				5C5A99D824E16BEC002A22EA /* lauxlib.h in Headers */,
@@ -1846,6 +2255,8 @@
 				5C5A994624E16BCC002A22EA /* LGDatePicker.h in Headers */,
 				5C5A992124E16BCC002A22EA /* LuaValues.h in Headers */,
 				5C5A99C524E16BEC002A22EA /* lcode.h in Headers */,
+				5C2F9A4229641AF800C443A8 /* UIView+MaterialElevationResponding.h in Headers */,
+				5C2F9A7329641E2700C443A8 /* MaterialShadowLayer.h in Headers */,
 				5CD92592252CA48300EC0A1D /* NSStack.h in Headers */,
 				5C5A99B124E16BEC002A22EA /* lmem.h in Headers */,
 				5C5A99DF24E16BEC002A22EA /* lua.h in Headers */,
@@ -1862,13 +2273,17 @@
 				5C5A9A0424E16BEC002A22EA /* select.h in Headers */,
 				5C810B1A295C3C2F00C2A93D /* UIView+MDCTimingFunction.h in Headers */,
 				5C5A993F24E16BCC002A22EA /* LGAutoCompleteTextView.h in Headers */,
+				5C2F9ABF29642CE700C443A8 /* LuaMenu.h in Headers */,
+				5C2F9A6E29641CB900C443A8 /* MDCPaletteNames.h in Headers */,
 				5C5A99CC24E16BEC002A22EA /* ltm.h in Headers */,
 				5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */,
+				5C2F9A9C29641F2900C443A8 /* UIFont+MaterialScalable.h in Headers */,
 				5C91BD72283E15FF00D4C94F /* LuaLifecycleOwner.h in Headers */,
 				5CC17C45295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.h in Headers */,
 				5C5A9A0024E16BEC002A22EA /* socket.h in Headers */,
 				5CC17C39295C38F1000B5BB0 /* MDCTabBarView.h in Headers */,
 				5CC17C3C295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h in Headers */,
+				5C2F9AB22964207E00C443A8 /* MDFTextAccessibility-Bridging-Header.h in Headers */,
 				5C5A990C24E16BCC002A22EA /* LuaResource.h in Headers */,
 				5C286DF625582B4900198DA5 /* LuaLog.h in Headers */,
 				5C5A98B924E16BCC002A22EA /* LuaInt.h in Headers */,
@@ -1878,7 +2293,10 @@
 				5CD343F32858AF7600343C6B /* RunnableObjc.h in Headers */,
 				5C5A990324E16BCC002A22EA /* LGStringParser.h in Headers */,
 				5C5A98EA24E16BCC002A22EA /* CommonDelegate.h in Headers */,
+				5C2F9A9729641F2900C443A8 /* MDCFontTextStyle.h in Headers */,
+				5C2F9A3E29641AF800C443A8 /* MDCElevationOverriding.h in Headers */,
 				5C9EC7E22935FD42008D2909 /* MDMMotionRepetition.h in Headers */,
+				5C2F9AB62964207E00C443A8 /* MDFTextAccessibility.h in Headers */,
 				5C9EC7E32935FD42008D2909 /* CAMediaTimingFunction+MDMTimingCurve.h in Headers */,
 				5C9EC7B92935FBE3008D2909 /* MaterialActivityIndicatorStrings_table.h in Headers */,
 				5C9EC80E29360141008D2909 /* MDMAnimatableKeyPaths.h in Headers */,
@@ -1890,21 +2308,32 @@
 				5C5A995224E16BCC002A22EA /* LuaColor.h in Headers */,
 				5C5A994D24E16BCC002A22EA /* LGRadioButton.h in Headers */,
 				5C5A99D024E16BEC002A22EA /* lobject.h in Headers */,
+				5C2F9AB72964207E00C443A8 /* MDFColorCalculations.h in Headers */,
 				5C5A990F24E16BCC002A22EA /* LuaGlobalFunction.h in Headers */,
+				5C2F9A5F29641C4B00C443A8 /* MDCShadowElevations.h in Headers */,
 				5C5A99CE24E16BEC002A22EA /* lparser.h in Headers */,
 				5C5A99DA24E16BEC002A22EA /* lstring.h in Headers */,
 				5C9EC80129360141008D2909 /* MDMCoreAnimationTraceable.h in Headers */,
 				5C5A99B524E16BEC002A22EA /* lgc.h in Headers */,
 				5C5A99EE24E16BEC002A22EA /* inet.h in Headers */,
+				5C2F9A7A29641F1200C443A8 /* MDCTypographyFontLoader.h in Headers */,
+				5C2F9A4829641B8700C443A8 /* UIColor+MaterialBlending.h in Headers */,
+				5C2F9A3229641A4500C443A8 /* MDCBottomNavigationBar+ItemView.h in Headers */,
 				5C9EC80929360141008D2909 /* MDMAnimationRegistrar.h in Headers */,
+				5C2F9A9E29641F2900C443A8 /* MDCFontTraits.h in Headers */,
 				5C5A98CF24E16BCC002A22EA /* LGAbsListView.h in Headers */,
+				5C2F9A6D29641CB900C443A8 /* MDCPaletteExpansions.h in Headers */,
 				5CC17C3F295C38F1000B5BB0 /* MDCTabBarViewIndicatorContext.h in Headers */,
 				5C5A99F324E16BEC002A22EA /* options.h in Headers */,
+				5C2F9AA029641F2900C443A8 /* MDCTypographyUtilities.h in Headers */,
 				5C9EC80429360141008D2909 /* MDMUIKitValueCoercion.h in Headers */,
 				5C9EC7D42935FD41008D2909 /* MDMSubclassingRestricted.h in Headers */,
 				5CC17C3D295C38F1000B5BB0 /* MDCTabBarViewIndicatorTemplate.h in Headers */,
 				5C9EC7B22935FBE3008D2909 /* MDCActivityIndicator+Interface.h in Headers */,
+				5C2F9A2829641A4500C443A8 /* MDCBottomNavigationItemView.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
+				5C2F9A2A29641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h in Headers */,
+				5C2F9A2F29641A4500C443A8 /* MDCBottomNavigationBarController.h in Headers */,
 				5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
 				5C5A98EB24E16BCC002A22EA /* LGCheckBox.h in Headers */,
@@ -1912,6 +2341,7 @@
 				5CC17C48295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h in Headers */,
 				5C5A992224E16BCC002A22EA /* LGHorizontalScrollView.h in Headers */,
 				5C5A98F524E16BCC002A22EA /* LG.h in Headers */,
+				5C2F9A2629641A4500C443A8 /* MDCBottomNavigationBarDelegate.h in Headers */,
 				5C5A994724E16BCC002A22EA /* CDefines.h in Headers */,
 				5C9EC7D52935FD41008D2909 /* MDMTimingCurve.h in Headers */,
 				5C9EC7B62935FBE3008D2909 /* MDCActivityIndicatorDelegate.h in Headers */,
@@ -1919,6 +2349,7 @@
 				5C5A98D224E16BCC002A22EA /* LGProgressBar.h in Headers */,
 				5CB8586824E434CA006E6B65 /* KeyboardHelper.h in Headers */,
 				5C43E6DB24FE679B005BEA07 /* LGToolbar.h in Headers */,
+				5C2F9A3F29641AF800C443A8 /* UIColor+MaterialElevation.h in Headers */,
 				5C91BD7E283E25B500D4C94F /* LifecycleRegistry.h in Headers */,
 				5C9EC7FD29360141008D2909 /* CATransaction+MotionAnimator.h in Headers */,
 				5C5A99D224E16BEC002A22EA /* lopcodes.h in Headers */,
@@ -1942,18 +2373,24 @@
 				5CC17C3B295C38F1000B5BB0 /* MDCTabBarViewCustomViewable.h in Headers */,
 				5C2F9A04295C799800C443A8 /* LGFragmentStateAdapter.h in Headers */,
 				5C5A99E624E16BEC002A22EA /* tcp.h in Headers */,
+				5C2F9A2229641A4500C443A8 /* MDCBottomNavigationBarControllerDelegate.h in Headers */,
 				5C5A99B224E16BEC002A22EA /* llimits.h in Headers */,
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
 				5C5A990224E16BCC002A22EA /* LuaShort.h in Headers */,
 				5CD344022861B7D200343C6B /* LGFragmentContainerView.h in Headers */,
+				5C2F9A0D2964194500C443A8 /* LGBottomNavigationView.h in Headers */,
 				5C9EC7BA2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h in Headers */,
+				5C2F9A2B29641A4500C443A8 /* MDCBottomNavigationBar+ShadowsPrivate.h in Headers */,
+				5C2F9A5829641BDB00C443A8 /* MDCShadowsCollection.h in Headers */,
 				5C5A994424E16BCC002A22EA /* LGView.h in Headers */,
 				5C9EC7D62935FD41008D2909 /* MDMRepetition.h in Headers */,
 				5CC17C44295C38F1000B5BB0 /* MDCTabBarViewItemView.h in Headers */,
 				5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */,
+				5C2F9AA929641FDC00C443A8 /* MaterialApplication.h in Headers */,
 				5C9EC7B12935FBE3008D2909 /* MaterialActivityIndicator.h in Headers */,
 				5C5A99C324E16BEC002A22EA /* ldebug.h in Headers */,
 				5C9EC80829360141008D2909 /* MDMBlockAnimations.h in Headers */,
+				5C2F9A5D29641C4B00C443A8 /* MaterialShadowElevations.h in Headers */,
 				5C5A995424E16BCC002A22EA /* Defines.h in Headers */,
 				5C5A99E424E16BEC002A22EA /* ltable.h in Headers */,
 				5C5A992524E16BCC002A22EA /* LuaTranslator.h in Headers */,
@@ -1961,18 +2398,28 @@
 				5C5A991524E16BCC002A22EA /* LuaRect.h in Headers */,
 				5C5A994C24E16BCC002A22EA /* LuaHttpClient.h in Headers */,
 				5C5A98BD24E16BCC002A22EA /* LuaContext.h in Headers */,
+				5C2F9A2729641A4500C443A8 /* MaterialBottomNavigation+BottomNavigationController.h in Headers */,
 				5C91BD73283E15FF00D4C94F /* LuaLifecycleObserver.h in Headers */,
 				5C2F99F5295C3AA300C443A8 /* MDCBadgeAppearance.h in Headers */,
+				5C2F9A9929641F2900C443A8 /* UIFontDescriptor+MaterialTypography.h in Headers */,
+				5C2F9A9A29641F2900C443A8 /* UIFont+MaterialTypography.h in Headers */,
 				5C5A98CE24E16BCC002A22EA /* LuaDefines.h in Headers */,
+				5C2F9A9429641F2900C443A8 /* UIFont+MaterialTypographyPrivate.h in Headers */,
+				5C2F9A2D29641A4500C443A8 /* MDCBottomNavigationBar.h in Headers */,
+				5C2F9A9529641F2900C443A8 /* MaterialTypography.h in Headers */,
+				5C2F9A4129641AF800C443A8 /* MDCElevatable.h in Headers */,
 				5CB8585824E4306A006E6B65 /* CustomURLConnection.h in Headers */,
 				5C91BD62283E135C00D4C94F /* Lifecycle.h in Headers */,
 				5C9EC7DB2935FD42008D2909 /* MotionInterchange.h in Headers */,
 				5C5A991824E16BCC002A22EA /* LuaDatabase.h in Headers */,
 				5CD344062861BA8100343C6B /* LuaNavHostFragment.h in Headers */,
+				5C2F9A9629641F2900C443A8 /* MDCTypography.h in Headers */,
 				5C810B0C295C3BB000C2A93D /* MDCRippleLayerDelegate.h in Headers */,
 				5C5A993A24E16BCC002A22EA /* LGScrollView.h in Headers */,
 				5C5A98CA24E16BCC002A22EA /* LuaDouble.h in Headers */,
+				5C2F9A3429641A4500C443A8 /* MDCBottomNavigationBar+Private.h in Headers */,
 				5C5A99D124E16BEC002A22EA /* lstate.h in Headers */,
+				5C2F9A5529641BDB00C443A8 /* MDCShadow.h in Headers */,
 				5C5A98DE24E16BCC002A22EA /* LGEditText.h in Headers */,
 				5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */,
 				5C9EC7B72935FBE3008D2909 /* MDCActivityIndicator+Subclassing.h in Headers */,
@@ -1986,12 +2433,15 @@
 				5C9EC7FB29360141008D2909 /* CABasicAnimation+MotionAnimator.h in Headers */,
 				5C5A99CA24E16BEC002A22EA /* llex.h in Headers */,
 				5C9EC80329360141008D2909 /* MDMRegisteredAnimation.h in Headers */,
+				5C2F9A7E29641F1900C443A8 /* MDCFontScaler.h in Headers */,
 				5C91BD77283E15FF00D4C94F /* LuaViewModelProvider.h in Headers */,
 				5C91BD75283E15FF00D4C94F /* LuaMutableLiveData.h in Headers */,
 				5C5A991624E16BCC002A22EA /* LuaNativeObject.h in Headers */,
 				5C2F9A08295ED9D100C443A8 /* LuaEvent.h in Headers */,
+				5C2F9A4029641AF800C443A8 /* MaterialElevation.h in Headers */,
 				5C2F99FE295C6EF200C443A8 /* LGViewPager.h in Headers */,
 				5C42E35224EFE1C600F8B012 /* LGViewGroup.h in Headers */,
+				5C2F9A4E29641BCD00C443A8 /* UIView+MDCShadowAnimations.h in Headers */,
 				5C1639542504DE790084032F /* DefaultStyles.h in Headers */,
 				5C2CA8432559753600C03879 /* LuaGraphics.h in Headers */,
 				5C91BD82283E39DC00D4C94F /* OrderedDictionary.h in Headers */,
@@ -2000,6 +2450,7 @@
 				5C2C28D92526139B00F382B0 /* LuaRef.h in Headers */,
 				5C43E6D324FE41E7005BEA07 /* LGRecyclerView.h in Headers */,
 				5C5A993C24E16BCC002A22EA /* Common.h in Headers */,
+				5C2F9A6B29641CB900C443A8 /* MaterialPalettes.h in Headers */,
 				5C5A99BA24E16BEC002A22EA /* lualib.h in Headers */,
 				5C9EC7DD2935FD42008D2909 /* MDMRepetitionOverTime.h in Headers */,
 				5C5A990A24E16BCC002A22EA /* LuaLong.h in Headers */,
@@ -2018,14 +2469,17 @@
 				5C810B09295C3BB000C2A93D /* MaterialRipple.h in Headers */,
 				5C5A99C824E16BEC002A22EA /* ldo.h in Headers */,
 				5C5A995324E16BCC002A22EA /* LuaStream.h in Headers */,
+				5C2F9ABB29642AD200C443A8 /* LGMenuParser.h in Headers */,
 				5C810B11295C3BB000C2A93D /* MDCRippleViewDelegate.h in Headers */,
 				5CB8585424E43007006E6B65 /* URLDownloader.h in Headers */,
 				5C5A994824E16BCC002A22EA /* LGColorParser.h in Headers */,
 				5C5A98D824E16BCC002A22EA /* DataToBeDownloaded.h in Headers */,
+				5C2F9AA829641FDC00C443A8 /* UIApplication+MDCAppExtensions.h in Headers */,
 				5CCB464525B82AD300CF0F4A /* LGConstraintLayout.h in Headers */,
 				5C9ED84128FECEBD00305A74 /* KotlinExports.h in Headers */,
 				5CC17C38295C38F1000B5BB0 /* MaterialTabs+TabBarView.h in Headers */,
 				5CB8587024E4354C006E6B65 /* NSQueue.h in Headers */,
+				5C2F9A5629641BDB00C443A8 /* MaterialShadow.h in Headers */,
 				5C9EC80229360141008D2909 /* MDMDragCoefficient.h in Headers */,
 				5C810B0B295C3BB000C2A93D /* MDCRippleTouchController.h in Headers */,
 				5C810B1B295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h in Headers */,
@@ -2200,6 +2654,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5A98F824E16BCC002A22EA /* LuaDialog.m in Sources */,
+				5C2F9A9B29641F2900C443A8 /* UIFont+MaterialSimpleEquality.m in Sources */,
+				5C2F9A4729641B8700C443A8 /* UIColor+MaterialBlending.m in Sources */,
 				5C5A99F224E16BEC002A22EA /* udp.c in Sources */,
 				5C5A994F24E16BCC002A22EA /* LuaChar.m in Sources */,
 				5CD92593252CA48300EC0A1D /* NSStack.m in Sources */,
@@ -2219,18 +2675,24 @@
 				5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */,
 				5CC17C172959C85F000B5BB0 /* Toast.swift in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
+				5C2F9A3D29641AF800C443A8 /* UIColor+MaterialElevation.m in Sources */,
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C91BD60283E134500D4C94F /* Lifecycle.m in Sources */,
 				5C5A991D24E16BCC002A22EA /* LGTextView.mm in Sources */,
 				5C2F99FF295C6EF200C443A8 /* LGViewPager.m in Sources */,
+				5C2F9A3329641A4500C443A8 /* MDCBottomNavigationItemView.m in Sources */,
 				5C9EC7DE2935FD42008D2909 /* MDMMotionCurve.m in Sources */,
 				5CC17C182959C85F000B5BB0 /* ToastWindow.swift in Sources */,
 				5C5A99DE24E16BEC002A22EA /* lbaselib.c in Sources */,
+				5C2F9A9229641F2900C443A8 /* MDCFontTraits.m in Sources */,
+				5C2F9A9329641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m in Sources */,
 				5C5A99E324E16BEC002A22EA /* llex.c in Sources */,
 				5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */,
 				5C5A99BE24E16BEC002A22EA /* lvm.c in Sources */,
 				5C42E35724EFE8B500F8B012 /* LGFrameLayout.mm in Sources */,
 				5C91BD872843647000D4C94F /* FragmentController.swift in Sources */,
+				5C2F9AA729641FDC00C443A8 /* UIApplication+MDCAppExtensions.m in Sources */,
+				5C2F9A4329641AF800C443A8 /* UIView+MaterialElevationResponding.m in Sources */,
 				5CD343F52858B12100343C6B /* SavedStateRegistryController.swift in Sources */,
 				5C9EC80F29360141008D2909 /* MDMRegisteredAnimation.m in Sources */,
 				5C5A98B724E16BCC002A22EA /* LGAutoCompleteTextView.mm in Sources */,
@@ -2244,6 +2706,7 @@
 				5CC17C47295C38F1000B5BB0 /* MDCTabBarView.m in Sources */,
 				5C78BA3028462498003EC02A /* Utils.swift in Sources */,
 				5C2F9A05295C799800C443A8 /* LGFragmentStateAdapter.m in Sources */,
+				5C2F9A2529641A4500C443A8 /* MDCBottomNavigationBar+ItemView.m in Sources */,
 				5C2CA8422559753600C03879 /* LuaGraphics.mm in Sources */,
 				5C31C7A4250399A8001773F8 /* LGStyleParser.m in Sources */,
 				5CC17C162959C85F000B5BB0 /* ToastCenter.swift in Sources */,
@@ -2252,7 +2715,10 @@
 				5C810B1C295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.m in Sources */,
 				5C5A99F024E16BEC002A22EA /* select.c in Sources */,
 				5C5A99D524E16BEC002A22EA /* lzio.c in Sources */,
+				5C65695329659F1B002EA9C8 /* VectorDrawableParser.swift in Sources */,
 				5C5A99F124E16BEC002A22EA /* unix.c in Sources */,
+				5C2F9A6929641CB900C443A8 /* MDCPaletteNames.m in Sources */,
+				5C65694F29659F1B002EA9C8 /* VectorView.swift in Sources */,
 				5C5A98E124E16BCC002A22EA /* LuaViewInflator.m in Sources */,
 				5C5A99B824E16BEC002A22EA /* lstate.c in Sources */,
 				5C5A98B524E16BCC002A22EA /* LGComboBox.mm in Sources */,
@@ -2290,6 +2756,7 @@
 				5C5A991324E16BCC002A22EA /* LuaToast.m in Sources */,
 				5C78BA2E28462344003EC02A /* FragmentLifecycleCallbacksDispatcher.swift in Sources */,
 				5C5A994B24E16BCC002A22EA /* LGListView.mm in Sources */,
+				5C2F9A5429641BDB00C443A8 /* MDCShadow.m in Sources */,
 				5C5A98EC24E16BCC002A22EA /* LuaFloat.m in Sources */,
 				5CB8585524E43007006E6B65 /* URLDownloader.m in Sources */,
 				5CD344072861BA8100343C6B /* LuaNavHostFragment.m in Sources */,
@@ -2298,7 +2765,9 @@
 				5C810B08295C3BB000C2A93D /* MDCRippleLayer.m in Sources */,
 				5C5A99D724E16BEC002A22EA /* lmem.c in Sources */,
 				5C5A99B624E16BEC002A22EA /* liolib.c in Sources */,
+				5C2F9ABC29642AD200C443A8 /* LGMenuParser.m in Sources */,
 				5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */,
+				5C2F9A9829641F2900C443A8 /* UIFont+MaterialScalable.m in Sources */,
 				5C32B2F024F9783300875355 /* LGValueParser.m in Sources */,
 				5CC17C42295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m in Sources */,
 				5C9EC7A32935F25D008D2909 /* CircularProgressView.swift in Sources */,
@@ -2324,17 +2793,24 @@
 				5C5A99BB24E16BEC002A22EA /* print.c in Sources */,
 				5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */,
 				5C5A992924E16BCC002A22EA /* LuaTranslator.m in Sources */,
+				5C2F9A6829641CB900C443A8 /* MDCPalettes.m in Sources */,
 				5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */,
 				5C5A99BD24E16BEC002A22EA /* loadlib.c in Sources */,
 				5C5A98FE24E16BCC002A22EA /* LuaDatabase.m in Sources */,
+				5C2F9A2E29641A4500C443A8 /* MDCBottomNavigationBarController.m in Sources */,
 				5C2C28DA2526139B00F382B0 /* LuaRef.m in Sources */,
 				5C5A98FD24E16BCC002A22EA /* LGView.mm in Sources */,
 				5C5A99FE24E16BEC002A22EA /* luasocket.c in Sources */,
+				5C2F9A2429641A4500C443A8 /* MDCBottomNavigationLargeItemDialogView.m in Sources */,
+				5C65695129659F1B002EA9C8 /* SwiftUIView.swift in Sources */,
+				5C65695029659F1B002EA9C8 /* XMLSchema.swift in Sources */,
 				5C5A98C024E16BCC002A22EA /* ToppingEngine.m in Sources */,
+				5C2F9AB52964207E00C443A8 /* MDFColorCalculations.m in Sources */,
 				5C5A98E324E16BCC002A22EA /* LuaPoint.m in Sources */,
 				5C5A99EA24E16BEC002A22EA /* io.c in Sources */,
 				5C5A992A24E16BCC002A22EA /* LuaDefines.m in Sources */,
 				5CD343E5284A29D500343C6B /* FragmentManagerState.swift in Sources */,
+				5C2F9A7529641E2700C443A8 /* MDCShadowLayer.m in Sources */,
 				5C5A99FA24E16BEC002A22EA /* auxiliar.c in Sources */,
 				5C5A98DD24E16BCC002A22EA /* CommonDelegate.mm in Sources */,
 				5C5A99C224E16BEC002A22EA /* lua.c in Sources */,
@@ -2353,10 +2829,12 @@
 				5C5A99B724E16BEC002A22EA /* lopcodes.c in Sources */,
 				5C25F4E025076B8E0074B6AF /* UIColor+Lum.m in Sources */,
 				5C9EC80729360141008D2909 /* MDMDragCoefficient.m in Sources */,
+				5C65694C29659F1B002EA9C8 /* XmlParsing.swift in Sources */,
 				5C9EC7B02935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.m in Sources */,
 				5C5A992424E16BCC002A22EA /* LuaStream.m in Sources */,
 				5C64ECB12897CDAB00A4C14B /* LuaFormExt.swift in Sources */,
 				5C23B60424E555870094389F /* UIBufferedProgressBar.m in Sources */,
+				5C2F9AC029642CE700C443A8 /* LuaMenu.m in Sources */,
 				5C5A99B924E16BEC002A22EA /* lobject.c in Sources */,
 				5CC17C4C295C38F1000B5BB0 /* MDCTabBarViewIndicatorAttributes.m in Sources */,
 				5C9EC80029360141008D2909 /* MDMAnimatableKeyPaths.m in Sources */,
@@ -2367,13 +2845,18 @@
 				5C78BA2A2846221B003EC02A /* FragmentStore.swift in Sources */,
 				5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */,
 				5C5A992324E16BCC002A22EA /* LuaBuffer.m in Sources */,
+				5C2F9A9F29641F2900C443A8 /* MDCTypographyUtilities.m in Sources */,
 				5C286DF525582B4900198DA5 /* LuaLog.mm in Sources */,
 				5C91BD892843649B00D4C94F /* FragmentHostCallback.swift in Sources */,
+				5C65694D29659F1B002EA9C8 /* Arc.swift in Sources */,
 				5C5A98FB24E16BCC002A22EA /* LGHorizontalScrollView.mm in Sources */,
 				5C5A992D24E16BCC002A22EA /* CDefines.m in Sources */,
 				5C91BD79283E15FF00D4C94F /* LuaViewModel.m in Sources */,
 				5C5A9A0524E16BEC002A22EA /* ldo.c in Sources */,
+				5C65694E29659F1B002EA9C8 /* VectorDrawable.swift in Sources */,
+				5C2F9A6C29641CB900C443A8 /* MDCPaletteExpansions.m in Sources */,
 				5C9EC7DC2935FD42008D2909 /* MDMSpringTimingCurveGenerator.m in Sources */,
+				5C2F9AA229641F2900C443A8 /* MDCTypography.m in Sources */,
 				5CB8585924E4306A006E6B65 /* CustomURLConnection.m in Sources */,
 				5C5A9A5124E1D3B1002A22EA /* DatabaseHelper.m in Sources */,
 				5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */,
@@ -2394,15 +2877,21 @@
 				5C5A99B024E16BEC002A22EA /* lauxlib.c in Sources */,
 				5C5A99FF24E16BEC002A22EA /* except.c in Sources */,
 				5C810B0F295C3BB000C2A93D /* MDCRippleTouchController.m in Sources */,
+				5C2F9A5E29641C4B00C443A8 /* MaterialShadowElevationsDummy.m in Sources */,
+				5C2F9A2329641A4500C443A8 /* MDCBottomNavigationSystemDialogView.m in Sources */,
 				5CC17C1A2959C85F000B5BB0 /* UIApplication+Load.swift in Sources */,
+				5C2F9A4D29641BCD00C443A8 /* UIView+MDCShadowAnimations.m in Sources */,
 				5C91BD74283E15FF00D4C94F /* LuaLifecycleOwner.m in Sources */,
 				5CC17C1B2959C85F000B5BB0 /* KeyboardObserver.swift in Sources */,
+				5C2F9A0C2964194500C443A8 /* LGBottomNavigationView.mm in Sources */,
 				5C810B18295C3C2F00C2A93D /* UIView+MDCTimingFunction.m in Sources */,
 				5C5A98DF24E16BCC002A22EA /* LuaJSON.m in Sources */,
 				5C5A98D724E16BCC002A22EA /* LGCheckBox.mm in Sources */,
 				5C5A99BC24E16BEC002A22EA /* lmathlib.c in Sources */,
 				5C9EC7D72935FD42008D2909 /* MDMAnimationTraits.m in Sources */,
 				5C5A991924E16BCC002A22EA /* LGParser.mm in Sources */,
+				5C2F9A7D29641F1900C443A8 /* MDCFontScaler.m in Sources */,
+				5C65695429659F1B002EA9C8 /* DrawingCommand.swift in Sources */,
 				5C5A98BC24E16BCC002A22EA /* LuaShort.m in Sources */,
 				5CB8587124E4354C006E6B65 /* NSQueue.m in Sources */,
 				5C5A98D424E16BCC002A22EA /* LGCompoundButton.mm in Sources */,
@@ -2413,8 +2902,11 @@
 				5C5A9A0124E16BEC002A22EA /* options.c in Sources */,
 				5C5A99F524E16BEC002A22EA /* mime.c in Sources */,
 				5C5A990D24E16BCC002A22EA /* LuaColor.m in Sources */,
+				5C2F9AA129641F2900C443A8 /* UIFont+MaterialTypographyPrivate.m in Sources */,
 				5C5A98BE24E16BCC002A22EA /* LuaGlobalFunction.m in Sources */,
+				5C2F9AB82964207E00C443A8 /* NSArray+MDFUtils.m in Sources */,
 				5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */,
+				5C2F9A5729641BDB00C443A8 /* MDCShadowsCollection.m in Sources */,
 				5C9EC7FE29360141008D2909 /* MDMAnimationRegistrar.m in Sources */,
 				5C5A98C824E16BCC002A22EA /* LuaForm.mm in Sources */,
 				5C5A98FF24E16BCC002A22EA /* LGAdapterView.mm in Sources */,
@@ -2423,10 +2915,14 @@
 				5C9EC7FF29360141008D2909 /* CABasicAnimation+MotionAnimator.m in Sources */,
 				5C5A99CF24E16BEC002A22EA /* ldump.c in Sources */,
 				5C2F99EE295C3A9600C443A8 /* MDCBadgeView.m in Sources */,
+				5C2F9AB32964207E00C443A8 /* MDFTextAccessibility.m in Sources */,
 				5C2F99FB295C47E800C443A8 /* LuaTab.m in Sources */,
 				5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */,
+				5C2F9A9129641F2900C443A8 /* UIFont+MaterialTypography.m in Sources */,
 				5C5A98DA24E16BCC002A22EA /* LGRadioGroup.mm in Sources */,
 				5C5A98D024E16BCC002A22EA /* LGDrawableParser.m in Sources */,
+				5C65695229659F1B002EA9C8 /* ParserPrimitives.swift in Sources */,
+				5C2F9A3029641A4500C443A8 /* MDCBottomNavigationBar.m in Sources */,
 				5C5A99DB24E16BEC002A22EA /* lcode.c in Sources */,
 				5C5A98E824E16BCC002A22EA /* LGRadioButton.mm in Sources */,
 				5C9EC80A29360141008D2909 /* CATransaction+MotionAnimator.m in Sources */,

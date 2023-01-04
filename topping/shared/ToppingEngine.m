@@ -67,6 +67,7 @@
 #import "LGToolbar.h"
 #import "LGFragmentContainerView.h"
 #import "LuaNavHostFragment.h"
+#import "LGBottomNavigationView.h"
 
 #import "LuaForm.h"
 #import "LuaFragment.h"
@@ -983,6 +984,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LGAbsListView class]];
 	[Lunar Register:lu :[LGAdapterView class]];
 	[Lunar Register:lu :[LGAutoCompleteTextView class]];
+    [Lunar Register:lu :[LGBottomNavigationView class]];
 	[Lunar Register:lu :[LGButton class]];
 	[Lunar Register:lu :[LGCheckBox class]];
 	[Lunar Register:lu :[LGComboBox class]];
@@ -1026,6 +1028,7 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LuaJSONObject class]];
 	[Lunar Register:lu :[LuaJSONArray class]];
     [Lunar Register:lu :[LuaLog class]];
+    [Lunar Register:lu :[LuaMenu class]];
     [Lunar Register:lu :[LuaNativeCall class]];
     [Lunar Register:lu :[LuaPoint class]];
     [Lunar Register:lu :[LuaRect class]];

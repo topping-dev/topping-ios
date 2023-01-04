@@ -14,6 +14,7 @@
 
 -(UIColor*) ParseColor:(NSString *)color;
 -(UIColor*) ParseColorInternal:(NSString *)color;
+-(UIColor*)GetTextColorFromColor:(UIColor*)color;
 -(NSDictionary*)GetKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *colorMap;

@@ -4,6 +4,7 @@
 #import "LGDrawableParser.h"
 #import "LGValueParser.h"
 #import "LuaFunction.h"
+#import <Topping/Topping-Swift.h>
 
 @implementation LGImageView
 
@@ -84,28 +85,47 @@
 	
 	if(self.android_src != nil)
     {
+        for(UIView *subview in self._view.subviews) {
+            [subview removeFromSuperview];
+        }
         LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:self.android_src];
-        [iv setImage:ldr.img];
+        CGSize size = CGSizeZero;
+        VectorView *vv = nil;
+        if(ldr.vector != nil) {
+            VectorTheme *theme = [[VectorTheme alloc] initWithColor:[UIColor blackColor]];
+            vv = [[VectorView alloc] initWithTheme:theme resources:theme];
+            VectorDrawable *drawable = (VectorDrawable*)ldr.vector;
+            vv.drawable = drawable;
+            [self._view addSubview:vv];
+            size = CGSizeMake(drawable.baseWidth, drawable.baseHeight);
+        }
+        else {
+            [iv setImage:ldr.img];
+            size = ldr.img.size;
+        }
         if(self.dWidth == 0 && self.dHeight == 0)
         {
-            self.dWidth = ldr.img.size.width;
-            self.dHeight = ldr.img.size.height;
+            self.dWidth = size.width;
+            self.dHeight = size.height;
         }
         if(self.dHeight == 0)
         {
             int width = self.dWidth;
-            int ivWidth = ldr.img.size.width;
-            int ivHeight = ldr.img.size.height;
+            int ivWidth = size.width;
+            int ivHeight = size.height;
             self.dHeight = ((float)(ivHeight * width)) / ((float)ivWidth);
         }
         if(self.dWidth == 0)
         {
             int height = self.dHeight;
-            int ivWidth = ldr.img.size.width;
-            int ivHeight = ldr.img.size.height;
+            int ivWidth = size.width;
+            int ivHeight = size.height;
             self.dWidth = ((float)(ivWidth * height)) / ((float)ivHeight);
         }
         iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
+        if(vv != nil) {
+            vv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
+        }
     }
 }
 

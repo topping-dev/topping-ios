@@ -356,6 +356,8 @@
 }
 
 -(void)AddMainView:(UIView *)viewToAdd {
+    if(self.view == nil || viewToAdd == nil)
+        return;
     [self.view addSubview:viewToAdd];
     [viewToAdd setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *constraint;

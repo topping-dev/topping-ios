@@ -51,6 +51,14 @@ static float statusBarHeight;
 	scaledDensity = sd;
 }
 
++(float)dpToSp:(float)value {
+    return value / density;
+}
+
++(float)spToDp:(float)value {
+    return value * density;
+}
+
 +(int)readSize:(NSString*)sz
 {
 	if (sz == nil)

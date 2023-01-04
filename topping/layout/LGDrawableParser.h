@@ -3,12 +3,25 @@
 #import "LuaRef.h"
 
 @class GDataXMLElement;
+@protocol ThemeProviding;
+@protocol ResourceProviding;
+
+@interface VectorTheme : NSObject <ThemeProviding, ResourceProviding>
+
+- (instancetype)initWithColor:(UIColor*)color;
+
+@property (nonatomic, retain) UIColor *color;
+
+@end
 
 @interface LGDrawableReturn : NSObject
 {
 };
 
+-(UIImage*)GetImage:(CGSize)size;
+
 @property(nonatomic, retain) UIImage *img;
+@property(nonatomic, retain) NSObject *vector;
 @property(nonatomic, retain) UIColor *color;
 @property(nonatomic, retain) NSString *state;
 @property(nonatomic) BOOL tile;
@@ -32,7 +45,8 @@ typedef NS_OPTIONS(NSUInteger, UIControlStateExtra) {
 -(LGDrawableReturn*) ParseDrawableRef:(LuaRef *)drawable :(int)tileMode;
 -(LGDrawableReturn*) ParseDrawable:(NSString *)drawable;
 -(LGDrawableReturn*) ParseDrawable:(NSString *)drawable :(int)tileMode;
--(LGDrawableReturn*) ParseXML:(NSString *)filename;
+-(LGDrawableReturn*) ParseXML:(NSString *)filename :(int)tileMode;
+-(LGDrawableReturn*) ParseVector:(NSData*)data;
 -(LGDrawableReturn*) ParseBitmap:(GDataXMLElement*)root;
 -(LGDrawableReturn*) ParseLayer:(GDataXMLElement *)root;
 -(LGDrawableReturn*) ParseStateList:(GDataXMLElement *)root;

@@ -125,6 +125,7 @@ function Main_Constructor(pForm, luacontext)
     local navController = pForm:GetFragmentManager():findFragmentById(LR.id.nav_host_fragment):getNavController()
     local toolbar = pForm:GetViewById(LR.id.ToolbarTest)
     LuaNavigationUI.setupWithNavController(toolbar, navController)
+    LuaNavigationUI.setupWithNavController(toolbar, navController)
 end
 
 function Pager_Constructor(pViewPager, luacontext)
@@ -161,7 +162,6 @@ end
 LuaEvent.RegisterUIEvent(LR.id.ListViewTest, LuaEvent.UI_EVENT_VIEW_CREATE, ListViewTest_Constructor);
 LuaEvent.RegisterUIEvent(LR.id.ToolbarTest, LuaEvent.UI_EVENT_VIEW_CREATE, Toolbar_Constructor);
 LuaEvent.RegisterUIEvent(LR.id.Main, LuaEvent.UI_EVENT_CREATE, Main_Constructor);
-LuaEvent.RegisterUIEvent(LR.id.pager, LuaEvent.UI_EVENT_VIEW_CREATE, Pager_Constructor);
+--LuaEvent.RegisterUIEvent(LR.id.pager, LuaEvent.UI_EVENT_VIEW_CREATE, Pager_Constructor);
 LuaEvent.RegisterUIEvent(LR.id.menuFragment, LuaEvent.UI_EVENT_FRAGMENT_CREATE_VIEW, MenuFragment_Create_View);
 LuaEvent.RegisterUIEvent(LR.id.receiveFragment, LuaEvent.UI_EVENT_FRAGMENT_CREATE_VIEW, ReceiveFragment_Create_View);
-LuaEvent.RegisterUIEvent(LR.id.formTestLL, LuaEvent.UI_EVENT_FRAGMENT_CREATE_VIEW, FormTest_Create_View);

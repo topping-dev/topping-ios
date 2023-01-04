@@ -27,6 +27,7 @@
 #import "LGViewPager.h"
 #import "LuaFragment.h"
 #import "LuaEvent.h"
+#import "LGBottomNavigationView.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -235,6 +236,9 @@
         || [name compare:@"android.support.v4.view.ViewPager"] == 0
         || [name compare:@"LGViewPager"] == 0)
         rootView = [[LGViewPager alloc] init];
+    else if([name compare:@"com.google.android.material.bottomnavigation.BottomNavigationView"] == 0
+        || [name compare:@"LGBottomNavigationView"] == 0)
+        rootView = [[LGBottomNavigationView alloc] init];
     else if([ToppingEngine GetViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine GetViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];

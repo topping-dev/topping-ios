@@ -29,4 +29,4 @@ function TestComboBox_Changed(pGUI, context, name, value)
 	LuaToast.ShowInternal(context, "Combobox id " .. name, 1000);
 end
 
-LuaEvent.RegisterUIEvent(LR.id.formTestLL, LuaEvent.UI_EVENT_FRAGMENT_VIEW_CREATED, FormTestLL_Constructor);
+LuaEvent.RegisterUIEvent(LR.id.formTestLL, LuaEvent.UI_EVENT_VIEW_CREATE, FormTestLL_Constructor);

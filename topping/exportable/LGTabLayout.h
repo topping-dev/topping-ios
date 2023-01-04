@@ -30,6 +30,7 @@
 -(void)SelectTabAtIndex:(int)position;
 
 -(void)SetTabSelectedListener:(LuaTranslator*)lt;
+-(void)SetCanSelectTab:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSString* app_tabBackground;
 @property (nonatomic, retain) NSString* app_tabContentStart;
@@ -58,6 +59,7 @@
 @property (nonatomic, retain) NSMutableArray *items;
 @property (nonatomic, retain) id<LGTabBarDelegate> delegate;
 @property (nonatomic, retain) LuaTranslator *ltTabSelectedListener;
+@property (nonatomic, retain) LuaTranslator *ltCanSelectTab;
 
 @property (nonatomic) CGPoint lastContentOffset;
 

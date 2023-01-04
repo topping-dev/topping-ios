@@ -10,4 +10,24 @@
     return lum < 0.5;
 }
 
+-(UIColor *)changeAlphaTo:(float)alpha {
+    CGFloat r,g,b,a;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    
+    return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
+}
+
+-(UIColor *)changeAlphaToPercent:(int)percent {
+    int percentReal = percent;
+    if(percentReal < 0) {
+        percentReal = 0;
+    } else if(percentReal > 100) {
+        percentReal = 100;
+    }
+    CGFloat r,g,b,a;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    
+    return [UIColor colorWithRed:r green:g blue:b alpha:((1.0f * ((float)percent)) / 100.0f)];
+}
+
 @end

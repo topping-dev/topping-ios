@@ -33,6 +33,7 @@
 #define LUA_ANIMS_FOLDER @"anim"
 #define LUA_FONT_FOLDER @"font"
 #define LUA_NAVIGATION_FOLDER @"navigation"
+#define LUA_MENU_FOLDER @"menu"
 
 typedef struct lua_State lua_State;
 

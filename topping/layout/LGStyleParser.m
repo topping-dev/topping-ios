@@ -5,6 +5,7 @@
 #import "LuaResource.h"
 #import "DefaultStyles.h"
 #import "GDataXMLNode.h"
+#import "LGColorParser.h"
 
 @implementation LGStyleParser
 

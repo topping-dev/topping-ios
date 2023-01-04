@@ -4,9 +4,49 @@
 #import "DisplayMetrics.h"
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
+#import <Topping/Topping-Swift.h>
 
 @implementation LGDrawableReturn
 
+-(UIImage *)GetImage:(CGSize)size {
+    if(self.img != nil)
+        return self.img;
+    else if(self.vector) {
+        VectorTheme *vt = [[VectorTheme alloc] initWithColor:[UIColor blackColor]];
+        VectorView *vv = [[VectorView alloc] initWithTheme:vt resources:vt];
+        CGFloat width = size.width, height = size.height;
+        if(width == 0)
+            width = height;
+        else if(height == 0)
+            height = width;
+        VectorDrawable *drawable = (VectorDrawable*)self.vector;
+        vv.drawable = drawable;
+        vv.frame = CGRectMake(0, 0, width, height);
+        return [vv asImage];
+    }
+    return nil;
+}
+
+@end
+
+@implementation VectorTheme
+
+- (instancetype)initWithColor:(UIColor*)color
+{
+    self = [super init];
+    if (self) {
+        self.color = color;
+    }
+    return self;
+}
+
+- (UIColor *)colorFromThemeWithNamed:(NSString *)name {
+    return self.color;
+}
+
+- (UIColor *)colorFromResourcesWithNamed:(NSString *)name {
+    return self.color;
+}
 
 @end
 
@@ -101,7 +141,7 @@
                         stream = [LuaResource GetResource:path :APPEND(name, @".gif")];
                         if(stream == nil)
                         {
-                            retVal = [self ParseXML:APPEND(name, @".xml") :tileMode].img;
+                            return [self ParseXML:APPEND(name, @".xml") :tileMode];
                         }
                     }
                 }
@@ -168,9 +208,22 @@
         {
             return [self ParseShape:root];
         }
+        else if(COMPARE([root name], @"vector"))
+        {
+            return [self ParseVector: dat];
+        }
     }
     
     return nil;
+}
+
+-(LGDrawableReturn*)ParseVector:(NSData*)data
+{
+    VectorDrawable *drawable = [VectorDrawable createDataObjcFrom:data];
+    
+    LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
+    ldr.vector = drawable;
+    return ldr;
 }
 
 -(LGDrawableReturn*)ParseBitmap:(GDataXMLElement*)root

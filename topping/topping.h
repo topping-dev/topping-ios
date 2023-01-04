@@ -26,6 +26,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGAbsListView.h>
 #import <topping/LGAdapterView.h>
 #import <topping/LGAutoCompleteTextView.h>
+#import <topping/LGBottomNavigationView.h>
 #import <topping/LGButton.h>
 #import <topping/LGCheckBox.h>
 #import <topping/LGComboBox.h>
@@ -64,6 +65,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaGraphics.h>
 #import <topping/LuaHttpClient.h>
 #import <topping/LuaJSON.h>
+#import <topping/LuaMenu.h>
 #import <topping/LuaLog.h>
 #import <topping/LuaNativeObject.h>
 #import <topping/LuaNativeCall.h>
