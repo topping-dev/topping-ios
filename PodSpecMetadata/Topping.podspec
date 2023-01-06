@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Topping'
-  s.version          = '0.1.6'
+  s.version          = '0.5.0'
   s.summary          = 'ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.'
   s.description      = <<-DESC
 ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.
