@@ -1011,6 +1011,7 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LGRecyclerView class]];
     [Lunar Register:lu :[LGRecyclerViewAdapter class]];
     [Lunar Register:lu :[LGToolbar class]];
+    [Lunar Register:lu :[LGWebView class]];
 	
 	[Lunar Register:lu :[LuaDefines class]];
 	[Lunar Register:lu :[LuaNativeObject class]];

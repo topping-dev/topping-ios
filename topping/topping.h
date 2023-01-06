@@ -52,6 +52,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGToolbar.h>
 #import <topping/LGView.h>
 #import <topping/LGViewGroup.h>
+#import <topping/LGWebView.h>
 #import <topping/LuaBuffer.h>
 #import <topping/LuaColor.h>
 #import <topping/LuaContext.h>

@@ -1,6 +1,5 @@
 #import "LGButton.h"
 #import "Defines.h"
-#import "LGRadioButton.h"
 #import "LGColorParser.h"
 #import "LGValueParser.h"
 #import "LuaFunction.h"

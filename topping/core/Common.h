@@ -21,14 +21,6 @@
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-//
-//  Common.h
-//  RestoIphone
-//
-//  Created by ed Ka on 12/13/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
 typedef int64_t int64;
 typedef int32_t int32;
 typedef int16_t int16;
