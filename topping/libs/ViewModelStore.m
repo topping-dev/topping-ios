@@ -2,12 +2,28 @@
 
 @implementation ViewModelStore
 
--(void)put:(NSString*)key :(LuaViewModel*)viewModel
+-(void)put:(NSString*)key :(NSObject*)viewModel
 {
     [self.mMap setObject:viewModel forKey:key];
 }
 
+-(void)put:(NSString*)key ptr:(void*)viewModel
+{
+    [self.mMap setObject:[NSValue valueWithPointer:viewModel] forKey:key];
+}
+
 -(LuaViewModel*)get:(NSString*)key
+{
+    return [self.mMap objectForKey:key];
+}
+
+-(void*)getPtr:(NSString*)key
+{
+    NSValue *value = [self.mMap objectForKey:key];
+    return [value pointerValue];
+}
+
+-(NSObject*)getObj:(NSString*)key
 {
     return [self.mMap objectForKey:key];
 }

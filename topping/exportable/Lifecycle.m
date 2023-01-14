@@ -1,32 +1,8 @@
 #import "Lifecycle.h"
 #import "LuaAll.h"
 #import "LuaLifecycleObserver.h"
+#import "CancelRunBlock.h"
 #import <Topping/Topping-Swift.h>
-
-CancelRunBlock* dispatch_async_with_cancel_block(dispatch_queue_t queue, void (^block)(void))
-{
-    __block BOOL execute = YES;
-    __block BOOL executed = NO;
-
-    dispatch_cancel_block_t cancelBlock = ^BOOL (BOOL cancelled) {
-        execute = !cancelled;
-        return executed == NO;
-    };
-    
-    dispatch_run_block_t runBlock = ^() {
-        dispatch_async(queue, ^{
-            if (execute)
-                block();
-            executed = YES;
-        });
-    };
-    
-    CancelRunBlock *crb = [CancelRunBlock new];
-    crb.cancelBlock = cancelBlock;
-    crb.runBlock = runBlock;
-
-    return crb;
-}
 
 @implementation Lifecycle
 
@@ -154,10 +130,10 @@ CancelRunBlock* dispatch_async_with_cancel_block(dispatch_queue_t queue, void (^
 
 -(CancelRunBlock*)whenStateAtLeast:(LifecycleState*)state :(void (^)(void))block {
     __block LifecycleController *controller = nil;
-    CancelRunBlock* crb = dispatch_async_with_cancel_block(dispatch_get_main_queue(), ^(void){
+    CancelRunBlock* crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_main_queue() :^(void){
         block();
         [controller finish];
-    });
+    }];
     controller = [[LifecycleController alloc] initWithLifecycle:self :state :dispatch_get_main_queue() :crb];
     return crb;
 }
@@ -180,10 +156,6 @@ CancelRunBlock* dispatch_async_with_cancel_block(dispatch_queue_t queue, void (^
     }
     return coroutineScope;
 }
-
-@end
-
-@implementation CancelRunBlock
 
 @end
 

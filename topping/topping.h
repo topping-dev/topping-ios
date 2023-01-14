@@ -94,6 +94,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LuaNavHostFragment.h>
 #import <topping/LGFragmentStateAdapter.h>
 #import <topping/LGViewPager.h>
+#import <topping/LuaFragmentInterface.h>
 
 #import <topping/KotlinExports.h>
 

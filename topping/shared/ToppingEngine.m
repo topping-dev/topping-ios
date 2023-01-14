@@ -1026,6 +1026,7 @@ int RegisterTag(lua_State *L)
    	[Lunar Register:lu :[LuaForm class]];
     [Lunar Register:lu :[LuaFragment class]];
    	[Lunar Register:lu :[LuaHttpClient class]];
+    [Lunar Register:lu :[LuaJob class]];
 	[Lunar Register:lu :[LuaJSONObject class]];
 	[Lunar Register:lu :[LuaJSONArray class]];
     [Lunar Register:lu :[LuaLog class]];
@@ -1048,6 +1049,7 @@ int RegisterTag(lua_State *L)
     [Lunar Register:lu :[LuaLifecycle class]];
     [Lunar Register:lu :[LuaLifecycleObserver class]];
     [Lunar Register:lu :[LuaLifecycleOwner class]];
+    [Lunar Register:lu :[LuaLiveData class]];
     [Lunar Register:lu :[LuaMutableLiveData class]];
     [Lunar Register:lu :[LuaNavController class]];
     [Lunar Register:lu :[NavigationUI class]];

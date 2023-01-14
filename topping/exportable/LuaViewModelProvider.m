@@ -25,18 +25,13 @@
     return self;
 }
 
--(LuaViewModel*)Get:(NSString*)tag
+-(LuaViewModel*)Get:(NSString*)key
 {
-    if(viewModelStore == nil)
-        viewModelStore = [NSMutableDictionary dictionary];
-    LuaViewModel *luaViewModel = [viewModelStore objectForKey:tag];
-    if(luaViewModel == nil)
-    {
-        luaViewModel = [LuaViewModel new];
-        [viewModelStore setObject:luaViewModel forKey:tag];
-    }
-    
-    return luaViewModel;
+    return [self.viewModelProvider getWithKey:key];
+}
+
+-(void *)Get:(NSString *)key ptr:(void *)ptr {
+    return [self.viewModelProvider getWithKey:key ptr:ptr];
 }
 
 -(NSString*)GetId

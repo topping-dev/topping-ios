@@ -109,7 +109,7 @@
 
 @end
 
-@implementation LuaMutableLiveData
+@implementation LuaLiveData
 
 - (instancetype)init
 {
@@ -290,9 +290,9 @@
     }
 }
 
-+(LuaMutableLiveData*)create
++(LuaLiveData*)create
 {
-    return [LuaMutableLiveData new];
+    return [LuaLiveData new];
 }
 
 -(void)observeLua:(LuaLifecycleOwner*) owner :(LuaTranslator*)lt
@@ -321,6 +321,45 @@
 
 -(NSString*)GetId
 {
+    return @"LuaLiveData";
+}
+
++ (NSString*)className
+{
+    return @"LuaLiveData";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    
+    ClassMethodNoArg(create, LuaLiveData, @"create", [LuaLiveData class])
+    InstanceMethodNoRet(observeLua::, MakeArray([LuaLifecycleOwner class]C [LuaTranslator class]C nil), @"observe")
+    InstanceMethodNoRet(removeObserver:, MakeArray([LuaTranslator class]C nil), @"removeObserver")
+    InstanceMethodNoArg(getValue, NSObject, @"getValue")
+    
+    return dict;
+}
+
+@end
+
+@implementation LuaMutableLiveData
+
++(LuaMutableLiveData*)create
+{
+    return [LuaMutableLiveData new];
+}
+
+-(void)postValue:(NSObject *)value {
+    [super postValue:value];
+}
+
+-(void)setValue:(NSObject *)value {
+    [super setValue:value];
+}
+
+-(NSString*)GetId
+{
     return @"LuaMutableLiveData";
 }
 
@@ -334,8 +373,8 @@
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
     ClassMethodNoArg(create, LuaMutableLiveData, @"create", [LuaMutableLiveData class])
-    InstanceMethodNoRet(observeLua::, MakeArray([LuaLifecycleOwner class]C [LuaTranslator class]C nil), @"observe")
-    InstanceMethodNoRet(removeObserver:, MakeArray([LuaTranslator class]C nil), @"removeObserver")
+    InstanceMethodNoRet(postValue:, @[[NSObject class]], @"postValue")
+    InstanceMethodNoRet(setValue:, @[[NSObject class]], @"setValue")
     
     return dict;
 }

@@ -78,6 +78,14 @@ class NavControllerViewModel : LuaViewModel {
         func create() -> LuaViewModel {
             return NavControllerViewModel()
         }
+        
+        func create(cls: NSObject.Type) -> NSObject {
+            return NavControllerViewModel()
+        }
+        
+        func create(ptr: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+            return UnsafeMutableRawPointer.allocate(byteCount: 0, alignment: 0)
+        }
     }
     
     static func getInstance(viewModelStore: ViewModelStore) -> NavControllerViewModel {

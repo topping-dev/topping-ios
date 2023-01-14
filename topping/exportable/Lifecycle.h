@@ -10,18 +10,6 @@
 @class LifecycleCoroutineScope;
 @class CancelRunBlock;
 
-typedef BOOL (^dispatch_cancel_block_t)(BOOL cancelBlock);
-typedef void (^dispatch_run_block_t)(void);
-
-@interface CancelRunBlock : NSObject
-
-@property (nonatomic, retain) dispatch_cancel_block_t cancelBlock;
-@property (nonatomic, retain) dispatch_run_block_t runBlock;
-
-@end
-
-CancelRunBlock* dispatch_async_with_cancel_block(dispatch_queue_t queue, void (^block)(void));
-
 typedef NS_ENUM(NSInteger, LifecycleEvent)
 {
     LIFECYCLEEVENT_NIL,

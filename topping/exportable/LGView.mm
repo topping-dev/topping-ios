@@ -824,6 +824,12 @@
     [self._view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self._view action:lt.selector]];
 }
 
+-(NSDictionary *)GetBindings {
+    if([self isKindOfClass:[LGViewGroup class]])
+        return [((LGViewGroup*)self) GetBindings];
+    return @{};
+}
+
 -(LuaFragment*)findFragment {
     LuaFragment *fragment = self.fragment;
     if(fragment == nil)
@@ -884,6 +890,7 @@
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBackground:)) :@selector(SetBackground:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetBackground"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnClickListener:)) :@selector(SetOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnClickListener"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavControllerInternal)) :@selector(findNavControllerInternal) :[LuaNavController class] :MakeArray(nil)] forKey:@"findNavController"];
+    InstanceMethodNoArg(GetBindings, NSMutableDictionary, @"GetBindings")
 	return dict;
 }
 

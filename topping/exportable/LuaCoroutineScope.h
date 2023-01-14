@@ -4,9 +4,23 @@
 #import "LuaTranslator.h"
 #import "LuaValues.h"
 
-@interface LuaCoroutineScope : NSObject <LuaClass>
+@class CancelRunBlock;
+@protocol CancelRunBlockDelegate;
 
--(void)launch:(LuaTranslator*)lt;
--(void)launchDispatcher:(int)dispatcher :(LuaTranslator*)lt;
+@interface LuaJob : NSObject <LuaClass>
+
+-(instancetype)initWithJob:(CancelRunBlock*)job;
+-(void)cancel;
+
+@property (nonatomic, retain) CancelRunBlock* job;
+
+@end
+
+@interface LuaCoroutineScope : NSObject <LuaClass, CancelRunBlockDelegate>
+
+-(LuaJob*)launch:(LuaTranslator*)lt;
+-(LuaJob*)launchDispatcher:(int)dispatcher :(LuaTranslator*)lt;
+
+@property (nonatomic, retain) NSMutableSet *jobSet;
 
 @end

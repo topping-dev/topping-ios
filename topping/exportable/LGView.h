@@ -93,6 +93,7 @@ enum GRAVITY
 -(void)SetVisibility:(NSInteger)visibility;
 -(float)GetAlpha;
 -(void)SetOnClickListener:(LuaTranslator *)lt;
+-(NSDictionary*)GetBindings;
 
 -(LuaFragment*)findFragment;
 -(NavController*)findNavController;

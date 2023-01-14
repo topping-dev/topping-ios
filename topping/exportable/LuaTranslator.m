@@ -27,7 +27,10 @@
 
 -(NSObject*) Call
 {
-    return [self CallIn:self.obj, nil];
+    if(self.obj != nil)
+        return [self CallIn:self.obj, nil];
+    else
+        return [self CallIn:nil];
 }
 
 -(NSObject*) Call:(NSObject *)a

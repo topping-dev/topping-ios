@@ -565,6 +565,10 @@
 		5CD052332967F8BF005E4960 /* LGWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD052312967F8BF005E4960 /* LGWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD052342967F8BF005E4960 /* LGWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD052322967F8BF005E4960 /* LGWebView.mm */; };
 		5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD052352967FAFE005E4960 /* WebKit.framework */; };
+		5CD05239296BED72005E4960 /* LuaFragmentInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05237296BED72005E4960 /* LuaFragmentInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD0523A296BED72005E4960 /* LuaFragmentInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05238296BED72005E4960 /* LuaFragmentInterface.mm */; };
+		5CD0524129718F73005E4960 /* CancelRunBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0523F29718F73005E4960 /* CancelRunBlock.h */; };
+		5CD0524229718F73005E4960 /* CancelRunBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524029718F73005E4960 /* CancelRunBlock.m */; };
 		5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D628464EAD00343C6B /* FragmentStateStore.swift */; };
 		5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */; };
 		5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343DA2847886900343C6B /* ViewModelStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1195,6 +1199,10 @@
 		5CD052312967F8BF005E4960 /* LGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGWebView.h; sourceTree = "<group>"; };
 		5CD052322967F8BF005E4960 /* LGWebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGWebView.mm; sourceTree = "<group>"; };
 		5CD052352967FAFE005E4960 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		5CD05237296BED72005E4960 /* LuaFragmentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaFragmentInterface.h; sourceTree = "<group>"; };
+		5CD05238296BED72005E4960 /* LuaFragmentInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaFragmentInterface.mm; sourceTree = "<group>"; };
+		5CD0523F29718F73005E4960 /* CancelRunBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CancelRunBlock.h; sourceTree = "<group>"; };
+		5CD0524029718F73005E4960 /* CancelRunBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CancelRunBlock.m; sourceTree = "<group>"; };
 		5CD343D628464EAD00343C6B /* FragmentStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateStore.swift; sourceTree = "<group>"; };
 		5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerViewModel.swift; sourceTree = "<group>"; };
 		5CD343DA2847886900343C6B /* ViewModelStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewModelStore.h; sourceTree = "<group>"; };
@@ -1709,6 +1717,8 @@
 				5CD343FA2859FA8F00343C6B /* ViewModelProvider.swift */,
 				5CD343DA2847886900343C6B /* ViewModelStore.h */,
 				5CD343DB2847886900343C6B /* ViewModelStore.m */,
+				5CD0523F29718F73005E4960 /* CancelRunBlock.h */,
+				5CD0524029718F73005E4960 /* CancelRunBlock.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -1808,6 +1818,8 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5CD05237296BED72005E4960 /* LuaFragmentInterface.h */,
+				5CD05238296BED72005E4960 /* LuaFragmentInterface.mm */,
 				5CD052312967F8BF005E4960 /* LGWebView.h */,
 				5CD052322967F8BF005E4960 /* LGWebView.mm */,
 				5C9ED84028FECEBD00305A74 /* KotlinExports.h */,
@@ -2344,6 +2356,7 @@
 				5C2F9A2829641A4500C443A8 /* MDCBottomNavigationItemView.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
 				5C2F9A2A29641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h in Headers */,
+				5CD0524129718F73005E4960 /* CancelRunBlock.h in Headers */,
 				5C2F9A2F29641A4500C443A8 /* MDCBottomNavigationBarController.h in Headers */,
 				5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
@@ -2468,6 +2481,7 @@
 				5C5A994E24E16BCC002A22EA /* LGParser.h in Headers */,
 				5C5A993524E16BCC002A22EA /* LuaClass.h in Headers */,
 				5C810B19295C3C2F00C2A93D /* MaterialAnimationTiming.h in Headers */,
+				5CD05239296BED72005E4960 /* LuaFragmentInterface.h in Headers */,
 				5C5A992B24E16BCC002A22EA /* LuaToast.h in Headers */,
 				5C5A99FD24E16BEC002A22EA /* timeout.h in Headers */,
 				5C5A990024E16BCC002A22EA /* LuaCPlusPlusHelper.h in Headers */,
@@ -2698,6 +2712,7 @@
 				5C2F9A9229641F2900C443A8 /* MDCFontTraits.m in Sources */,
 				5C2F9A9329641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m in Sources */,
 				5C5A99E324E16BEC002A22EA /* llex.c in Sources */,
+				5CD0523A296BED72005E4960 /* LuaFragmentInterface.mm in Sources */,
 				5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */,
 				5C5A99BE24E16BEC002A22EA /* lvm.c in Sources */,
 				5C42E35724EFE8B500F8B012 /* LGFrameLayout.mm in Sources */,
@@ -2805,6 +2820,7 @@
 				5C5A99BB24E16BEC002A22EA /* print.c in Sources */,
 				5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */,
 				5C5A992924E16BCC002A22EA /* LuaTranslator.m in Sources */,
+				5CD0524229718F73005E4960 /* CancelRunBlock.m in Sources */,
 				5C2F9A6829641CB900C443A8 /* MDCPalettes.m in Sources */,
 				5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */,
 				5C5A99BD24E16BEC002A22EA /* loadlib.c in Sources */,

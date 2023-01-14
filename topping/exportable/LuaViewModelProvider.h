@@ -10,13 +10,13 @@
 
 @interface LuaViewModelProvider : NSObject <LuaClass, LuaInterface>
 {
-    NSMutableDictionary *viewModelStore;
 }
 
 +(LuaViewModelProvider*)OfForm:(LuaForm*)form;
 +(LuaViewModelProvider*)OfFragment:(LuaFragment*)fragment;
 - (instancetype)initWithViewModelProvider:(ViewModelProvider*)viewModelProvider;
--(LuaViewModel*)Get:(NSString*)tag;
+-(LuaViewModel*)Get:(NSString*)key;
+-(void*)Get:(NSString*)key ptr:(void*)ptr;
 
 @property (nonatomic, retain) ViewModelProvider *viewModelProvider;
 

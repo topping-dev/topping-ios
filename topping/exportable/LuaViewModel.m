@@ -1,5 +1,17 @@
 #import "LuaViewModel.h"
 #import "LuaAll.h"
+#import "CancelRunBlock.h"
+
+@implementation ClosableCoroutineScope
+
+-(void)close {
+    for(CancelRunBlock* crb in self.jobSet) {
+        crb.cancelBlock(YES);
+    }
+    [self.jobSet removeAllObjects];
+}
+
+@end
 
 @implementation LuaViewModel
 
@@ -25,7 +37,6 @@
 
 -(void)onCleared
 {
-    
 }
 
 -(void)clear
@@ -70,7 +81,17 @@
 
 -(void)closeWithRuntimeException:(NSObject*)result
 {
-    
+    if([result isKindOfClass:[ClosableCoroutineScope class]]) {
+        [((ClosableCoroutineScope*)result) close];
+    }
+}
+
+-(LuaCoroutineScope*)getViewModelScope {
+    LuaCoroutineScope* scope = (LuaCoroutineScope*)[self getTag:@"LuaViewModelScope.JOB_KEY"];
+    if(scope != nil) {
+        return scope;
+    }
+    return (LuaCoroutineScope*)[self setTagIfAbsent:@"LuaViewModelScope.JOB_KEY" :[ClosableCoroutineScope new]];
 }
 
 -(NSString*)GetId
@@ -86,6 +107,10 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    
+    InstanceMethodNoArg(GetObject, @[[NSString class]], @"GetObject")
+    InstanceMethodNoRet(SetObject::, @[[NSString class]C [NSObject class]], @"SetObject")
+    
     return dict;
 }
 

@@ -166,23 +166,45 @@
     return YES;
 }
 
+-(NSDictionary*)GetBindings {
+    if([self GetView] != nil) {
+        if([[self GetView] isKindOfClass:[LGViewGroup class]]) {
+            return [((LGViewGroup*)[self GetView]) GetBindings];
+        }
+    }
+    return @{};
+}
+
+-(NSMutableDictionary*)requireSavedInstanceState:(NSMutableDictionary*)dict {
+    if(dict == nil)
+        return [NSMutableDictionary new];
+    else
+        return dict;
+}
+
 -(void)onCreate:(NSMutableDictionary *)savedInstanceState {
-    NSMutableDictionary *sis = savedInstanceState;
-    if(sis == nil)
-        sis = [NSMutableDictionary new];
-    [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :1, sis, nil];
+    self.kotlinInterface = [LuaEvent GetFragmentInstance:self.luaId :self];
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnCreate Call:[self requireSavedInstanceState:savedInstanceState]];
+    }
+    [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :1, [self requireSavedInstanceState:savedInstanceState], nil];
 }
 
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
-    NSMutableDictionary *sis = savedInstanceState;
-    if(sis == nil)
-        sis = [NSMutableDictionary new];
-    return (LGView*)[LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
-                     [LuaViewInflator From:inflater], container, sis, nil];
+    LGView *viewToRet = nil;
+    viewToRet = (LGView*)[LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
+                     [LuaViewInflator From:inflater], container, [self requireSavedInstanceState:savedInstanceState], nil];
+    if(viewToRet == nil && self.kotlinInterface != nil) {
+        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView CallIn:self.context, [LuaViewInflator From:inflater], container, [self requireSavedInstanceState:savedInstanceState], nil];
+    }
+    return viewToRet;
 }
 
 -(void)onViewCreated:(LGView *)view :(NSMutableDictionary *)savedInstanceState {
-    [LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, savedInstanceState, nil];
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnViewCreated Call:view :[self requireSavedInstanceState:savedInstanceState]];
+    }
+    [LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [self requireSavedInstanceState:savedInstanceState], nil];
 }
 
 -(void)onActivityCreated:(NSMutableDictionary *)savedInstanceState {
@@ -199,6 +221,9 @@
 
 -(void)onResume {
     self.mCalled = true;
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnResume Call];
+    }
     [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
 }
 
@@ -208,6 +233,9 @@
 
 -(void)onPause {
     self.mCalled = true;
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnPause Call];
+    }
     [LuaEvent OnUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
 }
 
@@ -221,6 +249,9 @@
 
 -(void)onDestroyView {
     self.mCalled = true;
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnDestroy Call];
+    }
     [LuaEvent OnUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
 }
 
@@ -663,6 +694,7 @@
     InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
     InstanceMethodNoArg(IsInitialized, LuaBool, @"IsInitialized")
     InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
+    InstanceMethodNoArg(GetBindings, NSMutableDictionary, @"GetBindings")
     
     return dict;
 }

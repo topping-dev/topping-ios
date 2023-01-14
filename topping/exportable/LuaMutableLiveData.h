@@ -16,7 +16,7 @@
 
 @class ObserverWrapper;
 
-@interface LuaMutableLiveData : NSObject <LuaClass, LuaInterface>
+@interface LuaLiveData : NSObject <LuaClass, LuaInterface>
 {
     NSMapTable *luaObserverMap;
 }
@@ -28,8 +28,6 @@
 -(void)observeForever:(id<Observer>) observer;
 -(void)removeObserver:(id<Observer>) observer;
 -(void)removeObservers:(id<LifecycleOwner>)owner;
--(void)postValue:(NSObject*)value;
--(void)setValue:(NSObject*)value;
 -(NSObject*)getValue;
 -(NSInteger)getVersion;
 -(void)onActive;
@@ -38,7 +36,7 @@
 -(BOOL)hasActiveObservers;
 -(void)changeActiveCounter:(NSInteger)change;
 
-+(LuaMutableLiveData*)create;
++(LuaLiveData*)create;
 -(void)observeLua:(LuaLifecycleOwner*) owner :(LuaTranslator*)lt;
 -(void)removeObserverLua:(LuaTranslator*)lt;
 
@@ -54,6 +52,16 @@
 @property BOOL mDispatchingValue;
 @property BOOL mDispatchingInvalidated;
 @property id<RunnableObjc> mPostValueRunnable;
+
+@end
+
+@interface LuaMutableLiveData : LuaLiveData {
+    
+}
+
++(LuaMutableLiveData*)create;
+-(void)postValue:(NSObject*)value;
+-(void)setValue:(NSObject*)value;
 
 @end
 
