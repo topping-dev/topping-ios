@@ -132,6 +132,7 @@
     if(!self.createCalled)
     {
         self.createCalled = true;
+        self.kotlinInterface = [LuaEvent GetFormInstance:self.luaId :self];
         [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
         if(self.kotlinInterface != nil) {
             [self.kotlinInterface.ltOnCreate Call];
@@ -140,7 +141,6 @@
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
     [self.mFragments dispatchResume];
     [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
-    self.kotlinInterface = [LuaEvent GetFormInstance:self.luaId :self];
     if(self.kotlinInterface != nil) {
         [self.kotlinInterface.ltOnResume Call];
     }
