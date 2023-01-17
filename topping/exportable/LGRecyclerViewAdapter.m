@@ -5,6 +5,7 @@
 #import "LuaValues.h"
 #import "LuaTranslator.h"
 #import "LGViewPager.h"
+#import "ILGRecyclerViewAdapter.h"
 
 @implementation LGViewUICollectionViewCell
 
@@ -47,6 +48,9 @@
 
 -(int)GetCount
 {
+    if(self.kotlinInterface != nil) {
+        return [((NSNumber*)[self.kotlinInterface.ltGetItemCount Call]) intValue];
+    }
     if(self.values != nil)
         return [self.values count];
     return 0;

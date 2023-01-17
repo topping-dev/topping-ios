@@ -4,7 +4,9 @@
 #import "LuaClass.h"
 #import "LuaRef.h"
 
-@class LuaFragmentInterface;
+@class ILuaForm;
+@class LuaForm;
+@class ILuaFragment;
 @class LuaFragment;
 
 typedef enum UIEvents
@@ -32,8 +34,10 @@ typedef enum UIEvents
 }
 
 +(void)RegisterUIEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
++(void)RegisterForm:(NSString*)name :(LuaTranslator*)ltInit;
++(ILuaForm*)GetFormInstance:(NSString*)name :(LuaForm*)fragment;
 +(void)RegisterFragment:(NSString*)name :(LuaTranslator*)ltInit;
-+(LuaFragmentInterface*)GetFragmentInstance:(NSString*)name :(LuaFragment*)fragment;
++(ILuaFragment*)GetFragmentInstance:(NSString*)name :(LuaFragment*)fragment;
 +(NSObject*)OnUIEvent:(NSObject<LuaInterface>*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
 
 @end

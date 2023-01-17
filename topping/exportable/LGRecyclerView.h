@@ -8,6 +8,7 @@
 //Lua
 +(LGRecyclerView *)Create:(LuaContext *)context;
 -(void)SetAdapter:(LGRecyclerViewAdapter *)val;
+-(void)SetAdapterInterface:(LuaTranslator *)ltInit;
 -(LGRecyclerViewAdapter *)GetAdapter;
 -(void)Notify;
 

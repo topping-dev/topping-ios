@@ -6,7 +6,7 @@
 #import "LuaContext.h"
 #import "LGView.h"
 #import "ViewModelStore.h"
-#import "LuaFragmentInterface.h"
+#import "ILuaFragment.h"
 
 #define SAVED_STATE_TAG @"android:support:fragments"
 
@@ -176,6 +176,6 @@ typedef NS_ENUM(NSInteger, FragmentState)
 @property Boolean mDetached;
 @property Boolean mCalled;
 @property (nonatomic, retain) NSNumber *mIsPrimaryNavigationFragment;
-@property (nonatomic, retain) LuaFragmentInterface *kotlinInterface;
+@property (nonatomic, retain) ILuaFragment *kotlinInterface;
 
 @end

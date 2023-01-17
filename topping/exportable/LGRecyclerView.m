@@ -1,6 +1,7 @@
 #import "LGRecyclerView.h"
 #import "Defines.h"
 #import "LuaFunction.h"
+#import "ILGRecyclerViewAdapter.h"
 
 @implementation LGRecyclerView
 
@@ -75,6 +76,14 @@
     }
     /*if(parToFind != nil)
        [parToFind ResizeAndInvalidate];*/
+}
+
+-(void)SetAdapterInterface:(LuaTranslator *)ltInit {
+    LGRecyclerViewAdapter *adapter = [LGRecyclerViewAdapter Create:self.lc :@""];
+    adapter.kotlinInterface = (ILGRecyclerViewAdapter*)[ltInit Call:adapter];
+    [adapter SetOnCreateViewHolder:adapter.kotlinInterface.ltOnCreateViewHolder];
+    [adapter SetOnBindViewHolder:adapter.kotlinInterface.ltOnBindViewHolder];
+    [adapter SetGetItemViewType:adapter.kotlinInterface.ltGetItemViewType];
 }
 
 -(LGRecyclerViewAdapter *)GetAdapter

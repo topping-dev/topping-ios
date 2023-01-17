@@ -6,6 +6,7 @@
 
 @implementation LuaEvent
 
+static NSMutableDictionary *formMap = [NSMutableDictionary dictionary];
 static NSMutableDictionary *fragmentMap = [NSMutableDictionary dictionary];
 static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
 
@@ -34,13 +35,22 @@ static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
     [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
++(void)RegisterForm:(NSString*)name :(LuaTranslator*)ltInit {
+    [fragmentMap setObject:ltInit forKey:name];
+}
+
++(ILuaForm*)GetFormInstance:(NSString*)name :(LuaForm*)form {
+    LuaTranslator* ltInit = [formMap objectForKey:name];
+    return (ILuaForm*)[ltInit Call:form];
+}
+
 +(void)RegisterFragment:(NSString*)name :(LuaTranslator*)ltInit {
     [fragmentMap setObject:ltInit forKey:name];
 }
 
-+(LuaFragmentInterface*)GetFragmentInstance:(NSString*)name :(LuaFragment*)fragment {
++(ILuaFragment*)GetFragmentInstance:(NSString*)name :(LuaFragment*)fragment {
     LuaTranslator* ltInit = [fragmentMap objectForKey:name];
-    return (LuaFragmentInterface*)[ltInit Call:fragment];
+    return (ILuaFragment*)[ltInit Call:fragment];
 }
 
 +(NSObject*)CreateInstanceForName:(NSString*)name {

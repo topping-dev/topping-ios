@@ -63,7 +63,7 @@
         else if(self.dialogType == DIALOG_TYPE_TIMEPICKER && self.ltTimeSelectedListener != nil)
         {
             NSDateComponents *dateComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:datePicker.date];
-            [self.ltTimeSelectedListener CallIn:[NSNumber numberWithInt:dateComponents.hour], [NSNumber numberWithInt:dateComponents.minute], nil];
+            [self.ltTimeSelectedListener CallIn:[NSNumber numberWithInt:dateComponents.hour], [NSNumber numberWithInt:dateComponents.minute], [NSNumber numberWithInt:dateComponents.second], nil];
         }
     }
 }

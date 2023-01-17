@@ -133,10 +133,17 @@
     {
         self.createCalled = true;
         [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
+        if(self.kotlinInterface != nil) {
+            [self.kotlinInterface.ltOnCreate Call];
+        }
     }
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
     [self.mFragments dispatchResume];
     [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
+    self.kotlinInterface = [LuaEvent GetFormInstance:self.luaId :self];
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnResume Call];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -152,6 +159,9 @@
     
     //onPause
 	[LuaEvent OnUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnPause Call];
+    }
     [self.mFragments dispatchPause];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_PAUSE];
     
@@ -173,6 +183,9 @@
     //onDestroy
     [self.mFragments dispatchDestroy];
     [LuaEvent OnUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
+    if(self.kotlinInterface != nil) {
+        [self.kotlinInterface.ltOnDestroy Call];
+    }
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_DESTROY];
 }
 

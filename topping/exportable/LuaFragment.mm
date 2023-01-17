@@ -185,17 +185,17 @@
 -(void)onCreate:(NSMutableDictionary *)savedInstanceState {
     self.kotlinInterface = [LuaEvent GetFragmentInstance:self.luaId :self];
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnCreate Call:[self requireSavedInstanceState:savedInstanceState]];
+        [self.kotlinInterface.ltOnCreate Call:[[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]]];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :1, [self requireSavedInstanceState:savedInstanceState], nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :1, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
 }
 
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
     LGView *viewToRet = nil;
     viewToRet = (LGView*)[LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
-                     [LuaViewInflator From:inflater], container, [self requireSavedInstanceState:savedInstanceState], nil];
+                     [LuaViewInflator From:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
     if(viewToRet == nil && self.kotlinInterface != nil) {
-        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView CallIn:self.context, [LuaViewInflator From:inflater], container, [self requireSavedInstanceState:savedInstanceState], nil];
+        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView CallIn:self.context, [LuaViewInflator From:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
     }
     return viewToRet;
 }
@@ -204,7 +204,7 @@
     if(self.kotlinInterface != nil) {
         [self.kotlinInterface.ltOnViewCreated Call:view :[self requireSavedInstanceState:savedInstanceState]];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [self requireSavedInstanceState:savedInstanceState], nil];
+    [LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
 }
 
 -(void)onActivityCreated:(NSMutableDictionary *)savedInstanceState {

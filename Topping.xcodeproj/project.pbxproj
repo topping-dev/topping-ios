@@ -565,10 +565,16 @@
 		5CD052332967F8BF005E4960 /* LGWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD052312967F8BF005E4960 /* LGWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD052342967F8BF005E4960 /* LGWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD052322967F8BF005E4960 /* LGWebView.mm */; };
 		5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD052352967FAFE005E4960 /* WebKit.framework */; };
-		5CD05239296BED72005E4960 /* LuaFragmentInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05237296BED72005E4960 /* LuaFragmentInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CD0523A296BED72005E4960 /* LuaFragmentInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05238296BED72005E4960 /* LuaFragmentInterface.mm */; };
+		5CD05239296BED72005E4960 /* ILuaFragment.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05237296BED72005E4960 /* ILuaFragment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD0523A296BED72005E4960 /* ILuaFragment.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05238296BED72005E4960 /* ILuaFragment.mm */; };
 		5CD0524129718F73005E4960 /* CancelRunBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0523F29718F73005E4960 /* CancelRunBlock.h */; };
 		5CD0524229718F73005E4960 /* CancelRunBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524029718F73005E4960 /* CancelRunBlock.m */; };
+		5CD0524529730703005E4960 /* ILuaForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0524329730703005E4960 /* ILuaForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD0524629730703005E4960 /* ILuaForm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524429730703005E4960 /* ILuaForm.mm */; };
+		5CD05249297321D8005E4960 /* ILGRecyclerViewAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05247297321D8005E4960 /* ILGRecyclerViewAdapter.mm */; };
+		5CD0524A297321D8005E4960 /* ILGRecyclerViewAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD0524D2976D546005E4960 /* LuaBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0524B2976D546005E4960 /* LuaBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD0524E2976D546005E4960 /* LuaBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524C2976D546005E4960 /* LuaBundle.m */; };
 		5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D628464EAD00343C6B /* FragmentStateStore.swift */; };
 		5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */; };
 		5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343DA2847886900343C6B /* ViewModelStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1199,10 +1205,16 @@
 		5CD052312967F8BF005E4960 /* LGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGWebView.h; sourceTree = "<group>"; };
 		5CD052322967F8BF005E4960 /* LGWebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGWebView.mm; sourceTree = "<group>"; };
 		5CD052352967FAFE005E4960 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		5CD05237296BED72005E4960 /* LuaFragmentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaFragmentInterface.h; sourceTree = "<group>"; };
-		5CD05238296BED72005E4960 /* LuaFragmentInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaFragmentInterface.mm; sourceTree = "<group>"; };
+		5CD05237296BED72005E4960 /* ILuaFragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILuaFragment.h; sourceTree = "<group>"; };
+		5CD05238296BED72005E4960 /* ILuaFragment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ILuaFragment.mm; sourceTree = "<group>"; };
 		5CD0523F29718F73005E4960 /* CancelRunBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CancelRunBlock.h; sourceTree = "<group>"; };
 		5CD0524029718F73005E4960 /* CancelRunBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CancelRunBlock.m; sourceTree = "<group>"; };
+		5CD0524329730703005E4960 /* ILuaForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILuaForm.h; sourceTree = "<group>"; };
+		5CD0524429730703005E4960 /* ILuaForm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ILuaForm.mm; sourceTree = "<group>"; };
+		5CD05247297321D8005E4960 /* ILGRecyclerViewAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ILGRecyclerViewAdapter.mm; sourceTree = "<group>"; };
+		5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGRecyclerViewAdapter.h; sourceTree = "<group>"; };
+		5CD0524B2976D546005E4960 /* LuaBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaBundle.h; sourceTree = "<group>"; };
+		5CD0524C2976D546005E4960 /* LuaBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaBundle.m; sourceTree = "<group>"; };
 		5CD343D628464EAD00343C6B /* FragmentStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateStore.swift; sourceTree = "<group>"; };
 		5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerViewModel.swift; sourceTree = "<group>"; };
 		5CD343DA2847886900343C6B /* ViewModelStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewModelStore.h; sourceTree = "<group>"; };
@@ -1818,10 +1830,10 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
-				5CD05237296BED72005E4960 /* LuaFragmentInterface.h */,
-				5CD05238296BED72005E4960 /* LuaFragmentInterface.mm */,
-				5CD052312967F8BF005E4960 /* LGWebView.h */,
-				5CD052322967F8BF005E4960 /* LGWebView.mm */,
+				5CD0524B2976D546005E4960 /* LuaBundle.h */,
+				5CD0524C2976D546005E4960 /* LuaBundle.m */,
+				5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */,
+				5CD05247297321D8005E4960 /* ILGRecyclerViewAdapter.mm */,
 				5C9ED84028FECEBD00305A74 /* KotlinExports.h */,
 				5C9ED84228FECF4200305A74 /* KotlinExports.m */,
 				5C5A982C24E16BBC002A22EA /* LGAbsListView.h */,
@@ -1886,6 +1898,8 @@
 				5C42E35124EFE1C600F8B012 /* LGViewGroup.m */,
 				5C2F99FC295C6EF200C443A8 /* LGViewPager.h */,
 				5C2F99FD295C6EF200C443A8 /* LGViewPager.m */,
+				5CD052312967F8BF005E4960 /* LGWebView.h */,
+				5CD052322967F8BF005E4960 /* LGWebView.mm */,
 				5C91BD61283E135C00D4C94F /* Lifecycle.h */,
 				5C91BD5F283E134500D4C94F /* Lifecycle.m */,
 				5C5A986B24E16BC3002A22EA /* LuaBuffer.h */,
@@ -1910,8 +1924,12 @@
 				5C2F9A07295ED9D100C443A8 /* LuaEvent.mm */,
 				5C5A982E24E16BBC002A22EA /* LuaForm.h */,
 				5C5A982524E16BBC002A22EA /* LuaForm.mm */,
+				5CD0524329730703005E4960 /* ILuaForm.h */,
+				5CD0524429730703005E4960 /* ILuaForm.mm */,
 				5C2CA83C2559728C00C03879 /* LuaFragment.h */,
 				5C2CA83D2559728D00C03879 /* LuaFragment.mm */,
+				5CD05237296BED72005E4960 /* ILuaFragment.h */,
+				5CD05238296BED72005E4960 /* ILuaFragment.mm */,
 				5C2CA8412559753500C03879 /* LuaGraphics.h */,
 				5C2CA8402559753300C03879 /* LuaGraphics.mm */,
 				5C5A98A924E16BCA002A22EA /* LuaHttpClient.h */,
@@ -2278,6 +2296,7 @@
 				5C5A994624E16BCC002A22EA /* LGDatePicker.h in Headers */,
 				5C5A992124E16BCC002A22EA /* LuaValues.h in Headers */,
 				5C5A99C524E16BEC002A22EA /* lcode.h in Headers */,
+				5CD0524529730703005E4960 /* ILuaForm.h in Headers */,
 				5C2F9A4229641AF800C443A8 /* UIView+MaterialElevationResponding.h in Headers */,
 				5C2F9A7329641E2700C443A8 /* MaterialShadowLayer.h in Headers */,
 				5CD92592252CA48300EC0A1D /* NSStack.h in Headers */,
@@ -2401,6 +2420,7 @@
 				5C5A99B224E16BEC002A22EA /* llimits.h in Headers */,
 				5C2CA83E2559728E00C03879 /* LuaFragment.h in Headers */,
 				5C5A990224E16BCC002A22EA /* LuaShort.h in Headers */,
+				5CD0524D2976D546005E4960 /* LuaBundle.h in Headers */,
 				5CD344022861B7D200343C6B /* LGFragmentContainerView.h in Headers */,
 				5C2F9A0D2964194500C443A8 /* LGBottomNavigationView.h in Headers */,
 				5C9EC7BA2935FBE3008D2909 /* MDCActivityIndicatorMotionSpec.h in Headers */,
@@ -2481,12 +2501,13 @@
 				5C5A994E24E16BCC002A22EA /* LGParser.h in Headers */,
 				5C5A993524E16BCC002A22EA /* LuaClass.h in Headers */,
 				5C810B19295C3C2F00C2A93D /* MaterialAnimationTiming.h in Headers */,
-				5CD05239296BED72005E4960 /* LuaFragmentInterface.h in Headers */,
+				5CD05239296BED72005E4960 /* ILuaFragment.h in Headers */,
 				5C5A992B24E16BCC002A22EA /* LuaToast.h in Headers */,
 				5C5A99FD24E16BEC002A22EA /* timeout.h in Headers */,
 				5C5A990024E16BCC002A22EA /* LuaCPlusPlusHelper.h in Headers */,
 				5C2F99F6295C3AA300C443A8 /* MDCDotBadgeAppearance.h in Headers */,
 				5C23B60324E555870094389F /* UIBufferedProgressBar.h in Headers */,
+				5CD0524A297321D8005E4960 /* ILGRecyclerViewAdapter.h in Headers */,
 				5C5A990824E16BCC002A22EA /* LuaDialog.h in Headers */,
 				5C609D6325BDC21F006BF4CE /* LGFontParser.h in Headers */,
 				5C31C7A3250399A8001773F8 /* LGStyleParser.h in Headers */,
@@ -2712,7 +2733,7 @@
 				5C2F9A9229641F2900C443A8 /* MDCFontTraits.m in Sources */,
 				5C2F9A9329641F2900C443A8 /* UIFontDescriptor+MaterialTypography.m in Sources */,
 				5C5A99E324E16BEC002A22EA /* llex.c in Sources */,
-				5CD0523A296BED72005E4960 /* LuaFragmentInterface.mm in Sources */,
+				5CD0523A296BED72005E4960 /* ILuaFragment.mm in Sources */,
 				5C78BA242846073E003EC02A /* BackStackRecord.swift in Sources */,
 				5C5A99BE24E16BEC002A22EA /* lvm.c in Sources */,
 				5C42E35724EFE8B500F8B012 /* LGFrameLayout.mm in Sources */,
@@ -2744,6 +2765,7 @@
 				5C65695329659F1B002EA9C8 /* VectorDrawableParser.swift in Sources */,
 				5C5A99F124E16BEC002A22EA /* unix.c in Sources */,
 				5C2F9A6929641CB900C443A8 /* MDCPaletteNames.m in Sources */,
+				5CD0524E2976D546005E4960 /* LuaBundle.m in Sources */,
 				5C65694F29659F1B002EA9C8 /* VectorView.swift in Sources */,
 				5CD052342967F8BF005E4960 /* LGWebView.mm in Sources */,
 				5C5A98E124E16BCC002A22EA /* LuaViewInflator.m in Sources */,
@@ -2798,6 +2820,7 @@
 				5C32B2F024F9783300875355 /* LGValueParser.m in Sources */,
 				5CC17C42295C38F1000B5BB0 /* MDCTabBarViewPrivateIndicatorContext.m in Sources */,
 				5C9EC7A32935F25D008D2909 /* CircularProgressView.swift in Sources */,
+				5CD0524629730703005E4960 /* ILuaForm.mm in Sources */,
 				5C5A990624E16BCC002A22EA /* LuaDate.m in Sources */,
 				5C5A99E524E16BEC002A22EA /* ltm.c in Sources */,
 				5CD343F72859F8EC00343C6B /* FragmentViewLifecycleOwner.swift in Sources */,
@@ -2823,6 +2846,7 @@
 				5CD0524229718F73005E4960 /* CancelRunBlock.m in Sources */,
 				5C2F9A6829641CB900C443A8 /* MDCPalettes.m in Sources */,
 				5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */,
+				5CD05249297321D8005E4960 /* ILGRecyclerViewAdapter.mm in Sources */,
 				5C5A99BD24E16BEC002A22EA /* loadlib.c in Sources */,
 				5C5A98FE24E16BCC002A22EA /* LuaDatabase.m in Sources */,
 				5C2F9A2E29641A4500C443A8 /* MDCBottomNavigationBarController.m in Sources */,

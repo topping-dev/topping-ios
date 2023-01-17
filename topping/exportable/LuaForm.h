@@ -8,6 +8,7 @@
 #import "LuaLifecycleOwner.h"
 #import "LifecycleRegistry.h"
 #import "LGView.h"
+#import "ILuaForm.h"
 
 @class LGView;
 @class LGToolbar;
@@ -76,5 +77,6 @@ KEYBOARD_PROPERTIES
 @property(nonatomic) BOOL mStopped;
 @property(nonatomic) BOOL createCalled;
 @property(nonatomic) BOOL rootConstraintsSet;
+@property (nonatomic, retain) ILuaForm *kotlinInterface;
 
 @end

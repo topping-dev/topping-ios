@@ -7,6 +7,7 @@
 @class LGRecyclerView;
 @protocol LuaInterface;
 @protocol OnPageChangeCallback;
+@class ILGRecyclerViewAdapter;
 
 @interface LGViewUICollectionViewCell : UICollectionViewCell
 
@@ -47,5 +48,7 @@
 @property(nonatomic, strong) LuaTranslator *ltItemSelected, *ltCreateViewHolder, *ltBindViewHolder, *ltGetItemViewType;
 
 @property(nonatomic, strong) id<OnPageChangeCallback> onPageChangedListener;
+
+@property(nonatomic, strong) ILGRecyclerViewAdapter *kotlinInterface;
 
 @end

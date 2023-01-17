@@ -228,7 +228,7 @@
 {
     if(self.ltNavigationClick != nil)
     {
-        [self.ltNavigationClick Call:self :nil];
+        [self.ltNavigationClick Call];
     }
     if(self.inNavigationClick != nil)
     {

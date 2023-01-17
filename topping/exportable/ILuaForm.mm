@@ -1,21 +1,21 @@
-#import "LuaFragmentInterface.h"
+#import "ILuaForm.h"
 #import "LuaFunction.h"
 #import "ToppingEngine.h"
 
-@implementation LuaFragmentInterface
+@implementation ILuaForm
 
-+(LuaFragmentInterface *)Create {
-    return [[LuaFragmentInterface alloc] init];
++(ILuaForm *)Create {
+    return [[ILuaForm alloc] init];
 }
 
 -(NSString*)GetId
 {
-    return [LuaFragmentInterface className];
+    return [ILuaForm className];
 }
 
 + (NSString*)className
 {
-	return @"LuaFragmentInterface";
+	return @"ILuaForm";
 }
 
 +(NSMutableDictionary*)luaMethods

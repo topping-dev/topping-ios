@@ -142,42 +142,10 @@
             filePath = "topping/exportable/LuaForm.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "-SetView:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A5FD50F3-60CE-4F50-AA23-5B3B5CAA276A - 6be39d2b443980d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LuaForm SetView:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/exportable/LuaForm.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "274"
-                  endingLineNumber = "274"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "A5FD50F3-60CE-4F50-AA23-5B3B5CAA276A - 6be39d2b4439802d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LuaForm SetView:]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/exportable/LuaForm.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "267"
-                  endingLineNumber = "267"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -153,7 +153,7 @@
     LuaTab *tabItem = [self getTabForUITabBarItem:item];
     if(tabItem != nil)
     {
-        [self.ltTabSelectedListener Call:self :tabItem];
+        [self.ltTabSelectedListener Call:tabItem];
     }
 }
 
@@ -164,7 +164,7 @@
     LuaTab *tabItem = [self getTabForUITabBarItem:item];
     if(tabItem != nil)
     {
-        return [self.ltCanSelectTab Call:self :tabItem];
+        return [self.ltCanSelectTab Call:tabItem];
     }
     
     return YES;

@@ -27,10 +27,7 @@
 
 -(NSObject*) Call
 {
-    if(self.obj != nil)
-        return [self CallIn:self.obj, nil];
-    else
-        return [self CallIn:nil];
+    return [self CallIn:nil];
 }
 
 -(NSObject*) Call:(NSObject *)a
@@ -47,14 +44,17 @@
 {
     if(self.nobj != NULL)
     {
+        NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:VarArgs2(val)];
+        if(self.obj != nil)
+           [arr insertObject:self.obj atIndex:0];
         if(self.kFF != NULL)
         {
-            self.kFF(self.nobj, 0, VarArgs2(val));
+            self.kFF(self.nobj, 0, arr);
             return nil;
         }
         else if(self.kFRetF != NULL)
         {
-            return self.kFRetF(self.nobj, 0, VarArgs2(val));
+            return self.kFRetF(self.nobj, 0, arr);
         }
         else
             return [sToppingEngine OnNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
