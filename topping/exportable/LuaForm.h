@@ -61,6 +61,7 @@ KEYBOARD_PROPERTIES
 
 @property(nonatomic, retain) NSString *luaId;
 @property(nonatomic, retain) LuaContext *context;
+@property(nonatomic, retain) LuaFormIntent *intent;
 
 @property(nonatomic, retain) LGView *lgview;
 @property(nonatomic, retain) LGToolbar *toolbar;

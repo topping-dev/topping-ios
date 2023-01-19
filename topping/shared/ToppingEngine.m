@@ -1018,12 +1018,14 @@ int RegisterTag(lua_State *L)
 	[Lunar Register:lu :[LuaObjectStore class]];
     
     [Lunar Register:lu :[LuaBuffer class]];
+    [Lunar Register:lu :[LuaBundle class]];
     [Lunar Register:lu :[LuaColor class]];
 	[Lunar Register:lu :[LuaDatabase class]];
     [Lunar Register:lu :[LuaDate class]];
     [Lunar Register:lu :[LuaDialog class]];
     [Lunar Register:lu :[LuaEvent class]];
    	[Lunar Register:lu :[LuaForm class]];
+    [Lunar Register:lu :[LuaFormIntent class]];
     [Lunar Register:lu :[LuaFragment class]];
    	[Lunar Register:lu :[LuaHttpClient class]];
     [Lunar Register:lu :[LuaJob class]];

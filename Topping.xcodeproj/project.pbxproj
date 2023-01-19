@@ -575,6 +575,8 @@
 		5CD0524A297321D8005E4960 /* ILGRecyclerViewAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD0524D2976D546005E4960 /* LuaBundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0524B2976D546005E4960 /* LuaBundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD0524E2976D546005E4960 /* LuaBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524C2976D546005E4960 /* LuaBundle.m */; };
+		5CD052512977BA59005E4960 /* LuaFormIntent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524F2977BA59005E4960 /* LuaFormIntent.m */; };
+		5CD052522977BA59005E4960 /* LuaFormIntent.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD052502977BA59005E4960 /* LuaFormIntent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D628464EAD00343C6B /* FragmentStateStore.swift */; };
 		5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */; };
 		5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343DA2847886900343C6B /* ViewModelStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1215,6 +1217,8 @@
 		5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILGRecyclerViewAdapter.h; sourceTree = "<group>"; };
 		5CD0524B2976D546005E4960 /* LuaBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaBundle.h; sourceTree = "<group>"; };
 		5CD0524C2976D546005E4960 /* LuaBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaBundle.m; sourceTree = "<group>"; };
+		5CD0524F2977BA59005E4960 /* LuaFormIntent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaFormIntent.m; sourceTree = "<group>"; };
+		5CD052502977BA59005E4960 /* LuaFormIntent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaFormIntent.h; sourceTree = "<group>"; };
 		5CD343D628464EAD00343C6B /* FragmentStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateStore.swift; sourceTree = "<group>"; };
 		5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerViewModel.swift; sourceTree = "<group>"; };
 		5CD343DA2847886900343C6B /* ViewModelStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewModelStore.h; sourceTree = "<group>"; };
@@ -1830,6 +1834,8 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5CD052502977BA59005E4960 /* LuaFormIntent.h */,
+				5CD0524F2977BA59005E4960 /* LuaFormIntent.m */,
 				5CD0524B2976D546005E4960 /* LuaBundle.h */,
 				5CD0524C2976D546005E4960 /* LuaBundle.m */,
 				5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */,
@@ -2277,6 +2283,7 @@
 				5C5A9A5024E1D3B1002A22EA /* DatabaseHelper.h in Headers */,
 				5CC17C3E295C38F1000B5BB0 /* MDCTabBarItem.h in Headers */,
 				5C5A9A4624E1B8EA002A22EA /* Singleton.h in Headers */,
+				5CD052522977BA59005E4960 /* LuaFormIntent.h in Headers */,
 				5C5A99E824E16BEC002A22EA /* mime.h in Headers */,
 				5C5A98FC24E16BCC002A22EA /* LGListView.h in Headers */,
 				5C5A9A0224E16BEC002A22EA /* udp.h in Headers */,
@@ -2832,6 +2839,7 @@
 				5CC17C40295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m in Sources */,
 				5C5A99E724E16BEC002A22EA /* buffer.c in Sources */,
 				5C43E6D424FE41E7005BEA07 /* LGRecyclerView.m in Sources */,
+				5CD052512977BA59005E4960 /* LuaFormIntent.m in Sources */,
 				5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */,
 				5C5A993624E16BCC002A22EA /* DataToBeDownloaded.m in Sources */,
 				5C5A99E024E16BEC002A22EA /* ldebug.c in Sources */,
