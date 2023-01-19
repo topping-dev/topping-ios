@@ -83,6 +83,7 @@ typedef NS_ENUM(NSInteger, FragmentState)
 -(BOOL)isInBackStack;
 -(void)setArguments:(NSMutableDictionary*)args;
 -(NSMutableDictionary*)getArguments;
+-(LuaBundle*)getArgumentsBundle;
 -(BOOL)isStateSaved;
 -(void)onHiddenChanged:(BOOL) hidden;
 -(BOOL)isHidden;

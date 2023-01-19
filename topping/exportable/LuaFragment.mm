@@ -327,6 +327,10 @@
     return self.mArguments;
 }
 
+-(LuaBundle *)getArgumentsBundle {
+    return [[LuaBundle alloc] initWithBundle:[self getArguments]];
+}
+
 -(BOOL)isStateSaved {
     if(self.mFragmentManager == nil)
         return false;
@@ -691,6 +695,7 @@
     InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitleInternal")
     InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitle")
     InstanceMethodNoRetNoArg(Close, @"Close")
+    InstanceMethodNoArg(getArgumentsBundle, LuaBundle, @"getArguments")
     InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
     InstanceMethodNoArg(IsInitialized, LuaBool, @"IsInitialized")
     InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
