@@ -7,7 +7,7 @@
 
 @implementation ObserverWrapper
 
--(instancetype)initWithLiveData:(LuaMutableLiveData*)livedata :(id<Observer>) observer {
+-(instancetype)initWithLiveData:(LuaLiveData*)livedata :(id<Observer>) observer {
     self = [super init];
     self.myself = livedata;
     self.mObserver = observer;
@@ -43,7 +43,7 @@
 
 @implementation LifecycleBoundObserver
 
--(instancetype)initWithLiveData:(LuaMutableLiveData*)livedata :(id<LifecycleOwner>)owner :(id<Observer>)observer {
+-(instancetype)initWithLiveData:(LuaLiveData*)livedata :(id<LifecycleOwner>)owner :(id<Observer>)observer {
     self = [super initWithLiveData:livedata :observer];
     self.myself = livedata;
     self.mOwner = owner;
@@ -81,7 +81,7 @@
 
 @implementation AlwaysActiveObserver
 
--(instancetype)initWithLiveData:(LuaMutableLiveData*)livedata :(id<Observer>) observer {
+-(instancetype)initWithLiveData:(LuaLiveData*)livedata :(id<Observer>) observer {
     self = [super initWithLiveData:livedata :observer];
     return self;
 }
@@ -104,7 +104,7 @@
 }
 
 -(void)onChanged:(NSObject *)obj {
-    [self.lt CallIn:obj, nil];
+    [self.lt callIn:obj, nil];
 }
 
 @end
@@ -119,7 +119,7 @@
         self.START_VERSION = -1;
         self.NOT_SET = [NSObject new];
         self.mData = self.NOT_SET;
-        self.mObservers = [[OrderedDictionary alloc] init];
+        self.mObservers = [[MutableOrderedDictionary alloc] init];
         self.mActiveCount = 0;
         self.mPendingData = self.NOT_SET;
         self.mVersion = self.START_VERSION;
@@ -171,6 +171,10 @@
         }
     } while(self.mDispatchingInvalidated);
     self.mDispatchingValue = false;
+}
+
+-(BOOL)hasActiveObservers {
+    return YES;
 }
 
 -(void)observe:(id<LifecycleOwner>)owner :(id<Observer>)observer {
@@ -229,8 +233,8 @@
     if(!postTask) {
         return;
     }
-    LuaMutableLiveData *myself = self;
-    [LuaThread RunOnUIThreadInternal:^{
+    __block LuaLiveData *myself = self;
+    [LuaThread runOnUIThreadInternal:^{
         [myself.mPostValueRunnable run];
     }];
 }

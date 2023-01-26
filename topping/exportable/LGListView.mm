@@ -6,7 +6,7 @@
 
 @implementation LGListView
 
--(int) GetContentW
+-(int) getContentW
 {
 	UITableView *table = ((UITableView*)self._view);
 	if(table != nil)
@@ -14,13 +14,13 @@
 		LGAdapterView *adapterL = (LGAdapterView*)table.delegate;
 		if(adapterL != nil)
 		{
-			return [adapterL GetTotalWidth:0];
+			return [adapterL getTotalWidth:0];
 		}
 	}
 	return 0;
 }
 
--(int) GetContentH
+-(int) getContentH
 {
 	UITableView *table = ((UITableView*)self._view);
 	if(table != nil)
@@ -28,38 +28,38 @@
 		LGAdapterView *adapterL = (LGAdapterView*)table.delegate;
 		if(adapterL != nil)
 		{
-			return [adapterL GetTotalHeight:0];
+			return [adapterL getTotalHeight:0];
 		}
 	}
 	return 0;
 }
 
--(UIView *) CreateComponent
+-(UIView *) createComponent
 {
 	UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight) style:UITableViewStylePlain];
     table.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 	return table;
 }
 
--(void) SetupComponent:(UIView *)view
+-(void) setupComponent:(UIView *)view
 {
 	UITableView *tv = (UITableView*)self._view;
 	if(self.android_divider != nil)
-		tv.separatorColor = [[LGColorParser GetInstance] ParseColor:self.android_divider];
+		tv.separatorColor = [[LGColorParser getInstance] parseColor:self.android_divider];
 }
 
-+(LGListView *)Create:(LuaContext *)context
++(LGListView *)create:(LuaContext *)context
 {
 	LGListView *lst = [[LGListView alloc] init];
 	return lst;
 }
 
--(void)SetAdapter:(LGAdapterView *)val
+-(void)setAdapter:(LGAdapterView *)val
 {
 	((UITableView*)self._view).delegate = val;
 	((UITableView*)self._view).dataSource = val;
 	val.parent = self;
-    self.adapter = val;
+    self.adapter_ = val;
 	[((UITableView*)self._view) reloadData];
 	LGView *parToFind = self.parent;
 	while(parToFind != nil)
@@ -78,12 +78,12 @@
 	[((UITableView*)self._view) setFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
 }
 
--(LGAdapterView *)GetAdapter
+-(LGAdapterView *)getAdapter
 {
-    return self.adapter;
+    return self.adapter_;
 }
 
--(void)Refresh
+-(void)refresh
 {
     [((UITableView*)self._view) reloadData];
 }
@@ -105,15 +105,15 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGListView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGListView class]] 
-			 forKey:@"Create"];	
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetAdapter:)) :@selector(SetAdapter:) :nil :MakeArray([LGAdapterView class]C nil)] forKey:@"SetAdapter"];
-   	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetAdapter)) :@selector(GetAdapter) :[LGAdapterView class] :MakeArray(nil)] forKey:@"GetAdapter"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Refresh)) :@selector(Refresh) :nil :MakeArray(nil)] forKey:@"Refresh"];
+			 forKey:@"create"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setAdapter:)) :@selector(setAdapter:) :nil :MakeArray([LGAdapterView class]C nil)] forKey:@"setAdapter"];
+   	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getAdapter)) :@selector(getAdapter) :[LGAdapterView class] :MakeArray(nil)] forKey:@"getAdapter"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(refresh)) :@selector(refresh) :nil :MakeArray(nil)] forKey:@"refresh"];
 	return dict;
 }
 

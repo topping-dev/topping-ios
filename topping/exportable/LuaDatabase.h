@@ -23,75 +23,75 @@
 /**
  * Creates LuaDatabase Object From Lua.
  */
-+(LuaDatabase*)Create:(LuaContext*)context;
++(LuaDatabase*)create:(LuaContext*)context;
 /**
  * Checks and Creates Database File on Storage.
  */
--(void)CheckAndCreateDatabase;
+-(void)checkAndCreateDatabase;
 /**
  * Opens connection to database.
  * @return LuaObjectStore of connection.
  */
- -(LuaObjectStore*)Open;
+ -(LuaObjectStore*)open;
 /**
  * Send sql query to connection.
  * @param conn object store of connection
  * @param str sql statement string
  * @return LuaObjectStore of statement.
  */
--(LuaObjectStore*)Query:(LuaObjectStore*)conn :(NSString*)str;
+-(LuaObjectStore*)query:(LuaObjectStore*)conn :(NSString*)str;
 /**
  * Send sql query to connection for insert,update operations.
  * @param conn object store of connection
  * @param str sql statement string
  * @return LuaObjectStore of statement.
  */
--(LuaObjectStore*)Insert:(LuaObjectStore*)conn :(NSString*)str;
+-(LuaObjectStore*)insert:(LuaObjectStore*)conn :(NSString*)str;
 /**
  * Finalize statement.
  * @param LuaObjectStore of statement.
  */
--(void)Finalize:(LuaObjectStore*)stmt;
+-(void)finalize:(LuaObjectStore*)stmt;
 /**
  * Finalize statement.
  * @param LuaObjectStore of connection.
  */
--(void)Close:(LuaObjectStore*)conn;
+-(void)close:(LuaObjectStore*)conn;
 /**
  * Get Integer value at column
  * @param stmt statement object
  * @param column column
  * @return Integer value
  */	
--(int)GetInt:(LuaObjectStore*)stmt :(int)column;
+-(int)getInt:(LuaObjectStore*)stmt :(int)column;
 /**
  * Get Float value at column
  * @param stmt statement object
  * @param column column
  * @return Float value
  */
--(float)GetFloat:(LuaObjectStore*)stmt :(int)column;
+-(float)getFloat:(LuaObjectStore*)stmt :(int)column;
 /**
  * Get String value at column
  * @param stmt statement object
  * @param column column
  * @return String value
  */
--(NSString*)GetString:(LuaObjectStore*)stmt :(int)column;
+-(NSString*)getString:(LuaObjectStore*)stmt :(int)column;
 /**
  * Get Double value at column
  * @param stmt statement object
  * @param column column
  * @return Double value
  */
--(double)GetDouble:(LuaObjectStore*)stmt :(int)column;
+-(double)getDouble:(LuaObjectStore*)stmt :(int)column;
 /**
  * Get Long value at column
  * @param stmt statement object
  * @param column column
  * @return Long value
  */
--(long)GetLong:(LuaObjectStore*)stmt :(int)column;
+-(long)getLong:(LuaObjectStore*)stmt :(int)column;
 
 
 @end

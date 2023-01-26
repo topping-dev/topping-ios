@@ -198,7 +198,7 @@ static NSData* GetResourceSd(NSString *path, NSString *name, NSString **url)
 static NSData* GetResourceValue(NSString *path, NSString *name, NSString **url);
 static NSData* GetResourceValue(NSString *path, NSString *name, NSString **url)
 {
-	int primaryLoad = [sToppingEngine GetPrimaryLoad];
+	int primaryLoad = [sToppingEngine getPrimaryLoad];
 	switch (primaryLoad)
 	{
 		case INTERNAL_DATA:

@@ -1,7 +1,7 @@
 #import "Lifecycle.h"
 #import "LuaAll.h"
 #import "LuaLifecycleObserver.h"
-#import "CancelRunBlock.h"
+#import "CoroutineScope.h"
 #import <Topping/Topping-Swift.h>
 
 @implementation Lifecycle
@@ -91,7 +91,7 @@
     }
 }
 
-+(LifecycleState)GetTargetState:(LifecycleEvent)event
++(LifecycleState)getTargetState:(LifecycleEvent)event
 {
     switch (event) {
         case LIFECYCLEEVENT_ON_CREATE:
@@ -105,6 +105,7 @@
         case LIFECYCLEEVENT_ON_DESTROY:
             return LIFECYCLESTATE_DESTROYED;
         case LIFECYCLEEVENT_ON_ANY:
+        case LIFECYCLEEVENT_NIL:
             break;
     }
     
@@ -128,25 +129,33 @@
     return LIFECYCLESTATE_NIL;
 }
 
--(CancelRunBlock*)whenStateAtLeast:(LifecycleState*)state :(void (^)(void))block {
-    __block LifecycleController *controller = nil;
-    CancelRunBlock* crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_main_queue() :^(void){
-        block();
-        [controller finish];
-    }];
-    controller = [[LifecycleController alloc] initWithLifecycle:self :state :dispatch_get_main_queue() :crb];
-    return crb;
+-(void)onCancel:(CancelRunBlock *)job {
+    
 }
 
--(CancelRunBlock*)whenCreated:(void (^)(void))block {
+-(void)onFinish:(CancelRunBlock *)job {
+    
+}
+
+-(NSObject*)whenStateAtLeast:(LifecycleState)state :(NSObject* (^)(void))block {
+    return [CoroutineScope withContext:MAIN :^NSObject *(CoroutineScope *scope) {
+        CancelRunBlock *crb = [scope.coroutineContext objectForKey:block];
+        LifecycleController *controller = [[LifecycleController alloc] initWithLifecycle:self :state :MAIN :crb];
+        NSObject *res = block();
+        [controller finish];
+        return res;
+    }];
+}
+
+-(NSObject*)whenCreated:(NSObject* (^)(void))block {
     return [self whenStateAtLeast:LIFECYCLESTATE_CREATED :block];
 }
 
--(CancelRunBlock*)whenStarted:(void (^)(void))block {
+-(NSObject*)whenStarted:(NSObject* (^)(void))block {
     return [self whenStateAtLeast:LIFECYCLESTATE_STARTED :block];
 }
 
--(CancelRunBlock*)whenResumed:(void (^)(void))block {
+-(NSObject*)whenResumed:(NSObject* (^)(void))block {
     return [self whenStateAtLeast:LIFECYCLESTATE_RESUMED :block];
 }
 
@@ -159,22 +168,24 @@
 
 @end
 
-@implementation CoroutineScope
-
-@end
-
 @implementation LifecycleCoroutineScope
 
-- (CancelRunBlock*)launchWhenStarted:(void (^)(void))block {
-    return [self.lifecycle whenStarted:block];
+- (CancelRunBlock*)launchWhenStarted:(NSObject* (^)(void))block {
+    return [self launch:^(CoroutineScope *scope) {
+        [self.lifecycle whenStarted:block];
+    }];
 }
 
-- (CancelRunBlock*)launchWhenCreated:(void (^)(void))block {
-    return [self.lifecycle whenCreated:block];
+- (CancelRunBlock*)launchWhenCreated:(NSObject* (^)(void))block {
+    return [self launch:^(CoroutineScope *scope) {
+        [self.lifecycle whenCreated:block];
+    }];
 }
 
-- (CancelRunBlock*)launchWhenResumed:(void (^)(void))block {
-    return [self.lifecycle whenResumed:block];
+- (CancelRunBlock*)launchWhenResumed:(NSObject* (^)(void))block {
+    return [self launch:^(CoroutineScope *scope) {
+        [self.lifecycle whenResumed:block];
+    }];
 }
 
 @end
@@ -212,11 +223,18 @@
     }
 }
 
+- (NSString *)getKey {
+    if(self.key == nil) {
+        self.key = [[NSUUID UUID] UUIDString];
+    }
+    return self.key;
+}
+
 @end
 
 @implementation JobLifecycleEventObserver
 
-- (instancetype)initWithJob:(CancelRunBlock*)job :(int)minState
+- (instancetype)initWithJob:(CancelRunBlock*)job :(LifecycleState)minState
 {
     self = [super init];
     if (self) {
@@ -247,7 +265,7 @@
 
 @implementation LifecycleController
 
-- (instancetype)initWithLifecycle:(Lifecycle*)lifecycle :(int)minState :(dispatch_queue_t)queue :(CancelRunBlock*)job
+- (instancetype)initWithLifecycle:(Lifecycle*)lifecycle :(LifecycleState)minState :(int)queue :(CancelRunBlock*)job
 {
     self = [super init];
     if (self) {

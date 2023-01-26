@@ -3,27 +3,27 @@
 
 @implementation LuaLog
 
-+(void)V:(NSString *)tag :(NSString *)message
++(void)v:(NSString *)tag :(NSString *)message
 {
     [LuaLog MSG:@"V-->" :tag :message];
 }
 
-+(void)D:(NSString *)tag :(NSString *)message
++(void)d:(NSString *)tag :(NSString *)message
 {
     [LuaLog MSG:@"D-->" :tag :message];
 }
 
-+(void)I:(NSString *)tag :(NSString *)message
++(void)i:(NSString *)tag :(NSString *)message
 {
     [LuaLog MSG:@"I-->" :tag :message];
 }
 
-+(void)W:(NSString *)tag :(NSString *)message
++(void)w:(NSString *)tag :(NSString *)message
 {
     [LuaLog MSG:@"W-->" :tag :message];
 }
 
-+(void)E:(NSString *)tag :(NSString *)message
++(void)e:(NSString *)tag :(NSString *)message
 {
     [LuaLog MSG:@"E-->" :tag :message];
 }
@@ -51,36 +51,36 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(V::))
-        :@selector(V::)
+        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(v::))
+        :@selector(v::)
         :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
-    forKey:@"V"];
-        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(D::))
-        :@selector(D::)
+    forKey:@"v"];
+        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(d::))
+        :@selector(d::)
         :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
-    forKey:@"D"];
-        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(I::))
-        :@selector(I::)
+    forKey:@"d"];
+        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(i::))
+        :@selector(i::)
         :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
-    forKey:@"I"];
-        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(W::))
-        :@selector(W::)
+    forKey:@"i"];
+        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(w::))
+        :@selector(w::)
         :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
-    forKey:@"W"];
-        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(E::))
-        :@selector(E::)
+    forKey:@"w"];
+        [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(e::))
+        :@selector(e::)
         :nil
         :[NSArray arrayWithObjects:[NSString class], [NSString class], nil]
         :[LuaLog class]]
-    forKey:@"E"];
+    forKey:@"e"];
 	return dict;
 }
 

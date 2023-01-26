@@ -1,6 +1,6 @@
 #import "LuaViewModel.h"
 #import "LuaAll.h"
-#import "CancelRunBlock.h"
+#import "CoroutineScope.h"
 
 @implementation ClosableCoroutineScope
 
@@ -25,12 +25,12 @@
     return self;
 }
 
--(void)SetObject:(NSString *)key :(NSObject *)obj
+-(void)setObject:(NSString *)key :(NSObject *)obj
 {
     [self.objectMap setObject:obj forKey:key];
 }
 
--(NSObject *)GetObject:(NSString *)key
+-(NSObject *)getObject:(NSString *)key
 {
     return [self.objectMap objectForKey:key];
 }
@@ -108,8 +108,8 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    InstanceMethodNoArg(GetObject, @[[NSString class]], @"GetObject")
-    InstanceMethodNoRet(SetObject::, @[[NSString class]C [NSObject class]], @"SetObject")
+    InstanceMethodNoArg(getObject, @[[NSString class]], @"getObject")
+    InstanceMethodNoRet(setObject::, @[[NSString class]C [NSObject class]], @"setObject")
     
     return dict;
 }

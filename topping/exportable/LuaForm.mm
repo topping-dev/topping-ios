@@ -29,29 +29,29 @@
     return self;
 }
 
-+(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId
++(LuaNativeObject*)create:(LuaContext*)context :(LuaRef*)luaId
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = [luaId GetCleanId];
+	form.luaId = [luaId getCleanId];
     return [[LuaNativeObject alloc] initWithObject:form];
 }
 
-+(LuaNativeObject*)CreateWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
++(LuaNativeObject*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = [luaId GetCleanId];
+	form.luaId = [luaId getCleanId];
     form.ui = ui;
     return [[LuaNativeObject alloc] initWithObject:form];
 }
 
-+(LuaForm*)GetActiveForm
++(LuaForm*)getActiveForm
 {
-	return [CommonDelegate GetActiveForm];
+	return [CommonDelegate getActiveForm];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    if([CommonDelegate GetInstance].statusBarIsDark)
+    if([CommonDelegate getInstance].statusBarIsDark)
         return UIStatusBarStyleLightContent;
     else
         return UIStatusBarStyleDefault;
@@ -71,9 +71,9 @@
     
 	//CGRect fullFrame = [[UIScreen mainScreen] applicationFrame];
 	//self.view.frame  = fullFrame;
-	self.view.frame = [DisplayMetrics GetMasterView].frame;
+	self.view.frame = [DisplayMetrics getMasterView].frame;
 	if(self.ui != nil)
-		[self SetViewXML:self.ui];
+		[self setViewXML:self.ui];
     
     //onCreate
     self.mStopped = false;
@@ -94,12 +94,12 @@
     
     [KeyboardHelper KeyboardEnableEventForView:self.view :self];
     
-    UIColor *statusBarColor = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"colorPrimaryDark"];
+    UIColor *statusBarColor = (UIColor*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"colorPrimaryDark"];
     if(statusBarColor != nil)
     {
-        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -[DisplayMetrics GetStatusBarHeight], [UIScreen mainScreen].bounds.size.width, [DisplayMetrics GetStatusBarHeight])];
+        UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -[DisplayMetrics getStatusBarHeight], [UIScreen mainScreen].bounds.size.width, [DisplayMetrics getStatusBarHeight])];
         statusBarView.backgroundColor = statusBarColor;
-        BOOL statusBarIsDark = [CommonDelegate GetInstance].statusBarIsDark;
+        BOOL statusBarIsDark = [CommonDelegate getInstance].statusBarIsDark;
         if(!self.context.navController.isNavigationBarHidden)
         {
             if(statusBarIsDark)
@@ -115,8 +115,8 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
-	[CommonDelegate SetActiveForm:self];
-    [DisplayMetrics SetMasterView:self.view];
+	[CommonDelegate setActiveForm:self];
+    [DisplayMetrics setMasterView:self.view];
     
     if(self.view.superview != nil && !self.rootConstraintsSet) {
         [self setConstraints];
@@ -132,17 +132,17 @@
     if(!self.createCalled)
     {
         self.createCalled = true;
-        self.kotlinInterface = [LuaEvent GetFormInstance:self.luaId :self];
-        [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
+        self.kotlinInterface = [LuaEvent getFormInstance:self.luaId :self];
+        [LuaEvent onUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
         if(self.kotlinInterface != nil) {
-            [self.kotlinInterface.ltOnCreate Call];
+            [self.kotlinInterface.ltOnCreate call];
         }
     }
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
     [self.mFragments dispatchResume];
-    [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnResume Call];
+        [self.kotlinInterface.ltOnResume call];
     }
 }
 
@@ -158,9 +158,9 @@
 	[KeyboardHelper KeyboardDisableEvents:self :self.selectedKeyboardTextView];
     
     //onPause
-	[LuaEvent OnUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
+	[LuaEvent onUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnPause Call];
+        [self.kotlinInterface.ltOnPause call];
     }
     [self.mFragments dispatchPause];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_PAUSE];
@@ -182,9 +182,9 @@
     
     //onDestroy
     [self.mFragments dispatchDestroy];
-    [LuaEvent OnUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnDestroy Call];
+        [self.kotlinInterface.ltOnDestroy call];
     }
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_DESTROY];
 }
@@ -195,8 +195,8 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         //NSLog(@"Transition Size %@", NSStringFromCGSize(size));
-        [self.lgview ResizeAndInvalidate];
-        [self.lgview ConfigChange];
+        [self.lgview resizeAndInvalidate];
+        [self.lgview configChange];
     }];
 }
 
@@ -205,7 +205,7 @@
     NSLog(@"superview frame %@ %@", self.luaId, NSStringFromCGRect(self.view.frame));
     NSLog(@"superview class string %@", NSStringFromClass([self.view.superview class]));*/
     [self.lgview viewDidLayoutSubviews];
-    [self.lgview ResizeAndInvalidate];
+    [self.lgview resizeAndInvalidate];
 }
 
 -(void)didReceiveMemoryWarning
@@ -230,7 +230,7 @@
     constraint = [self.view.superview.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:self.view.rightAnchor];
     constraint.priority = UILayoutPriority(999);
     constraint.active = true;
-    NSString *val = (NSString*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"iosBottomSafeArea"];
+    NSString *val = (NSString*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"iosBottomSafeArea"];
     if([val isEqualToString:@"true"]) {
         constraint = [self.view.superview.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
         constraint.priority = UILayoutPriority(999);
@@ -246,60 +246,60 @@
     constraint.active = true;
 }
 
--(LuaContext*)GetContext
+-(LuaContext*)getContext
 {
 	return self.context;
 }
 
--(LGView*)GetViewById:(LuaRef*)lId
+-(LGView*)getViewById:(LuaRef*)lId
 {
-	return [_lgview GetViewById:lId];
+	return [_lgview getViewById:lId];
 }
 
--(LGView*)GetViewByIdInternal:(NSString *)sId
+-(LGView*)getViewByIdInternal:(NSString *)sId
 {
-    return [_lgview GetViewByIdInternal:sId];
+    return [_lgview getViewByIdInternal:sId];
 }
 
--(NSDictionary*)GetBindings
+-(NSDictionary*)getBindings
 {
     if([self.lgview isKindOfClass:[LGViewGroup class]])
     {
-        return [((LGViewGroup*)self.lgview) GetBindings];
+        return [((LGViewGroup*)self.lgview) getBindings];
     }
     return [NSDictionary dictionary];
 }
 
--(LGView *)GetView
+-(LGView *)getLuaView
 {
 	return self.lgview;
 }
 
--(void)SetView:(LGView*)v
+-(void)setLuaView:(LGView*)v
 {
 	self.lgview = v;
-	self.view = [v GetView];
+	self.view = [v getView];
 }
 
--(void)SetViewXML:(LuaRef *)xml
+-(void)setViewXML:(LuaRef *)xml
 {
 	LGView *lgview;
-    [self AddMainView:[[LGLayoutParser GetInstance] ParseRef:xml :[DisplayMetrics GetMasterView] :nil :self :&lgview]];
+    [self addMainView:[[LGLayoutParser getInstance] parseRef:xml :[DisplayMetrics getMasterView] :nil :self :&lgview]];
 	self.lgview = lgview;
 }
 
--(void)SetTitle:(NSString *)str
+-(void)setTitle:(NSString *)str
 {
 	self.title = str;
 }
 
--(void)SetTitleRef:(LuaRef *)ref
+-(void)setTitleRef:(LuaRef *)ref
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetTitle:val];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setTitle:val];
 }
 
--(void)Close
+-(void)close
 {
 	[self.context.navController popViewControllerAnimated:YES];
 }
@@ -356,7 +356,7 @@
     return hadNotMarked;
 }
 
--(FragmentManager*)GetFragmentManager {
+-(FragmentManager*)getFragmentManager {
     return [self.mFragments getSupportFragmentManager];
 }
 
@@ -365,10 +365,10 @@
 }
 
 -(LuaLifecycle *)getLifecycleInner {
-    return [LuaLifecycle CreateForm:self];
+    return [LuaLifecycle createForm:self];
 }
 
--(void)AddMainView:(UIView *)viewToAdd {
+-(void)addMainView:(UIView *)viewToAdd {
     if(self.view == nil || viewToAdd == nil)
         return;
     [self.view addSubview:viewToAdd];
@@ -380,7 +380,7 @@
     constraint = [self.view.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:viewToAdd.rightAnchor];
     constraint.priority = UILayoutPriority(999);
     constraint.active = true;
-    NSString *val = (NSString*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"iosBottomSafeArea"];
+    NSString *val = (NSString*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"iosBottomSafeArea"];
     if([val isEqualToString:@"true"]) {
         constraint = [self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
         constraint.priority = UILayoutPriority(999);
@@ -411,21 +411,21 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    ClassMethod(Create::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaForm class])
-    ClassMethod(CreateWithUI:::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaForm class])
-    ClassMethodNoArg(GetActiveForm, [LuaForm class], @"GetActiveForm", [LuaForm class])
+    ClassMethod(create::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]], @"create", [LuaForm class])
+    ClassMethod(createWithUI:::, LuaNativeObject, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"createWithUI", [LuaForm class])
+    ClassMethodNoArg(getActiveForm, [LuaForm class], @"getActiveForm", [LuaForm class])
 
-    InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")
-    InstanceMethod(GetViewById:, LGView, @[[LuaRef class]], @"GetViewById")
-    InstanceMethodNoArg(GetBindings, NSDictionary, @"GetBindings")
-    InstanceMethodNoArg(GetView, LGView, @"GetView")
-    InstanceMethodNoRet(SetView:, @[[LGView class]], @"SetView")
-    InstanceMethodNoRet(SetViewXML:, @[[LuaRef class]], @"SetViewXML")
-    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitle")
-    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitleRef")
-    InstanceMethodNoRetNoArg(Close, @"Close")
-    InstanceMethodNoArg(getLifecycleInner, LuaLifecycle, @"GetLifecycle")
-    InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
+    InstanceMethodNoArg(getContext, LuaContext, @"getContext")
+    InstanceMethod(getViewById:, LGView, @[[LuaRef class]], @"getViewById")
+    InstanceMethodNoArg(getBindings, NSDictionary, @"getBindings")
+    InstanceMethodNoArg(getView, LGView, @"getView")
+    InstanceMethodNoRet(setView:, @[[LGView class]], @"setView")
+    InstanceMethodNoRet(setViewXML:, @[[LuaRef class]], @"setViewXML")
+    InstanceMethodNoRet(setTitle:, @[[NSString class]], @"setTitle")
+    InstanceMethodNoRet(setTitleRef:, @[[LuaRef class]], @"setTitleRef")
+    InstanceMethodNoRetNoArg(close, @"close")
+    InstanceMethodNoArg(getLifecycleInner, LuaLifecycle, @"getLifecycle")
+    InstanceMethodNoArg(getSupportFragmentManager, FragmentManager, @"getFragmentManager")
     
 	return dict;
 }

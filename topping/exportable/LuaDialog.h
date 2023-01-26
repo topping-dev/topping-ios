@@ -30,28 +30,28 @@
 {
 }
 
-+(void)MessageBox:(LuaContext*)context :(LuaRef*)title :(LuaRef*)content;
-+(void)MessageBoxInternal:(LuaContext*)context :(NSString*)title :(NSString*)content;
-+(LuaDialog*)Create:(LuaContext*)context :(int)dialogType;
--(void)SetCancellable:(bool)val;
--(void)SetPositiveButtonInternal:(NSString*)title :(LuaTranslator*)action;
--(void)SetPositiveButton:(LuaRef*)title :(LuaTranslator*)action;
--(void)SetNegativeButtonInternal:(NSString*)title :(LuaTranslator*)action;
--(void)SetNegativeButton:(LuaRef*)title :(LuaTranslator*)action;
--(void)SetTitle:(NSString*)title;
--(void)SetTitleRef:(LuaRef*)ref;
--(void)SetMessage:(NSString*)message;
--(void)SetMessageRef:(LuaRef*)ref;
--(void)SetProgress:(int)value;
--(void)SetMax:(int)value;
--(void)SetDate:(LuaDate*)date;
--(void)SetDateManual:(int)day :(int)month :(int)year;
--(void)SetTime:(LuaDate*)date;
--(void)SetTimeManual:(int)hour :(int)minute;
--(void)Show;
--(void)Dismiss;
--(void)SetDateSelectedListener:(LuaTranslator*)action;
--(void)SetTimeSelectedListener:(LuaTranslator*)action;
++(void)messageBox:(LuaContext*)context :(LuaRef*)title :(LuaRef*)content;
++(void)messageBoxInternal:(LuaContext*)context :(NSString*)title :(NSString*)content;
++(LuaDialog*)create:(LuaContext*)context :(int)dialogType;
+-(void)setCancellable:(bool)val;
+-(void)setPositiveButtonInternal:(NSString*)title :(LuaTranslator*)action;
+-(void)setPositiveButton:(LuaRef*)title :(LuaTranslator*)action;
+-(void)setNegativeButtonInternal:(NSString*)title :(LuaTranslator*)action;
+-(void)setNegativeButton:(LuaRef*)title :(LuaTranslator*)action;
+-(void)setTitle:(NSString*)title;
+-(void)setTitleRef:(LuaRef*)ref;
+-(void)setMessage:(NSString*)message;
+-(void)setMessageRef:(LuaRef*)ref;
+-(void)setProgress:(int)value;
+-(void)setMax:(int)value;
+-(void)setDate:(LuaDate*)date;
+-(void)setDateManual:(int)day :(int)month :(int)year;
+-(void)setTime:(LuaDate*)date;
+-(void)setTimeManual:(int)hour :(int)minute;
+-(void)show;
+-(void)dismiss;
+-(void)setDateSelectedListener:(LuaTranslator*)action;
+-(void)setTimeSelectedListener:(LuaTranslator*)action;
 
 @property(nonatomic) int dialogType;
 @property(nonatomic, retain) MBProgressHUD *progressView;
@@ -63,9 +63,9 @@
 @property(nonatomic, retain) LuaTranslator *ltTimeSelectedListener;
 @property(nonatomic) int positiveButtonId;
 @property(nonatomic) int negativeButtonId;
-@property(nonatomic, retain) NSString *title;
-@property(nonatomic) int progress;
-@property(nonatomic) int maximum;
-@property(nonatomic) bool cancellable;
+@property(nonatomic, retain) NSString *title_;
+@property(nonatomic) int progress_;
+@property(nonatomic) int maximum_;
+@property(nonatomic) bool cancellable_;
 
 @end

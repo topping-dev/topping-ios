@@ -42,26 +42,26 @@ static LuaForm *sActiveForm;
 
 @implementation CommonDelegate
 
-+ (CommonDelegate *)GetInstance
++ (CommonDelegate *)getInstance
 {
 	if(sCommonDelegate == nil)
 		sCommonDelegate = [[CommonDelegate alloc] init];
 	return sCommonDelegate;
 }
 
-+(LuaForm*)GetActiveForm
++(LuaForm*)getActiveForm
 {
 	return sActiveForm;
 }
 
-+(void)SetActiveForm:(LuaForm *)form
++(void)setActiveForm:(LuaForm *)form
 {
 	sActiveForm = form;
 }
 
--(void)InitMain:(UIWindow *)windw :(UIScene *)scene
+-(void)initMain:(UIWindow *)windw :(UIScene *)scene
 {
-    [DisplayMetrics SetDensity:windw.screen.scale :1.0f];
+    [DisplayMetrics setDensity:windw.screen.scale :1.0f];
 
 	//[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 	self.statusBarHidden = YES;
@@ -70,7 +70,7 @@ static LuaForm *sActiveForm;
     // Override point for customization after application launch.
 	//self.window.rootViewController.wantsFullScreenLayout = NO;
 	
-	[sToppingEngine Startup];
+	[sToppingEngine startup];
 	int height = self.window.frame.size.height;
     float sbarHeight = 0;
     if(@available(iOS 13.0, *))
@@ -81,7 +81,7 @@ static LuaForm *sActiveForm;
     {
         sbarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     }
-    [DisplayMetrics SetStatusBarHeight:sbarHeight];
+    [DisplayMetrics setStatusBarHeight:sbarHeight];
     
     CGFloat topPadding = 0;
     CGFloat bottomPadding = 0;
@@ -97,10 +97,10 @@ static LuaForm *sActiveForm;
     height -= bottomPadding;
     LuaContext *context = [[LuaContext alloc] init];
 	self.startForm = [[LuaForm alloc] initWithContext:context];
-    [CommonDelegate SetActiveForm:self.startForm];
-    [context Setup:self.startForm];
+    [CommonDelegate setActiveForm:self.startForm];
+    [context setup:self.startForm];
     self.startForm.context = context;
-    self.startForm.luaId = [sToppingEngine GetMainForm];
+    self.startForm.luaId = [sToppingEngine getMainForm];
     self.window.rootViewController = self.startForm.context.navController;
     if(!self.startForm.context.navController.isNavigationBarHidden)
     {
@@ -111,12 +111,12 @@ static LuaForm *sActiveForm;
     self.startForm.view.frame = CGRectMake(0, 0, self.window.frame.size.width, height);
     self.window.rootViewController.view.autoresizesSubviews = YES;
     
-    [DisplayMetrics SetMasterView:self.window.rootViewController.view];
-    [DisplayMetrics SetBaseFrame:CGRectMake(0, 0, self.window.frame.size.width, height)];
+    [DisplayMetrics setMasterView:self.window.rootViewController.view];
+    [DisplayMetrics setBaseFrame:CGRectMake(0, 0, self.window.frame.size.width, height)];
     
     //Apply styles
-    NSString *style = [sToppingEngine GetAppStyle];
-    NSDictionary *styleMap = [[LGStyleParser GetInstance] GetStyle:style];
+    NSString *style = [sToppingEngine getAppStyle];
+    NSDictionary *styleMap = [[LGStyleParser getInstance] getStyle:style];
     
     if (@available(iOS 13.0, *))
     {
@@ -133,13 +133,13 @@ static LuaForm *sActiveForm;
         
     NSString *windowBackgroundColor = [styleMap objectForKey:@"android:windowBackground"];
     if(windowBackgroundColor != nil)
-        self.window.backgroundColor = [[LGColorParser GetInstance] ParseColor:windowBackgroundColor];
+        self.window.backgroundColor = [[LGColorParser getInstance] parseColor:windowBackgroundColor];
     
     self.statusBarIsDark = NO;
     NSString *statusBarColor = [styleMap objectForKey:@"colorPrimaryDark"];
     if(statusBarColor != nil)
     {
-        UIColor *color = [[LGColorParser GetInstance] ParseColor:statusBarColor];
+        UIColor *color = [[LGColorParser getInstance] parseColor:statusBarColor];
 
         self.statusBarIsDark = [color isDarkColor];
         if(!self.startForm.context.navController.isNavigationBarHidden)
@@ -152,21 +152,21 @@ static LuaForm *sActiveForm;
     }
     //Apply styles end
     
-	self.startForm.luaId = [sToppingEngine GetMainForm];
-	NSString *initUI = [sToppingEngine GetMainUI];
+	self.startForm.luaId = [sToppingEngine getMainForm];
+	NSString *initUI = [sToppingEngine getMainUI];
     [self.window makeKeyAndVisible];
 	if([initUI compare:@""] != 0)
 	{
 		LGView *lgview = nil;
         NSLog(@"Window Frame: %@", NSStringFromCGRect(self.window.rootViewController.view.frame));
         NSLog(@"Form Frame: %@", NSStringFromCGRect(self.startForm.view.frame));
-        UIView *viewToAdd = [[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] ParseXML:initUI :self.startForm.view :nil :self.startForm :&lgview];
+        UIView *viewToAdd = [[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] parseXML:initUI :self.startForm.view :nil :self.startForm :&lgview];
         NSLog(@"View To Add Frame: %@", NSStringFromCGRect(viewToAdd.frame));
-        [self.startForm AddMainView:viewToAdd];
+        [self.startForm addMainView:viewToAdd];
     }
 	else
 	{
-        [LuaEvent OnUIEvent:self.startForm :UI_EVENT_CREATE :self.startForm.context :0, nil];
+        [LuaEvent onUIEvent:self.startForm :UI_EVENT_CREATE :self.startForm.context :0, nil];
 	}
 }
 
@@ -192,7 +192,7 @@ static LuaForm *sActiveForm;
 {
 }
 
--(BOOL)HasResourceData:(NSString *)resourcePath :(NSString *)name
+-(BOOL)hasResourceData:(NSString *)resourcePath :(NSString *)name
 {
 	NSString *bundleRoot = [[NSBundle mainBundle] bundlePath];
 	NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundleRoot error:nil];
@@ -213,7 +213,7 @@ static LuaForm *sActiveForm;
 	return NO;
 }
 
--(BOOL)HasExternalResourceData:(NSString *)resourcePath :(NSString *)name :(BOOL)intermediate
+-(BOOL)hasExternalResourceData:(NSString *)resourcePath :(NSString *)name :(BOOL)intermediate
 {
 	/*NSString *bundleRoot = [[NSBundle mainBundle] bundlePath];
 	 NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:bundleRoot error:nil];

@@ -15,7 +15,7 @@
     return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
     NSBundle *bund = [NSBundle bundleWithIdentifier:@"dev.topping.ios"];
     NSString *themePath = [bund pathForResource:@"themes" ofType:@"xml"];

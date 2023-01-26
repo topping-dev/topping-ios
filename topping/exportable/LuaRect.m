@@ -3,39 +3,39 @@
 
 @implementation LuaRect
 
-+(LuaRect *)CreateRect
++(LuaRect *)createRect
 {
     return [[LuaRect alloc] init];
 }
 
-+(LuaRect *)CreateRectPar:(float)left :(float)top :(float)right :(float)bottom
++(LuaRect *)createRectPar:(float)left :(float)top :(float)right :(float)bottom
 {
     LuaRect *rect = [[LuaRect alloc] init];
-    [rect Set:left :top :right :bottom];
+    [rect set:left :top :right :bottom];
     return rect;    
 }
 
--(void)Set:(float)left :(float)top :(float)right :(float)bottom
+-(void)set:(float)left :(float)top :(float)right :(float)bottom
 {
     rect = CGRectMake(left, top, right - left, bottom - top);
 }
 
--(float)GetLeft
+-(float)getLeft
 {
     return rect.origin.x;
 }
 
--(float)GetRight
+-(float)getRight
 {
     return rect.origin.x + rect.size.width;
 }
 
--(float)GetTop
+-(float)getTop
 {
     return rect.origin.y;
 }
 
--(float)GetBottom
+-(float)getBottom
 {
     return rect.origin.y + rect.size.height;
 }
@@ -53,43 +53,43 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateRect))
-										:@selector(CreateRect)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createRect))
+										:@selector(createRect)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:nil]
 										:[LuaRect class]]
-			 forKey:@"CreateRect"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateRectPar::::))
-										:@selector(CreateRectPar::::)
+			 forKey:@"createRect"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createRectPar::::))
+										:@selector(createRectPar::::)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaFloat class], [LuaFloat class], [LuaFloat class], [LuaFloat class], nil]
 										:[LuaRect class]]
-			 forKey:@"CreateRectPar"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Set::::))
-									   :@selector(Set::::)
+			 forKey:@"createRectPar"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(set::::))
+									   :@selector(set::::)
 									   :nil
 									   :[NSArray arrayWithObjects:[LuaFloat class], [LuaFloat class], [LuaFloat class], [LuaFloat class], nil]]
-			 forKey:@"Set"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetLeft))
-									   :@selector(GetLeft)
+			 forKey:@"set"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getLeft))
+									   :@selector(getLeft)
 									   :[LuaFloat class]
 									   :MakeArray(nil)]
-			 forKey:@"GetLeft"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetRight))
-									   :@selector(GetRight)
+			 forKey:@"getLeft"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getRight))
+									   :@selector(getRight)
 									   :[LuaFloat class]
 									   :MakeArray(nil)]
-			 forKey:@"GetRight"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetTop))
-									   :@selector(GetTop)
+			 forKey:@"getRight"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getTop))
+									   :@selector(getTop)
 									   :[LuaFloat class]
 									   :MakeArray(nil)]
-			 forKey:@"GetTop"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetBottom))
-									   :@selector(GetBottom)
+			 forKey:@"getTop"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getBottom))
+									   :@selector(getBottom)
 									   :[LuaFloat class]
 									   :MakeArray(nil)]
-			 forKey:@"GetBottom"];
+			 forKey:@"getBottom"];
 	return dict;
 }
 

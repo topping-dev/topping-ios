@@ -10,6 +10,6 @@
 {
 }
 
-+(NSString*)GetHumanReadableDate:(int)value;
++(NSString*)getHumanReadableDate:(int)value;
 
 @end

@@ -13,12 +13,12 @@
     return self;
 }
 
-+ (LuaLifecycle*)CreateForm:(LuaForm*)form {
-    return [[LuaLifecycle alloc] initWithLifecycle:[form getLifecycle] :[[form getLifecycle] getCoroutineScope]];
++ (LuaLifecycle*)createForm:(LuaForm*)form {
+    return [[LuaLifecycle alloc] initWithLifecycle:[form getLifecycle] :[[LuaCoroutineScope alloc] initWithScope:[[form getLifecycle] getCoroutineScope]]];
 }
 
-+ (LuaLifecycle*)CreateFragment:(LuaFragment*)fragment {
-    return [[LuaLifecycle alloc] initWithLifecycle:[fragment getLifecycle] :[[fragment getLifecycle] getCoroutineScope]];
++ (LuaLifecycle*)createFragment:(LuaFragment*)fragment {
+    return [[LuaLifecycle alloc] initWithLifecycle:[fragment getLifecycle] :[[LuaCoroutineScope alloc] initWithScope:[[fragment getLifecycle] getCoroutineScope]]];
 }
 
 -(void)addObserver:(LuaLifecycleObserver *)observer {

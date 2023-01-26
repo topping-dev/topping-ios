@@ -16,49 +16,49 @@
 /**
  * Creates LuaJSON from json string.
  */
-+(LuaJSONObject*)CreateJSOFromString:(NSString*)str;
++(LuaJSONObject*)createJSOFromString:(NSString*)str;
 /**
  * Get object value at name.
  * @param name Name value.
  * @return LuaJSONObject
  */
--(LuaJSONObject *)GetJSONObject:(NSString *)name;
+-(LuaJSONObject *)getJSONObject:(NSString *)name;
 /**
  * Get array value at name.
  * @param name Name value.
  * @return LuaJSONArray
  */
--(LuaJSONArray *)GetJSONArray:(NSString *)name;
+-(LuaJSONArray *)getJSONArray:(NSString *)name;
 /**
  * Get string value at name.
  * @param name Name value.
  * @return String value.
  */
--(NSString*)GetString:(NSString*)name;
+-(NSString*)getString:(NSString*)name;
 /**
  * Get int value at name.
  * @param name Name value.
  * @return Int value.
  */
--(int)GetInt:(NSString*)name;
+-(int)getInt:(NSString*)name;
 /**
  * Get double value at name.
  * @param name Name value.
  * @return Double value.
  */
--(double)GetDouble:(NSString*)name;
+-(double)getDouble:(NSString*)name;
 /**
  * Get float value at name.
  * @param name Name value.
  * @return Float value.
  */
--(float)GetFloat:(NSString*)name;
+-(float)getFloat:(NSString*)name;
 /**
  * Get bool value at name.
  * @param name Name value.
  * @return Bool value.
  */
--(bool)GetBool:(NSString*)name;
+-(bool)getBool:(NSString*)name;
 
 /**
  * Object store of json object.
@@ -79,49 +79,49 @@
  * Get array count.
  * @return count of array.
  */
--(int)Count;
+-(int)count;
 /**
  * Get object value at name.
  * @param index index value
  * @return LuaJSONObject
  */
--(LuaJSONObject *)GetJSONObject:(int)index;
+-(LuaJSONObject *)getJSONObject:(int)index;
 /**
  * Get array value at name.
  * @param index index value
  * @return LuaJSONArray
  */
--(LuaJSONArray *)GetJSONArray:(int)index;
+-(LuaJSONArray *)getJSONArray:(int)index;
 /**
  * Get string value at name.
  * @param index index value
  * @return String value.
  */
--(NSString*)GetString:(int)index;
+-(NSString*)getString:(int)index;
 /**
  * Get int value at name.
  * @param index index value
  * @return Int value.
  */
--(int)GetInt:(int)index;
+-(int)getInt:(int)index;
 /**
  * Get double value at name.
  * @param index index value
  * @return Double value.
  */
--(double)GetDouble:(int)index;
+-(double)getDouble:(int)index;
 /**
  * Get float value at name.
  * @param index index value
  * @return Float value.
  */
--(float)GetFloat:(int)index;
+-(float)getFloat:(int)index;
 /**
  * Get bool value at name.
  * @param index index value
  * @return Bool value.
  */
--(bool)GetBool:(int)index;
+-(bool)getBool:(int)index;
 
 @property(nonatomic, retain) NSArray *jsa;
 

@@ -7,9 +7,6 @@
  * Object store to store c objects sent and received from lua engine.
  */
 @interface LuaObjectStore : NSObject<LuaClass, LuaInterface>
-{
-	void* obj;
-}
 
 /**
  * Object that sent and received.

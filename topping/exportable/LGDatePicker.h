@@ -9,19 +9,19 @@
 }
 
 //Lua
-+(LGDatePicker*)Create:(LuaContext *)context;
--(void)SetOnDateChangedListener:(LuaTranslator *)lt;
--(void)Show;
--(int)GetDay;
--(int)GetMonth;
--(int)GetYear;
--(void)UpdateDate:(int)day :(int)month :(int)year;
++(LGDatePicker*)create:(LuaContext *)context;
+-(void)setOnDateChangedListener:(LuaTranslator *)lt;
+-(void)show;
+-(int)getDay;
+-(int)getMonth;
+-(int)getYear;
+-(void)updateDate:(int)day :(int)month :(int)year;
 
 @property (nonatomic, strong) LuaTranslator *ltChanged;
 @property (nonatomic, strong) UITextField *hiddenTextField;
-@property (nonatomic) int day;
-@property (nonatomic) int month;
-@property (nonatomic) int year;
+@property (nonatomic) int day_;
+@property (nonatomic) int month_;
+@property (nonatomic) int year_;
 
 
 @end

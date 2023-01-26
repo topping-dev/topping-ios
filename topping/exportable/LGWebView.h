@@ -7,17 +7,17 @@
 {
 }
 
-+(LGWebView*)Create:(LuaContext *)context;
--(void)SetConfiguration:(BOOL)enableJavascript :(BOOL)enableDomStorage;
--(void)Load:(NSString *)url;
--(void)LoadData:(NSString*)data :(NSString*)mimeType :(NSString*)encoding :(NSString*)baseUrl;
--(void)StopLoading;
--(BOOL)IsLoading;
--(BOOL)CanGoBack;
--(BOOL)CanGoForward;
--(void)GoBack;
--(void)GoForward;
--(void)SetRequestAction:(LuaTranslator*)lt;
++(LGWebView*)create:(LuaContext *)context;
+-(void)setConfiguration:(BOOL)enableJavascript :(BOOL)enableDomStorage;
+-(void)load:(NSString *)url;
+-(void)loadData:(NSString*)data :(NSString*)mimeType :(NSString*)encoding :(NSString*)baseUrl;
+-(void)stopLoading;
+-(BOOL)isLoading;
+-(BOOL)canGoBack;
+-(BOOL)canGoForward;
+-(void)goBack;
+-(void)goForward;
+-(void)setRequestAction:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) WKWebView *wv;
 @property (nonatomic, strong) LuaTranslator *ltRequestAction;

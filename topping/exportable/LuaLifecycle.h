@@ -10,8 +10,10 @@
 
 @interface LuaLifecycle : NSObject <LuaClass>
 
-+(LuaLifecycle*)CreateForm:(LuaForm*)form;
-+(LuaLifecycle*)CreateFragment:(LuaFragment*)fragment;
++(LuaLifecycle*)createForm:(LuaForm*)form;
++(LuaLifecycle*)createFragment:(LuaFragment*)fragment;
+
+- (instancetype)initWithLifecycle:(Lifecycle*)lifecycle :(LuaCoroutineScope*)scope;
 
 -(void)addObserver:(LuaLifecycleObserver*)observer;
 -(void)removeObserver:(LuaLifecycleObserver*)observer;

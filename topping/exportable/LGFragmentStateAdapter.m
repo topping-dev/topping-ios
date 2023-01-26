@@ -63,6 +63,14 @@
     [self.enforcer updateFragmentMaxLifecycle:false];
 }
 
+- (NSString *)getKey {
+    if(self.key == nil) {
+        self.key = [[NSUUID UUID] UUIDString];
+    }
+    return self.key;
+}
+
+
 @end
 
 @implementation FragmentMaxLifecycleEnforcer
@@ -85,13 +93,13 @@
     //[self.viewPager dataobserver]
     
     self.lifecycleObserver = [[FragmentMaxLifecycleEnforcerLifecycleCallback alloc] initWithEnforcer:self];
-    [self.adapter.lifecycle addObserver:self.lifecycleObserver];
+    [self.adapter.lifecycle.lifecycle addObserver:self.lifecycleObserver];
 }
 
 -(void)unregister:(LGViewPager *)viewPager {
     [self.viewPager unRegisterOnPageChangeCallback:self.pageChangeCallback];
     //TODO:Data
-    [self.adapter.lifecycle removeObserver:self.lifecycleObserver];
+    [self.adapter.lifecycle.lifecycle removeObserver:self.lifecycleObserver];
 }
 
 -(void)updateFragmentMaxLifecycle:(BOOL)dataSetChanged {
@@ -259,24 +267,24 @@
 
 @implementation LGFragmentStateAdapter
 
-+(LGFragmentStateAdapter *)CreateFromForm:(LuaForm *)form {
++(LGFragmentStateAdapter *)createFromForm:(LuaForm *)form {
     return [[LGFragmentStateAdapter alloc] initWithForm:form];
 }
 
-+(LGFragmentStateAdapter *)CreateFromFragment:(LuaFragment *)fragment {
++(LGFragmentStateAdapter *)createFromFragment:(LuaFragment *)fragment {
     return [[LGFragmentStateAdapter alloc] initWithFragment:fragment];
 }
 
-+(LGFragmentStateAdapter *)Create:(LuaContext *)context :(FragmentManager *)fragmentManager :(LuaLifecycle *)lifecycle {
++(LGFragmentStateAdapter *)create:(LuaContext *)context :(FragmentManager *)fragmentManager :(LuaLifecycle *)lifecycle {
     return [[LGFragmentStateAdapter alloc] initWithFragmentManager:context :fragmentManager :lifecycle];
 }
 
 - (instancetype)initWithForm:(LuaForm *)form {
-    return [self initWithFragmentManager:form.context :[form getSupportFragmentManager] :[LuaLifecycle CreateForm:form]];
+    return [self initWithFragmentManager:form.context :[form getSupportFragmentManager] :[LuaLifecycle createForm:form]];
 }
 
 -(instancetype)initWithFragment:(LuaFragment *)fragment {
-    return [self initWithFragmentManager:fragment.context :fragment.mFragmentManager :[LuaLifecycle CreateFragment:fragment]];
+    return [self initWithFragmentManager:fragment.context :fragment.mFragmentManager :[LuaLifecycle createFragment:fragment]];
 }
 
 -(instancetype)initWithFragmentManager:(LuaContext*)context :(FragmentManager *)fragmentManager :(LuaLifecycle *)lifecycle {
@@ -298,7 +306,7 @@
 
 -(LuaFragment *)createFragment:(int)position {
     if(self.ltCreateFragment != nil)
-        return (LuaFragment*)[self.ltCreateFragment CallIn:[NSNumber numberWithInt:position], nil];
+        return (LuaFragment*)[self.ltCreateFragment callIn:[NSNumber numberWithInt:position], nil];
     return nil;
 }
 
@@ -329,7 +337,7 @@
     [self.cells setObject:cell atIndexedSubscript:indexPath.row];
     [self ensureFragment:indexPath.row];
     
-    NSString *itemId = [cell.fragment.luaId stringByAppendingString:ITOS(indexPath.row)];
+    NSString *itemId = [cell.fragment.luaId stringByAppendingString:LTOS(indexPath.row)];
     NSString *viewHolderId = cell.frameLayout.lua_id;
     NSString *boundItemId = [self itemForViewHolder:viewHolderId];
     if(boundItemId != nil && boundItemId != itemId) {
@@ -392,14 +400,14 @@
             fragment.mSavedFragmentState = nil;
         [self.fragments setObject:fragment forKey:itemId];
         
-        LGFrameLayout *frameLayout = [LGFrameLayout Create:self.lc];
+        LGFrameLayout *frameLayout = [LGFrameLayout create:self.lc];
         frameLayout.android_layout_width = @"match_parent";
         frameLayout.android_layout_height = @"match_parent";
         frameLayout.lua_id = [[NSUUID UUID] UUIDString];
-        frameLayout._view = [frameLayout CreateComponent];
-        [frameLayout SetupComponent:frameLayout._view];
+        frameLayout._view = [frameLayout createComponent];
+        [frameLayout setupComponent:frameLayout._view];
         
-        [frameLayout AddSelfToParent:cell.contentView :nil];
+        [frameLayout addSelfToParent:cell.contentView :nil];
         
         cell.frameLayout = frameLayout;
         cell.fragment = fragment;
@@ -408,7 +416,7 @@
 
 -(void)placeFragmentInCell:(LuaFragmentUICollectionViewCell*)cell {
     LGFrameLayout *container = cell.frameLayout;
-    LGView *view = [cell.fragment GetView];
+    LGView *view = [cell.fragment getView];
     
     if(cell.fragment.mAdded && view == nil)
     {
@@ -420,7 +428,7 @@
         if(view.parent != cell.frameLayout) {
             [self addViewToContainer:view :container];
         }
-        [cell.frameLayout ResizeAndInvalidate];
+        [cell.frameLayout resizeAndInvalidate];
         return;
     }
     
@@ -439,7 +447,7 @@
             return;
         }
         
-        [self.lifecycle addObserver:[[FragmentStateLifecycleObserver alloc] initWithAdapter:self :cell]];
+        [self.lifecycle.lifecycle addObserver:[[FragmentStateLifecycleObserver alloc] initWithAdapter:self :cell]];
     }
 }
 
@@ -450,10 +458,10 @@
     if(fragment == nil)
         return;
     
-    if([fragment GetView] != nil) {
-        LGViewGroup *parent = (LGViewGroup*)[fragment GetView].parent;
+    if([fragment getView] != nil) {
+        LGViewGroup *parent = (LGViewGroup*)[fragment getView].parent;
         if(parent != nil)
-           [parent RemoveAllSubViews];
+           [parent removeAllSubViews];
     }
     
     [self.savedStates removeObjectForKey:itemId];
@@ -478,7 +486,7 @@
 
 -(int)getItemCount {
     if(self.ltGetItemCount != nil) {
-        return [((NSNumber*)[self.ltGetItemCount Call]) intValue];
+        return [((NSNumber*)[self.ltGetItemCount call]) intValue];
     }
     return 0;
 }
@@ -525,18 +533,18 @@
         return;
     
     if(container.subviews.count > 0) {
-        [container RemoveAllSubViews];
+        [container removeAllSubViews];
     }
     
     if(v.parent != nil) {
-        [((LGViewGroup*)v.parent) RemoveSubview:v];
+        [((LGViewGroup*)v.parent) removeSubview:v];
     }
     
-    [container AddSubview:v];
-    [container ComponentAddMethod:container._view :v._view];
-    [self.lc.form.lgview ResizeAndInvalidate];
+    [container addSubview:v];
+    [container componentAddMethod:container._view :v._view];
+    [self.lc.form.lgview resizeAndInvalidate];
     if([self.receiverDelegate isKindOfClass:[LGViewPager class]]) {
-        [((LGViewPager*)self.receiverDelegate) Notify];
+        [((LGViewPager*)self.receiverDelegate) notify];
     }
 }
 
@@ -587,11 +595,11 @@
     return (int)((scrollView.contentOffset.x + (0.5 * scrollView.frame.size.width)) / scrollView.frame.size.width);
 }
 
--(void)SetCreateFragment:(LuaTranslator *)lt {
+-(void)setCreateFragment:(LuaTranslator *)lt {
     self.ltCreateFragment = lt;
 }
 
--(void)SetGetItemCount:(LuaTranslator *)lt {
+-(void)setGetItemCount:(LuaTranslator *)lt {
     self.ltGetItemCount = lt;
 }
 
@@ -609,12 +617,12 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(CreateFromForm:, LGFragmentStateAdapter, @[[LuaForm class]], @"CreateFromForm", [LGFragmentStateAdapter class])
-    ClassMethod(CreateFromFragment:, LGFragmentStateAdapter, @[[LuaFragment class]], @"CreateFromFragment", [LGFragmentStateAdapter class])
-    ClassMethod(Create:::, LGFragmentStateAdapter, @[[LuaContext class]C [FragmentManager class]C [LuaLifecycle class]], @"Create", [LGFragmentStateAdapter class])
+    ClassMethod(createFromForm:, LGFragmentStateAdapter, @[[LuaForm class]], @"createFromForm", [LGFragmentStateAdapter class])
+    ClassMethod(createFromFragment:, LGFragmentStateAdapter, @[[LuaFragment class]], @"createFromFragment", [LGFragmentStateAdapter class])
+    ClassMethod(create:::, LGFragmentStateAdapter, @[[LuaContext class]C [FragmentManager class]C [LuaLifecycle class]], @"create", [LGFragmentStateAdapter class])
     
-    InstanceMethodNoRet(SetCreateFragment:, @[[LuaTranslator class]], @"SetCreateFragment")
-    InstanceMethodNoRet(SetGetItemCount:, @[[LuaTranslator class]], @"SetGetItemCount")
+    InstanceMethodNoRet(setCreateFragment:, @[[LuaTranslator class]], @"setCreateFragment")
+    InstanceMethodNoRet(setGetItemCount:, @[[LuaTranslator class]], @"setGetItemCount")
     
     return dict;
 }

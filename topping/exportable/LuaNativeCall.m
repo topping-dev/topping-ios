@@ -3,7 +3,7 @@
 
 @implementation LuaNativeCall
 
-+(LuaNativeObject *)CallClass:(NSString *)clss :(NSString *)func :(NSArray *)params
++(LuaNativeObject *)callClass:(NSString *)clss :(NSString *)func :(NSArray *)params
 {
     SEL selector = NSSelectorFromString(func);
     NSMethodSignature *sig = [clss methodSignatureForSelector:selector];
@@ -26,7 +26,7 @@
     return lno;
 }
 
-+(LuaNativeObject *)Call:(LuaNativeObject *)obj :(NSString *)func :(NSArray *)params
++(LuaNativeObject *)call:(LuaNativeObject *)obj :(NSString *)func :(NSArray *)params
 {
     //objc_msgSend(target, @selector(action:::), );
     SEL selector = NSSelectorFromString(func);
@@ -39,7 +39,7 @@
     [invo setSelector:selector];
     int i = 2;
     for(id obj in params)
-        [invo setArgument:&obj atIndex:i++];
+        [invo setArgument:(void*)&obj atIndex:i++];
     [invo invoke];
     LuaNativeObject *lno = [LuaNativeObject new];
     if (sig.methodReturnLength) {
@@ -63,14 +63,14 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CallClass:::))
-                                        :@selector(CallClass:::)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(callClass:::))
+                                        :@selector(callClass:::)
                                         :[LuaNativeObject class]
                                         :[NSArray arrayWithObjects:[NSString class], [NSString class], [NSArray class], nil]
                                         :[LuaNativeCall class]]
              forKey:@"CallClass"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Call:::))
-                                        :@selector(Call:::)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(call:::))
+                                        :@selector(call:::)
                                         :[LuaNativeObject class]
                                         :[NSArray arrayWithObjects:[LuaNativeObject class], [NSString class], [NSArray class], nil]
                                         :[LuaNativeCall class]]

@@ -3,12 +3,15 @@
 #import "LuaClass.h"
 #import "LuaInterface.h"
 #import "LuaCoroutineScope.h"
+#import "CoroutineScope.h"
 
 @protocol LifecycleObserver;
 @protocol LifecycleEventObserver;
 @class LuaLifecycleObserver;
 @class LifecycleCoroutineScope;
 @class CancelRunBlock;
+@protocol CancelRunBlockDelegate;
+@class CoroutineScope;
 
 typedef NS_ENUM(NSInteger, LifecycleEvent)
 {
@@ -86,7 +89,7 @@ typedef NS_ENUM(NSInteger, LifecycleState) {
     LIFECYCLESTATE_RESUMED
 };
 
-@interface Lifecycle : NSObject
+@interface Lifecycle : NSObject <CancelRunBlockDelegate>
 {
     LifecycleCoroutineScope *coroutineScope;
 }
@@ -95,7 +98,7 @@ typedef NS_ENUM(NSInteger, LifecycleState) {
 +(LifecycleEvent)downTo:(LifecycleState)state;
 +(LifecycleEvent)upFrom:(LifecycleState)state;
 +(LifecycleEvent)upTo:(LifecycleState)state;
-+(LifecycleState)GetTargetState:(LifecycleEvent)event;
++(LifecycleState)getTargetState:(LifecycleEvent)event;
 +(BOOL)isAtLeast:(LifecycleState)stateSelf :(LifecycleState)targetState;
 -(LifecycleState)getCurrentState;
 -(void)addObserver:(id<LifecycleObserver>)observer;
@@ -104,17 +107,11 @@ typedef NS_ENUM(NSInteger, LifecycleState) {
 
 @end
 
-@interface CoroutineScope : NSObject
-
-@property (nonatomic, retain) NSObject *coroutineContext;
-
-@end
-
 @interface LifecycleCoroutineScope : CoroutineScope
 
--(CancelRunBlock*)launchWhenCreated:(void (^)(void))block;
--(CancelRunBlock*)launchWhenStarted:(void (^)(void))block;
--(CancelRunBlock*)launchWhenResumed:(void (^)(void))block;
+-(CancelRunBlock*)launchWhenCreated:(NSObject* (^)(void))block;
+-(CancelRunBlock*)launchWhenStarted:(NSObject* (^)(void))block;
+-(CancelRunBlock*)launchWhenResumed:(NSObject* (^)(void))block;
 
 @property (nonatomic, retain) Lifecycle* lifecycle;
 
@@ -130,19 +127,19 @@ typedef NS_ENUM(NSInteger, LifecycleState) {
 
 @property (nonatomic, retain) NSString *key;
 @property (nonatomic, retain) CancelRunBlock *job;
-@property int minState;
+@property LifecycleState minState;
 
 @end
 
 @interface LifecycleController : NSObject
 
-- (instancetype)initWithLifecycle:(Lifecycle*)lifecycle :(int)minState :(dispatch_queue_t)queue :(CancelRunBlock*)job;
+- (instancetype)initWithLifecycle:(Lifecycle*)lifecycle :(LifecycleState)minState :(int)queue :(CancelRunBlock*)job;
 - (void)handleDestroy:(CancelRunBlock*)job;
 - (void)finish;
 
 @property (nonatomic, retain) Lifecycle* lifecycle;
-@property int minState;
-@property (nonatomic, retain) dispatch_queue_t dispatchQueue;
+@property LifecycleState minState;
+@property (nonatomic) int dispatchQueue;
 @property (nonatomic, retain) CancelRunBlock *job;
 @property (nonatomic, retain) JobLifecycleEventObserver *observer;
 

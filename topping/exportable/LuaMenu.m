@@ -7,25 +7,25 @@
 
 @implementation LuaMenu
 
-+(LuaTab*)Create {
++(LuaTab*)create {
     LuaTab *tab = [LuaTab new];
     tab.item = [[MDCTabBarItem alloc] init];
     return tab;
 }
 
--(void)SetTitle:(NSString*)text {
+-(void)setTitle:(NSString*)text {
     self.title = text;
 }
 
--(void)SetTitleRef:(LuaRef*)text {
-    self.title = [[LGStringParser GetInstance] GetString:text.idRef];
+-(void)setTitleRef:(LuaRef*)text {
+    self.title = [[LGStringParser getInstance] getString:text.idRef];
 }
 
--(void)SetIcon:(LuaRef*)icon {
+-(void)setIcon:(LuaRef*)icon {
     self.iconRes = icon;
 }
 
--(void)SetIntent:(LuaTranslator *)lt {
+-(void)setIntent:(LuaTranslator *)lt {
     
 }
 
@@ -36,11 +36,11 @@
 + (NSMutableDictionary *)luaMethods {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethodNoArg(Create, LuaTab, @"Create", [LuaTab class])
+    ClassMethodNoArg(create, LuaTab, @"create", [LuaTab class])
     
-    InstanceMethodNoRet(SetText:, @[[NSString class]], @"SetText")
-    InstanceMethodNoRet(SetTextRef:, @[[LuaRef class]], @"SetTextRef")
-    InstanceMethodNoRet(SetIcon:, @[[LuaRef class]], @"SetIcon")
+    InstanceMethodNoRet(setText:, @[[NSString class]], @"setText")
+    InstanceMethodNoRet(setTextRef:, @[[LuaRef class]], @"setTextRef")
+    InstanceMethodNoRet(setIcon:, @[[LuaRef class]], @"setIcon")
     
     return dict;
 }

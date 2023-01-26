@@ -7,53 +7,53 @@
 
 @implementation LuaTab
 
-+(LuaTab*)Create {
++(LuaTab*)create {
     LuaTab *tab = [LuaTab new];
     tab.item = [[MDCTabBarItem alloc] init];
     return tab;
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
     //TODO: exception here?
     if(self.parent != nil && [self.parent isKindOfClass:[LGTabLayout class]]) {
         self.item = [[MDCTabBarItem alloc] init];
         
         if(self.android_icon != nil) {
-            ((MDCTabBarItem*)(self.item)).image = [[LGDrawableParser GetInstance] ParseDrawable:self.android_icon].img;
+            ((MDCTabBarItem*)(self.item)).image = [[LGDrawableParser getInstance] parseDrawable:self.android_icon].img;
         }
         if(self.android_text != nil) {
-            ((MDCTabBarItem*)(self.item)).title = [[LGStringParser GetInstance] GetString:self.android_text];
+            ((MDCTabBarItem*)(self.item)).title = [[LGStringParser getInstance] getString:self.android_text];
         }
         if(self.android_layout != nil) {
-            LuaViewInflator *inflator = (LuaViewInflator*)[LuaViewInflator Create:self.lc];
-            [self SetCustomView:[inflator Inflate:[LuaRef WithValue:self.android_layout] :nil]];
+            LuaViewInflator *inflator = (LuaViewInflator*)[LuaViewInflator create:self.lc];
+            [self setCustomView:[inflator inflate:[LuaRef withValue:self.android_layout] :nil]];
         }
         
-        [((LGTabLayout*)self.parent) AddTab:self];
+        [((LGTabLayout*)self.parent) addTab:self];
     }
 }
 
--(void)SetText:(NSString*)text {
+-(void)setText:(NSString*)text {
     ((MDCTabBarItem*)(self.item)).title = text;
 }
 
--(void)SetTextRef:(LuaRef*)text {
-    ((MDCTabBarItem*)(self.item)).title = [[LGStringParser GetInstance] GetString:text.idRef];
+-(void)setTextRef:(LuaRef*)text {
+    ((MDCTabBarItem*)(self.item)).title = [[LGStringParser getInstance] getString:text.idRef];
 }
 
--(void)SetIcon:(LuaRef*)icon {
-    ((MDCTabBarItem*)(self.item)).image = [[LGDrawableParser GetInstance] ParseDrawableRef:icon].img;
+-(void)setIcon:(LuaRef*)icon {
+    ((MDCTabBarItem*)(self.item)).image = [[LGDrawableParser getInstance] parseDrawableRef:icon].img;
 }
 
--(void)SetIconStream:(LuaStream*)icon {
+-(void)setIconStream:(LuaStream*)icon {
     ((MDCTabBarItem*)(self.item)).image = [[UIImage alloc] initWithData:icon.data];
 }
 
--(void)SetCustomView:(LGView*)view {
+-(void)setCustomView:(LGView*)view {
     self.customView = view;
     //TODO:Check this
-    ((MDCTabBarItem*)(self.item)).mdc_customView = [view GetView];
+    ((MDCTabBarItem*)(self.item)).mdc_customView = [view getView];
 }
 
 + (NSString *)className {
@@ -63,13 +63,13 @@
 + (NSMutableDictionary *)luaMethods {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethodNoArg(Create, LuaTab, @"Create", [LuaTab class])
+    ClassMethodNoArg(create, LuaTab, @"create", [LuaTab class])
     
-    InstanceMethodNoRet(SetText:, @[[NSString class]], @"SetText")
-    InstanceMethodNoRet(SetTextRef:, @[[LuaRef class]], @"SetTextRef")
-    InstanceMethodNoRet(SetIcon:, @[[LuaRef class]], @"SetIcon")
-    InstanceMethodNoRet(SetIconStream:, @[[LuaStream class]], @"SetIconStream")
-    InstanceMethodNoRet(SetCustomView:, @[[LGView class]], @"SetCustomView")
+    InstanceMethodNoRet(setText:, @[[NSString class]], @"setText")
+    InstanceMethodNoRet(setTextRef:, @[[LuaRef class]], @"setTextRef")
+    InstanceMethodNoRet(setIcon:, @[[LuaRef class]], @"setIcon")
+    InstanceMethodNoRet(setIconStream:, @[[LuaStream class]], @"setIconStream")
+    InstanceMethodNoRet(setCustomView:, @[[LGView class]], @"setCustomView")
     
     return dict;
 }

@@ -10,17 +10,17 @@
 
 @implementation LGEditText
 
--(void)InitProperties
+-(void)initProperties
 {
-    [super InitProperties];
+    [super initProperties];
     
-    int val = [[LGDimensionParser GetInstance] GetDimension:@"1dp"];
+    int val = [[LGDimensionParser getInstance] getDimension:@"1dp"];
     self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
 
     self.fontSize = [UIFont labelFontSize];
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
     self.multiLine = false;
     if(self.android_inputType != nil)
@@ -59,7 +59,7 @@
     }
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
     if(self.multiLine)
     {
@@ -125,12 +125,12 @@
         }
         
         if(self.colorAccent != nil)
-            tf.textColor = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
+            tf.textColor = [[LGColorParser getInstance] parseColor:self.colorAccent];
         if(self.android_textColor != nil)
-            tf.textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+            tf.textColor = [[LGColorParser getInstance] parseColor:self.android_textColor];
 
         if(self.android_textSize != nil)
-            tf.font = [tf.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
+            tf.font = [tf.font fontWithSize:[[LGDimensionParser getInstance] getDimension:self.android_textSize]];
 
         if(self.dGravity & GRAVITY_START)
             [tf setTextAlignment:NSTextAlignmentLeft];
@@ -201,12 +201,12 @@
             }
             
             if(self.colorAccent != nil)
-                tf.textColor = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
+                tf.textColor = [[LGColorParser getInstance] parseColor:self.colorAccent];
             if(self.android_textColor != nil)
-                tf.textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+                tf.textColor = [[LGColorParser getInstance] parseColor:self.android_textColor];
 
             if(self.android_textSize != nil)
-                tf.font = [tf.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
+                tf.font = [tf.font fontWithSize:[[LGDimensionParser getInstance] getDimension:self.android_textSize]];
 
             if(self.dGravity & GRAVITY_START)
                 [tf setTextAlignment:NSTextAlignmentLeft];
@@ -217,22 +217,22 @@
         }
     }
 	
-	[super SetupComponent:view];
+	[super setupComponent:view];
 }
 
--(int)GetContentW
+-(int)getContentW
 {
-    int l = [self GetStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
-    if (l > [DisplayMetrics GetBaseFrame].size.width)
-        l = [DisplayMetrics GetBaseFrame].size.width - self.dX;
+    int l = [self getStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
+    if (l > [DisplayMetrics getBaseFrame].size.width)
+        l = [DisplayMetrics getBaseFrame].size.width - self.dX;
     return l;
 }
 
--(int)GetContentH
+-(int)getContentH
 {
-	CGSize textSize = [self GetStringSize];
+	CGSize textSize = [self getStringSize];
     int th = textSize.height;
-    NSMutableArray *texts = [self BuildLineBreaks:self.android_text];
+    NSMutableArray *texts = [self buildLineBreaks:self.android_text];
     NSUInteger mult = texts.count;
     if(mult == 0)
         mult = 1;
@@ -267,8 +267,8 @@
     }
 }
 
--(void)Resize {
-    [super Resize];
+-(void)resize {
+    [super resize];
     
     self.layer.frame = CGRectMake(0, self._view.frame.size.height - 1, self._view.frame.size.width, 1);
 }
@@ -298,7 +298,7 @@
 - (void)keyboardWillShow:(NSNotification *)notif
 {
     CGRect t;
-    [[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&t];
+    [((NSValue*)[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey]) getValue:&t];
     t = [self._view convertRect:t toView:nil];
        
     if(self.selectedKeyboardTextField != nil)
@@ -394,31 +394,31 @@
     self.selectedKeyboardTextField = nil;
     self.selectedKeyboardTextView = textView;
     if(self.ltBeforeTextChangedListener != nil)
-        [self.ltBeforeTextChangedListener CallIn:textView.text];
+        [self.ltBeforeTextChangedListener callIn:textView.text];
     return textView.editable;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if(self.ltAfterTextChangedListener != nil)
-        [self.ltAfterTextChangedListener CallIn:textView.text];
+        [self.ltAfterTextChangedListener callIn:textView.text];
 }
 
 -(void)textViewDidChange:(UITextView *)textView
 {
     if(self.ltTextChangedListener != nil)
-        [self.ltTextChangedListener CallIn:textView.text];
+        [self.ltTextChangedListener callIn:textView.text];
 }
 
 //Lua
-+(LGEditText*)Create:(LuaContext *)context
++(LGEditText*)create:(LuaContext *)context
 {
 	LGEditText *lst = [[LGEditText alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
--(NSString *)GetText
+-(NSString *)getText
 {
     if(self.multiLine)
     {
@@ -432,7 +432,7 @@
     }
 }
 
--(void)SetTextInternal:(NSString *)val
+-(void)setTextInternal:(NSString *)val
 {
     if(self.multiLine)
     {
@@ -445,32 +445,32 @@
         [field setText:val];
     }
     self.android_text = val;
-    [self ResizeOnText];
+    [self resizeOnText];
 }
 
--(void)SetText:(LuaRef *)ref
+-(void)setText:(LuaRef *)ref
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetTextInternal:val];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setTextInternal:val];
 }
 
--(void)SetTextColor:(NSString *)color
+-(void)setTextColor:(NSString *)color
 {
     if(self.multiLine)
     {
         UITextView *field = (UITextView*)self._view;
-        [field setTextColor:[[LGColorParser GetInstance] ParseColor:color]];
+        [field setTextColor:[[LGColorParser getInstance] parseColor:color]];
     }
     else
     {
         UITextField *field = (UITextField*)self._view;
-        [field setTextColor:[[LGColorParser GetInstance] ParseColor:color]];
+        [field setTextColor:[[LGColorParser getInstance] parseColor:color]];
     }
 }
 
--(void)SetTextColorRef:(LuaRef *)ref
+-(void)setTextColorRef:(LuaRef *)ref
 {
-    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:ref.idRef];
     if(self.multiLine)
     {
         UITextView *field = (UITextView*)self._view;
@@ -483,7 +483,7 @@
     }
 }
 
--(void)SetTextChangedListener:(LuaTranslator*)lt
+-(void)setTextChangedListener:(LuaTranslator*)lt
 {
     self.ltTextChangedListener = lt;
     if(self.multiLine)
@@ -496,7 +496,7 @@
     }
 }
 
--(void)SetBeforeTextChangedListener:(LuaTranslator*)lt
+-(void)setBeforeTextChangedListener:(LuaTranslator*)lt
 {
     self.ltBeforeTextChangedListener = lt;
     if(self.multiLine)
@@ -509,7 +509,7 @@
     }
 }
 
--(void)SetAfterTextChangedListener:(LuaTranslator*)lt
+-(void)setAfterTextChangedListener:(LuaTranslator*)lt
 {
     self.ltAfterTextChangedListener = lt;
     if(self.multiLine)
@@ -540,15 +540,15 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGEditText class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGEditText class]] 
-			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextChangedListener:)) :@selector(SetTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"SetTextChangedListener"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetBeforeTextChangedListener:)) :@selector(SetBeforeTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"SetBeforeTextChangedListener"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetAfterTextChangedListener:)) :@selector(SetAfterTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"SetAfterTextChangedListener"];
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setTextChangedListener:)) :@selector(setTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"setTextChangedListener"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setBeforeTextChangedListener:)) :@selector(setBeforeTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"setBeforeTextChangedListener"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setAfterTextChangedListener:)) :@selector(setAfterTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"setAfterTextChangedListener"];
 	return dict;
 }
 

@@ -6,12 +6,12 @@
 
 @implementation LuaViewModelProvider
 
-+(LuaViewModelProvider*)OfForm:(LuaForm*)form
++(LuaViewModelProvider*)ofForm:(LuaForm*)form
 {    
     return [[LuaViewModelProvider alloc] initWithViewModelProvider:[[ViewModelProvider alloc] initWithOwner:form]];
 }
 
-+(LuaViewModelProvider*)OfFragment:(LuaFragment*)fragment
++(LuaViewModelProvider*)ofFragment:(LuaFragment*)fragment
 {
     return [[LuaViewModelProvider alloc] initWithViewModelProvider:[[ViewModelProvider alloc] initWithOwner:fragment]];
 }
@@ -25,12 +25,12 @@
     return self;
 }
 
--(LuaViewModel*)Get:(NSString*)key
+-(LuaViewModel*)get:(NSString*)key
 {
     return [self.viewModelProvider getWithKey:key];
 }
 
--(void *)Get:(NSString *)key ptr:(void *)ptr {
+-(void *)get:(NSString *)key ptr:(void *)ptr {
     return [self.viewModelProvider getWithKey:key ptr:ptr];
 }
 
@@ -48,9 +48,9 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(OfForm:, LuaViewModelProvider, MakeArray([LuaForm class]C nil), @"OfForm", [LuaViewModelProvider class])
-    ClassMethod(OfFragment:, LuaViewModelProvider, MakeArray([LuaFragment class]C nil), @"OfFragment", [LuaViewModelProvider class])
-    InstanceMethod(Get:, LuaViewModel, MakeArray([NSString class]C nil), @"Get")
+    ClassMethod(ofForm:, LuaViewModelProvider, MakeArray([LuaForm class]C nil), @"ofForm", [LuaViewModelProvider class])
+    ClassMethod(ofFragment:, LuaViewModelProvider, MakeArray([LuaFragment class]C nil), @"ofFragment", [LuaViewModelProvider class])
+    InstanceMethod(get:, LuaViewModel, MakeArray([NSString class]C nil), @"get")
     
     return dict;
 }

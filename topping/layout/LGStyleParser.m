@@ -19,12 +19,12 @@
     return self;
 }
 
-+(LGStyleParser *) GetInstance
++(LGStyleParser *) getInstance
 {
-    return [LGParser GetInstance].pStyle;
+    return [LGParser getInstance].pStyle;
 }
 
--(void)ParseXML:(int)orientation :(GDataXMLElement *)element
+-(void)parseXML:(int)orientation :(GDataXMLElement *)element
 {
     GDataXMLNode *nameAttr;
     GDataXMLNode *typeAttr;
@@ -45,10 +45,10 @@
         }
     }
     
-    [self ParseXML:orientation :nameAttr :parentAttr :element];
+    [self parseXML:orientation :nameAttr :parentAttr :element];
 }
 
--(void)ParseXML:(int)orientation :(GDataXMLNode *)nameAttr :(GDataXMLNode *)parentAttr :(GDataXMLElement *)element
+-(void)parseXML:(int)orientation :(GDataXMLNode *)nameAttr :(GDataXMLNode *)parentAttr :(GDataXMLElement *)element
 {
     NSMutableDictionary *dict = nil;
     if(element.childCount > 0)
@@ -76,10 +76,10 @@
         [self.parentMap setObject:parentAttr.stringValue forKey:nameAttr.stringValue];
 }
 
--(void)LinkParents
+-(void)linkParents
 {
     DefaultStyles *ds = [DefaultStyles new];
-    [ds Initialize];
+    [ds initialize];
     for(NSString *key in ds.styleMap)
     {
         [self.styleMap setObject:[ds.styleMap objectForKey:key] forKey:key];
@@ -116,26 +116,26 @@
     [linkedMap setObject:[NSNumber numberWithInt:1] forKey:name];
 }
 
--(NSDictionary*)GetStyle:(NSString *)style
+-(NSDictionary*)getStyle:(NSString *)style
 {
     return [self.styleMap objectForKey:style];
 }
 
--(NSObject *)GetStyleValue:(NSString *)style :(NSString *)key
+-(NSObject *)getStyleValue:(NSString *)style :(NSString *)key
 {
     NSMutableDictionary *dict = [self.styleMap objectForKey:style];
     
     if(dict != nil)
     {
         NSString *valRef = [dict objectForKey:key];
-        NSObject *val = [[LGValueParser GetInstance] GetValue:valRef];
+        NSObject *val = [[LGValueParser getInstance] getValue:valRef];
         return val;
     }
     
     return nil;
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.styleMap)

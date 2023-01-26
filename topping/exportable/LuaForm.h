@@ -29,19 +29,19 @@
 
 - (instancetype)initWithContext:(LuaContext *)context;
 
-+(LuaNativeObject*)Create:(LuaContext*)context :(LuaRef*)luaId;
-+(LuaNativeObject*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
-+(LuaForm*)GetActiveForm;
--(LuaContext*)GetContext;
--(LGView*)GetViewById:(LuaRef*)lId;
--(LGView*)GetViewByIdInternal:(NSString*)sId;
--(NSDictionary*)GetBindings;
--(LGView*)GetView;
--(void)SetView:(LGView*)v;
--(void)SetViewXML:(LuaRef *)xml;
--(void)SetTitle:(NSString *)str;
--(void)SetTitleRef:(LuaRef *)str;
--(void)Close;
++(LuaNativeObject*)create:(LuaContext*)context :(LuaRef*)luaId;
++(LuaNativeObject*)createWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
++(LuaForm*)getActiveForm;
+-(LuaContext*)getContext;
+-(LGView*)getViewById:(LuaRef*)lId;
+-(LGView*)getViewByIdInternal:(NSString*)sId;
+-(NSDictionary*)getBindings;
+-(LGView*)getLuaView;
+-(void)setLuaView:(LGView*)v;
+-(void)setViewXML:(LuaRef *)xml;
+-(void)setTitle:(NSString *)str;
+-(void)setTitleRef:(LuaRef *)str;
+-(void)close;
 
 -(BOOL)isChangingConfigurations;
 -(void)onBackPressed;
@@ -53,7 +53,7 @@
 -(Lifecycle*)getLifecycle;
 -(LuaLifecycle*)getLifecycleInner;
 
--(void)AddMainView:(UIView*)viewToAdd;
+-(void)addMainView:(UIView*)viewToAdd;
 
 KEYBOARD_FUNCTIONS
 

@@ -19,22 +19,22 @@
 
 - (instancetype)initWithContext:(LuaContext *)context :(NSString*)lua_id;
 
--(NSObject *)GetObject:(NSIndexPath*)indexPath;
--(int)GetCount;
--(int)GetTotalHeight:(int)start;
--(int)GetTotalWidth:(int)start;
+-(NSObject *)getObject:(NSIndexPath*)indexPath;
+-(int)getCount;
+-(int)getTotalHeight:(int)start;
+-(int)getTotalWidth:(int)start;
 
-+(LGRecyclerViewAdapter*)Create:(LuaContext *)context :(NSString*)lid;
--(LGRecyclerViewAdapter*)AddSection:(NSString *)header :(NSString*) idV;
--(void)RemoveSection:(NSString*) header;
--(void)AddValue:(NSObject *)value;
--(void)RemoveValue:(NSObject *)value;
--(void)Clear;
--(void)Notify;
--(void)SetOnItemSelected:(LuaTranslator*)lt;
--(void)SetOnCreateViewHolder:(LuaTranslator*)lt;
--(void)SetOnBindViewHolder:(LuaTranslator*)lt;
--(void)SetGetItemViewType:(LuaTranslator*)lt;
++(LGRecyclerViewAdapter*)create:(LuaContext *)context :(NSString*)lid;
+-(LGRecyclerViewAdapter*)addSection:(NSString *)header :(NSString*) idV;
+-(void)removeSection:(NSString*) header;
+-(void)addValue:(NSObject *)value;
+-(void)removeValue:(NSObject *)value;
+-(void)clear;
+-(void)notify;
+-(void)setOnItemSelected:(LuaTranslator*)lt;
+-(void)setOnCreateViewHolder:(LuaTranslator*)lt;
+-(void)setOnBindViewHolder:(LuaTranslator*)lt;
+-(void)setGetItemViewType:(LuaTranslator*)lt;
 
 @property (nonatomic, strong) NSString *lua_id;
 @property (nonatomic, strong) LuaContext *lc;

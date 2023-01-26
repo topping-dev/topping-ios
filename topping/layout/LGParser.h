@@ -51,10 +51,10 @@ typedef enum
 {
 }
 
-+(LGParser*) GetInstance;
--(void)Initialize;
--(NSMutableArray *)Tester:(NSArray*)directoryList :(NSString*)directoryType;
--(MATCH_ID) Matcher:(MATCH_ID)count :(NSString*)toMatch :(BOOL *) result;
++(LGParser*) getInstance;
+-(void)initialize;
+-(NSMutableArray *)tester:(NSArray*)directoryList :(NSString*)directoryType;
+-(MATCH_ID) matcher:(MATCH_ID)count :(NSString*)toMatch :(BOOL *) result;
 
 @property (nonatomic, retain) LGLayoutParser *pLayout;
 @property (nonatomic, retain) LGDrawableParser *pDrawable;

@@ -9,9 +9,9 @@
 }
 
 //Lua
-+(LGCheckBox*)Create:(LuaContext *)context;
--(BOOL)IsChecked;
--(void)SetOnCheckedChangedListener:(LuaTranslator*)lt;
++(LGCheckBox*)create:(LuaContext *)context;
+-(BOOL)isChecked;
+-(void)setOnCheckedChangedListener:(LuaTranslator*)lt;
 
 @property (nonatomic, strong) CheckBox *checkbox;
 @property (nonatomic) CGSize checkboxSize;

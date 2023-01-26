@@ -4,45 +4,45 @@
 
 @interface LGToolbar : LGView
 
--(void)SetMenu:(LuaRef*)menu;
+-(void)setMenu:(LuaRef*)menu;
 
--(void)SetLogo:(LuaRef*)logo;
+-(void)setLogo:(LuaRef*)logo;
 
--(void)SetNavigationIcon:(LuaRef*)navigationIcon;
+-(void)setNavigationIcon:(LuaRef*)navigationIcon;
 
--(void)SetNavigationIconImage:(UIImage*)img;
+-(void)setNavigationIconImage:(UIImage*)img;
 
--(void)SetOverflowIcon:(LuaRef*)overflowIcon;
+-(void)setOverflowIcon:(LuaRef*)overflowIcon;
 
--(NSString*)GetTitle;
+-(NSString*)getTitle;
 
--(void)SetTitleInternal:(NSString*)title;
+-(void)setTitleInternal:(NSString*)title;
 
--(void)SetTitle:(LuaRef*)ref;
+-(void)setTitle:(LuaRef*)ref;
 
--(void)SetTitleTextColor:(LuaRef*)color;
+-(void)setTitleTextColor:(LuaRef*)color;
 
--(void)SetTitleTextApperance:(LuaRef*)ref;
+-(void)setTitleTextApperance:(LuaRef*)ref;
 
--(NSString*)GetSubtitle;
+-(NSString*)getSubtitle;
 
--(void)SetSubtitleInternal:(NSString*)subtitle;
+-(void)setSubtitleInternal:(NSString*)subtitle;
 
--(void)SetSubtitle:(LuaRef*)ref;
+-(void)setSubtitle:(LuaRef*)ref;
 
--(void)SetSubtitleTextColor:(LuaRef*)color;
+-(void)setSubtitleTextColor:(LuaRef*)color;
 
--(void)SetSubtitleTextApperance:(LuaRef*)ref;
+-(void)setSubtitleTextApperance:(LuaRef*)ref;
 
 -(void)navigationTap;
 
--(void)SetNavigationOnClickListener:(LuaTranslator*)lt;
+-(void)setNavigationOnClickListener:(LuaTranslator*)lt;
 
--(void)SetNavigationOnClickListenerInternal:(id<OnClickListenerInternal>)runnable;
+-(void)setNavigationOnClickListenerInternal:(id<OnClickListenerInternal>)runnable;
 
 -(void)overflowTap;
 
--(void)SetMenuItemClickListener:(LuaTranslator*)lt;
+-(void)setMenuItemClickListener:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSString* android_buttonGravity;
 @property (nonatomic, retain) NSString* android_collapseContentDescription;
@@ -72,7 +72,7 @@
 @property (nonatomic, retain) NSString* android_titleTextColor;
 @property (nonatomic, retain) UIView *toolbar;
 @property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UIBarButtonItem *title;
+@property (nonatomic, retain) UIBarButtonItem *title_;
 @property (nonatomic, retain) UIBarButtonItem *spacer;
 @property (nonatomic, retain) NSMutableArray *startItems;
 @property (nonatomic, retain) NSMutableArray *endItems;

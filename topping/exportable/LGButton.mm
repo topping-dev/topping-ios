@@ -10,16 +10,16 @@
 @implementation LGButton
 
 //Image here?
--(int)GetContentW
+-(int)getContentW
 {
-	int w = [super GetContentW];
+	int w = [super getContentW];
 	/*if (img_base != null && w < img_base.getWidth(null)) {
 		return img_base.getWidth(null);
 	}*/
 	return w;
 }
 
--(int)GetContentH
+-(int)getContentH
 {
 	/*if (img_base != null) {
 		return img_base.getHeight(null)-4;
@@ -29,14 +29,14 @@
 	//}
 }
 
--(void)InitProperties
+-(void)initProperties
 {
-    [super InitProperties];
+    [super initProperties];
     
     self.fontSize = [UIFont buttonFontSize];
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	UIButton *but = nil;
 	if(ISNULLOREMPTY(self.android_background))
@@ -48,9 +48,9 @@
 	return but;	
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
-    [super SetupComponent:view];
+    [super setupComponent:view];
     
     UIButton *but = (UIButton*)self._view;
     but.userInteractionEnabled = YES;
@@ -66,7 +66,7 @@
 	[but setTitle:self.android_text forState:UIControlStateHighlighted];
     if(self.colorAccent != nil)
     {
-        UIColor *color = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
+        UIColor *color = [[LGColorParser getInstance] parseColor:self.colorAccent];
         [but setTitleColor:color forState:UIControlStateNormal];
         [but setTitleColor:color forState:UIControlStateSelected];
         [but setTitleColor:color forState:UIControlStateDisabled];
@@ -75,7 +75,7 @@
     }
     if(self.android_textColor != nil)
     {
-        UIColor *color = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+        UIColor *color = [[LGColorParser getInstance] parseColor:self.android_textColor];
         [but setTitleColor:color forState:UIControlStateNormal];
         [but setTitleColor:color forState:UIControlStateSelected];
         [but setTitleColor:color forState:UIControlStateDisabled];
@@ -94,20 +94,20 @@
 }
 
 //Lua
-+(LGButton*)Create:(LuaContext *)context
++(LGButton*)create:(LuaContext *)context
 {
 	LGButton *lst = [[LGButton alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
-- (NSString *)GetText
+- (NSString *)getText
 {
     UIButton *but = (UIButton*)self._view;
     return but.currentTitle;
 }
 
--(void)SetTextInternal:(NSString *)val
+-(void)setTextInternal:(NSString *)val
 {
     UIButton *but = (UIButton*)self._view;
     [but setTitle:val forState:UIControlStateNormal];
@@ -116,18 +116,18 @@
     [but setTitle:val forState:UIControlStateSelected];
     [but setTitle:val forState:UIControlStateHighlighted];
     self.android_text = val;
-    [self ResizeOnText];
+    [self resizeOnText];
 }
 
--(void)SetText:(LuaRef *)ref
+-(void)setText:(LuaRef *)ref
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetTextInternal:val];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setTextInternal:val];
 }
 
--(void)SetTextColor:(LuaRef *)ref
+-(void)setTextColor:(LuaRef *)ref
 {
-    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:ref.idRef];
     UIButton *but = (UIButton*)self._view;
     [but setTitleColor:val forState:UIControlStateNormal];
     [but setTitleColor:val forState:UIControlStateFocused];
@@ -139,11 +139,11 @@
 -(void)didClickButton
 {
     if(self.ltOnClickListener != nil) {
-        [self.ltOnClickListener CallIn:self.lc, nil];
+        [self.ltOnClickListener callIn:self.lc, nil];
     }
 }
 
--(void)SetOnClickListener:(LuaTranslator *)lt
+-(void)setOnClickListener:(LuaTranslator *)lt
 {
     self.ltOnClickListener = lt;
 }
@@ -165,13 +165,13 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGButton class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGButton class]] 
-			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnClickListener:)) :@selector(SetOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnClickListener"];
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnClickListener:)) :@selector(setOnClickListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnClickListener"];
 	return dict;
 }
 

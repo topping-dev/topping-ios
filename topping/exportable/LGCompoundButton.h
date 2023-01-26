@@ -6,7 +6,7 @@
 {
 }
 
-+(LGCompoundButton*)Create:(LuaContext *)context;
++(LGCompoundButton*)create:(LuaContext *)context;
 
 @property(nonatomic, retain) NSString *android_checked;
 

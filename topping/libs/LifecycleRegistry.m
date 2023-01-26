@@ -4,7 +4,7 @@
 
 -(void)dispatchEvent:(id<LifecycleOwner>)owner :(LifecycleEvent)event
 {
-    LifecycleState newState = [Lifecycle GetTargetState:event];
+    LifecycleState newState = [Lifecycle getTargetState:event];
     self.state = [LifecycleRegistry min:self.state :newState];
     [self.observer onStateChanged:owner :event];
     self.state = newState;
@@ -53,7 +53,7 @@
 -(void)handleLifecycleEvent:(LifecycleEvent) event
 {
     [self enforceMainThreadIfNeeded:@"handleLifecycleEvent"];
-    [self moveToState:[Lifecycle GetTargetState:event]];
+    [self moveToState:[Lifecycle getTargetState:event]];
 }
 
 -(void)moveToState:(LifecycleState)next
@@ -192,7 +192,7 @@
             LifecycleEvent event = [Lifecycle downFrom:observer.state];
             if(event == LIFECYCLEEVENT_NIL)
                 return;
-            [self pushParentState:[Lifecycle GetTargetState:event]];
+            [self pushParentState:[Lifecycle getTargetState:event]];
             [observer dispatchEvent:lifecycleOwner :event];
             [self popParentState];
         }

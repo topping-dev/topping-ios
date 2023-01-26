@@ -3,6 +3,6 @@
 
 @interface LGFrameLayout : LGViewGroup
 
-+(LGFrameLayout*)Create:(LuaContext *)context;
++(LGFrameLayout*)create:(LuaContext *)context;
 
 @end

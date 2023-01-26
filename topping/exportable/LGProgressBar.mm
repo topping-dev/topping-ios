@@ -10,9 +10,9 @@
 
 @implementation LGProgressBar
 
--(int)GetContentW
+-(int)getContentW
 {
-	[super GetContentW];
+	[super getContentW];
 	int width = self.dWidth;
     BOOL horizontalProgress = NO;
     if(self.iosHorizontalProgress != nil)
@@ -20,11 +20,11 @@
     if(!horizontalProgress && width == 0)
     {
         MDCActivityIndicator *temp = [MDCActivityIndicator new];
-        width = [[LGDimensionParser GetInstance] GetDimension:[NSString stringWithFormat:@"%ddp", (int)temp.radius]];
+        width = [[LGDimensionParser getInstance] getDimension:[NSString stringWithFormat:@"%ddp", (int)temp.radius]];
     }
 	if(self.android_maxWidth != nil)
 	{
-		int maxW = [[LGDimensionParser GetInstance] GetDimension:self.android_maxWidth];
+		int maxW = [[LGDimensionParser getInstance] getDimension:self.android_maxWidth];
 		if(maxW < width)
 			return maxW;
 		else
@@ -33,9 +33,9 @@
 	return width;
 }
 
--(int)GetContentH
+-(int)getContentH
 {
-	[super GetContentH];
+	[super getContentH];
 	int height = self.dHeight;
     if(height == 0)
     {
@@ -44,16 +44,16 @@
             horizontalProgress = [self.iosHorizontalProgress boolValue];
         
         if(horizontalProgress)
-            height = [[LGDimensionParser GetInstance] GetDimension:@"5dp"];
+            height = [[LGDimensionParser getInstance] getDimension:@"5dp"];
         else
         {
             MDCActivityIndicator *temp = [MDCActivityIndicator new];
-            height = [[LGDimensionParser GetInstance] GetDimension:[NSString stringWithFormat:@"%ddp", (int)temp.radius]];
+            height = [[LGDimensionParser getInstance] getDimension:[NSString stringWithFormat:@"%ddp", (int)temp.radius]];
         }
     }
 	if(self.android_maxHeight != nil)
 	{
-		int maxH = [[LGDimensionParser GetInstance] GetDimension:self.android_maxHeight];
+		int maxH = [[LGDimensionParser getInstance] getDimension:self.android_maxHeight];
 		if(maxH < height)
 			return maxH;
 		else
@@ -62,7 +62,7 @@
 	return height;
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
     BOOL horizontalProgress = NO;
     if(self.iosHorizontalProgress != nil)
@@ -87,7 +87,7 @@
         
         if(self.android_progressDrawable != nil)
         {
-            LGDrawableReturn *ret = [[LGDrawableParser GetInstance] ParseDrawable:self.android_progressDrawable];
+            LGDrawableReturn *ret = [[LGDrawableParser getInstance] parseDrawable:self.android_progressDrawable];
             if(ret != nil)
                 pv.progressImage = ret.img;
         }
@@ -123,7 +123,7 @@
         if(self.android_progress != nil)
             [pv setProgress:[self.android_progress floatValue] / (float)self.maxProgress animated:NO];
         if(smallProgress)
-            pv.radius = [[LGDimensionParser GetInstance] GetDimension:@"6dp"];
+            pv.radius = [[LGDimensionParser getInstance] getDimension:@"6dp"];
         if(darkProgress)
             pv.cycleColors = @[ UIColor.whiteColor ];
         
@@ -131,9 +131,9 @@
     }
 }
 
--(void)ComponentAddMethod:(UIView *)par :(UIView *)me
+-(void)componentAddMethod:(UIView *)par :(UIView *)me
 {
-    [super ComponentAddMethod:par :me];
+    [super componentAddMethod:par :me];
     
     BOOL horizontalProgress = NO;
     if(self.iosHorizontalProgress != nil)
@@ -144,14 +144,14 @@
 }
 
 //Lua
-+(LGProgressBar*)Create:(LuaContext *)context
++(LGProgressBar*)create:(LuaContext *)context
 {
 	LGProgressBar *lst = [[LGProgressBar alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
--(void)SetProgress:(int)progress
+-(void)setProgress:(int)progress
 {
     if(self.horizontal)
     {
@@ -165,7 +165,7 @@
     }
 }
 
--(void)SetMax:(int)max
+-(void)setMax:(int)max
 {
     if(self.horizontal)
     {
@@ -180,7 +180,7 @@
     }
 }
 
--(void)SetIndeterminate:(bool)val
+-(void)setIndeterminate:(bool)val
 {
     if(self.horizontal)
     {
@@ -214,15 +214,15 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGProgressBar class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGProgressBar class]] 
-			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetProgress:)) :@selector(SetProgress:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetProgress"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMax:)) :@selector(SetMax:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetMax"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetIndeterminate:)) :@selector(SetIndeterminate:) :nil :MakeArray([LuaBool class]C nil)] forKey:@"SetIndeterminate"];
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setProgress:)) :@selector(setProgress:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setProgress"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setMax:)) :@selector(setMax:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setMax"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setIndeterminate:)) :@selector(setIndeterminate:) :nil :MakeArray([LuaBool class]C nil)] forKey:@"setIndeterminate"];
     
 	return dict;
 }

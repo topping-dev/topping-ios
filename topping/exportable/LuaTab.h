@@ -7,23 +7,23 @@
 
 @interface LuaTab : LGView <LuaClass>
 
-+(LuaTab*)Create;
++(LuaTab*)create;
 
--(void)SetText:(NSString*)text;
+-(void)setText:(NSString*)text;
 
--(void)SetTextRef:(LuaRef*)text;
+-(void)setTextRef:(LuaRef*)text;
 
--(void)SetIcon:(LuaRef*)icon;
+-(void)setIcon:(LuaRef*)icon;
 
--(void)SetIconStream:(LuaStream*)icon;
+-(void)setIconStream:(LuaStream*)icon;
 
--(void)SetCustomView:(LGView*)view;
+-(void)setCustomView:(LGView*)view;
 
 @property (nonatomic, retain) NSString* android_icon;
 @property (nonatomic, retain) NSString* android_layout;
 @property (nonatomic, retain) NSString* android_text;
 
 @property(nonatomic, retain) UIBarItem* item;
-@property(nonatomic, retain) LGView* customView;
+@property(nonatomic, retain) LGView* customView_;
 
 @end

@@ -16,18 +16,18 @@
 
 @implementation LGBottomNavigationView
 
-- (int)GetContentH
+- (int)getContentH
 {
     CGSize size = [((MDCBottomNavigationBar*)self.bottomNav) sizeThatFits:self.parent._view.bounds.size];
     return size.height;
 }
 
--(void)InitProperties
+-(void)initProperties
 {
-    [super InitProperties];
+    [super initProperties];
 }
 
--(UIView *)CreateComponent {
+-(UIView *)createComponent {
     self.bottomNav = [[MDCBottomNavigationBar alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
     
     self.items = [NSMutableArray new];
@@ -35,7 +35,7 @@
     return self.bottomNav;
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
     ((MDCBottomNavigationBar*)self.bottomNav).titleVisibility = MDCBottomNavigationBarTitleVisibilityAlways;
     if(self.app_labelVisibilityMode != nil) {
@@ -54,18 +54,18 @@
     }
     
     if(self.app_menu != nil) {
-        self.items = [[LGMenuParser GetInstance] GetMenu:self.app_menu];
+        self.items = [[LGMenuParser getInstance] getMenu:self.app_menu];
         [self GenerateMenu];
     }
     
-    UIColor *colorSurface = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"colorSurface"];
+    UIColor *colorSurface = (UIColor*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"colorSurface"];
     if(colorSurface != nil) {
         [((MDCBottomNavigationBar*)self.bottomNav) setBarTintColor:colorSurface];
     }
     
     ((MDCBottomNavigationBar*)self.bottomNav).delegate = self;
     
-    [super SetupComponent:self.bottomNav];
+    [super setupComponent:self.bottomNav];
 }
 
 -(void)GenerateMenu {
@@ -74,22 +74,22 @@
     for(LuaMenu *menu in self.items) {
         UITabBarItem *item;
         if(menu.iconRes != nil) {
-            LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:menu.iconRes.idRef];
+            LGDrawableReturn *ldr = [[LGDrawableParser getInstance] parseDrawable:menu.iconRes.idRef];
             CGSize size = [((MDCBottomNavigationBar*)self.bottomNav) sizeThatFits:self.parent._view.bounds.size];
-            UIImage *img = [ldr GetImage:size];
+            UIImage *img = [ldr getImage:size];
             //TODO:Manual 20 is good?
             img = [img imageWithSizeAspect:size.height - 20];
-            item = [[UITabBarItem alloc] initWithTitle:menu.title image:img tag:count++];
+            item = [[UITabBarItem alloc] initWithTitle:menu.title_ image:img tag:count++];
         }
         else {
-            item = [[UITabBarItem alloc] initWithTitle:menu.title image:nil tag:count++];
+            item = [[UITabBarItem alloc] initWithTitle:menu.title_ image:nil tag:count++];
         }
-        UIColor *colorPrimary = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"colorPrimary"];
+        UIColor *colorPrimary = (UIColor*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"colorPrimary"];
         if(colorPrimary != nil) {
             [item setTitleTextAttributes:@{ NSForegroundColorAttributeName : colorPrimary }
                                                          forState:UIControlStateSelected];
         }
-        UIColor *colorOnSurface = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:[sToppingEngine GetAppStyle] :@"colorOnSurface"];
+        UIColor *colorOnSurface = (UIColor*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"colorOnSurface"];
         if(colorOnSurface != nil) {
             //[item setTitleTextAttributes:@{ NSForegroundColorAttributeName : [colorOnSurface changeAlphaToPercent:60] } forState:UIControlStateNormal];
         }
@@ -101,30 +101,30 @@
 -(void)bottomNavigationBar:(MDCBottomNavigationBar *)bottomNavigationBar didSelectItem:(UITabBarItem *)item {
     if(self.ltTabSelectedListener != nil) {
         int pos = [((MDCBottomNavigationBar*)self.bottomNav).items indexOfObject:item];
-        [self.ltTabSelectedListener Call:[NSNumber numberWithInt:pos]];
+        [self.ltTabSelectedListener call:[NSNumber numberWithInt:pos]];
     }
 }
 
 -(BOOL)bottomNavigationBar:(MDCBottomNavigationBar *)bottomNavigationBar shouldSelectItem:(UITabBarItem *)item {
     if(self.ltCanSelectTab != nil) {
         int pos = [((MDCBottomNavigationBar*)self.bottomNav).items indexOfObject:item];
-        return [self.ltCanSelectTab Call:[NSNumber numberWithInt:pos]];
+        return [self.ltCanSelectTab call:[NSNumber numberWithInt:pos]];
     }
     return YES;
 }
 
-+(LGBottomNavigationView*)Create:(LuaContext *)context
++(LGBottomNavigationView*)create:(LuaContext *)context
 {
     LGBottomNavigationView *lst = [[LGBottomNavigationView alloc] init];
-    [lst InitProperties];
+    [lst initProperties];
     return lst;
 }
 
--(void)SetTabSelectedListener:(LuaTranslator*)lt {
+-(void)setTabSelectedListener:(LuaTranslator*)lt {
     self.ltTabSelectedListener = lt;
 }
 
--(void)SetCanSelectTab:(LuaTranslator*)lt {
+-(void)setCanSelectTab:(LuaTranslator*)lt {
     self.ltCanSelectTab = lt;
 }
 
@@ -146,10 +146,10 @@
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(Create:, LGBottomNavigationView, @[ [LuaContext class] ], @"Create", [LGBottomNavigationView class])
+    ClassMethod(create:, LGBottomNavigationView, @[ [LuaContext class] ], @"create", [LGBottomNavigationView class])
     
-    InstanceMethodNoRet(SetTabSelectedListener:, @[ [LuaTranslator class] ], @"SetTabSelectedListener")
-    InstanceMethodNoRet(SetCanSelectTab:, @[ [LuaTranslator class] ], @"SetCanSelectTab")
+    InstanceMethodNoRet(setTabSelectedListener:, @[ [LuaTranslator class] ], @"setTabSelectedListener")
+    InstanceMethodNoRet(setCanSelectTab:, @[ [LuaTranslator class] ], @"setCanSelectTab")
 	
 	return dict;
 }

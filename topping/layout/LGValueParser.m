@@ -17,14 +17,14 @@
 	return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
-    NSArray *layoutDirectories = [LuaResource GetResourceDirectories:LUA_VALUES_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_VALUES_FOLDER];
+    NSArray *layoutDirectories = [LuaResource getResourceDirectories:LUA_VALUES_FOLDER];
+    self.clearedDirectoryList = [[LGParser getInstance] tester:layoutDirectories :LUA_VALUES_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
-         NSString *aData = ((DynamicResource*)obj1).data;
-         NSString *bData = ((DynamicResource*)obj2).data;
+         NSString *aData = (NSString*)((DynamicResource*)obj1).data;
+         NSString *bData = (NSString*)((DynamicResource*)obj2).data;
          if(COMPARE(aData, bData))
              return NSOrderedSame;
          else if(aData.length > bData.length)
@@ -34,12 +34,12 @@
      }];
 }
 
-+(LGValueParser *) GetInstance
++(LGValueParser *) getInstance
 {
-	return [LGParser GetInstance].pValue;
+	return [LGParser getInstance].pValue;
 }
 
--(void)ParseXML:(int)orientation :(GDataXMLElement *)element
+-(void)parseXML:(int)orientation :(GDataXMLElement *)element
 {
     if(self.valueMap == nil)
     {
@@ -141,7 +141,7 @@
     else if(COMPARE(type, @"id"))
     {
         NSString *value = APPEND(@"id/", name);
-        [[LGIdParser GetInstance] AddKey:name :value];
+        [[LGIdParser getInstance] addKey:name :value];
     }
     else if(COMPARE(type, @"array"))
     {
@@ -152,7 +152,7 @@
             for(int i = 0; i < element.children.count; i++)
             {
                 GDataXMLElement *child = [element.children objectAtIndex:i];
-                [arr addObject:[self GetValue:child.stringValue]];
+                [arr addObject:[self getValue:child.stringValue]];
             }
         }
         if(arr == nil)
@@ -168,7 +168,7 @@
     return nil;
 }
 
--(NSObject *)GetValueDirect:(NSString *)keyT
+-(NSObject *)getValueDirect:(NSString *)keyT
 {
     if(keyT == nil)
         return nil;
@@ -194,17 +194,17 @@
     return key;
 }
 
--(BOOL)GetBoolValueDirect:(NSString *)key
+-(BOOL)getBoolValueDirect:(NSString *)key
 {
     @try {
-        NSObject *obj = [self GetValueDirect:key];
+        NSObject *obj = [self getValueDirect:key];
         return [((NSNumber*)obj) boolValue];
     } @catch (NSException *exception) {
     }
     return false;
 }
 
--(NSObject *)GetValue:(NSString *)key
+-(NSObject *)getValue:(NSString *)key
 {
     if(key == nil)
         return nil;
@@ -216,41 +216,41 @@
     else if(STARTS_WITH(key, @"@string/") || 
             STARTS_WITH(key, @"@android:string/"))
     {
-        return [[LGStringParser GetInstance] GetString:key];
+        return [[LGStringParser getInstance] getString:key];
     }
     else if(STARTS_WITH(key, @"@drawable/") ||
             STARTS_WITH(key, @"@android:drawable/"))
     {
-        return [[LGDrawableParser GetInstance] ParseDrawable:key];
+        return [[LGDrawableParser getInstance] parseDrawable:key];
     }
     else if(STARTS_WITH(key, @"@color/") || STARTS_WITH(key, @"@android:color/") || STARTS_WITH(key, @"#"))
     {
-        return [[LGColorParser GetInstance] ParseColor:key];
+        return [[LGColorParser getInstance] parseColor:key];
     }
     else if(STARTS_WITH(key, @"@style/"))
     {
         NSArray *arr = SPLIT(key, @"/");
         NSString *val = [arr objectAtIndex:arr.count - 1];
-        return [[LGStyleParser GetInstance] GetStyle:val];
+        return [[LGStyleParser getInstance] getStyle:val];
     }
     else
     {
-        return [self GetValueDirect:key];
+        return [self getValueDirect:key];
     }
     
     return key;
 }
 
--(NSMutableDictionary *)GetAllKeys
+-(NSMutableDictionary *)getAllKeys
 {
     NSMutableDictionary *dictRet = [NSMutableDictionary dictionary];
-    [dictRet setObject:[[LGDrawableParser GetInstance] GetKeys] forKey:@"drawable"];
-    [dictRet setObject:[[LGStringParser GetInstance] GetKeys] forKey:@"string"];
-    [dictRet setObject:[[LGColorParser GetInstance] GetKeys] forKey:@"color"];
-    [dictRet setObject:[[LGLayoutParser GetInstance] GetKeys] forKey:@"layout"];
-    [dictRet setObject:[[LGDimensionParser GetInstance] GetKeys] forKey:@"dimen"];
-    [dictRet setObject:[[LGStyleParser GetInstance] GetKeys] forKey:@"style"];
-    [dictRet setObject:[[LGIdParser GetInstance] GetKeys] forKey:@"id"];
+    [dictRet setObject:[[LGDrawableParser getInstance] getKeys] forKey:@"drawable"];
+    [dictRet setObject:[[LGStringParser getInstance] getKeys] forKey:@"string"];
+    [dictRet setObject:[[LGColorParser getInstance] getKeys] forKey:@"color"];
+    [dictRet setObject:[[LGLayoutParser getInstance] getKeys] forKey:@"layout"];
+    [dictRet setObject:[[LGDimensionParser getInstance] getKeys] forKey:@"dimen"];
+    [dictRet setObject:[[LGStyleParser getInstance] getKeys] forKey:@"style"];
+    [dictRet setObject:[[LGIdParser getInstance] getKeys] forKey:@"id"];
     for(NSString *key in self.valueKeyMap)
     {
         [dictRet setObject:[self.valueKeyMap objectForKey:key] forKey:key];

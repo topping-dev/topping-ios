@@ -54,50 +54,50 @@ typedef struct lua_State lua_State;
     NSString* appStyle;
 }
 
-+(void)AddLuaPlugin:(Class) plugin;
-+(NSArray*)GetViewPlugins;
++(void)addLuaPlugin:(Class) plugin;
++(NSArray*)getViewPlugins;
 +(void)report: (lua_State*) L;
--(void)Startup;
--(void)StartupDefines;
--(void)LoadScripts;
--(void)StartupDownload;
--(void)LoadScriptsDownload;
--(void)Restart;
--(void)Unload;
+-(void)startup;
+-(void)startupDefines;
+-(void)loadScripts;
+-(void)startupDownload;
+-(void)loadScriptsDownload;
+-(void)restart;
+-(void)unload;
 
--(bool)BeginCall:(NSString*) func;
--(bool)ExecuteCall:(uint8)params :(uint8)res;
--(void)EndCall:(uint8)res;
--(void)CallFunction:(NSString*)FunctionName :(int)ref;
+-(bool)beginCall:(NSString*) func;
+-(bool)executeCall:(uint8)params :(uint8)res;
+-(void)endCall:(uint8)res;
+-(void)callFunction:(NSString*)FunctionName :(int)ref;
 
--(void)RegisterTag:(const char*)nibC :(int)tag :(const char*)strTag;
--(NSString *)GetTag:(NSString*)nib :(int) tag;
--(void)FillVariable:(NSObject*) type;
+-(void)registerTag:(const char*)nibC :(int)tag :(const char*)strTag;
+-(NSString *)getTag:(NSString*)nib :(int) tag;
+-(void)fillVariable:(NSObject*) type;
 
--(NSObject*)OnNativeEventArgs:(NSObject*)pGui :(int)ref :(NSArray*)Args;
--(NSObject*)OnGuiEventArgs:(NSObject*)pGui :(NSString*)FunctionName :(NSArray*)Args;
+-(NSObject*)onNativeEventArgs:(NSObject*)pGui :(int)ref :(NSArray*)Args;
+-(NSObject*)onGuiEventArgs:(NSObject*)pGui :(NSString*)FunctionName :(NSArray*)Args;
 
--(void)PushBool:(bool) val;
--(void)PushNil;
--(void)PushInt:(int32) val;
--(void)PushUInt:(uint32) val;
--(void)PushLong:(long) val;
--(void)PushFloat:(float) val;
--(void)PushDouble:(double) val;
--(void)PushString:(NSString*) val;
--(void)PushArray:(NSMutableArray *)val;
--(void)PushTable:(NSMutableDictionary*) val;
+-(void)pushBool:(bool) val;
+-(void)pushNil;
+-(void)pushInt:(int32) val;
+-(void)pushUInt:(uint32) val;
+-(void)pushLong:(long) val;
+-(void)pushFloat:(float) val;
+-(void)pushDouble:(double) val;
+-(void)pushString:(NSString*) val;
+-(void)pushArray:(NSMutableArray *)val;
+-(void)pushTable:(NSMutableDictionary*) val;
 	
--(void)RegisterCoreFunctions;
--(void)RegisterGlobals;
--(lua_State*)GetLuaState;
+-(void)registerCoreFunctions;
+-(void)registerGlobals;
+-(lua_State*)getLuaState;
 
--(NSString *)GetScriptsRoot;
--(int) GetPrimaryLoad;
--(NSString *)GetUIRoot;
--(NSString *)GetMainUI;
--(NSString *)GetMainForm;
--(NSString *)GetAppStyle;
+-(NSString *)getScriptsRoot;
+-(int) getPrimaryLoad;
+-(NSString *)getUIRoot;
+-(NSString *)getMainUI;
+-(NSString *)getMainForm;
+-(NSString *)getAppStyle;
 
 @property (nonatomic, retain) NSString* scriptsRoot;
 @property (nonatomic) int primaryLoad;

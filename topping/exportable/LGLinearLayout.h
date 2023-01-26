@@ -13,7 +13,7 @@ enum LAYOUTORIENTATION
 {
 }
 
-+(LGLinearLayout*)Create:(LuaContext *)context;
++(LGLinearLayout*)create:(LuaContext *)context;
 
 @property (nonatomic, retain) NSString *android_orientation;
 @property (nonatomic, retain) NSNumber *android_weightSum;

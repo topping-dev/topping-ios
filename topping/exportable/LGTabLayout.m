@@ -9,7 +9,7 @@
 
 @implementation LGTabLayout
 
-- (int)GetContentH
+- (int)getContentH
 {
     if(self.tab != nil)
     {
@@ -18,16 +18,16 @@
     return 49;
 }
 
-- (int)GetContentW
+- (int)getContentW
 {
     if(self.tab != nil)
     {
         return ((MDCTabBarView*)self.tab).contentSize.width;
     }
-    return [super GetContentW];
+    return [super getContentW];
 }
 
--(UIView *)CreateComponent
+-(UIView *)createComponent
 {
     self.tab = [[MDCTabBarView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
     ((MDCTabBarView*)self.tab).tabBarDelegate = self;
@@ -37,7 +37,7 @@
     return self.tab;
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
     if(self.app_tabBackground == nil) {
         self.app_tabBackground = @"@color/colorPrimary";
@@ -46,7 +46,7 @@
         //[self.tab setMode:]
     }
     if(self.app_tabIndicatorColor != nil) {
-        [((MDCTabBarView*)self.tab) setSelectionIndicatorStrokeColor:[[LGColorParser GetInstance] ParseColor:self.app_tabIndicatorColor]];
+        [((MDCTabBarView*)self.tab) setSelectionIndicatorStrokeColor:[[LGColorParser getInstance] parseColor:self.app_tabIndicatorColor]];
     }
     if(self.app_tabMode != nil) {
         int mode = [self.app_tabMode intValue];
@@ -57,7 +57,7 @@
         }
     }
     
-    [super SetupComponent:self.tab];
+    [super setupComponent:self.tab];
 }
 
 -(void)UpdateTabs {
@@ -73,50 +73,50 @@
     if(self.items.count == 1) {
         [((MDCTabBarView*)self.tab) setSelectedItem:(UITabBarItem*)firstTab.item animated:NO];
     }
-    [self ResizeAndInvalidate];
+    [self resizeAndInvalidate];
 }
 
--(void)AddTab:(LuaTab*)tab {
+-(void)addTab:(LuaTab*)tab {
     [self.items addObject:tab];
     [self UpdateTabs];
 }
 
--(LuaTab*)GetTabAtIndex:(int)position {
+-(LuaTab*)getTabAtIndex:(int)position {
     return [self.items objectAtIndex:position];
 }
 
--(int)GetTabCount {
+-(int)getTabCount {
     return (int)self.items.count;
 }
 
--(void)RemoveTabAtPosition:(int)position {
+-(void)removeTabAtPosition:(int)position {
     [self.items removeObjectAtIndex:position];
     [self UpdateTabs];
 }
 
--(void)RemoveTab:(LuaTab*)tab {
+-(void)removeTab:(LuaTab*)tab {
     [self.items removeObject:tab];
     [self UpdateTabs];
 }
 
--(void)RemoveAllTabs {
+-(void)removeAllTabs {
     [self.items removeAllObjects];
     [self UpdateTabs];
 }
 
--(void)SelectTab:(LuaTab*)tab {
+-(void)selectTab:(LuaTab*)tab {
     [((MDCTabBarView*)self.tab) setSelectedItem:(MDCTabBarItem*)tab.item];
 }
 
--(void)SelectTabAtIndex:(int)position {
-    [self SelectTab:[self.items objectAtIndex:position]];
+-(void)selectTabAtIndex:(int)position {
+    [self selectTab:[self.items objectAtIndex:position]];
 }
 
--(void)SetTabSelectedListener:(LuaTranslator*)lt {
+-(void)setTabSelectedListener:(LuaTranslator*)lt {
     self.ltTabSelectedListener = lt;
 }
 
--(void)SetCanSelectTab:(LuaTranslator*)lt {
+-(void)setCanSelectTab:(LuaTranslator*)lt {
     self.ltCanSelectTab = lt;
 }
 
@@ -153,7 +153,7 @@
     LuaTab *tabItem = [self getTabForUITabBarItem:item];
     if(tabItem != nil)
     {
-        [self.ltTabSelectedListener Call:tabItem];
+        [self.ltTabSelectedListener call:tabItem];
     }
 }
 
@@ -164,7 +164,7 @@
     LuaTab *tabItem = [self getTabForUITabBarItem:item];
     if(tabItem != nil)
     {
-        return [self.ltCanSelectTab Call:tabItem];
+        return [self.ltCanSelectTab call:tabItem];
     }
     
     return YES;
@@ -216,15 +216,15 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    InstanceMethodNoRet(AddTab:, @[[LuaTab class]], @"AddTab")
-    InstanceMethod(GetTabAtIndex:, LuaTab, @[[LuaInt class]], @"GetTabAtIndex")
-    InstanceMethodNoArg(GetTabCount, LuaInt, @"GetTabCount")
-    InstanceMethodNoRet(RemoveTabAtPosition:, @[[LuaInt class]], @"RemoveTabAtPosition")
-    InstanceMethodNoRet(RemoveTab:, @[[LuaTab class]], @"RemoveTab")
-    InstanceMethodNoRetNoArg(RemoveAllTabs, @"RemoveAllTabs")
-    InstanceMethodNoRet(SelectTab:, @[[LuaTab class]], @"SelectTab")
-    InstanceMethodNoRet(SelectTabAtIndex:, @[[LuaInt class]], @"SelectTabAtIndex")
-    InstanceMethodNoRet(SetTabSelectedListener:, @[[LuaTranslator class]], @"SetTabSelectedListener")
+    InstanceMethodNoRet(addTab:, @[[LuaTab class]], @"addTab")
+    InstanceMethod(getTabAtIndex:, LuaTab, @[[LuaInt class]], @"getTabAtIndex")
+    InstanceMethodNoArg(getTabCount, LuaInt, @"getTabCount")
+    InstanceMethodNoRet(removeTabAtPosition:, @[[LuaInt class]], @"removeTabAtPosition")
+    InstanceMethodNoRet(removeTab:, @[[LuaTab class]], @"removeTab")
+    InstanceMethodNoRetNoArg(removeAllTabs, @"removeAllTabs")
+    InstanceMethodNoRet(selectTab:, @[[LuaTab class]], @"selectTab")
+    InstanceMethodNoRet(selectTabAtIndex:, @[[LuaInt class]], @"selectTabAtIndex")
+    InstanceMethodNoRet(setTabSelectedListener:, @[[LuaTranslator class]], @"setTabSelectedListener")
     
     return dict;
 }

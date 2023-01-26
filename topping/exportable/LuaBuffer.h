@@ -7,9 +7,9 @@
 {
 }
 
-+(LuaBuffer*)Create:(int)capacity;
--(int)GetByte:(int)index;
--(void)SetByte:(int)index :(int)value;
++(LuaBuffer*)create:(int)capacity;
+-(int)getByte:(int)index;
+-(void)setByte:(int)index :(int)value;
 
 @property (nonatomic, strong) NSMutableArray *data;
 

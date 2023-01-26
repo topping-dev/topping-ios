@@ -6,7 +6,7 @@
 
 @synthesize obj, func;
 
-+(NSObject*) Register:(NSObject *)obj :(NSString *)function
++(NSObject*) register:(NSObject *)obj :(NSString *)function
 {
 	LuaTranslator *lt = [[LuaTranslator alloc] init];
 	lt.func = function;
@@ -18,29 +18,29 @@
 {
     self = [super init];
     if (self) {
-        self.selector = @selector(Call);
-        self.selectorOne = @selector(Call:);
-        self.selectorTwo = @selector(Call::);
+        self.selector = @selector(call);
+        self.selectorOne = @selector(call:);
+        self.selectorTwo = @selector(call::);
     }
     return self;
 }
 
--(NSObject*) Call
+-(NSObject*) call
 {
-    return [self CallIn:nil];
+    return [self callIn:nil];
 }
 
--(NSObject*) Call:(NSObject *)a
+-(NSObject*) call:(NSObject *)a
 {
-    return [self CallIn:a, nil];
+    return [self callIn:a, nil];
 }
 
--(NSObject*) Call:(NSObject *)a :(NSObject *)b
+-(NSObject*) call:(NSObject *)a :(NSObject *)b
 {
-	return [self CallIn:a, b, nil];
+	return [self callIn:a, b, nil];
 }
 
--(NSObject*) CallIn:(NSObject *) val, ...
+-(NSObject*) callIn:(NSObject *) val, ...
 {
     if(self.nobj != NULL)
     {
@@ -57,12 +57,12 @@
             return self.kFRetF(self.nobj, 0, arr);
         }
         else
-            return [sToppingEngine OnNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
+            return [sToppingEngine onNativeEventArgs:self.obj :[((NSNumber*)self.nobj) intValue] :VarArgs2(val)];
     }
-	return [sToppingEngine OnGuiEventArgs:self.obj :func :VarArgs2(val)];
+	return [sToppingEngine onGuiEventArgs:self.obj :func :VarArgs2(val)];
 }
 
--(NSObject*) CallInSelf:(NSObject *)s :(NSObject *)val :(va_list)valist
+-(NSObject*) callInSelf:(NSObject *)s :(NSObject *)val :(va_list)valist
 {
     NSMutableArray *args = VarArgs3(valist, val);
     if(self.nobj != NULL)
@@ -80,22 +80,22 @@
             return ret;
         }
         else
-            return [sToppingEngine OnNativeEventArgs:s :[((NSNumber*)self.nobj) intValue] :args];
+            return [sToppingEngine onNativeEventArgs:s :[((NSNumber*)self.nobj) intValue] :args];
     }
-    return [sToppingEngine OnGuiEventArgs:s :func :args];
+    return [sToppingEngine onGuiEventArgs:s :func :args];
 }
 
--(NSObject *)GetObject
+-(NSObject *)getObject
 {
 	return obj;
 }
 
--(NSString *)GetFunction
+-(NSString *)getFunction
 {
 	return func;
 }
 
--(void) Set:(NSObject*) objP :(NSString*)funcP
+-(void) set:(NSObject*) objP :(NSString*)funcP
 {
 	obj = objP;
 	func = funcP;
@@ -114,12 +114,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Register::)) 
-										:@selector(Register::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(register::)) 
+										:@selector(register::) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSObject class], [NSString class], nil] 
 										:[LuaTranslator class]] 
-										forKey:@"Register"];
+										forKey:@"register"];
 	return dict;
 }
 

@@ -18,7 +18,7 @@
 {
 };
 
--(UIImage*)GetImage:(CGSize)size;
+-(UIImage*)getImage:(CGSize)size;
 
 @property(nonatomic, retain) UIImage *img;
 @property(nonatomic, retain) NSObject *vector;
@@ -39,23 +39,23 @@ typedef NS_OPTIONS(NSUInteger, UIControlStateExtra) {
 {
 }
 
-+(LGDrawableParser*) GetInstance;
--(void)Initialize;
--(LGDrawableReturn*) ParseDrawableRef:(LuaRef *)drawable;
--(LGDrawableReturn*) ParseDrawableRef:(LuaRef *)drawable :(int)tileMode;
--(LGDrawableReturn*) ParseDrawable:(NSString *)drawable;
--(LGDrawableReturn*) ParseDrawable:(NSString *)drawable :(int)tileMode;
--(LGDrawableReturn*) ParseXML:(NSString *)filename :(int)tileMode;
--(LGDrawableReturn*) ParseVector:(NSData*)data;
--(LGDrawableReturn*) ParseBitmap:(GDataXMLElement*)root;
--(LGDrawableReturn*) ParseLayer:(GDataXMLElement *)root;
--(LGDrawableReturn*) ParseStateList:(GDataXMLElement *)root;
--(LGDrawableReturn*) ParseShape:(GDataXMLElement *)root;
++(LGDrawableParser*) getInstance;
+-(void)initialize;
+-(LGDrawableReturn*) parseDrawableRef:(LuaRef *)drawable;
+-(LGDrawableReturn*) parseDrawableRef:(LuaRef *)drawable :(int)tileMode;
+-(LGDrawableReturn*) parseDrawable:(NSString *)drawable;
+-(LGDrawableReturn*) parseDrawable:(NSString *)drawable :(int)tileMode;
+-(LGDrawableReturn*) parseXML:(NSString *)filename :(int)tileMode;
+-(LGDrawableReturn*) parseVector:(NSData*)data;
+-(LGDrawableReturn*) parseBitmap:(GDataXMLElement*)root;
+-(LGDrawableReturn*) parseLayer:(GDataXMLElement *)root;
+-(LGDrawableReturn*) parseStateList:(GDataXMLElement *)root;
+-(LGDrawableReturn*) parseShape:(GDataXMLElement *)root;
 
 -(CGPoint) radialIntersectionWithDegrees:(CGFloat)degrees :(CGRect)frame;
 -(CGPoint) radialIntersectionWithRadians:(CGFloat)radians :(CGRect)frame;
 -(CGPoint) radialIntersectionWithConstrainedRadians:(CGFloat)radians :(CGRect)frame;
--(NSDictionary *)GetKeys;
+-(NSDictionary *)getKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *stateListDictionary;
 @property (nonatomic, retain) NSMutableArray *clearedDirectoryList;

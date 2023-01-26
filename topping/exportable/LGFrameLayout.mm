@@ -4,9 +4,9 @@
 
 @implementation LGFrameLayout
 
--(void)InitComponent:(UIView *)view :(LuaContext *)lc
+-(void)initComponent:(UIView *)view :(LuaContext *)lc
 {
-    [super InitComponent:view :lc];
+    [super initComponent:view :lc];
     
     [self._view.widthAnchor constraintEqualToConstant:self.dWidth].active = YES;
     [self._view.heightAnchor constraintEqualToConstant:self.dHeight].active = YES;
@@ -63,10 +63,10 @@
 }
 
 //Lua
-+(LGFrameLayout*)Create:(LuaContext *)context
++(LGFrameLayout*)create:(LuaContext *)context
 {
     LGFrameLayout *lfl = [[LGFrameLayout alloc] init];
-    [lfl InitProperties];
+    [lfl initProperties];
     return lfl;
 }
 
@@ -87,12 +87,12 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-                                        :@selector(Create:)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+                                        :@selector(create:)
                                         :[LGFrameLayout class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGFrameLayout class]]
-             forKey:@"Create"];
+             forKey:@"create"];
     return dict;
 }
 

@@ -81,7 +81,7 @@
 static NSMutableArray *plugins;
 static NSMutableArray *viewPlugins;
 
-+(void)AddLuaPlugin:(Class) plugin
++(void)addLuaPlugin:(Class) plugin
 {
     if(plugins == nil)
         plugins = [NSMutableArray array];
@@ -94,7 +94,7 @@ static NSMutableArray *viewPlugins;
     }
 }
 
-+(NSArray*)GetViewPlugins
++(NSArray*)getViewPlugins
 {
     return viewPlugins;
 }
@@ -107,19 +107,19 @@ static NSMutableArray *viewPlugins;
         str = REPLACE(str, [[NSBundle mainBundle] bundlePath], @"");
         NSLog(@"ToppingEngine Lua Error: %@", str);
 #ifdef DEBUG
-        [LuaDialog MessageBoxInternal:nil :@"error" :str];
+        [LuaDialog messageBoxInternal:nil :@"error" :str];
 #endif
     }
 }
 
--(void)StartupDownload
+-(void)startupDownload
 {
 	lu = lua_open();
 	
 	GuiBindingMap = [[NSMutableDictionary alloc] init];
 	TagMap = [[NSMutableDictionary alloc] init];
 	
-	[self LoadScriptsDownload];
+	[self loadScriptsDownload];
 }
 
 int handleLuaError(lua_State* L) {
@@ -145,11 +145,11 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
   return ret;
 }
 
--(void)LoadScriptsDownload
+-(void)loadScriptsDownload
 {
 	luaL_openlibs(lu);
-	[self RegisterCoreFunctions];
-	[self RegisterGlobals];
+	[self registerCoreFunctions];
+	[self registerGlobals];
 	NSFileManager *fm = [NSFileManager defaultManager];	
 	NSString  *scriptPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/LuaScripts/"];
 	NSBundle *bund = [NSBundle mainBundle];
@@ -198,21 +198,21 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	}
 }
 
--(void)Startup
+-(void)startup
 {
 	lu = lua_open();
 	
 	GuiBindingMap = [[NSMutableDictionary alloc] init];
 	TagMap = [[NSMutableDictionary alloc] init];
 	
-	[self LoadScripts];
+	[self loadScripts];
 }
 
--(void)LoadScripts
+-(void)loadScripts
 {
 	luaL_openlibs(lu);
-	[self RegisterCoreFunctions];
-	[self RegisterGlobals];
+	[self registerCoreFunctions];
+	[self registerGlobals];
 	
 	NSFileManager *fm = [NSFileManager defaultManager];	
 	//NSString  *scriptPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/LuaScripts/"];
@@ -301,11 +301,11 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
         self.appStyle = lua_tonsstring(lua_tostring(lu, -1));
     lua_pop(lu, 1);
 	
-	[[LGParser GetInstance] Initialize];
+	[[LGParser getInstance] initialize];
     
-    [LuaRef ResourceLoader];
+    [LuaRef resourceLoader];
 	
-	[self StartupDefines];
+	[self startupDefines];
 	/*
 	
 	NSFileManager *fm = [[NSFileManager alloc] init];
@@ -339,7 +339,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	[fm dealloc];*/
 }
 
--(void)StartupDefines
+-(void)startupDefines
 {
 	NSFileManager *fm = [NSFileManager defaultManager];	
 
@@ -519,16 +519,16 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	}
 }
 
--(void)Restart
+-(void)restart
 {
 	NSLog(@"LuaEngine: Restarting Engine.\r\n");
-	[self Unload];
+	[self unload];
 	lu = lua_open();
-	[self LoadScripts];
+	[self loadScripts];
 	NSLog(@"LuaEngine: Done restarting engine.");
 }
 
--(void)Unload
+-(void)unload
 {
 	lua_close(lu);
 	{
@@ -537,7 +537,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	}
 }
 
--(bool)BeginCall:(NSString *)func
+-(bool)beginCall:(NSString *)func
 {
 	const char * sFuncName = [func cStringUsingEncoding:NSASCIIStringEncoding];
 	char * copy = strdup(sFuncName);
@@ -585,7 +585,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	return colon;
 }
 
--(bool)ExecuteCall:(uint8)params :(uint8)res
+-(bool)executeCall:(uint8)params :(uint8)res
 {
 	bool ret = true;
 	if(lua_pcall(lu,params,res,0) )
@@ -596,7 +596,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	return ret;	
 }
 
--(void)EndCall:(uint8)res
+-(void)endCall:(uint8)res
 {
 	for(int i = res; i > 0; i--)
 	{
@@ -605,7 +605,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	}
 }
 
--(void)CallFunction:(NSString *)FunctionName :(int)ref
+-(void)callFunction:(NSString *)FunctionName :(int)ref
 {
 	int top = lua_gettop(lu);
 	int args = 0;
@@ -694,52 +694,52 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
    return numID == boolID;
 }
 
--(void)FillVariable:(NSObject*)val
+-(void)fillVariable:(NSObject*)val
 {
 	if(val == nil || val == NULL || (&val) == 0x1)
 	{
-		[self PushNil];
+		[self pushNil];
 		return;
 	}
 	if([val isKindOfClass:[NSNumber class]])
 	{
 		NSNumber* num = (NSNumber*)val;
 		if([self isBoolNumber:num])
-			[self PushBool:[num boolValue]];
+			[self pushBool:[num boolValue]];
 		else if(!strcmp([num objCType], @encode(unsigned char)))
-			[self PushInt:[num unsignedCharValue]];
+			[self pushInt:[num unsignedCharValue]];
 		else if(!strcmp([num objCType], @encode(char)))
 		{
 			char c = [num charValue];
 			char *cP = &c;
-			[self PushString:[NSString  stringWithCString:cP encoding:NSUTF8StringEncoding]];
+			[self pushString:[NSString  stringWithCString:cP encoding:NSUTF8StringEncoding]];
 		}		
 		else if(!strcmp([num objCType], @encode(int)))
-			[self PushInt:[num intValue]];
+			[self pushInt:[num intValue]];
 		else if(!strcmp([num objCType], @encode(unsigned int)))
-			[self PushUInt:[num unsignedIntValue]];
+			[self pushUInt:[num unsignedIntValue]];
 		else if(!strcmp([num objCType], @encode(long)))
-			[self PushLong:[num longValue]];
+			[self pushLong:[num longValue]];
 		else if(!strcmp([num objCType], @encode(unsigned long)))
-			[self PushLong:[num unsignedLongValue]];
+			[self pushLong:[num unsignedLongValue]];
 		else if(!strcmp([num objCType], @encode(long long)))
-			[self PushDouble:[num longLongValue]];
+			[self pushDouble:[num longLongValue]];
 		else if(!strcmp([num objCType], @encode(unsigned long long)))
-			[self PushDouble:[num unsignedLongLongValue]];	 
+			[self pushDouble:[num unsignedLongLongValue]];	 
 		else if(!strcmp([num objCType], @encode(float)))
-			[self PushFloat:[num floatValue]];
+			[self pushFloat:[num floatValue]];
 		else if(!strcmp([num objCType], @encode(double)))
-			[self PushDouble:[num doubleValue]];
+			[self pushDouble:[num doubleValue]];
 	}
 	else if([val isKindOfClass:[NSString class]])
-		[self PushString:(NSString*)val];
+		[self pushString:(NSString*)val];
 	else if([val isKindOfClass:[NSMutableDictionary class]])
-		[self PushTable:(NSMutableDictionary*)val];
+		[self pushTable:(NSMutableDictionary*)val];
 	else
 		[Lunar push:lu :val :true];
 }
 
--(void)RegisterTag:(const char*)nibC :(int)tag :(const char *)strTag
+-(void)registerTag:(const char*)nibC :(int)tag :(const char *)strTag
 {
 	NSString *nib = [NSString stringWithCString:nibC encoding:NSASCIIStringEncoding];
 	if([TagMap objectForKey:nib] != nil)
@@ -753,7 +753,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	//[TagMap setObject:[NSString stringWithCString:strTag encoding:NSASCIIStringEncoding] forKey:[NSNumber numberWithInt:tag]];
 }
 
--(NSString *)GetTag:(NSString*)nib :(int)tag
+-(NSString *)getTag:(NSString*)nib :(int)tag
 {
 	return [[TagMap objectForKey:nib] objectForKey:[NSNumber numberWithInt:tag]];
 }
@@ -802,7 +802,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
                         break;
                     case LUA_TSTRING:
                     {
-                        keyObject = [NSString stringWithCString:GetStr(key) encoding:NSUTF8StringEncoding];
+                        keyObject = [NSString stringWithCString:getStr(key) encoding:NSUTF8StringEncoding];
                     }break;
                     case LUA_TNUMBER:
                         keyObject = [NSNumber numberWithDouble:nvalue(key)];
@@ -819,17 +819,17 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
                         break;
                     case LUA_TSTRING:
                     {
-                        valObject = [NSString stringWithCString:GetStr((TValue*)val) encoding:NSUTF8StringEncoding];
+                        valObject = [NSString stringWithCString:getStr((TValue*)val) encoding:NSUTF8StringEncoding];
                     }break;
                     case LUA_TNUMBER:
                         valObject = [NSNumber numberWithDouble:nvalue(val)];
                         break;
                     case LUA_TTABLE:
-                        valObject = [Lunar ParseTable:(TValue*)val];
+                        valObject = [Lunar parseTable:(TValue*)val];
                         break;
                     case LUA_TUSERDATA:
                     {
-                        void **ptr = RawUValue((TValue*)val);
+                        void **ptr = rawUValue((TValue*)val);
                         valObject = *ptr;
                         if(valObject != NULL)
                         {
@@ -877,7 +877,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
     return retVal;
 }
 
--(NSObject*)OnNativeEventArgs:(NSObject *)pGui :(int)ref :(NSArray *)Args
+-(NSObject*)onNativeEventArgs:(NSObject *)pGui :(int)ref :(NSArray *)Args
 {
     /*if(table == nil)
         return nil;
@@ -901,7 +901,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
     int i = 0;
     for(NSObject* type in Args)
     {
-        [self FillVariable :type];
+        [self fillVariable :type];
         i++;
     }
     
@@ -915,7 +915,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
     return [self OnGuiEventResult];
 }
 
--(NSObject*)OnGuiEventArgs:(NSObject *)pGui :(NSString *)FunctionName :(NSArray *)Args
+-(NSObject*)onGuiEventArgs:(NSObject *)pGui :(NSString *)FunctionName :(NSArray *)Args
 {
 	if(FunctionName == nil)
 		return nil;
@@ -938,7 +938,7 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 	int i = 0;
 	for(NSObject* type in Args)
 	{
-		[self FillVariable :type];
+		[self fillVariable :type];
 		i++;
 	}
 	
@@ -967,107 +967,107 @@ int RegisterTag(lua_State *L)
     int tag = luaL_checkint(L, 2);
     const char *strTag = luaL_checkstring(L, 3);
     
-    [sToppingEngine RegisterTag:nib :tag :strTag];
+    [sToppingEngine registerTag:nib :tag :strTag];
     
     return 0;
 }
 
--(void)RegisterCoreFunctions
+-(void)registerCoreFunctions
 {
 	lua_register(lu, "RegisterTag", RegisterTag);
 	
-	[Lunar Register:lu :[LuaTranslator class]];
+	[Lunar register:lu :[LuaTranslator class]];
 	
-	[Lunar Register:lu :[LuaContext class]];
+	[Lunar register:lu :[LuaContext class]];
 	
-	[Lunar Register:lu :[LuaViewInflator class]];
-	[Lunar Register:lu :[LGAbsListView class]];
-	[Lunar Register:lu :[LGAdapterView class]];
-	[Lunar Register:lu :[LGAutoCompleteTextView class]];
-    [Lunar Register:lu :[LGBottomNavigationView class]];
-	[Lunar Register:lu :[LGButton class]];
-	[Lunar Register:lu :[LGCheckBox class]];
-	[Lunar Register:lu :[LGComboBox class]];
-	[Lunar Register:lu :[LGCompoundButton class]];
-    [Lunar Register:lu :[LGConstraintLayout class]];
-	[Lunar Register:lu :[LGDatePicker class]];
-	[Lunar Register:lu :[LGEditText class]];
-    [Lunar Register:lu :[LGFragmentContainerView class]];
-    [Lunar Register:lu :[LGFragmentStateAdapter class]];
-	[Lunar Register:lu :[LGFrameLayout class]];
-    [Lunar Register:lu :[LGImageView class]];
-	[Lunar Register:lu :[LGLinearLayout class]];
-	[Lunar Register:lu :[LGListView class]];
-	[Lunar Register:lu :[LGProgressBar class]];
-	[Lunar Register:lu :[LGRadioButton class]];
-	[Lunar Register:lu :[LGRadioGroup class]];
-	[Lunar Register:lu :[LGScrollView class]];
-    [Lunar Register:lu :[LGHorizontalScrollView class]];
-    [Lunar Register:lu :[LGTabLayout class]];
-	[Lunar Register:lu :[LGTextView class]];
-	[Lunar Register:lu :[LGView class]];
-    [Lunar Register:lu :[LGViewGroup class]];
-    [Lunar Register:lu :[LGViewPager class]];
-    [Lunar Register:lu :[LGRecyclerView class]];
-    [Lunar Register:lu :[LGRecyclerViewAdapter class]];
-    [Lunar Register:lu :[LGToolbar class]];
-    [Lunar Register:lu :[LGWebView class]];
+	[Lunar register:lu :[LuaViewInflator class]];
+	[Lunar register:lu :[LGAbsListView class]];
+	[Lunar register:lu :[LGAdapterView class]];
+	[Lunar register:lu :[LGAutoCompleteTextView class]];
+    [Lunar register:lu :[LGBottomNavigationView class]];
+	[Lunar register:lu :[LGButton class]];
+	[Lunar register:lu :[LGCheckBox class]];
+	[Lunar register:lu :[LGComboBox class]];
+	[Lunar register:lu :[LGCompoundButton class]];
+    [Lunar register:lu :[LGConstraintLayout class]];
+	[Lunar register:lu :[LGDatePicker class]];
+	[Lunar register:lu :[LGEditText class]];
+    [Lunar register:lu :[LGFragmentContainerView class]];
+    [Lunar register:lu :[LGFragmentStateAdapter class]];
+	[Lunar register:lu :[LGFrameLayout class]];
+    [Lunar register:lu :[LGImageView class]];
+	[Lunar register:lu :[LGLinearLayout class]];
+	[Lunar register:lu :[LGListView class]];
+	[Lunar register:lu :[LGProgressBar class]];
+	[Lunar register:lu :[LGRadioButton class]];
+	[Lunar register:lu :[LGRadioGroup class]];
+	[Lunar register:lu :[LGScrollView class]];
+    [Lunar register:lu :[LGHorizontalScrollView class]];
+    [Lunar register:lu :[LGTabLayout class]];
+	[Lunar register:lu :[LGTextView class]];
+	[Lunar register:lu :[LGView class]];
+    [Lunar register:lu :[LGViewGroup class]];
+    [Lunar register:lu :[LGViewPager class]];
+    [Lunar register:lu :[LGRecyclerView class]];
+    [Lunar register:lu :[LGRecyclerViewAdapter class]];
+    [Lunar register:lu :[LGToolbar class]];
+    [Lunar register:lu :[LGWebView class]];
 	
-	[Lunar Register:lu :[LuaDefines class]];
-	[Lunar Register:lu :[LuaNativeObject class]];
-	[Lunar Register:lu :[LuaObjectStore class]];
+	[Lunar register:lu :[LuaDefines class]];
+	[Lunar register:lu :[LuaNativeObject class]];
+	[Lunar register:lu :[LuaObjectStore class]];
     
-    [Lunar Register:lu :[LuaBuffer class]];
-    [Lunar Register:lu :[LuaBundle class]];
-    [Lunar Register:lu :[LuaColor class]];
-	[Lunar Register:lu :[LuaDatabase class]];
-    [Lunar Register:lu :[LuaDate class]];
-    [Lunar Register:lu :[LuaDialog class]];
-    [Lunar Register:lu :[LuaEvent class]];
-   	[Lunar Register:lu :[LuaForm class]];
-    [Lunar Register:lu :[LuaFormIntent class]];
-    [Lunar Register:lu :[LuaFragment class]];
-   	[Lunar Register:lu :[LuaHttpClient class]];
-    [Lunar Register:lu :[LuaJob class]];
-	[Lunar Register:lu :[LuaJSONObject class]];
-	[Lunar Register:lu :[LuaJSONArray class]];
-    [Lunar Register:lu :[LuaLog class]];
-    [Lunar Register:lu :[LuaMenu class]];
-    [Lunar Register:lu :[LuaNativeCall class]];
-    [Lunar Register:lu :[LuaPoint class]];
-    [Lunar Register:lu :[LuaRect class]];
-    [Lunar Register:lu :[LuaRef class]];
-	[Lunar Register:lu :[LuaResource class]];
-    [Lunar Register:lu :[LuaStore class]];
-	[Lunar Register:lu :[LuaStream class]];
-    [Lunar Register:lu :[LuaTab class]];
-    [Lunar Register:lu :[LuaThread class]];
-	[Lunar Register:lu :[LuaToast class]];
+    [Lunar register:lu :[LuaBuffer class]];
+    [Lunar register:lu :[LuaBundle class]];
+    [Lunar register:lu :[LuaColor class]];
+	[Lunar register:lu :[LuaDatabase class]];
+    [Lunar register:lu :[LuaDate class]];
+    [Lunar register:lu :[LuaDialog class]];
+    [Lunar register:lu :[LuaEvent class]];
+   	[Lunar register:lu :[LuaForm class]];
+    [Lunar register:lu :[LuaFormIntent class]];
+    [Lunar register:lu :[LuaFragment class]];
+   	[Lunar register:lu :[LuaHttpClient class]];
+    [Lunar register:lu :[LuaJob class]];
+	[Lunar register:lu :[LuaJSONObject class]];
+	[Lunar register:lu :[LuaJSONArray class]];
+    [Lunar register:lu :[LuaLog class]];
+    [Lunar register:lu :[LuaMenu class]];
+    [Lunar register:lu :[LuaNativeCall class]];
+    [Lunar register:lu :[LuaPoint class]];
+    [Lunar register:lu :[LuaRect class]];
+    [Lunar register:lu :[LuaRef class]];
+	[Lunar register:lu :[LuaResource class]];
+    [Lunar register:lu :[LuaStore class]];
+	[Lunar register:lu :[LuaStream class]];
+    [Lunar register:lu :[LuaTab class]];
+    [Lunar register:lu :[LuaThread class]];
+	[Lunar register:lu :[LuaToast class]];
     
-    [Lunar Register:lu :[LuaAppBarConfiguration class]];
-    [Lunar Register:lu :[LuaCoroutineScope class]];
-    [Lunar Register:lu :[LuaDispatchers class]];
-    [Lunar Register:lu :[FragmentManager class]];
-    [Lunar Register:lu :[LuaLifecycle class]];
-    [Lunar Register:lu :[LuaLifecycleObserver class]];
-    [Lunar Register:lu :[LuaLifecycleOwner class]];
-    [Lunar Register:lu :[LuaLiveData class]];
-    [Lunar Register:lu :[LuaMutableLiveData class]];
-    [Lunar Register:lu :[LuaNavController class]];
-    [Lunar Register:lu :[NavigationUI class]];
-    [Lunar Register:lu :[NavOptions class]];
-    [Lunar Register:lu :[LuaNavHostFragment class]];
-    [Lunar Register:lu :[LuaViewModel class]];
-    [Lunar Register:lu :[LuaViewModelProvider class]];
+    [Lunar register:lu :[LuaAppBarConfiguration class]];
+    [Lunar register:lu :[LuaCoroutineScope class]];
+    [Lunar register:lu :[LuaDispatchers class]];
+    [Lunar register:lu :[FragmentManager class]];
+    [Lunar register:lu :[LuaLifecycle class]];
+    [Lunar register:lu :[LuaLifecycleObserver class]];
+    [Lunar register:lu :[LuaLifecycleOwner class]];
+    [Lunar register:lu :[LuaLiveData class]];
+    [Lunar register:lu :[LuaMutableLiveData class]];
+    [Lunar register:lu :[LuaNavController class]];
+    [Lunar register:lu :[NavigationUI class]];
+    [Lunar register:lu :[NavOptions class]];
+    [Lunar register:lu :[LuaNavHostFragment class]];
+    [Lunar register:lu :[LuaViewModel class]];
+    [Lunar register:lu :[LuaViewModelProvider class]];
     
     if(plugins != nil)
     {
         for(Class cls in plugins)
-            [Lunar Register:lu :cls];
+            [Lunar register:lu :cls];
     }
 }
 
--(void)RegisterGlobals
+-(void)registerGlobals
 {
 #if TARGET_OS_MACCATALYST
     lua_pushstring(lu, "iOS");
@@ -1083,12 +1083,12 @@ int RegisterTag(lua_State *L)
     lua_setglobal(lu, "IS_TABLET");
 }
 
--(lua_State *)GetLuaState
+-(lua_State *)getLuaState
 {
 	return lu;
 }
 
--(void)PushBool:(bool)val
+-(void)pushBool:(bool)val
 {
 	if(val) 
 		lua_pushboolean(lu,1);
@@ -1096,42 +1096,42 @@ int RegisterTag(lua_State *L)
 		lua_pushboolean(lu,0);
 }
 
--(void)PushNil
+-(void)pushNil
 {
 	lua_pushnil(lu);
 }
 
--(void)PushInt:(int32)val
+-(void)pushInt:(int32)val
 {
 	lua_pushinteger(lu,val);
 }
 
--(void)PushUInt:(uint32)val
+-(void)pushUInt:(uint32)val
 {
 	lua_pushnumber(lu,val);
 }
 			 
--(void)PushLong:(long)val
+-(void)pushLong:(long)val
 {
 	lua_pushnumber(lu, val);
 }
 
--(void)PushFloat:(float)val
+-(void)pushFloat:(float)val
 {
 	lua_pushnumber(lu, val);
 }
 
--(void)PushDouble:(double)val
+-(void)pushDouble:(double)val
 {
 	lua_pushnumber(lu, val);
 }
 
--(void)PushString:(NSString *)val
+-(void)pushString:(NSString *)val
 {
 	lua_pushstring(lu, [val cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
--(void)PushTable:(NSMutableDictionary *)val
+-(void)pushTable:(NSMutableDictionary *)val
 {
 	lua_lock(lu);
 	BOOL created = false;
@@ -1149,24 +1149,24 @@ int RegisterTag(lua_State *L)
 			   || [value class] == [LuaShort class]
 			   || [value class] == [LuaInt class])
 			{
-				[self PushInt:[((NSNumber*)value) intValue]];
+				[self pushInt:[((NSNumber*)value) intValue]];
 			}
 			else if([value class] == [LuaLong class])
 			{
-				[self PushLong:[((NSNumber*)value) longValue]];
+				[self pushLong:[((NSNumber*)value) longValue]];
 			}
 			else if([value class] == [LuaFloat class]
 					|| [value class] == [LuaDouble class])
 			{
-				[self PushDouble:[((NSNumber*)value) doubleValue]];
+				[self pushDouble:[((NSNumber*)value) doubleValue]];
 			}
 			else if([value class] == [NSString class])
 			{
-				[self PushString:((NSString*)value)];
+				[self pushString:((NSString*)value)];
 			}
 			else if([value class] == [NSMutableDictionary class])
 			{
-				[self PushTable:((NSMutableDictionary*)value)];
+				[self pushTable:((NSMutableDictionary*)value)];
 			}
 			else 
 			{
@@ -1205,32 +1205,32 @@ int RegisterTag(lua_State *L)
 	lua_unlock(lu);
 }
 
--(NSString *)GetScriptsRoot
+-(NSString *)getScriptsRoot
 {
 	return self.scriptsRoot;
 }
 
--(int)GetPrimaryLoad
+-(int)getPrimaryLoad
 {
 	return self.primaryLoad;
 }
 
--(NSString *)GetUIRoot
+-(NSString *)getUIRoot
 {
 	return self.uiRoot;
 }
 
--(NSString *)GetMainUI
+-(NSString *)getMainUI
 {
 	return self.mainUI;
 }
 
--(NSString *)GetMainForm
+-(NSString *)getMainForm
 {
 	return self.mainForm;
 }
 
--(NSString *)GetAppStyle
+-(NSString *)getAppStyle
 {
     return self.appStyle;
 }

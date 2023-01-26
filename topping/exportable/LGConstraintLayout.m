@@ -5,9 +5,9 @@
 
 @implementation LGConstraintLayout
 
--(void)InitComponent:(UIView *)view :(LuaContext *)lc
+-(void)initComponent:(UIView *)view :(LuaContext *)lc
 {
-    [super InitComponent:view :lc];
+    [super initComponent:view :lc];
     
     [self._view.widthAnchor constraintEqualToConstant:self.dWidth].active = YES;
     [self._view.heightAnchor constraintEqualToConstant:self.dHeight].active = YES;
@@ -363,10 +363,10 @@
     [self._view layoutIfNeeded];
 }
 
-+(LGConstraintLayout*)Create:(LuaContext *)context
++(LGConstraintLayout*)create:(LuaContext *)context
 {
     LGConstraintLayout *lcl = [[LGConstraintLayout alloc] init];
-    [lcl InitProperties];
+    [lcl initProperties];
     return lcl;
 }
 
@@ -387,12 +387,12 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-                                        :@selector(Create:)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+                                        :@selector(create:)
                                         :[LGConstraintLayout class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGConstraintLayout class]]
-             forKey:@"Create"];
+             forKey:@"create"];
     return dict;
 }
 

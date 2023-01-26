@@ -24,12 +24,12 @@
 	return self;
 }
 
-+(LGFontParser *) GetInstance
++(LGFontParser *) getInstance
 {
-	return [LGParser GetInstance].pFont;
+	return [LGParser getInstance].pFont;
 }
 
-+(int)ParseTextStyle:(NSString *)textStyle
++(int)parseTextStyle:(NSString *)textStyle
 {
     NSArray *arr = SPLIT(textStyle, @"|");
     int flg = 0;
@@ -46,10 +46,10 @@
     return flg;
 }
 
--(void)Initialize
+-(void)initialize
 {
-    NSArray *fontDirectories = [LuaResource GetResourceDirectories:LUA_FONT_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:fontDirectories :LUA_FONT_FOLDER];
+    NSArray *fontDirectories = [LuaResource getResourceDirectories:LUA_FONT_FOLDER];
+    self.clearedDirectoryList = [[LGParser getInstance] tester:fontDirectories :LUA_FONT_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
          NSString *aData = (NSString*)((DynamicResource*)obj1).data;
@@ -65,7 +65,7 @@
     self.fontCacheMap = [NSMutableDictionary dictionary];
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSString *filename = (NSString *)obj;
             NSString *fNameNoExt = [filename stringByDeletingPathExtension];
@@ -76,10 +76,10 @@
     }
 }
 
--(LGFontReturn *) ParseXML:(NSString*)path :(NSString *)filename
+-(LGFontReturn *) parseXML:(NSString*)path :(NSString *)filename
 {
-    NSString *fontBundlePath = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:path];
-    NSData *dat = [[LuaResource GetResource:fontBundlePath :filename] GetData];
+    NSString *fontBundlePath = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:path];
+    NSData *dat = [[LuaResource getResource:fontBundlePath :filename] getData];
     GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
     if(xml == nil)
     {
@@ -92,13 +92,13 @@
         return nil;
     if(COMPARE([root name], @"font-family"))
     {
-        return [self ParseFont:root];
+        return [self parseFont:root];
     }
     
     return nil;
 }
 
--(LGFontReturn*)ParseFont:(GDataXMLElement*)root
+-(LGFontReturn*)parseFont:(GDataXMLElement*)root
 {
     NSArray *children = [root children];
     
@@ -130,14 +130,14 @@
                         if([arr count] > 1)
                         {
                             NSString *name = [arr objectAtIndex:1];
-                            NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
-                            stream = [LuaResource GetResource:path :APPEND(name, @".ttf")];
+                            NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
+                            stream = [LuaResource getResource:path :APPEND(name, @".ttf")];
                             if(stream == nil)
                             {
-                                stream = [LuaResource GetResource:path :APPEND(name, @".ttc")];
+                                stream = [LuaResource getResource:path :APPEND(name, @".ttc")];
                                 if(stream == nil)
                                 {
-                                    stream = [LuaResource GetResource:path :APPEND(name, @".otf")];
+                                    stream = [LuaResource getResource:path :APPEND(name, @".otf")];
                                 }
                             }
                             if(stream != nil)
@@ -148,7 +148,7 @@
                     }
                 }
                 
-                if(stream == nil || ![stream HasStream])
+                if(stream == nil || ![stream hasStream])
                 {
                     NSLog(@"Cannot read font file %@", [root name]);
                     continue;
@@ -194,7 +194,7 @@
     return lfr;
 }
 
--(LGFontReturn *)GetFont:(NSString *)key
+-(LGFontReturn *)getFont:(NSString *)key
 {
     if(key == nil)
         return nil;
@@ -208,7 +208,7 @@
             NSString *name = [arr objectAtIndex:1];
             for(DynamicResource *dr in self.clearedDirectoryList)
             {
-                retVal = [self ParseXML:(NSString*)dr.data :APPEND(name, @".xml")];
+                retVal = [self parseXML:(NSString*)dr.data :APPEND(name, @".xml")];
                 if(retVal != nil)
                 {
                     break;
@@ -220,7 +220,7 @@
     return retVal;
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.fontMap)

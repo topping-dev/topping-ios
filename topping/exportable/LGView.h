@@ -42,58 +42,58 @@ enum GRAVITY
     NSArray *propertyNameCache;
 }
 
--(void)InitProperties;
--(void)CopyAttributesTo:(LGView*)viewToCopy;
--(BOOL)SetAttributeValue:(NSString*) name :(NSString*) value;
--(void)ApplyStyles;
+-(void)initProperties;
+-(void)copyAttributesTo:(LGView*)viewToCopy;
+-(BOOL)setAttributeValue:(NSString*) name :(NSString*) value;
+-(void)applyStyles;
 
--(void)AddSelfToParent:(UIView*)par :(LuaForm*)cont;
--(void)AddSelfToParentNoSetup:(UIView *)par :(LuaForm*)cont;
--(UIView*)CreateComponent;
--(void)InitComponent:(UIView *)view :(LuaContext *)lc;
--(void)SetupComponent:(UIView *)view;
--(void)ComponentAddMethod:(UIView*)par :(UIView *)me;
+-(void)addSelfToParent:(UIView*)par :(LuaForm*)cont;
+-(void)addSelfToParentNoSetup:(UIView *)par :(LuaForm*)cont;
+-(UIView*)createComponent;
+-(void)initComponent:(UIView *)view :(LuaContext *)lc;
+-(void)setupComponent:(UIView *)view;
+-(void)componentAddMethod:(UIView*)par :(UIView *)me;
 
 //Positioning
--(void)ClearDimensions;
--(void)Resize;
--(void)ResizeAndInvalidate;
--(void)ReadWidth;
--(void)ReadHeight;
--(void)ReadWidthHeight;
--(void)ResizeInternal;
--(void)AfterResize:(BOOL)vertical;
--(int)GetContentW;
--(int)GetContentH;
--(NSObject*)HasAttribute:(NSString *)key;
--(BOOL)ContainsAttribute:(NSString *)key :(NSObject *)val;
+-(void)clearDimensions;
+-(void)resize;
+-(void)resizeAndInvalidate;
+-(void)readWidth;
+-(void)readHeight;
+-(void)readWidthHeight;
+-(void)resizeInternal;
+-(void)afterResize:(BOOL)vertical;
+-(int)getContentW;
+-(int)getContentH;
+-(NSObject*)hasAttribute:(NSString *)key;
+-(BOOL)containsAttribute:(NSString *)key :(NSObject *)val;
 
--(void)ReduceWidth:(int)share;
--(void)ReduceHeight:(int)share;
--(int)GetCalculatedHeight;
--(int)GetCalculatedWidth;
--(void)ConfigChange;
--(NSString *) DebugDescription:(NSString *)val;
+-(void)reduceWidth:(int)share;
+-(void)reduceHeight:(int)share;
+-(int)getCalculatedHeight;
+-(int)getCalculatedWidth;
+-(void)configChange;
+-(NSString *) debugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;
 
--(NSMutableDictionary*)OnSaveInstanceState;
+-(NSMutableDictionary*)onSaveInstanceState;
 
 -(void)viewDidLayoutSubviews;
 
 //Lua
--(UIView*)GetView;
-+(LGView*)Create:(LuaContext *)context;
--(LGView*)GetViewById:(LuaRef*)lId;
--(LGView*)GetViewByIdInternal:(NSString*)sId;
--(void)SetEnabled:(BOOL)enabled;
--(void)SetFocusable:(BOOL)focusable;
--(void)SetBackground:(LuaRef*)ref;
--(NSInteger)GetVisibility;
--(void)SetVisibility:(NSInteger)visibility;
--(float)GetAlpha;
--(void)SetOnClickListener:(LuaTranslator *)lt;
--(NSDictionary*)GetBindings;
+-(UIView*)getView;
++(LGView*)create:(LuaContext *)context;
+-(LGView*)getViewById:(LuaRef*)lId;
+-(LGView*)getViewByIdInternal:(NSString*)sId;
+-(void)setEnabled:(BOOL)enabled;
+-(void)setFocusable:(BOOL)focusable;
+-(void)setBackground:(LuaRef*)ref;
+-(NSInteger)getVisibility;
+-(void)setVisibility:(NSInteger)visibility;
+-(float)getAlpha;
+-(void)setOnClickListener:(LuaTranslator *)lt;
+-(NSDictionary*)getBindings;
 
 -(LuaFragment*)findFragment;
 -(NavController*)findNavController;

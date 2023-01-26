@@ -7,12 +7,12 @@
 {
 }
 
--(void)Initialize;
-+(LGIdParser*) GetInstance;
--(void) Parse:(NSString*)folder :(NSArray*)clearedDirectoryList;
--(void) ParseXML:(NSString*)path :(NSString *)filename;
--(NSDictionary *)GetKeys;
--(void) AddKey:(NSString*)key :(NSString*)value;
+-(void)initialize;
++(LGIdParser*) getInstance;
+-(void) parse:(NSString*)folder :(NSArray*)clearedDirectoryList;
+-(void) parseXML:(NSString*)path :(NSString *)filename;
+-(NSDictionary *)getKeys;
+-(void) addKey:(NSString*)key :(NSString*)value;
 
 @property (nonatomic, retain) NSMutableDictionary *idMap;
 

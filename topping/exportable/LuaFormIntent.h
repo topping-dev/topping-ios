@@ -12,7 +12,7 @@
 - (void)setFlags:(int)flags;
 
 @property (nonatomic, retain) LuaBundle *bundle;
-@property (nonatomic) int flags;
+@property (nonatomic) int flags_;
 @property (nonatomic, retain) LuaForm *form;
 
 @end

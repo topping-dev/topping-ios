@@ -142,10 +142,10 @@
     return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
-    NSArray *layoutDirectories = [LuaResource GetResourceDirectories:LUA_NAVIGATION_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_NAVIGATION_FOLDER];
+    NSArray *layoutDirectories = [LuaResource getResourceDirectories:LUA_NAVIGATION_FOLDER];
+    self.clearedDirectoryList = [[LGParser getInstance] tester:layoutDirectories :LUA_NAVIGATION_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
          NSString *aData = (NSString*)((DynamicResource*)obj1).data;
@@ -160,7 +160,7 @@
     self.navigationMap = [NSMutableDictionary dictionary];
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSString *filename = (NSString *)obj;
             NSString *fNameNoExt = [filename stringByDeletingPathExtension];
@@ -169,15 +169,15 @@
     }
 }
 
-+(LGNavigationParser *) GetInstance
++(LGNavigationParser *) getInstance
 {
-    return [LGParser GetInstance].pNavigation;
+    return [LGParser getInstance].pNavigation;
 }
 
--(NavGraph *) ParseXML:(NavController*)controller :(NSString*)path :(NSString *)filename
+-(NavGraph *) parseXML:(NavController*)controller :(NSString*)path :(NSString *)filename
 {
-    NSString *fontBundlePath = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:path];
-    NSData *dat = [[LuaResource GetResource:fontBundlePath :filename] GetData];
+    NSString *fontBundlePath = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:path];
+    NSData *dat = [[LuaResource getResource:fontBundlePath :filename] getData];
     GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
     if(xml == nil)
     {
@@ -194,7 +194,7 @@
     return nil;
 }
 
--(NavGraph *)GetNavigation:(NavController*)controller :(NSString *)key {
+-(NavGraph *)getNavigation:(NavController*)controller :(NSString *)key {
     if(key == nil)
         return nil;
     if(self.navigationCache == nil) {
@@ -212,7 +212,7 @@
             NSString *name = [arr objectAtIndex:1];
             for(DynamicResource *dr in self.clearedDirectoryList)
             {
-                retVal = [self ParseXML:controller :(NSString*)dr.data :APPEND(name, @".xml")];
+                retVal = [self parseXML:controller :(NSString*)dr.data :APPEND(name, @".xml")];
                 if(retVal != nil)
                 {
                     break;
@@ -267,7 +267,7 @@
             }
             else if(COMPARE([node name], @"android:label"))
             {
-                lne.mLabel = [[LGStringParser GetInstance] GetString:[node stringValue]];
+                lne.mLabel = [[LGStringParser getInstance] getString:[node stringValue]];
             }
         }
         for(GDataXMLElement *childChild in [child children])

@@ -14,7 +14,7 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     self.window = [[UIWindow alloc] initWithWindowScene:scene];
     //    window = UIWindow(frame: UIScreen.main.bounds)
-    [[CommonDelegate GetInstance] InitMain:self.window :scene];
+    [[CommonDelegate getInstance] initMain:self.window :scene];
 }
 
 

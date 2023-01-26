@@ -10,6 +10,6 @@
 
 -(void)resizeSegmentsToFitTitles:(UISegmentedControl*)segCtrl;
 
-+(LGRadioButton*)Create:(LuaContext *)context;
++(LGRadioButton*)create:(LuaContext *)context;
 
 @end

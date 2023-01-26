@@ -67,27 +67,27 @@
 }
 
 -(void)onCreate:(id<LifecycleOwner>)owner {
-    [self.lt Call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:0]];
+    [self.lt call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:0]];
 }
 
 -(void)onDestroy:(id<LifecycleOwner>)owner {
-    [self.lt Call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:1]];
+    [self.lt call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:1]];
 }
 
 -(void)onPause:(id<LifecycleOwner>)owner {
-    [self.lt Call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:2]];
+    [self.lt call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:2]];
 }
 
 -(void)onResume:(id<LifecycleOwner>)owner {
-    [self.lt Call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:3]];
+    [self.lt call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:3]];
 }
 
 -(void)onStart:(id<LifecycleOwner>)owner {
-    [self.lt Call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:4]];
+    [self.lt call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:4]];
 }
 
 -(void)onStop:(id<LifecycleOwner>)owner {
-    [self.lt Call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:5]];
+    [self.lt call:[[LuaNativeObject alloc] initWithObject:owner] :[NSNumber numberWithInt:5]];
 }
 
 -(NSString*)GetId

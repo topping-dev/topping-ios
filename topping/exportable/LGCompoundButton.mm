@@ -5,10 +5,10 @@
 @implementation LGCompoundButton
 
 //Lua
-+(LGCompoundButton*)Create:(LuaContext *)context
++(LGCompoundButton*)create:(LuaContext *)context
 {
 	LGCompoundButton *lst = [[LGCompoundButton alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
@@ -29,12 +29,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGCompoundButton class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGCompoundButton class]] 
-			 forKey:@"Create"];
+			 forKey:@"create"];
 	return dict;
 }
 

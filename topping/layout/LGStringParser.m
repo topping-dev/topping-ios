@@ -15,12 +15,12 @@
 	return self;
 }
 
-+(LGStringParser *) GetInstance
++(LGStringParser *) getInstance
 {
-	return [LGParser GetInstance].pString;
+	return [LGParser getInstance].pString;
 }
 
--(void) ParseXML:(NSString *)filename;
+-(void) parseXML:(NSString *)filename;
 {
 /*	if(self.stringMap == nil)
 	{
@@ -56,7 +56,7 @@
 	}*/
 }
 
--(void)ParseXML:(int)orientation :(GDataXMLElement *)element
+-(void)parseXML:(int)orientation :(GDataXMLElement *)element
 {
     if(self.stringMap == nil)
 	{
@@ -96,7 +96,7 @@
     }
 }
 
--(NSString *)GetString:(NSString *)key
+-(NSString *)getString:(NSString *)key
 {
     if(key == nil)
         return nil;
@@ -118,7 +118,7 @@
     return key;
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.stringMap)

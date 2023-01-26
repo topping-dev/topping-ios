@@ -23,27 +23,27 @@
 
 @implementation LGViewPager
 
--(void)SetupComponent:(UIView *)view {
-    [super SetupComponent:view];
+-(void)setupComponent:(UIView *)view {
+    [super setupComponent:view];
     self.pageChangeCallbacks = [NSMutableArray new];
     self.flowLayout = [SnappingLayout new];
     [((SnappingLayout*)self.flowLayout) setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     ((SnappingLayout*)self.flowLayout).sectionInsetReference = UICollectionViewFlowLayoutSectionInsetFromContentInset;
-    self.lgview = [LGView Create:self.lc];
+    self.lgview = [LGView create:self.lc];
     self.lgview.android_layout_width = @"match_parent";
     self.lgview.android_layout_height = @"match_parent";
     self.lgview._view = [[UICollectionView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight) collectionViewLayout:self.flowLayout];
     ((UICollectionView*)self.lgview._view).decelerationRate = UIScrollViewDecelerationRateFast;
 }
 
--(void)ComponentAddMethod:(UIView *)par :(UIView *)me {
-    [super ComponentAddMethod:par :me];
-    [self AddSubview:self.lgview];
+-(void)componentAddMethod:(UIView *)par :(UIView *)me {
+    [super componentAddMethod:par :me];
+    [self addSubview:self.lgview];
     [self._view addSubview:self.lgview._view];
-    [self Resize];
+    [self resize];
 }
 
--(void)SetAdapter:(id<LGViewPagerAdapter>)adapter {
+-(void)setAdapter:(id<LGViewPagerAdapter>)adapter {
     [adapter setParentView:self.lgview];
     [adapter setReceiver:self];
     UICollectionView *cv = (UICollectionView*)self.lgview._view;
@@ -63,32 +63,32 @@
     [cv scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:pos inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 }
 
--(void)SetTabLayout:(LGTabLayout*)tabLayout :(LuaTranslator*)ltTabTitle {
+-(void)setTabLayout:(LGTabLayout*)tabLayout :(LuaTranslator*)ltTabTitle {
     [self registerOnPageChangeCallback:[[TabLayoutOnPageChangeCallback alloc] initWithTabLayout:tabLayout]];
     int count = [self.adapterValue getItemCount];
     for(int i = 0; i < count; i++) {
-        [tabLayout AddTab:(LuaTab*)[ltTabTitle Call:[NSNumber numberWithInt:i]]];
+        [tabLayout addTab:(LuaTab*)[ltTabTitle call:[NSNumber numberWithInt:i]]];
     }
     tabLayout.delegate = self;
     [self.adapterValue setScroller:tabLayout];
 }
 
--(void)Notify
+-(void)notify
 {
     [((UICollectionView*)self.lgview._view) reloadData];
 }
 
--(void)ResizeAndInvalidate {
-    [super ResizeAndInvalidate];
-    [self Notify];
+-(void)resizeAndInvalidate {
+    [super resizeAndInvalidate];
+    [self notify];
 }
 
--(void)ConfigChange {
-    [self Notify];
+-(void)configChange {
+    [self notify];
 }
 
--(NSMutableDictionary *)OnSaveInstanceState {
-    NSMutableDictionary *superState = [super OnSaveInstanceState];
+-(NSMutableDictionary *)onSaveInstanceState {
+    NSMutableDictionary *superState = [super onSaveInstanceState];
     //TODO:Fix state
     return superState;
 }
@@ -129,8 +129,8 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    InstanceMethodNoRet(SetAdapter:, @[[LGFragmentStateAdapter class]], @"SetAdapter")
-    InstanceMethodNoRet(SetTabLayout::, @[[LGTabLayout class]C [LuaTranslator class]], @"SetTabLayout");
+    InstanceMethodNoRet(setAdapter:, @[[LGFragmentStateAdapter class]], @"setAdapter")
+    InstanceMethodNoRet(setTabLayout::, @[[LGTabLayout class]C [LuaTranslator class]], @"setTabLayout");
     
     return dict;
 }

@@ -75,7 +75,7 @@
 - (void)keyboardWillShow:(NSNotification *)notif \
 { \
     CGRect t; \
-        [[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&t]; \
+        [((NSValue*)[notif.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey]) getValue:&t]; \
             t = [self.view convertRect:t toView:nil]; \
                 \
                 if(self.selectedKeyboardTextField != nil) \

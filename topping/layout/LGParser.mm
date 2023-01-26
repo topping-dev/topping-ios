@@ -22,14 +22,14 @@
 	return self;
 }
 
-+(LGParser*)GetInstance
++(LGParser*)getInstance
 {
 	if(sLGParser == nil)
 		sLGParser = [[LGParser alloc] init];
 	return sLGParser;
 }
 
--(void)Initialize
+-(void)initialize
 {
 	self.pLayout = [[LGLayoutParser alloc] init];
 	self.pDrawable = [[LGDrawableParser alloc] init];
@@ -100,30 +100,30 @@
     [self.MatchStringEnd addObject:lst];
     lst = [NSMutableArray array];
     
-    [self.pFont Initialize];
-    [self.pDrawable Initialize];
-    [self.pLayout Initialize];
-    [self.pValue Initialize];
-    [self.pNavigation Initialize];
-    [self.pMenu Initialize];
-    [self.pId Initialize];
+    [self.pFont initialize];
+    [self.pDrawable initialize];
+    [self.pLayout initialize];
+    [self.pValue initialize];
+    [self.pNavigation initialize];
+    [self.pMenu initialize];
+    [self.pId initialize];
     [self ParseValues];
 }
 
 -(void)ParseValues
 {
-    NSArray *directoryList = [LuaResource GetResourceDirectories:LUA_VALUES_FOLDER];
-    NSMutableArray *clearedDirectoryList = [self Tester:directoryList :LUA_VALUES_FOLDER];
+    NSArray *directoryList = [LuaResource getResourceDirectories:LUA_VALUES_FOLDER];
+    NSMutableArray *clearedDirectoryList = [self tester:directoryList :LUA_VALUES_FOLDER];
     for(DynamicResource *dr in clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         for(NSString *file in files)
         {
-            NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:LUA_VALUES_FOLDER];
-            LuaStream *ls = [LuaResource GetResource:path :file];
-            if([ls HasStream])
+            NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:LUA_VALUES_FOLDER];
+            LuaStream *ls = [LuaResource getResource:path :file];
+            if([ls hasStream])
             {
-                GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:[ls GetData] error:nil];
+                GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:[ls getData] error:nil];
                 if(xml == nil)
                 {
                     NSLog(@"Cannot read xml file %@", file);
@@ -138,15 +138,15 @@
                         NSString *childName = child.name;
                         if(COMPARE(childName, @"color"))
                         {
-                            [self.pColor ParseXML:dr.orientation :child];
+                            [self.pColor parseXML:dr.orientation :child];
                         }
                         else if(COMPARE(childName, @"dimen"))
                         {
-                            [self.pDimen ParseXML:dr.orientation :child];
+                            [self.pDimen parseXML:dr.orientation :child];
                         }
                         else if(COMPARE(childName, @"string"))
                         {
-                            [self.pString ParseXML:dr.orientation :child];
+                            [self.pString parseXML:dr.orientation :child];
                         }
                         else if(COMPARE(childName, @"bool")
                                 || COMPARE(childName, @"integer")
@@ -154,7 +154,7 @@
                                 || COMPARE(childName, @"integer-array")
                                 || COMPARE(childName, @"array"))
                         {
-                            [self.pValue ParseXML:dr.orientation :child];
+                            [self.pValue parseXML:dr.orientation :child];
                         }
                         else {
                             NSLog(@"Unknown resource type resources LGParser ParseValues %@", childName);
@@ -169,14 +169,14 @@
     }
     for(DynamicResource *dr in clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         for(NSString *file in files)
         {
-            NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:LUA_VALUES_FOLDER];
-            LuaStream *ls = [LuaResource GetResource:path :file];
-            if([ls HasStream])
+            NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:LUA_VALUES_FOLDER];
+            LuaStream *ls = [LuaResource getResource:path :file];
+            if([ls hasStream])
             {
-                GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:[ls GetData] error:nil];
+                GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:[ls getData] error:nil];
                 if(xml == nil)
                 {
                     NSLog(@"Cannot read xml file %@", file);
@@ -191,31 +191,31 @@
                         NSString *childName = child.name;
                         if(COMPARE(childName, @"style"))
                         {
-                            [self.pStyle ParseXML:dr.orientation :child];
+                            [self.pStyle parseXML:dr.orientation :child];
                         }
                     }
                 }
             }
         }
-        [self.pStyle LinkParents];
+        [self.pStyle linkParents];
     }
     
     //TODO: Move these to associated classes
-    directoryList = [LuaResource GetResourceDirectories:LUA_LAYOUT_FOLDER];
-    clearedDirectoryList = [self Tester:directoryList :LUA_LAYOUT_FOLDER];
-    [self.pId Parse:LUA_LAYOUT_FOLDER :clearedDirectoryList];
-    directoryList = [LuaResource GetResourceDirectories:LUA_VALUES_FOLDER];
-    clearedDirectoryList = [self Tester:directoryList :LUA_VALUES_FOLDER];
-    [self.pId Parse:LUA_VALUES_FOLDER :clearedDirectoryList];
-    directoryList = [LuaResource GetResourceDirectories:LUA_NAVIGATION_FOLDER];
-    clearedDirectoryList = [self Tester:directoryList :LUA_NAVIGATION_FOLDER];
-    [self.pId Parse:LUA_NAVIGATION_FOLDER :clearedDirectoryList];
-    directoryList = [LuaResource GetResourceDirectories:LUA_MENU_FOLDER];
-    clearedDirectoryList = [self Tester:directoryList :LUA_MENU_FOLDER];
-    [self.pId Parse:LUA_MENU_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource getResourceDirectories:LUA_LAYOUT_FOLDER];
+    clearedDirectoryList = [self tester:directoryList :LUA_LAYOUT_FOLDER];
+    [self.pId parse:LUA_LAYOUT_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource getResourceDirectories:LUA_VALUES_FOLDER];
+    clearedDirectoryList = [self tester:directoryList :LUA_VALUES_FOLDER];
+    [self.pId parse:LUA_VALUES_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource getResourceDirectories:LUA_NAVIGATION_FOLDER];
+    clearedDirectoryList = [self tester:directoryList :LUA_NAVIGATION_FOLDER];
+    [self.pId parse:LUA_NAVIGATION_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource getResourceDirectories:LUA_MENU_FOLDER];
+    clearedDirectoryList = [self tester:directoryList :LUA_MENU_FOLDER];
+    [self.pId parse:LUA_MENU_FOLDER :clearedDirectoryList];
 }
 
--(NSMutableArray *)Tester:(NSArray*)directoryList :(NSString*)directoryType
+-(NSMutableArray *)tester:(NSArray*)directoryList :(NSString*)directoryType
 {
     NSMutableArray *clearedDirectoryList = [NSMutableArray array];
     for(NSString *dirName in directoryList)
@@ -238,7 +238,7 @@
                 if(COMPARE(toMatch, directoryType))
                     continue;
                 result = NO;
-                count = [self Matcher:count: toMatch: &result];
+                count = [self matcher:count: toMatch: &result];
                 if(!result)
                 {
                     NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
@@ -359,7 +359,7 @@
     return clearedDirectoryList;
 }
 
--(MATCH_ID) Matcher:(MATCH_ID)count :(NSString*)toMatch :(BOOL *) result
+-(MATCH_ID) matcher:(MATCH_ID)count :(NSString*)toMatch :(BOOL *) result
 {
     BOOL found = NO;
     int lastCount = 0;

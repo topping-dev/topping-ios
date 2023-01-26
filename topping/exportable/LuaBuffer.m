@@ -5,19 +5,19 @@
 
 @synthesize data;
 
-+(LuaBuffer *)Create:(int)capacity
++(LuaBuffer *)create:(int)capacity
 {
     LuaBuffer *buf = [[LuaBuffer alloc] init];
     buf.data = [NSMutableArray arrayWithCapacity:capacity];
     return buf;
 }
 
--(int)GetByte:(int)index
+-(int)getByte:(int)index
 {
     return [[data objectAtIndex:index] intValue];
 }
 
--(void)SetByte:(int)index :(int)value
+-(void)setByte:(int)index :(int)value
 {
     [data setObject:[NSNumber numberWithInt:value] atIndexedSubscript:index];
 }
@@ -35,22 +35,22 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaInt class], nil]
 										:[LuaBuffer class]]
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetByte:))
-									   :@selector(GetByte:)
+			 forKey:@"create"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getByte:))
+									   :@selector(getByte:)
 									   :[LuaInt class]
 									   :[NSArray arrayWithObjects:[LuaInt class], nil]]
-			 forKey:@"GetByte"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetByte::))
-									   :@selector(SetByte::)
+			 forKey:@"getByte"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setByte::))
+									   :@selector(setByte::)
 									   :nil
 									   :[NSArray arrayWithObjects:[LuaInt class], [LuaInt class], nil]]
-			 forKey:@"SetByte"];
+			 forKey:@"setByte"];
 	return dict;
 }
 

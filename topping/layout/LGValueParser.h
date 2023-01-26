@@ -7,13 +7,13 @@
 {
 }
 
-+(LGValueParser*) GetInstance;
--(void)Initialize;
--(void)ParseXML:(int)orientation :(GDataXMLElement *)element;
--(NSObject*)GetValue:(NSString *)key;
--(NSObject*)GetValueDirect:(NSString *)key;
--(BOOL)GetBoolValueDirect:(NSString *)key;
--(NSMutableDictionary *)GetAllKeys;
++(LGValueParser*) getInstance;
+-(void)initialize;
+-(void)parseXML:(int)orientation :(GDataXMLElement *)element;
+-(NSObject*)getValue:(NSString *)key;
+-(NSObject*)getValueDirect:(NSString *)key;
+-(BOOL)getBoolValueDirect:(NSString *)key;
+-(NSMutableDictionary *)getAllKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *valueMap;
 @property (nonatomic, retain) NSMutableDictionary *valueKeyMap;

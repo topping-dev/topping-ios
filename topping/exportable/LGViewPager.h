@@ -45,10 +45,10 @@
 -(void)unRegisterOnPageChangeCallback:(id<OnPageChangeCallback>) callback;
 -(int)getCurrentItem;
 
--(void)Notify;
+-(void)notify;
 
--(void)SetAdapter:(id<LGViewPagerAdapter>)adapter;
--(void)SetTabLayout:(LGTabLayout*)tabLayout :(LuaTranslator*)ltTabTitle;
+-(void)setAdapter:(id<LGViewPagerAdapter>)adapter;
+-(void)setTabLayout:(LGTabLayout*)tabLayout :(LuaTranslator*)ltTabTitle;
 
 @property (nonatomic, retain) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, retain) LGView *lgview;

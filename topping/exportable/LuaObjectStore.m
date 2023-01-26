@@ -3,8 +3,6 @@
 
 @implementation LuaObjectStore
 
-@synthesize obj;
-
 -(NSString*)GetId
 {
 	return @"LuaObjectStore"; 

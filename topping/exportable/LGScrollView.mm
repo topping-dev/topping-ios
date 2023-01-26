@@ -5,29 +5,29 @@
 
 @implementation LGScrollView
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	UIScrollView *iv = [[UIScrollView alloc] init];
 	iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 	return iv;
 }
 
--(void) ComponentAddMethod:(UIView *)par :(UIView *)me
+-(void) componentAddMethod:(UIView *)par :(UIView *)me
 {
-	[super ComponentAddMethod:par :me];
+	[super componentAddMethod:par :me];
 	int totalHeight = 0;
 	for(LGView *v in self.subviews)
 	{
-		totalHeight += [v GetContentH];
+		totalHeight += [v getContentH];
 	}
 	((UIScrollView*)me).contentSize = CGSizeMake(((UIScrollView*)me).contentSize.width, totalHeight + 10);
 }
 
 //Lua
-+(LGScrollView*)Create:(LuaContext *)context
++(LGScrollView*)create:(LuaContext *)context
 {
 	LGScrollView *lst = [[LGScrollView alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
@@ -48,12 +48,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGScrollView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGScrollView class]] 
-			 forKey:@"Create"];
+			 forKey:@"create"];
 	return dict;
 }
 

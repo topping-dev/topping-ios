@@ -10,14 +10,14 @@
 }
 
 //Lua
-+(LGListView *)Create:(LuaContext *)context;
--(void)SetAdapter:(LGAdapterView *)val;
--(LGAdapterView *)GetAdapter;
--(void)Refresh;
++(LGListView *)create:(LuaContext *)context;
+-(void)setAdapter:(LGAdapterView *)val;
+-(LGAdapterView *)getAdapter;
+-(void)refresh;
 
 @property(nonatomic, retain) NSString *android_divider;
 @property(nonatomic, retain) NSNumber *android_dividerHeight;
 @property(nonatomic, retain) NSString *android_entries;
-@property(nonatomic, retain) LGAdapterView *adapter;
+@property(nonatomic, retain) LGAdapterView *adapter_;
 
 @end

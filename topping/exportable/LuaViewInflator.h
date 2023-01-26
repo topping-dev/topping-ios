@@ -13,10 +13,10 @@
 	
 }
 
-+(NSObject*)Create:(LuaContext*)lc;
-+(LuaViewInflator *)From:(LGLayoutParser*)parser;
--(LGView*)ParseFile:(NSString*)filename :(LGView*)parent;
--(LGView*) Inflate:(LuaRef*)ref : (LGView*)parent;
++(NSObject*)create:(LuaContext*)lc;
++(LuaViewInflator *)from:(LGLayoutParser*)parser;
+-(LGView*)parseFile:(NSString*)filename :(LGView*)parent;
+-(LGView*)inflate:(LuaRef*)ref : (LGView*)parent;
 
 @property (nonatomic, retain) LuaContext* context;
 

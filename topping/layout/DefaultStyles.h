@@ -2,7 +2,7 @@
 
 @interface DefaultStyles : NSObject
 
--(void)Initialize;
+-(void)initialize;
 
 @property (nonatomic, retain) NSMutableDictionary *styleMap;
 @property (nonatomic, retain) NSMutableDictionary *parentMap;

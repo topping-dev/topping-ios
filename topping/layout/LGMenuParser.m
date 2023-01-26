@@ -15,14 +15,14 @@
 	return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
-    NSArray *layoutDirectories = [LuaResource GetResourceDirectories:LUA_MENU_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_MENU_FOLDER];
+    NSArray *layoutDirectories = [LuaResource getResourceDirectories:LUA_MENU_FOLDER];
+    self.clearedDirectoryList = [[LGParser getInstance] tester:layoutDirectories :LUA_MENU_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
-         NSString *aData = ((DynamicResource*)obj1).data;
-         NSString *bData = ((DynamicResource*)obj2).data;
+         NSString *aData = (NSString*)((DynamicResource*)obj1).data;
+         NSString *bData = (NSString*)((DynamicResource*)obj2).data;
          if(COMPARE(aData, bData))
              return NSOrderedSame;
          else if(aData.length > bData.length)
@@ -32,15 +32,15 @@
      }];
 }
 
-+(LGMenuParser *) GetInstance
++(LGMenuParser *) getInstance
 {
-	return [LGParser GetInstance].pMenu;
+	return [LGParser getInstance].pMenu;
 }
 
 -(NSMutableArray *) ParseXML:(NSString*)path :(NSString *)filename
 {
-    NSString *fontBundlePath = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:path];
-    NSData *dat = [[LuaResource GetResource:fontBundlePath :filename] GetData];
+    NSString *fontBundlePath = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:path];
+    NSData *dat = [[LuaResource getResource:fontBundlePath :filename] getData];
     GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
     if(xml == nil)
     {
@@ -57,7 +57,7 @@
     return nil;
 }
 
--(NSMutableArray *)GetMenu:(NSString *)key
+-(NSMutableArray *)getMenu:(NSString *)key
 {
     if(key == nil)
         return nil;
@@ -110,11 +110,11 @@
             }
             else if(COMPARE([node name], @"android:title"))
             {
-                item.title = [[LGStringParser GetInstance] GetString:[node stringValue]];
+                item.title = [[LGStringParser getInstance] getString:[node stringValue]];
             }
             else if(COMPARE([node name], @"android:icon"))
             {
-                item.iconRes = [LuaRef WithValue:[node stringValue]];
+                item.iconRes = [LuaRef withValue:[node stringValue]];
             }
         }
         

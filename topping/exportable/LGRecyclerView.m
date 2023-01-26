@@ -5,7 +5,7 @@
 
 @implementation LGRecyclerView
 
--(int) GetContentW
+-(int) getContentW
 {
     UICollectionView *cv = ((UICollectionView*)self._view);
     if(cv != nil)
@@ -19,7 +19,7 @@
     return 0;
 }
 
--(int) GetContentH
+-(int) getContentH
 {
     UICollectionView *cv = ((UICollectionView*)self._view);
     if(cv != nil)
@@ -33,7 +33,7 @@
     return 0;
 }
 
--(UIView *) CreateComponent
+-(UIView *) createComponent
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     ((UICollectionViewFlowLayout*)self.flowLayout).sectionInsetReference = UICollectionViewFlowLayoutSectionInsetFromContentInset;
@@ -41,7 +41,7 @@
     return cv;
 }
 
--(void) SetupComponent:(UIView *)view
+-(void) setupComponent:(UIView *)view
 {
     UICollectionView *tv = (UICollectionView*)self._view;
     tv.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
@@ -49,18 +49,18 @@
         tv.separatorColor = [[LGColorParser GetInstance] ParseColor:self.android_divider];*/
 }
 
-+(LGRecyclerView *)Create:(LuaContext *)context
++(LGRecyclerView *)create:(LuaContext *)context
 {
     LGRecyclerView *lst = [[LGRecyclerView alloc] init];
     return lst;
 }
 
--(void)SetAdapter:(LGRecyclerViewAdapter *)val
+-(void)setAdapter:(LGRecyclerViewAdapter *)val
 {
     ((UICollectionView*)self._view).delegate = val;
     ((UICollectionView*)self._view).dataSource = val;
     val.parent = self;
-    self.adapter = val;
+    self.adapter_ = val;
     
     [((UICollectionView*)self._view) setFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
     
@@ -78,26 +78,26 @@
        [parToFind ResizeAndInvalidate];*/
 }
 
--(void)SetAdapterInterface:(LuaTranslator *)ltInit {
-    LGRecyclerViewAdapter *adapter = [LGRecyclerViewAdapter Create:self.lc :@""];
-    adapter.kotlinInterface = (ILGRecyclerViewAdapter*)[ltInit Call:adapter];
-    [adapter SetOnCreateViewHolder:adapter.kotlinInterface.ltOnCreateViewHolder];
-    [adapter SetOnBindViewHolder:adapter.kotlinInterface.ltOnBindViewHolder];
-    [adapter SetGetItemViewType:adapter.kotlinInterface.ltGetItemViewType];
+-(void)setAdapterInterface:(LuaTranslator *)ltInit {
+    LGRecyclerViewAdapter *adapter = [LGRecyclerViewAdapter create:self.lc :@""];
+    adapter.kotlinInterface = (ILGRecyclerViewAdapter*)[ltInit call:adapter];
+    [adapter setOnCreateViewHolder:adapter.kotlinInterface.ltOnCreateViewHolder];
+    [adapter setOnBindViewHolder:adapter.kotlinInterface.ltOnBindViewHolder];
+    [adapter setGetItemViewType:adapter.kotlinInterface.ltGetItemViewType];
 }
 
--(LGRecyclerViewAdapter *)GetAdapter
+-(LGRecyclerViewAdapter *)getAdapter
 {
-    return self.adapter;
+    return self.adapter_;
 }
 
--(void)Notify
+-(void)notify
 {
     [((UICollectionView*)self._view) reloadData];
 }
 
--(void)ConfigChange {
-    [self Notify];
+-(void)configChange {
+    [self notify];
 }
 
 -(NSString*)GetId
@@ -117,15 +117,15 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-                                        :@selector(Create:)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+                                        :@selector(create:)
                                         :[LGRecyclerView class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGRecyclerView class]]
-             forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetAdapter:)) :@selector(SetAdapter:) :nil :MakeArray([LGRecyclerViewAdapter class]C nil)] forKey:@"SetAdapter"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetAdapter)) :@selector(GetAdapter) :[LGRecyclerViewAdapter class] :MakeArray(nil)] forKey:@"GetAdapter"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Notify)) :@selector(Notify) :nil :MakeArray(nil)] forKey:@"Notify"];
+             forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setAdapter:)) :@selector(setAdapter:) :nil :MakeArray([LGRecyclerViewAdapter class]C nil)] forKey:@"setAdapter"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getAdapter)) :@selector(getAdapter) :[LGRecyclerViewAdapter class] :MakeArray(nil)] forKey:@"getAdapter"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(notify)) :@selector(notify) :nil :MakeArray(nil)] forKey:@"notify"];
     return dict;
 }
 

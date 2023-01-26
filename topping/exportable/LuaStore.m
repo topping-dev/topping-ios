@@ -36,39 +36,39 @@ static int LuaStore_index(lua_State *L)
 {
 	void **ptrHold = (void **)(lua_touserdata(L, 1));
 	const char* keyC = lua_tostring(L, 2);
-    NSObject *val = [LuaStore Get:[NSString stringWithCString:keyC encoding:NSUTF8StringEncoding]];
+    NSObject *val = [LuaStore get:[NSString stringWithCString:keyC encoding:NSUTF8StringEncoding]];
 	if([val isKindOfClass:[NSNumber class]])
 	{
 		NSNumber* num = (NSNumber*)val;
 		if(!strcmp([num objCType], @encode(BOOL)))
-			[sToppingEngine PushBool:[num boolValue]];
+			[sToppingEngine pushBool:[num boolValue]];
 		else if(!strcmp([num objCType], @encode(unsigned char)))
-			[sToppingEngine PushInt:[num unsignedCharValue]];
+			[sToppingEngine pushInt:[num unsignedCharValue]];
 		else if(!strcmp([num objCType], @encode(char)))
 		{
 			char c = [num charValue];
 			char *cP = &c;
-			[sToppingEngine PushString:[NSString  stringWithCString:cP encoding:NSUTF8StringEncoding]];
+			[sToppingEngine pushString:[NSString  stringWithCString:cP encoding:NSUTF8StringEncoding]];
 		}		
 		else if(!strcmp([num objCType], @encode(int)))
-			[sToppingEngine PushInt:[num intValue]];
+			[sToppingEngine pushInt:[num intValue]];
 		else if(!strcmp([num objCType], @encode(unsigned int)))
-			[sToppingEngine PushUInt:[num unsignedIntValue]];
+			[sToppingEngine pushUInt:[num unsignedIntValue]];
 		else if(!strcmp([num objCType], @encode(long)))
-			[sToppingEngine PushLong:[num longValue]];
+			[sToppingEngine pushLong:[num longValue]];
 		else if(!strcmp([num objCType], @encode(unsigned long)))
-			[sToppingEngine PushLong:[num unsignedLongValue]];
+			[sToppingEngine pushLong:[num unsignedLongValue]];
 		else if(!strcmp([num objCType], @encode(long long)))
-			[sToppingEngine PushDouble:[num longLongValue]];
+			[sToppingEngine pushDouble:[num longLongValue]];
 		else if(!strcmp([num objCType], @encode(unsigned long long)))
-			[sToppingEngine PushDouble:[num unsignedLongLongValue]];	 
+			[sToppingEngine pushDouble:[num unsignedLongLongValue]];	 
 		else if(!strcmp([num objCType], @encode(float)))
-			[sToppingEngine PushFloat:[num floatValue]];
+			[sToppingEngine pushFloat:[num floatValue]];
 		else if(!strcmp([num objCType], @encode(double)))
-			[sToppingEngine PushDouble:[num doubleValue]];
+			[sToppingEngine pushDouble:[num doubleValue]];
 	}
 	else if([val isKindOfClass:[NSString class]])
-		[sToppingEngine PushString:(NSString*)val];
+		[sToppingEngine pushString:(NSString*)val];
 	return 1;
 }
 
@@ -83,12 +83,12 @@ static int LuaStore_newindex(lua_State *L)
 	if(lua_isstring(L, 3))
 	{
 		val = [NSString stringWithCString:lua_tostring(L, 3) encoding:NSUTF8StringEncoding];
-		[LuaStore SetString:[NSString stringWithCString:keyC encoding:NSUTF8StringEncoding] :(NSString*)val];
+		[LuaStore setString:[NSString stringWithCString:keyC encoding:NSUTF8StringEncoding] :(NSString*)val];
 	}
 	else if(lua_isnumber(L, 3))
 	{
 		val = [NSNumber numberWithDouble:lua_tonumber(L, 3)];
-		[LuaStore SetNumber:[NSString stringWithCString:keyC encoding:NSUTF8StringEncoding] :[((NSNumber*)val) doubleValue]];
+		[LuaStore setNumber:[NSString stringWithCString:keyC encoding:NSUTF8StringEncoding] :[((NSNumber*)val) doubleValue]];
 	}
 	else 
 		return 0;
@@ -108,31 +108,31 @@ static int LuaStore_tostring(lua_State *L)
 	return 1;
 }
 
-+(void) SetString:(NSString *)key :(NSString *)value
++(void) setString:(NSString *)key :(NSString *)value
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:value forKey:key];
 }
 
-+(void) SetNumber:(NSString *)key :(double)value
++(void) setNumber:(NSString *)key :(double)value
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:[NSNumber numberWithDouble:value] forKey:key];
 }
 
-+(NSObject *) Get:(NSString *)key
++(NSObject *) get:(NSString *)key
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	return [defaults objectForKey:key];
 }
 
-+(NSString *) GetString:(NSString *)key
++(NSString *) getString:(NSString *)key
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	return [defaults objectForKey:key];
 }
 
-+(double) GetNumber:(NSString *)key
++(double) getNumber:(NSString *)key
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	return [((NSNumber*)[defaults objectForKey:key]) doubleValue];
@@ -151,30 +151,30 @@ static int LuaStore_tostring(lua_State *L)
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SetString::)) 
-										:@selector(SetString::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(setString::)) 
+										:@selector(setString::) 
 										:nil
 										:MakeArray([NSString class]C [NSString class]C nil)
 										:[LuaStore class]] 
-			 forKey:@"SetString"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(SetNumber::)) 
-										:@selector(SetNumber::) 
+			 forKey:@"setString"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(setNumber::)) 
+										:@selector(setNumber::) 
 										:nil
 										:MakeArray([NSString class]C [LuaDouble class]C nil)
 										:[LuaStore class]] 
-			 forKey:@"SetNumber"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetString:)) 
-										:@selector(GetString:) 
+			 forKey:@"setNumber"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getString:)) 
+										:@selector(getString:) 
 										:[NSString class]
 										:MakeArray([NSString class]C nil)
 										:[LuaStore class]] 
-			 forKey:@"GetString"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetNumber:)) 
-										:@selector(GetNumber:) 
+			 forKey:@"getString"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getNumber:)) 
+										:@selector(getNumber:) 
 										:[LuaDouble class]
 										:MakeArray([NSString class]C nil)
 										:[LuaStore class]] 
-			 forKey:@"GetNumber"];	
+			 forKey:@"getNumber"];	
 	return dict;
 }
 

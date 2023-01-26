@@ -7,16 +7,16 @@
 
 @implementation LGWebView
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	self.wv = [[WKWebView alloc] initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
     self.wv.navigationDelegate = self;
 	return self.wv;
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
-    [super SetupComponent:view];
+    [super setupComponent:view];
 }
 
 -(void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
@@ -26,28 +26,28 @@
     }
     NSURLRequest *request = navigationAction.request;
     //TODO pass LuaRequest here and mutate headers etc.
-    BOOL result = [self.ltRequestAction CallIn:[request.URL absoluteString], nil];
+    BOOL result = [self.ltRequestAction callIn:[request.URL absoluteString], nil];
     if(result)
         decisionHandler(WKNavigationActionPolicyAllow);
     else
         decisionHandler(WKNavigationActionPolicyCancel);
 }
 
-+(LGWebView*)Create:(LuaContext *)context
++(LGWebView*)create:(LuaContext *)context
 {
     LGWebView *lst = [[LGWebView alloc] init];
 	return lst;
 }
 
--(void)SetConfiguration:(BOOL)enableJavascript :(BOOL)enableDomStorage {
+-(void)setConfiguration:(BOOL)enableJavascript :(BOOL)enableDomStorage {
     
 }
 
--(void)Load:(NSString *)url {
+-(void)load:(NSString *)url {
     [self.wv loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
--(void)LoadData:(NSString*)data :(NSString*)mimeType :(NSString*)encoding :(NSString*)baseUrl {
+-(void)loadData:(NSString*)data :(NSString*)mimeType :(NSString*)encoding :(NSString*)baseUrl {
     NSStringEncoding encodingEnum = NSUTF8StringEncoding;
     if(COMPARE(encoding, @"utf16"))
         encodingEnum = NSUTF16StringEncoding;
@@ -58,31 +58,31 @@
     [self.wv loadData:[data dataUsingEncoding:encodingEnum] MIMEType:mimeType characterEncodingName:encoding baseURL:[NSURL URLWithString:baseUrl]];
 }
 
--(void)StopLoading {
+-(void)stopLoading {
     [self.wv stopLoading];
 }
 
--(BOOL)IsLoading {
+-(BOOL)isLoading {
     return self.wv.loading;
 }
 
--(BOOL)CanGoBack {
+-(BOOL)canGoBack {
     return self.wv.canGoBack;
 }
 
--(BOOL)CanGoForward {
+-(BOOL)canGoForward {
     return self.wv.canGoForward;
 }
 
--(void)GoBack {
+-(void)goBack {
     [self.wv goBack];
 }
 
--(void)GoForward {
+-(void)goForward {
     [self.wv goForward];
 }
 
--(void)SetRequestAction:(LuaTranslator*)lt {
+-(void)setRequestAction:(LuaTranslator*)lt {
     self.ltRequestAction = lt;
 }
 
@@ -104,17 +104,17 @@
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(Create:, LGWebView, @[ [LuaContext class] ], @"Create", [LGWebView class])
-    InstanceMethodNoRet(SetConfiguration::, @[ [NSString class]C [NSString class] ], @"SetConfiguration")
-    InstanceMethodNoRet(Load:, @[ [NSString class] ], @"Load")
-    InstanceMethodNoRet(LoadData::::, @[ [NSString class]C [NSString class]C [NSString class]C [NSString class] ], @"LoadData")
-    InstanceMethodNoRetNoArg(StopLoading, @"StopLoading")
-    InstanceMethodNoArg(IsLoading, LuaBool, @"IsLoading")
-    InstanceMethodNoArg(CanGoBack, LuaBool, @"CanGoBack")
-    InstanceMethodNoArg(CanGoForward, LuaBool, @"CanGoForward")
-    InstanceMethodNoRetNoArg(GoBack, @"GoBack")
-    InstanceMethodNoRetNoArg(GoForward, @"GoForward")
-    InstanceMethodNoRet(SetRequestAction:, @[ [LuaTranslator class] ], @"SetRequestAction")
+    ClassMethod(create:, LGWebView, @[ [LuaContext class] ], @"create", [LGWebView class])
+    InstanceMethodNoRet(setConfiguration::, @[ [NSString class]C [NSString class] ], @"setConfiguration")
+    InstanceMethodNoRet(load:, @[ [NSString class] ], @"load")
+    InstanceMethodNoRet(loadData::::, @[ [NSString class]C [NSString class]C [NSString class]C [NSString class] ], @"loadData")
+    InstanceMethodNoRetNoArg(stopLoading, @"stopLoading")
+    InstanceMethodNoArg(isLoading, LuaBool, @"isLoading")
+    InstanceMethodNoArg(canGoBack, LuaBool, @"canGoBack")
+    InstanceMethodNoArg(canGoForward, LuaBool, @"canGoForward")
+    InstanceMethodNoRetNoArg(goBack, @"goBack")
+    InstanceMethodNoRetNoArg(goForward, @"goForward")
+    InstanceMethodNoRet(setRequestAction:, @[ [LuaTranslator class] ], @"setRequestAction")
 
 	return dict;
 }

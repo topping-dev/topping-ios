@@ -17,18 +17,18 @@
 {
 }
 
--(NSMutableArray*) BuildLineBreaks:(NSString *)textVal;
+-(NSMutableArray*) buildLineBreaks:(NSString *)textVal;
 
--(CGSize)GetStringSize;
--(void)ResizeOnText;
+-(CGSize)getStringSize;
+-(void)resizeOnText;
 
 //Lua
-+(LGTextView*)Create:(LuaContext *)context;
--(NSString *)GetText;
--(void)SetTextInternal:(NSString *)val;
--(void)SetText:(LuaRef *)ref;
--(void)SetTextColor:(NSString *)color;
--(void)SetTextColorRef:(LuaRef *)ref;
++(LGTextView*)create:(LuaContext *)context;
+-(NSString *)getText;
+-(void)setTextInternal:(NSString *)val;
+-(void)setText:(LuaRef *)ref;
+-(void)setTextColor:(NSString *)color;
+-(void)setTextColorRef:(LuaRef *)ref;
 
 @property(nonatomic, retain) NSNumber *android_autoLink;
 @property(nonatomic, retain) NSNumber *android_autoText;

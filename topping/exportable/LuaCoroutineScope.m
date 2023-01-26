@@ -1,7 +1,8 @@
 #import "LuaCoroutineScope.h"
 #import "LuaFunction.h"
 #import "LuaDispatchers.h"
-#import "CancelRunBlock.h"
+#import "CoroutineScope.h"
+#import "Lifecycle.h"
 
 @implementation LuaJob
 
@@ -18,6 +19,10 @@
     self.job.cancelBlock(true);
 }
 
+-(void)delay:(long)milliseconds {
+    sleep((unsigned int)milliseconds);
+}
+
 + (NSString *)className {
     return @"LuaJob";
 }
@@ -26,6 +31,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     InstanceMethodNoRetNoArg(cancel, @"cancel")
+    InstanceMethodNoRet(delay:, @[ [LuaLong class] ], @"delay")
     
     return dict;
 }
@@ -34,64 +40,36 @@
 
 @implementation LuaCoroutineScope
 
-- (instancetype)init
+- (instancetype)initWithScope:(CoroutineScope*)scope
 {
     self = [super init];
     if (self) {
         self.jobSet = [NSMutableSet set];
+        self.scope = scope;
     }
     return self;
 }
 
 -(LuaJob*)launch:(LuaTranslator *)lt
 {
-    CancelRunBlock* crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) :^(void){
-        [lt Call];
+    __block LuaJob *lj;
+    CancelRunBlock* crb = [self.scope launch:^(CoroutineScope *scope){
+        [lt call:lj];
     }];
     crb.delegate = self;
-    LuaJob *lj = [[LuaJob alloc] initWithJob:crb];
+    lj = [[LuaJob alloc] initWithJob:crb];
     [self.jobSet addObject:lj];
     return lj;
 }
 
 -(LuaJob*)launchDispatcher:(int)dispatcher :(LuaTranslator *)lt
 {
-    CancelRunBlock* crb = nil;
-    switch(dispatcher) {
-        case DEFAULT:
-        {
-            crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) :^(void){
-                [lt Call];
-            }];
-        } break;
-        case MAIN:
-        {
-            crb = [CancelRunBlock
-                dispatch_async_with_cancel_block:dispatch_get_main_queue() :^(void){
-                [lt Call];
-            }];
-        } break;
-        case UNCONFINED:
-        {
-            crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) :^(void){
-                [lt Call];
-            }];
-        } break;
-        case IO:
-        {
-            crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) :^(void){
-                [lt Call];
-            }];
-        } break;
-        default:
-        {
-            crb = [CancelRunBlock dispatch_async_with_cancel_block:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) :^(void){
-                [lt Call];
-            }];
-        }
-    }
+    __block LuaJob *lj;
+    CancelRunBlock *crb = [self.scope launch:dispatcher :^(CoroutineScope *scope){
+        [lt call:lj];
+    }];
     crb.delegate = self;
-    LuaJob *lj = [[LuaJob alloc] initWithJob:crb];
+    lj = [[LuaJob alloc] initWithJob:crb];
     [self.jobSet addObject:lj];
     return lj;
 }

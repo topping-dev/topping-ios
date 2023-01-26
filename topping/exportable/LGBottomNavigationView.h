@@ -9,9 +9,9 @@
 
 }
 
-+(LGBottomNavigationView*)Create:(LuaContext *)context;
--(void)SetTabSelectedListener:(LuaTranslator*)lt;
--(void)SetCanSelectTab:(LuaTranslator*)lt;
++(LGBottomNavigationView*)create:(LuaContext *)context;
+-(void)setTabSelectedListener:(LuaTranslator*)lt;
+-(void)setCanSelectTab:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSString* app_menu;
 @property (nonatomic, retain) NSString* app_labelVisibilityMode;

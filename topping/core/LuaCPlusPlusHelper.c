@@ -14,12 +14,12 @@
 #include "lundump.h"
 #include "lvm.h"
 
-LUA_API const char *GetStr(TValue *val)
+LUA_API const char *getStr(TValue *val)
 {
 	return getstr(val);
 }
 
-LUA_API void* RawUValue(StkId val)
+LUA_API void* rawUValue(StkId val)
 {
 	return (rawuvalue(val) + 1);
 }

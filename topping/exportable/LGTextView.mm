@@ -17,12 +17,12 @@
 +(LuaTextViewAppearance *)Parse:(NSString *)name
 {
     LuaTextViewAppearance *ltva = [[LuaTextViewAppearance alloc] init];
-    NSDictionary *dict = [[LGStyleParser GetInstance] GetStyle:name];
+    NSDictionary *dict = [[LGStyleParser getInstance] getStyle:name];
     if(dict != nil)
     {
-        ltva.color = [[LGColorParser GetInstance] ParseColor:dict[@"android:textColor"]];
+        ltva.color = [[LGColorParser getInstance] parseColor:dict[@"android:textColor"]];
 //        ltva.font = [[android:fontFamily	]]
-        ltva.textSize = [[LGDimensionParser GetInstance] GetDimension:dict[@"android:textSize"]];
+        ltva.textSize = [[LGDimensionParser getInstance] getDimension:dict[@"android:textSize"]];
     }
     return ltva;
 }
@@ -31,39 +31,39 @@
 
 @implementation LGTextView
 
--(void)InitProperties
+-(void)initProperties
 {
-	[super InitProperties];
+	[super initProperties];
     
     self.stringSize = CGSizeZero;
-    int val = [[LGDimensionParser GetInstance] GetDimension:@"4dp"];
+    int val = [[LGDimensionParser getInstance] getDimension:@"4dp"];
     self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
 
     self.fontSize = [UIFont labelFontSize];
 }
 
--(void)Resize
+-(void)resize
 {
-	[super Resize];
+	[super resize];
 	if (self.android_textSize != nil && [self.android_textSize length] > 0)
 	{
-		self.fontSize = [[LGDimensionParser GetInstance] GetDimension:self.android_textSize];
+		self.fontSize = [[LGDimensionParser getInstance] getDimension:self.android_textSize];
 	}
 }
 
--(void)ResizeOnText
+-(void)resizeOnText
 {
     self.stringSize = CGSizeZero;
     LGView *parentTop = self.parent;
     while(parentTop.parent != nil)
         parentTop = parentTop.parent;
     
-    [parentTop ClearDimensions];
-    [parentTop Resize];
+    [parentTop clearDimensions];
+    [parentTop resize];
     //[parentTop DebugDescription:@"\n"];
 }
 
--(CGSize)GetStringSize
+-(CGSize)getStringSize
 {
     if(!CGSizeEqualToSize(self.stringSize, CGSizeZero))
         return self.stringSize;
@@ -80,9 +80,9 @@
             int style = FONT_STYLE_NORMAL;
             if(self.android_textStyle != nil)
             {
-                style = [LGFontParser ParseTextStyle:[[LGStringParser GetInstance] GetString:self.android_textStyle]];
+                style = [LGFontParser parseTextStyle:[[LGStringParser getInstance] getString:self.android_textStyle]];
             }
-            LGFontReturn *lfr = [[LGFontParser GetInstance] GetFont:self.android_fontFamily];
+            LGFontReturn *lfr = [[LGFontParser getInstance] getFont:self.android_fontFamily];
             LGFontData *lfd = [lfr.fontMap objectForKey:[NSNumber numberWithInt:style]];
             if(lfd != nil)
                 self.font = [UIFont fontWithName:lfd.fontName size:self.fontSize];
@@ -102,20 +102,20 @@
 //    return [text sizeWithAttributes:@{NSFontAttributeName: font}];
 }
 
--(int)GetContentW
+-(int)getContentW
 {
-    int l = [self GetStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
-	if (l > [DisplayMetrics GetMasterView].frame.size.width)
-		l = [DisplayMetrics GetMasterView].frame.size.width - self.dX;
+    int l = [self getStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
+	if (l > [DisplayMetrics getMasterView].frame.size.width)
+		l = [DisplayMetrics getMasterView].frame.size.width - self.dX;
     l += 1;
 	return l;
 }
 
--(int)GetContentH
+-(int)getContentH
 {
-    CGSize textSize = [self GetStringSize];
+    CGSize textSize = [self getStringSize];
     int th = textSize.height;
-	NSMutableArray *texts = [self BuildLineBreaks:self.android_text];
+	NSMutableArray *texts = [self buildLineBreaks:self.android_text];
     NSUInteger mult = texts.count;
     if(mult == 0)
         mult = 1;
@@ -126,7 +126,7 @@
 	return h;
 }
 
--(NSMutableArray*) BuildLineBreaks:(NSString *)textVal
+-(NSMutableArray*) buildLineBreaks:(NSString *)textVal
 {
 	NSMutableArray *res = [[NSMutableArray alloc] init];
 	if (textVal == nil) 
@@ -175,7 +175,7 @@
 	return res;
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	UILabelPadding *lab = [UILabelPadding new];
     lab.insets = self.insets;
@@ -183,7 +183,7 @@
 	return lab;
 }
 
--(void) SetupComponent:(UIView *)view
+-(void) setupComponent:(UIView *)view
 {
     if(self.font == nil)
     {
@@ -196,9 +196,9 @@
                 int style = FONT_STYLE_NORMAL;
                 if(self.android_textStyle != nil)
                 {
-                    style = [LGFontParser ParseTextStyle:[[LGStringParser GetInstance] GetString:self.android_textStyle]];
+                    style = [LGFontParser parseTextStyle:[[LGStringParser getInstance] getString:self.android_textStyle]];
                 }
-                LGFontReturn *lfr = [[LGFontParser GetInstance] GetFont:self.android_fontFamily];
+                LGFontReturn *lfr = [[LGFontParser getInstance] getFont:self.android_fontFamily];
                 LGFontData *lfd = [lfr.fontMap objectForKey:[NSNumber numberWithInt:style]];
                 if(lfd != nil)
                     self.font = [UIFont fontWithName:lfd.fontName size:self.fontSize];
@@ -210,17 +210,17 @@
     {
         UILabelPadding *lab = (UILabelPadding*)self._view;
         lab.lineBreakMode = NSLineBreakByTruncatingTail;
-        lab.text = [[LGStringParser GetInstance] GetString:self.android_text];
+        lab.text = [[LGStringParser getInstance] getString:self.android_text];
         if(self.colorAccent != nil)
-            lab.textColor = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
+            lab.textColor = [[LGColorParser getInstance] parseColor:self.colorAccent];
         if(self.android_textColor != nil)
-            lab.textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+            lab.textColor = [[LGColorParser getInstance] parseColor:self.android_textColor];
         
         if(self.android_textColorHighlight != nil)
-            lab.highlightedTextColor = [[LGColorParser GetInstance] ParseColor:self.android_textColorHighlight];
+            lab.highlightedTextColor = [[LGColorParser getInstance] parseColor:self.android_textColorHighlight];
         
         if(self.android_textSize != nil)
-            lab.font = [lab.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
+            lab.font = [lab.font fontWithSize:[[LGDimensionParser getInstance] getDimension:self.android_textSize]];
         
         if(self.dGravity & GRAVITY_START)
             [lab setTextAlignment:NSTextAlignmentLeft];
@@ -246,47 +246,47 @@
         ((UIButton*)self._view).titleLabel.font = self.font;
     }
     
-    [super SetupComponent:view];
+    [super setupComponent:view];
 }
 
 //Lua
-+(LGTextView*)Create:(LuaContext *)context
++(LGTextView*)create:(LuaContext *)context
 {
 	LGTextView *lst = [[LGTextView alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
--(NSString *)GetText
+-(NSString *)getText
 {
 	UILabel *field = (UILabel*)self._view;
 	return [field text];
 }
 
--(void)SetTextInternal:(NSString *)val
+-(void)setTextInternal:(NSString *)val
 {
     UILabel *field = (UILabel*)self._view;
 	[field setText:val];
     self.android_text = val;
-	[self ResizeOnText];
+	[self resizeOnText];
 }
 
--(void)SetText:(LuaRef *)ref
+-(void)setText:(LuaRef *)ref
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetTextInternal:val];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setTextInternal:val];
 }
 
--(void)SetTextColor:(NSString *)color
+-(void)setTextColor:(NSString *)color
 {
 	UILabel *field = (UILabel*)self._view;
-	[field setTextColor:[[LGColorParser GetInstance] ParseColor:color]];
+	[field setTextColor:[[LGColorParser getInstance] parseColor:color]];
 }
 
--(void)SetTextColorRef:(LuaRef *)ref
+-(void)setTextColorRef:(LuaRef *)ref
 {
     UILabel *field = (UILabel*)self._view;
-    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:ref.idRef];
     [field setTextColor:val];
 }
 
@@ -307,37 +307,37 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGTextView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGTextView class]] 
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextInternal:))
-									   :@selector(SetTextInternal:)
+			 forKey:@"create"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setTextInternal:))
+									   :@selector(setTextInternal:)
 									   :nil
 									   :MakeArray([NSString class]C nil)]
-			 forKey:@"SetText"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetText:))
-                              :@selector(SetText:)
+			 forKey:@"setText"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setText:))
+                              :@selector(setText:)
                               :nil
                               :MakeArray([LuaRef class]C nil)]
-             forKey:@"SetTextRef"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextColor:)) 
-									   :@selector(SetTextColor:)
+             forKey:@"setTextRef"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setTextColor:))
+									   :@selector(setTextColor:)
 									   :nil
 									   :MakeArray([NSString class]C nil)]
-			 forKey:@"SetTextColor"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetTextColorRef:))
-                                       :@selector(SetTextColorRef:)
+			 forKey:@"setTextColor"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setTextColorRef:))
+                                       :@selector(setTextColorRef:)
                                        :nil
                                        :MakeArray([LuaRef class]C nil)]
-             forKey:@"SetTextColorRef"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetText)) 
-									   :@selector(GetText)
+             forKey:@"setTextColorRef"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getText))
+									   :@selector(getText)
 									   :[NSString class]
 									   :MakeArray(nil)]
-			 forKey:@"GetText"];
+			 forKey:@"getText"];
 	return dict;
 }
 

@@ -46,12 +46,12 @@
 @property (nonatomic, retain) MutableOrderedDictionary *mObservers;
 @property NSInteger mActiveCount;
 @property BOOL mChangingActiveState;
-@property NSObject *mData;
-@property NSObject *mPendingData;
+@property (nonatomic, retain) NSObject *mData;
+@property (nonatomic, retain) NSObject *mPendingData;
 @property NSInteger mVersion;
 @property BOOL mDispatchingValue;
 @property BOOL mDispatchingInvalidated;
-@property id<RunnableObjc> mPostValueRunnable;
+@property (nonatomic, retain) id<RunnableObjc> mPostValueRunnable;
 
 @end
 
@@ -74,7 +74,7 @@
 -(void)detachObserver;
 -(void)activeStateChanged:(BOOL) newActive;
 
-@property (nonatomic, retain) LuaMutableLiveData* myself;
+@property (nonatomic, retain) LuaLiveData* myself;
 @property (nonatomic, retain) id<Observer> mObserver;
 @property BOOL mActive;
 @property NSInteger mLastVersion;
@@ -83,7 +83,7 @@
 
 @interface LifecycleBoundObserver : ObserverWrapper <LifecycleEventObserver>
 
-@property (nonatomic, retain) LuaMutableLiveData *myself;
+@property (nonatomic, retain) LuaLiveData *myself;
 @property (nonatomic, retain) id<LifecycleOwner> mOwner;
 
 @end

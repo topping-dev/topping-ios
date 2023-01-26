@@ -5,24 +5,24 @@
 
 @implementation LGDatePicker
 
--(int)GetContentW
+-(int)getContentW
 {
 	return 0;
 }
 
--(int)GetContentH
+-(int)getContentH
 {
 	return 0;
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	UIDatePicker *dp = [[UIDatePicker alloc] init];
 	dp.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 	return dp;
 }
 
--(void) SetupComponent:(UIView *)view
+-(void) setupComponent:(UIView *)view
 {
 	UIDatePicker *cb = (UIDatePicker*)self._view;
     self.hiddenTextField = [[UITextField alloc] init];
@@ -48,10 +48,10 @@
     if(self.ltChanged != nil)
     {
         NSDateComponents *components = [cb.calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:cb.date];
-        self.year = [components year];
-        self.month = [components month];
-        self.day = [components day];
-        [self.ltChanged CallIn:[NSNumber numberWithInt:self.day], [NSNumber numberWithInt:self.month], [NSNumber numberWithInt:self.year], nil];
+        self.year_ = (int)[components year];
+        self.month_ = (int)[components month];
+        self.day_ = (int)[components day];
+        [self.ltChanged callIn:[NSNumber numberWithInt:self.day_], [NSNumber numberWithInt:self.month_], [NSNumber numberWithInt:self.year_], nil];
     }
     [self._view endEditing:YES];
 }
@@ -60,56 +60,56 @@
 {
     if(self.ltChanged != nil)
     {
-        [self.ltChanged CallIn:nil, nil, nil, nil];
+        [self.ltChanged callIn:nil, nil, nil, nil];
     }
     [self._view endEditing:YES];
 }
 
 //Lua
-+(LGDatePicker*)Create:(LuaContext *)context
++(LGDatePicker*)create:(LuaContext *)context
 {
 	LGDatePicker *lst = [[LGDatePicker alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
 +(LGDatePicker*)Create:(LuaContext *)context :(int)day :(int)month :(int)year
 {
     LGDatePicker *lst = [[LGDatePicker alloc] init];
-    [lst InitProperties];
+    [lst initProperties];
     return lst;
 }
 
--(void)SetOnDateChangedListener:(LuaTranslator *)lt
+-(void)setOnDateChangedListener:(LuaTranslator *)lt
 {
     self.ltChanged = lt;
 }
 
--(void)Show
+-(void)show
 {
     [self.hiddenTextField becomeFirstResponder];
 }
 
--(int)GetDay
+-(int)getDay
 {
-    return self.day;
+    return self.day_;
 }
 
--(int)GetMonth
+-(int)getMonth
 {
-    return self.month;
+    return self.month_;
 }
 
--(int)GetYear
+-(int)getYear
 {
-    return self.year;
+    return self.year_;
 }
 
--(void)UpdateDate:(int)day :(int)month :(int)year
+-(void)updateDate:(int)day :(int)month :(int)year
 {
-    self.day = day;
-    self.month = month;
-    self.year = year;
+    self.day_ = day;
+    self.month_ = month;
+    self.year_ = year;
     UIDatePicker *cb = (UIDatePicker*)self._view;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear fromDate:[NSDate date]];
@@ -136,18 +136,18 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGDatePicker class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGDatePicker class]] 
-			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Show)) :@selector(Show) :nil :MakeArray(nil)] forKey:@"Show"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnDateChangedListener:)) :@selector(SetOnDateChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnDateChangedListener"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetDay)) :@selector(GetDay) :[LuaInt class] :MakeArray(nil)] forKey:@"GetDay"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetMonth)) :@selector(GetMonth) :[LuaInt class] :MakeArray(nil)] forKey:@"GetMonth"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetYear)) :@selector(GetYear) :[LuaInt class] :MakeArray(nil)] forKey:@"GetYear"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(UpdateDate:::)) :@selector(UpdateDate:::) :nil :MakeArray([LuaInt class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"UpdateDate"];
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(show)) :@selector(show) :nil :MakeArray(nil)] forKey:@"show"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnDateChangedListener:)) :@selector(setOnDateChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnDateChangedListener"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getDay)) :@selector(getDay) :[LuaInt class] :MakeArray(nil)] forKey:@"getDay"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getMonth)) :@selector(getMonth) :[LuaInt class] :MakeArray(nil)] forKey:@"getMonth"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getYear)) :@selector(getYear) :[LuaInt class] :MakeArray(nil)] forKey:@"getYear"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(updateDate:::)) :@selector(updateDate:::) :nil :MakeArray([LuaInt class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"updateDate"];
 	return dict;
 }
 

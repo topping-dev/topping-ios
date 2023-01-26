@@ -16,8 +16,8 @@
     return self;
 }
 
--(void)InitComponent:(UIView *)view :(LuaContext *)lc {
-    [super InitComponent:view :lc];
+-(void)initComponent:(UIView *)view :(LuaContext *)lc {
+    [super initComponent:view :lc];
     
     NSString *name = self.android_name;
     NSString *tag = self.android_tag;
@@ -37,22 +37,22 @@
 }
 
 //TODO:These
--(void)AddSubview:(LGView *)val {
-    [super AddSubview:val];
+-(void)addSubview:(LGView *)val {
+    [super addSubview:val];
 }
 
--(void)AddSubview:(LGView *)val :(NSInteger)index {
-    [super AddSubview:val :index];
+-(void)addSubview:(LGView *)val :(NSInteger)index {
+    [super addSubview:val :index];
 }
 
-- (void)RemoveSubview:(LGView *)val {
-    [super RemoveSubview:val];
+- (void)removeSubview:(LGView *)val {
+    [super removeSubview:val];
 }
 
-+(LGFragmentContainerView*)Create:(LuaContext *)context
++(LGFragmentContainerView*)create:(LuaContext *)context
 {
     LGFragmentContainerView *lfcv = [[LGFragmentContainerView alloc] init];
-    [lfcv InitProperties];
+    [lfcv initProperties];
     return lfcv;
 }
 
@@ -74,7 +74,7 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethod(Create:, LGFragmentContainerView, @[[LuaContext class]C [NSString class]], @"Create", [LGFragmentContainerView class])
+    ClassMethod(create:, LGFragmentContainerView, @[[LuaContext class]C [NSString class]], @"create", [LGFragmentContainerView class])
 
     return dict;
 }

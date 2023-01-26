@@ -53,16 +53,16 @@ typedef NSObject* (*kFRet)(void*, int s, NSArray*);
  * @param obj Object which function will registered.
  * @param function Function name.
  */
-+(NSObject*) Register:(NSObject*)obj :(NSString*)function;
++(NSObject*)register:(NSObject*)obj :(NSString*)function;
 
--(NSObject*)Call;
--(NSObject*)CallIn:(NSObject*) val, ...;
--(NSObject*)CallInSelf:(NSObject*) s :(NSObject*) val :(va_list) valist;
--(NSObject*)Call:(NSObject*)a;
--(NSObject*)Call:(NSObject*)a :(NSObject*)b;
--(NSObject *)GetObject;
--(NSString *)GetFunction;
--(void) Set:(NSObject*) objP :(NSString*)strP;
+-(NSObject*)call;
+-(NSObject*)callIn:(NSObject*) val, ...;
+-(NSObject*)callInSelf:(NSObject*) s :(NSObject*) val :(va_list) valist;
+-(NSObject*)call:(NSObject*)a;
+-(NSObject*)call:(NSObject*)a :(NSObject*)b;
+-(NSObject*)getObject;
+-(NSString*)getFunction;
+-(void)set:(NSObject*) objP :(NSString*)strP;
 
 @property (nonatomic, retain) NSObject *obj;
 @property (nonatomic, retain) NSString *func;

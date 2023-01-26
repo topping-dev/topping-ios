@@ -7,14 +7,14 @@
 
 @synthesize date;
 
-+(LuaDate *)Now
++(LuaDate *)now
 {
     LuaDate *ld = [[LuaDate alloc] init];
     ld.date = [NSDate date];
     return ld;
 }
 
-+(LuaDate *)CreateDate:(int)day :(int)month :(int)year
++(LuaDate *)createDate:(int)day :(int)month :(int)year
 {
     LuaDate *ld = [[LuaDate alloc] init];
     ld.date = [NSDate date];
@@ -29,7 +29,7 @@
     return ld;
 }
 
-+(LuaDate *)CreateDateWithTime:(int)day :(int)month :(int)year :(int)hour :(int)minute :(int)second
++(LuaDate *)createDateWithTime:(int)day :(int)month :(int)year :(int)hour :(int)minute :(int)second
 {
     LuaDate *ld = [[LuaDate alloc] init];
     ld.date = [NSDate date];
@@ -48,7 +48,7 @@
     return ld;
 }
 
--(int)GetDay
+-(int)getDay
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:
@@ -57,7 +57,7 @@
 
 }
 
--(void)SetDay:(int)day
+-(void)setDay:(int)day
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitDay fromDate:self.date];
@@ -65,14 +65,14 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(int)GetMonth
+-(int)getMonth
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMonth fromDate:self.date];
     return [dateComponents month];
 }
 
--(void)SetMonth:(int)month
+-(void)setMonth:(int)month
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMonth fromDate:self.date];
@@ -80,14 +80,14 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(int)GetYear
+-(int)getYear
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitYear fromDate:self.date];
     return [dateComponents year];
 }
 
--(void)SetYear:(int)year
+-(void)setYear:(int)year
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitYear fromDate:self.date];
@@ -95,14 +95,14 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(int)GetHour
+-(int)getHour
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitHour fromDate:self.date];
     return [dateComponents hour];
 }
 
--(void)SetHour:(int)hour
+-(void)setHour:(int)hour
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitHour fromDate:self.date];
@@ -110,14 +110,14 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(int)GetMinute
+-(int)getMinute
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMinute fromDate:self.date];
     return [dateComponents minute];
 }
 
--(void)SetMinute:(int)minute
+-(void)setMinute:(int)minute
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitMinute fromDate:self.date];
@@ -125,14 +125,14 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(int)GetSecond
+-(int)getSecond
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitSecond fromDate:self.date];
     return [dateComponents second];
 }
 
--(void)SetSecond:(int)second
+-(void)setSecond:(int)second
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:NSCalendarUnitSecond fromDate:self.date];
@@ -140,7 +140,7 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(int)GetMilliSecond
+-(int)getMilliSecond
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:
@@ -150,7 +150,7 @@
     return [dateComponents nanosecond] / 1000000;
 }
 
--(void)SetMilliSecond:(int)ms
+-(void)setMilliSecond:(int)ms
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *dateComponents = [calendar components:
@@ -161,7 +161,7 @@
     self.date = [calendar dateFromComponents:dateComponents];
 }
 
--(NSString *)ToString:(NSString *)frmt
+-(NSString *)toString:(NSString *)frmt
 {
     //TODO:fix this
     return @"Not Implemented";
@@ -180,42 +180,42 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Now))
-										:@selector(Now)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(now))
+										:@selector(now)
 										:[LuaDate class]
 										:MakeArray(nil)
 										:[LuaDate class]]
      
-			 forKey:@"Now"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateDate:::))
-										:@selector(CreateDate:::)
+			 forKey:@"now"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createDate:::))
+										:@selector(createDate:::)
 										:[LuaDate class]
 										:MakeArray([LuaInt class]C [LuaInt class]C [LuaInt class]C nil)
 										:[LuaDate class]]
      
-			 forKey:@"CreateDate"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateDateWithTime::::::))
-                                        :@selector(CreateDateWithTime::::::)
+			 forKey:@"createDate"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createDateWithTime::::::))
+                                        :@selector(createDateWithTime::::::)
 										:[LuaDate class]
 										:MakeArray([LuaInt class]C [LuaInt class]C [LuaInt class]C [LuaInt class]C [LuaInt class]C [LuaInt class]C nil)
 										:[LuaDate class]]
      
-			 forKey:@"CreateDateWithTime"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetDay)) :@selector(GetDay) :[LuaInt class] :MakeArray(nil)] forKey:@"GetDay"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetDay:)) :@selector(SetDay:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetDay"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetMonth)) :@selector(GetMonth) :[LuaInt class] :MakeArray(nil)] forKey:@"GetMonth"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMonth:)) :@selector(SetMonth:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetMonth"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetYear)) :@selector(GetYear) :[LuaInt class] :MakeArray(nil)] forKey:@"GetYear"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetYear:)) :@selector(SetYear:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetYear"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetHour)) :@selector(GetHour) :[LuaInt class] :MakeArray(nil)] forKey:@"GetHour"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetHour:)) :@selector(SetHour:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetHour"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetMinute)) :@selector(GetMinute) :[LuaInt class] :MakeArray(nil)] forKey:@"GetMinute"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMinute:)) :@selector(SetMinute:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetMinute"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetSecond)) :@selector(GetSecond) :[LuaInt class] :MakeArray(nil)] forKey:@"GetSecond"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSecond:)) :@selector(SetSecond:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetSecond"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetMilliSecond)) :@selector(GetMilliSecond) :[LuaInt class] :MakeArray(nil)] forKey:@"GetMilliSecond"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetMilliSecond:)) :@selector(SetMilliSecond:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetMilliSecond"];
-   	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(ToString:)) :@selector(ToString:) :[NSString class] :MakeArray([NSString class]C nil)] forKey:@"ToString"];
+			 forKey:@"createDateWithTime"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getDay)) :@selector(getDay) :[LuaInt class] :MakeArray(nil)] forKey:@"getDay"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setDay:)) :@selector(setDay:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setDay"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getMonth)) :@selector(getMonth) :[LuaInt class] :MakeArray(nil)] forKey:@"getMonth"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setMonth:)) :@selector(setMonth:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setMonth"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getYear)) :@selector(getYear) :[LuaInt class] :MakeArray(nil)] forKey:@"getYear"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setYear:)) :@selector(setYear:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setYear"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getHour)) :@selector(getHour) :[LuaInt class] :MakeArray(nil)] forKey:@"getHour"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setHour:)) :@selector(setHour:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setHour"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getMinute)) :@selector(getMinute) :[LuaInt class] :MakeArray(nil)] forKey:@"getMinute"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setMinute:)) :@selector(setMinute:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setMinute"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getSecond)) :@selector(getSecond) :[LuaInt class] :MakeArray(nil)] forKey:@"getSecond"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setSecond:)) :@selector(setSecond:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setSecond"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getMilliSecond)) :@selector(getMilliSecond) :[LuaInt class] :MakeArray(nil)] forKey:@"getMilliSecond"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setMilliSecond:)) :@selector(setMilliSecond:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setMilliSecond"];
+   	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(toString:)) :@selector(toString:) :[NSString class] :MakeArray([NSString class]C nil)] forKey:@"toString"];
     
 	return dict;
 }

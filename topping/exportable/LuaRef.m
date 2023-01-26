@@ -69,7 +69,7 @@ int lcf6 (lua_State *L) {
          * return LuaRef.WithValue(store[k]) */
         int lc5 = lua_gettop(L);
         lua_getfield(L,LUA_ENVIRONINDEX,"LuaRef");
-        lua_pushliteral(L,"WithValue");
+        lua_pushliteral(L,"withValue");
         lua_gettable(L,-2);
         lua_remove(L,-2);
         lc_getupvalue(L,lua_upvalueindex(1),0,1);
@@ -141,7 +141,7 @@ int readOnlyTable (lua_State *L) {
     return 1;
 }
 
-+(void)ResourceLoader
++(void)resourceLoader
 {
     /* function readOnlyTable (t)
      *     local proxy = {}
@@ -161,7 +161,7 @@ int readOnlyTable (lua_State *L) {
      *     setmetatable(proxy, mt)
      *     return proxy
      * end */
-    lua_State *L = [sToppingEngine GetLuaState];
+    lua_State *L = [sToppingEngine getLuaState];
     lua_pushcfunction(L, readOnlyTable);
     lua_setfield(L,LUA_GLOBALSINDEX,"readOnlyTable");
 
@@ -188,7 +188,7 @@ int readOnlyTable (lua_State *L) {
     [reservedKeywordSet addObject:@"until"];
     [reservedKeywordSet addObject:@"while"];
     
-    NSMutableDictionary *allKeys = [[LGValueParser GetInstance] GetAllKeys];
+    NSMutableDictionary *allKeys = [[LGValueParser getInstance] getAllKeys];
     NSMutableArray *classArr = [NSMutableArray array];
     for(NSString *key in allKeys)
     {
@@ -276,7 +276,7 @@ int readOnlyTable (lua_State *L) {
     lua_pop(L,1);
 }
 
-+(LuaRef*)WithValue:(NSString *)val
++(LuaRef*)withValue:(NSString *)val
 {
     LuaRef *lr = [[LuaRef alloc] init];
     lr.idRef = val;
@@ -284,14 +284,14 @@ int readOnlyTable (lua_State *L) {
 }
 
 
-+(LuaRef*)GetRef:(LuaContext*)lc :(NSString *)ids
++(LuaRef*)getRef:(LuaContext*)lc :(NSString *)ids
 {
     LuaRef *lr = [[LuaRef alloc] init];
     lr.idRef = ids;
     return lr;
 }
 
--(NSString *)GetCleanId {
+-(NSString *)getCleanId {
     return [[self.idRef componentsSeparatedByString:@"/"] lastObject];
 }
 
@@ -308,18 +308,18 @@ int readOnlyTable (lua_State *L) {
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(WithValue:))
-                                        :@selector(WithValue:)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(withValue:))
+                                        :@selector(withValue:)
                                         :[LuaRef class]
                                         :[NSArray arrayWithObjects:[NSString class], nil]
                                         :[LuaRef class]]
-             forKey:@"WithValue"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetRef::))
-                                        :@selector(GetRef::)
+             forKey:@"withValue"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getRef::))
+                                        :@selector(getRef::)
                                         :[LuaRef class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LuaRef class]]
-             forKey:@"GetRef"];
+             forKey:@"getRef"];
     return dict;
 }
 

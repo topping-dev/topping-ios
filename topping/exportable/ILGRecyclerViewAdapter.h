@@ -9,7 +9,7 @@
 {
 }
 
-+(ILGRecyclerViewAdapter*)Create;
++(ILGRecyclerViewAdapter*)create;
 
 @property (nonatomic, retain) LuaTranslator *ltGetItemCount;
 @property (nonatomic, retain) LuaTranslator *ltOnCreateViewHolder;

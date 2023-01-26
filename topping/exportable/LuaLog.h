@@ -8,10 +8,10 @@
 {
 }
 
-+(void)V:(NSString *)tag :(NSString *)message;
-+(void)D:(NSString *)tag :(NSString *)message;
-+(void)I:(NSString *)tag :(NSString *)message;
-+(void)W:(NSString *)tag :(NSString *)message;
-+(void)E:(NSString *)tag :(NSString *)message;
++(void)v:(NSString *)tag :(NSString *)message;
++(void)d:(NSString *)tag :(NSString *)message;
++(void)i:(NSString *)tag :(NSString *)message;
++(void)w:(NSString *)tag :(NSString *)message;
++(void)e:(NSString *)tag :(NSString *)message;
 
 @end

@@ -204,7 +204,7 @@ open class FragmentTransaction : NSObject {
     }
     
     @objc public func addSharedElement(sharedElement: LGView, name: String) -> FragmentTransaction {
-        var transitionName = sharedElement.transitionName
+        let transitionName = sharedElement.transitionName
         if(transitionName == nil) {
             return self
         }

@@ -16,9 +16,9 @@
 	UINavigationController *navController;
 }
 
--(void)Setup:(UIViewController *)controller;
--(LuaForm*)GetForm;
--(void)StartForm:(LuaFormIntent*)formIntent;
+-(void)setup:(UIViewController *)controller;
+-(LuaForm*)getForm;
+-(void)startForm:(LuaFormIntent*)formIntent;
 
 @property (nonatomic, retain) NSString *packageName;
 @property (nonatomic, retain) NSString *lua_id;

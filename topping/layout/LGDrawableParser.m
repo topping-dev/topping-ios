@@ -8,7 +8,7 @@
 
 @implementation LGDrawableReturn
 
--(UIImage *)GetImage:(CGSize)size {
+-(UIImage *)getImage:(CGSize)size {
     if(self.img != nil)
         return self.img;
     else if(self.vector) {
@@ -60,10 +60,10 @@
 	return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
-    NSArray *drawableDirectories = [LuaResource GetResourceDirectories:LUA_DRAWABLE_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:drawableDirectories :LUA_DRAWABLE_FOLDER];
+    NSArray *drawableDirectories = [LuaResource getResourceDirectories:LUA_DRAWABLE_FOLDER];
+    self.clearedDirectoryList = [[LGParser getInstance] tester:drawableDirectories :LUA_DRAWABLE_FOLDER];
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
      {
          NSString *aData = (NSString*)((DynamicResource*)obj1).data;
@@ -78,7 +78,7 @@
     self.drawableMap = [NSMutableDictionary dictionary];
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSString *filename = (NSString *)obj;
             NSString *fNameNoExt = [filename stringByDeletingPathExtension];
@@ -87,33 +87,33 @@
     }
 }
 
-+(LGDrawableParser *) GetInstance
++(LGDrawableParser *) getInstance
 {
-	return [LGParser GetInstance].pDrawable;
+	return [LGParser getInstance].pDrawable;
 }
 
--(LGDrawableReturn *) ParseDrawableRef:(LuaRef *)drawable
+-(LGDrawableReturn *) parseDrawableRef:(LuaRef *)drawable
 {
-    return [self ParseDrawableRef:drawable :0];
+    return [self parseDrawableRef:drawable :0];
 }
 
--(LGDrawableReturn *) ParseDrawableRef:(LuaRef *)drawable :(int)tileMode
+-(LGDrawableReturn *) parseDrawableRef:(LuaRef *)drawable :(int)tileMode
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:drawable.idRef];
-    return [self ParseDrawable:val :tileMode];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:drawable.idRef];
+    return [self parseDrawable:val :tileMode];
 }
 
 
--(LGDrawableReturn *) ParseDrawable:(NSString *)drawable
+-(LGDrawableReturn *) parseDrawable:(NSString *)drawable
 {
-	return [self ParseDrawable:drawable :0];
+	return [self parseDrawable:drawable :0];
 }
 
--(LGDrawableReturn *) ParseDrawable:(NSString *)drawable :(int)tileMode
+-(LGDrawableReturn *) parseDrawable:(NSString *)drawable :(int)tileMode
 {
     if(drawable == nil)
         return nil;
-    UIColor *color = [[LGColorParser GetInstance] ParseColor:drawable];
+    UIColor *color = [[LGColorParser getInstance] parseColor:drawable];
     if(color != nil)
     {
         LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
@@ -131,23 +131,23 @@
             for(DynamicResource *dr in self.clearedDirectoryList)
             {
                 LuaStream *stream = nil;
-                NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
-                stream = [LuaResource GetResource:path :APPEND(name, @".png")];
+                NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
+                stream = [LuaResource getResource:path :APPEND(name, @".png")];
                 if(stream == nil)
                 {
-                    stream = [LuaResource GetResource:path :APPEND(name, @".jpg")];
+                    stream = [LuaResource getResource:path :APPEND(name, @".jpg")];
                     if(stream == nil)
                     {
-                        stream = [LuaResource GetResource:path :APPEND(name, @".gif")];
+                        stream = [LuaResource getResource:path :APPEND(name, @".gif")];
                         if(stream == nil)
                         {
-                            return [self ParseXML:APPEND(name, @".xml") :tileMode];
+                            return [self parseXML:APPEND(name, @".xml") :tileMode];
                         }
                     }
                 }
                 if(stream != nil)
                 {
-                    retVal = [UIImage imageWithData:[stream GetData]];
+                    retVal = [UIImage imageWithData:[stream getData]];
                 }
                 if(retVal != nil)
                 {
@@ -168,16 +168,16 @@
     return nil;
 }
 
--(LGDrawableReturn *) ParseXML:(NSString *)filename :(int)tileMode
+-(LGDrawableReturn *) parseXML:(NSString *)filename :(int)tileMode
 {
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
-        LuaStream *ls = [LuaResource GetResource:path :filename];
+        NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
+        LuaStream *ls = [LuaResource getResource:path :filename];
         if(ls == NULL)
             continue;
         
-        NSData *dat = [ls GetData];
+        NSData *dat = [ls getData];
         
         GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
         if(xml == nil)
@@ -194,30 +194,30 @@
         if(COMPARE([root name], @"bitmap")
            || COMPARE([root name], @"nine-patch"))
         {
-            return [self ParseBitmap:root];
+            return [self parseBitmap:root];
         }
         else if(COMPARE([root name], @"layer-list"))
         {
-            return [self ParseLayer:root];
+            return [self parseLayer:root];
         }
         else if(COMPARE([root name], @"selector"))
         {
-            return [self ParseStateList:root];
+            return [self parseStateList:root];
         }
         else if(COMPARE([root name], @"shape"))
         {
-            return [self ParseShape:root];
+            return [self parseShape:root];
         }
         else if(COMPARE([root name], @"vector"))
         {
-            return [self ParseVector: dat];
+            return [self parseVector: dat];
         }
     }
     
     return nil;
 }
 
--(LGDrawableReturn*)ParseVector:(NSData*)data
+-(LGDrawableReturn*)parseVector:(NSData*)data
 {
     VectorDrawable *drawable = [VectorDrawable createDataObjcFrom:data];
     
@@ -226,7 +226,7 @@
     return ldr;
 }
 
--(LGDrawableReturn*)ParseBitmap:(GDataXMLElement*)root
+-(LGDrawableReturn*)parseBitmap:(GDataXMLElement*)root
 {
     NSArray *attrs = [root attributes];
     /*CGRect rect = CGRectMake(0, 0, 1, 1);
@@ -258,11 +258,11 @@
     int tileModeInt = 0;
     if(COMPARE(tileMode, @"repeat"))
         tileModeInt = 1;
-    LGDrawableReturn *ret = [self ParseDrawable:imgPath :tileModeInt];
+    LGDrawableReturn *ret = [self parseDrawable:imgPath :tileModeInt];
     return ret;
 }
 
--(LGDrawableReturn*)ParseLayer:(GDataXMLElement *)root
+-(LGDrawableReturn*)parseLayer:(GDataXMLElement *)root
 {    
     NSMutableArray *imgArr = [NSMutableArray array];
     int maxWidth = 0, maxHeight = 0;
@@ -279,33 +279,33 @@
             if([child childCount] > 0)
             {
                 GDataXMLElement *childItem = [[child children] objectAtIndex:0];
-                ldr = [self ParseBitmap:childItem];
+                ldr = [self parseBitmap:childItem];
             }
             for(GDataXMLNode *node in [child attributes])
             {
                 NSString *attr = [node name];
                 if(COMPARE(attr, @"android:drawable"))
                 {
-                    ldr = [self ParseDrawable:[node stringValue]];
+                    ldr = [self parseDrawable:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:id"))
                 {
                 }
                 else if(COMPARE(attr, @"android:top"))
                 {
-                    top = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    top = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:right"))
                 {
-                    right = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    right = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:bottom"))
                 {
-                    bottom = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    bottom = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:left"))
                 {
-                    left = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    left = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
 
             }
@@ -353,19 +353,19 @@
                 }
                 else if(COMPARE(attr, @"android:top"))
                 {
-                    top = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    top = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:right"))
                 {
-                    right = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    right = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:bottom"))
                 {
-                    bottom = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    bottom = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:left"))
                 {
-                    left = [[LGDimensionParser GetInstance] GetDimension:[node stringValue]];
+                    left = [[LGDimensionParser getInstance] getDimension:[node stringValue]];
                 }
             }
             
@@ -383,7 +383,7 @@
     return ret;
 }
 
--(LGDrawableReturn*)ParseStateList:(GDataXMLElement *)root
+-(LGDrawableReturn*)parseStateList:(GDataXMLElement *)root
 {
     NSMutableDictionary *stateList = [NSMutableDictionary dictionary];
     for(GDataXMLElement *child in [root children])
@@ -398,14 +398,14 @@
             if([child childCount] > 0)
             {
                 GDataXMLElement *childItem = [[child children] objectAtIndex:0];
-                ldr = [self ParseBitmap:childItem];
+                ldr = [self parseBitmap:childItem];
             }
             for(GDataXMLNode *node in [child attributes])
             {
                 NSString *attr = [node name];
                 if(COMPARE(attr, @"android:drawable"))
                 {
-                    ldr = [self ParseDrawable:[node stringValue]];
+                    ldr = [self parseDrawable:[node stringValue]];
                 }
                 else if(COMPARE(attr, @"android:state_pressed"))
                 {
@@ -466,7 +466,7 @@
     return ret;
 }
 
--(LGDrawableReturn*)ParseShape:(GDataXMLElement *)root
+-(LGDrawableReturn*)parseShape:(GDataXMLElement *)root
 {
     if([root kind] != GDataXMLElementKind)
         return nil;
@@ -510,7 +510,7 @@
         }
         else if(COMPARE(attrName, @"android:innerRadius"))
         {
-            radius = [[LGDimensionParser GetInstance] GetDimension:[attr stringValue]];
+            radius = [[LGDimensionParser getInstance] getDimension:[attr stringValue]];
         }
         else if(COMPARE(attrName, @"android:innerRadiusRatio"))
         {
@@ -518,7 +518,7 @@
         }
         else if(COMPARE(attrName, @"android:thickness"))
         {
-            thickness = [[LGDimensionParser GetInstance] GetDimension:[attr stringValue]];
+            thickness = [[LGDimensionParser getInstance] getDimension:[attr stringValue]];
         }
         else if(COMPARE(attrName, @"android:thicknessRatio"))
         {
@@ -539,7 +539,7 @@
                 NSString *childAttrName = [childAttr name];
                 if(COMPARE(childAttrName, @"android:radius"))
                 {
-                    int cornerRadius = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    int cornerRadius = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                     cornerTopLeftRadius = cornerRadius;
                     cornerTopRightRadius = cornerRadius;
                     cornerBottomLeftRadius = cornerRadius;
@@ -547,19 +547,19 @@
                 }
                 else if(COMPARE(childAttrName, @"android:topLeftRadius"))
                 {
-                    cornerTopLeftRadius = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    cornerTopLeftRadius = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:topRightRadius"))
                 {
-                    cornerTopRightRadius = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    cornerTopRightRadius = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:bottomLeftRadius"))
                 {
-                    cornerBottomLeftRadius = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    cornerBottomLeftRadius = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:bottomRightRadius"))
                 {
-                    cornerBottomRightRadius = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    cornerBottomRightRadius = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
             }
         }
@@ -571,31 +571,31 @@
                 NSString *childAttrName = [childAttr name];
                 if(COMPARE(childAttrName, @"android:angle"))
                 {
-                    gradientAngle = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    gradientAngle = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:centerX"))
                 {
-                    gradientCenterX = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    gradientCenterX = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:centerY"))
                 {
-                    gradientCenterY = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    gradientCenterY = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:centerColor"))
                 {
-                    gradientCenterColor = [[LGColorParser GetInstance] ParseColor:[childAttr stringValue]];
+                    gradientCenterColor = [[LGColorParser getInstance] parseColor:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:endColor"))
                 {
-                    gradientEndColor = [[LGColorParser GetInstance] ParseColor:[childAttr stringValue]];
+                    gradientEndColor = [[LGColorParser getInstance] parseColor:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:gradientRadius"))
                 {
-                    gradientRadius = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    gradientRadius = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:startColor"))
                 {
-                    gradientStartColor = [[LGColorParser GetInstance] ParseColor:[childAttr stringValue]];
+                    gradientStartColor = [[LGColorParser getInstance] parseColor:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:type"))
                 {
@@ -610,19 +610,19 @@
                 NSString *childAttrName = [childAttr name];
                 if(COMPARE(childAttrName, @"android:left"))
                 {
-                    paddingLeft = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    paddingLeft = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:top"))
                 {
-                    paddingTop = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    paddingTop = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:right"))
                 {
-                    paddingRight = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    paddingRight = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:bottom"))
                 {
-                    paddingBottom = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    paddingBottom = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
             }
         }
@@ -633,11 +633,11 @@
                 NSString *childAttrName = [childAttr name];
                 if(COMPARE(childAttrName, @"android:height"))
                 {
-                    height = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    height = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:width"))
                 {
-                    width = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    width = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
             }
         }
@@ -648,7 +648,7 @@
                 NSString *childAttrName = [childAttr name];
                 if(COMPARE(childAttrName, @"android:color"))
                 {
-                    fillColor = [[LGColorParser GetInstance] ParseColor:[childAttr stringValue]];
+                    fillColor = [[LGColorParser getInstance] parseColor:[childAttr stringValue]];
                 }
             }
         }
@@ -659,19 +659,19 @@
                 NSString *childAttrName = [childAttr name];
                 if(COMPARE(childAttrName, @"android:width"))
                 {
-                    strokeWidth = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    strokeWidth = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:color"))
                 {
-                    strokeColor = [[LGColorParser GetInstance] ParseColor:[childAttr stringValue]];
+                    strokeColor = [[LGColorParser getInstance] parseColor:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:dashGap"))
                 {
-                    dashGap = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    dashGap = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
                 else if(COMPARE(childAttrName, @"android:dashWidth"))
                 {
-                    dashWidth = [[LGDimensionParser GetInstance] GetDimension:[childAttr stringValue]];
+                    dashWidth = [[LGDimensionParser getInstance] getDimension:[childAttr stringValue]];
                 }
             }
         }
@@ -888,7 +888,7 @@
     // An infinite line passing through the center at angle `radians`
     // intersects the right edge at Y coordinate `y` and the left edge
     // at Y coordinate `-y`.
-    if (fabsf(y) <= yRadius) {
+    if (fabs(y) <= yRadius) {
         // The line intersects the left and right edges before it intersects
         // the top and bottom edges.
         if (radians < (CGFloat)M_PI_2 || radians > (CGFloat)(M_PI + M_PI_2)) {
@@ -915,7 +915,7 @@
                        pointRelativeToCenter.y + CGRectGetMidY(frame));
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.drawableMap)

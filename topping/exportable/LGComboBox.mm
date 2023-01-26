@@ -19,9 +19,9 @@
 
 @implementation LGComboBox
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
-    UIView *view = [super CreateComponent];
+    UIView *view = [super createComponent];
 	
 	if(self.comboArray == nil)
 		self.comboArray = [NSMutableArray array];
@@ -29,7 +29,7 @@
     return view;
 }
 
--(void)SetupComponent:(UIView *)view
+-(void)setupComponent:(UIView *)view
 {
     self._view.userInteractionEnabled = YES;
     [self._view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(comboBoxClicked)]];
@@ -46,14 +46,14 @@
 }
 
 //Lua
-+(LGComboBox*)Create:(LuaContext *)context
++(LGComboBox*)create:(LuaContext *)context
 {
 	LGComboBox *lst = [[LGComboBox alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
--(void) AddItem:(NSString *)name :(NSObject *)value
+-(void) addItem:(NSString *)name :(NSObject *)value
 {
 	ComboData *d = [[ComboData alloc] init];
 	d.name = name;
@@ -64,35 +64,35 @@
         ((UILabelPadding*)self._view).text = [[self.comboArray objectAtIndex:0] description];
 }
 
--(void) SetItems:(NSMutableDictionary *)values
+-(void) setItems:(NSMutableDictionary *)values
 {
     [self.comboArray removeAllObjects];
     for(NSString *key in values.allKeys)
     {
-        [self AddItem:[values objectForKey:key] :key];
+        [self addItem:[values objectForKey:key] :key];
     }
 }
 
--(void) ShowCancel:(int)value
+-(void) showCancel:(int)value
 {
     self.showCancel = value == 1;
 }
 
--(NSString *) GetSelectedName
+-(NSString *) getSelectedName
 {
 	if(self.selected != nil)
 		return self.selected.name;
 	return nil;
 }
 
--(NSObject *) GetSelectedTag
+-(NSObject *) getSelectedTag
 {
 	if(self.selected != nil)
 		return self.selected.tag;
 	return nil;
 }
 
--(void)SetSelected:(int)index
+-(void)setSelectedIndex:(int)index
 {
     if(index < 0 || index >= self.comboArray.count)
         return;
@@ -102,11 +102,11 @@
     
     if(self.ltCBoxValueChanged == nil)
     {
-        [self.ltCBoxValueChanged CallIn:self.lc, d.name, d.tag, nil];
+        [self.ltCBoxValueChanged callIn:self.lc, d.name, d.tag, nil];
     }
 }
 
--(void)SetOnComboChangedListener:(LuaTranslator*)lt
+-(void)setOnComboChangedListener:(LuaTranslator*)lt
 {
     self.ltCBoxValueChanged = lt;
 }
@@ -119,7 +119,7 @@
         self.selected = d;
         if(self.ltCBoxValueChanged != nil)
         {
-            [self.ltCBoxValueChanged CallIn:self.lc, d.name, d.tag, nil];
+            [self.ltCBoxValueChanged callIn:self.lc, d.name, d.tag, nil];
         }
     };
 
@@ -130,7 +130,7 @@
         {
             if(self.ltCBoxValueChanged != nil)
             {
-                [self.ltCBoxValueChanged CallIn:self.lc, nil, nil, nil];
+                [self.ltCBoxValueChanged callIn:self.lc, nil, nil, nil];
             }
         };
     }
@@ -155,19 +155,19 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGComboBox class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGComboBox class]] 
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddItem::)) :@selector(AddItem::) :nil :MakeArray([NSString class]C [NSObject class]C nil)] forKey:@"AddItem"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetItems:)) :@selector(SetItems:) :nil :MakeArray([NSMutableDictionary class]C nil)] forKey:@"SetItems"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(ShowCancel:)) :@selector(ShowCancel:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"ShowCancel"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetSelectedName)) :@selector(GetSelectedName) :[NSString class] :MakeArray(nil)] forKey:@"GetSelectedName"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetSelectedTag)) :@selector(GetSelectedTag) :[NSObject class] :MakeArray(nil)] forKey:@"GetSelectedTag"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetSelected:)) :@selector(SetSelected:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"SetSelected"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnComboChangedListener:)) :@selector(SetOnComboChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnComboChangedListener"];
+			 forKey:@"create"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(addItem::)) :@selector(addItem::) :nil :MakeArray([NSString class]C [NSObject class]C nil)] forKey:@"addItem"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setItems:)) :@selector(setItems:) :nil :MakeArray([NSMutableDictionary class]C nil)] forKey:@"setItems"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(showCancel:)) :@selector(showCancel:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"showCancel"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getSelectedName)) :@selector(getSelectedName) :[NSString class] :MakeArray(nil)] forKey:@"getSelectedName"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getSelectedTag)) :@selector(getSelectedTag) :[NSObject class] :MakeArray(nil)] forKey:@"getSelectedTag"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setSelectedIndex:)) :@selector(setSelectedIndex:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"setSelectedIndex"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnComboChangedListener:)) :@selector(setOnComboChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnComboChangedListener"];
 	
 	return dict;
 }

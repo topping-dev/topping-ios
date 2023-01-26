@@ -7,10 +7,10 @@
 {
 }
 
-+(LGEditText*)Create:(LuaContext *)context;
--(void)SetTextChangedListener:(LuaTranslator*)lt;
--(void)SetBeforeTextChangedListener:(LuaTranslator*)lt;
--(void)SetAfterTextChangedListener:(LuaTranslator*)lt;
++(LGEditText*)create:(LuaContext *)context;
+-(void)setTextChangedListener:(LuaTranslator*)lt;
+-(void)setBeforeTextChangedListener:(LuaTranslator*)lt;
+-(void)setAfterTextChangedListener:(LuaTranslator*)lt;
 
 KEYBOARD_FUNCTIONS
 

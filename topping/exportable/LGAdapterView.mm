@@ -7,7 +7,7 @@
 
 @implementation LGAdapterView
 
--(NSObject *)GetObject:(NSIndexPath*)indexPath
+-(NSObject *)getObject:(NSIndexPath*)indexPath
 {
 	NSObject *obj = nil;
 	if(self.sections == nil)
@@ -20,7 +20,7 @@
 			if(count == indexPath.section)
 			{
 				LGAdapterView *view = [self.sections objectForKey:key];
-				obj = [view GetObject:indexPath];
+				obj = [view getObject:indexPath];
 				break;
 			}
 			count++;
@@ -29,14 +29,14 @@
 	return obj;
 }
 
--(int)GetCount
+-(int)getCount
 {
 	if(self.values != nil)
 		return [self.values count];
 	return 0;
 }
 
--(int)GetTotalHeight:(int)start
+-(int)getTotalHeight:(int)start
 {
 	int value = start;
 	if(self.sections == nil)
@@ -44,7 +44,7 @@
 		for(NSObject *key in self.views)
 		{
 			NSObject *obj = [self.views objectForKey:key];
-			value += [((LGView*)obj) GetContentH];
+			value += [((LGView*)obj) getContentH];
 		}
 	}
 	else 
@@ -52,13 +52,13 @@
 		for(NSString *key in self.sections)
 		{
 			LGAdapterView *view = [self.sections objectForKey:key];
-			value = [view GetTotalHeight:value];
+			value = [view getTotalHeight:value];
 		}
 	}
 	return value;
 }
 
--(int)GetTotalWidth:(int)start
+-(int)getTotalWidth:(int)start
 {
 	int value = start;
 	if(self.sections == nil)
@@ -66,7 +66,7 @@
 		for(NSObject *key in self.views)
 		{
 			NSObject *obj = [self.views objectForKey:key];
-			value += [((LGView*)obj) GetContentW];
+			value += [((LGView*)obj) getContentW];
 		}
 	}
 	else 
@@ -74,7 +74,7 @@
 		for(NSString *key in self.sections)
 		{
 			LGAdapterView *view = [self.sections objectForKey:key];
-			value = [view GetTotalWidth:value];
+			value = [view getTotalWidth:value];
 		}
 	}
 	return value;
@@ -114,12 +114,12 @@
 			if(count == section)
 			{
 				LGAdapterView *view = [self.sections objectForKey:key];
-				return [view GetCount];
+				return [view getCount];
 			}
 			count++;
 		}
 	}
-	return [self GetCount];
+	return [self getCount];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,7 +138,7 @@
 	
 	LGView *lgview = (LGView*)[self.views objectForKey:indexPath];
 	if(lgview != nil)
-        return [lgview GetCalculatedHeight];
+        return [lgview getCalculatedHeight];
 	else
 		return 0;
 }
@@ -179,7 +179,7 @@
             detail = [[LGView alloc] init];
         }
                                                 //Detail View
-		[self.ltItemSelected CallIn:self.parent,       detail, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], [self GetObject:indexPath], nil];
+		[self.ltItemSelected callIn:self.parent,       detail, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], [self getObject:indexPath], nil];
 	}
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
 }
@@ -217,9 +217,9 @@
     {
         [v removeFromSuperview];
     }*/
-    NSObject *obj = [self GetObject:indexPath];
+    NSObject *obj = [self getObject:indexPath];
 
-    LGView *lview = (LGView*)[self.ltOnAdapterView CallIn:self.parent, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], obj, nil, self.lc, nil];
+    LGView *lview = (LGView*)[self.ltOnAdapterView callIn:self.parent, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], obj, nil, self.lc, nil];
     
     //Fix the cell height problem if match parent occured
     //We are trying to find the biggest height in wrap_content views
@@ -240,11 +240,11 @@
         
         lview.dHeight = biggestHeight;*/
         lview.dHeight = 0;
-        CGRect lastFrame = [lview GetView].frame;
-        [[lview GetView] setFrame:CGRectMake(lastFrame.origin.x, lastFrame.origin.y, lastFrame.size.width, lview.dHeight)];
+        CGRect lastFrame = [lview getView].frame;
+        [[lview getView] setFrame:CGRectMake(lastFrame.origin.x, lastFrame.origin.y, lastFrame.size.width, lview.dHeight)];
     }
     
-    [lview AddSelfToParent:cell.contentView :nil];
+    [lview addSelfToParent:cell.contentView :nil];
     //[lgview._view setFrame:CGRectMake(lgview._view.frame.origin.x, lgview._view.frame.origin.y, 80, lgview._view.frame.size.height)];
     //[cell setFrame:lgview._view.frame];
     [self.views setObject:lview forKey:indexPath];
@@ -253,7 +253,7 @@
     return cell;
 }
 
-+(LGAdapterView*)Create:(LuaContext *)context :(NSString*)lid
++(LGAdapterView*)create:(LuaContext *)context :(NSString*)lid
 {
 	LGAdapterView *view = [[LGAdapterView alloc] init];
     view.lua_id = lid;
@@ -261,7 +261,7 @@
 	return view;
 }
 
--(LGAdapterView*)AddSection:(NSString *)header :(NSString*) idV
+-(LGAdapterView*)addSection:(NSString *)header :(NSString*) idV
 {
 	if(self.sections == nil)
 		self.sections = [[NSMutableDictionary alloc] init];
@@ -277,7 +277,7 @@
 	return view;
 }
 
--(void)RemoveSection:(NSString*) header
+-(void)removeSection:(NSString*) header
 {
 	if(self.sections != nil)
 		[self.sections removeObjectForKey:header];
@@ -301,7 +301,7 @@
 	}
 }
 
--(void)AddValue:(NSObject *)value
+-(void)addValue:(NSObject *)value
 {
 	if(self.values == nil)
 		self.values = [NSMutableArray array];
@@ -309,7 +309,7 @@
     [self.values addObject:value];
 }
 
--(void)RemoveValue:(NSObject*)value
+-(void)removeValue:(NSObject*)value
 {
 	if(self.values == nil)
 		return;
@@ -317,7 +317,7 @@
 	[self.values removeObject:value];
 }
 
--(void)Clear
+-(void)clear
 {
     if(self.values == nil)
         return;
@@ -325,12 +325,12 @@
     [self.values removeAllObjects];
 }
 
--(void)SetOnAdapterView:(LuaTranslator *)lt
+-(void)setOnAdapterView:(LuaTranslator *)lt
 {
     self.ltOnAdapterView =  lt;
 }
 
--(void)SetOnItemSelected:(LuaTranslator *)lt
+-(void)setOnItemSelected:(LuaTranslator *)lt
 {
     self.ltItemSelected = lt;
 }
@@ -350,19 +350,19 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::)) 
-										:@selector(Create::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create::)) 
+										:@selector(create::) 
 										:[LGAdapterView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGAdapterView class]] 
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddSection::)) :@selector(AddSection::) :[LGAdapterView class] :MakeArray([NSString class]C [NSString class]C nil)] forKey:@"AddSection"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveSection:)) :@selector(RemoveSection:) :nil :MakeArray([NSString class]C nil)] forKey:@"RemoveSection"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddValue:)) :@selector(AddValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"AddValue"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveValue:)) :@selector(RemoveValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"RemoveValue"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Clear)) :@selector(Clear) :nil :MakeArray(nil)] forKey:@"Clear"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnItemSelected:)) :@selector(SetOnItemSelected:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnItemSelected"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnAdapterView:)) :@selector(SetOnAdapterView:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnAdapterView"];
+			 forKey:@"create"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(addSection::)) :@selector(addSection::) :[LGAdapterView class] :MakeArray([NSString class]C [NSString class]C nil)] forKey:@"addSection"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(removeSection:)) :@selector(removeSection:) :nil :MakeArray([NSString class]C nil)] forKey:@"removeSection"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(addValue:)) :@selector(addValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"addValue"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(removeValue:)) :@selector(removeValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"removeValue"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(clear)) :@selector(clear) :nil :MakeArray(nil)] forKey:@"clear"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnItemSelected:)) :@selector(setOnItemSelected:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnItemSelected"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnAdapterView:)) :@selector(setOnAdapterView:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnAdapterView"];
 	return dict;
 }
 

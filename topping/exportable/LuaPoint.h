@@ -8,10 +8,10 @@
     CGPoint point;
 }
 
-+(LuaPoint*)CreatePoint;
-+(LuaPoint*)CreatePointPar:(float)x :(float)y;
--(void)Set:(float)x :(float)y;
--(float)GetX;
--(float)GetY;
++(LuaPoint*)createPoint;
++(LuaPoint*)createPointPar:(float)x :(float)y;
+-(void)set:(float)x :(float)y;
+-(float)getX;
+-(float)getY;
 
 @end

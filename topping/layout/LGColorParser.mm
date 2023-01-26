@@ -16,12 +16,12 @@
 	return self;
 }
 
-+(LGColorParser *) GetInstance
++(LGColorParser *) getInstance
 {
-	return [LGParser GetInstance].pColor;
+	return [LGParser getInstance].pColor;
 }
 
--(void) ParseXML:(NSString *)filename;
+-(void) parseXML:(NSString *)filename;
 {
 	if(self.colorMap == nil)
 	{
@@ -58,12 +58,12 @@
 		NSArray *attrs = [child attributes];
 		for(GDataXMLNode *node in attrs)
 		{
-			[self.colorMap setObject:[self ParseColorInternal:[child stringValue]] forKey:[node stringValue]];
+			[self.colorMap setObject:[self parseColorInternal:[child stringValue]] forKey:[node stringValue]];
 		}
 	}
 }
 
--(void)ParseXML:(int)orientation :(GDataXMLElement *)element
+-(void)parseXML:(int)orientation :(GDataXMLElement *)element
 {
     if(self.colorMap == nil)
 	{
@@ -84,7 +84,7 @@
             NSMutableDictionary *oldValue = [self.colorMap objectForKey:attr.stringValue];
             NSMutableDictionary *valueDict = [NSMutableDictionary dictionary];
             if(orientation & ORIENTATION_PORTRAIT)
-                [valueDict setObject:[self ParseColor:element.stringValue] forKey:ORIENTATION_PORTRAIT_S];
+                [valueDict setObject:[self parseColor:element.stringValue] forKey:ORIENTATION_PORTRAIT_S];
             else
             {
                 id val;
@@ -93,7 +93,7 @@
             }
             
             if(orientation & ORIENTATION_LANDSCAPE)
-                [valueDict setObject:[self ParseColor:element.stringValue] forKey:ORIENTATION_LANDSCAPE_S];
+                [valueDict setObject:[self parseColor:element.stringValue] forKey:ORIENTATION_LANDSCAPE_S];
             else
             {
                 id val;
@@ -107,7 +107,7 @@
     }
 }
 
--(UIColor *) ParseColor:(NSString *)color
+-(UIColor *) parseColor:(NSString *)color
 {
 	UIColor *retVal = nil;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
@@ -125,11 +125,11 @@
         }
     }
 	if(retVal == nil && STARTS_WITH(color, @"#"))
-		retVal = [self ParseColorInternal:color];
+		retVal = [self parseColorInternal:color];
 	return retVal;
 }
 
--(UIColor *) ParseColorInternal:(NSString *)color
+-(UIColor *) parseColorInternal:(NSString *)color
 {
 	uint aI = 255;
 	uint rI = 0;
@@ -158,7 +158,7 @@
 	return [UIColor colorWithRed:rI/255.0f green:gI/255.0f blue:bI/255.0f alpha:aI/255.0f];
 }
 
--(UIColor *)GetTextColorFromColor:(UIColor *)color {
+-(UIColor *)getTextColorFromColor:(UIColor *)color {
     CGFloat r, g, b, a;
     BOOL success = [color getRed:&r green:&g blue:&b alpha:&a];
     if(success) {
@@ -176,7 +176,7 @@
     return UIColor.whiteColor;
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.colorMap)

@@ -3,29 +3,29 @@
 
 @implementation LuaPoint
 
-+(LuaPoint *)CreatePoint
++(LuaPoint *)createPoint
 {
     return [[LuaPoint alloc] init];
 }
 
-+(LuaPoint *)CreatePointPar:(float)x :(float)y
++(LuaPoint *)createPointPar:(float)x :(float)y
 {
     LuaPoint *point = [[LuaPoint alloc] init];
-    [point Set:x :y];
+    [point set:x :y];
     return point;
 }
 
--(void)Set:(float)x :(float)y
+-(void)set:(float)x :(float)y
 {
     point = CGPointMake(x, y);
 }
 
--(float)GetX
+-(float)getX
 {
     return point.x;
 }
 
--(float)GetY
+-(float)getY
 {
     return point.y;
 }
@@ -43,33 +43,33 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreatePoint))
-										:@selector(CreatePoint)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createPoint))
+										:@selector(createPoint)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:nil]
 										:[LuaPoint class]]
-			 forKey:@"CreatePoint"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreatePointPar::))
-										:@selector(CreatePointPar::)
+			 forKey:@"createPoint"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createPointPar::))
+										:@selector(createPointPar::)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaFloat class], [LuaFloat class], nil]
 										:[LuaPoint class]]
-			 forKey:@"CreatePointPar"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Set::))
-									   :@selector(Set::)
+			 forKey:@"createPointPar"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(set::))
+									   :@selector(set::)
 									   :nil
 									   :[NSArray arrayWithObjects:[LuaFloat class], [LuaFloat class], nil]]
-			 forKey:@"Set"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetX))
-									   :@selector(GetX)
+			 forKey:@"set"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getX))
+									   :@selector(getX)
 									   :[LuaFloat class]
 									   :MakeArray(nil)]
-			 forKey:@"GetX"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetY))
-									   :@selector(GetY)
+			 forKey:@"getX"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getY))
+									   :@selector(getY)
 									   :[LuaFloat class]
 									   :MakeArray(nil)]
-			 forKey:@"GetY"];
+			 forKey:@"getY"];
 	return dict;
 }
 

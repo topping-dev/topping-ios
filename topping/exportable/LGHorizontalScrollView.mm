@@ -4,7 +4,7 @@
 
 @implementation LGHorizontalScrollView
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	UIScrollView *iv = [[UIScrollView alloc] init];
 	iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
@@ -12,22 +12,22 @@
 	return iv;
 }
 
--(void) ComponentAddMethod:(UIView *)par :(UIView *)me
+-(void) componentAddMethod:(UIView *)par :(UIView *)me
 {
-	[super ComponentAddMethod:par :me];
+	[super componentAddMethod:par :me];
 	int totalWidth = 0;
 	for(LGView *v in self.subviews)
 	{
-		totalWidth += [v GetContentW];
+		totalWidth += [v getContentW];
 	}
 	((UIScrollView*)me).contentSize = CGSizeMake(totalWidth + 10, ((UIScrollView*)me).contentSize.height);
 }
 
 //Lua
-+(LGHorizontalScrollView*)Create:(LuaContext *)context
++(LGHorizontalScrollView*)create:(LuaContext *)context
 {
 	LGHorizontalScrollView *lst = [[LGHorizontalScrollView alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
@@ -48,12 +48,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGHorizontalScrollView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGHorizontalScrollView class]] 
-			 forKey:@"Create"];
+			 forKey:@"create"];
 	return dict;
 }
 

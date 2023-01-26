@@ -24,7 +24,7 @@
     return self;
 }
 
--(NSObject *)GetObject:(NSIndexPath*)indexPath
+-(NSObject *)getObject:(NSIndexPath*)indexPath
 {
     NSObject *obj = nil;
     if(self.sections == nil)
@@ -37,7 +37,7 @@
             if(count == indexPath.section)
             {
                 LGRecyclerViewAdapter *view = [self.sections objectForKey:key];
-                obj = [view GetObject:indexPath];
+                obj = [view getObject:indexPath];
                 break;
             }
             count++;
@@ -46,17 +46,17 @@
     return obj;
 }
 
--(int)GetCount
+-(int)getCount
 {
     if(self.kotlinInterface != nil) {
-        return [((NSNumber*)[self.kotlinInterface.ltGetItemCount Call]) intValue];
+        return [((NSNumber*)[self.kotlinInterface.ltGetItemCount call]) intValue];
     }
     if(self.values != nil)
         return [self.values count];
     return 0;
 }
 
--(int)GetTotalHeight:(int)start
+-(int)getTotalHeight:(int)start
 {
     int value = start;
     if(self.sections == nil)
@@ -72,13 +72,13 @@
         for(NSString *key in self.sections)
         {
             LGRecyclerViewAdapter *view = [self.sections objectForKey:key];
-            value = [view GetTotalHeight:value];
+            value = [view getTotalHeight:value];
         }
     }
     return value;
 }
 
--(int)GetTotalWidth:(int)start
+-(int)getTotalWidth:(int)start
 {
     int value = start;
     if(self.sections == nil)
@@ -94,7 +94,7 @@
         for(NSString *key in self.sections)
         {
             LGRecyclerViewAdapter *view = [self.sections objectForKey:key];
-            value = [view GetTotalWidth:value];
+            value = [view getTotalWidth:value];
         }
     }
     return value;
@@ -115,9 +115,9 @@
     }
     
     if(cell.lgview == nil) {
-        LGView *lgview = (LGView*)[self.ltCreateViewHolder CallIn:self.parent, nType, self.lc, nil];
+        LGView *lgview = (LGView*)[self.ltCreateViewHolder callIn:self.parent, nType, self.lc, nil];
         ((LGViewUICollectionViewCell*)cell).lgview = lgview;
-        [lgview AddSelfToParent:cell.contentView :nil];
+        [lgview addSelfToParent:cell.contentView :nil];
     }
     
     [self.cells setObject:cell forKey:indexPath];
@@ -135,7 +135,7 @@
             return;
         }
 
-        [self.ltItemSelected CallIn:self.parent, cell.lgview, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], [self GetObject:indexPath], nil];
+        [self.ltItemSelected callIn:self.parent, cell.lgview, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], [self getObject:indexPath], nil];
     }
 }
 
@@ -143,8 +143,8 @@
 {
     LGViewUICollectionViewCell* cell = [self.cells objectForKey:indexPath];
     
-    NSObject *obj = [self GetObject:indexPath];
-    [self.ltBindViewHolder CallIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
+    NSObject *obj = [self getObject:indexPath];
+    [self.ltBindViewHolder callIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
     
     return cell;
 }
@@ -173,16 +173,16 @@
         int type = 0;
         if(self.ltGetItemViewType != nil)
         {
-            type = [((NSNumber*)[self.ltGetItemViewType CallIn:[NSNumber numberWithInt:indexPath.row], nil]) intValue];
+            type = [((NSNumber*)[self.ltGetItemViewType callIn:[NSNumber numberWithInt:indexPath.row], nil]) intValue];
         }
         cell = (LGViewUICollectionViewCell*)[self generateCell:indexPath :type];
-        NSObject *obj = [self GetObject:indexPath];
-        [self.ltBindViewHolder CallIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
+        NSObject *obj = [self getObject:indexPath];
+        [self.ltBindViewHolder callIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
     }
 
     if(cell.lgview != nil)
     {
-        [cell.lgview ReadWidthHeight];
+        [cell.lgview readWidthHeight];
         int width = cell.lgview.dWidth;
         int height = cell.lgview.dHeight;
         return CGSizeMake(width, height);
@@ -191,13 +191,13 @@
         return CGSizeZero;
 }
 
-+(LGRecyclerViewAdapter*)Create:(LuaContext *)context :(NSString*)lid
++(LGRecyclerViewAdapter*)create:(LuaContext *)context :(NSString*)lid
 {
     LGRecyclerViewAdapter *view = [[LGRecyclerViewAdapter alloc] initWithContext:context :lid];
     return view;
 }
 
--(LGRecyclerViewAdapter*)AddSection:(NSString *)header :(NSString*) idV
+-(LGRecyclerViewAdapter*)addSection:(NSString *)header :(NSString*) idV
 {
     if(self.sections == nil)
         self.sections = [[NSMutableDictionary alloc] init];
@@ -213,7 +213,7 @@
     return view;
 }
 
--(void)RemoveSection:(NSString*) header
+-(void)removeSection:(NSString*) header
 {
     if(self.sections != nil)
         [self.sections removeObjectForKey:header];
@@ -237,7 +237,7 @@
     }
 }
 
--(void)AddValue:(NSObject *)value
+-(void)addValue:(NSObject *)value
 {
     if(self.values == nil)
         self.values = [NSMutableArray array];
@@ -245,7 +245,7 @@
     [self.values addObject:value];
 }
 
--(void)RemoveValue:(NSObject *)value
+-(void)removeValue:(NSObject *)value
 {
     if(self.values == nil)
         return;
@@ -253,7 +253,7 @@
     [self.values removeObject:value];
 }
 
--(void)Clear
+-(void)clear
 {
     if(self.values == nil)
         return;
@@ -261,27 +261,27 @@
     [self.values removeAllObjects];
 }
 
--(void)Notify
+-(void)notify
 {
     [((UICollectionView*)self.parent._view) reloadData];
 }
 
--(void)SetOnItemSelected:(LuaTranslator*)lt
+-(void)setOnItemSelected:(LuaTranslator*)lt
 {
     self.ltItemSelected = lt;
 }
 
--(void)SetOnCreateViewHolder:(LuaTranslator*)lt
+-(void)setOnCreateViewHolder:(LuaTranslator*)lt
 {
     self.ltCreateViewHolder = lt;
 }
 
--(void)SetOnBindViewHolder:(LuaTranslator*)lt
+-(void)setOnBindViewHolder:(LuaTranslator*)lt
 {
     self.ltBindViewHolder = lt;
 }
 
--(void)SetGetItemViewType:(LuaTranslator*)lt
+-(void)setGetItemViewType:(LuaTranslator*)lt
 {
     self.ltGetItemViewType = lt;
 }
@@ -301,22 +301,22 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create::))
-                                        :@selector(Create::)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create::))
+                                        :@selector(create::)
                                         :[LGRecyclerViewAdapter class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGRecyclerViewAdapter class]]
-             forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddSection::)) :@selector(AddSection::) :[LGRecyclerViewAdapter class] :MakeArray([NSString class]C [NSString class]C nil)] forKey:@"AddSection"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveSection:)) :@selector(RemoveSection:) :nil :MakeArray([NSString class]C nil)] forKey:@"RemoveSection"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(AddValue:)) :@selector(AddValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"AddValue"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(RemoveValue:)) :@selector(RemoveValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"RemoveValue"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Clear)) :@selector(Clear) :nil :MakeArray(nil)] forKey:@"Clear"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Notify)) :@selector(Notify) :nil :MakeArray(nil)] forKey:@"Notify"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnItemSelected:)) :@selector(SetOnItemSelected:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnItemSelected"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnCreateViewHolder:)) :@selector(SetOnCreateViewHolder:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnCreateViewHolder"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnBindViewHolder:)) :@selector(SetOnBindViewHolder:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnBindViewHolder"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetGetItemViewType:)) :@selector(SetGetItemViewType:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetGetItemViewType"];
+             forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(addSection::)) :@selector(addSection::) :[LGRecyclerViewAdapter class] :MakeArray([NSString class]C [NSString class]C nil)] forKey:@"addSection"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(removeSection:)) :@selector(removeSection:) :nil :MakeArray([NSString class]C nil)] forKey:@"removeSection"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(addValue:)) :@selector(addValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"addValue"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(removeValue:)) :@selector(removeValue:) :nil :MakeArray([NSObject class]C nil)] forKey:@"removeValue"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(clear)) :@selector(clear) :nil :MakeArray(nil)] forKey:@"clear"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(notify)) :@selector(notify) :nil :MakeArray(nil)] forKey:@"notify"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnItemSelected:)) :@selector(setOnItemSelected:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnItemSelected"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnCreateViewHolder:)) :@selector(setOnCreateViewHolder:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnCreateViewHolder"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnBindViewHolder:)) :@selector(setOnBindViewHolder:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnBindViewHolder"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setGetItemViewType:)) :@selector(setGetItemViewType:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setGetItemViewType"];
     return dict;
 }
 

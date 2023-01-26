@@ -5,7 +5,7 @@
 
 @implementation LuaDefines
 
-+(NSString*)GetHumanReadableDate:(int)value
++(NSString*)getHumanReadableDate:(int)value
 {
 	NSDate *date = [NSDate dateWithTimeIntervalSince1970:value];
 	NSDateComponents *weekdayComponents = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit|NSWeekdayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:date];
@@ -32,12 +32,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetHumanReadableDate:)) 
-										:@selector(GetHumanReadableDate:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getHumanReadableDate:)) 
+										:@selector(getHumanReadableDate:) 
 										:[NSString class]
 										:[NSArray arrayWithObjects:[LuaInt class], nil] 
 										:[LuaDefines class]] 
-			 forKey:@"GetHumanReadableDate"];
+			 forKey:@"getHumanReadableDate"];
 	return dict;
 }
 

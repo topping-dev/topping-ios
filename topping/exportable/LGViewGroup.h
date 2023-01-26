@@ -3,12 +3,12 @@
 
 @interface LGViewGroup : LGView
 
--(void)AddSubview:(LGView*)val;
--(void)AddSubview:(LGView*)val :(NSInteger)index;
--(void)RemoveSubview:(LGView*)val;
--(void)RemoveAllSubViews;
--(void)ClearSubviews;
--(NSMutableDictionary*)GetBindings;
+-(void)addSubview:(LGView*)val;
+-(void)addSubview:(LGView*)val :(NSInteger)index;
+-(void)removeSubview:(LGView*)val;
+-(void)removeAllSubViews;
+-(void)clearSubviews;
+-(NSMutableDictionary*)getBindings;
 
 @property (nonatomic, strong) NSMutableArray *subviews;
 @property (nonatomic, strong) NSMutableDictionary *subviewMap;

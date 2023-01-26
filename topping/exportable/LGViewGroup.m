@@ -5,15 +5,15 @@
 
 @implementation LGViewGroup
 
-- (void)InitProperties
+- (void)initProperties
 {
-    [super InitProperties];
+    [super initProperties];
     
     self.subviews = [NSMutableArray array];
     self.subviewMap = [NSMutableDictionary dictionary];
 }
 
--(void)AddSubview:(LGView*)val
+-(void)addSubview:(LGView*)val
 {
     if(val != nil)
     {
@@ -26,10 +26,10 @@
         NSLog(@"Null child");*/
 }
 
--(void)AddSubview:(LGView*)val :(NSInteger)index
+-(void)addSubview:(LGView*)val :(NSInteger)index
 {
     if(index == -1) {
-        [self AddSubview:val];
+        [self addSubview:val];
         return;
     }
     if(val != nil)
@@ -43,7 +43,7 @@
         NSLog(@"Null child");*/
 }
 
--(void)RemoveSubview:(LGView*)val
+-(void)removeSubview:(LGView*)val
 {
     if(val != nil)
     {
@@ -52,39 +52,39 @@
             [self.subviewMap removeObjectForKey:[val GetId]];
         [val._view removeFromSuperview];
         val.parent = nil;
-        [self Resize];
+        [self resize];
     }
 }
 
--(void)RemoveAllSubViews {
+-(void)removeAllSubViews {
     for(LGView *subview in self.subviews)
     {
-        [self RemoveSubview:subview];
+        [self removeSubview:subview];
     }
 }
 
--(void)ClearSubviews
+-(void)clearSubviews
 {
     for(LGView *w in self.subviews)
         [w._view removeFromSuperview];
     [self.subviews removeAllObjects];
-    [self Resize];
+    [self resize];
 }
 
--(void)ClearDimensions
+-(void)clearDimensions
 {
-    [super ClearDimensions];
+    [super clearDimensions];
     for(LGView *w in self.subviews)
-        [w ClearDimensions];
+        [w clearDimensions];
 }
 
--(LGView *)GetViewById:(LuaRef*)lId
+-(LGView *)getViewById:(LuaRef*)lId
 {
-    NSString *sId = (NSString*)[[LGValueParser GetInstance] GetValue: lId.idRef];
-    return [self GetViewByIdInternal:sId];
+    NSString *sId = (NSString*)[[LGValueParser getInstance] getValue: lId.idRef];
+    return [self getViewByIdInternal:sId];
 }
 
--(LGView *)GetViewByIdInternal:(NSString *)sId
+-(LGView *)getViewByIdInternal:(NSString *)sId
 {
     if([[self GetId] compare:sId] == 0)
        return self;
@@ -92,7 +92,7 @@
     {
         for(LGView *v in self.subviews)
         {
-            LGView *a = [v GetViewByIdInternal:sId];
+            LGView *a = [v getViewByIdInternal:sId];
             if(a != nil)
                 return a;
         }
@@ -100,15 +100,15 @@
     return nil;
 }
 
--(void)Resize
+-(void)resize
 {
-    [super Resize];
+    [super resize];
     for(LGView *w in self.subviews)
-        [w ResizeAndInvalidate];
-    [super Resize];
+        [w resizeAndInvalidate];
+    [super resize];
 }
 
--(int)GetContentW
+-(int)getContentW
 {
     if ([self.subviews count] > 0) {
         int maxX = 0;
@@ -116,7 +116,7 @@
         {
             int width_w_margin = 0;
             if([v isKindOfClass:[LGViewGroup class]])
-                width_w_margin = [v GetContentW];
+                width_w_margin = [v getContentW];
             else
                 width_w_margin = v.dWidth + v.dMarginLeft + v.dMarginRight;
             if (v.dX + width_w_margin > maxX)
@@ -128,7 +128,7 @@
         return 0;
 }
 
--(int)GetContentH
+-(int)getContentH
 {
     if ([self.subviews count] > 0) {
         int maxY = 0;
@@ -136,7 +136,7 @@
         {
             int height_w_margin = 0;
             if([v isKindOfClass:[LGViewGroup class]])
-                height_w_margin = [v GetContentH];
+                height_w_margin = [v getContentH];
             else
                 height_w_margin = v.dHeight + v.dMarginTop + v.dMarginBottom;
             if (v.dY + height_w_margin > maxY)
@@ -148,50 +148,50 @@
         return 0;
 }
 
--(void)ReduceWidth:(int)share
+-(void)reduceWidth:(int)share
 {
     for(LGView *w in self.subviews)
     {
-        [w ReduceWidth:share];
+        [w reduceWidth:share];
     }
-    [super ReduceWidth:share];
+    [super reduceWidth:share];
 }
 
--(void)ReduceHeight:(int)share
+-(void)reduceHeight:(int)share
 {
     for(LGView *w in [self subviews])
     {
-        [w ReduceHeight:share];
+        [w reduceHeight:share];
     }
-    [super ReduceHeight:share];
+    [super reduceHeight:share];
 }
 
--(void)ConfigChange
+-(void)configChange
 {
     for(LGView *w in [self subviews])
     {
-        [w ConfigChange];
+        [w configChange];
     }
-    [super ConfigChange];
+    [super configChange];
 }
 
--(NSString *)DebugDescription:(NSString *)val
+-(NSString *)debugDescription:(NSString *)val
 {
-    NSString *retVal = [super DebugDescription:val];
+    NSString *retVal = [super debugDescription:val];
     NSString *valValue = val;
     for(LGView *w in self.subviews)
     {
-        retVal = FUAPPEND(retVal, [w DebugDescription:APPEND(valValue, @"--")], NULL);
+        retVal = FUAPPEND(retVal, [w debugDescription:APPEND(valValue, @"--")], NULL);
     }
     
     return retVal;
 }
 
--(NSMutableDictionary *)OnSaveInstanceState {
+-(NSMutableDictionary *)onSaveInstanceState {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     for(LGView *w in self.subviews)
     {
-        [dict addEntriesFromDictionary:[w OnSaveInstanceState]];
+        [dict addEntriesFromDictionary:[w onSaveInstanceState]];
     }
     
     return dict;
@@ -204,7 +204,7 @@
     }
 }
 
--(NSDictionary*)GetBindings
+-(NSDictionary*)getBindings
 {
     return self.subviewMap;
 }
@@ -213,7 +213,7 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
 
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetBindings)) :@selector(GetBindings) :nil :MakeArray(nil)] forKey:@"GetBindings"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getBindings)) :@selector(getBindings) :nil :MakeArray(nil)] forKey:@"getBindings"];
     return dict;
 }
 

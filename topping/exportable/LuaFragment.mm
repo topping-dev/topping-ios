@@ -23,7 +23,7 @@
     if(self.fragment.lgview == nil) {
         return nil;
     }
-    return [self.fragment.lgview GetViewByIdInternal:idVal];
+    return [self.fragment.lgview getViewByIdInternal:idVal];
 }
 
 -(BOOL)onHasView {
@@ -31,7 +31,7 @@
 }
 
 -(LuaFragment *)instantiateWithContext:(LuaContext *)context arguments:(NSDictionary<NSString *,id> *)arguments {
-    return [LuaFragment Create:context :[LuaRef WithValue:@""]];
+    return [LuaFragment create:context :[LuaRef withValue:@""]];
 }
 
 @end
@@ -60,94 +60,94 @@
     return self;
 }
 
-+(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId
++(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = [luaId GetCleanId];
+    lf.luaId = [luaId getCleanId];
     lf.context = context;
     return lf;
 }
 
-+(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments
++(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = [luaId GetCleanId];
+    lf.luaId = [luaId getCleanId];
     lf.context = context;
     lf.mArguments = arguments;
     return lf;
 }
 
-+(LuaFragment*)CreateWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui :(NSMutableDictionary*)arguments
++(LuaFragment*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui :(NSMutableDictionary*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = [luaId GetCleanId];
+    lf.luaId = [luaId getCleanId];
     lf.context = context;
     lf.ui = ui;
     lf.mArguments = arguments;
     return lf;
 }
 
--(LuaContext*)GetContext
+-(LuaContext*)getContext
 {
     return self.context;
 }
 
--(LuaForm *)GetForm
+-(LuaForm *)getForm
 {
     return [self.mHost getActivity];
 }
 
--(FragmentManager*)GetFragmentManager
+-(FragmentManager*)getFragmentManager
 {
     return self.mHost.fragmentManager;
 }
 
--(LGView*)GetViewById:(LuaRef*)lId
+-(LGView*)getViewById:(LuaRef*)lId
 {
-    return [_lgview GetViewById:lId];
+    return [_lgview getViewById:lId];
 }
 
--(LGView *)GetViewByIdInternal:(NSString *)sId
+-(LGView *)getViewByIdInternal:(NSString *)sId
 {
-    return [_lgview GetViewByIdInternal:sId];
+    return [_lgview getViewByIdInternal:sId];
 }
 
--(LGView *)GetView
+-(LGView *)getView
 {
     return self.lgview;
 }
 
--(void)SetView:(LGView*)v
+-(void)setView:(LGView*)v
 {
     self.lgview = v;
 }
 
--(void)SetViewXML:(LuaRef *)xml
+-(void)setViewXML:(LuaRef *)xml
 {
     LGView *lgview;
-    [[LGLayoutParser GetInstance] ParseRef:xml :[DisplayMetrics GetMasterView] :nil :[LuaForm GetActiveForm] :&lgview];
+    [[LGLayoutParser getInstance] parseRef:xml :[DisplayMetrics getMasterView] :nil :[LuaForm getActiveForm] :&lgview];
     self.lgview = lgview;
 }
 
--(void)SetViewId:(NSString *)luaId
+-(void)setViewId:(NSString *)luaId
 {
     self.luaId = luaId;
 }
 
--(void)SetTitle:(NSString *)str
+-(void)setTitle:(NSString *)str
 {
-    [[LuaForm GetActiveForm] SetTitle:str];
+    [[LuaForm getActiveForm] setTitle:str];
 }
 
--(void)SetTitleRef:(LuaRef *)ref
+-(void)setTitleRef:(LuaRef *)ref
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetTitle:val];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setTitle:val];
 }
 
--(void)Close
+-(void)close
 {
-    [[LuaForm GetActiveForm] Close];
+    [[LuaForm getActiveForm] close];
 }
 
 -(LuaNavController*)getNavController
@@ -161,15 +161,15 @@
     self.mDefaultFactory = nil;
 }
 
--(BOOL)IsInitialized
+-(BOOL)isInitialized
 {
     return YES;
 }
 
--(NSDictionary*)GetBindings {
-    if([self GetView] != nil) {
-        if([[self GetView] isKindOfClass:[LGViewGroup class]]) {
-            return [((LGViewGroup*)[self GetView]) GetBindings];
+-(NSDictionary*)getBindings {
+    if([self getView] != nil) {
+        if([[self getView] isKindOfClass:[LGViewGroup class]]) {
+            return [((LGViewGroup*)[self getView]) getBindings];
         }
     }
     return @{};
@@ -183,28 +183,28 @@
 }
 
 -(void)onCreate:(NSMutableDictionary *)savedInstanceState {
-    self.kotlinInterface = [LuaEvent GetFragmentInstance:self.luaId :self];
+    self.kotlinInterface = [LuaEvent getFragmentInstance:self.luaId :self];
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnCreate Call:[[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]]];
+        [self.kotlinInterface.ltOnCreate call:[[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]]];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_CREATE :self.context :1, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_CREATE :self.context :1, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
 }
 
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
     LGView *viewToRet = nil;
-    viewToRet = (LGView*)[LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
-                     [LuaViewInflator From:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+    viewToRet = (LGView*)[LuaEvent onUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
+                     [LuaViewInflator from:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
     if(viewToRet == nil && self.kotlinInterface != nil) {
-        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView CallIn:self.context, [LuaViewInflator From:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView callIn:self.context, [LuaViewInflator from:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
     }
     return viewToRet;
 }
 
 -(void)onViewCreated:(LGView *)view :(NSMutableDictionary *)savedInstanceState {
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnViewCreated Call:view :[self requireSavedInstanceState:savedInstanceState]];
+        [self.kotlinInterface.ltOnViewCreated call:view :[self requireSavedInstanceState:savedInstanceState]];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
 }
 
 -(void)onActivityCreated:(NSMutableDictionary *)savedInstanceState {
@@ -222,21 +222,21 @@
 -(void)onResume {
     self.mCalled = true;
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnResume Call];
+        [self.kotlinInterface.ltOnResume call];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
 }
 
 - (void)onSaveInstanceState:(NSMutableDictionary *)outState {
-    [outState addEntriesFromDictionary:[self.lgview OnSaveInstanceState]];
+    [outState addEntriesFromDictionary:[self.lgview onSaveInstanceState]];
 }
 
 -(void)onPause {
     self.mCalled = true;
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnPause Call];
+        [self.kotlinInterface.ltOnPause call];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_PAUSE :self.context :0, nil];
 }
 
 -(void)onStop {
@@ -250,9 +250,9 @@
 -(void)onDestroyView {
     self.mCalled = true;
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnDestroy Call];
+        [self.kotlinInterface.ltOnDestroy call];
     }
-    [LuaEvent OnUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_DESTROY :self.context :0, nil];
 }
 
 -(void)onDestroy {
@@ -351,11 +351,11 @@
 }
 
 - (LGLayoutParser *)getLayoutInflater {
-    return [LGLayoutParser GetInstance];
+    return [LGLayoutParser getInstance];
 }
 
 -(LGLayoutParser *)getLayoutInflater:(NSMutableDictionary *)savedInstanceState {
-    return [LGLayoutParser GetInstance];
+    return [LGLayoutParser getInstance];
 }
 
 -(LGLayoutParser *)onGetLayoutInflater:(NSMutableDictionary *)savedInstanceState {
@@ -410,7 +410,7 @@
     if(savedInstanceState != nil) {
         NSObject *data = [savedInstanceState objectForKey:SAVED_STATE_TAG];
         if(data != nil) {
-            [self.mChildFragmentManager restoreSaveStateInternalWithState:data];
+            [self.mChildFragmentManager restoreSaveStateInternalWithState:(FragmentManagerState*)data];
             [self.mChildFragmentManager dispatchCreate];
         }
     }
@@ -681,25 +681,25 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    ClassMethod(Create::, LuaFragment, @[[LuaContext class]C [LuaRef class]], @"Create", [LuaFragment class])
-    ClassMethod(Create:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [NSDictionary class]], @"CreateWithArgs", [LuaFragment class])
-    ClassMethod(CreateWithUI:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"CreateWithUI", [LuaFragment class])
+    ClassMethod(create::, LuaFragment, @[[LuaContext class]C [LuaRef class]], @"create", [LuaFragment class])
+    ClassMethod(create:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [NSDictionary class]], @"createWithArgs", [LuaFragment class])
+    ClassMethod(createWithUI:::, LuaFragment, @[[LuaContext class]C [LuaRef class]C [LuaRef class]], @"createWithUI", [LuaFragment class])
     
-    InstanceMethodNoArg(GetContext, LuaContext, @"GetContext")
-    InstanceMethodNoArg(GetForm, LuaForm, @"GetForm")
-    InstanceMethod(GetViewById:, LGView, @[[LuaRef class]], @"GetViewById")
-    InstanceMethodNoArg(GetView, LGView, @"GetView")
-    InstanceMethodNoRet(SetView:, @[[LGView class]], @"SetView")
-    InstanceMethodNoRet(SetViewXML:, @[[LuaRef class]], @"SetViewXML")
-    InstanceMethodNoRet(SetViewId:, @[[NSString class]], @"SetViewId")
-    InstanceMethodNoRet(SetTitle:, @[[NSString class]], @"SetTitleInternal")
-    InstanceMethodNoRet(SetTitleRef:, @[[LuaRef class]], @"SetTitle")
-    InstanceMethodNoRetNoArg(Close, @"Close")
+    InstanceMethodNoArg(getContext, LuaContext, @"getContext")
+    InstanceMethodNoArg(getForm, LuaForm, @"getForm")
+    InstanceMethod(getViewById:, LGView, @[[LuaRef class]], @"getViewById")
+    InstanceMethodNoArg(getView, LGView, @"getView")
+    InstanceMethodNoRet(setView:, @[[LGView class]], @"setView")
+    InstanceMethodNoRet(setViewXML:, @[[LuaRef class]], @"setViewXML")
+    InstanceMethodNoRet(setViewId:, @[[NSString class]], @"setViewId")
+    InstanceMethodNoRet(setTitle:, @[[NSString class]], @"setTitleInternal")
+    InstanceMethodNoRet(setTitleRef:, @[[LuaRef class]], @"setTitle")
+    InstanceMethodNoRetNoArg(close, @"close")
     InstanceMethodNoArg(getArgumentsBundle, LuaBundle, @"getArguments")
     InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
-    InstanceMethodNoArg(IsInitialized, LuaBool, @"IsInitialized")
-    InstanceMethodNoArg(GetFragmentManager, FragmentManager, @"GetFragmentManager")
-    InstanceMethodNoArg(GetBindings, NSMutableDictionary, @"GetBindings")
+    InstanceMethodNoArg(isInitialized, LuaBool, @"isInitialized")
+    InstanceMethodNoArg(getFragmentManager, FragmentManager, @"getFragmentManager")
+    InstanceMethodNoArg(getBindings, NSMutableDictionary, @"getBindings")
     
     return dict;
 }

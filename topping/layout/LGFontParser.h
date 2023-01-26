@@ -38,13 +38,13 @@
 {
 }
 
-+(LGFontParser*) GetInstance;
-+(int)ParseTextStyle:(NSString*)textStyle;
--(void)Initialize;
--(LGFontReturn*) GetFont:(NSString *)key;
--(LGFontReturn*) ParseXML:(NSString*)path :(NSString *)filename;
--(LGFontReturn*) ParseFont:(GDataXMLElement *)element;
--(NSDictionary*) GetKeys; 
++(LGFontParser*) getInstance;
++(int)parseTextStyle:(NSString*)textStyle;
+-(void)initialize;
+-(LGFontReturn*) getFont:(NSString *)key;
+-(LGFontReturn*) parseXML:(NSString*)path :(NSString *)filename;
+-(LGFontReturn*) parseFont:(GDataXMLElement *)element;
+-(NSDictionary*) getKeys; 
 
 @property (nonatomic, retain) NSMutableDictionary *fontMap;
 @property (nonatomic, retain) NSMutableDictionary *fontCacheMap;

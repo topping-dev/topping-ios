@@ -15,32 +15,32 @@
 	return self;
 }
 
--(bool)HasStream
+-(bool)hasStream
 {
     return self.type != NOSTREAM;
 }
 
--(NSObject*)GetStream
+-(NSObject*)getStream
 {
 	if(self.type == -1)
 	{
-		Loge("LuaStream", "Stream not set");
+		logE("LuaStream", "Stream not set");
 		return nil;
 	}
 	
-	return self.stream;
+	return self.stream_;
 }
 
--(NSMutableData*)GetData
+-(NSMutableData*)getData
 {
 	if(self.type == -1)
 	{
-		Loge("LuaStream", "Stream not set");
+        logE("LuaStream", "Stream not set");
 		return nil;
 	}
 	else if(self.type == OUTPUTSTREAM)
 	{
-		Loge("LuaStream", "Cannot get data on output stream");
+        logE("LuaStream", "Cannot get data on output stream");
 		return nil;
 	}
 	
@@ -53,7 +53,7 @@
 	
 	unsigned int len = 0;
 	
-	NSInputStream *is = (NSInputStream*)[self GetStream];
+	NSInputStream *is = (NSInputStream*)[self getStream];
 	while([is hasBytesAvailable])
 	{
 		len = [is read:buf maxLength:1024];
@@ -67,12 +67,12 @@
 	return _dataL;
 }
 
--(void)SetStream:(NSObject*)str
+-(void)setStream:(NSObject*)str
 {
     if(str == nil)
     {
         self.type = -1;
-        self.stream = nil;
+        self.stream_ = nil;
         return;
     }
 	if([str isKindOfClass:[NSInputStream class]])
@@ -82,42 +82,42 @@
     else
     {
         self.type = INPUTSTREAM;
-        self.stream = [[NSInputStream alloc] initWithData:(NSData*)str];
+        self.stream_ = [[NSInputStream alloc] initWithData:(NSData*)str];
         self.data = (NSData*)str;
         return;
     }
 	
-	self.stream = (NSStream*)str;
+	self.stream_ = (NSStream*)str;
 }
 
--(int)ReadOne
+-(int)readOne
 {
 	if(self.type == OUTPUTSTREAM)
 	{
-		Loge("LuaStream", "Tried to read output stream.");
+        logE("LuaStream", "Tried to read output stream.");
 		return -1;
 	}
 	
-	NSInputStream *is = (NSInputStream*)self.stream;
+	NSInputStream *is = (NSInputStream*)self.stream_;
 	uint8_t c;
 	int result = [is read:&c maxLength:1];
 	if(result < 0)
 	{
-		Loge("LuaStream", "Cannot read stream");
+        logE("LuaStream", "Cannot read stream");
 	}
 	return c;
 }
 
--(void)Read:(LuaBuffer*)bufferO :(int)offset :(int)length
+-(void)read:(LuaBuffer*)bufferO :(int)offset :(int)length
 {
 	uint8_t *buffer = malloc(sizeof(uint8_t*) * length);
 	
-	NSInputStream *is = (NSInputStream*)self.stream;
+	NSInputStream *is = (NSInputStream*)self.stream_;
 	[is setProperty:[NSNumber numberWithInt:offset] forKey:NSStreamFileCurrentOffsetKey];
 	int result = [is read:buffer maxLength:length];
 	if(result < 0)
 	{
-		Loge("LuaStream", "Cannot read stream");
+        logE("LuaStream", "Cannot read stream");
 	}
     else
     {
@@ -132,32 +132,32 @@
     free(buffer);
 }
 
--(void)WriteOne:(int)oneByte
+-(void)writeOne:(int)oneByte
 {
 	if(self.type == INPUTSTREAM)
 	{
-		Loge("LuaStream", "Tried to write input stream.");
+        logE("LuaStream", "Tried to write input stream.");
 		return;
 	}
 	
-	NSOutputStream *os = (NSOutputStream*)self.stream;
+	NSOutputStream *os = (NSOutputStream*)self.stream_;
 	uint8_t c = oneByte;
     int result = [os write:&c maxLength:1];
 	if(result < 0)
 	{
-		Loge("LuaStream", "Cannot write stream");
+        logE("LuaStream", "Cannot write stream");
 	}
 }
 
--(void)Write:(LuaBuffer*) bufferO :(int)offset :(int)length
+-(void)write:(LuaBuffer*) bufferO :(int)offset :(int)length
 {
 	if(self.type == INPUTSTREAM)
 	{
-		Loge("LuaStream", "Tried to write input stream.");
+        logE("LuaStream", "Tried to write input stream.");
 		return;
 	}
 	
-	NSOutputStream *os = (NSOutputStream*)self.stream;
+	NSOutputStream *os = (NSOutputStream*)self.stream_;
     uint8_t *buffer = malloc(sizeof(uint8_t*) * length);
     for(int i = 0; i < length; i++)
     {
@@ -167,7 +167,7 @@
 	int result = [os write:buffer maxLength:length];
 	if(result < 0)
 	{
-		Loge("LuaStream", "Cannot write stream");
+        logE("LuaStream", "Cannot write stream");
 	}
     free(buffer);
 }
@@ -185,12 +185,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(GetStream)) :@selector(GetStream) :[NSObject class]	:MakeArray(nil)] forKey:@"GetStream"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetStream:)) :@selector(SetStream:) :nil	:MakeArray([NSObject class]C nil)] forKey:@"SetStream"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(ReadOne)) :@selector(ReadOne) :[LuaInt class] :MakeArray(nil)] forKey:@"ReadOne"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Read:::)) :@selector(Read:::) :nil :MakeArray([LuaBuffer class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"Read"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(WriteOne:)) :@selector(WriteOne:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"WriteOne"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Write:::)) :@selector(Write:::) :nil :MakeArray([LuaBuffer class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"Write"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getStream)) :@selector(getStream) :[NSObject class]	:MakeArray(nil)] forKey:@"getStream"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setStream:)) :@selector(setStream:) :nil	:MakeArray([NSObject class]C nil)] forKey:@"setStream"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(readOne)) :@selector(readOne) :[LuaInt class] :MakeArray(nil)] forKey:@"readOne"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(read:::)) :@selector(read:::) :nil :MakeArray([LuaBuffer class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"read"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(writeOne:)) :@selector(writeOne:) :nil :MakeArray([LuaInt class]C nil)] forKey:@"writeOne"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(write:::)) :@selector(write:::) :nil :MakeArray([LuaBuffer class]C [LuaInt class]C [LuaInt class]C nil)] forKey:@"write"];
 	return dict;
 }
 

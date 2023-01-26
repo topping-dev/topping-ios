@@ -567,8 +567,6 @@
 		5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD052352967FAFE005E4960 /* WebKit.framework */; };
 		5CD05239296BED72005E4960 /* ILuaFragment.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05237296BED72005E4960 /* ILuaFragment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD0523A296BED72005E4960 /* ILuaFragment.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05238296BED72005E4960 /* ILuaFragment.mm */; };
-		5CD0524129718F73005E4960 /* CancelRunBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0523F29718F73005E4960 /* CancelRunBlock.h */; };
-		5CD0524229718F73005E4960 /* CancelRunBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524029718F73005E4960 /* CancelRunBlock.m */; };
 		5CD0524529730703005E4960 /* ILuaForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD0524329730703005E4960 /* ILuaForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD0524629730703005E4960 /* ILuaForm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524429730703005E4960 /* ILuaForm.mm */; };
 		5CD05249297321D8005E4960 /* ILGRecyclerViewAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05247297321D8005E4960 /* ILGRecyclerViewAdapter.mm */; };
@@ -577,6 +575,8 @@
 		5CD0524E2976D546005E4960 /* LuaBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524C2976D546005E4960 /* LuaBundle.m */; };
 		5CD052512977BA59005E4960 /* LuaFormIntent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD0524F2977BA59005E4960 /* LuaFormIntent.m */; };
 		5CD052522977BA59005E4960 /* LuaFormIntent.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD052502977BA59005E4960 /* LuaFormIntent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD05255297FD334005E4960 /* CoroutineScope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05253297FD334005E4960 /* CoroutineScope.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD05256297FD334005E4960 /* CoroutineScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05254297FD334005E4960 /* CoroutineScope.m */; };
 		5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D628464EAD00343C6B /* FragmentStateStore.swift */; };
 		5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */; };
 		5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343DA2847886900343C6B /* ViewModelStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1209,8 +1209,6 @@
 		5CD052352967FAFE005E4960 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		5CD05237296BED72005E4960 /* ILuaFragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILuaFragment.h; sourceTree = "<group>"; };
 		5CD05238296BED72005E4960 /* ILuaFragment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ILuaFragment.mm; sourceTree = "<group>"; };
-		5CD0523F29718F73005E4960 /* CancelRunBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CancelRunBlock.h; sourceTree = "<group>"; };
-		5CD0524029718F73005E4960 /* CancelRunBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CancelRunBlock.m; sourceTree = "<group>"; };
 		5CD0524329730703005E4960 /* ILuaForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILuaForm.h; sourceTree = "<group>"; };
 		5CD0524429730703005E4960 /* ILuaForm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ILuaForm.mm; sourceTree = "<group>"; };
 		5CD05247297321D8005E4960 /* ILGRecyclerViewAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ILGRecyclerViewAdapter.mm; sourceTree = "<group>"; };
@@ -1219,6 +1217,8 @@
 		5CD0524C2976D546005E4960 /* LuaBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaBundle.m; sourceTree = "<group>"; };
 		5CD0524F2977BA59005E4960 /* LuaFormIntent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuaFormIntent.m; sourceTree = "<group>"; };
 		5CD052502977BA59005E4960 /* LuaFormIntent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaFormIntent.h; sourceTree = "<group>"; };
+		5CD05253297FD334005E4960 /* CoroutineScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoroutineScope.h; sourceTree = "<group>"; };
+		5CD05254297FD334005E4960 /* CoroutineScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoroutineScope.m; sourceTree = "<group>"; };
 		5CD343D628464EAD00343C6B /* FragmentStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateStore.swift; sourceTree = "<group>"; };
 		5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerViewModel.swift; sourceTree = "<group>"; };
 		5CD343DA2847886900343C6B /* ViewModelStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewModelStore.h; sourceTree = "<group>"; };
@@ -1666,6 +1666,8 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5CD05253297FD334005E4960 /* CoroutineScope.h */,
+				5CD05254297FD334005E4960 /* CoroutineScope.m */,
 				5C78BA2128460152003EC02A /* ArrayExtension.swift */,
 				5C78BA27284609EC003EC02A /* AtomicInteger.swift */,
 				5C78BA232846073E003EC02A /* BackStackRecord.swift */,
@@ -1733,8 +1735,6 @@
 				5CD343FA2859FA8F00343C6B /* ViewModelProvider.swift */,
 				5CD343DA2847886900343C6B /* ViewModelStore.h */,
 				5CD343DB2847886900343C6B /* ViewModelStore.m */,
-				5CD0523F29718F73005E4960 /* CancelRunBlock.h */,
-				5CD0524029718F73005E4960 /* CancelRunBlock.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -2382,7 +2382,6 @@
 				5C2F9A2829641A4500C443A8 /* MDCBottomNavigationItemView.h in Headers */,
 				5C5A994124E16BCC002A22EA /* LGButton.h in Headers */,
 				5C2F9A2A29641A4500C443A8 /* MDCBottomNavigationItemView+Testing.h in Headers */,
-				5CD0524129718F73005E4960 /* CancelRunBlock.h in Headers */,
 				5C2F9A2F29641A4500C443A8 /* MDCBottomNavigationBarController.h in Headers */,
 				5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */,
 				5C5A990E24E16BCC002A22EA /* LuaBuffer.h in Headers */,
@@ -2391,6 +2390,7 @@
 				5CC17C48295C38F1000B5BB0 /* MDCTabBarViewUnderlineIndicatorTemplate.h in Headers */,
 				5C5A992224E16BCC002A22EA /* LGHorizontalScrollView.h in Headers */,
 				5C5A98F524E16BCC002A22EA /* LG.h in Headers */,
+				5CD05255297FD334005E4960 /* CoroutineScope.h in Headers */,
 				5C2F9A2629641A4500C443A8 /* MDCBottomNavigationBarDelegate.h in Headers */,
 				5C5A994724E16BCC002A22EA /* CDefines.h in Headers */,
 				5C9EC7D52935FD41008D2909 /* MDMTimingCurve.h in Headers */,
@@ -2751,6 +2751,7 @@
 				5C9EC80F29360141008D2909 /* MDMRegisteredAnimation.m in Sources */,
 				5C5A98B724E16BCC002A22EA /* LGAutoCompleteTextView.mm in Sources */,
 				5CD344032861B7D200343C6B /* LGFragmentContainerView.m in Sources */,
+				5CD05256297FD334005E4960 /* CoroutineScope.m in Sources */,
 				5C5A99DD24E16BEC002A22EA /* lapi.c in Sources */,
 				5C5A98B624E16BCC002A22EA /* LuaContext.mm in Sources */,
 				5C810B10295C3BB000C2A93D /* MDCStatefulRippleView.m in Sources */,
@@ -2851,7 +2852,6 @@
 				5C5A99BB24E16BEC002A22EA /* print.c in Sources */,
 				5C86213725C0477D00BF23CA /* LuaNativeCall.m in Sources */,
 				5C5A992924E16BCC002A22EA /* LuaTranslator.m in Sources */,
-				5CD0524229718F73005E4960 /* CancelRunBlock.m in Sources */,
 				5C2F9A6829641CB900C443A8 /* MDCPalettes.m in Sources */,
 				5C9EC80B29360141008D2909 /* MDMMotionAnimator.m in Sources */,
 				5CD05249297321D8005E4960 /* ILGRecyclerViewAdapter.mm in Sources */,

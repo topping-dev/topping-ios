@@ -8,15 +8,15 @@
     UIColor* colorValue;
 }
 
-+(LuaColor*)FromString:(NSString*)colorStr;
-+(LuaColor*)CreateFromARGB:(int)alpha :(int)red :(int)green :(int)blue;
-+(LuaColor*)CreateFromRGB:(int)red :(int)green :(int)blue;
-+(LuaColor*)ColorFromInt:(int)color;
-+(unsigned int)Alpha:(unsigned int) color;
-+(int)Red:(int) color;
-+(int)Green:(int) color;
-+(int)Blue:(int) color;
--(int)GetColorValue;
++(LuaColor*)fromString:(NSString*)colorStr;
++(LuaColor*)createFromARGB:(int)alpha :(int)red :(int)green :(int)blue;
++(LuaColor*)createFromRGB:(int)red :(int)green :(int)blue;
++(LuaColor*)colorFromInt:(int)color;
++(unsigned int)alpha:(unsigned int) color;
++(int)red:(int) color;
++(int)green:(int) color;
++(int)blue:(int) color;
+-(int)getColorValue;
 
 @property (nonatomic, retain) UIColor* colorValue;
 

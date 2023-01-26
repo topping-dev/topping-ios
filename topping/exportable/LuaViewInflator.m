@@ -8,13 +8,13 @@
 
 @implementation LuaViewInflator
 
-+(NSObject *) Create:(LuaContext*)lc
++(NSObject *) create:(LuaContext*)lc
 {
 	return [[LuaViewInflator alloc] initWithContext:lc];
 }
 
-+(LuaViewInflator *)From:(LGLayoutParser*)parser {
-    return [[LuaViewInflator alloc] initWithContext:[LuaForm GetActiveForm].context];
++(LuaViewInflator *)from:(LGLayoutParser*)parser {
+    return [[LuaViewInflator alloc] initWithContext:[LuaForm getActiveForm].context];
 }
 
 - (instancetype)initWithContext:(LuaContext*) context {
@@ -25,16 +25,16 @@
     return self;
 }
 
--(LGView*)ParseFile:(NSString *)filename :(LGView*)parent
+-(LGView*)parseFile:(NSString *)filename :(LGView*)parent
 {
 	LGView *lgview = nil;
-	[[LGLayoutParser GetInstance] ParseXML:filename :[parent GetView] :parent :self.context.form :&lgview];
+	[[LGLayoutParser getInstance] parseXML:filename :[parent getView] :parent :self.context.form :&lgview];
 	return lgview;
 }
 
--(LGView*)Inflate:(LuaRef*)ref : (LGView*)parent {
+-(LGView*)inflate:(LuaRef*)ref : (LGView*)parent {
     LGView *lgview = nil;
-    [[LGLayoutParser GetInstance] ParseRef:ref :[parent GetView] :parent :self.context.form :&lgview];
+    [[LGLayoutParser getInstance] parseRef:ref :[parent getView] :parent :self.context.form :&lgview];
     return lgview;
 }
 
@@ -51,22 +51,22 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaContext class], nil] 
 										:[LuaViewInflator class]] 
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(ParseFile::)) 
-									   :@selector(ParseFile::) 
+			 forKey:@"reate"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(parseFile::)) 
+									   :@selector(parseFile::) 
 									   :[LGView class]
 									   :MakeArray([NSString class]C [LGView class]C nil)]
-			 forKey:@"ParseFile"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Inflate::))
-                                       :@selector(Inflate::)
+			 forKey:@"parseFile"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(inflate::))
+                                       :@selector(inflate::)
                                        :[LGView class]
                                        :MakeArray([LuaRef class]C [LGView class]C nil)]
-             forKey:@"Inflate"];
+             forKey:@"inflate"];
 	return dict;
 }
 

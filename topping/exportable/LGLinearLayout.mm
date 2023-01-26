@@ -4,31 +4,31 @@
 
 @implementation LGLinearLayout
 
--(void)InitProperties
+-(void)initProperties
 {
-	[super InitProperties];
+	[super initProperties];
 	
 	self.android_weightSum = [NSNumber numberWithFloat:-1.0f];
 	
 	self.layout = YES;
 }
 
--(void)Resize
+-(void)resize
 {
-	[super Resize];
-	[self ResizeInternal];
+	[super resize];
+	[self resizeInternal];
 	//NSLog(@"\n %@", [self DebugDescription:nil]);
 	BOOL vertical = YES;
 	if(self.android_orientation != nil)
 		vertical = [self.android_orientation compare:@"vertical"] == 0;
-    [super Resize];
+    [super resize];
 	//[super AfterResize:vertical];
 #ifdef DEBUG_DESCRIPTION
 	NSLog(@"\n %@", [self DebugDescription:nil]);
 #endif
 }
 
--(void)ResizeInternal
+-(void)resizeInternal
 {
 	int y = 0;
 	int x = 0;
@@ -46,7 +46,7 @@
 		{
 			if (!(w.layout))
 			{
-				if (![w ContainsAttribute:@"android:layout_gravity" :@"bottom"] ||
+				if (![w containsAttribute:@"android:layout_gravity" :@"bottom"] ||
 					([self.android_layout_gravity compare:@"top"] != 0 && [self.android_layout_gravity compare:@"bottom"] == 0))
 				{
 					if (w.baseLine > max_base) 
@@ -156,7 +156,7 @@
 			}
 		}
 		
-		NSObject *hasWeight = [w HasAttribute:@"android:layout_weight"];
+		NSObject *hasWeight = [w hasAttribute:@"android:layout_weight"];
         y += w.dMarginTop;
         x += w.dMarginLeft;
         w.dX = x;
@@ -208,7 +208,7 @@
                 {
                     for(LGView *wsub in ((LGViewGroup*)w).subviews)
                     {
-                        [wsub ReduceWidth:share];
+                        [wsub reduceWidth:share];
                     }
                 }
                 else
@@ -216,7 +216,7 @@
 			}
 		}
         
-        [w ReadWidthHeight];
+        [w readWidthHeight];
 	}
 	//Fix pixels
 	if(self.percentGone != 0)
@@ -258,7 +258,7 @@
 	float sum = 0;
 	for (LGView *w in self.subviews) 
 	{
-		NSNumber *prop = (NSNumber*)[w HasAttribute:@"android:layout_weight"];
+		NSNumber *prop = (NSNumber*)[w hasAttribute:@"android:layout_weight"];
 		if (prop == nil)
 		{
 			continue;
@@ -274,7 +274,7 @@
 	return sum;
 }
 
--(int)GetCalculatedWidth
+-(int)getCalculatedWidth
 {
     int calcW = 0;
     for(LGView *w in [self subviews])
@@ -284,18 +284,18 @@
             vertical = [self.android_orientation compare:@"vertical"] == 0;
         
         if(!vertical)
-            calcW += [w GetCalculatedWidth];
+            calcW += [w getCalculatedWidth];
         else
         {
-            int width = [w GetCalculatedWidth];
+            int width = [w getCalculatedWidth];
             if(width > calcW)
                 calcW = width;
         }
     }
-    return calcW + [super GetCalculatedWidth];
+    return calcW + [super getCalculatedWidth];
 }
 
--(int)GetCalculatedHeight
+-(int)getCalculatedHeight
 {
     int calcH = 0;
     for(LGView *w in [self subviews])
@@ -305,22 +305,22 @@
             vertical = [self.android_orientation compare:@"vertical"] == 0;
         
         if(vertical)
-            calcH += [w GetCalculatedHeight];
+            calcH += [w getCalculatedHeight];
         else
         {
-            int height = [w GetCalculatedHeight];
+            int height = [w getCalculatedHeight];
             if(height > calcH)
                 calcH = height;
         }
     }
-    return calcH + [super GetCalculatedHeight];
+    return calcH + [super getCalculatedHeight];
 }
 
 //Lua
-+(LGLinearLayout*)Create:(LuaContext *)context
++(LGLinearLayout*)create:(LuaContext *)context
 {
 	LGLinearLayout *lst = [[LGLinearLayout alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
@@ -341,12 +341,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGLinearLayout class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGLinearLayout class]] 
-			 forKey:@"Create"];
+			 forKey:@"create"];
 	return dict;
 }
 

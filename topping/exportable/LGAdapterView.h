@@ -11,20 +11,20 @@
 
 -(UITableViewCell*)generateCell:(NSIndexPath*)indexPath;
 
--(NSObject *)GetObject:(NSIndexPath*)indexPath;
--(int)GetCount;
--(int)GetTotalHeight:(int)start;
--(int)GetTotalWidth:(int)start;
+-(NSObject *)getObject:(NSIndexPath*)indexPath;
+-(int)getCount;
+-(int)getTotalHeight:(int)start;
+-(int)getTotalWidth:(int)start;
 
-+(LGAdapterView*)Create:(LuaContext *)context :(NSString*)lid;
--(LGAdapterView*)AddSection:(NSString *)header :(NSString*) idV;
--(void)RemoveSection:(NSString*) header;
--(void)AddValue:(NSObject *)value;
--(void)RemoveValue:(NSObject *)value;
--(void)RemoveAllValues;
--(void)Clear;
--(void)SetOnAdapterView:(LuaTranslator *)lt;
--(void)SetOnItemSelected:(LuaTranslator *)lt;
++(LGAdapterView*)create:(LuaContext *)context :(NSString*)lid;
+-(LGAdapterView*)addSection:(NSString *)header :(NSString*) idV;
+-(void)removeSection:(NSString*) header;
+-(void)addValue:(NSObject *)value;
+-(void)removeValue:(NSObject *)value;
+-(void)removeAllValues;
+-(void)clear;
+-(void)setOnAdapterView:(LuaTranslator *)lt;
+-(void)setOnItemSelected:(LuaTranslator *)lt;
 
 @property (nonatomic, strong) NSString *lua_id;
 @property (nonatomic, strong) LuaContext *lc;

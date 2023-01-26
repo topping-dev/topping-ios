@@ -18,31 +18,31 @@
     return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
     self.idMap = [NSMutableDictionary dictionary];
 }
 
-+(LGIdParser *) GetInstance
++(LGIdParser *) getInstance
 {
-    return [LGParser GetInstance].pId;
+    return [LGParser getInstance].pId;
 }
 
--(void) Parse:(NSString*)folder :(NSArray*)clearedDirectoryList {
+-(void) parse:(NSString*)folder :(NSArray*)clearedDirectoryList {
     for(DynamicResource *dr in clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         for(NSString *file in files)
         {
-            NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:folder];
-            [self ParseXML:path :file];
+            NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:folder];
+            [self parseXML:path :file];
         }
     }
 }
 
--(void) ParseXML:(NSString*)path :(NSString *)filename
+-(void) parseXML:(NSString*)path :(NSString *)filename
 {
-    NSData *dat = [[LuaResource GetResource:path :filename] GetData];
+    NSData *dat = [[LuaResource getResource:path :filename] getData];
     GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
     if(xml == nil)
     {
@@ -76,11 +76,11 @@
     }
 }
 
--(NSDictionary *)GetKeys {
+-(NSDictionary *)getKeys {
     return self.idMap;
 }
 
--(void)AddKey:(NSString *)key :(NSString *)value
+-(void)addKey:(NSString *)key :(NSString *)value
 {
     [self.idMap setObject:value forKey:key];
 }

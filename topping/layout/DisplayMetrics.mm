@@ -15,37 +15,37 @@ static float statusBarHeight;
 
 @implementation DisplayMetrics
 
-+(UIView *)GetMasterView
++(UIView *)getMasterView
 {
 	return masterView;
 }
 
-+(void)SetMasterView:(UIView *)view
++(void)setMasterView:(UIView *)view
 {
 	masterView = view;
 }
 
-+(CGRect)GetBaseFrame
++(CGRect)getBaseFrame
 {
     return baseFrame;
 }
 
-+(void)SetBaseFrame:(CGRect )frame
++(void)setBaseFrame:(CGRect )frame
 {
     baseFrame = frame;
 }
 
-+(float)GetStatusBarHeight
++(float)getStatusBarHeight
 {
     return statusBarHeight;
 }
 
-+(void)SetStatusBarHeight:(float)height
++(void)setStatusBarHeight:(float)height
 {
     statusBarHeight = height;
 }
 
-+(void)SetDensity:(float)d :(float)sd
++(void)setDensity:(float)d :(float)sd
 {
 	density = d;
 	scaledDensity = sd;

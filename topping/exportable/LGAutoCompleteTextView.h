@@ -6,6 +6,6 @@
 {
 }
 
-+(LGAutoCompleteTextView*)Create:(LuaContext *)context;
++(LGAutoCompleteTextView*)create:(LuaContext *)context;
 
 @end

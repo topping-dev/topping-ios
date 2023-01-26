@@ -5,7 +5,7 @@
 
 @implementation LGRadioGroup
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	/*UIView *myView = [[UIView alloc] init];
 	myView.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
@@ -18,14 +18,14 @@
 }
 
 //Lua
-+(LGRadioGroup*)Create:(LuaContext *)context
++(LGRadioGroup*)create:(LuaContext *)context
 {
 	LGRadioGroup *lst = [[LGRadioGroup alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
--(void)SetOnCheckedChangedListener:(LuaTranslator*) lt
+-(void)setOnCheckedChangedListener:(LuaTranslator*) lt
 {
     self.ltOnCheckedChanged = lt;
     UISegmentedControl *sc = (UISegmentedControl*)self._view;
@@ -49,13 +49,13 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGRadioGroup class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGRadioGroup class]] 
-			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnCheckedChangedListener:)) :@selector(SetOnCheckedChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnCheckedChangedListener"];
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnCheckedChangedListener:)) :@selector(setOnCheckedChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnCheckedChangedListener"];
 	return dict;
 }
 

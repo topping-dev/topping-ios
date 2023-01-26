@@ -12,11 +12,11 @@
 {
 }
 
-+(LuaViewModelProvider*)OfForm:(LuaForm*)form;
-+(LuaViewModelProvider*)OfFragment:(LuaFragment*)fragment;
++(LuaViewModelProvider*)ofForm:(LuaForm*)form;
++(LuaViewModelProvider*)ofFragment:(LuaFragment*)fragment;
 - (instancetype)initWithViewModelProvider:(ViewModelProvider*)viewModelProvider;
--(LuaViewModel*)Get:(NSString*)key;
--(void*)Get:(NSString*)key ptr:(void*)ptr;
+-(LuaViewModel*)get:(NSString*)key;
+-(void*)get:(NSString*)key ptr:(void*)ptr;
 
 @property (nonatomic, retain) ViewModelProvider *viewModelProvider;
 

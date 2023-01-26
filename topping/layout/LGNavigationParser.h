@@ -79,10 +79,10 @@
 {
 }
 
--(void)Initialize;
-+(LGNavigationParser*) GetInstance;
--(NavGraph *) GetNavigation:(NavController*)controller :(NSString*)key;
--(NavGraph *) ParseXML:(NavController*)controller :(NSString*)path :(NSString *)filename;
+-(void)initialize;
++(LGNavigationParser*) getInstance;
+-(NavGraph *) getNavigation:(NavController*)controller :(NSString*)key;
+-(NavGraph *) parseXML:(NavController*)controller :(NSString*)path :(NSString *)filename;
 
 @property (nonatomic, retain) NSMutableArray *clearedDirectoryList;
 @property (nonatomic, retain) NSMutableDictionary *navigationCache;

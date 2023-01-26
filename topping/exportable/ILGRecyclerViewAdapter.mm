@@ -4,7 +4,7 @@
 
 @implementation ILGRecyclerViewAdapter
 
-+(ILGRecyclerViewAdapter *)Create {
++(ILGRecyclerViewAdapter *)create {
     return [[ILGRecyclerViewAdapter alloc] init];
 }
 

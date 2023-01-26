@@ -9,10 +9,10 @@
 
 }
 
-+(void)SetString:(NSString*)key :(NSString*)value;
-+(void)SetNumber:(NSString*)key :(double)value;
-+(NSObject*)Get:(NSString *)key;
-+(NSString*)GetString:(NSString*)key;
-+(double)GetNumber:(NSString*)key;
++(void)setString:(NSString*)key :(NSString*)value;
++(void)setNumber:(NSString*)key :(double)value;
++(NSObject*)get:(NSString *)key;
++(NSString*)getString:(NSString*)key;
++(double)getNumber:(NSString*)key;
 
 @end

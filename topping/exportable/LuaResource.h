@@ -20,33 +20,33 @@
  * @param resName resource name to search
  * @return Data of resource
  */
-+(NSObject*)GetResourceAssetSd:(NSString*) path :(NSString*) resName;
++(NSObject*)getResourceAssetSd:(NSString*) path :(NSString*) resName;
 /**
  * This function gets resource from other data location, if can not it gets from package.
  * @param path root path to search.
  * @param resName resource name to search
  * @return Data of resource
  */
-+(NSObject*)GetResourceSdAsset:(NSString*) path :(NSString*) resName;
++(NSObject*)getResourceSdAsset:(NSString*) path :(NSString*) resName;
 /**
  * This function gets resource from package.
  * @param path root path to search.
  * @param resName resource name to search
  * @return Data of resource
  */
-+(NSObject*)GetResourceAsset:(NSString*) path :(NSString*) resName;
++(NSObject*)getResourceAsset:(NSString*) path :(NSString*) resName;
 /**
  * This function gets resource from other data location.
  * @param path root path to search.
  * @param resName resource name to search
  * @return Data of resource
  */
-+(NSObject*)GetResourceSd:(NSString*) path :(NSString*) resName;
++(NSObject*)getResourceSd:(NSString*) path :(NSString*) resName;
 
-+(LuaStream*)GetResource:(NSString*) path :(NSString *)resName;
-+(LuaStream*)GetResourceRef:(LuaRef*) ref;
++(LuaStream*)getResource:(NSString*) path :(NSString *)resName;
++(LuaStream*)getResourceRef:(LuaRef*) ref;
 
-+(NSArray*)GetResourceDirectories:(NSString*) startsWith;
-+(NSArray*)GetResourceFiles:(NSString*) path;
++(NSArray*)getResourceDirectories:(NSString*) startsWith;
++(NSArray*)getResourceFiles:(NSString*) path;
 
 @end

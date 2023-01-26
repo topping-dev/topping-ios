@@ -70,7 +70,7 @@
 }
 
 -(void)onCreate:(NSMutableDictionary *)savedInsanceState {
-    LuaContext *context = [self GetContext];
+    LuaContext *context = [self getContext];
     
     self.mNavController = [[NavHostController alloc] initWithContext:context];
     [self.mNavController setLifecycleOwnerWithOwner:self];
@@ -139,7 +139,7 @@
 }
 
 - (FragmentNavigator*)createFragmentNavigator {
-    return [[FragmentNavigator alloc] initWithContext:[self GetContext] manager:[self getChildFragmentManager] containerId:[self getContainerId]];
+    return [[FragmentNavigator alloc] initWithContext:[self getContext] manager:[self getChildFragmentManager] containerId:[self getContainerId]];
 }
 
 - (NSString*)getContainerId {
@@ -152,12 +152,12 @@
 }
 
 - (LGView *)onCreateView:(LGLayoutParser *)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
-    LGFragmentContainerView *containerView = [LGFragmentContainerView Create:[self GetContext]];
+    LGFragmentContainerView *containerView = [LGFragmentContainerView create:[self getContext]];
     containerView.android_id = [self getContainerId];
     containerView.android_layout_width = @"match_parent";
     containerView.android_layout_height = @"match_parent";
     containerView.parent = container;
-    [containerView AddSelfToParent:[container GetView] :self.context.form];
+    [containerView addSelfToParent:[container getView] :self.context.form];
     return containerView;
 }
 

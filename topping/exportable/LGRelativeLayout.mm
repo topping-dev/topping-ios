@@ -4,16 +4,16 @@
 
 @implementation LGRelativeLayout
 
--(void)ComponentAddMethod:(UIView *)par :(UIView *)me
+-(void)componentAddMethod:(UIView *)par :(UIView *)me
 {
-    [super ComponentAddMethod:par :me];
+    [super componentAddMethod:par :me];
 }
 
 //Lua
-+(LGRelativeLayout*)Create:(LuaContext *)context
++(LGRelativeLayout*)create:(LuaContext *)context
 {
     LGRelativeLayout *lfl = [[LGRelativeLayout alloc] init];
-    [lfl InitProperties];
+    [lfl initProperties];
     return lfl;
 }
 
@@ -34,12 +34,12 @@
 +(NSMutableDictionary*)luaMethods
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-                                        :@selector(Create:)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+                                        :@selector(create:)
                                         :[LGRelativeLayout class]
                                         :[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil]
                                         :[LGRelativeLayout class]]
-             forKey:@"Create"];
+             forKey:@"create"];
     return dict;
 }
 

@@ -10,7 +10,7 @@
 	
 }
 
-+(void)ShowInternal:(LuaContext*)context :(NSString*)text :(int) duration;
-+(void)Show:(LuaContext*)context :(LuaRef*)text :(int) duration;
++(void)showInternal:(LuaContext*)context :(NSString*)text :(int) duration;
++(void)show:(LuaContext*)context :(LuaRef*)text :(int) duration;
 
 @end

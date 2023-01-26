@@ -7,13 +7,13 @@
 
 @implementation LuaToast
 
-+(void) ShowInternal:(LuaContext *)context :(NSString *)text :(int)duration
++(void) showInternal:(LuaContext *)context :(NSString *)text :(int)duration
 {
     [[[LuaToaster alloc] initWithText:text delay:0 duration:(((float)duration) / 1000.0f)] showToast];
 }
 
-+(void)Show:(LuaContext *)context :(LuaRef*)text :(int)duration {
-    [LuaToast ShowInternal:context :(NSString*)[[LGValueParser GetInstance] GetValue:text.idRef] :duration];
++(void)show:(LuaContext *)context :(LuaRef*)text :(int)duration {
+    [LuaToast showInternal:context :(NSString*)[[LGValueParser getInstance] getValue:text.idRef] :duration];
 }
 
 -(NSString*)GetId
@@ -30,8 +30,8 @@
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    ClassMethodNoRet(ShowInternal:::, @[[LuaContext class]C [NSString class]C [LuaInt class]], @"ShowInternal", [LuaToast class])
-    ClassMethodNoRet(Show:::, @[[LuaContext class]C [LuaRef class]C [LuaInt class]], @"Show", [LuaToast class])
+    ClassMethodNoRet(showInternal:::, @[[LuaContext class]C [NSString class]C [LuaInt class]], @"showInternal", [LuaToast class])
+    ClassMethodNoRet(show:::, @[[LuaContext class]C [LuaRef class]C [LuaInt class]], @"show", [LuaToast class])
     
 	return dict;
 }

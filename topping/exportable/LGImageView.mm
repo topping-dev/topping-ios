@@ -8,7 +8,7 @@
 
 @implementation LGImageView
 
--(int)GetContentW
+-(int)getContentW
 {
 	if(self._view != nil)
 	{
@@ -18,7 +18,7 @@
 			int width = iv.image.size.width;
 			if(self.android_maxWidth != nil)
 			{
-				int maxW = [[LGDimensionParser GetInstance] GetDimension:self.android_maxWidth];
+				int maxW = [[LGDimensionParser getInstance] getDimension:self.android_maxWidth];
 				if(maxW < width)
 					return maxW;
 				else
@@ -28,10 +28,10 @@
 			return width;
 		}
 	}
-	return [super GetContentW];
+	return [super getContentW];
 }
 
--(int)GetContentH
+-(int)getContentH
 {
 	if(self._view != nil)
 	{
@@ -41,7 +41,7 @@
 			int height = iv.image.size.height;
 			if(self.android_maxHeight != nil)
 			{
-				int maxH = [[LGDimensionParser GetInstance] GetDimension:self.android_maxHeight];
+				int maxH = [[LGDimensionParser getInstance] getDimension:self.android_maxHeight];
 				if(maxH < height)
 					return maxH;
 				else
@@ -51,17 +51,17 @@
 			return height;
 		}
 	}
-	return [super GetContentH];
+	return [super getContentH];
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	UIImageView *iv = [[UIImageView alloc] init];
 	iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 	return iv;
 }
 
--(void) SetupComponent:(UIView *)view
+-(void) setupComponent:(UIView *)view
 {
 	UIImageView *iv = (UIImageView*)self._view;
 	if(self.android_scaleType != nil)
@@ -88,7 +88,7 @@
         for(UIView *subview in self._view.subviews) {
             [subview removeFromSuperview];
         }
-        LGDrawableReturn *ldr = [[LGDrawableParser GetInstance] ParseDrawable:self.android_src];
+        LGDrawableReturn *ldr = [[LGDrawableParser getInstance] parseDrawable:self.android_src];
         CGSize size = CGSizeZero;
         VectorView *vv = nil;
         if(ldr.vector != nil) {
@@ -130,23 +130,23 @@
 }
 
 //Lua
-+(LGImageView*)Create:(LuaContext *)context :(NSString*)lid
++(LGImageView*)create:(LuaContext *)context :(NSString*)lid
 {
 	LGImageView *liv = [[LGImageView alloc] init];
     liv.lua_id = lid;
-	[liv InitProperties];
+	[liv initProperties];
 	return liv;
 }
 
--(void)SetImage:(LuaStream*)stream
+-(void)setImage:(LuaStream*)stream
 {
 	NSMutableData *_data = [NSMutableData data];
 	
 	uint8_t buf[1024];
 	
-	unsigned int len = 0;
+	NSInteger len = 0;
 	
-	NSInputStream *is = (NSInputStream*)[stream GetStream];
+	NSInputStream *is = (NSInputStream*)[stream getStream];
 	while([is hasBytesAvailable])
 	{
 		len = [is read:buf maxLength:1024];
@@ -159,9 +159,9 @@
 	[((UIImageView *)self._view) setImage:[UIImage imageWithData:_data]];
 }
 
--(void)SetImageRef:(LuaRef*)ref
+-(void)setImageRef:(LuaRef*)ref
 {
-    LGDrawableReturn *ret = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    LGDrawableReturn *ret = (LGDrawableReturn*)[[LGValueParser getInstance] getValue:ref.idRef];
     if(ret.img != nil)
         [((UIImageView *)self._view) setImage:ret.img];
 }
@@ -183,14 +183,14 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGImageView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGImageView class]] 
-			 forKey:@"Create"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetImage:)) :@selector(SetImage:) :nil :MakeArray([LuaStream class]C nil)] forKey:@"SetImage"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetImageRef:)) :@selector(SetImageRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"SetImageRef"];
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setImage:)) :@selector(setImage:) :nil :MakeArray([LuaStream class]C nil)] forKey:@"setImage"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setImageRef:)) :@selector(setImageRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"setImageRef"];
 	return dict;
 }
 

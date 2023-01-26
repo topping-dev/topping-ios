@@ -39,9 +39,9 @@
 
 @implementation LGLayoutParser
 
-+(LGLayoutParser*)GetInstance
++(LGLayoutParser*)getInstance
 {
-	return [LGParser GetInstance].pLayout;
+	return [LGParser getInstance].pLayout;
 }
 
 - (id) init
@@ -52,10 +52,10 @@
 	return self;
 }
 
--(void)Initialize
+-(void)initialize
 {
-    NSArray *layoutDirectories = [LuaResource GetResourceDirectories:LUA_LAYOUT_FOLDER];
-    self.clearedDirectoryList = [[LGParser GetInstance] Tester:layoutDirectories :LUA_LAYOUT_FOLDER];
+    NSArray *layoutDirectories = [LuaResource getResourceDirectories:LUA_LAYOUT_FOLDER];
+    self.clearedDirectoryList = [[LGParser getInstance] tester:layoutDirectories :LUA_LAYOUT_FOLDER];
 
     [self.clearedDirectoryList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
     {
@@ -71,7 +71,7 @@
     self.layoutMap = [NSMutableDictionary dictionary];
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        NSArray *files = [LuaResource GetResourceFiles:(NSString*)dr.data];
+        NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];
         [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSString *filename = (NSString *)obj;
             NSString *fNameNoExt = [filename stringByDeletingPathExtension];
@@ -85,30 +85,30 @@
     LuaStream *ls = nil;
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
-        NSString *path = [[sToppingEngine GetUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
-        ls = [LuaResource GetResource:path :name];
-        if([ls HasStream])
+        NSString *path = [[sToppingEngine getUIRoot] stringByAppendingPathComponent:(NSString*)dr.data];
+        ls = [LuaResource getResource:path :name];
+        if([ls hasStream])
             break;
     }
     return ls;
 }
 
--(UIView*) ParseRef:(LuaRef *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
+-(UIView*) parseRef:(LuaRef *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
 {
     NSArray *arr = SPLIT(filename.idRef, @"/");
-    return [self ParseXML:[[arr lastObject] stringByAppendingString:@".xml"] :parentView :parent :cont :lgview];
+    return [self parseXML:[[arr lastObject] stringByAppendingString:@".xml"] :parentView :parent :cont :lgview];
 }
 
--(UIView*) ParseXML:(NSString *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
+-(UIView*) parseXML:(NSString *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
 {
     self.lastFileName = filename;
     LuaStream *ls = [self GetLayout:filename];
-    if(![ls HasStream])
+    if(![ls hasStream])
     {
         NSLog(@"Cannot read xml file %@", filename);
         return nil;
     }
-	NSData *dat = [ls GetData];
+	NSData *dat = [ls getData];
 	GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
 	if(xml == nil)
 	{
@@ -117,28 +117,28 @@
 	}
 		
 	GDataXMLElement *root = [xml rootElement];
-	LGView *rootView = [self ParseChildXML:nil :root];
+	LGView *rootView = [self parseChildXML:nil :root];
 	*lgview = rootView;
     if(cont.lgview == nil)
         cont.lgview = rootView;
-	return [self GenerateUIViewFromLGView:rootView :parentView :parent :cont];
+	return [self generateUIViewFromLGView:rootView :parentView :parent :cont];
 }
 
--(LGView*) ParseUI:(NSString*)name :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(NSArray *)attrs {
+-(LGView*) parseUI:(NSString*)name :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(NSArray *)attrs {
     LGView *rootView = nil;
     
-    rootView = [self GetViewFromName:name :attrs];
+    rootView = [self getViewFromName:name :attrs];
     if(rootView == nil) {
         NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
         return nil;
     }
     for(GDataXMLNode *node in attrs)
     {
-        [rootView SetAttributeValue:[node name] :[node stringValue]];
+        [rootView setAttributeValue:[node name] :[node stringValue]];
     }
-    [rootView ApplyStyles];
+    [rootView applyStyles];
         
-    [self GenerateUIViewFromLGView:rootView :parentView :parent :cont];
+    [self generateUIViewFromLGView:rootView :parentView :parent :cont];
     return rootView;
 }
 
@@ -154,7 +154,7 @@
     return nil;
 }
 
--(LGView*) GetViewFromName:(NSString*)name :(NSArray*)attrs
+-(LGView*) getViewFromName:(NSString*)name :(NSArray*)attrs
 {
     LGView *rootView = nil;
     Class pluginClass = nil;
@@ -240,7 +240,7 @@
     else if([name compare:@"WebView"] == 0
         || [name compare:@"LGWebView"] == 0)
         rootView = [[LGWebView alloc] init];
-    else if([ToppingEngine GetViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine GetViewPlugins] :name]) != nil)
+    else if([ToppingEngine getViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine getViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];
     }
@@ -249,12 +249,12 @@
         return nil;
     }
     
-    [rootView InitProperties];
+    [rootView initProperties];
     
     return rootView;
 }
 
--(LGView*) ParseChildXML:(LGView*)parent :(GDataXMLElement*)view
+-(LGView*) parseChildXML:(LGView*)parent :(GDataXMLElement*)view
 {
     GDataXMLNodeKind kind = [view kind];
     if(kind != GDataXMLElementKind) {
@@ -264,54 +264,54 @@
 	LGView *rootView = nil;
     NSArray *attrs = [view attributes];
     
-    rootView = [self GetViewFromName:name :attrs];
+    rootView = [self getViewFromName:name :attrs];
     if(rootView == nil) {
         NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
         return nil;
     }
 	for(GDataXMLNode *node in attrs)
 	{
-		[rootView SetAttributeValue:[node name] :[node stringValue]];
+		[rootView setAttributeValue:[node name] :[node stringValue]];
 	}
     rootView.attrs = attrs;
-    [rootView ApplyStyles];
+    [rootView applyStyles];
 	
     if([rootView isKindOfClass:[LGViewGroup class]])
     {
         for(GDataXMLElement *child in [view children])
         {
-            [((LGViewGroup*)rootView) AddSubview:[self ParseChildXML:rootView :child]];
+            [((LGViewGroup*)rootView) addSubview:[self parseChildXML:rootView :child]];
         }
     }
     
-    [self ApplyOverrides:parent :rootView];
+    [self applyOverrides:parent :rootView];
 	return rootView;
 }
 
--(UIView*) GenerateUIViewFromLGView:(LGView*)view :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont;
+-(UIView*) generateUIViewFromLGView:(LGView*)view :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont;
 {
     view.parent = parent;
-    [view Resize];
-    UIView *viewRoot = [view CreateComponent];
+    [view resize];
+    UIView *viewRoot = [view createComponent];
 		
     if([view isKindOfClass:[LGViewGroup class]])
     {
 		for(LGView *w in ((LGViewGroup*)view).subviews)
 		{
-			[w AddSelfToParent:viewRoot :cont];
-            [LuaEvent OnUIEvent:w :UI_EVENT_VIEW_CREATE :w.lc :0, nil];
+			[w addSelfToParent:viewRoot :cont];
+            [LuaEvent onUIEvent:w :UI_EVENT_VIEW_CREATE :w.lc :0, nil];
 		}
 	}
-    [view InitComponent:viewRoot :cont.context];
-    [LuaEvent OnUIEvent:view :UI_EVENT_VIEW_CREATE :view.lc :0, nil];
+    [view initComponent:viewRoot :cont.context];
+    [LuaEvent onUIEvent:view :UI_EVENT_VIEW_CREATE :view.lc :0, nil];
     return viewRoot;
 }
 
--(void)ApplyOverrides:(LGView *)lgview :(LGView*)parent {
+-(void)applyOverrides:(LGView *)lgview :(LGView*)parent {
     
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.layoutMap)

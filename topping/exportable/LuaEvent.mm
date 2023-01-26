@@ -10,7 +10,7 @@ static NSMutableDictionary *formMap = [NSMutableDictionary dictionary];
 static NSMutableDictionary *fragmentMap = [NSMutableDictionary dictionary];
 static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
 
-+(NSObject*)OnUIEvent:(NSObject<LuaInterface>*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...
++(NSObject*)onUIEvent:(NSObject<LuaInterface>*)pGui :(int) EventType :(LuaContext*)lc :(int)ArgCount, ...
 {
     LuaTranslator *ltToCall;
     ltToCall = [eventMap objectForKey:APPEND([pGui GetId], ITOS(EventType))];
@@ -19,38 +19,38 @@ static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
     {
         va_list ap;
         va_start(ap, ArgCount);
-        ret = [ltToCall CallInSelf:pGui :lc :ap];
+        ret = [ltToCall callInSelf:pGui :lc :ap];
         va_end(ap);
     }
     return ret;
 }
 
-+(void)RegisterUIEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
++(void)registerUIEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
 {
-    [LuaEvent RegisterUIEventInternal:[luaId GetCleanId] :event :lt];
+    [LuaEvent registerUIEventInternal:[luaId getCleanId] :event :lt];
 }
 
-+(void)RegisterUIEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt
++(void)registerUIEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt
 {
     [eventMap setObject:lt forKey:APPEND(luaId, ITOS(event))];
 }
 
-+(void)RegisterForm:(NSString*)name :(LuaTranslator*)ltInit {
++(void)registerForm:(NSString*)name :(LuaTranslator*)ltInit {
     [fragmentMap setObject:ltInit forKey:name];
 }
 
-+(ILuaForm*)GetFormInstance:(NSString*)name :(LuaForm*)form {
++(ILuaForm*)getFormInstance:(NSString*)name :(LuaForm*)form {
     LuaTranslator* ltInit = [formMap objectForKey:name];
-    return (ILuaForm*)[ltInit Call:form];
+    return (ILuaForm*)[ltInit call:form];
 }
 
-+(void)RegisterFragment:(NSString*)name :(LuaTranslator*)ltInit {
++(void)registerFragment:(NSString*)name :(LuaTranslator*)ltInit {
     [fragmentMap setObject:ltInit forKey:name];
 }
 
-+(ILuaFragment*)GetFragmentInstance:(NSString*)name :(LuaFragment*)fragment {
++(ILuaFragment*)getFragmentInstance:(NSString*)name :(LuaFragment*)fragment {
     LuaTranslator* ltInit = [fragmentMap objectForKey:name];
-    return (ILuaFragment*)[ltInit Call:fragment];
+    return (ILuaFragment*)[ltInit call:fragment];
 }
 
 +(NSObject*)CreateInstanceForName:(NSString*)name {
@@ -92,7 +92,7 @@ static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    ClassMethodNoRet(RegisterUIEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"RegisterUIEvent", [LuaEvent class])
+    ClassMethodNoRet(registerUIEvent:::, @[[LuaRef class]C [LuaInt class]C [LuaTranslator class]], @"registerUIEvent", [LuaEvent class])
     
 	return dict;
 }

@@ -7,6 +7,6 @@
 
 }
 
-+(LGButton*)Create:(LuaContext *)context;
++(LGButton*)create:(LuaContext *)context;
 
 @end

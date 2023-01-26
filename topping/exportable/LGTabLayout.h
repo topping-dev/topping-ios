@@ -13,24 +13,24 @@
 
 @interface LGTabLayout : LGScrollView <MDCTabBarViewDelegate, OnScrollCallback>
 
--(void)AddTab:(LuaTab*)tab;
+-(void)addTab:(LuaTab*)tab;
 
--(LuaTab*)GetTabAtIndex:(int)position;
+-(LuaTab*)getTabAtIndex:(int)position;
 
--(int)GetTabCount;
+-(int)getTabCount;
 
--(void)RemoveTabAtPosition:(int)position;
+-(void)removeTabAtPosition:(int)position;
 
--(void)RemoveTab:(LuaTab*)tab;
+-(void)removeTab:(LuaTab*)tab;
 
--(void)RemoveAllTabs;
+-(void)removeAllTabs;
 
--(void)SelectTab:(LuaTab*)tab;
+-(void)selectTab:(LuaTab*)tab;
 
--(void)SelectTabAtIndex:(int)position;
+-(void)selectTabAtIndex:(int)position;
 
--(void)SetTabSelectedListener:(LuaTranslator*)lt;
--(void)SetCanSelectTab:(LuaTranslator*)lt;
+-(void)setTabSelectedListener:(LuaTranslator*)lt;
+-(void)setCanSelectTab:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSString* app_tabBackground;
 @property (nonatomic, retain) NSString* app_tabContentStart;

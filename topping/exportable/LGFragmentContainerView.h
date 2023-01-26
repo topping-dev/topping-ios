@@ -11,7 +11,7 @@
 
 @interface LGFragmentContainerView : LGFrameLayout
 
-+(LGFragmentContainerView*)Create:(LuaContext *)context;
++(LGFragmentContainerView*)create:(LuaContext *)context;
 
 -(instancetype)initWithFragmentManager:(FragmentManager*)fragmentManager;
 

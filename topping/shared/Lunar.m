@@ -29,7 +29,7 @@ static int tostring_T (lua_State *L);
 @implementation Lunar
 static NSMutableDictionary *dictFunctionNames = NULL;
 
-+(void) Register:(lua_State*)L :(Class) T
++(void) register:(lua_State*)L :(Class) T
 {
 	if(dictFunctionNames == NULL)
 	{
@@ -133,7 +133,7 @@ static NSMutableDictionary *dictFunctionNames = NULL;
         {
             NSObject *val = [staticVars objectForKey:var];
             lua_pushstring(L, [var cStringUsingEncoding:NSUTF8StringEncoding]);
-            [sToppingEngine FillVariable:val];
+            [sToppingEngine fillVariable:val];
             lua_settable(L, methods);
         }
     }
@@ -238,15 +238,15 @@ static NSMutableDictionary *dictFunctionNames = NULL;
 	
 	if([className compare:@"NSNumber"] == 0)
 	{
-		[sToppingEngine PushDouble:[((NSNumber*)obj) doubleValue]];
+		[sToppingEngine pushDouble:[((NSNumber*)obj) doubleValue]];
 	}
 	else if([className compare:@"NSCFString"] == 0)
 	{
-		[sToppingEngine PushString:(NSString*)obj];
+		[sToppingEngine pushString:(NSString*)obj];
 	}
 	else if([className compare:@"NSMutableDictionary"] == 0)
 	{
-		[sToppingEngine PushTable:(NSMutableDictionary*)obj];
+		[sToppingEngine pushTable:(NSMutableDictionary*)obj];
 	}
 	else
 		returnFromHere = NO;
@@ -294,7 +294,7 @@ static NSObject *check(lua_State *L, int narg)
     return *ptrHold;
 }
 
-+(NSMutableDictionary*) ParseTable:(TValue*)valP
++(NSMutableDictionary*) parseTable:(TValue*)valP
 {
 	NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
 	Table *ot = (Table*)hvalue(valP);
@@ -333,7 +333,7 @@ static NSObject *check(lua_State *L, int narg)
 				valObject = [NSNumber numberWithDouble:nvalue(val)];
 				break;
 			case LUA_TTABLE:
-				valObject = [Lunar ParseTable:val];
+				valObject = [Lunar parseTable:val];
 				break;
 			case LUA_TUSERDATA:
 			{
@@ -439,7 +439,7 @@ static int sThunk(lua_State *L)
                         NSObject *objClass = (NSObject*)o;
                         if([objClass isKindOfClass:[LuaRef class]])
                         {
-                            NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                            NSString* idRef = (NSString*)[[LGValueParser getInstance] getValue: ((LuaRef*)objClass).idRef];
                             [ni setArgument:&idRef atIndex:count+1];
                             continue;
                         }
@@ -531,7 +531,7 @@ static int sThunk(lua_State *L)
 								valObject = [NSNumber numberWithDouble:nvalue(val)];
 								break;
 							case LUA_TTABLE:
-								valObject = [Lunar ParseTable:val];
+								valObject = [Lunar parseTable:val];
 								break;
 							case LUA_TUSERDATA:
 							{
@@ -585,7 +585,7 @@ static int sThunk(lua_State *L)
                     NSObject *objClass = (NSObject*)o;
                     if([objClass isKindOfClass:[LuaRef class]] && c != [LuaRef class])
                     {
-                        NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                        NSString* idRef = (NSString*)[[LGValueParser getInstance] getValue: ((LuaRef*)objClass).idRef];
                         [ni setArgument:&idRef atIndex:count+1];
                     }
                     else
@@ -611,32 +611,32 @@ static int sThunk(lua_State *L)
 		{
 			int retVal = 0;
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushInt:retVal];
+			[sToppingEngine pushInt:retVal];
 		}
 		else if(lf->returns == [LuaLong class])
 		{
 			long retVal = 0;
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushLong:retVal];
+			[sToppingEngine pushLong:retVal];
 		}
 		else if(lf->returns == [LuaFloat class]
 				|| lf->returns == [LuaDouble class])
 		{
 			double retVal = 0;
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushDouble:retVal];
+			[sToppingEngine pushDouble:retVal];
 		}
 		else if(lf->returns == [NSString class])
 		{
 			NSString *retVal = @"";
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushString:retVal];
+			[sToppingEngine pushString:retVal];
 		}
 		else if(lf->returns == [NSMutableDictionary class])
 		{
 			NSMutableDictionary *retVal = [[NSMutableDictionary alloc] init];
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushTable:retVal];
+			[sToppingEngine pushTable:retVal];
 		}
 		else 
 		{
@@ -701,7 +701,7 @@ static int thunk(lua_State *L)
                         NSObject *objClass = (NSObject*)o;
                         if([objClass isKindOfClass:[LuaRef class]])
                         {
-                            NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                            NSString* idRef = (NSString*)[[LGValueParser getInstance] getValue: ((LuaRef*)objClass).idRef];
                             [ni setArgument:&idRef atIndex:count+1];
                             continue;
                         }
@@ -793,7 +793,7 @@ static int thunk(lua_State *L)
 								valObject = [NSNumber numberWithDouble:nvalue(val)];
 								break;
 							case LUA_TTABLE:
-								valObject = [Lunar ParseTable:val];
+								valObject = [Lunar parseTable:val];
 								break;
 							case LUA_TUSERDATA:
 							{
@@ -851,7 +851,7 @@ static int thunk(lua_State *L)
                                         valObject = [NSNumber numberWithDouble:nvalue(valO)];
                                         break;
                                     case LUA_TTABLE:
-                                        valObject = [Lunar ParseTable:valO];
+                                        valObject = [Lunar parseTable:valO];
                                         break;
                                     case LUA_TUSERDATA:
                                     {
@@ -909,7 +909,7 @@ static int thunk(lua_State *L)
                     NSObject *objClass = (NSObject*)o;
                     if([objClass isKindOfClass:[LuaRef class]] && c != [LuaRef class])
                     {
-                        NSString* idRef = (NSString*)[[LGValueParser GetInstance] GetValue: ((LuaRef*)objClass).idRef];
+                        NSString* idRef = (NSString*)[[LGValueParser getInstance] getValue: ((LuaRef*)objClass).idRef];
                         [ni setArgument:&idRef atIndex:count+1];
                     }
                     else
@@ -935,32 +935,32 @@ static int thunk(lua_State *L)
 		{
 			int retVal = 0;
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushInt:retVal];
+			[sToppingEngine pushInt:retVal];
 		}
 		else if(lf->returns == [LuaLong class])
 		{
 			long retVal = 0;
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushLong:retVal];
+			[sToppingEngine pushLong:retVal];
 		}
 		else if(lf->returns == [LuaFloat class]
 				|| lf->returns == [LuaDouble class])
 		{
 			double retVal = 0;
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushDouble:retVal];
+			[sToppingEngine pushDouble:retVal];
 		}
 		else if(lf->returns == [NSString class])
 		{
 			NSString *retVal = @"";
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushString:retVal];
+			[sToppingEngine pushString:retVal];
 		}
 		else if(lf->returns == [NSMutableDictionary class])
 		{
 			NSMutableDictionary *retVal = [[NSMutableDictionary alloc] init];
 			[ni getReturnValue:&retVal];
-			[sToppingEngine PushTable:retVal];
+			[sToppingEngine pushTable:retVal];
 		}
 		else 
 		{

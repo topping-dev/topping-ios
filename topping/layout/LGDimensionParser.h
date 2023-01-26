@@ -8,11 +8,11 @@
 	NSMutableDictionary *dimensionMap;
 }
 
-+(LGDimensionParser*) GetInstance;
--(void) ParseXML:(NSString *)filename;
--(void) ParseXML:(int)orientation :(GDataXMLElement *)element;
--(int)GetDimension:(NSString *)key;
--(NSDictionary *)GetKeys;
++(LGDimensionParser*) getInstance;
+-(void) parseXML:(NSString *)filename;
+-(void) parseXML:(int)orientation :(GDataXMLElement *)element;
+-(int)getDimension:(NSString *)key;
+-(NSDictionary *)getKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *dimensionMap;
 

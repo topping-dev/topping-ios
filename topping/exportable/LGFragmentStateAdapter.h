@@ -72,6 +72,7 @@
 - (instancetype)initWithEnforcer:(FragmentMaxLifecycleEnforcer *)enforcer;
 
 @property (nonatomic, strong) FragmentMaxLifecycleEnforcer *enforcer;
+@property (nonatomic, strong) NSString *key;
 
 @end
 
@@ -118,9 +119,9 @@
 
 @interface LGFragmentStateAdapter : NSObject <LuaClass, LuaInterface, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LGViewPagerEvents, LGViewPagerAdapter, StatefulAdapter>
 
-+(LGFragmentStateAdapter*)Create:(LuaContext*)context :(FragmentManager*)fragmentManager :(LuaLifecycle*)lifecycle;
-+(LGFragmentStateAdapter*)CreateFromForm:(LuaForm*)form;
-+(LGFragmentStateAdapter*)CreateFromFragment:(LuaFragment*)form;
++(LGFragmentStateAdapter*)create:(LuaContext*)context :(FragmentManager*)fragmentManager :(LuaLifecycle*)lifecycle;
++(LGFragmentStateAdapter*)createFromForm:(LuaForm*)form;
++(LGFragmentStateAdapter*)createFromFragment:(LuaFragment*)form;
 
 -(instancetype)initWithForm:(LuaForm *)form;
 -(instancetype)initWithFragment:(LuaFragment *)fragment;
@@ -132,8 +133,8 @@
 -(int)getItemCount;
 -(NSString*)getItemId:(int)position;
 
--(void)SetCreateFragment:(LuaTranslator*)lt;
--(void)SetGetItemCount:(LuaTranslator*)lt;
+-(void)setCreateFragment:(LuaTranslator*)lt;
+-(void)setGetItemCount:(LuaTranslator*)lt;
 
 @property (nonatomic, strong) NSString* KEY_PREFIX_FRAGMENT;
 @property (nonatomic, strong) NSString* KEY_PREFIX_STATE;

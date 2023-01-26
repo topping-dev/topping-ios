@@ -52,24 +52,24 @@ typedef NS_ENUM(NSInteger, FragmentState)
 {
 }
 
-+(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId;
-+(LuaFragment*)Create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments;
-+(LuaFragment*)CreateWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui :(NSMutableDictionary*)arguments;
--(LuaContext*)GetContext;
--(LuaForm*)GetForm;
--(FragmentManager*)GetFragmentManager;
--(LGView*)GetViewById:(LuaRef*)lId;
--(LGView*)GetViewByIdInternal:(NSString*)sId;
--(LGView*)GetView;
--(void)SetView:(LGView*)v;
--(void)SetViewId:(NSString*)luaId;
--(void)SetViewXML:(LuaRef *)xml;
--(void)SetTitle:(NSString *)str;
--(void)SetTitleRef:(LuaRef *)ref;
--(void)Close;
++(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId;
++(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments;
++(LuaFragment*)createWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui :(NSMutableDictionary*)arguments;
+-(LuaContext*)getContext;
+-(LuaForm*)getForm;
+-(FragmentManager*)getFragmentManager;
+-(LGView*)getViewById:(LuaRef*)lId;
+-(LGView*)getViewByIdInternal:(NSString*)sId;
+-(LGView*)getView;
+-(void)setView:(LGView*)v;
+-(void)setViewId:(NSString*)luaId;
+-(void)setViewXML:(LuaRef *)xml;
+-(void)setTitle:(NSString *)str;
+-(void)setTitleRef:(LuaRef *)ref;
+-(void)close;
 -(LuaNavController*)getNavController;
--(BOOL)IsInitialized;
--(NSDictionary*)GetBindings;
+-(BOOL)isInitialized;
+-(NSDictionary*)getBindings;
 
 -(void)onCreate:(NSMutableDictionary*)savedInstanceState;
 -(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup*)container :(NSMutableDictionary*)savedInstanceState;

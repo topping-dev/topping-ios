@@ -18,7 +18,7 @@
 }
 
 -(void)setFlags:(int)flags {
-    self.flags = flags;
+    self.flags_ = flags;
 }
 
 + (NSString *)className {

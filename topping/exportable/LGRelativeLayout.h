@@ -3,6 +3,6 @@
 
 @interface LGRelativeLayout : LGViewGroup
 
-+(LGRelativeLayout*)Create:(LuaContext *)context;
++(LGRelativeLayout*)create:(LuaContext *)context;
 
 @end

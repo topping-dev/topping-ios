@@ -7,10 +7,10 @@
 }
 
 //Lua
-+(LGProgressBar*)Create:(LuaContext *)context;
--(void)SetProgress:(int)progress;
--(void)SetMax:(int)max;
--(void)SetIndeterminate:(bool)val;
++(LGProgressBar*)create:(LuaContext *)context;
+-(void)setProgress:(int)progress;
+-(void)setMax:(int)max;
+-(void)setIndeterminate:(bool)val;
 
 @property(nonatomic, retain) NSNumber *android_animationResolution;
 @property(nonatomic, retain) NSNumber *android_indeterminate;

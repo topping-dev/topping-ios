@@ -11,35 +11,35 @@
 
 @implementation LGCheckBox
 
--(void)InitProperties
+-(void)initProperties
 {
-	[super InitProperties];
+	[super initProperties];
     self.checkboxSize = CGSizeMake(51 + 24, 31 + 6);
 }
 
--(int)GetContentW
+-(int)getContentW
 {
 	if(self._view != nil)
 	{
-        return self.checkboxSize.width + [self GetStringSize].width;
+        return self.checkboxSize.width + [self getStringSize].width;
 	}
-	return self.checkboxSize.width + [super GetContentW];
+	return self.checkboxSize.width + [super getContentW];
 }
 
--(int)GetContentH
+-(int)getContentH
 {
 	if(self._view != nil)
 	{
         float val = self.checkboxSize.height;
-        float stringSize = [self GetStringSize].height;
+        float stringSize = [self getStringSize].height;
         if(stringSize > val)
             val = stringSize;
-        return val + [[LGDimensionParser GetInstance] GetDimension:@"8dp"];
+        return val + [[LGDimensionParser getInstance] getDimension:@"8dp"];
 	}
-    return [super GetContentH];
+    return [super getContentH];
 }
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	self.checkbox = [CheckBox alloc];
     self.checkbox = [self.checkbox initWithFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.checkboxSize.height)];
@@ -50,17 +50,17 @@
 	return self.checkbox;
 }
 
--(void) SetupComponent:(UIView *)view
+-(void) setupComponent:(UIView *)view
 {
-    BOOL checked = [[LGValueParser GetInstance] GetBoolValueDirect:self.android_checked];
+    BOOL checked = [[LGValueParser getInstance] getBoolValueDirect:self.android_checked];
     self.checkbox.sw.on = checked;
     
-    self.checkbox.title.text = [[LGStringParser GetInstance] GetString:self.android_text];
-    UIColor *textColor = [[LGColorParser GetInstance] ParseColor:self.android_textColor];
+    self.checkbox.title.text = [[LGStringParser getInstance] getString:self.android_text];
+    UIColor *textColor = [[LGColorParser getInstance] parseColor:self.android_textColor];
     if(textColor == nil)
-        textColor = (UIColor*)[[LGStyleParser GetInstance] GetStyleValue:@"android:textColor" :[sToppingEngine GetAppStyle]];
+        textColor = (UIColor*)[[LGStyleParser getInstance] getStyleValue:@"android:textColor" :[sToppingEngine getAppStyle]];
     self.checkbox.title.textColor = textColor;
-    UIColor *colorAccent = [[LGColorParser GetInstance] ParseColor:self.colorAccent];
+    UIColor *colorAccent = [[LGColorParser getInstance] parseColor:self.colorAccent];
     if(colorAccent != nil)
     {
         self.checkbox.sw.tintColor = colorAccent;
@@ -68,15 +68,15 @@
     }
     
     if(self.android_textSize != nil)
-        self.checkbox.title.font = [self.checkbox.title.font fontWithSize:[[LGDimensionParser GetInstance] GetDimension:self.android_textSize]];
+        self.checkbox.title.font = [self.checkbox.title.font fontWithSize:[[LGDimensionParser getInstance] getDimension:self.android_textSize]];
     
     if(self.checkbox.title.text != nil)
     {
-        self.checkbox.frame = CGRectMake(self.dX, self.dY, self.dWidth, [self GetContentH]);
+        self.checkbox.frame = CGRectMake(self.dX, self.dY, self.dWidth, [self getContentH]);
     }
     
     LGView *v = [LGView new];
-    [v SetupComponent:view];
+    [v setupComponent:view];
     v = nil;
 }
 
@@ -90,53 +90,53 @@
 {
     if(self.ltCheckedChanged != nil)
     {
-        [self.ltCheckedChanged CallIn:self.lc, [NSNumber numberWithBool:self.checkbox.sw.on], nil];
+        [self.ltCheckedChanged callIn:self.lc, [NSNumber numberWithBool:self.checkbox.sw.on], nil];
     }
 }
 
-+(LGCheckBox*)Create:(LuaContext *)context
++(LGCheckBox*)create:(LuaContext *)context
 {
 	LGCheckBox *lst = [[LGCheckBox alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
--(NSString *)GetText
+-(NSString *)getText
 {
     return self.checkbox.title.text;
 }
 
--(void)SetTextInternal:(NSString *)val
+-(void)setTextInternal:(NSString *)val
 {
     [self.checkbox.title setText:val];
     self.android_text = val;
-    [self ResizeOnText];
+    [self resizeOnText];
 }
 
--(void)SetText:(LuaRef *)ref
+-(void)setText:(LuaRef *)ref
 {
-    NSString *val = (NSString*)[[LGValueParser GetInstance] GetValue:ref.idRef];
-    [self SetTextInternal:val];
+    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setTextInternal:val];
 }
 
--(void)SetTextColor:(NSString *)color
+-(void)setTextColor:(NSString *)color
 {
-    UIColor *val = [[LGColorParser GetInstance] ParseColor:color];
+    UIColor *val = [[LGColorParser getInstance] parseColor:color];
     [self.checkbox.title setTextColor:val];
 }
 
--(void)SetTextColorRef:(LuaRef *)ref
+-(void)setTextColorRef:(LuaRef *)ref
 {
-    UIColor *val = (UIColor*)[[LGValueParser GetInstance] GetValue:ref.idRef];
+    UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:ref.idRef];
     [self.checkbox.title setTextColor:val];
 }
 
--(BOOL) IsChecked
+-(BOOL) isChecked
 {
 	return self.checkbox.sw.on;
 }
 
--(void)SetOnCheckedChangedListener:(LuaTranslator*)lt
+-(void)setOnCheckedChangedListener:(LuaTranslator*)lt
 {
     self.ltCheckedChanged = lt;
 }
@@ -158,18 +158,18 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:)) 
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
+										:@selector(create:)
 										:[LGCheckBox class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGCheckBox class]] 
-			 forKey:@"Create"];
-	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(IsChecked)) 
-									   :@selector(IsChecked)
+			 forKey:@"create"];
+	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(isChecked)) 
+									   :@selector(isChecked)
 									   :[LuaBool class]
 									   :[NSArray arrayWithObjects:nil]]
-			 forKey:@"IsChecked"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(SetOnCheckedChangedListener:)) :@selector(SetOnCheckedChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"SetOnCheckedChangedListener"];
+			 forKey:@"isChecked"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setOnCheckedChangedListener:)) :@selector(setOnCheckedChangedListener:) :nil :MakeArray([LuaTranslator class]C nil)] forKey:@"setOnCheckedChangedListener"];
 	return dict;
 }
 

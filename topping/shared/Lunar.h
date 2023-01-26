@@ -10,9 +10,9 @@
 	
 }
 
-+(void)Register:(lua_State*)L :(Class)T;
-+(int) push:(lua_State*)L :(NSObject*)obj :(bool)gc;
-+(NSMutableDictionary*)ParseTable:(TValue *)valP;
++(void)register:(lua_State*)L :(Class)T;
++(int)push:(lua_State*)L :(NSObject*)obj :(bool)gc;
++(NSMutableDictionary*)parseTable:(TValue *) valP;
 /*+(NSObject*) check:(lua_State*) L:(int) narg;
 //member function dispatcher
 +(int) thunk:(lua_State*) L;

@@ -11,28 +11,28 @@
 
 @synthesize lua_id, navController;
 
--(void)Setup:(UIViewController*)controller
+-(void)setup:(UIViewController*)controller
 {
 	self.navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    NSString *style = [sToppingEngine GetAppStyle];
+    NSString *style = [sToppingEngine getAppStyle];
     
-    NSDictionary *styleMap = [[LGStyleParser GetInstance] GetStyle:style];
+    NSDictionary *styleMap = [[LGStyleParser getInstance] getStyle:style];
     
     NSString *windowActionBar = [styleMap objectForKey:@"windowActionBar"];
     if(windowActionBar != nil)
-        self.navController.navigationBarHidden = ![[LGValueParser GetInstance] GetBoolValueDirect:windowActionBar];
+        self.navController.navigationBarHidden = ![[LGValueParser getInstance] getBoolValueDirect:windowActionBar];
 
     NSString *actionBarColor = [styleMap objectForKey:@"colorPrimary"];
     if(actionBarColor != nil)
     {
-        self.navController.navigationBar.barTintColor = [[LGColorParser GetInstance] ParseColor:actionBarColor];
+        self.navController.navigationBar.barTintColor = [[LGColorParser getInstance] parseColor:actionBarColor];
         self.navController.navigationBar.translucent = NO;
     }
     
     NSString *toolbarTextColor = [styleMap objectForKey:@"iosToolbarTextColor"];
     if(toolbarTextColor != nil)
     {
-        NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[[LGColorParser GetInstance] ParseColor:toolbarTextColor]};
+        NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[[LGColorParser getInstance] parseColor:toolbarTextColor]};
         self.navController.navigationBar.titleTextAttributes = textAttributes;
     }
     
@@ -40,11 +40,11 @@
     self.packageName = [[NSBundle mainBundle] bundleIdentifier];
 }
 
--(LuaForm *)GetForm {
+-(LuaForm *)getForm {
     return self.form;
 }
 
--(void)StartForm:(LuaFormIntent*)formIntent {
+-(void)startForm:(LuaFormIntent*)formIntent {
     formIntent.form.intent = formIntent;
     [navController pushViewController:formIntent.form animated:true];
 }
@@ -66,8 +66,8 @@
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    InstanceMethodNoArg(GetForm, LuaForm, @"GetForm")
-    InstanceMethodNoRet(StartForm:, @[[LuaFormIntent class]], @"StartForm")
+    InstanceMethodNoArg(getForm, LuaForm, @"getForm")
+    InstanceMethodNoRet(startForm:, @[[LuaFormIntent class]], @"startForm")
         
 	return dict;
 }

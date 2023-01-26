@@ -33,11 +33,11 @@ typedef enum UIEvents
 {
 }
 
-+(void)RegisterUIEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
-+(void)RegisterForm:(NSString*)name :(LuaTranslator*)ltInit;
-+(ILuaForm*)GetFormInstance:(NSString*)name :(LuaForm*)fragment;
-+(void)RegisterFragment:(NSString*)name :(LuaTranslator*)ltInit;
-+(ILuaFragment*)GetFragmentInstance:(NSString*)name :(LuaFragment*)fragment;
-+(NSObject*)OnUIEvent:(NSObject<LuaInterface>*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
++(void)registerUIEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt;
++(void)registerForm:(NSString*)name :(LuaTranslator*)ltInit;
++(ILuaForm*)getFormInstance:(NSString*)name :(LuaForm*)fragment;
++(void)registerFragment:(NSString*)name :(LuaTranslator*)ltInit;
++(ILuaFragment*)getFragmentInstance:(NSString*)name :(LuaFragment*)fragment;
++(NSObject*)onUIEvent:(NSObject<LuaInterface>*)pGui :(int)EventType :(LuaContext*)lc :(int)ArgCount, ...;
 
 @end

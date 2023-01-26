@@ -8,14 +8,14 @@
 	NSMutableDictionary *colorMap;
 }
 
-+(LGColorParser*) GetInstance;
--(void) ParseXML:(NSString *)filename;
--(void) ParseXML:(int)orientation :(GDataXMLElement *)element;
++(LGColorParser*) getInstance;
+-(void) parseXML:(NSString *)filename;
+-(void) parseXML:(int)orientation :(GDataXMLElement *)element;
 
--(UIColor*) ParseColor:(NSString *)color;
--(UIColor*) ParseColorInternal:(NSString *)color;
--(UIColor*)GetTextColorFromColor:(UIColor*)color;
--(NSDictionary*)GetKeys;
+-(UIColor*) parseColor:(NSString *)color;
+-(UIColor*) parseColorInternal:(NSString *)color;
+-(UIColor*)getTextColorFromColor:(UIColor*)color;
+-(NSDictionary*)getKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *colorMap;
 

@@ -18,79 +18,79 @@
  * Creates LuaHttpClient Object From Lua.
  * @param tag Tag that htmlclient will used.
  */
-+(LuaHttpClient*)Create:(NSString *)tag;
++(LuaHttpClient*)create:(NSString *)tag;
 /**
  * Set Content type
  * @param content type
  */
--(void)SetContentType:(NSString *)type;
+-(void)setContentType:(NSString *)type;
 /**
  * Start Form data.
  * This is used to create multipart form data. After this use AppendPostData or AppendImageData.
  * To end form use EndForm.
  * @return Form data
  */
--(LuaNativeObject*)StartForm;
+-(LuaNativeObject*)startForm;
 /**
  * Add data to form.
  * @param formData Form data created by StartForm.
  * @param name id of the data.
  * @param value value of the data.
  */
--(void)AppendPostData:(LuaNativeObject*)formData :(NSString*)name :(NSString*)value;
+-(void)appendPostData:(LuaNativeObject*)formData :(NSString*)name :(NSString*)value;
 /**
  * Add file to form.
  * @param formData Form data created by StartForm.
  * @param name id of the data.
  * @param file data of the file.
  */
--(void)AppendFileData:(LuaNativeObject*)formData :(NSString*)name :(NSObject*)file;
+-(void)appendFileData:(LuaNativeObject*)formData :(NSString*)name :(NSObject*)file;
 /**
  * Finishes the form data created.
  * @param formData Form data created by StartForm.
  */
--(void)EndForm:(LuaNativeObject*)formData;
+-(void)endForm:(LuaNativeObject*)formData;
 /**
  * Start asynchronous load of form.
  * @param url url to send.
  * @param formData Form data finished by EndForm.
  * @param tag tag that is used to identify connection.
  */
--(void)StartAsyncLoadForm:(NSString*)url :(LuaNativeObject*)formData :(NSString*)tag;
+-(void)startAsyncLoadForm:(NSString*)url :(LuaNativeObject*)formData :(NSString*)tag;
 /**
  * Start asynchronous load.
  * @param url url to send.
  * @param data post data string.
  * @param tag tag that is used to identify connection.
  */
--(void)StartAsyncLoad:(NSString*)url :(NSString*)data :(NSString*)tag;
+-(void)startAsyncLoad:(NSString*)url :(NSString*)data :(NSString*)tag;
 /**
  * Start asynchronous load.
  * @param url url to send.
  * @param tag tag that is used to identify connection.
  */
--(void)StartAsyncLoadGet:(NSString*)url :(NSString *)tag;
+-(void)startAsyncLoadGet:(NSString*)url :(NSString *)tag;
 /**
  * Start synchronous load.
  * @param url url to send.
  * @param data post data string.
  * @return string value of returned data.
  */
--(NSString*)StartLoad:(NSString*)url :(NSString*)data;
+-(NSString*)startLoad:(NSString*)url :(NSString*)data;
 /**
  * Start synchronous load.
  * @param url url to send.
  * @return string value of returned data.
  */
--(NSString*)StartLoadGet:(NSString*)url;
+-(NSString*)startLoadGet:(NSString*)url;
 /**
  * Set timeout of connection
  * @param timeout timeout value seconds
  */
--(void)SetTimeout:(int)timeout;
+-(void)setTimeout:(int)timeout;
 
--(void)SetOnFinishListener:(LuaTranslator*) lt;
--(void)SetOnFailListener:(LuaTranslator*) lt;
+-(void)setOnFinishListener:(LuaTranslator*) lt;
+-(void)setOnFailListener:(LuaTranslator*) lt;
 
 /**
  * Http Client.

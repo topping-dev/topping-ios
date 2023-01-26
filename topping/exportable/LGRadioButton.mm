@@ -4,12 +4,12 @@
 
 @implementation LGRadioButton
 
--(UIView*)CreateComponent
+-(UIView*)createComponent
 {
 	return [[UIView alloc] init];
 }
 
--(void)ComponentAddMethod:(UIView*)par :(UIView *)me
+-(void)componentAddMethod:(UIView*)par :(UIView *)me
 {   
 	[((UISegmentedControl *)par) insertSegmentWithTitle:self.android_text atIndex:[((UISegmentedControl *)par) numberOfSegments] animated:NO];
 	if(self.android_checked != nil && CONTAINS(self.android_checked, @"true"))
@@ -89,10 +89,10 @@
 }
 
 //Lua
-+(LGRadioButton*)Create:(LuaContext *)context
++(LGRadioButton*)create:(LuaContext *)context
 {
 	LGRadioButton *lst = [[LGRadioButton alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
@@ -113,12 +113,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:) 
 										:[LGRadioButton class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGRadioButton class]] 
-			 forKey:@"Create"];
+			 forKey:@"create"];
 	return dict;
 }
 		 

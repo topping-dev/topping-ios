@@ -4,7 +4,7 @@
 
 FILE *GetResourceAssetSdF(const char *filename, const char *mode)
 {
-	NSString *scriptsRoot = [sToppingEngine GetScriptsRoot];
+	NSString *scriptsRoot = [sToppingEngine getScriptsRoot];
 	NSString *name = [NSString stringWithCString:filename encoding:NSUTF8StringEncoding];
 	NSArray *arr = SPLIT(name, @"/");
 	name = [arr objectAtIndex:[arr count] - 1];
@@ -31,7 +31,7 @@ FILE *GetResourceAssetSdF(const char *filename, const char *mode)
 
 FILE *GetResourceSdAssetF(const char *filename, const char *mode)
 {
-	NSString *scriptsRoot = [sToppingEngine GetScriptsRoot];	
+	NSString *scriptsRoot = [sToppingEngine getScriptsRoot];
 	NSString *name = [NSString stringWithCString:filename encoding:NSUTF8StringEncoding];
 	NSString *basePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/"];
 	NSString *resourcePathDirectory = [basePath stringByAppendingPathComponent:scriptsRoot];
@@ -65,6 +65,12 @@ FILE *GetResourceAssetF(const char *filename, const char *mode)
 	if([arr count] < 2)
 		return NULL;
 	NSString* resourcePath = [[NSBundle mainBundle] pathForResource:[arr objectAtIndex:0] ofType:[arr objectAtIndex:1]];
+    if(resourcePath == nil) {
+        NSString *scriptPath = [sToppingEngine getScriptsRoot];
+        if(scriptPath == nil)
+            scriptPath = @"scripts";
+        resourcePath = [[NSBundle mainBundle] pathForResource:[arr objectAtIndex:0] ofType:[arr objectAtIndex:1] inDirectory:scriptPath];
+    }
 	if(resourcePath != nil)
 		return fopen([resourcePath cStringUsingEncoding:NSUTF8StringEncoding], "r");
 	
@@ -74,7 +80,7 @@ FILE *GetResourceAssetF(const char *filename, const char *mode)
 FILE *lua_ifopen(const char *filename, const char *mode)
 {
 	FILE *f = NULL;
-	switch([sToppingEngine GetPrimaryLoad])
+	switch([sToppingEngine getPrimaryLoad])
 	{
 		case EXTERNAL_DATA:
 		case INTERNAL_DATA:

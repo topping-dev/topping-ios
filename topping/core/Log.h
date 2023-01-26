@@ -13,14 +13,14 @@
 
 @end
 
-static void Loge(const char* tag, const char* message);
-static void Loge(const char* tag, const char* message)
+static void logE(const char* tag, const char* message);
+static void logE(const char* tag, const char* message)
 {
 	[Log e:[NSString stringWithCString:tag encoding:NSUTF8StringEncoding] :[NSString stringWithCString:message encoding:NSUTF8StringEncoding]];
 }
 
-static void Logd(const char* tag, const char* message);
-static void Logd(const char* tag, const char* message)
+static void logD(const char* tag, const char* message);
+static void logD(const char* tag, const char* message)
 {
 	[Log d:[NSString stringWithCString:tag encoding:NSUTF8StringEncoding] :[NSString stringWithCString:message encoding:NSUTF8StringEncoding]];
 }

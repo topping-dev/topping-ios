@@ -16,14 +16,14 @@
 {
 }
 
-+(LGComboBox*)Create:(LuaContext *)context;
--(void) AddItem:(NSString *)name :(NSObject *)value;
--(void) SetItems:(NSMutableDictionary *)values;
--(void) ShowCancel:(int)value;
--(NSString*) GetSelectedName;
--(NSObject*) GetSelectedTag;
--(void) SetSelected:(int)index;
--(void)SetOnComboChangedListener:(LuaTranslator*)lt;
++(LGComboBox*)create:(LuaContext *)context;
+-(void) addItem:(NSString *)name :(NSObject *)value;
+-(void) setItems:(NSMutableDictionary *)values;
+-(void) showCancel:(int)value;
+-(NSString*) getSelectedName;
+-(NSObject*) getSelectedTag;
+-(void) setSelectedIndex:(int)index;
+-(void)setOnComboChangedListener:(LuaTranslator*)lt;
 
 @property(nonatomic) BOOL showCancel;
 @property(nonatomic, strong) ComboData *selected;

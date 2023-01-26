@@ -16,12 +16,12 @@
 	return self;
 }
 
-+(LGDimensionParser*)GetInstance
++(LGDimensionParser*)getInstance
 {
-	return [LGParser GetInstance].pDimen;
+	return [LGParser getInstance].pDimen;
 }
 
--(void) ParseXML:(NSString *)filename
+-(void) parseXML:(NSString *)filename
 {
 	if(self.dimensionMap == nil)
 	{
@@ -61,7 +61,7 @@
 	}
 }
 
--(void)ParseXML:(int)orientation :(GDataXMLElement *)element
+-(void)parseXML:(int)orientation :(GDataXMLElement *)element
 {
     if(self.dimensionMap == nil)
 	{
@@ -101,7 +101,7 @@
     }
 }
 
--(int)GetDimension:(NSString *)key
+-(int)getDimension:(NSString *)key
 {
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
@@ -120,7 +120,7 @@
     return [DisplayMetrics readSize:key];
 }
 
--(NSDictionary *)GetKeys
+-(NSDictionary *)getKeys
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for(NSString *key in self.dimensionMap)

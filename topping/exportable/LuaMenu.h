@@ -5,18 +5,18 @@
 
 @interface LuaMenu : NSObject <LuaClass>
 
-+(LuaMenu*)Create;
++(LuaMenu*)create;
 
--(void)SetTitle:(NSString*)text;
+-(void)setTitle:(NSString*)text;
 
--(void)SetTitleRef:(LuaRef*)text;
+-(void)setTitleRef:(LuaRef*)text;
 
--(void)SetIcon:(LuaRef*)icon;
+-(void)setIcon:(LuaRef*)icon;
 
--(void)SetIntent:(LuaTranslator*)lt;
+-(void)setIntent:(LuaTranslator*)lt;
 
 @property (nonatomic, retain) NSString* idVal;
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) NSString* title_;
 @property (nonatomic, retain) LuaRef* iconRes;
 
 @end

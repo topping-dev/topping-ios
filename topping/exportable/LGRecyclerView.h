@@ -6,13 +6,13 @@
 @interface LGRecyclerView : LGView
 
 //Lua
-+(LGRecyclerView *)Create:(LuaContext *)context;
--(void)SetAdapter:(LGRecyclerViewAdapter *)val;
--(void)SetAdapterInterface:(LuaTranslator *)ltInit;
--(LGRecyclerViewAdapter *)GetAdapter;
--(void)Notify;
++(LGRecyclerView *)create:(LuaContext *)context;
+-(void)setAdapter:(LGRecyclerViewAdapter *)val;
+-(void)setAdapterInterface:(LuaTranslator *)ltInit;
+-(LGRecyclerViewAdapter *)getAdapter;
+-(void)notify;
 
-@property(nonatomic, strong) LGRecyclerViewAdapter *adapter;
+@property(nonatomic, strong) LGRecyclerViewAdapter *adapter_;
 @property(nonatomic, strong) UICollectionViewLayout *flowLayout;
 
 

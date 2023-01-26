@@ -9,6 +9,6 @@
 }
 
 //Lua
-+(LGScrollView*)Create:(LuaContext *)context;
++(LGScrollView*)create:(LuaContext *)context;
 
 @end

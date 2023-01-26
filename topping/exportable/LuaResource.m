@@ -7,27 +7,27 @@
 
 @implementation LuaResource
 
-+(NSObject*)GetResourceAssetSd:(NSString*) path :(NSString*) resName
++(NSObject*)getResourceAssetSd:(NSString*) path :(NSString*) resName
 {
 	return GetResourceAssetSd(path, resName, nil);
 }
 
-+(NSObject*)GetResourceSdAsset:(NSString*) path :(NSString*) resName
++(NSObject*)getResourceSdAsset:(NSString*) path :(NSString*) resName
 {
 	return GetResourceSdAsset(path, resName, nil);
 }
 
-+(NSObject*)GetResourceAsset:(NSString*) path :(NSString*) resName
++(NSObject*)getResourceAsset:(NSString*) path :(NSString*) resName
 {
 	return GetResourceAsset(path, resName, nil);
 }
 
-+(NSObject*)GetResourceSd:(NSString*) path :(NSString*) resName
++(NSObject*)getResourceSd:(NSString*) path :(NSString*) resName
 {
 	return GetResourceSd(path, resName, nil);
 }
 
-+(LuaStream *) GetResource:(NSString *)path :(NSString *)resName
++(LuaStream *) getResource:(NSString *)path :(NSString *)resName
 {
     NSBundle *bund = [NSBundle mainBundle];
 #if TARGET_OS_MACCATALYST
@@ -36,7 +36,7 @@
     NSString *bundlePath = [bund bundlePath];
 #endif
     NSString *truePath = [bundlePath stringByAppendingPathComponent:path];
-	switch([sToppingEngine GetPrimaryLoad])
+	switch([sToppingEngine getPrimaryLoad])
 	{
 		case EXTERNAL_DATA:
 		case INTERNAL_DATA:
@@ -45,7 +45,7 @@
             if(data == nil)
                 return nil;
             LuaStream *ls = [[LuaStream alloc] init];
-            [ls SetStream:data];
+            [ls setStream:data];
 			return ls;
 		}break;
 		case RESOURCE_DATA:
@@ -55,16 +55,16 @@
             if(data == nil)
                 return nil;
             LuaStream *ls = [[LuaStream alloc] init];
-            [ls SetStream:data];
+            [ls setStream:data];
             return ls;
 		}break;
 	}
 }
 
-+(LuaStream *) GetResourceRef:(LuaRef*)ref
++(LuaStream *) getResourceRef:(LuaRef*)ref
 {
     LuaStream *ls = [[LuaStream alloc] init];
-    NSObject *obj = [[LGValueParser GetInstance] GetValue:ref.idRef];
+    NSObject *obj = [[LGValueParser getInstance] getValue:ref.idRef];
     if([obj isKindOfClass:[LGDrawableReturn class]])
     {
         LGDrawableReturn *ldr = ((LGDrawableReturn*)obj);
@@ -73,11 +73,11 @@
     return ls;
 }
 
-+(NSArray *)GetResourceDirectories:(NSString *)startsWith
++(NSArray *)getResourceDirectories:(NSString *)startsWith
 {
     NSMutableArray *lst = [NSMutableArray array];
     NSFileManager *fm = [NSFileManager defaultManager];
-    switch ([sToppingEngine GetPrimaryLoad])
+    switch ([sToppingEngine getPrimaryLoad])
     {
         case EXTERNAL_DATA:
         case INTERNAL_DATA:
@@ -89,7 +89,7 @@
         case RESOURCE_DATA:
         {
             NSBundle *bund = [NSBundle mainBundle];
-            NSString *uiRoot = [sToppingEngine GetUIRoot];
+            NSString *uiRoot = [sToppingEngine getUIRoot];
 #if TARGET_OS_MACCATALYST
             NSString *resBundlePath = [[bund resourcePath] stringByAppendingPathComponent:uiRoot];
 #else
@@ -114,10 +114,10 @@
     
 }
 
-+(NSArray *)GetResourceFiles:(NSString *)path
++(NSArray *)getResourceFiles:(NSString *)path
 {
     NSFileManager *fm = [NSFileManager defaultManager];
-    switch ([sToppingEngine GetPrimaryLoad])
+    switch ([sToppingEngine getPrimaryLoad])
     {
         case EXTERNAL_DATA:
         case INTERNAL_DATA:
@@ -136,7 +136,7 @@
 #else
             NSString *bundlePath = [bund bundlePath];
 #endif
-            NSString *uiRoot = [sToppingEngine GetUIRoot];
+            NSString *uiRoot = [sToppingEngine getUIRoot];
             NSString *resBundlePath = [bundlePath stringByAppendingPathComponent:uiRoot];
             NSString *folderPath = [resBundlePath stringByAppendingPathComponent:path];
             NSArray *files = [fm contentsOfDirectoryAtPath:folderPath error:nil];
@@ -158,42 +158,42 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResourceAssetSd::)) 
-										:@selector(GetResourceAssetSd::) 
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getResourceAssetSd::)) 
+										:@selector(getResourceAssetSd::) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSString class], [NSString class], nil] 
 										:[LuaResource class]] 
-			 forKey:@"GetResourceAssetSd"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResourceSdAsset::)) 
-										:@selector(GetResourceSdAsset::) 
+			 forKey:@"getResourceAssetSd"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getResourceSdAsset::)) 
+										:@selector(getResourceSdAsset::) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSString class], [NSString class], nil] 
 										:[LuaResource class]] 
-			 forKey:@"GetResourceSdAsset"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResourceAsset::)) 
-										:@selector(GetResourceAsset::) 
+			 forKey:@"getResourceSdAsset"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getResourceAsset::)) 
+										:@selector(getResourceAsset::) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSString class], [NSString class], nil] 
 										:[LuaResource class]] 
-			 forKey:@"GetResourceAsset"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResourceSd::)) 
-										:@selector(GetResourceSd::) 
+			 forKey:@"getResourceAsset"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getResourceSd::)) 
+										:@selector(getResourceSd::) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSString class], [NSString class], nil] 
 										:[LuaResource class]] 
-			 forKey:@"GetResourceSd"];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResource::)) 
-										:@selector(GetResource::) 
+			 forKey:@"getResourceSd"];
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getResource::)) 
+										:@selector(getResource::) 
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSString class], [NSString class], nil] 
 										:[LuaResource class]] 
-			 forKey:@"GetResource"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(GetResourceRef:))
-                                        :@selector(GetResourceRef:)
+			 forKey:@"getResource"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(getResourceRef:))
+                                        :@selector(getResourceRef:)
                                         :[NSObject class]
                                         :[NSArray arrayWithObjects:[LuaRef class], nil]
                                         :[LuaResource class]]
-             forKey:@"GetResourceRef"];
+             forKey:@"getResourceRef"];
 
 	return dict;
 }

@@ -6,10 +6,10 @@
 @implementation LGAutoCompleteTextView
 
 //Lua
-+(LGAutoCompleteTextView*)Create:(LuaContext *)context
++(LGAutoCompleteTextView*)create:(LuaContext *)context
 {
 	LGAutoCompleteTextView *lst = [[LGAutoCompleteTextView alloc] init];
-	[lst InitProperties];
+	[lst initProperties];
 	return lst;
 }
 
@@ -30,12 +30,12 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(Create:))
-										:@selector(Create:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+										:@selector(create:)
 										:[LGAutoCompleteTextView class]
 										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
 										:[LGAutoCompleteTextView class]]
-			 forKey:@"Create"];
+			 forKey:@"create"];
 	return dict;
 }
 

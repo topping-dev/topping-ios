@@ -6,13 +6,13 @@
 
 }
 
-+(UIView *)GetMasterView;
-+(void)SetMasterView:(UIView *)view;
-+(CGRect)GetBaseFrame;
-+(void)SetBaseFrame:(CGRect)frame;
-+(float)GetStatusBarHeight;
-+(void)SetStatusBarHeight:(float)height;
-+(void)SetDensity:(float)d :(float)sd;
++(UIView *)getMasterView;
++(void)setMasterView:(UIView *)view;
++(CGRect)getBaseFrame;
++(void)setBaseFrame:(CGRect)frame;
++(float)getStatusBarHeight;
++(void)setStatusBarHeight:(float)height;
++(void)setDensity:(float)d :(float)sd;
 +(float)dpToSp:(float)value;
 +(float)spToDp:(float)value;
 +(int)readSize:(NSString *)sz;

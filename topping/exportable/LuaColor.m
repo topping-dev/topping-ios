@@ -5,21 +5,21 @@
 
 @synthesize colorValue;
 
-+(LuaColor *)FromString:(NSString *)colorStr
++(LuaColor *)fromString:(NSString *)colorStr
 {
     LuaColor *color = [[LuaColor alloc] init];
-    color.colorValue = [[LGColorParser GetInstance] ParseColor:colorStr];
+    color.colorValue = [[LGColorParser getInstance] parseColor:colorStr];
     return color;
 }
 
-+(LuaColor *)CreateFromARGB:(int)alpha :(int)red :(int)green :(int)blue
++(LuaColor *)createFromARGB:(int)alpha :(int)red :(int)green :(int)blue
 {
     LuaColor *color = [[LuaColor alloc] init];
     color.colorValue = [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:alpha / 255.0f];
     return color;
 }
 
-+(LuaColor *)CreateFromRGB:(int)red :(int)green :(int)blue
++(LuaColor *)createFromRGB:(int)red :(int)green :(int)blue
 {
     LuaColor *color = [[LuaColor alloc] init];
     color.colorValue = [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:1.0f];
@@ -29,21 +29,21 @@
 /**
  * Internal
  */
-+(LuaColor*)ColorFromInt:(int)color
++(LuaColor*)colorFromInt:(int)color
 {
-    unsigned int A = [LuaColor Alpha:color];
-    int R = [LuaColor Red:color];
-    int G = [LuaColor Green:color];
-    int B = [LuaColor Blue:color];
+    unsigned int A = [LuaColor alpha:color];
+    int R = [LuaColor red:color];
+    int G = [LuaColor green:color];
+    int B = [LuaColor blue:color];
     
-    return [LuaColor CreateFromARGB:A :R :G :B];
+    return [LuaColor createFromARGB:A :R :G :B];
 }
 
 /**
  * Return the alpha component of a color int. This is the same as saying
  * color >>> 24
  */
-+(unsigned int)Alpha:(unsigned int) color
++(unsigned int)alpha:(unsigned int) color
 {
     return color >> 24;
 }
@@ -52,7 +52,7 @@
  * Return the red component of a color int. This is the same as saying
  * (color >> 16) & 0xFF
  */
-+(int)Red:(int) color
++(int)red:(int) color
 {
     return (color >> 16) & 0xFF;
 }
@@ -61,7 +61,7 @@
  * Return the green component of a color int. This is the same as saying
  * (color >> 8) & 0xFF
  */
-+(int)Green:(int) color
++(int)green:(int) color
 {
     return (color >> 8) & 0xFF;
 }
@@ -70,7 +70,7 @@
  * Return the blue component of a color int. This is the same as saying
  * color & 0xFF
  */
-+(int)Blue:(int) color
++(int)blue:(int) color
 {
     return color & 0xFF;
 }
@@ -88,24 +88,24 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(FromString:))
-										:@selector(FromString:)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(fromString:))
+										:@selector(fromString:)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[NSString class], nil]
 										:[LuaColor class]]
-			 forKey:@"FromString"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateFromARGB::::))
-										:@selector(CreateFromARGB::::)
+			 forKey:@"fromString"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createFromARGB::::))
+										:@selector(createFromARGB::::)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaInt class], [LuaInt class], [LuaInt class], [LuaInt class], nil]
 										:[LuaColor class]]
-			 forKey:@"CreateFromARGB"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(CreateFromRGB:::))
-										:@selector(CreateFromRGB:::)
+			 forKey:@"createFromARGB"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createFromRGB:::))
+										:@selector(createFromRGB:::)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaInt class], [LuaInt class], [LuaInt class], nil]
 										:[LuaColor class]]
-			 forKey:@"CreateFromRGB"];
+			 forKey:@"createFromRGB"];
 	return dict;
 }
 

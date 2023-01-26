@@ -10,9 +10,9 @@
 }
 
 //Lua
-+(LGImageView*)Create:(LuaContext *)context :(NSString*)lid;
--(void)SetImage:(LuaStream *)stream;
--(void)SetImageRef:(LuaRef *)ref;
++(LGImageView*)create:(LuaContext *)context :(NSString*)lid;
+-(void)setImage:(LuaStream *)stream;
+-(void)setImageRef:(LuaRef *)ref;
 
 @property(nonatomic, retain) NSNumber *android_adjustViewBounds;
 @property(nonatomic, retain) NSNumber *android_baselineAlignBottom;
