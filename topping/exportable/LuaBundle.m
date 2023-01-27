@@ -4,6 +4,15 @@
 
 @implementation LuaBundle
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.bundle = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
 - (instancetype)initWithBundle:(NSMutableDictionary*)bundle
 {
     self = [super init];

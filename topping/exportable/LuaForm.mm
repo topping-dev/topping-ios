@@ -21,6 +21,7 @@
         self.lifecycleRegistry = [[LifecycleRegistry alloc] initWithOwner:self.lifecycleOwner];
         self.onBackPressedDispatcher = [[LuaFormOnBackPressedDispatcher alloc] initWithForm: self];
         self.mFragments = [FragmentController createControllerWithFragmentHostCallback:[[LuaFormHostCallback alloc] initWithForm:self]];
+        [LGParser getInstance].pLayout = [[LGFragmentLayoutParser alloc] initWithFragmentManager:[self getSupportFragmentManager]];
         
         [[self getSavedStateRegistry] registerSavedStateProviderWithKey:@"android:support:fragments" provider:[[LuaFormSavedStateProvider alloc] initWithForm:self]];
         
@@ -29,19 +30,23 @@
     return self;
 }
 
-+(LuaNativeObject*)create:(LuaContext*)context :(LuaRef*)luaId
++(LuaFormIntent*)create:(LuaContext*)context :(LuaRef*)luaId
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
 	form.luaId = [luaId getCleanId];
-    return [[LuaNativeObject alloc] initWithObject:form];
+    LuaFormIntent *formIntent = [[LuaFormIntent alloc] initWithBundle:[LuaBundle new]];
+    formIntent.form = form;
+    return formIntent;
 }
 
-+(LuaNativeObject*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
++(LuaFormIntent*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
 	form.luaId = [luaId getCleanId];
     form.ui = ui;
-    return [[LuaNativeObject alloc] initWithObject:form];
+    LuaFormIntent *formIntent = [[LuaFormIntent alloc] initWithBundle:[LuaBundle new]];
+    formIntent.form = form;
+    return formIntent;
 }
 
 +(LuaForm*)getActiveForm
@@ -129,15 +134,7 @@
     self.mResumed = true;
     [self.mFragments noteStateNotSaved];
     [self.mFragments execPendingActions];
-    if(!self.createCalled)
-    {
-        self.createCalled = true;
-        self.kotlinInterface = [LuaEvent getFormInstance:self.luaId :self];
-        [LuaEvent onUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
-        if(self.kotlinInterface != nil) {
-            [self.kotlinInterface.ltOnCreate call];
-        }
-    }
+    [self onCreate];
     [self.lifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_RESUME];
     [self.mFragments dispatchResume];
     [LuaEvent onUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
@@ -278,7 +275,7 @@
 -(void)setLuaView:(LGView*)v
 {
 	self.lgview = v;
-	self.view = [v getView];
+    [self addMainView:[v getView]];
 }
 
 -(void)setViewXML:(LuaRef *)xml
@@ -306,6 +303,18 @@
 
 - (BOOL)isChangingConfigurations {
     return true;
+}
+
+- (void)onCreate {
+    if(!self.createCalled)
+    {
+        self.createCalled = true;
+        self.kotlinInterface = [LuaEvent getFormInstance:self.luaId :self];
+        [LuaEvent onUIEvent:self :UI_EVENT_CREATE :self.context :0, nil];
+        if(self.kotlinInterface != nil) {
+            [self.kotlinInterface.ltOnCreate call];
+        }
+    }
 }
 
 -(void)onBackPressed {
@@ -371,6 +380,10 @@
 -(void)addMainView:(UIView *)viewToAdd {
     if(self.view == nil || viewToAdd == nil)
         return;
+    for(int i = 0; i < self.view.subviews.count; i++) {
+        UIView *subview = [self.view.subviews objectAtIndex:i];
+        [subview removeFromSuperview];
+    }
     [self.view addSubview:viewToAdd];
     [viewToAdd setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSLayoutConstraint *constraint;
@@ -418,8 +431,8 @@
     InstanceMethodNoArg(getContext, LuaContext, @"getContext")
     InstanceMethod(getViewById:, LGView, @[[LuaRef class]], @"getViewById")
     InstanceMethodNoArg(getBindings, NSDictionary, @"getBindings")
-    InstanceMethodNoArg(getView, LGView, @"getView")
-    InstanceMethodNoRet(setView:, @[[LGView class]], @"setView")
+    InstanceMethodNoArg(getLuaView, LGView, @"getView")
+    InstanceMethodNoRet(setLuaView:, @[[LGView class]], @"setView")
     InstanceMethodNoRet(setViewXML:, @[[LuaRef class]], @"setViewXML")
     InstanceMethodNoRet(setTitle:, @[[NSString class]], @"setTitle")
     InstanceMethodNoRet(setTitleRef:, @[[LuaRef class]], @"setTitleRef")

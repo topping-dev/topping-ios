@@ -158,15 +158,12 @@ static LuaForm *sActiveForm;
 	if([initUI compare:@""] != 0)
 	{
 		LGView *lgview = nil;
-        NSLog(@"Window Frame: %@", NSStringFromCGRect(self.window.rootViewController.view.frame));
-        NSLog(@"Form Frame: %@", NSStringFromCGRect(self.startForm.view.frame));
         UIView *viewToAdd = [[[self.startForm getSupportFragmentManager] getLayoutInflaterFactory] parseXML:initUI :self.startForm.view :nil :self.startForm :&lgview];
-        NSLog(@"View To Add Frame: %@", NSStringFromCGRect(viewToAdd.frame));
         [self.startForm addMainView:viewToAdd];
     }
 	else
 	{
-        [LuaEvent onUIEvent:self.startForm :UI_EVENT_CREATE :self.startForm.context :0, nil];
+        [self.startForm onCreate];
 	}
 }
 

@@ -29,8 +29,8 @@
 
 - (instancetype)initWithContext:(LuaContext *)context;
 
-+(LuaNativeObject*)create:(LuaContext*)context :(LuaRef*)luaId;
-+(LuaNativeObject*)createWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
++(LuaFormIntent*)create:(LuaContext*)context :(LuaRef*)luaId;
++(LuaFormIntent*)createWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui;
 +(LuaForm*)getActiveForm;
 -(LuaContext*)getContext;
 -(LGView*)getViewById:(LuaRef*)lId;
@@ -44,6 +44,7 @@
 -(void)close;
 
 -(BOOL)isChangingConfigurations;
+-(void)onCreate;
 -(void)onBackPressed;
 
 -(ViewModelStore*)getViewModelStore;

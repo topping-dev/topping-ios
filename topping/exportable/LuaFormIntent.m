@@ -22,7 +22,7 @@
 }
 
 + (NSString *)className {
-    return @"LuaBundle";
+    return @"LuaFormIntent";
 }
 
 + (NSMutableDictionary *)luaMethods {

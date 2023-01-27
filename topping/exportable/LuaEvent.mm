@@ -36,7 +36,7 @@ static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
 }
 
 +(void)registerForm:(NSString*)name :(LuaTranslator*)ltInit {
-    [fragmentMap setObject:ltInit forKey:name];
+    [formMap setObject:ltInit forKey:name];
 }
 
 +(ILuaForm*)getFormInstance:(NSString*)name :(LuaForm*)form {
