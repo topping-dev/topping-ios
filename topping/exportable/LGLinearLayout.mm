@@ -39,7 +39,10 @@
     self.mBaselineChildTop = 0;
     self.sRemeasureWeightedChildren = true;
     self.mAllowInconsistentMeasurement = true;
-    
+}
+
+-(void)applyStyles {
+    [super applyStyles];
     self.orientation = VERTICAL;
     if(self.android_orientation != nil) {
         if([self.android_orientation isEqualToString:@"horizontal"]) {
@@ -137,14 +140,7 @@
         self.dHeightSpec = [self getParentHeightSpec];
         self.heightSpecSet = true;
     }
-    //[super resize];
     [self resizeInternal];
-	//NSLog(@"\n %@", [self DebugDescription:nil]);
-	/*BOOL vertical = YES;
-	if(self.android_orientation != nil)
-		vertical = [self.android_orientation compare:@"vertical"] == 0;
-    [super resize];*/
-	//[super AfterResize:vertical];
 #ifdef DEBUG_DESCRIPTION
 	NSLog(@"\n %@", [self debugDescription:nil]);
 #endif

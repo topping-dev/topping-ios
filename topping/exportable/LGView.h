@@ -126,7 +126,6 @@ enum MEASURE_SPEC
 +(int)resolveSizeAndState:(int)size :(int)measureSpec :(int)childMeasuredState;
 -(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight;
 -(void)resizeInternal;
--(void)afterResize:(BOOL)vertical;
 -(int)getContentW;
 -(int)getContentH;
 -(NSObject*)hasAttribute:(NSString *)key;
