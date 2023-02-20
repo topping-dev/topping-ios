@@ -3,4 +3,86 @@
    uuid = "922A95D2-7C0F-467E-8903-A75E0247BEAA"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F653DF07-CD16-4264-82CE-80885589F666"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/libs/Material/TextControls/BaseTextAreas/private/MDCBaseTextAreaLayout.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "-calculateLayoutWithSize:verticalPositioningReference:horizontalPositioningReference:text:font:floatingFont:label:labelPosition:labelBehavior:placeholderLabel:leadingView:leadingViewMode:trailingView:trailingViewMode:leadingAssistiveLabel:trailingAssistiveLabel:assistiveLabelDrawPriority:customAssistiveLabelDrawPriority:isRTL:isEditing:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86E862E6-C3EB-4E96-AAC7-A68A0F157C37"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/libs/Material/TextControls/BaseTextAreas/private/MDCBaseTextAreaLayout.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "-calculateLayoutWithSize:verticalPositioningReference:horizontalPositioningReference:text:font:floatingFont:label:labelPosition:labelBehavior:placeholderLabel:leadingView:leadingViewMode:trailingView:trailingViewMode:leadingAssistiveLabel:trailingAssistiveLabel:assistiveLabelDrawPriority:customAssistiveLabelDrawPriority:isRTL:isEditing:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8D5E86FE-7162-4BA1-A9DE-BCEA90CC0DAE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/exportable/LGRecyclerViewAdapter.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-getCount"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01CAF81D-962A-43EF-A65F-27020F8286F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/exportable/LGNavigationView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-notify"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C0277BA7-7BA5-49C3-9BEA-7AC3C2DD6C8C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/exportable/LGLinearLayout.mm"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "-layoutHorizontal"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

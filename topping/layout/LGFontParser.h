@@ -25,7 +25,6 @@
 @property(nonatomic) int fontStyle;
 @property(nonatomic) int fontWeight;
 
-
 @end
 
 @interface LGFontReturn : NSObject
@@ -39,7 +38,7 @@
 }
 
 +(LGFontParser*) getInstance;
-+(int)parseTextStyle:(NSString*)textStyle;
++(int)parseTextStyle:(NSString *)textStyleStr;
 -(void)initialize;
 -(LGFontReturn*) getFont:(NSString *)key;
 -(LGFontReturn*) parseXML:(NSString*)path :(NSString *)filename;

@@ -9,6 +9,9 @@
     <string name="message">Message</string>
     <string name="toast_message">Toast test</string>
     <string name="test_button_clicked">Test button clicked</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_settings">Settings</string>
     <integer-array name="mole">
         <item>1</item>
         <item>2</item>

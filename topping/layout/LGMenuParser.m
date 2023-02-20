@@ -96,29 +96,95 @@
        
     for(GDataXMLElement *child in children)
     {
-        if(![[child name] isEqualToString:@"item"])
-            continue;
-        
-        LuaMenu *item = [LuaMenu new];
-
-        NSArray *attrs = [child attributes];
-        for(GDataXMLNode *node in attrs)
+        if([[child name] isEqualToString:@"group"])
         {
-            if(COMPARE([node name], @"android:id"))
-            {
-                item.idVal = REPLACE([node stringValue], @"+", @"");
+            LuaMenu *item = [LuaMenu new];
+            
+            item.children = [self ParseMenu:child];
+            for(LuaMenu *child in item.children) {
+                child.parent = item;
             }
-            else if(COMPARE([node name], @"android:title"))
+            
+            NSArray *attrs = [child attributes];
+            for(GDataXMLNode *node in attrs)
             {
-                item.title = [[LGStringParser getInstance] getString:[node stringValue]];
+                if(COMPARE([node name], @"android:id"))
+                {
+                    item.idVal = REPLACE([node stringValue], @"+", @"");
+                }
+                else if(COMPARE([node name], @"android:checkableBehavior"))
+                {
+                    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:[node stringValue]];
+                    if([val isEqualToString:@"single"])
+                        item.checkableBehavior = CheckableBehaviorSingle;
+                    else if([val isEqualToString:@"all"])
+                        item.checkableBehavior = CheckableBehaviorAll;
+                    else
+                        item.checkableBehavior = CheckableBehaviorNone;
+                }
+                else if(COMPARE([node name], @"android:visible"))
+                {
+                    item.visible = SSTOB((NSString*)[[LGValueParser getInstance] getValue:[node stringValue]]);
+                }
+                else if(COMPARE([node name], @"android:enabled"))
+                {
+                    item.enabled = SSTOB((NSString*)[[LGValueParser getInstance] getValue:[node stringValue]]);
+                }
             }
-            else if(COMPARE([node name], @"android:icon"))
+            [menuArr addObject:item];
+            
+            continue;
+        }
+        else if([[child name] isEqualToString:@"item"])
+        {
+            LuaMenu *item = [LuaMenu new];
+
+            NSArray *attrs = [child attributes];
+            for(GDataXMLNode *node in attrs)
             {
-                item.iconRes = [LuaRef withValue:[node stringValue]];
+                if(COMPARE([node name], @"android:id"))
+                {
+                    item.idVal = REPLACE([node stringValue], @"+", @"");
+                }
+                else if(COMPARE([node name], @"android:title"))
+                {
+                    item.title = [[LGStringParser getInstance] getString:[node stringValue]];
+                }
+                else if(COMPARE([node name], @"android:icon"))
+                {
+                    item.iconRes = [LuaRef withValue:[node stringValue]];
+                }
+                else if(COMPARE([node name], @"android:showAsAction"))
+                {
+                    NSString *val = (NSString*)[[LGValueParser getInstance] getValue:[node stringValue]];
+                    if([val isEqualToString:@"never"])
+                        item.showAsAction = ShowAsActionNever;
+                    else if([val isEqualToString:@"withText"])
+                        item.showAsAction = ShowAsActionWithText;
+                    else if([val isEqualToString:@"always"])
+                        item.showAsAction = ShowAsActionAlways;
+                    else if([val isEqualToString:@"collapseActionView"])
+                        item.showAsAction = ShowAsActionCollapseActionView;
+                    else
+                        item.showAsAction = ShowAsActionIfRoom;
+                }
+                else if(COMPARE([node name], @"android:checkable"))
+                {
+                    item.checkable = SSTOB((NSString*)[[LGValueParser getInstance] getValue:[node stringValue]]);
+                }
+                else if(COMPARE([node name], @"android:visible"))
+                {
+                    item.visible = SSTOB((NSString*)[[LGValueParser getInstance] getValue:[node stringValue]]);
+                }
+                else if(COMPARE([node name], @"android:enabled"))
+                {
+                    item.enabled = SSTOB((NSString*)[[LGValueParser getInstance] getValue:[node stringValue]]);
+                }
             }
+            [menuArr addObject:item];
         }
         
-        [menuArr addObject:item];
+        
     }
     
     return menuArr;

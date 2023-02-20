@@ -319,14 +319,14 @@ public class LGFragmentLayoutParser: LGLayoutParser {
         super.initialize()
     }
 
-    override public func getViewFromName(_ name: String!, _ attrs: [Any]!) -> LGView! {
+    override public func getViewFromName(_ name: String!, _ attrs: [Any]!, _ parent: LGView!) -> LGView! {
         if(name == "androidx.fragment.app.FragmentContainerView"
            || name == "LGFragmentContainerView") {
             let result = LGFragmentContainerView(fragmentManager: mFragmentManager)
             result?.initProperties()
             return result
         }
-        return super.getViewFromName(name, attrs)
+        return super.getViewFromName(name, attrs, parent)
     }
     
     public override func applyOverrides(_ parent: LGView!, _ lgview: LGView!) {

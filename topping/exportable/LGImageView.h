@@ -14,9 +14,9 @@
 -(void)setImage:(LuaStream *)stream;
 -(void)setImageRef:(LuaRef *)ref;
 
-@property(nonatomic, retain) NSNumber *android_adjustViewBounds;
-@property(nonatomic, retain) NSNumber *android_baselineAlignBottom;
-@property(nonatomic, retain) NSNumber *android_cropToPadding;
+@property(nonatomic, retain) NSString *android_adjustViewBounds;
+@property(nonatomic, retain) NSString *android_baselineAlignBottom;
+@property(nonatomic, retain) NSString *android_cropToPadding;
 @property(nonatomic, retain) NSString *android_maxHeight;
 @property(nonatomic, retain) NSString *android_maxWidth;
 @property(nonatomic, retain) NSString *android_scaleType;

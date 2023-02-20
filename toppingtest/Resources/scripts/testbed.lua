@@ -96,9 +96,9 @@ function ListViewTest_Constructor(pGUI, luacontext)
         return viewToRet;
     end);
     pAdapter:setOnBindViewHolder(function(adapter, view, index, object)
-        local tvTitle = view:GetViewById(LR.id.testBedTitle);
-        tvTitle:SetText(object);
-        tvTitle:SetTextColorRef(LR.color.colorAccent);
+        local tvTitle = view:getViewById(LR.id.testBedTitle);
+        tvTitle:setText(object);
+        tvTitle:setTextColorRef(LR.color.colorAccent);
     end);
     pAdapter:setGetItemViewType(function(adapter, type)
         return 1;

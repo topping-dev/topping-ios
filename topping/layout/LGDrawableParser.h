@@ -19,21 +19,24 @@
 };
 
 -(UIImage*)getImage:(CGSize)size;
+-(UIImage*)getImageForState:(CGSize)size :(int)state :(UIImage*)def;
 
 @property(nonatomic, retain) UIImage *img;
 @property(nonatomic, retain) NSObject *vector;
-@property(nonatomic, retain) UIColor *color;
-@property(nonatomic, retain) NSString *state;
 @property(nonatomic) BOOL tile;
 
-@end
+@property(nonatomic) BOOL hasState;
+@property(nonatomic) BOOL state_pressed;
+@property(nonatomic) BOOL state_focused;
+@property(nonatomic) BOOL state_hovered;
+@property(nonatomic) BOOL state_selected;
+@property(nonatomic) BOOL state_checkable;
+@property(nonatomic) BOOL state_checked;
+@property(nonatomic) BOOL state_enabled;
+@property(nonatomic) BOOL state_activated;
+@property(nonatomic) BOOL state_window_focused;
 
-typedef NS_OPTIONS(NSUInteger, UIControlStateExtra) {
-    UIControlStateCheckable             = 1 << 3,
-    UIControlStateChecked               = 1 << 4,
-    UIControlStateActivated             = 1 << 5,
-    UIControlStateWindowFocused         = 1 << 6,
-};
+@end
 
 @interface LGDrawableParser : NSObject 
 {

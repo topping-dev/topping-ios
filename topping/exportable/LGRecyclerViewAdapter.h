@@ -9,6 +9,15 @@
 @protocol OnPageChangeCallback;
 @class ILGRecyclerViewAdapter;
 
+@protocol LGRecyclerViewAdapterDelegate <NSObject>
+
+-(void)onItemSelected:(LGView*)parent :(LGView*)cell :(int)position;
+-(LGView*)onCreateViewHolder:(LGView*)parent :(int)type :(LuaContext*)context;
+-(void)onBindViewHolder:(LGView*)cell :(int)position;
+-(int)getItemViewType:(int)position;
+
+@end
+
 @interface LGViewUICollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) LGView *lgview;
@@ -19,7 +28,9 @@
 
 - (instancetype)initWithContext:(LuaContext *)context :(NSString*)lua_id;
 
+-(UICollectionViewCell *)getCellForIndex:(int)index;
 -(NSObject *)getObject:(NSIndexPath*)indexPath;
+-(NSObject *)getValue:(int)position;
 -(int)getCount;
 -(int)getTotalHeight:(int)start;
 -(int)getTotalWidth:(int)start;
@@ -49,6 +60,7 @@
 
 @property(nonatomic, strong) id<OnPageChangeCallback> onPageChangedListener;
 
+@property(nonatomic, strong) id<LGRecyclerViewAdapterDelegate> delegate;
 @property(nonatomic, strong) ILGRecyclerViewAdapter *kotlinInterface;
 
 @end

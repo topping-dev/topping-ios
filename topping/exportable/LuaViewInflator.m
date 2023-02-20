@@ -56,7 +56,7 @@
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaContext class], nil] 
 										:[LuaViewInflator class]] 
-			 forKey:@"reate"];
+			 forKey:@"create"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(parseFile::)) 
 									   :@selector(parseFile::) 
 									   :[LGView class]

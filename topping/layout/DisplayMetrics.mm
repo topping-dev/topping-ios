@@ -70,7 +70,7 @@ static float statusBarHeight;
 			return [dimen intValue];*/
         
         if([sz compare:@"0dp"] == 0 || [sz compare:@"0dip"] == 0)
-            return -1;
+            return 0;
 
         if ([sz hasSuffix:@"dip"])
 			size = [[sz substringToIndex:[sz length] - 3] floatValue];
@@ -96,8 +96,10 @@ static float statusBarHeight;
 			return (int)(size*scaledDensity);
 		}
 		else {
-			if([sz compare:@"fill_parent"] == 0 || [sz compare:@"wrap_content"] == 0 || [sz compare:@"match_parent"] == 0)
+			if([sz compare:@"fill_parent"] == 0 || [sz compare:@"match_parent"] == 0)
 				return -1;
+            else if([sz compare:@"wrap_content"] == 0)
+                return -2;
 			return [sz intValue];
 		}
 	} @catch (...) {

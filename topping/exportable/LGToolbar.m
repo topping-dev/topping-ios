@@ -62,9 +62,14 @@
     
     if(self.android_background != nil)
     {
-        LGDrawableReturn *ldr = [[LGDrawableParser getInstance] parseDrawable:self.android_background];
-        if(ldr != nil)
-            toolbar.barTintColor = ldr.color;
+        NSObject *obj = [[LGValueParser getInstance] getValue:self.android_background];
+        if([obj isKindOfClass:[LGDrawableReturn class]]) {
+            LGDrawableReturn *ldr = (LGDrawableReturn*)obj;
+            toolbar.barTintColor = [UIColor colorWithPatternImage:ldr.img];
+        } else if(obj != nil) {
+            toolbar.barTintColor = (UIColor*)obj;
+        }
+        
     }
     
     @try {

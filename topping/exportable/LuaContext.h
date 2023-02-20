@@ -16,6 +16,7 @@
 	UINavigationController *navController;
 }
 
+-(void)setup:(UIViewController*)controller :(BOOL)navigation;
 -(void)setup:(UIViewController *)controller;
 -(LuaForm*)getForm;
 -(void)startForm:(LuaFormIntent*)formIntent;

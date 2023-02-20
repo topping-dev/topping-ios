@@ -7,8 +7,7 @@
 
 -(int) getContentW
 {
-    UICollectionView *cv = ((UICollectionView*)self._view);
-    if(cv != nil)
+    if(self.adapter_ != nil)
     {
         /*LGAdapterView *adapterL = (LGAdapterView*)table.delegate;
         if(adapterL != nil)
@@ -16,7 +15,7 @@
             return [adapterL GetTotalWidth:0];
         }*/
     }
-    return 0;
+    return [super getContentW];
 }
 
 -(int) getContentH
@@ -30,7 +29,7 @@
             return [adapterL GetTotalHeight:0];
         }*/
     }
-    return 0;
+    return [super getContentH];
 }
 
 -(UIView *) createComponent
@@ -66,7 +65,7 @@
     
     [((UICollectionView*)self._view) reloadData];
     
-    LGView *parToFind = self.parent;
+    /*LGView *parToFind = self.parent;
     while(parToFind != nil)
     {
         LGView *findView = parToFind.parent;
@@ -74,7 +73,7 @@
             break;
         parToFind = findView;
     }
-    /*if(parToFind != nil)
+    if(parToFind != nil)
        [parToFind ResizeAndInvalidate];*/
 }
 

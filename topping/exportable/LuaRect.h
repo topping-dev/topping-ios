@@ -15,5 +15,8 @@
 -(float)getRight;
 -(float)getTop;
 -(float)getBottom;
+-(CGRect)getCGRect;
+
+@property (nonatomic) float left, right, top, bottom;
 
 @end

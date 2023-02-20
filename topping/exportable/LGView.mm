@@ -11,15 +11,21 @@
 #import <Topping/Topping-Swift.h>
 #import "GDataXMLNode.h"
 
+static BOOL rtl = false;
+
 @implementation LGView
 
-@synthesize layout, baseLine, backgroundImage;
++(BOOL)isRtl {
+    return rtl;
+}
+
+@synthesize layout, baseLine;
 
 -(void)initProperties
 {
 	//self.layout_weight = [NSNumber numberWithFloat:0.0f];
 	self.layout = NO;
-	self.baseLine = 14;
+	self.baseLine = -1;
 	self.android_layout_width = @"wrap_content";
 	self.android_layout_height = @"wrap_content";
 }
@@ -42,28 +48,36 @@
     
     @try
     {
-        /*NSObject *val = *(viewPropertyMap[name]);
-        if([val isMemberOfClass:[NSNumber class]])
-        {*/
-            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-            [f setNumberStyle:NSNumberFormatterDecimalStyle];
-            NSNumber *val /**(viewPropertyMap[name])*/ = [f numberFromString:value];
-        /*}
-        else*/
         NSString *nameValue = [name stringByReplacingOccurrencesOfString:@":" withString:@"_"];
-        if(val == nil)
-        {
-            [self setValue:[value copy] forKey:nameValue];
-        }
-        else
-        {
-            [self setValue:[val copy] forKey:nameValue];
-        }
-        return YES;
-	}
-    @catch(NSException *ex)
-    {
+        [self setValue:[value copy] forKey:nameValue];
     }
+    @catch(NSException *ex) {
+        
+    }
+//    @try
+//    {
+//        /*NSObject *val = *(viewPropertyMap[name]);
+//        if([val isMemberOfClass:[NSNumber class]])
+//        {*/
+//            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+//            [f setNumberStyle:NSNumberFormatterDecimalStyle];
+//            NSNumber *val /**(viewPropertyMap[name])*/ = [f numberFromString:value];
+//        /*}
+//        else*/
+//        NSString *nameValue = [name stringByReplacingOccurrencesOfString:@":" withString:@"_"];
+//        if(val == nil)
+//        {
+//            [self setValue:[value copy] forKey:nameValue];
+//        }
+//        else
+//        {
+//            [self setValue:[val copy] forKey:nameValue];
+//        }
+//        return YES;
+//	}
+//    @catch(NSException *ex)
+//    {
+//    }
 	return NO;
 }
 
@@ -165,53 +179,11 @@
 		NSArray *arr = SPLIT(self.android_id, @"/");
 		if([arr count] > 1)
 			self.android_id = [arr objectAtIndex:1];
-		/*else
-			self.android_id = [LGView className];*/
 	}
-	/*else
-		self.android_id = [LGView className];*/
 	
 	//Setup background
-    NSObject *obj = nil;
-    if(ISNULLOREMPTY(self.android_background))
-        obj = self._view.backgroundColor = (UIColor*)[[LGStyleParser getInstance] getStyleValue:@"colorSurface" :[sToppingEngine getAppStyle]];
-    else
-        obj = [[LGValueParser getInstance] getValue:self.android_background];
-    if([obj isKindOfClass:[LGDrawableReturn class]])
-    {
-        LGDrawableReturn *ldr = (LGDrawableReturn*)obj;
-        if(ldr.img != nil)
-        {
-            self.backgroundImage = ldr.img;
-            self._view.backgroundColor = [UIColor colorWithPatternImage:ldr.img];
-        }
-        else if(ldr.color != nil)
-        {
-            self._view.backgroundColor = ldr.color;
-            view.backgroundColor = ldr.color;
-        }
-        else
-        {
-            UIColor *color = [[LGColorParser getInstance] parseColor:self.android_background];
-            if(color != nil)
-            {
-                self._view.backgroundColor = color;
-                view.backgroundColor = color;
-            }
-            else
-                [Log e:@"LGView.mm" :APPEND(@"Cannot load backgorund image ", self.android_background)];
-        }
-    }
-    else if([obj isKindOfClass:[UIColor class]])
-    {
-        self._view.backgroundColor = (UIColor*)obj;
-        view.backgroundColor = (UIColor*)obj;
-    }
-    else
-    {
-        self._view.backgroundColor = [UIColor clearColor];
-        view.backgroundColor = [UIColor clearColor];
-    }
+    if(self.android_background != nil)
+        [self setBackground:[LuaRef withValue:self.android_background]];
     
     self.lc = lc;
 }
@@ -220,6 +192,12 @@
 {
     if(![self._view isKindOfClass:[UILabelPadding class]])
         view.layoutMargins = UIEdgeInsetsMake(self.dPaddingTop, self.dPaddingLeft, self.dPaddingBottom, self.dPaddingRight);
+    if(self.android_enabled != nil) {
+        NSString *enabled = [[LGValueParser getInstance] getValue:self.android_enabled];
+        [self setEnabled:SSTOB(enabled)];
+    }
+    
+    rtl = [self._view isRTL];
 }
 
 -(void)addSelfToParent:(UIView*)par :(LuaForm*)cont
@@ -254,12 +232,6 @@
     }
 	
 	[self componentAddMethod:par :myView];
-	
-	//Cleanup
-	if(self.backgroundImage != nil)
-	{
-		self.backgroundImage = nil;
-	}
 }
 
 -(void)componentAddMethod:(UIView*)par :(UIView *)me
@@ -283,185 +255,128 @@
     self._view.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 }
 
--(void)afterResize:(BOOL)vertical
-{
-    //TODO:Check this
-	/*for(LGView *w in self.subviews)
-	{
-		if([w isKindOfClass:[LGLinearLayout class]])
-		{
-			//TODO acaba burda vertical vermek gerekiyormu
-			BOOL v = true;
-			LGLinearLayout *llw = (LGLinearLayout*)w;
-			if(llw.orientation != nil)
-				v = [llw.orientation compare:@"vertical"] == 0;
-			[llw AfterResize:v];
-		}
-		else
-			[w AfterResize:vertical];
-	}*/
-	if(vertical)
-		[self readWidth];
-	else
-		[self readHeight];
-//	[self ReadWidthHeight];
+-(void)resizeInternal {
+    
 }
 
--(void)readWidth
-{
-	int w = [[LGDimensionParser getInstance] getDimension:self.android_layout_width];
-	if (w < 0) {
-		w = self.dWidth;
-		if([self.android_layout_width compare:@"fill_parent"] == 0 ||
-		   [self.android_layout_width compare:@"match_parent"] == 0 ||
-		   [self.android_layout_width compare:@"0dp"] == 0)
-			return;
-	}	
-	@try {
-		self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_paddingLeft];
-		self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_paddingRight];
-		self.dPaddingTop = [[LGDimensionParser getInstance] getDimension:self.android_paddingTop];
-		self.dPaddingBottom = [[LGDimensionParser getInstance] getDimension:self.android_paddingBottom];
-		if(self.android_padding != nil)
-		{
-			self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-			self.dPaddingTop = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-			self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-			self.dPaddingBottom = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-		}
-		if(self.dPaddingLeft == -1)
-			self.dPaddingLeft = 0;
-		if(self.dPaddingRight == -1)
-			self.dPaddingRight = 0;
-		if(self.dPaddingTop == -1)
-			self.dPaddingTop = 0;
-		if(self.dPaddingBottom == -1)
-			self.dPaddingBottom = 0;
-	} @catch (...) {}
-	
-	@try {
-		self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginLeft];
-		self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginRight];
-		self.dMarginTop = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginTop];
-		self.dMarginBottom = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginBottom];
-		if(self.android_layout_margin != nil)
-		{
-			self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-			self.dMarginTop = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-			self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-			self.dMarginBottom = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-		}
-		if(self.dMarginLeft == -1)
-			self.dMarginLeft = 0;
-		if(self.dMarginRight == -1)
-			self.dMarginRight = 0;
-		if(self.dMarginTop == -1)
-			self.dMarginTop = 0;
-		if(self.dMarginBottom == -1)
-			self.dMarginBottom = 0;
-	} @catch (...) {}	
-	
-	if ([self.android_layout_width compare:@"wrap_content"] == 0) {
-		w = [self getContentW];
-	}
-	if ([self.android_layout_width compare:@"fill_parent"] == 0 ||
-		[self.android_layout_width compare:@"match_parent"] == 0 ||
-        [self.android_layout_width compare:@"0dp"] == 0)
-	{
-		if (self.parent != nil) {
-			if ([self.parent.android_layout_width compare:@"wrap_content"] == 0)
-				w = [self getContentW];
-			else
-				w = self.parent.dWidth;
-		}
-		else 
-		{
-			w = [DisplayMetrics getMasterView].frame.size.width;
-		}
-		w = w - self.dX - self.dPaddingRight - self.dMarginRight;
-	}
-	
-	self.dWidth = w;	
+-(int)findMatchParentWidth:(LGView*)view {
+    if(view.parent != nil) {
+        if([view.parent.android_layout_width isEqualToString:@"wrap_content"]) {
+            return [self findMatchParentWidth:view.parent];
+        } else {
+            return view.parent.dWidth;
+        }
+    }
+    else {
+        return self.lc.form.view.frame.size.width;
+    }
 }
 
--(void)readHeight
-{
-	int h = [[LGDimensionParser getInstance] getDimension:self.android_layout_height];
-	if (h < 0) {
-		h = self.dHeight;
-		if([self.android_layout_height compare:@"fill_parent"] == 0 ||
-		   [self.android_layout_height compare:@"match_parent"] == 0 ||
-           [self.android_layout_height compare:@"0dp"] == 0)
-			return;
-	}
-	
-	@try {
-		self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_paddingLeft];
-		self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_paddingRight];
-		self.dPaddingTop = [[LGDimensionParser getInstance] getDimension:self.android_paddingTop];
-		self.dPaddingBottom = [[LGDimensionParser getInstance] getDimension:self.android_paddingBottom];
-		if(self.android_padding != nil)
-		{
-			self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-			self.dPaddingTop = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-			self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-			self.dPaddingBottom = [[LGDimensionParser getInstance] getDimension:self.android_padding];
-		}
-		if(self.dPaddingLeft == -1)
-			self.dPaddingLeft = 0;
-		if(self.dPaddingRight == -1)
-			self.dPaddingRight = 0;
-		if(self.dPaddingTop == -1)
-			self.dPaddingTop = 0;
-		if(self.dPaddingBottom == -1)
-			self.dPaddingBottom = 0;
-	} @catch (...) {}
-	
-	@try {
-		self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginLeft];
-		self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginRight];
-		self.dMarginTop = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginTop];
-		self.dMarginBottom = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginBottom];
-		if(self.android_layout_margin != nil)
-		{
-			self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-			self.dMarginTop = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-			self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-			self.dMarginBottom = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
-		}
-		if(self.dMarginLeft == -1)
-			self.dMarginLeft = 0;
-		if(self.dMarginRight == -1)
-			self.dMarginRight = 0;
-		if(self.dMarginTop == -1)
-			self.dMarginTop = 0;
-		if(self.dMarginBottom == -1)
-			self.dMarginBottom = 0;
-	} @catch (...) {}	
-	
-	if ([self.android_layout_height compare:@"wrap_content"] == 0) {
-		h = [self getContentH];
-	}
-	
-	if ([self.android_layout_height compare:@"fill_parent"] == 0 ||
-		[self.android_layout_height compare:@"match_parent"] == 0 ||
-        [self.android_layout_height compare:@"0dp"] == 0)
-	{
-		if (self.parent != nil) {
-			if ([self.parent.android_layout_height compare:@"wrap_content"] == 0)
-				h = [self getContentH];
-			else
-				h = self.parent.dHeight;
-            h = h - self.dY - self.parent.dPaddingBottom - self.dMarginBottom;
-		}
-		else 
-		{
-			h = [DisplayMetrics getMasterView].frame.size.height;
-            h = h - self.dY - self.dMarginBottom;
-		}
-	}
-	
-	self.dHeight = h;	
+-(int)findMatchParentHeight:(LGView*)view {
+    if(view.parent != nil) {
+        if([view.parent.android_layout_height isEqualToString:@"wrap_content"]) {
+            return [self findMatchParentHeight:view.parent];
+        } else {
+            return view.parent.dHeight;
+        }
+    }
+    else {
+        return self.lc.form.view.frame.size.height;
+    }
+}
+
+-(void)measure:(int)widthMeasureSpec :(int)heightMeasureSpec {
+    if(self.dWidthSpec != widthMeasureSpec || self.dHeightSpec != heightMeasureSpec)
+    {
+        [self onMeasure:widthMeasureSpec :heightMeasureSpec];
+    }
+    self.dWidthSpec = widthMeasureSpec;
+    self.dHeightSpec = heightMeasureSpec;
+}
+
+-(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
+    [self setMeasuredDimension:[LGView getDefaultSize:[self getSuggestedMinimumWidth] :widthMeasureSpec] :[LGView getDefaultSize:[self getSuggestedMinimumHeight] :heightMeasureSpec]];
+}
+
+-(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight {
+    self.dWidth = measuredWidth & MEASURED_SIZE_MASK;
+    self.dHeight = measuredHeight & MEASURED_SIZE_MASK;
+    self.dWidthSpec = measuredWidth;
+    self.dHeightSpec = measuredHeight;
+}
+
+-(int)getMeasuredState {
+    return self.dWidthSpec | self.dHeightSpec;
+}
+
+-(int)getSuggestedMinimumHeight {
+    int suggestedMinHeight = 0;
+    if(self.android_minHeight != nil)
+        suggestedMinHeight = STOI((NSString*)[[LGValueParser getInstance] getValue:self.android_minHeight]);
+    /*if(self.android_background != nil)
+    if (mBGDrawable != null) {
+        final int bgMinWidth = mBGDrawable.getMinimumWidth();
+        if (suggestedMinWidth < bgMinWidth) {
+            suggestedMinWidth = bgMinWidth;
+        }
+    }*/
+    return suggestedMinHeight;
+}
+
+-(int)getSuggestedMinimumWidth {
+    int suggestedMinWidth = 0;
+    if(self.android_minWidth != nil)
+        suggestedMinWidth = STOI((NSString*)[[LGValueParser getInstance] getValue:self.android_minWidth]);
+    /*if(self.android_background != nil)
+    if (mBGDrawable != null) {
+        final int bgMinWidth = mBGDrawable.getMinimumWidth();
+        if (suggestedMinWidth < bgMinWidth) {
+            suggestedMinWidth = bgMinWidth;
+        }
+    }*/
+    return suggestedMinWidth;
+}
+
++(int)resolveSizeAndState:(int)size :(int)measureSpec :(int)childMeasuredState {
+    int result = size;
+    int specMode = [MeasureSpec getMode:measureSpec];
+    int specSize =  [MeasureSpec getSize:measureSpec];
+    switch (specMode) {
+    case UNSPECIFIED:
+        result = size;
+        break;
+    case AT_MOST:
+        if (specSize < size) {
+            result = specSize | MEASURED_STATE_TOO_SMALL;
+        } else {
+            result = size;
+        }
+        break;
+    case EXACTLY:
+        result = specSize;
+        break;
+    }
+    return result | (childMeasuredState&MEASURED_STATE_MASK);
+}
+
++(int)getDefaultSize:(int)size :(int)measureSpec {
+    int result = size;
+    int specMode = [MeasureSpec getMode:measureSpec];
+    int specSize = [MeasureSpec getSize:measureSpec];
+    switch (specMode) {
+    case UNSPECIFIED:
+        result = size;
+        break;
+    case AT_MOST:
+    case EXACTLY:
+        result = specSize;
+        break;
+    }
+    return result;
+}
+
++(int)combineMeasuredStates:(int)curState :(int)newState {
+    return curState | newState;
 }
 
 -(void)readWidthHeight
@@ -470,6 +385,8 @@
         self.android_layout_gravity = @"top|left|start";
 	int w = [[LGDimensionParser getInstance] getDimension:self.android_layout_width];
 	int h = [[LGDimensionParser getInstance] getDimension:self.android_layout_height];
+    self.dWidthDimension = w;
+    self.dHeightDimension = h;
 	if (w < 0) {
 		w = self.dWidth;
 	}
@@ -533,11 +450,8 @@
         [self.android_layout_width compare:@"0dp"] == 0)
 	{
 		if (self.parent != nil) {
-			if ([self.parent.android_layout_width compare:@"wrap_content"] == 0)
-				w = [self getContentW];
-			else
-				w = self.parent.dWidth;
-            w = w - self.dX - self.parent.dPaddingRight - self.dMarginRight /*- self.parent.dPaddingLeft*/ - self.dMarginLeft;
+            w = [self findMatchParentWidth:self];
+            w = w - self.dX - self.parent.dPaddingRight - self.dMarginRight;
 		}
 		else 
 		{
@@ -552,11 +466,9 @@
         [self.android_layout_height compare:@"0dp"] == 0)
 	{
 		if (self.parent != nil) {
-			if ([self.parent.android_layout_height compare:@"wrap_content"] == 0)
-				h = [self getContentH];
-			else
-				h = self.parent.dHeight;
-            h = h - self.dY - self.dMarginBottom - self.dMarginTop /*- self.parent.dPaddingTop*/ - self.parent.dPaddingBottom;
+            h = [self findMatchParentHeight:self];
+            h = h - self.dY - self.dMarginTop - self.parent.dPaddingTop;
+            h -= (self.parent.dPaddingBottom + self.dMarginBottom);
 		}
 		else 
 		{
@@ -664,9 +576,26 @@
             topOrBottomSet = YES;
         }
     }
+    
+    if(!startOrEndSet)
+    {
+        self.dGravity |= GRAVITY_LEFT;
+    }
+    if(!topOrBottomSet)
+    {
+        self.dGravity |= GRAVITY_TOP;
+    }
 	
-	self.dWidth = w;
-	self.dHeight = h;
+    /*if(self.dWidthSpec != INT_MIN) {
+        self.dWidth = [MeasureSpec getSize:self.dWidthSpec];
+    }
+    else*/
+       self.dWidth = w;
+    /*if(self.dHeightSpec != INT_MIN) {
+        self.dHeight = [MeasureSpec getSize:self.dHeightSpec];
+    }
+    else*/
+       self.dHeight = h;
 }
 
 -(int)getContentW
@@ -779,12 +708,20 @@
 
 -(void)setBackground:(LuaRef*)background
 {
-    NSString *sId = (NSString*)[[LGValueParser getInstance] getValue: background.idRef];
-    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser getInstance] getValue:sId];
-    if(ldr.img)
-        [self._view setBackgroundColor:[UIColor colorWithPatternImage:ldr.img]];
-    else if(ldr.color != nil)
-        [self._view setBackgroundColor:ldr.color];
+    NSObject *obj = [[LGValueParser getInstance] getValue:background.idRef];
+    if([obj isKindOfClass:[LGDrawableReturn class]])
+    {
+        LGDrawableReturn *ldr = (LGDrawableReturn*)obj;
+        self._view.backgroundColor = [UIColor colorWithPatternImage:ldr.img];
+    }
+    else if([obj isKindOfClass:[UIColor class]])
+    {
+        self._view.backgroundColor = (UIColor*)obj;
+    }
+    else
+    {
+        self._view.backgroundColor = [UIColor clearColor];
+    }
 }
 
 -(NSInteger)getVisibility {
@@ -799,6 +736,7 @@
 }
 
 -(void)setVisibility:(NSInteger)visibility {
+    self.dVisibility = (int)visibility;
     if(visibility == VISIBLE)
     {
         self._view.hidden = NO;
@@ -860,6 +798,38 @@
     return [[LuaNavController alloc] initWithController:controller];
 }
 
+-(int)getLeft {
+    return self.dX;
+}
+
+-(int)getRight {
+    return self.dX + self.dWidth;
+}
+
+-(int)getTop {
+    return self.dY;
+}
+
+-(int)getBottom {
+    return self.dY + self.dHeight;
+}
+
+-(int)getMLeft {
+    return self.left;
+}
+
+-(int)getMRight {
+    return self.right;
+}
+
+-(int)getMTop {
+    return self.top;
+}
+
+-(int)getMBottom {
+    return self.bottom;
+}
+
 -(NSString*)GetId
 {
 	if(self.lua_id != nil)
@@ -892,6 +862,166 @@
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavControllerInternal)) :@selector(findNavControllerInternal) :[LuaNavController class] :MakeArray(nil)] forKey:@"findNavController"];
     InstanceMethodNoArg(getBindings, NSMutableDictionary, @"getBindings")
 	return dict;
+}
+
+@end
+
+@implementation Gravity
+
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container {
+    return [Gravity apply:gravity :w :h :container :0 :0];
+}
+
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container :(int)layoutDirection {
+    int absGravity = [Gravity getAbsoluteGravity:gravity];
+    return [Gravity apply:absGravity :w :h :container :0 :0];
+}
+
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container :(int)xAdj :(int)yAdj {
+    LuaRect* outRect = [LuaRect new];
+    switch (gravity&((AXIS_PULL_BEFORE|AXIS_PULL_AFTER)<<AXIS_X_SHIFT)) {
+        case 0:
+            outRect.left = container.left
+                    + ((container.right - container.left - w)/2) + xAdj;
+            outRect.right = outRect.left + w;
+            if ((gravity&(AXIS_CLIP<<AXIS_X_SHIFT))
+                    == (AXIS_CLIP<<AXIS_X_SHIFT)) {
+                if (outRect.left < container.left) {
+                    outRect.left = container.left;
+                }
+                if (outRect.right > container.right) {
+                    outRect.right = container.right;
+                }
+            }
+            break;
+        case AXIS_PULL_BEFORE<<AXIS_X_SHIFT:
+            outRect.left = container.left + xAdj;
+            outRect.right = outRect.left + w;
+            if ((gravity&(AXIS_CLIP<<AXIS_X_SHIFT))
+                    == (AXIS_CLIP<<AXIS_X_SHIFT)) {
+                if (outRect.right > container.right) {
+                    outRect.right = container.right;
+                }
+            }
+            break;
+        case AXIS_PULL_AFTER<<AXIS_X_SHIFT:
+            outRect.right = container.right - xAdj;
+            outRect.left = outRect.right - w;
+            if ((gravity&(AXIS_CLIP<<AXIS_X_SHIFT))
+                    == (AXIS_CLIP<<AXIS_X_SHIFT)) {
+                if (outRect.left < container.left) {
+                    outRect.left = container.left;
+                }
+            }
+            break;
+        default:
+            outRect.left = container.left + xAdj;
+            outRect.right = container.right + xAdj;
+            break;
+    }
+
+    switch (gravity&((AXIS_PULL_BEFORE|AXIS_PULL_AFTER)<<AXIS_Y_SHIFT)) {
+        case 0:
+            outRect.top = container.top
+                    + ((container.bottom - container.top - h)/2) + yAdj;
+            outRect.bottom = outRect.top + h;
+            if ((gravity&(AXIS_CLIP<<AXIS_Y_SHIFT))
+                    == (AXIS_CLIP<<AXIS_Y_SHIFT)) {
+                if (outRect.top < container.top) {
+                    outRect.top = container.top;
+                }
+                if (outRect.bottom > container.bottom) {
+                    outRect.bottom = container.bottom;
+                }
+            }
+            break;
+        case AXIS_PULL_BEFORE<<AXIS_Y_SHIFT:
+            outRect.top = container.top + yAdj;
+            outRect.bottom = outRect.top + h;
+            if ((gravity&(AXIS_CLIP<<AXIS_Y_SHIFT))
+                    == (AXIS_CLIP<<AXIS_Y_SHIFT)) {
+                if (outRect.bottom > container.bottom) {
+                    outRect.bottom = container.bottom;
+                }
+            }
+            break;
+        case AXIS_PULL_AFTER<<AXIS_Y_SHIFT:
+            outRect.bottom = container.bottom - yAdj;
+            outRect.top = outRect.bottom - h;
+            if ((gravity&(AXIS_CLIP<<AXIS_Y_SHIFT))
+                    == (AXIS_CLIP<<AXIS_Y_SHIFT)) {
+                if (outRect.top < container.top) {
+                    outRect.top = container.top;
+                }
+            }
+            break;
+        default:
+            outRect.top = container.top + yAdj;
+            outRect.bottom = container.bottom + yAdj;
+            break;
+    }
+    return outRect;
+}
+
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container :(int)xAdj :(int)yAdj :(int)layoutDirection {
+    int absGravity = [Gravity getAbsoluteGravity:gravity];
+    return [Gravity apply:absGravity :w :h :container :xAdj :yAdj];
+}
+
++ (BOOL)isVertical:(int)gravity {
+    return gravity > 0 && (gravity & VERTICAL_GRAVITY_MASK) != 0;
+}
+
++(BOOL)isHorizontal:(int)gravity {
+    return gravity > 0 && (gravity & RELATIVE_HORIZONTAL_GRAVITY_MASK) != 0;
+}
+
++(int)getAbsoluteGravity:(int)gravity {
+    int result = gravity;
+    // If layout is script specific and gravity is horizontal relative (START or END)
+    if ((result & RELATIVE_LAYOUT_DIRECTION) > 0) {
+        if ((result & GRAVITY_START) == GRAVITY_START) {
+            // Remove the START bit
+            result &= ~GRAVITY_START;
+            if ([LGView isRtl]) {
+                // Set the RIGHT bit
+                result |= GRAVITY_RIGHT;
+            } else {
+                // Set the LEFT bit
+                result |= GRAVITY_LEFT;
+            }
+        } else if ((result & GRAVITY_END) == GRAVITY_END) {
+            // Remove the END bit
+            result &= ~GRAVITY_END;
+            if ([LGView isRtl]) {
+                // Set the LEFT bit
+                result |= GRAVITY_LEFT;
+            } else {
+                // Set the RIGHT bit
+                result |= GRAVITY_RIGHT;
+            }
+        }
+        // Don't need the script specific bit any more, so remove it as we are converting to
+        // absolute values (LEFT or RIGHT)
+        result &= ~RELATIVE_LAYOUT_DIRECTION;
+    }
+    return result;
+}
+
+@end
+
+@implementation MeasureSpec
+
++(int)makeMeasureSpec:(int)size :(int)mode {
+    return size + mode;
+}
+
++(int)getMode:(int)measureSpec {
+    return (measureSpec & MODE_MASK);
+}
+
++(int)getSize:(int)measureSpec {
+    return (measureSpec & ~MODE_MASK);
 }
 
 @end

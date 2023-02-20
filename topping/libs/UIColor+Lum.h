@@ -3,6 +3,7 @@
 
 @interface UIColor (Lum)
 
++ (UIImage *)imageFromColor:(UIColor *)color;
 -(BOOL) isDarkColor;
 -(UIColor*) changeAlphaTo:(float)alpha;
 -(UIColor*) changeAlphaToPercent:(int)percent;

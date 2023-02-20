@@ -280,14 +280,13 @@
 -(void)setTextColor:(NSString *)color
 {
 	UILabel *field = (UILabel*)self._view;
-	[field setTextColor:[[LGColorParser getInstance] parseColor:color]];
+    UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:color];
+    [field setTextColor:val];
 }
 
 -(void)setTextColorRef:(LuaRef *)ref
 {
-    UILabel *field = (UILabel*)self._view;
-    UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:ref.idRef];
-    [field setTextColor:val];
+    [self setTextColor:ref.idRef];
 }
 
 -(NSString*)GetId
@@ -310,7 +309,7 @@
 	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
 										:@selector(create:)
 										:[LGTextView class]
-										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
+										:[NSArray arrayWithObjects:[LuaContext class], nil] 
 										:[LGTextView class]] 
 			 forKey:@"create"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setTextInternal:))

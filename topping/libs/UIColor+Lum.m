@@ -2,6 +2,17 @@
 
 @implementation UIColor (Lum)
 
++ (UIImage *)imageFromColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 -(BOOL) isDarkColor
 {
     CGFloat r = 0, g = 0, b = 0, a = 0;

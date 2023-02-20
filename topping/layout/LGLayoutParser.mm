@@ -29,6 +29,9 @@
 #import "LuaEvent.h"
 #import "LGBottomNavigationView.h"
 #import "LGWebView.h"
+#import "LGTextInputEditText.h"
+#import "LGDrawerLayout.h"
+#import "LGNavigationView.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -99,6 +102,22 @@
     return [self parseXML:[[arr lastObject] stringByAppendingString:@".xml"] :parentView :parent :cont :lgview];
 }
 
+-(UIView*) parseData:(NSData*)data :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview {
+    GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:data error:nil];
+    if(xml == nil)
+    {
+        NSLog(@"Cannot read xml file data");
+        return nil;
+    }
+        
+    GDataXMLElement *root = [xml rootElement];
+    LGView *rootView = [self parseChildXML:nil :root];
+    *lgview = rootView;
+    if(cont.lgview == nil)
+        cont.lgview = rootView;
+    return [self generateUIViewFromLGView:rootView :parentView :parent :cont];
+}
+
 -(UIView*) parseXML:(NSString *)filename :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(LGView **)lgview
 {
     self.lastFileName = filename;
@@ -109,25 +128,13 @@
         return nil;
     }
 	NSData *dat = [ls getData];
-	GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:dat error:nil];
-	if(xml == nil)
-	{
-		NSLog(@"Cannot read xml file %@", filename);
-		return nil;
-	}
-		
-	GDataXMLElement *root = [xml rootElement];
-	LGView *rootView = [self parseChildXML:nil :root];
-	*lgview = rootView;
-    if(cont.lgview == nil)
-        cont.lgview = rootView;
-	return [self generateUIViewFromLGView:rootView :parentView :parent :cont];
+    return [self parseData:dat :parentView :parent :cont :lgview];
 }
 
 -(LGView*) parseUI:(NSString*)name :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont :(NSArray *)attrs {
     LGView *rootView = nil;
     
-    rootView = [self getViewFromName:name :attrs];
+    rootView = [self getViewFromName:name :attrs :parent];
     if(rootView == nil) {
         NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
         return nil;
@@ -154,12 +161,15 @@
     return nil;
 }
 
--(LGView*) getViewFromName:(NSString*)name :(NSArray*)attrs
+-(LGView*) getViewFromName:(NSString*)name :(NSArray*)attrs :(LGView*)parent
 {
     LGView *rootView = nil;
     Class pluginClass = nil;
     
-    if([name compare:@"AbsListView"] == 0
+    if([name compare:@"View"] == 0
+       || [name compare:@"LGView"] == 0)
+        rootView = [[LGView alloc] init];
+    else if([name compare:@"AbsListView"] == 0
        || [name compare:@"LGAbsListView"] == 0)
         rootView = [[LGAbsListView alloc] init];
     else if([name compare:@"AutoCompleteTextView"] == 0
@@ -240,6 +250,27 @@
     else if([name compare:@"WebView"] == 0
         || [name compare:@"LGWebView"] == 0)
         rootView = [[LGWebView alloc] init];
+    else if([name compare:@"com.google.android.material.textfield.TextInputLayout"] == 0)
+        rootView = [[LGLinearLayout alloc] init];
+    else if([name compare:@"com.google.android.material.textfield.TextInputEditText"] == 0)
+    {
+        LGTextInputEditText *et = [LGTextInputEditText new];
+        if(parent.style != nil && [parent.style containsString:@"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"]) {
+            et.editTextType = 1;
+        }
+        else
+        {
+            et.editTextType = 0;
+        }
+        et.parentStyle = parent.style;
+        et.android_hint = ((LGLinearLayout*)parent).android_hint;
+        rootView = et;
+    }
+    else if([name compare:@"androidx.drawerlayout.widget.DrawerLayout"] == 0)
+        rootView = [[LGDrawerLayout alloc] init];
+    else if([name compare:@"android.support.design.widget.NavigationView"] == 0
+            || [name compare:@"com.google.android.material.navigation.NavigationView"] == 0)
+        rootView = [[LGNavigationView alloc] init];
     else if([ToppingEngine getViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine getViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];
@@ -264,7 +295,7 @@
 	LGView *rootView = nil;
     NSArray *attrs = [view attributes];
     
-    rootView = [self getViewFromName:name :attrs];
+    rootView = [self getViewFromName:name :attrs :parent];
     if(rootView == nil) {
         NSLog(@"Unknown class %@ at ParseChildXml in file %@", name, self.lastFileName);
         return nil;

@@ -7,6 +7,31 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	android:background="#7993AB">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/label"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+
+    </com.google.android.material.textfield.TextInputLayout>
 	<LGAutoCompleteTextView
 	    android:id="@+id/formTestAutoCompTV"
 	    android:layout_width="match_parent"
@@ -16,7 +41,8 @@
         android:id="@+id/formTestButton"
 	    android:layout_width="match_parent"
     	android:layout_height="wrap_content"
-    	android:text="Button Text">
+    	android:text="Button Text"
+        android:textColor="@color/statelist">
 	</LGButton>
 	<LGCheckBox
         android:id="@+id/formTestCheckBox"

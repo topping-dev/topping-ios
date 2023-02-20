@@ -108,6 +108,17 @@
     [super resize];
 }
 
+-(float)findParentMatchParentWidth:(LGView*)view {
+    if(view.parent != nil) {
+        if(view.parent.dWidth != 0)
+            return view.parent.dWidth;
+        else
+            return [self findParentMatchParentWidth:view.parent];
+    }
+    else
+        return view.lc.form.view.frame.size.width;
+}
+
 -(int)getContentW
 {
     if ([self.subviews count] > 0) {
@@ -115,10 +126,20 @@
         for (LGView *v in self.subviews)
         {
             int width_w_margin = 0;
-            if([v isKindOfClass:[LGViewGroup class]])
+            if(v.dVisibility == GONE) {
+                width_w_margin = 0;
+            }
+            else if([v isKindOfClass:[LGViewGroup class]])
                 width_w_margin = [v getContentW];
-            else
+            else {
+                if(v.dWidth == 0
+                   && ([v.android_layout_width compare:@"fill_parent"] == 0 ||
+                       [v.android_layout_width compare:@"match_parent"] == 0)) {
+                    v.dWidth = [self findParentMatchParentWidth:v];
+                }
                 width_w_margin = v.dWidth + v.dMarginLeft + v.dMarginRight;
+            }
+            width_w_margin += self.dPaddingLeft + self.dPaddingRight;
             if (v.dX + width_w_margin > maxX)
                 maxX = v.dX + width_w_margin;
         }
@@ -135,7 +156,10 @@
         for (LGView *v in self.subviews)
         {
             int height_w_margin = 0;
-            if([v isKindOfClass:[LGViewGroup class]])
+            if(v.dVisibility == GONE) {
+                height_w_margin = 0;
+            }
+            else if([v isKindOfClass:[LGViewGroup class]])
                 height_w_margin = [v getContentH];
             else
                 height_w_margin = v.dHeight + v.dMarginTop + v.dMarginBottom;
@@ -173,6 +197,98 @@
         [w configChange];
     }
     [super configChange];
+}
+
+-(void)measureChildren:(int)widthMeasureSpec :(int)heightMeasureSpec {
+    int size = self.subviews.count;
+    NSMutableArray *children = self.subviews;
+    for (int i = 0; i < size; ++i) {
+        LGView *child = [children objectAtIndex:i];
+        if(child.dVisibility != GONE) {
+            [self measureChild:child :widthMeasureSpec :heightMeasureSpec];
+        }
+    }
+}
+
+-(void)measureChild:(LGView*)child :(int)parentWidthMeasureSpec :(int)parentHeightMeasureSpec
+{
+    int childWidthMeasureSpec = [LGViewGroup getChildMeasureSpec:parentWidthMeasureSpec :self.dPaddingLeft + self.dPaddingRight :self.dWidthDimension];
+    int childHeightMeasureSpec = [LGViewGroup getChildMeasureSpec:parentHeightMeasureSpec
+                                                          :self.dPaddingTop + self.dPaddingBottom  :self.dHeightDimension];
+    [child measure:childWidthMeasureSpec :childHeightMeasureSpec];
+}
+    
+-(void)measureChildWithMargins:(LGView*)child :(int)parentWidthMeasureSpec :(int)widthUsed :(int)parentHeightMeasureSpec :(int)heightUsed {
+    int childWidthMeasureSpec = [LGViewGroup getChildMeasureSpec:parentWidthMeasureSpec
+                                                         :self.dPaddingLeft + self.dPaddingRight + child.dMarginLeft + child.dMarginRight
+                                 + widthUsed :child.dWidthDimension];
+    int childHeightMeasureSpec = [LGViewGroup getChildMeasureSpec:parentHeightMeasureSpec :self.dPaddingTop + self.dPaddingBottom + child.dMarginTop + child.dMarginBottom
+                                  + heightUsed :child.dHeightDimension];
+    [child measure:childWidthMeasureSpec :childHeightMeasureSpec];
+}
+    
++(int)getChildMeasureSpec:(int)spec :(int)padding :(int)childDimension {
+    int specMode = [MeasureSpec getMode:spec];
+    int specSize = [MeasureSpec getSize:spec];
+    int size = MAX(0, specSize - padding);
+    int resultSize = 0;
+    int resultMode = 0;
+    switch (specMode) {
+    // Parent has imposed an exact size on us
+    case EXACTLY:
+        if (childDimension >= 0) {
+            resultSize = childDimension;
+            resultMode = EXACTLY;
+        } else if (childDimension == MATCH_PARENT) {
+            // Child wants to be our size. So be it.
+            resultSize = size;
+            resultMode = EXACTLY;
+        } else if (childDimension == WRAP_CONTENT) {
+            // Child wants to determine its own size. It can't be
+            // bigger than us.
+            resultSize = size;
+            resultMode = AT_MOST;
+        }
+        break;
+    // Parent has imposed a maximum size on us
+    case AT_MOST:
+        if (childDimension >= 0) {
+            // Child wants a specific size... so be it
+            resultSize = childDimension;
+            resultMode = EXACTLY;
+        } else if (childDimension == MATCH_PARENT) {
+            // Child wants to be our size, but our size is not fixed.
+            // Constrain child to not be bigger than us.
+            resultSize = size;
+            resultMode = AT_MOST;
+        } else if (childDimension == WRAP_CONTENT) {
+            // Child wants to determine its own size. It can't be
+            // bigger than us.
+            resultSize = size;
+            resultMode = AT_MOST;
+        }
+        break;
+    // Parent asked to see how big we want to be
+    case UNSPECIFIED:
+        if (childDimension >= 0) {
+            // Child wants a specific size... let them have it
+            resultSize = childDimension;
+            resultMode = EXACTLY;
+        } else if (childDimension == MATCH_PARENT) {
+            // Child wants to be our size... find out how big it should
+            // be
+            resultSize = 0;//View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
+            resultMode = UNSPECIFIED;
+        } else if (childDimension == WRAP_CONTENT) {
+            // Child wants to determine its own size.... find out how
+            // big it should be
+            resultSize = 0;//View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
+            resultMode = UNSPECIFIED;
+        }
+        break;
+    }
+    //noinspection ResourceType
+    return [MeasureSpec makeMeasureSpec:resultSize :resultMode];
 }
 
 -(NSString *)debugDescription:(NSString *)val

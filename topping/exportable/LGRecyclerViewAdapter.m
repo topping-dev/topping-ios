@@ -24,6 +24,11 @@
     return self;
 }
 
+-(NSObject *)getValue:(int)position
+{
+    return [self.values objectAtIndex:position];
+}
+
 -(NSObject *)getObject:(NSIndexPath*)indexPath
 {
     NSObject *obj = nil;
@@ -100,6 +105,16 @@
     return value;
 }
 
+-(UICollectionViewCell *)getCellForIndex:(int)index
+{
+    @try {
+        return [((UICollectionView*)self.parent._view) cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    } @catch (NSException *exception) {
+    }
+    
+    return nil;
+}
+
 -(UICollectionViewCell *)generateCell:(NSIndexPath*)indexPath :(int)type
 {
     NSString *MyIdentifier = self.lua_id;
@@ -116,6 +131,9 @@
     
     if(cell.lgview == nil) {
         LGView *lgview = (LGView*)[self.ltCreateViewHolder callIn:self.parent, nType, self.lc, nil];
+        if(self.delegate != nil) {
+            lgview = [self.delegate onCreateViewHolder:self.parent :type :self.lc];
+        }
         ((LGViewUICollectionViewCell*)cell).lgview = lgview;
         [lgview addSelfToParent:cell.contentView :nil];
     }
@@ -127,15 +145,16 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    LGViewUICollectionViewCell* cell = [self.cells objectForKey:indexPath];
+    if(cell.lgview == nil)
+        return;
+    
     if(self.ltItemSelected != nil)
     {
-        LGViewUICollectionViewCell* cell = [self.cells objectForKey:indexPath];
-        if(cell.lgview == nil)
-        {
-            return;
-        }
-
-        [self.ltItemSelected callIn:self.parent, cell.lgview, [NSNumber numberWithInt:(indexPath.section + 1 * indexPath.row)], [self getObject:indexPath], nil];
+        [self.ltItemSelected callIn:self.parent, cell.lgview, [NSNumber numberWithInt:indexPath.row], [self getObject:indexPath], nil];
+    }
+    if(self.delegate != nil) {
+        [self.delegate onItemSelected:self.parent :cell.lgview :indexPath.row];
     }
 }
 
@@ -145,6 +164,9 @@
     
     NSObject *obj = [self getObject:indexPath];
     [self.ltBindViewHolder callIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
+    if(self.delegate != nil) {
+        [self.delegate onBindViewHolder:cell.lgview :indexPath.row];
+    }
     
     return cell;
 }
@@ -175,9 +197,15 @@
         {
             type = [((NSNumber*)[self.ltGetItemViewType callIn:[NSNumber numberWithInt:indexPath.row], nil]) intValue];
         }
+        if(self.delegate != nil) {
+            type = [self.delegate getItemViewType:indexPath.row];
+        }
         cell = (LGViewUICollectionViewCell*)[self generateCell:indexPath :type];
         NSObject *obj = [self getObject:indexPath];
         [self.ltBindViewHolder callIn:cell.lgview, [NSNumber numberWithInt:indexPath.row], obj, nil];
+        if(self.delegate != nil) {
+            [self.delegate onBindViewHolder:cell.lgview :indexPath.row];
+        }
     }
 
     if(cell.lgview != nil)

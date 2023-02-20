@@ -107,6 +107,7 @@
     [self.pNavigation initialize];
     [self.pMenu initialize];
     [self.pId initialize];
+    [self.pColor initialize];
     [self ParseValues];
 }
 

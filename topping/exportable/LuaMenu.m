@@ -7,6 +7,16 @@
 
 @implementation LuaMenu
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.visible = true;
+        self.enabled = true;
+    }
+    return self;
+}
+
 +(LuaTab*)create {
     LuaTab *tab = [LuaTab new];
     tab.item = [[MDCTabBarItem alloc] init];
@@ -14,11 +24,11 @@
 }
 
 -(void)setTitle:(NSString*)text {
-    self.title = text;
+    self.title_ = text;
 }
 
 -(void)setTitleRef:(LuaRef*)text {
-    self.title = [[LGStringParser getInstance] getString:text.idRef];
+    self.title_ = [[LGStringParser getInstance] getString:text.idRef];
 }
 
 -(void)setIcon:(LuaRef*)icon {

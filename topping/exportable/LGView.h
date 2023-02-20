@@ -4,6 +4,7 @@
 #import "LuaContext.h"
 #import "LuaForm.h"
 #import "LuaRef.h"
+#import "LuaRect.h"
 
 @class LuaForm;
 @class LuaFragment;
@@ -20,27 +21,82 @@ typedef NS_ENUM(NSInteger, VISIBILITY)
 
 enum LAYOUTDIMENSION
 {
-	FILL_PARENT = -1,
+	MATCH_PARENT = -1,
 	WRAP_CONTENT = -2
 };
 
 enum GRAVITY
 {
-    GRAVITY_LEFT = 0x1,
-    GRAVITY_START = 0x1,
-    GRAVITY_RIGHT = 0x2,
-    GRAVITY_END = 0x2,
-    GRAVITY_TOP = 0x4,
-    GRAVITY_BOTTOM = 0x8,
-    GRAVITY_CENTER_VERTICAL = 0x10,
-    GRAVITY_CENTER_HORIZONTAL = 0x20,
-    GRAVITY_CENTER = (GRAVITY_CENTER_VERTICAL | GRAVITY_CENTER_HORIZONTAL)
+    NO_GRAVITY = 0x0000,
+    AXIS_SPECIFIED = 0x0001,
+    AXIS_PULL_BEFORE = 0x0002,
+    AXIS_PULL_AFTER = 0x0004,
+    AXIS_CLIP = 0x0008,
+    AXIS_X_SHIFT = 0,
+    AXIS_Y_SHIFT = 4,
+    GRAVITY_TOP = (AXIS_PULL_BEFORE|AXIS_SPECIFIED)<<AXIS_Y_SHIFT,
+    GRAVITY_BOTTOM = (AXIS_PULL_AFTER|AXIS_SPECIFIED)<<AXIS_Y_SHIFT,
+    GRAVITY_LEFT = (AXIS_PULL_BEFORE|AXIS_SPECIFIED)<<AXIS_X_SHIFT,
+    GRAVITY_RIGHT = (AXIS_PULL_AFTER|AXIS_SPECIFIED)<<AXIS_X_SHIFT,
+    GRAVITY_CENTER_VERTICAL = AXIS_SPECIFIED<<AXIS_Y_SHIFT,
+    GRAVITY_FILL_VERTICAL = GRAVITY_TOP|GRAVITY_BOTTOM,
+    GRAVITY_CENTER_HORIZONTAL = AXIS_SPECIFIED<<AXIS_X_SHIFT,
+    GRAVITY_FILL_HORIZONTAL = GRAVITY_LEFT|GRAVITY_RIGHT,
+    GRAVITY_CENTER = GRAVITY_CENTER_VERTICAL|GRAVITY_CENTER_HORIZONTAL,
+    GRAVITY_FILL = GRAVITY_FILL_VERTICAL|GRAVITY_FILL_HORIZONTAL,
+    GRAVITY_CLIP_VERTICAL = AXIS_CLIP<<AXIS_Y_SHIFT,
+    GRAVITY_CLIP_HORIZONTAL = AXIS_CLIP<<AXIS_X_SHIFT,
+    RELATIVE_LAYOUT_DIRECTION = 0x00800000,
+    HORIZONTAL_GRAVITY_MASK = (AXIS_SPECIFIED |
+                               AXIS_PULL_BEFORE | AXIS_PULL_AFTER) << AXIS_X_SHIFT,
+    VERTICAL_GRAVITY_MASK = (AXIS_SPECIFIED |
+                AXIS_PULL_BEFORE | AXIS_PULL_AFTER) << AXIS_Y_SHIFT,
+    DISPLAY_CLIP_VERTICAL = 0x10000000,
+    DISPLAY_CLIP_HORIZONTAL = 0x01000000,
+    GRAVITY_START = RELATIVE_LAYOUT_DIRECTION | GRAVITY_LEFT,
+    GRAVITY_END = RELATIVE_LAYOUT_DIRECTION | GRAVITY_RIGHT,
+    RELATIVE_HORIZONTAL_GRAVITY_MASK = GRAVITY_START | GRAVITY_END
 };
+
+@interface Gravity : NSObject
+
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container;
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container :(int)layoutDirection;
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container :(int)xAdj :(int)yAdj;
++(LuaRect*)apply:(int)gravity :(int)w :(int)h :(LuaRect*)container :(int)xAdj :(int)yAdj :(int)layoutDirection;
++(BOOL)isVertical:(int)gravity;
++(BOOL)isHorizontal:(int)gravity;
++(int)getAbsoluteGravity:(int)gravity;
+
+@end
+
+enum MEASURE_SPEC
+{
+    MODE_SHIFT = 30,
+    MODE_MASK = 0x3 << MODE_SHIFT,
+    UNSPECIFIED = 0 << MODE_SHIFT,
+    EXACTLY = 1 << MODE_SHIFT,
+    AT_MOST = 2 << MODE_SHIFT,
+    MEASURED_STATE_TOO_SMALL = 0x01000000,
+    MEASURED_SIZE_MASK = 0x00ffffff,
+    MEASURED_STATE_MASK = 0xff000000,
+    MEASURED_HEIGHT_STATE_SHIFT = 16
+};
+
+@interface MeasureSpec : NSObject
+
++(int)makeMeasureSpec:(int)size :(int)mode;
++(int)getMode:(int)measureSpec;
++(int)getSize:(int)measureSpec;
+
+@end
 
 @interface LGView : NSObject <LuaClass, LuaInterface>
 {
     NSArray *propertyNameCache;
 }
+
++(BOOL)isRtl;
 
 -(void)initProperties;
 -(void)copyAttributesTo:(LGView*)viewToCopy;
@@ -61,6 +117,14 @@ enum GRAVITY
 -(void)readWidth;
 -(void)readHeight;
 -(void)readWidthHeight;
+-(void)measure:(int)widthMeasureSpec :(int)heightMeasureSpec;
+-(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec;
++(int)combineMeasuredStates:(int)curState :(int)newState;
+-(int)getMeasuredState;
+-(int)getSuggestedMinimumWidth;
+-(int)getSuggestedMinimumHeight;
++(int)resolveSizeAndState:(int)size :(int)measureSpec :(int)childMeasuredState;
+-(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight;
 -(void)resizeInternal;
 -(void)afterResize:(BOOL)vertical;
 -(int)getContentW;
@@ -104,7 +168,7 @@ enum GRAVITY
 
 @property (nonatomic, strong) NSString* android_alpha;
 @property (nonatomic, retain) NSString* android_background;
-@property (nonatomic, retain) NSNumber* android_clickable;
+@property (nonatomic, retain) NSString* android_clickable;
 @property (nonatomic, retain) NSString* android_id;
 @property (nonatomic, retain) NSString* android_tag;
 @property (nonatomic, retain) NSString* android_name;
@@ -116,6 +180,7 @@ enum GRAVITY
 @property (nonatomic, retain) NSString* android_paddingTop;
 @property (nonatomic, retain) NSString* android_padding;
 @property (nonatomic, retain) NSString* android_visibility;
+@property (nonatomic, retain) NSString* android_enabled;
 
 //Viewgroup
 @property(nonatomic, retain) NSString* android_layout_width;
@@ -129,7 +194,7 @@ enum GRAVITY
 
 @property(nonatomic, retain) NSString *android_gravity;
 @property(nonatomic, retain) NSString* android_layout_gravity;
-@property(nonatomic, retain) NSNumber* android_layout_weight;
+@property(nonatomic, retain) NSString* android_layout_weight;
 
 @property(nonatomic, retain) NSString* style;
 @property(nonatomic, retain) NSString* colorAccent;
@@ -144,6 +209,10 @@ enum GRAVITY
 
 @property (nonatomic) int dWidth;
 @property (nonatomic) int dHeight;
+@property (nonatomic) int dWidthDimension;
+@property (nonatomic) int dHeightDimension;
+@property (nonatomic) int dWidthSpec;
+@property (nonatomic) int dHeightSpec;
 @property (nonatomic) int dPaddingBottom;
 @property (nonatomic) int dPaddingLeft;
 @property (nonatomic) int dPaddingRight;
@@ -158,16 +227,21 @@ enum GRAVITY
 
 @property (nonatomic) int dGravity;
 @property (nonatomic) int dLayoutGravity;
+@property (nonatomic) int dVisibility;
 
 @property(nonatomic) BOOL layout;
 @property(nonatomic) int baseLine;
-@property(nonatomic, retain) UIImage *backgroundImage;
+
+@property(nonatomic) BOOL widthSpecSet, heightSpecSet;
 
 @property(nonatomic, strong) LuaTranslator *ltOnClickListener;
 
 @property(nonatomic, strong) LuaFragment *fragment;
 
 @property(nonatomic, strong) NavController *navController;
+
+@property(nonatomic) int left, right, top, bottom;
+@property(nonatomic) int mLeft, mRight, mTop, mBottom;
 
 @end
 

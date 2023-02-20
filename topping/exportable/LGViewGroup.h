@@ -10,6 +10,9 @@
 -(void)clearSubviews;
 -(NSMutableDictionary*)getBindings;
 
+-(void)measureChildWithMargins:(LGView*)child :(int)parentWidthMeasureSpec :(int)widthUsed :(int)parentHeightMeasureSpec :(int)heightUsed;
++(int)getChildMeasureSpec:(int)spec :(int)padding :(int)childDimension;
+
 @property (nonatomic, strong) NSMutableArray *subviews;
 @property (nonatomic, strong) NSMutableDictionary *subviewMap;
 

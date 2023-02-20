@@ -88,44 +88,7 @@
         for(UIView *subview in self._view.subviews) {
             [subview removeFromSuperview];
         }
-        LGDrawableReturn *ldr = [[LGDrawableParser getInstance] parseDrawable:self.android_src];
-        CGSize size = CGSizeZero;
-        VectorView *vv = nil;
-        if(ldr.vector != nil) {
-            VectorTheme *theme = [[VectorTheme alloc] initWithColor:[UIColor blackColor]];
-            vv = [[VectorView alloc] initWithTheme:theme resources:theme];
-            VectorDrawable *drawable = (VectorDrawable*)ldr.vector;
-            vv.drawable = drawable;
-            [self._view addSubview:vv];
-            size = CGSizeMake(drawable.baseWidth, drawable.baseHeight);
-        }
-        else {
-            [iv setImage:ldr.img];
-            size = ldr.img.size;
-        }
-        if(self.dWidth == 0 && self.dHeight == 0)
-        {
-            self.dWidth = size.width;
-            self.dHeight = size.height;
-        }
-        if(self.dHeight == 0)
-        {
-            int width = self.dWidth;
-            int ivWidth = size.width;
-            int ivHeight = size.height;
-            self.dHeight = ((float)(ivHeight * width)) / ((float)ivWidth);
-        }
-        if(self.dWidth == 0)
-        {
-            int height = self.dHeight;
-            int ivWidth = size.width;
-            int ivHeight = size.height;
-            self.dWidth = ((float)(ivWidth * height)) / ((float)ivHeight);
-        }
-        iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
-        if(vv != nil) {
-            vv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
-        }
+        [self setImageRef:[LuaRef withValue:self.android_src]];
     }
 }
 
@@ -161,9 +124,48 @@
 
 -(void)setImageRef:(LuaRef*)ref
 {
-    LGDrawableReturn *ret = (LGDrawableReturn*)[[LGValueParser getInstance] getValue:ref.idRef];
-    if(ret.img != nil)
-        [((UIImageView *)self._view) setImage:ret.img];
+    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser getInstance] getValue:ref.idRef];
+    UIImageView *iv = ((UIImageView *)self._view);
+    CGSize size = CGSizeZero;
+    VectorView *vv = nil;
+    for(UIView *subView in self._view.subviews) {
+        [subView removeFromSuperview];
+    }
+    if(ldr.vector != nil) {
+        VectorTheme *theme = [[VectorTheme alloc] initWithColor:[UIColor blackColor]];
+        vv = [[VectorView alloc] initWithTheme:theme resources:theme];
+        VectorDrawable *drawable = (VectorDrawable*)ldr.vector;
+        vv.drawable = drawable;
+        [self._view addSubview:vv];
+        size = CGSizeMake(drawable.baseWidth, drawable.baseHeight);
+    }
+    else {
+        [iv setImage:ldr.img];
+        size = ldr.img.size;
+    }
+    if(self.dWidth == 0 && self.dHeight == 0)
+    {
+        self.dWidth = size.width;
+        self.dHeight = size.height;
+    }
+    if(self.dHeight == 0)
+    {
+        int width = self.dWidth;
+        int ivWidth = size.width;
+        int ivHeight = size.height;
+        self.dHeight = ((float)(ivHeight * width)) / ((float)ivWidth);
+    }
+    if(self.dWidth == 0)
+    {
+        int height = self.dHeight;
+        int ivWidth = size.width;
+        int ivHeight = size.height;
+        self.dWidth = ((float)(ivWidth * height)) / ((float)ivHeight);
+    }
+    iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
+    if(vv != nil) {
+        vv.frame = CGRectMake(0, 0, self.dWidth, self.dHeight);
+    }
 }
 
 -(NSString*)GetId

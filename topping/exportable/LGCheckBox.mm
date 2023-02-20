@@ -56,13 +56,13 @@
     self.checkbox.sw.on = checked;
     
     self.checkbox.title.text = [[LGStringParser getInstance] getString:self.android_text];
-    UIColor *textColor = [[LGColorParser getInstance] parseColor:self.android_textColor];
-    if(textColor == nil)
-        textColor = (UIColor*)[[LGStyleParser getInstance] getStyleValue:@"android:textColor" :[sToppingEngine getAppStyle]];
-    self.checkbox.title.textColor = textColor;
-    UIColor *colorAccent = [[LGColorParser getInstance] parseColor:self.colorAccent];
-    if(colorAccent != nil)
-    {
+    if(self.android_textColor != nil) {
+        UIColor *textColor = [[LGColorParser getInstance] parseColor:self.android_textColor];
+        self.checkbox.title.textColor = textColor;
+    }
+    
+    if(self.colorAccent != nil) {
+        UIColor *colorAccent = [[LGColorParser getInstance] parseColor:self.colorAccent];
         self.checkbox.sw.tintColor = colorAccent;
         self.checkbox.sw.onTintColor = colorAccent;
     }
@@ -74,6 +74,9 @@
     {
         self.checkbox.frame = CGRectMake(self.dX, self.dY, self.dWidth, [self getContentH]);
     }
+    
+    self.checkbox.backgroundColor = [UIColor clearColor];
+    self.checkbox.title.backgroundColor = [UIColor clearColor];
     
     LGView *v = [LGView new];
     [v setupComponent:view];

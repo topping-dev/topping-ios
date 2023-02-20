@@ -6,7 +6,9 @@
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"
 #import "LGValueParser.h"
+#import "LGStringParser.h"
 #import "LuaTranslator.h"
+#import "TextField+Util.h"
 
 @implementation LGEditText
 
@@ -35,9 +37,7 @@
     {
         UITextView *field = [[UITextView alloc] init];
         field.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
-        field.text = self.android_text;
-        //field.placeholder = self.hint;
-        
+
         [field setAutocorrectionType:UITextAutocorrectionTypeNo];
         
         [KeyboardHelper KeyboardSetEventForTextView:field :self.cont];
@@ -48,8 +48,6 @@
     {
         UITextField *field = [[UITextField alloc] init];
         field.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
-        field.text = self.android_text;
-        field.placeholder = self.android_hint;
             
         [field setAutocorrectionType:UITextAutocorrectionTypeNo];
         
@@ -69,6 +67,9 @@
         self.layer.backgroundColor = tf.textColor.CGColor;
         self.layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
         [tf.layer addSublayer:self.layer];
+        
+        if(self.android_text != nil)
+            tf.text = [[LGStringParser getInstance] getString:self.android_text];
         
         if(self.android_inputType != nil)
         {
@@ -138,6 +139,10 @@
             [tf setTextAlignment:NSTextAlignmentRight];
         else if(self.dGravity & GRAVITY_CENTER)
             [tf setTextAlignment:NSTextAlignmentCenter];
+        
+        if(self.android_textAppearance != nil) {
+            [tf setTextAppearance:self.android_textAppearance];
+        }
     }
     else
     {
@@ -146,6 +151,11 @@
         self.layer.backgroundColor = tf.textColor.CGColor;
         self.layer.frame = CGRectMake(0, tf.frame.size.height - 1, tf.frame.size.width, 1);
         [tf.layer addSublayer:self.layer];
+        
+        if(self.android_text != nil)
+            tf.text = [[LGStringParser getInstance] getString:self.android_text];
+        if(self.android_hint != nil)
+            tf.placeholder = [[LGStringParser getInstance] getString:self.android_hint];
         
         if(self.android_inputType != nil)
         {
@@ -214,6 +224,10 @@
                 [tf setTextAlignment:NSTextAlignmentRight];
             else if(self.dGravity & GRAVITY_CENTER)
                 [tf setTextAlignment:NSTextAlignmentCenter];
+            
+            if(self.android_textAppearance != nil) {
+                [tf setTextAppearance:self.android_textAppearance];
+            }
         }
     }
 	
@@ -543,7 +557,7 @@
 	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:)) 
 										:@selector(create:)
 										:[LGEditText class]
-										:[NSArray arrayWithObjects:[LuaContext class], [NSString class], nil] 
+										:[NSArray arrayWithObjects:[LuaContext class], nil] 
 										:[LGEditText class]] 
 			 forKey:@"create"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setTextChangedListener:)) :@selector(setTextChangedListener:) :[LGView class] :MakeArray([LuaTranslator class]C nil)] forKey:@"setTextChangedListener"];

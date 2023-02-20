@@ -83,7 +83,7 @@
     return self.adapter_;
 }
 
--(void)refresh
+-(void)notify
 {
     [((UITableView*)self._view) reloadData];
 }
@@ -113,7 +113,7 @@
 			 forKey:@"create"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setAdapter:)) :@selector(setAdapter:) :nil :MakeArray([LGAdapterView class]C nil)] forKey:@"setAdapter"];
    	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getAdapter)) :@selector(getAdapter) :[LGAdapterView class] :MakeArray(nil)] forKey:@"getAdapter"];
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(refresh)) :@selector(refresh) :nil :MakeArray(nil)] forKey:@"refresh"];
+    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(notify)) :@selector(notify) :nil :MakeArray(nil)] forKey:@"refresh"];
 	return dict;
 }
 

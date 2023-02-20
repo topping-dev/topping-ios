@@ -3,6 +3,15 @@
 
 @implementation LuaRect
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        rect = CGRectMake(0, 0, 0, 0);
+    }
+    return self;
+}
+
 +(LuaRect *)createRect
 {
     return [[LuaRect alloc] init];
@@ -18,6 +27,22 @@
 -(void)set:(float)left :(float)top :(float)right :(float)bottom
 {
     rect = CGRectMake(left, top, right - left, bottom - top);
+}
+
+-(void)setLeft:(float)left {
+    rect.origin.x = left;
+}
+
+-(void)setRight:(float)right {
+    rect.size.width = right - self.left;
+}
+
+-(void)setTop:(float)top {
+    rect.origin.y = top;
+}
+
+- (void)setBottom:(float)bottom {
+    rect.size.height = bottom - self.top;
 }
 
 -(float)getLeft
@@ -38,6 +63,10 @@
 -(float)getBottom
 {
     return rect.origin.y + rect.size.height;
+}
+
+-(CGRect)getCGRect {
+    return rect;
 }
 
 -(NSString*)GetId

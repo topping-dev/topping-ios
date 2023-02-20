@@ -29,21 +29,19 @@
 	return [LGParser getInstance].pFont;
 }
 
-+(int)parseTextStyle:(NSString *)textStyle
++(int)parseTextStyle:(NSString *)textStyleStr
 {
-    NSArray *arr = SPLIT(textStyle, @"|");
-    int flg = 0;
-    for(NSString *sty in arr)
-    {
-        if([sty isEqualToString:@"normal"])
-            flg |= FONT_STYLE_NORMAL;
-        else if([sty isEqualToString:@"bold"])
-            flg |= FONT_STYLE_BOLD;
-        else if([sty isEqualToString:@"italic"])
-            flg |= FONT_STYLE_ITALIC;
+    NSArray *arr = [textStyleStr componentsSeparatedByString:@"|"];
+    int textStyle = FONT_STYLE_NORMAL;
+    for(NSString *comp in arr) {
+        NSString *trimmed = [comp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+        if([trimmed isEqualToString:@"bold"]) {
+            textStyle |= FONT_STYLE_BOLD;
+        } else if([trimmed isEqualToString:@"italic"]) {
+            textStyle |= FONT_STYLE_ITALIC;
+        }
     }
-    
-    return flg;
+    return textStyle;
 }
 
 -(void)initialize

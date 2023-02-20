@@ -4,6 +4,7 @@
 #import "DisplayMetrics.h"
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
+#import "UIColor+Lum.h"
 #import <Topping/Topping-Swift.h>
 
 @implementation LGDrawableReturn
@@ -25,6 +26,18 @@
         return [vv asImage];
     }
     return nil;
+}
+
+-(UIImage*)getImageForState:(CGSize)size :(int)state :(UIImage*)def {
+    if(!self.hasState || state == UIControlStateNormal) {
+        return [self getImage:size];
+    }
+    else if(state == UIControlStateSelected && (self.state_selected || self.state_pressed || self.state_checked)) {
+        return [self getImage:size];
+    } else if(state == UIControlStateDisabled && !self.state_enabled) {
+        return [self getImage:size];
+    }
+    return def;
 }
 
 @end
@@ -117,7 +130,7 @@
     if(color != nil)
     {
         LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
-        ldr.color = color;
+        ldr.img = [UIColor imageFromColor:color];
         return ldr;
     }
     NSArray *arr = SPLIT(drawable, @"/");
@@ -158,7 +171,7 @@
         LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
         if(tileMode > 0)
         {
-            ldr.color = [UIColor colorWithPatternImage:ldr.img];
+            ldr.img = [UIColor imageFromColor:[UIColor colorWithPatternImage:ldr.img]];
         }
         else
             ldr.img = retVal;
@@ -310,7 +323,7 @@
 
             }
         }
-        if(ldr != nil && (ldr.img != nil || ldr.color != nil))
+        if(ldr != nil && ldr.img != nil)
         {
             [imgArr addObject:ldr];
             if(ldr.img != nil)
@@ -379,19 +392,17 @@
     UIGraphicsEndImageContext();
     LGDrawableReturn *ret = [[LGDrawableReturn alloc] init];
     ret.img = img;
-    ret.color = nil;
     return ret;
 }
 
 -(LGDrawableReturn*)parseStateList:(GDataXMLElement *)root
 {
-    NSMutableDictionary *stateList = [NSMutableDictionary dictionary];
+    LGDrawableReturn *ldr;
     for(GDataXMLElement *child in [root children])
 	{
         if([child kind] != GDataXMLElementKind)
             continue;
-        int left,top,right,bottom = 0;
-        LGDrawableReturn *ldr;
+        
         NSString *name = [child name];
         if(COMPARE(name, @"item"))
         {
@@ -406,64 +417,62 @@
                 if(COMPARE(attr, @"android:drawable"))
                 {
                     ldr = [self parseDrawable:[node stringValue]];
+                    break;
                 }
-                else if(COMPARE(attr, @"android:state_pressed"))
+            }
+            for(GDataXMLNode *node in [child attributes])
+            {
+                NSString *attr = [node name];
+                if(COMPARE(attr, @"android:state_pressed"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateSelected]];
+                    ldr.hasState = true;
+                    ldr.state_pressed = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_focused"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateHighlighted]];
+                    ldr.hasState = true;
+                    ldr.state_focused = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_hovered"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateHighlighted]];
+                    ldr.hasState = true;
+                    ldr.state_hovered = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_selected"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateSelected]];
+                    ldr.hasState = true;
+                    ldr.state_selected = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_checkable"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateCheckable]];
+                    ldr.hasState = true;
+                    ldr.state_checkable = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_checked"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateChecked]];
+                    ldr.hasState = true;
+                    ldr.state_checked = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_enabled"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateNormal]];
+                    ldr.hasState = true;
+                    ldr.state_enabled = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_activated"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateActivated]];
+                    ldr.hasState = true;
+                    ldr.state_activated = SSTOB([node stringValue]);
                 }
                 else if(COMPARE(attr, @"android:state_window_focused"))
                 {
-                    if(ldr)
-                        [stateList setObject:ldr.img forKey:[NSNumber numberWithInt:UIControlStateWindowFocused]];
+                    ldr.hasState = true;
+                    ldr.state_window_focused = SSTOB([node stringValue]);
                 }
             }
         }
 	}
     
-    [self.stateListDictionary setObject:stateList forKey:[root name]];
-    
-    UIGraphicsEndImageContext();
-    LGDrawableReturn *ret = [[LGDrawableReturn alloc] init];
-    ret.img = nil;
-    ret.color = nil;
-    ret.state = [root name];
-    return ret;
+    return ldr;
 }
 
 -(LGDrawableReturn*)parseShape:(GDataXMLElement *)root
@@ -839,7 +848,8 @@
             }
             else
                 CGContextDrawRadialGradient(context, gradient, CGPointMake(gradientCenterX, gradientCenterY), gradientRadius, CGPointMake(gradientCenterX, gradientCenterY), gradientRadius, 0);
-            CGColorSpaceRelease(baseSpace), baseSpace = NULL;
+            CGColorSpaceRelease(baseSpace);
+            baseSpace = NULL;
             CGGradientRelease(gradient);
         }
         else
@@ -858,7 +868,6 @@
     UIGraphicsEndImageContext();
     LGDrawableReturn *ret = [[LGDrawableReturn alloc] init];
     ret.img = img;
-    ret.color = nil;
     return ret;
 }
 

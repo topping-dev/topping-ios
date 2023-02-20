@@ -96,6 +96,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGViewPager.h>
 #import <topping/LuaBundle.h>
 #import <topping/LuaFormIntent.h>
+#import <topping/LGTextInputEditText.h>
 
 #import <topping/ILuaFragment.h>
 #import <topping/ILuaForm.h>

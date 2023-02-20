@@ -68,6 +68,8 @@
 #import "LGFragmentContainerView.h"
 #import "LuaNavHostFragment.h"
 #import "LGBottomNavigationView.h"
+#import "LGNavigationView.h"
+#import "LGTextInputEditText.h"
 
 #import "LuaForm.h"
 #import "LuaFragment.h"
@@ -998,12 +1000,14 @@ int RegisterTag(lua_State *L)
     [Lunar register:lu :[LGImageView class]];
 	[Lunar register:lu :[LGLinearLayout class]];
 	[Lunar register:lu :[LGListView class]];
+    [Lunar register:lu :[LGNavigationView class]];
 	[Lunar register:lu :[LGProgressBar class]];
 	[Lunar register:lu :[LGRadioButton class]];
 	[Lunar register:lu :[LGRadioGroup class]];
 	[Lunar register:lu :[LGScrollView class]];
     [Lunar register:lu :[LGHorizontalScrollView class]];
     [Lunar register:lu :[LGTabLayout class]];
+    [Lunar register:lu :[LGTextInputEditText class]];
 	[Lunar register:lu :[LGTextView class]];
 	[Lunar register:lu :[LGView class]];
     [Lunar register:lu :[LGViewGroup class]];
