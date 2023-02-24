@@ -3,6 +3,7 @@
 #import "LGAbsListView.h"
 #import "LGRecyclerViewAdapter.h"
 
+@interface LGRecyclerView : LGAbsListView
 
 //Lua
 +(LGRecyclerView *)create:(LuaContext *)context;
