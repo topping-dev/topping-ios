@@ -210,6 +210,7 @@
 
     if(cell.lgview != nil)
     {
+        [cell.lgview resize];
         [cell.lgview readWidthHeight];
         int width = cell.lgview.dWidth;
         int height = cell.lgview.dHeight;

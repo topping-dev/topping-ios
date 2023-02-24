@@ -12,6 +12,9 @@
     if (self) {
         self.mMaxAscent = [@[[NSNumber numberWithInt:-1], [NSNumber numberWithInt:-1], [NSNumber numberWithInt:-1], [NSNumber numberWithInt:-1]] mutableCopy];
         self.mMaxDescent = [@[[NSNumber numberWithInt:-1], [NSNumber numberWithInt:-1], [NSNumber numberWithInt:-1], [NSNumber numberWithInt:-1]] mutableCopy];
+        self.mWeightSum = 1;
+        self.mBaseAligned = true;
+        self.mBaselineChildTop = 0;
     }
     return self;
 }
@@ -19,13 +22,10 @@
 -(void)setupComponent:(UIView *)view {
     [super setupComponent:view];
     
-    self.mWeightSum = 1;
     if(self.android_weightSum != nil) {
         self.mWeightSum = STOF((NSString*)[[LGValueParser getInstance] getValue:self.android_weightSum]);
     }
     
-    self.layout = YES;
-    self.mBaseAligned = true;
     if(self.android_baseAligned != nil) {
         self.mBaseAligned = SSTOB(self.android_baseAligned);
     }
@@ -36,9 +36,6 @@
     if(self.android_measureWithLargestChild != nil) {
         self.mUseLargestChild = SSTOB(self.android_measureWithLargestChild);
     }
-    self.mBaselineChildTop = 0;
-    self.sRemeasureWeightedChildren = true;
-    self.mAllowInconsistentMeasurement = true;
 }
 
 -(void)applyStyles {
@@ -76,10 +73,10 @@
         if (majorGravity != GRAVITY_TOP) {
            switch (majorGravity) {
                case GRAVITY_BOTTOM:
-                   childTop = self.mBottom - self.mTop - self.dPaddingBottom - self.mTotalLength;
+                   childTop = self.getMBottom - self.getMTop - self.dPaddingBottom - self.mTotalLength;
                    break;
                case GRAVITY_CENTER_VERTICAL:
-                   childTop += ((self.mBottom - self.mTop - self.dPaddingTop - self.dPaddingBottom) -
+                   childTop += ((self.getMBottom - self.getMTop - self.dPaddingTop - self.dPaddingBottom) -
                            self.mTotalLength) / 2;
                    break;
            }
@@ -88,44 +85,26 @@
     return childTop + child.dMarginTop + childBaseline;
 }
 
+//getRootMeasureSpec(int windowSize, int measurement, int privateFlags) {
 -(int)getParentWidthSpec
 {
     int widthSpec = 0;
     if(self.parent != nil) {
         widthSpec = self.parent.dWidthSpec;
     } else {
-        switch (self.dWidthDimension) {
-            case MATCH_PARENT:
-                widthSpec = [MeasureSpec makeMeasureSpec:self.dWidth :EXACTLY];
-                break;
-            case WRAP_CONTENT:
-                widthSpec = [MeasureSpec makeMeasureSpec:self.dWidth :AT_MOST];
-                break;
-            default:
-                widthSpec = [MeasureSpec makeMeasureSpec:self.dWidth :EXACTLY];
-                break;
-        }
+        return [MeasureSpec makeMeasureSpec:self.lc.form.view.frame.size.width :EXACTLY];
     }
     return widthSpec;
 }
 
+//getRootMeasureSpec(int windowSize, int measurement, int privateFlags) {
 -(int)getParentHeightSpec
 {
     int heightSpec = 0;
     if(self.parent != nil) {
         heightSpec = self.parent.dHeightSpec;
     } else {
-        switch (self.dWidthDimension) {
-            case MATCH_PARENT:
-                heightSpec = [MeasureSpec makeMeasureSpec:self.dHeight :EXACTLY];
-                break;
-            case WRAP_CONTENT:
-                heightSpec = [MeasureSpec makeMeasureSpec:self.dHeight :AT_MOST];
-                break;
-            default:
-                heightSpec = [MeasureSpec makeMeasureSpec:self.dHeight :EXACTLY];
-                break;
-        }
+        return [MeasureSpec makeMeasureSpec:self.lc.form.view.frame.size.height :EXACTLY];
     }
     return heightSpec;
 }
@@ -199,11 +178,11 @@
 -(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
     if(self.orientation == VERTICAL) {
         [self resizeInternalVertical:widthMeasureSpec :heightMeasureSpec];
-        [self layoutVertical];
+        [self layoutVertical:self.getLeft :self.getTop :self.getRight :self.getBottom];
     }
     else {
         [self resizeInternalHorizontal:widthMeasureSpec :heightMeasureSpec];
-        [self layoutHorizontal];
+        [self layoutHorizontal:self.getLeft :self.getTop :self.getRight :self.getBottom];
     }
 }
 
@@ -214,22 +193,22 @@
     int heightSpec = [self getParentHeightSpec];
     if(self.orientation == VERTICAL) {
         [self resizeInternalVertical:widthSpec :heightSpec];
-        [self layoutVertical];
+        [self layoutVertical:self.getLeft :self.getTop :self.getRight :self.getBottom];
     }
     else {
         [self resizeInternalHorizontal:widthSpec :heightSpec];
-        [self layoutVertical];
+        [self layoutHorizontal:self.getLeft :self.getTop :self.getRight :self.getBottom];
     }
 }
 
--(void)layoutVertical {
+-(void)layoutVertical:(int)l :(int)t :(int)r :(int)b {
     int paddingLeft = self.dPaddingLeft;
     
     int childTop;
     int childLeft;
     
     // Where right end of child should go
-    int width = self.right - self.left;
+    int width = r - l;
     int childRight = width - self.dPaddingRight;
     
     // Space available for child
@@ -243,11 +222,11 @@
     switch (majorGravity) {
        case GRAVITY_BOTTOM:
            // mTotalLength contains the padding already
-           childTop = self.dPaddingTop + self.bottom - self.top - self.mTotalLength;
+           childTop = self.dPaddingTop + b - t - self.mTotalLength;
            break;
            // mTotalLength contains the padding already
        case GRAVITY_CENTER_VERTICAL:
-           childTop = self.dPaddingTop + (self.bottom - self.top - self.mTotalLength) / 2;
+           childTop = self.dPaddingTop + (b - t - self.mTotalLength) / 2;
            break;
        case GRAVITY_TOP:
        default:
@@ -261,10 +240,12 @@
         } else if (child.dVisibility != GONE) {
             int childWidth = child.dWidth;
             int childHeight = child.dHeight;
-            int gravity = child.dGravity;
+            
+            int gravity = child.dGravityDimen;
             if (gravity < 0) {
                 gravity = minorGravity;
             }
+            
             int absoluteGravity = [Gravity getAbsoluteGravity:gravity];
             switch (absoluteGravity & HORIZONTAL_GRAVITY_MASK) {
                 case GRAVITY_CENTER_HORIZONTAL:
@@ -287,6 +268,7 @@
             child.dY = childTop + [self getLocationOffset:child];
             child.dWidth = childWidth;
             child.dHeight = childHeight;
+            [child layout:child.dX :child.dY :(child.dX + child.dWidth) :(child.dY + child.dHeight)];
             childTop += childHeight + child.dMarginBottom + [self getNextLocationOffset:child];
             
             i += [self getChildrenSkipCount:child :i];
@@ -294,7 +276,7 @@
     }
 }
 
--(void)layoutHorizontal {
+-(void)layoutHorizontal:(int)l :(int)t :(int)r :(int)b {
     BOOL isLayoutRtl = [LGView isRtl];
     int paddingTop = self.dPaddingTop;
     
@@ -302,7 +284,7 @@
     int childLeft = 0;
     
     // Where bottom of child should go
-    int height = self.bottom - self.top;
+    int height = b - t;
     int childBottom = height - self.dPaddingBottom;
     
     // Space available for child
@@ -321,11 +303,11 @@
     switch ([Gravity getAbsoluteGravity:majorGravity]) {
        case GRAVITY_RIGHT:
            // mTotalLength contains the padding already
-           childLeft = self.dPaddingLeft + self.right - self.left - self.mTotalLength;
+           childLeft = self.dPaddingLeft + r - l - self.mTotalLength;
            break;
            // mTotalLength contains the padding already
        case GRAVITY_CENTER_HORIZONTAL:
-            childLeft = self.dPaddingLeft + (self.right - self.left - self.mTotalLength) / 2;
+            childLeft = self.dPaddingLeft + (r - l - self.mTotalLength) / 2;
            break;
        case GRAVITY_LEFT:
        default:
@@ -355,7 +337,7 @@
                 childBaseline = child.baseLine;
             }
             
-            int gravity = child.dGravity;
+            int gravity = child.dGravityDimen;
             if (gravity < 0) {
                 gravity = minorGravity;
             }
@@ -392,7 +374,7 @@
             child.dY = childTop;
             child.dWidth = childWidth;
             child.dHeight = childHeight;
-            
+            [child layout:child.dX :child.dY :(child.dX + child.dWidth) :(child.dY + child.dHeight)];
             childLeft += childWidth + child.dMarginRight + [self getNextLocationOffset:child];
             
             i += [self getChildrenSkipCount:child :childIndex];
@@ -844,7 +826,7 @@
             if(childBaseline != -1) {
                 // Translates the child's vertical gravity into an index
                 // in the range 0..VERTICAL_GRAVITY_COUNT
-                int gravity = (child.dGravity < 0 ? self.dGravity : child.dGravity)
+                int gravity = (child.dGravityDimen < 0 ? self.dGravity : child.dGravityDimen)
                         & VERTICAL_GRAVITY_MASK;
                 int index = ((gravity >> AXIS_Y_SHIFT)
                         & ~AXIS_SPECIFIED) >> 1;
@@ -1018,7 +1000,7 @@
                 int childBaseline = child.baseLine;
                 if(child.baseLine != -1) {
                     // Translates the child's vertical gravity into an index in the range 0..2
-                    int gravity = (child.dGravity < 0 ? self.dGravity : child.dGravity)
+                    int gravity = (child.dGravityDimen < 0 ? self.dGravity : child.dGravityDimen)
                             & VERTICAL_GRAVITY_MASK;
                     int index = ((gravity >> AXIS_Y_SHIFT)
                             & ~AXIS_SPECIFIED) >> 1;
@@ -1116,6 +1098,15 @@
                 child.dWidthDimension = oldWidth;
             }
         }
+    }
+}
+
+-(void)layout:(int)l :(int)t :(int)r :(int)b {
+    [super layout:l :t: r: b];
+    if(self.orientation == VERTICAL) {
+        [self layoutVertical:l :t :r :b];
+    } else {
+        [self layoutHorizontal:l :t :r :b];
     }
 }
 

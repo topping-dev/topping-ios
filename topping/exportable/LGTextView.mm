@@ -36,7 +36,7 @@
 	[super initProperties];
     
     self.stringSize = CGSizeZero;
-    int val = [[LGDimensionParser getInstance] getDimension:@"4dp"];
+    int val = [[LGDimensionParser getInstance] getDimension:@"1dp"];
     self.insets = UIEdgeInsetsMake(val, val * 2, val * 2, val / 2);
 
     self.fontSize = [UIFont labelFontSize];
@@ -58,17 +58,14 @@
     while(parentTop.parent != nil)
         parentTop = parentTop.parent;
     
-    [parentTop clearDimensions];
+    //[parentTop clearDimensions];
+    self.layout = true;
     [parentTop resize];
-    //[parentTop DebugDescription:@"\n"];
 }
 
 -(CGSize)getStringSize
 {
-    if(!CGSizeEqualToSize(self.stringSize, CGSizeZero))
-        return self.stringSize;
-    
-    NSString *text = self.android_text;
+    NSString *text = [self getText];
     if(text == nil || COMPARE(text, @""))
         text = @"R";
     
@@ -88,25 +85,15 @@
                 self.font = [UIFont fontWithName:lfd.fontName size:self.fontSize];
         }
     }
-    
-    /*NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:font}];
-
-    CTFramesetterRef ref = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attrString);
-    CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(ref, CFRangeMake(0, 0), nil, CGSizeMake(MAXFLOAT, MAXFLOAT), nil);
-    return size;*/
 
     CGSize val = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.font} context:nil].size;
     
     return val;
-    
-//    return [text sizeWithAttributes:@{NSFontAttributeName: font}];
 }
 
 -(int)getContentW
 {
     int l = [self getStringSize].width + self.dPaddingLeft + self.dPaddingRight + self.insets.left + self.insets.right;
-	if (l > [DisplayMetrics getMasterView].frame.size.width)
-		l = [DisplayMetrics getMasterView].frame.size.width - self.dX;
     l += 1;
 	return l;
 }
@@ -209,7 +196,7 @@
     if([self._view isKindOfClass:[UILabelPadding class]])
     {
         UILabelPadding *lab = (UILabelPadding*)self._view;
-        lab.lineBreakMode = NSLineBreakByTruncatingTail;
+        lab.lineBreakMode = NSLineBreakByClipping;
         lab.text = [[LGStringParser getInstance] getString:self.android_text];
         if(self.colorAccent != nil)
             lab.textColor = [[LGColorParser getInstance] parseColor:self.colorAccent];

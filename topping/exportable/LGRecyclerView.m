@@ -83,6 +83,7 @@
     [adapter setOnCreateViewHolder:adapter.kotlinInterface.ltOnCreateViewHolder];
     [adapter setOnBindViewHolder:adapter.kotlinInterface.ltOnBindViewHolder];
     [adapter setGetItemViewType:adapter.kotlinInterface.ltGetItemViewType];
+    [adapter setOnItemSelected:adapter.kotlinInterface.ltOnItemSelected];
 }
 
 -(LGRecyclerViewAdapter *)getAdapter

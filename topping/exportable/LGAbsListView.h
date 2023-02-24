@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import "LGView.h"
 
-@interface LGAbsListView : LGView 
+@interface LGAbsListView : LGView
 {
 /*
  

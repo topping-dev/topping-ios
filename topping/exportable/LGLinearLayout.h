@@ -34,9 +34,6 @@ enum LAYOUTORIENTATION
 @property (nonatomic) BOOL mUseLargestChild;
 @property (nonatomic, retain) NSMutableArray *mMaxAscent;
 @property (nonatomic, retain) NSMutableArray *mMaxDescent;
-@property (nonatomic) BOOL sCompatibilityDone;
-@property (nonatomic) BOOL sRemeasureWeightedChildren;
-@property (nonatomic) BOOL mAllowInconsistentMeasurement;
 @property (nonatomic) int orientation;
 @property (nonatomic) int mDividerWidth;
 @property (nonatomic) int mDividerHeight;

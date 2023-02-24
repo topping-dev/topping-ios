@@ -6,14 +6,6 @@
 
 @implementation LGNavigationView
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
-
 +(LGNavigationView*)create:(LuaContext*)context {
     LGNavigationView *dl = [[LGNavigationView alloc] init];
     dl.lc = context;
@@ -21,6 +13,7 @@
 }
 
 -(void)setupComponent:(UIView *)view {
+    [super setupComponent:view];
     if(self.app_headerLayout != nil) {
         LuaViewInflator *inflator = [[LuaViewInflator alloc] init];
         self.headerView = [inflator inflate:[LuaRef withValue:self.app_headerLayout] :self];
@@ -31,7 +24,7 @@
         NSMutableArray *arr = [[LGMenuParser getInstance] getMenu:self.app_menu];
         self.subView = [LGRecyclerView create:self.lc];
         self.subView.android_layout_width = @"match_parent";
-        self.subView.android_layout_height = @"match_parent";
+        self.subView.android_layout_height = @"wrap_content";
         
         [self addSubview:self.subView];
         
@@ -55,6 +48,10 @@
     }
 }
 
+-(void)configChange {
+    [self.subView._view setFrame:CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight)];
+}
+
 -(void)componentAddMethod:(UIView *)par :(UIView *)me {
     [self.subView setAdapter:self.adapter];
     [self.subView notify];
@@ -75,17 +72,17 @@
         "   android:layout_height=\"wrap_content\""
         "   android:orientation=\"horizontal\""
         "   android:padding=\"8dp\""
-        "   android:layout_gravity=\"center_vertical\""
+        "   android:gravity=\"center_vertical\""
         "   android:layout_margin=\"4dp\">"
         "   <ImageView"
         "       android:id=\"@+id/iv_icon\""
-        "       android:layout_width=\"wrap_content\""
-        "       android:layout_height=\"wrap_content\"/>"
+        "       android:layout_width=\"12dp\""
+        "       android:layout_height=\"12dp\"/>"
         "   <TextView"
         "       android:id=\"@+id/tv_title\""
         "       android:layout_width=\"wrap_content\""
         "       android:layout_height=\"wrap_content\""
-        "       android:layout_marginStart=\"8dp\"/>"
+        "       android:layout_marginStart=\"10dp\"/>"
         "</LinearLayout>";
     }
     else {

@@ -1,9 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "LuaContext.h"
-#import "LGView.h"
+#import "LGAbsListView.h"
 #import "LGRecyclerViewAdapter.h"
 
-@interface LGRecyclerView : LGView
 
 //Lua
 +(LGRecyclerView *)create:(LuaContext *)context;

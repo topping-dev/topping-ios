@@ -136,6 +136,7 @@ enum MEASURE_SPEC
 -(int)getCalculatedHeight;
 -(int)getCalculatedWidth;
 -(void)configChange;
+-(void)layout:(int)l :(int)t :(int)r :(int)b;
 -(NSString *) debugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;
@@ -157,6 +158,15 @@ enum MEASURE_SPEC
 -(float)getAlpha;
 -(void)setOnClickListener:(LuaTranslator *)lt;
 -(NSDictionary*)getBindings;
+
+-(int)getLeft;
+-(int)getRight;
+-(int)getTop;
+-(int)getBottom;
+-(int)getMLeft;
+-(int)getMRight;
+-(int)getMTop;
+-(int)getMBottom;
 
 -(LuaFragment*)findFragment;
 -(NavController*)findNavController;
@@ -225,7 +235,9 @@ enum MEASURE_SPEC
 @property(nonatomic) int dMarginTop;
 
 @property (nonatomic) int dGravity;
+@property (nonatomic) int dGravityDimen;
 @property (nonatomic) int dLayoutGravity;
+@property (nonatomic) int dLayoutGravityDimen;
 @property (nonatomic) int dVisibility;
 
 @property(nonatomic) BOOL layout;
@@ -238,9 +250,6 @@ enum MEASURE_SPEC
 @property(nonatomic, strong) LuaFragment *fragment;
 
 @property(nonatomic, strong) NavController *navController;
-
-@property(nonatomic) int left, right, top, bottom;
-@property(nonatomic) int mLeft, mRight, mTop, mBottom;
 
 @end
 

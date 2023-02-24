@@ -15,5 +15,6 @@
 @property (nonatomic, retain) LuaTranslator *ltOnCreateViewHolder;
 @property (nonatomic, retain) LuaTranslator *ltOnBindViewHolder;
 @property (nonatomic, retain) LuaTranslator *ltGetItemViewType;
+@property (nonatomic, retain) LuaTranslator *ltOnItemSelected;
 
 @end

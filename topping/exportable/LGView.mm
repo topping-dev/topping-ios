@@ -286,8 +286,9 @@ static BOOL rtl = false;
 }
 
 -(void)measure:(int)widthMeasureSpec :(int)heightMeasureSpec {
-    if(self.dWidthSpec != widthMeasureSpec || self.dHeightSpec != heightMeasureSpec)
+    if(self.layout || self.dWidthSpec != widthMeasureSpec || self.dHeightSpec != heightMeasureSpec)
     {
+        self.layout = NO;
         [self onMeasure:widthMeasureSpec :heightMeasureSpec];
     }
     self.dWidthSpec = widthMeasureSpec;
@@ -295,7 +296,29 @@ static BOOL rtl = false;
 }
 
 -(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
-    [self setMeasuredDimension:[LGView getDefaultSize:[self getSuggestedMinimumWidth] :widthMeasureSpec] :[LGView getDefaultSize:[self getSuggestedMinimumHeight] :heightMeasureSpec]];
+    int newWidthSpec = widthMeasureSpec;
+    int newHeightSpec = heightMeasureSpec;
+    if(![self isKindOfClass:[LGViewGroup class]]
+       && ![self isKindOfClass:[LGAbsListView class]]
+       && ![NSStringFromClass(self.class) isEqualToString:@"LGView"]) {
+        int widthSpec = [MeasureSpec getMode:widthMeasureSpec];
+        int width = [MeasureSpec getSize:widthMeasureSpec];
+        if(widthSpec == AT_MOST) {
+            int contentW = [self getContentW];
+            contentW += self.dMarginLeft + self.dMarginRight;
+            width = MIN(contentW, width);
+        }
+        newWidthSpec = [MeasureSpec makeMeasureSpec:width :widthSpec];
+        int heightSpec = [MeasureSpec getMode:heightMeasureSpec];
+        int height = [MeasureSpec getSize:heightMeasureSpec];
+        if(heightSpec == AT_MOST ) {
+            int contentH = [self getContentH];
+            contentH += self.dMarginTop + self.dMarginBottom;
+            height = MIN(contentH, height);
+        }
+        newHeightSpec = [MeasureSpec makeMeasureSpec:height :heightSpec];
+    }
+    [self setMeasuredDimension:[LGView getDefaultSize:[self getSuggestedMinimumWidth] :newWidthSpec] :[LGView getDefaultSize:[self getSuggestedMinimumHeight] :newHeightSpec]];
 }
 
 -(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight {
@@ -481,6 +504,7 @@ static BOOL rtl = false;
     NSArray *gravitySplit = SPLIT(self.android_layout_gravity, @"|");
     BOOL startOrEndSet = NO;
     BOOL topOrBottomSet = NO;
+    self.dLayoutGravityDimen = -1;
     for(NSString *gravity in gravitySplit)
     {
         if([gravity isEqualToString:@"left"]
@@ -523,6 +547,8 @@ static BOOL rtl = false;
         }
     }
     
+    if(startOrEndSet || topOrBottomSet)
+        self.dLayoutGravityDimen = self.dLayoutGravity;
     if(!startOrEndSet)
     {
         self.dLayoutGravity |= GRAVITY_LEFT;
@@ -535,6 +561,7 @@ static BOOL rtl = false;
     gravitySplit = SPLIT(self.android_gravity, @"|");
     startOrEndSet = NO;
     topOrBottomSet = NO;
+    self.dGravityDimen = -1;
     for(NSString *gravity in gravitySplit)
     {
         if([gravity isEqualToString:@"left"]
@@ -577,9 +604,11 @@ static BOOL rtl = false;
         }
     }
     
+    if(startOrEndSet || topOrBottomSet)
+        self.dGravityDimen = self.dGravity;
     if(!startOrEndSet)
     {
-        self.dGravity |= GRAVITY_LEFT;
+        self.dGravity |= GRAVITY_START;
     }
     if(!topOrBottomSet)
     {
@@ -655,6 +684,10 @@ static BOOL rtl = false;
 
 -(void)configChange {
     
+}
+
+-(void)layout:(int)l :(int)t :(int)r :(int)b {
+    self._view.frame = CGRectMake(l, t, r - l, b - t);
 }
 
 -(NSString *) debugDescription:(NSString *)val
@@ -815,19 +848,19 @@ static BOOL rtl = false;
 }
 
 -(int)getMLeft {
-    return self.left;
+    return [self getLeft];
 }
 
 -(int)getMRight {
-    return self.right;
+    return [self getRight];
 }
 
 -(int)getMTop {
-    return self.top;
+    return [self getTop];
 }
 
 -(int)getMBottom {
-    return self.bottom;
+    return [self getBottom];
 }
 
 -(NSString*)GetId
