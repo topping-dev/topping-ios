@@ -104,6 +104,9 @@
 }
 
 -(void)didPan:(UIGestureRecognizer *)gesture {
+    for(LuaTranslator *lt in self.ltOnDrawerSlide) {
+        [lt callIn:[NSNumber numberWithInt:[gesture locationInView:self].x]];
+    }
     if(gesture.state == UIGestureRecognizerStateBegan) {
         [self openDrawer:false];
     } else {

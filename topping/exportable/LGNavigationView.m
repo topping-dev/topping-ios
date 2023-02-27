@@ -44,7 +44,8 @@
 
 -(void)onItemSelected:(LGView *)parent :(LGView *)cell :(int)position {
     if(self.ltNavigationItemSelectListener != nil) {
-        [self.ltNavigationItemSelectListener call:[NSNumber numberWithInt:position]];
+        LuaMenu *menu = (LuaMenu*)[self.adapter getValue:position];
+        [self.ltNavigationItemSelectListener call:menu];
     }
 }
 
