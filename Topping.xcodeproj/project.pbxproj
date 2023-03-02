@@ -309,6 +309,8 @@
 		5C43E6DC24FE679B005BEA07 /* LGToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C43E6DA24FE679B005BEA07 /* LGToolbar.m */; };
 		5C4F829F298FA3880013620E /* LGNavigationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4F829D298FA3880013620E /* LGNavigationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C4F82A0298FA3880013620E /* LGNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F829E298FA3880013620E /* LGNavigationView.m */; };
+		5C4F831129AD267D0013620E /* LGTextInputLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4F830F29AD267D0013620E /* LGTextInputLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C4F831229AD267D0013620E /* LGTextInputLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F831029AD267D0013620E /* LGTextInputLayout.m */; };
 		5C5A980924E16A4B002A22EA /* Topping.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A980724E16A4B002A22EA /* Topping.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A98B324E16BCC002A22EA /* LGButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A980F24E16BBB002A22EA /* LGButton.mm */; };
 		5C5A98B424E16BCC002A22EA /* LuaDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A981024E16BBB002A22EA /* LuaDouble.m */; };
@@ -746,7 +748,7 @@
 		5CBB56BC298D43A10080FEF1 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB56B7298D43A10080FEF1 /* UIView+Extensions.swift */; };
 		5CBB56BD298D43A10080FEF1 /* NavigationDrawerPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB56B8298D43A10080FEF1 /* NavigationDrawerPresentationAnimator.swift */; };
 		5CBB56BE298D43A10080FEF1 /* NavigationDrawerSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB56B9298D43A10080FEF1 /* NavigationDrawerSwipeController.swift */; };
-		5CBB56C1298D440B0080FEF1 /* LGDrawerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CBB56BF298D440A0080FEF1 /* LGDrawerLayout.h */; };
+		5CBB56C1298D440B0080FEF1 /* LGDrawerLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CBB56BF298D440A0080FEF1 /* LGDrawerLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CBB56C2298D440B0080FEF1 /* LGDrawerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB56C0298D440B0080FEF1 /* LGDrawerLayout.m */; };
 		5CBD36ED24F1652F00EB167E /* UILabelPadding.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CBD36EB24F1652F00EB167E /* UILabelPadding.h */; };
 		5CBD36EE24F1652F00EB167E /* UILabelPadding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CBD36EC24F1652F00EB167E /* UILabelPadding.m */; };
@@ -1180,6 +1182,8 @@
 		5C43E6DA24FE679B005BEA07 /* LGToolbar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGToolbar.m; sourceTree = "<group>"; };
 		5C4F829D298FA3880013620E /* LGNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGNavigationView.h; sourceTree = "<group>"; };
 		5C4F829E298FA3880013620E /* LGNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGNavigationView.m; sourceTree = "<group>"; };
+		5C4F830F29AD267D0013620E /* LGTextInputLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTextInputLayout.h; sourceTree = "<group>"; };
+		5C4F831029AD267D0013620E /* LGTextInputLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTextInputLayout.m; sourceTree = "<group>"; };
 		5C5A980424E16A4B002A22EA /* Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5A980724E16A4B002A22EA /* Topping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Topping.h; sourceTree = "<group>"; };
 		5C5A980824E16A4B002A22EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2867,6 +2871,8 @@
 				5C91BD6E283E15FF00D4C94F /* LuaViewModelProvider.m */,
 				5CBB56BF298D440A0080FEF1 /* LGDrawerLayout.h */,
 				5CBB56C0298D440B0080FEF1 /* LGDrawerLayout.m */,
+				5C4F830F29AD267D0013620E /* LGTextInputLayout.h */,
+				5C4F831029AD267D0013620E /* LGTextInputLayout.m */,
 			);
 			path = exportable;
 			sourceTree = "<group>";
@@ -3714,6 +3720,7 @@
 				5C810B1B295C3C2F00C2A93D /* CAMediaTimingFunction+MDCAnimationTiming.h in Headers */,
 				5C5A98EF24E16BCC002A22EA /* LuaInterface.h in Headers */,
 				5CBFA03A2530562200734CAE /* LuaThread.h in Headers */,
+				5C4F831129AD267D0013620E /* LGTextInputLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3915,6 +3922,7 @@
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
 				5C18BAC929866A2E00C4A929 /* MDCTextInputControllerLegacyFullWidth.m in Sources */,
 				5C07C3F429879BDC0085B536 /* MDCTextControlPlaceholderSupport.m in Sources */,
+				5C4F831229AD267D0013620E /* LGTextInputLayout.m in Sources */,
 				5C2F9A3D29641AF800C443A8 /* UIColor+MaterialElevation.m in Sources */,
 				5C5A98E924E16BCC002A22EA /* DisplayMetrics.mm in Sources */,
 				5C91BD60283E134500D4C94F /* Lifecycle.m in Sources */,

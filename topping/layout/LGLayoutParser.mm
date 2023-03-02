@@ -30,6 +30,7 @@
 #import "LGBottomNavigationView.h"
 #import "LGWebView.h"
 #import "LGTextInputEditText.h"
+#import "LGTextInputLayout.h"
 #import "LGDrawerLayout.h"
 #import "LGNavigationView.h"
 
@@ -251,7 +252,7 @@
         || [name compare:@"LGWebView"] == 0)
         rootView = [[LGWebView alloc] init];
     else if([name compare:@"com.google.android.material.textfield.TextInputLayout"] == 0)
-        rootView = [[LGLinearLayout alloc] init];
+        rootView = [[LGTextInputLayout alloc] init];
     else if([name compare:@"com.google.android.material.textfield.TextInputEditText"] == 0)
     {
         LGTextInputEditText *et = [LGTextInputEditText new];

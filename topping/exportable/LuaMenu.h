@@ -19,7 +19,9 @@ typedef NS_ENUM(NSInteger, ShowAsAction) {
 
 @interface LuaMenu : NSObject <LuaClass>
 
-+(LuaMenu*)create;
++(LuaMenu*)create:(LuaContext*)lc :(LuaRef*)idVal;
+
+-(LuaRef*)getItemId;
 
 -(void)setTitle:(NSString*)text;
 

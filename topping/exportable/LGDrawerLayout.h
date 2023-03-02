@@ -19,6 +19,8 @@
 
 @interface LGDrawerLayout : LGViewGroup
 
++(LGDrawerLayout*)create:(LuaContext*)context;
+
 -(void)addOnDrawerSlide:(LuaTranslator*)lt;
 -(void)addOnDrawerOpened:(LuaTranslator*)lt;
 -(void)addOnDrawerClosed:(LuaTranslator*)lt;

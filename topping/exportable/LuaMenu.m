@@ -17,10 +17,14 @@
     return self;
 }
 
-+(LuaTab*)create {
++(LuaMenu*)create:(LuaContext*)lc :(LuaRef*)idVal {
     LuaTab *tab = [LuaTab new];
     tab.item = [[MDCTabBarItem alloc] init];
     return tab;
+}
+
+-(LuaRef*)getItemId {
+    return self.idVal;
 }
 
 -(void)setTitle:(NSString*)text {
