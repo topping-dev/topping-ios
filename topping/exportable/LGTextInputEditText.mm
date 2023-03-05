@@ -152,8 +152,13 @@
 -(int)getContentH
 {
     MDCBaseTextField *btf = (MDCBaseTextField*)self._view;
-    [btf sizeToFit];
-    return btf.frame.size.height;
+    if(btf == nil)
+        return 30;
+    else
+    {
+        [btf sizeToFit];
+        return btf.frame.size.height;
+    }
 }
 
 -(IBAction)onClickReturn:(id)sender
@@ -401,7 +406,7 @@
 
 + (NSString*)className
 {
-	return @"LGTextInputEditText";
+    return @"LGTextInputEditText";
 }
 
 +(NSMutableDictionary*)luaMethods

@@ -287,6 +287,11 @@
     self.layer.frame = CGRectMake(0, self._view.frame.size.height - 1, self._view.frame.size.width, 1);
 }
 
+-(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight {
+    [super setMeasuredDimension:measuredWidth :measuredHeight];
+    self.layer.frame = CGRectMake(0, self._view.frame.size.height - 1, self._view.frame.size.width, 1);
+}
+
 -(void)setViewMovedUp:(BOOL)movedUp :(NSNotification*)notif
 {
     [UIView beginAnimations:nil context:NULL];

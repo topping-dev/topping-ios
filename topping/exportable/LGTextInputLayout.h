@@ -6,4 +6,6 @@
 
 +(LGTextInputLayout*)create:(LuaContext*)context;
 
+@property (nonatomic, retain) NSString *android_hint;
+
 @end

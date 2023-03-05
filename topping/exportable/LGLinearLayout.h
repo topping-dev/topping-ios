@@ -21,9 +21,6 @@ enum LAYOUTORIENTATION
 @property (nonatomic, retain) NSString *android_baseAlignedChildIndex;
 @property (nonatomic, retain) NSString *android_measureWithLargestChild;
 
-//For material
-@property (nonatomic, retain) NSString *android_hint;
-
 @property (nonatomic) int extra;
 @property (nonatomic) float percentGone;
 @property (nonatomic) BOOL mBaseAligned;

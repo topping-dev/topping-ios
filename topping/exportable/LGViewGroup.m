@@ -108,6 +108,22 @@
     [super resize];
 }
 
+/*-(void)readWidthHeight {
+    [super readWidthHeight];
+    for(LGView *subView in self.subviews) {
+        [subView readWidthHeight];
+    }
+    [super readWidthHeight];
+}*/
+
+-(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
+    [super onMeasure:widthMeasureSpec :heightMeasureSpec];
+    for(LGView *subView in self.subviews) {
+        [subView readWidthHeight];
+        [subView onMeasure:widthMeasureSpec :heightMeasureSpec];
+    }
+}
+
 -(float)findParentMatchParentWidth:(LGView*)view {
     if(view.parent != nil) {
         if(view.parent.dWidth != 0)
@@ -125,12 +141,15 @@
         int maxX = 0;
         for (LGView *v in self.subviews)
         {
+            [v readWidthHeight];
             int width_w_margin = 0;
             if(v.dVisibility == GONE) {
                 width_w_margin = 0;
             }
             else if([v isKindOfClass:[LGViewGroup class]])
                 width_w_margin = [v getContentW];
+            else if(v.dWidthDimension == WRAP_CONTENT)
+                width_w_margin = [v getContentW] + v.dMarginLeft + v.dMarginRight;
             else {
                 if(v.dWidth == 0
                    && ([v.android_layout_width compare:@"fill_parent"] == 0 ||
@@ -155,12 +174,15 @@
         int maxY = 0;
         for (LGView *v in self.subviews)
         {
+            [v readWidthHeight];
             int height_w_margin = 0;
             if(v.dVisibility == GONE) {
                 height_w_margin = 0;
             }
             else if([v isKindOfClass:[LGViewGroup class]])
                 height_w_margin = [v getContentH];
+            else if(v.dHeightDimension == WRAP_CONTENT)
+                height_w_margin = [v getContentH] + v.dMarginTop + v.dMarginBottom;
             else
                 height_w_margin = v.dHeight + v.dMarginTop + v.dMarginBottom;
             if (v.dY + height_w_margin > maxY)
@@ -323,6 +345,20 @@
 -(NSDictionary*)getBindings
 {
     return self.subviewMap;
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGView className];
+}
+
++ (NSString*)className
+{
+    return @"LGViewGroup";
 }
 
 +(NSMutableDictionary*)luaMethods

@@ -291,6 +291,8 @@ static BOOL rtl = false;
         self.layout = NO;
         [self onMeasure:widthMeasureSpec :heightMeasureSpec];
     }
+    self.widthSpecSet = true;
+    self.heightSpecSet = true;
     self.dWidthSpec = widthMeasureSpec;
     self.dHeightSpec = heightMeasureSpec;
 }
@@ -298,7 +300,7 @@ static BOOL rtl = false;
 -(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
     int newWidthSpec = widthMeasureSpec;
     int newHeightSpec = heightMeasureSpec;
-    if(![self isKindOfClass:[LGViewGroup class]]
+    if(![self isKindOfClass:[LGLinearLayout class]]
        && ![self isKindOfClass:[LGAbsListView class]]
        && ![NSStringFromClass(self.class) isEqualToString:@"LGView"]) {
         int widthSpec = [MeasureSpec getMode:widthMeasureSpec];
@@ -324,8 +326,7 @@ static BOOL rtl = false;
 -(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight {
     self.dWidth = measuredWidth & MEASURED_SIZE_MASK;
     self.dHeight = measuredHeight & MEASURED_SIZE_MASK;
-    self.dWidthSpec = measuredWidth;
-    self.dHeightSpec = measuredHeight;
+    self._view.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
 }
 
 -(int)getMeasuredState {

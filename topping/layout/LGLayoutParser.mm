@@ -264,7 +264,7 @@
             et.editTextType = 0;
         }
         et.parentStyle = parent.style;
-        et.android_hint = ((LGLinearLayout*)parent).android_hint;
+        et.android_hint = ((LGTextInputLayout*)parent).android_hint;
         rootView = et;
     }
     else if([name compare:@"androidx.drawerlayout.widget.DrawerLayout"] == 0)

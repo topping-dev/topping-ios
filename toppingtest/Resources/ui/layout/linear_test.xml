@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lua="http://schemas.android.com/apk/res-auto"
+    lua:id="formTestLL"
+    android:id="@+id/formTestLL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#7993AB">
+    <LGAutoCompleteTextView
+        android:id="@+id/formTestAutoCompTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LGAutoCompleteTextView>
+    <LGButton
+        android:id="@+id/formTestButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button Text">
+    </LGButton>
+    <LGCheckBox
+        android:id="@+id/formTestCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkbox text"
+        android:checked="@bool/checkbox_checked">
+    </LGCheckBox>
+    <LGComboBox
+        android:id="@+id/formTestComboBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LGComboBox>
+    <LGEditText
+        android:id="@+id/formTestEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="test hint">
+    </LGEditText>
+    <LGProgressBar
+        android:id="@+id/formTestProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:progress="15">
+    </LGProgressBar>
+    <LGImageView
+        android:id="@+id/formTestIv"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/indexbutleft">
+    </LGImageView>
+</LinearLayout>

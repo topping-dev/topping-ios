@@ -344,7 +344,7 @@
 
 + (NSString*)className
 {
-	return @"LGAdapterView";
+    return @"LGAdapterView";
 }
 
 +(NSMutableDictionary*)luaMethods

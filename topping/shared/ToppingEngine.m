@@ -993,6 +993,7 @@ int RegisterTag(lua_State *L)
 	[Lunar register:lu :[LGCompoundButton class]];
     [Lunar register:lu :[LGConstraintLayout class]];
 	[Lunar register:lu :[LGDatePicker class]];
+    [Lunar register:lu :[LGDrawerLayout class]];
 	[Lunar register:lu :[LGEditText class]];
     [Lunar register:lu :[LGFragmentContainerView class]];
     [Lunar register:lu :[LGFragmentStateAdapter class]];
@@ -1007,6 +1008,7 @@ int RegisterTag(lua_State *L)
 	[Lunar register:lu :[LGScrollView class]];
     [Lunar register:lu :[LGHorizontalScrollView class]];
     [Lunar register:lu :[LGTabLayout class]];
+    [Lunar register:lu :[LGTextInputLayout class]];
     [Lunar register:lu :[LGTextInputEditText class]];
 	[Lunar register:lu :[LGTextView class]];
 	[Lunar register:lu :[LGView class]];
