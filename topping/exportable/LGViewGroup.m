@@ -124,6 +124,30 @@
     }
 }
 
+//getRootMeasureSpec(int windowSize, int measurement, int privateFlags) {
+-(int)getParentWidthSpec
+{
+    int widthSpec = 0;
+    if(self.parent != nil) {
+        widthSpec = self.parent.dWidthSpec;
+    } else {
+        return [MeasureSpec makeMeasureSpec:self.lc.form.view.frame.size.width :EXACTLY];
+    }
+    return widthSpec;
+}
+
+//getRootMeasureSpec(int windowSize, int measurement, int privateFlags) {
+-(int)getParentHeightSpec
+{
+    int heightSpec = 0;
+    if(self.parent != nil) {
+        heightSpec = self.parent.dHeightSpec;
+    } else {
+        return [MeasureSpec makeMeasureSpec:self.lc.form.view.frame.size.height :EXACTLY];
+    }
+    return heightSpec;
+}
+
 -(float)findParentMatchParentWidth:(LGView*)view {
     if(view.parent != nil) {
         if(view.parent.dWidth != 0)
