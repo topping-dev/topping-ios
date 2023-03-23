@@ -20,10 +20,8 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.license          = { :type => 'Creative Commons License', :file => 'LICENSE' }
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
-  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.1.6/topping.zip' }
-  #s.source            = { :http => 'https://github.com/Deadknight/topping-ios-local/releases/download/v0.1.4/topping.zip' }
+  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.5.0/topping.zip' }
   #s.source = { :http=> 'https://localhost:8080/topping.zip' }
-  
   #s.social_media_url = 'https://www.twitter.com/toppingdev'
 
   s.dependency 'GDataXML-HTML', '1.4.1'

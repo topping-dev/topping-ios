@@ -3,12 +3,12 @@
 
 @implementation LuaPoint
 
-+(LuaPoint *)createPoint
++(LuaPoint *)create
 {
     return [[LuaPoint alloc] init];
 }
 
-+(LuaPoint *)createPointPar:(float)x :(float)y
++(LuaPoint *)createPar:(float)x :(float)y
 {
     LuaPoint *point = [[LuaPoint alloc] init];
     [point set:x :y];
@@ -43,18 +43,18 @@
 +(NSMutableDictionary*)luaMethods
 {
 	NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createPoint))
-										:@selector(createPoint)
+	[dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create))
+										:@selector(create)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:nil]
 										:[LuaPoint class]]
-			 forKey:@"createPoint"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createPointPar::))
-										:@selector(createPointPar::)
+			 forKey:@"create"];
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(createPar::))
+										:@selector(createPar::)
 										:[NSObject class]
 										:[NSArray arrayWithObjects:[LuaFloat class], [LuaFloat class], nil]
 										:[LuaPoint class]]
-			 forKey:@"createPointPar"];
+			 forKey:@"createPar"];
 	[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(set::))
 									   :@selector(set::)
 									   :nil

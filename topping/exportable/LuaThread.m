@@ -31,7 +31,7 @@
     }];
 }
 
-+(LuaThread *)new:(LuaTranslator *)runnable
++(LuaThread *)create:(LuaTranslator *)runnable
 {
     LuaThread *lt = [[LuaThread alloc] init];
     lt.runnable = runnable;
@@ -97,12 +97,12 @@
                                :[NSArray arrayWithObjects:[LuaTranslator class], nil]
                                :[LuaThread class]]
              forKey:@"runOnBackground"];
-    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(new:))
-                      :@selector(new:)
+    [dict setObject:[LuaFunction CreateC:class_getClassMethod([self class], @selector(create:))
+                      :@selector(create:)
                       :[NSObject class]
                       :[NSArray arrayWithObjects:[LuaTranslator class], nil]
                       :[LuaThread class]]
-    forKey:@"new"];
+    forKey:@"create"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(run)) :@selector(run) :nil :MakeArray(nil)] forKey:@"run"];
     /*[dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(Wait:)) :@selector(Wait:) :nil :MakeArray([LuaLong class]C nil)] forKey:@"wait"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(notify)) :@selector(notify) :nil :MakeArray(nil)] forKey:@"notify"];*/

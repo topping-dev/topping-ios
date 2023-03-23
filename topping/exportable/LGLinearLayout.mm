@@ -97,6 +97,7 @@
     }
     [self resizeInternal];
 #ifdef DEBUG_DESCRIPTION
+    NSLog(@"---- LinearLayout ----\n");
 	NSLog(@"\n %@", [self debugDescription:nil]);
 #endif
 }

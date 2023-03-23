@@ -219,6 +219,10 @@
         self.heightSpecSet = true;
 //    }
     [self resizeInternal];
+#ifdef DEBUG_DESCRIPTION
+    NSLog(@"---- FrameLayout ----\n");
+    NSLog(@"\n %@", [self debugDescription:nil]);
+#endif
 }
 
 - (void)resizeInternal {
@@ -279,6 +283,10 @@
                 default:
                     childTop = parentTop + child.dMarginTop;
             }
+            child.dX = childLeft;
+            child.dY = childTop;
+            child.dWidth = childLeft + width;
+            child.dHeight = childTop + height;
             [child layout:childLeft :childTop :childLeft + width :childTop + height];
         }
     }

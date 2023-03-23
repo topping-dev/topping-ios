@@ -8,8 +8,8 @@
     CGRect rect;
 }
 
-+(LuaRect*)createRect;
-+(LuaRect*)createRectPar:(float)left :(float)top :(float)right :(float)bottom;
++(LuaRect*)create;
++(LuaRect*)createPar:(float)left :(float)top :(float)right :(float)bottom;
 -(void)set:(float)left :(float)top :(float)right :(float)bottom;
 -(float)getLeft;
 -(float)getRight;
