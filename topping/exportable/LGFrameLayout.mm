@@ -207,6 +207,7 @@
             [child measure:childWidthMeasureSpec :childHeightMeasureSpec];
         }
     }
+    [self layoutChildren:self.getLeft :self.getTop :self.getRight :self.getBottom];
 }
 
 - (void)resize {
@@ -230,7 +231,6 @@
     int widthSpec = [self getParentWidthSpec];
     int heightSpec = [self getParentHeightSpec];
     [self onMeasure:widthSpec :heightSpec];
-    [self layoutChildren:self.getLeft :self.getTop :self.getRight :self.getBottom];
 }
     
 -(void)layoutChildren:(int)left :(int)top :(int)right :(int)bottom {
