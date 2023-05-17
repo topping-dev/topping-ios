@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Topping'
-  s.version          = '0.5.0'
+  s.version          = '0.5.1'
   s.summary          = 'ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.'
   s.description      = <<-DESC
 ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.
@@ -20,25 +20,21 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.license          = { :type => 'Creative Commons License', :file => 'LICENSE' }
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
-  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.5.0/topping.zip' }
+  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.5.1/topping.zip' }
   #s.source = { :http=> 'https://localhost:8080/topping.zip' }
   #s.social_media_url = 'https://www.twitter.com/toppingdev'
-
-  s.dependency 'GDataXML-HTML', '1.4.1'
-  s.dependency 'ActionSheetPicker-3.0', '2.5.0'
-  s.dependency 'MBProgressHUD', '1.2.0'
   
   s.vendored_frameworks = 'Topping.xcframework'
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
   s.swift_versions = '4.0'
   
   s.pod_target_xcconfig = {
     #'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
-    'IPHONEOS_DEPLOYMENT_TARGET' => '10.0'
+    'IPHONEOS_DEPLOYMENT_TARGET' => '13.0'
   }
   s.user_target_xcconfig = {
     #'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
-    'IPHONEOS_DEPLOYMENT_TARGET' => '10.0'
+    'IPHONEOS_DEPLOYMENT_TARGET' => '13.0'
   }
 
 end

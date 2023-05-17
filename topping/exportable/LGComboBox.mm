@@ -4,7 +4,7 @@
 #import "Defines.h"
 #import "UILabelPadding.h"
 #import <QuartzCore/QuartzCore.h>
-#import <ActionSheetPicker_3_0/ActionSheetPicker.h>
+#import "ActionSheetPicker.h"
 
 @class LuaTranslator;
 
