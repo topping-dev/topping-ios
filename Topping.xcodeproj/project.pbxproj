@@ -166,7 +166,6 @@
 		5C18BAFD29866BEC00C4A929 /* MDCContainerScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C18BAFA29866BEC00C4A929 /* MDCContainerScheme.h */; };
 		5C23B60324E555870094389F /* UIBufferedProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C23B60124E555870094389F /* UIBufferedProgressBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C23B60424E555870094389F /* UIBufferedProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C23B60224E555870094389F /* UIBufferedProgressBar.m */; };
-		5C23B60524E592AB0094389F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A9A4C24E1BDEF002A22EA /* CoreLocation.framework */; };
 		5C251C8224EBF6EB00CCA3B4 /* ui in Resources */ = {isa = PBXBuildFile; fileRef = 5C251C7924EBF6E900CCA3B4 /* ui */; };
 		5C251C8324EBF6EB00CCA3B4 /* defines.lua in Resources */ = {isa = PBXBuildFile; fileRef = 5C251C7A24EBF6EA00CCA3B4 /* defines.lua */; };
 		5C251C8424EBF6EB00CCA3B4 /* ltn12.lua in Resources */ = {isa = PBXBuildFile; fileRef = 5C251C7B24EBF6EA00CCA3B4 /* ltn12.lua */; };
@@ -554,7 +553,6 @@
 		5C5A9A0524E16BEC002A22EA /* ldo.c in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A99AE24E16BEC002A22EA /* ldo.c */; };
 		5C5A9A0624E16BEC002A22EA /* lundump.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A99AF24E16BEC002A22EA /* lundump.h */; };
 		5C5A9A4024E16F0D002A22EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A9A3F24E16F0D002A22EA /* UIKit.framework */; };
-		5C5A9A4224E1A57D002A22EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5A9A4124E1A57D002A22EA /* MapKit.framework */; };
 		5C5A9A4624E1B8EA002A22EA /* Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A9A4424E1B8EA002A22EA /* Singleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A9A4524E1B8EA002A22EA /* Singleton.m */; };
 		5C5A9A5024E1D3B1002A22EA /* DatabaseHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C5A9A4E24E1D3B1002A22EA /* DatabaseHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1792,8 +1790,6 @@
 			files = (
 				5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */,
 				5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */,
-				5C23B60524E592AB0094389F /* CoreLocation.framework in Frameworks */,
-				5C5A9A4224E1A57D002A22EA /* MapKit.framework in Frameworks */,
 				5C5A9A4024E16F0D002A22EA /* UIKit.framework in Frameworks */,
 				4FD173E093462938CD3C2ADB /* Pods_Topping.framework in Frameworks */,
 			);
