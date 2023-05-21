@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Topping'
-  s.version          = '0.5.1'
+  s.version          = '0.5.2'
   s.summary          = 'ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.'
   s.description      = <<-DESC
 ToppingEngine is a library helps you create mobile applications using one type of layout code and one type of backend code.
@@ -20,7 +20,7 @@ If you know how to write Android code, learning curve of this engine is very sim
   s.license          = { :type => 'Creative Commons License', :file => 'LICENSE' }
   s.author           = { 'topping dev' => 'toppingdev@gmail.com' }
   s.platform         = :ios
-  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.5.1/topping.zip' }
+  s.source           = { :http => 'https://github.com/topping-dev/topping-ios/releases/download/v0.5.2/topping.zip' }
   #s.source = { :http=> 'https://localhost:8080/topping.zip' }
   #s.social_media_url = 'https://www.twitter.com/toppingdev'
   
