@@ -37,7 +37,7 @@
     UIToolbar *toolbar = (UIToolbar*)self.toolbar;
     if(self.android_background == nil)
     {
-        self.android_background = @"@color/colorPrimary";
+        self.android_background = @"@color/transparent";
     }
     if(self.android_title != nil)
     {
@@ -62,14 +62,22 @@
     
     if(self.android_background != nil)
     {
-        NSObject *obj = [[LGValueParser getInstance] getValue:self.android_background];
-        if([obj isKindOfClass:[LGDrawableReturn class]]) {
-            LGDrawableReturn *ldr = (LGDrawableReturn*)obj;
-            toolbar.barTintColor = [UIColor colorWithPatternImage:ldr.img];
-        } else if(obj != nil) {
-            toolbar.barTintColor = (UIColor*)obj;
+        if([self.android_background isEqualToString:@"@color/transparent"])
+        {
+            [toolbar setBackgroundImage:[UIImage new]
+                          forToolbarPosition:UIToolbarPositionAny
+                                  barMetrics:UIBarMetricsDefault];
+            toolbar.backgroundColor = [UIColor clearColor];
         }
-        
+        else {
+            NSObject *obj = [[LGValueParser getInstance] getValue:self.android_background];
+            if([obj isKindOfClass:[LGDrawableReturn class]]) {
+                LGDrawableReturn *ldr = (LGDrawableReturn*)obj;
+                toolbar.barTintColor = [UIColor colorWithPatternImage:ldr.img];
+            } else if(obj != nil) {
+                toolbar.barTintColor = (UIColor*)obj;
+            }
+        }
     }
     
     @try {

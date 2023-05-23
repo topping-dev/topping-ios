@@ -715,9 +715,9 @@ open class AbstractAppBarOnDestinationChangedListener : NSObject, OnDestinationC
                      return;
                  }
          */
-        if(mOpenableLayout == nil) {
+        /*if(mOpenableLayout == nil) {
             controller.removeOnDestinationChangedListener(listener: self)
-        }
+        }*/
         let label = destination.mLabel
         if(label != nil) {
             setTitle(title: label!)
@@ -823,7 +823,7 @@ open class AppBarConfiguration: NSObject {
     }
     
     func Builder(navGraph: NavGraph) {
-        mTopLevelDestinations.add(NavigationUI.findStartDestination(graph: navGraph))
+        mTopLevelDestinations.add(NavigationUI.findStartDestination(graph: navGraph).idVal)
     }
 }
 

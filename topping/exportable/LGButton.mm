@@ -82,6 +82,13 @@
 	}
 }
 
+/*-(void)applyStyles {
+    if(self.style == nil)
+        self.style = @"Theme.MaterialComponents.Button";
+    
+    [super applyStyles];
+}*/
+
 //Lua
 +(LGButton*)create:(LuaContext *)context
 {

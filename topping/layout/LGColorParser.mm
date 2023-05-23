@@ -65,6 +65,31 @@
         [self.colorMap setObject:transparent forKey:@"transparent"];
     }
     self.colorFileCacheMap = [NSMutableDictionary dictionary];
+    
+    {
+        NSBundle *bund = [NSBundle bundleWithIdentifier:@"dev.topping.ios"];
+        NSString *themePath = [bund pathForResource:@"colors" ofType:@"xml"];
+        NSData *resourceData = [NSData dataWithContentsOfFile:themePath];
+        
+        GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:resourceData error:nil];
+        
+        GDataXMLElement *root = [xml rootElement];
+        
+        
+        if(COMPARE(root.name, @"resources"))
+        {
+            for(GDataXMLElement *child in root.children)
+            {
+                NSString *childName = child.name;
+                if(COMPARE(childName, @"color"))
+                {
+                    [self parseXML:ORIENTATION_PORTRAIT :child];
+                    [self parseXML:ORIENTATION_LANDSCAPE :child];
+                }
+            }
+        }
+    }
+    
     for(DynamicResource *dr in self.clearedDirectoryList)
     {
         NSArray *files = [LuaResource getResourceFiles:(NSString*)dr.data];

@@ -825,6 +825,7 @@
 		5CCA8280250604AC005689D8 /* themes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA827F250604AC005689D8 /* themes.xml */; };
 		5CCB464525B82AD300CF0F4A /* LGConstraintLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CCB464625B82AD300CF0F4A /* LGConstraintLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */; };
+		5CCBECDB2A1CBD35008AE6A1 /* colors.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CCBECDA2A1CBD35008AE6A1 /* colors.xml */; };
 		5CD052332967F8BF005E4960 /* LGWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD052312967F8BF005E4960 /* LGWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD052342967F8BF005E4960 /* LGWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5CD052322967F8BF005E4960 /* LGWebView.mm */; };
 		5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD052352967FAFE005E4960 /* WebKit.framework */; };
@@ -1732,6 +1733,7 @@
 		5CCA827F250604AC005689D8 /* themes.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = themes.xml; sourceTree = "<group>"; };
 		5CCB464325B82AD300CF0F4A /* LGConstraintLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGConstraintLayout.h; sourceTree = "<group>"; };
 		5CCB464425B82AD300CF0F4A /* LGConstraintLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGConstraintLayout.m; sourceTree = "<group>"; };
+		5CCBECDA2A1CBD35008AE6A1 /* colors.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = colors.xml; sourceTree = "<group>"; };
 		5CD052312967F8BF005E4960 /* LGWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGWebView.h; sourceTree = "<group>"; };
 		5CD052322967F8BF005E4960 /* LGWebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LGWebView.mm; sourceTree = "<group>"; };
 		5CD052352967FAFE005E4960 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/iOSSupport/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -3351,6 +3353,7 @@
 		5CCA827E25060491005689D8 /* DefaultResources */ = {
 			isa = PBXGroup;
 			children = (
+				5CCBECDA2A1CBD35008AE6A1 /* colors.xml */,
 				5CCA827F250604AC005689D8 /* themes.xml */,
 			);
 			path = DefaultResources;
@@ -3928,6 +3931,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */,
+				5CCBECDB2A1CBD35008AE6A1 /* colors.xml in Resources */,
 				5CCA8280250604AC005689D8 /* themes.xml in Resources */,
 				5C18BAB229866A2D00C4A929 /* MaterialTextFields.bundle in Resources */,
 				5C2B615E254AA82B003A9705 /* README.md in Resources */,

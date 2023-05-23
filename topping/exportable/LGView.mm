@@ -139,20 +139,6 @@ static BOOL rtl = false;
             }
         }
     }
-    
-    if(self.style != nil)
-    {
-        styleMap = (NSDictionary*)[[LGValueParser getInstance] getValue:self.style];
-        for(NSString *property in arr)
-        {
-            NSString *propertyCorrectedName = REPLACE(property, @"_", @":");
-            NSString *styleVal = [styleMap objectForKey:propertyCorrectedName];
-            if(styleVal != nil)
-            {
-                [self setValue:styleVal forKey:property];
-            }
-        }
-    }
 }
 
 -(UIView *)createComponent
