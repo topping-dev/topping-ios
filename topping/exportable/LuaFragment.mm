@@ -662,7 +662,11 @@
     }
 }
 
-- (Lifecycle *)getLifecycle {
+-(LuaLifecycleOwner *)getLifecycleOwner {
+    return [[LuaLifecycleOwner alloc] initWithLifecycleOwner:self.mViewLifecycleOwner];
+}
+
+-(Lifecycle *)getLifecycle {
     return self.mLifecycleRegistry;
 }
 
@@ -697,6 +701,7 @@
     InstanceMethodNoRetNoArg(close, @"close")
     InstanceMethodNoArg(getArgumentsBundle, LuaBundle, @"getArguments")
     InstanceMethodNoArg(getNavController, LuaNavController, @"getNavController")
+    InstanceMethodNoArg(getLifecycleOwner, LuaLifecycleOwner, @"getLifecycleOwner")
     InstanceMethodNoArg(isInitialized, LuaBool, @"isInitialized")
     InstanceMethodNoArg(getFragmentManager, FragmentManager, @"getFragmentManager")
     InstanceMethodNoArg(getBindings, NSMutableDictionary, @"getBindings")

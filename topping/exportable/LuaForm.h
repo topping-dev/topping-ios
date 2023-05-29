@@ -53,6 +53,7 @@
 -(void)markFragmentsCreated;
 -(Lifecycle*)getLifecycle;
 -(LuaLifecycle*)getLifecycleInner;
+-(LuaLifecycleOwner*)getLifecycleOwner;
 
 -(void)addMainView:(UIView*)viewToAdd;
 

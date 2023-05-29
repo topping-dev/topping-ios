@@ -11,7 +11,9 @@
 @end
 
 @interface LuaLifecycleOwner : NSObject <LuaClass, LuaInterface, LifecycleOwner>
-{
-}
+
+- (instancetype)initWithLifecycleOwner:(id<LifecycleOwner>)owner;
+
+@property (strong, nonatomic) id<LifecycleOwner> lifecycleOwner;
 
 @end

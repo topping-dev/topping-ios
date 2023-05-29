@@ -377,6 +377,10 @@
     return [LuaLifecycle createForm:self];
 }
 
+- (LuaLifecycleOwner *)getLifecycleOwner {
+    return [[LuaLifecycleOwner alloc] initWithLifecycleOwner:self.lifecycleOwner];
+}
+
 -(void)addMainView:(UIView *)viewToAdd {
     if(self.view == nil || viewToAdd == nil)
         return;
@@ -439,6 +443,7 @@
     InstanceMethodNoRetNoArg(close, @"close")
     InstanceMethodNoArg(getLifecycleInner, LuaLifecycle, @"getLifecycle")
     InstanceMethodNoArg(getSupportFragmentManager, FragmentManager, @"getFragmentManager")
+    InstanceMethodNoArg(getLifecycleOwner, LuaLifecycleOwner, @"getLifecycleOwner")
     
 	return dict;
 }

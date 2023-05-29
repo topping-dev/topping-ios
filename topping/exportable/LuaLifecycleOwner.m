@@ -3,9 +3,17 @@
 
 @implementation LuaLifecycleOwner
 
+- (instancetype)initWithLifecycleOwner:(id<LifecycleOwner>)owner
+{
+    self = [super init];
+    if (self) {
+        self.lifecycleOwner = owner;
+    }
+    return self;
+}
+
 - (Lifecycle *)getLifecycle {
-    //TODO
-    return nil;
+    return [self.lifecycleOwner getLifecycle];
 }
 
 -(NSString*)GetId

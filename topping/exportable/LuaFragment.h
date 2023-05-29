@@ -128,6 +128,8 @@ typedef NS_ENUM(NSInteger, FragmentState)
 -(void)performDestory;
 -(void)performDetach;
 
+-(LuaLifecycleOwner*)getLifecycleOwner;
+
 @property(nonatomic, retain) NSString *luaId;
 @property(nonatomic, retain) LuaContext *context;
 @property(nonatomic, retain) LGView *lgview;
