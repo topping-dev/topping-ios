@@ -1005,6 +1005,7 @@ int RegisterTag(lua_State *L)
 	[Lunar register:lu :[LGProgressBar class]];
 	[Lunar register:lu :[LGRadioButton class]];
 	[Lunar register:lu :[LGRadioGroup class]];
+    [Lunar register:lu :[LGRelativeLayout class]];
 	[Lunar register:lu :[LGScrollView class]];
     [Lunar register:lu :[LGHorizontalScrollView class]];
     [Lunar register:lu :[LGTabLayout class]];

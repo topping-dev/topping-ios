@@ -65,6 +65,10 @@
     return rect.origin.y + rect.size.height;
 }
 
+-(void)setCGRect:(CGRect)rectP {
+    rect = rectP;
+}
+
 -(CGRect)getCGRect {
     return rect;
 }

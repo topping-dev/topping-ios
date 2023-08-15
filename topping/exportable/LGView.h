@@ -6,11 +6,14 @@
 #import "LuaRef.h"
 #import "LuaRect.h"
 
+#define IS_VIEW_NO_ID(X) (X == nil || [X isEqualToString:@""])
+
 @class LuaForm;
 @class LuaFragment;
 @protocol LuaInterface;
 @class NavController;
 @class LuaNavController;
+@class LGRelativeLayoutParams;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
 {
@@ -123,6 +126,7 @@ enum MEASURE_SPEC
 -(int)getMeasuredState;
 -(int)getSuggestedMinimumWidth;
 -(int)getSuggestedMinimumHeight;
++(int)resolveSize:(int)size :(int) measureSpec;
 +(int)resolveSizeAndState:(int)size :(int)measureSpec :(int)childMeasuredState;
 -(void)setMeasuredDimension:(int)measuredWidth :(int)measuredHeight;
 -(void)resizeInternal;
@@ -207,6 +211,16 @@ enum MEASURE_SPEC
 
 @property(nonatomic, retain) NSString* style;
 @property(nonatomic, retain) NSString* colorAccent;
+
+//RelativeLayout
+@property(nonatomic, retain) NSString *android_layout_above, *android_layout_alignBaseline, *android_layout_alignBottom;
+@property(nonatomic, retain) NSString *android_layout_alignEnd, *android_layout_alignLeft, *android_layout_alignParentBottom;
+@property(nonatomic, retain) NSString *android_layout_alignParentEnd, *android_layout_alignParentLeft, *android_layout_alignParentRight;
+@property(nonatomic, retain) NSString *android_layout_alignParentStart, *android_layout_alignParentTop, *android_layout_alignRight;
+@property(nonatomic, retain) NSString *android_layout_alignStart, *android_layout_alignTop, *android_layout_alignWithParentIfMissing, *android_layout_below;
+@property(nonatomic, retain) NSString *android_layout_centerHorizontal, *android_layout_centerInParent, *android_layout_centerVertical;
+@property(nonatomic, retain) NSString *android_layout_toEndOf, *android_layout_toRightOf, *android_layout_toStartOf, *android_layout_toLeftOf;
+@property(nonatomic, strong) LGRelativeLayoutParams *rlParams;
 
 @property(nonatomic, retain) NSString* lua_id;
 

@@ -2,7 +2,7 @@
 <resources>
     <dimen name="testdimen">10dp</dimen>
     <color name="testcolor">#FF0000</color>
-    <string name="teststring">bgbgbgbg</string>
+    <string name="teststring">test button</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="title">Title</string>
@@ -12,6 +12,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_settings">Settings</string>
+    <string name="receive">Receive</string>
+    <string name="label">Label</string>
     <integer-array name="mole">
         <item>1</item>
         <item>2</item>

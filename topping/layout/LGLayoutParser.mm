@@ -33,6 +33,7 @@
 #import "LGTextInputLayout.h"
 #import "LGDrawerLayout.h"
 #import "LGNavigationView.h"
+#import "LGRelativeLayout.h"
 
 #import "Defines.h"
 #import "ToppingEngine.h"
@@ -276,6 +277,9 @@
     {
         rootView = [[pluginClass alloc] init];
     }
+    else if([name compare:@"RelativeLayout"] == 0
+            || [name compare:@"LGRelativeLayout"] == 0)
+        rootView = [[LGRelativeLayout alloc] init];
     else
     {
         return nil;
