@@ -4,6 +4,7 @@
 #import "LGDrawableParser.h"
 #import "LGValueParser.h"
 #import "LuaFunction.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
 #import <Topping/Topping-Swift.h>
 
 @implementation LGImageView
@@ -122,9 +123,7 @@
 	[((UIImageView *)self._view) setImage:[UIImage imageWithData:_data]];
 }
 
--(void)setImageRef:(LuaRef*)ref
-{
-    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser getInstance] getValue:ref.idRef];
+-(void)setImageDrawable:(LGDrawableReturn*)ldr {
     UIImageView *iv = ((UIImageView *)self._view);
     CGSize size = CGSizeZero;
     VectorView *vv = nil;
@@ -168,6 +167,12 @@
     }
 }
 
+-(void)setImageRef:(LuaRef*)ref
+{
+    LGDrawableReturn *ldr = (LGDrawableReturn*)[[LGValueParser getInstance] getValue:ref.idRef];
+    [self setImageDrawable:ldr];
+}
+
 -(NSString*)GetId
 {
     if(self.lua_id != nil)
@@ -194,6 +199,22 @@
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setImage:)) :@selector(setImage:) :nil :MakeArray([LuaStream class]C nil)] forKey:@"setImage"];
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(setImageRef:)) :@selector(setImageRef:) :nil :MakeArray([LuaRef class]C nil)] forKey:@"setImageRef"];
 	return dict;
+}
+
+#pragma IOSKHTView
+
+- (void)setImageDrawableDrawable:(id<IOSKHTDrawable> _Nullable)drawable {
+    if(drawable == nil)
+    {
+        ((UIImageView *)self._view).image = nil;
+        return;
+    }
+    LGDrawableReturn *ldr = (LGDrawableReturn *)drawable;
+    [self setImageDrawable:ldr];
+}
+
+- (void)setImageResourceResourceId:(nonnull NSString *)resourceId {
+    [self setImageRef:[LuaRef withValue:resourceId]];
 }
 
 @end

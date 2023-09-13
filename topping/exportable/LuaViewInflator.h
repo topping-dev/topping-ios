@@ -7,8 +7,9 @@
 @class LGView;
 @class LGLayoutParser;
 @class LuaRef;
+@protocol IOSKHTLayoutInflater;
 
-@interface LuaViewInflator : NSObject <LuaClass, LuaInterface> 
+@interface LuaViewInflator : NSObject <LuaClass, LuaInterface, IOSKHTLayoutInflater> 
 {
 	
 }

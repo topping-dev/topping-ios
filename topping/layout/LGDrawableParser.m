@@ -6,8 +6,28 @@
 #import "GDataXMLNode.h"
 #import "UIColor+Lum.h"
 #import <Topping/Topping-Swift.h>
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
 
 @implementation LGDrawableReturn
+
+-(UIImage *)getImage {
+    if(self.img != nil)
+        return self.img;
+    else if(self.vector) {
+        VectorDrawable *drawable = (VectorDrawable*)self.vector;
+        VectorTheme *vt = [[VectorTheme alloc] initWithColor:[UIColor blackColor]];
+        VectorView *vv = [[VectorView alloc] initWithTheme:vt resources:vt];
+        CGFloat width = drawable.baseWidth, height = drawable.baseHeight;
+        if(width == 0)
+            width = height;
+        else if(height == 0)
+            height = width;
+        vv.drawable = drawable;
+        vv.frame = CGRectMake(0, 0, width, height);
+        return [vv asImage];
+    }
+    return nil;
+}
 
 -(UIImage *)getImage:(CGSize)size {
     if(self.img != nil)
@@ -115,7 +135,6 @@
     NSString *val = (NSString*)[[LGValueParser getInstance] getValue:drawable.idRef];
     return [self parseDrawable:val :tileMode];
 }
-
 
 -(LGDrawableReturn *) parseDrawable:(NSString *)drawable
 {

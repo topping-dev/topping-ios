@@ -8,6 +8,7 @@
 #import "LGValueParser.h"
 #import "LuaNavHostFragment.h"
 #import "KotlinExports.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
 #import <Topping/Topping-Swift.h>
 #import "GDataXMLNode.h"
 
@@ -28,6 +29,10 @@ static BOOL rtl = false;
 	self.baseLine = -1;
 	self.android_layout_width = @"wrap_content";
 	self.android_layout_height = @"wrap_content";
+    self.methodEventMap = [NSMutableDictionary dictionary];
+    
+    self.dScaleX = 1;
+    self.dScaleY = 1;
 }
 
 -(void)copyAttributesTo:(LGView*)viewToCopy {
@@ -728,6 +733,7 @@ static BOOL rtl = false;
 
 -(void)setBackground:(LuaRef*)background
 {
+    self.lrBackground = background;
     NSObject *obj = [[LGValueParser getInstance] getValue:background.idRef];
     if([obj isKindOfClass:[LGDrawableReturn class]])
     {
@@ -882,6 +888,587 @@ static BOOL rtl = false;
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(findNavControllerInternal)) :@selector(findNavControllerInternal) :[LuaNavController class] :MakeArray(nil)] forKey:@"findNavController"];
     InstanceMethodNoArg(getBindings, NSMutableDictionary, @"getBindings")
 	return dict;
+}
+
+#pragma IOSKHView start
+
+-(void)callTMethodArr:(NSString *)methodName :(NSArray *)arr {
+    IOSKHKotlinArray *___arr___ = [IOSKHKotlinArray arrayWithSize:1 init:^id _Nullable(IOSKHInt * _Nonnull index) { return nil; }];
+    for(int i = 0; i < arr.count; i++) {
+        [___arr___ setIndex:i value:[arr objectAtIndex:i]];
+    }
+    
+    if([self.methodEventMap objectForKey:methodName] != nil) {
+        ((id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))[self.methodEventMap objectForKey:methodName])(self, ___arr___);
+    }
+}
+
+-(void)callTMethod:(NSString *)methodName :(NSObject *)arg, ... {
+    NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:VarArgs2(arg)];
+    
+    [self callTMethodArr:methodName :arr];
+}
+
+- (void)addViewView:(nonnull id<IOSKHTView>)view param:(nonnull IOSKHViewGroupLayoutParams *)param {
+    
+}
+
+
+- (BOOL)canScrollVerticallyVert:(int32_t)vert {
+    return false;
+}
+
+
+- (void)dispatchDrawCanvas:(nonnull id<IOSKHTCanvas>)canvas {
+    
+}
+
+
+- (float)dpToPixelDp:(float)dp {
+    return [DisplayMetrics dpToSp:dp];
+}
+
+
+- (void)drawCanvas:(nonnull id<IOSKHTCanvas>)canvas {
+    
+}
+
+
+- (id<IOSKHTView> _Nullable)findViewByIdId:(nonnull NSString *)id {
+    return [self getViewByIdId:id];
+}
+
+
+- (void)forceLayout {
+    [self._view setNeedsLayout];
+    [self._view layoutIfNeeded];
+}
+
+
+- (id<IOSKHTDrawable> _Nullable)getBackground {
+    NSObject *obj = [[LGValueParser getInstance] getValue:self.lrBackground.idRef];
+    
+    if([obj isKindOfClass:[LGDrawableReturn class]]) {
+        return (id<IOSKHTDrawable>)obj;
+    }
+    
+    return nil;
+}
+
+
+- (int32_t)getBaseline {
+    return self.baseLine;
+}
+
+
+- (nonnull id<IOSKHTView>)getChildAtIndex:(int32_t)index {
+    return (id<IOSKHTView>)[UIView new];
+}
+
+
+- (int32_t)getChildCount {
+    return 0;
+}
+
+
+- (int32_t)getChildMeasureSpecMLayoutWidthSpec:(int32_t)mLayoutWidthSpec i:(int32_t)i matchParent:(int32_t)matchParent {
+    return 0;
+}
+
+
+- (nonnull id<IOSKHTClass>)getClass {
+    return (id<IOSKHTClass>)[[ToppingClass alloc] initWithCls:[self class]];
+}
+
+
+- (nonnull id<IOSKHTContext>)getContext {
+    return self.lc;
+}
+
+
+- (nonnull id<IOSKHTDisplay>)getDisplay {
+    return [ToppingDisplay new];
+}
+
+
+- (float)getElevation {
+    return ((NSNumber*)[[LGValueParser getInstance] getValue:self.android_elevation]).floatValue;
+}
+
+
+- (int32_t)getHeight {
+    return self.dHeight;
+}
+
+
+- (void)getHitRectTempRec:(nonnull IOSKHRect *)tempRec {
+    CGPoint topLeft = CGPointMake(self._view.bounds.origin.x,
+                                       self._view.bounds.origin.y);
+    CGPoint bottomRight = CGPointMake(self._view.bounds.origin.x + self._view.bounds.size.width,
+                                      self._view.bounds.origin.y + self._view.bounds.size.height);
+    CGPoint cTopLeft = [self._view convertPoint:topLeft toView:self.parent._view];
+    CGPoint cBottomRight = [self._view convertPoint:topLeft toView:self.parent._view];
+    
+    tempRec.left = cTopLeft.x;
+    tempRec.top = cTopLeft.y;
+    tempRec.right = cBottomRight.x;
+    tempRec.bottom = cBottomRight.y;
+}
+
+
+- (nonnull NSString *)getId {
+    return [self GetId];
+}
+
+
+- (int32_t)getLayoutDirection {
+    return [LGView isRtl] ? 1 : 0;
+}
+
+
+- (IOSKHViewGroupLayoutParams * _Nullable)getLayoutParams {
+    return self.kLayoutParams;
+}
+
+
+- (void)getLocationOnScreenTempLoc:(nonnull IOSKHKotlinIntArray *)tempLoc {
+    CGPoint p = [self._view convertPoint:self._view.frame.origin toView:nil];
+    [tempLoc setIndex:0 value:p.x];
+    [tempLoc setIndex:1 value:p.y];
+}
+
+
+- (nonnull IOSKHAndroidMatrix33 *)getMatrix {
+    CGAffineTransform transform = self._view.transform;
+    
+    IOSKHKotlinFloatArray *arr = [IOSKHKotlinFloatArray arrayWithSize:9 init:^IOSKHFloat * _Nonnull(IOSKHInt * _Nonnull index) {
+        return 0;
+    }];
+    [arr setIndex:0 value:transform.a];
+    [arr setIndex:1 value:transform.b];
+    [arr setIndex:2 value:0];
+    [arr setIndex:3 value:transform.c];
+    [arr setIndex:4 value:transform.d];
+    [arr setIndex:5 value:0];
+    [arr setIndex:6 value:transform.tx];
+    [arr setIndex:7 value:transform.ty];
+    [arr setIndex:8 value:1];
+    IOSKHAndroidMatrix33 *matrix = [[IOSKHAndroidMatrix33 alloc] initWithData:arr];
+    return matrix;
+}
+
+
+- (int32_t)getMeasuredHeight {
+    return self.dHeight;
+}
+
+
+- (int32_t)getMeasuredWidth {
+    return self.dWidth;
+}
+
+
+- (id _Nullable)getObjCPropertyName:(nonnull NSString *)name {
+    return [self valueForKey:name];
+}
+
+
+- (int32_t)getOptimizationLevel {
+    return 0;
+}
+
+
+- (int32_t)getPaddingBottom {
+    return self.dPaddingBottom;
+}
+
+
+- (int32_t)getPaddingEnd {
+    return self.dPaddingRight;
+}
+
+
+- (int32_t)getPaddingLeft {
+    return self.dPaddingLeft;
+}
+
+
+- (int32_t)getPaddingRight {
+    return self.dPaddingRight;
+}
+
+
+- (int32_t)getPaddingStart {
+    return self.dPaddingLeft;
+}
+
+
+- (int32_t)getPaddingTop {
+    return self.dPaddingTop;
+}
+
+
+- (id<IOSKHTView> _Nullable)getParent {
+    return self.parent;
+}
+
+
+- (nonnull id)getParentType {
+    return self.kParentType;
+}
+
+
+- (float)getPivotX {
+    return self.dPivotX;
+}
+
+
+- (float)getPivotY {
+    return self.dPivotY;
+}
+
+
+- (nonnull id<IOSKHTResources>)getResources {
+    return (id<IOSKHTResources>)[[ToppingResources alloc] init];
+}
+
+
+- (float)getRotationX {
+    return self.dRotationX;
+}
+
+
+- (float)getRotationY {
+    return self.dRotationY;
+}
+
+
+- (float)getRotation_ {
+    return self.dRotation;
+}
+
+
+- (float)getScaleX {
+    return self.dScaleX;
+}
+
+
+- (float)getScaleY {
+    return self.dScaleY;
+}
+
+
+- (float)getScrollX {
+    return 0;
+}
+
+
+- (float)getScrollY {
+    return 0;
+}
+
+
+- (id _Nullable)getTag {
+    //TODO:
+    return nil;
+}
+
+
+- (id _Nullable)getTagKey:(nonnull id)key {
+    //TODO:
+    return nil;
+}
+
+
+- (float)getTranslationX {
+    return self.dTranslationX;
+}
+
+
+- (float)getTranslationY {
+    return self.dTranslationY;
+}
+
+
+- (float)getTranslationZ {
+    return self.dTranslationZ;
+}
+
+
+- (id<IOSKHTView> _Nullable)getViewByIdId:(nonnull NSString *)id {
+    return [self getViewById:[LuaRef withValue:id]];
+}
+
+
+- (int32_t)getWidth {
+    return self.dWidth;
+}
+
+
+- (int32_t)getX {
+    return self.dX;
+}
+
+
+- (int32_t)getY {
+    return self.dY;
+}
+
+
+- (void)invalidate {
+    [self resizeAndInvalidate];
+}
+
+
+- (void)invalidateOutline {
+    
+}
+
+
+- (void)invokeMethodMethod:(nonnull NSString *)method value:(nonnull id)value {
+    SEL selector = NSSelectorFromString(method);
+    [self performSelector:selector withObject:value];
+}
+
+
+- (BOOL)isAttachedToWindow {
+    return true;
+}
+
+
+- (BOOL)isInEditMode {
+    return false;
+}
+
+
+- (BOOL)isLayoutRequested {
+    //TODO:
+    return false;
+}
+
+
+- (BOOL)isRtl {
+    return [LGView isRtl];
+}
+
+
+- (void)layoutL:(int32_t)l t:(int32_t)t r:(int32_t)r b:(int32_t)b {
+    [self layout:l :t :r :b];
+}
+
+
+- (int32_t)makeMeasureSpecMeasureSpec:(int32_t)measureSpec type:(int32_t)type {
+    return [MeasureSpec makeMeasureSpec:measureSpec :type];
+}
+
+
+- (void)measureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec {
+    [self measure:widthMeasureSpec :heightMeasureSpec];
+}
+
+
+- (void)onAttachedToWindow {
+    [self._view didMoveToWindow];
+}
+
+- (void)onDrawCanvas:(nonnull id<IOSKHTCanvas>)canvas {
+    //TODO:
+}
+
+
+- (void)onMeasureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec {
+    [self onMeasure:widthMeasureSpec :heightMeasureSpec];
+}
+
+
+- (BOOL)onTouchEventEvent:(nonnull IOSKHMotionEvent *)event {
+    return false;
+}
+
+
+- (void)onViewAddedView:(nonnull id<IOSKHTView>)view {
+    
+}
+
+
+- (void)onViewRemovedView:(nonnull id<IOSKHTView>)view {
+   
+}
+
+
+- (void)postRunnable:(nonnull id<IOSKHTRunnable>)runnable {
+    [LuaThread runOnUIThreadInternal:^{
+        [runnable run];
+    }];
+}
+
+
+- (void)requestLayout {
+    [self resizeAndInvalidate];
+}
+
+
+- (int32_t)resolveSizeAndStateSize:(int32_t)size measureSpec:(int32_t)measureSpec childState:(int32_t)childState {
+    return [LGView resolveSizeAndState:size :measureSpec :childState];
+}
+
+
+- (void)setAlphaValue:(float)value {
+    self._view.alpha = value / 255.0f;
+}
+
+
+- (void)setClipToOutlineClip:(BOOL)clip {
+    
+}
+
+
+- (void)setElevationValue:(float)value {
+
+}
+
+
+- (void)setIdId:(nonnull NSString *)id {
+    self.lua_id = id;
+}
+
+
+- (void)setImageDrawableDrawable:(id<IOSKHTDrawable> _Nullable)drawable {
+    
+}
+
+
+- (void)setImageResourceResourceId:(nonnull NSString *)resourceId {
+    
+}
+
+
+- (void)setLayoutParamsParams:(nonnull IOSKHViewGroupLayoutParams *)params {
+    self.kLayoutParams = params;
+}
+
+
+- (void)setMeasuredDimensionWidth:(int32_t)width height:(int32_t)height {
+    [self setMeasuredDimension:width :height];
+}
+
+
+- (void)setObjCPropertyMethodName:(nonnull NSString *)methodName value:(nonnull id)value {
+    [self setValue:value forKey:methodName];
+}
+
+
+- (void)setOnClickListenerListener:(id<IOSKHTViewOnClickListener> _Nullable)listener {
+    
+}
+
+
+- (void)setOutlineProviderViewOutlineProvider:(IOSKHViewOutlineProvider * _Nullable)viewOutlineProvider {
+    
+}
+
+
+- (void)setPaddingLeft:(int32_t)left top:(int32_t)top right:(int32_t)right bottom:(int32_t)bottom {
+    self.dPaddingLeft = left;
+    self.dPaddingTop = top;
+    self.dPaddingRight = right;
+    self.dPaddingBottom = bottom;
+}
+
+
+- (void)setParentTypeObj:(nonnull id)obj {
+    self.kParentType = obj;
+}
+
+
+- (void)setPivotXValue:(float)value {
+    self.dPivotX = value;
+}
+
+
+- (void)setPivotYValue:(float)value {
+    self.dPivotY = value;
+}
+
+
+- (void)setReflectionColorDrawableMethodName:(nonnull NSString *)methodName r:(int32_t)r g:(int32_t)g b:(int32_t)b a:(int32_t)a {
+    
+}
+
+-(void)setReflectionColorMethodName:(NSString *)methodName r:(int32_t)r g:(int32_t)g b:(int32_t)b a:(int32_t)a {
+    
+}
+
+
+- (void)setReflectionValueMethodName:(nonnull NSString *)methodName value:(nonnull id)value {
+    [self setValue:value forKey:methodName];
+}
+
+
+- (void)setRotationValue:(float)value {
+    self.dRotation = value;
+    self._view.transform = CGAffineTransformMakeRotation(value * M_PI/180);
+}
+
+
+- (void)setRotationXValue:(float)value {
+    self.dRotationX = value;
+    self._view.layer.transform = CATransform3DMakeRotation(value * M_PI/180, 1.0, 0.0, 0.0);
+}
+
+
+- (void)setRotationYValue:(float)value {
+    self.dRotationY = value;
+    self._view.layer.transform = CATransform3DMakeRotation(value * M_PI/180, 0.0, 1.0, 0.0);
+}
+
+
+- (void)setScaleXValue:(float)value {
+    self.dScaleX = value;
+    self._view.transform = CGAffineTransformConcat(self._view.transform, CGAffineTransformMakeScale(self.dScaleX, self.dScaleY));
+}
+
+
+- (void)setScaleYValue:(float)value {
+    self.dScaleY = value;
+    self._view.transform = CGAffineTransformConcat(self._view.transform, CGAffineTransformMakeScale(self.dScaleX, self.dScaleY));
+}
+
+
+- (void)setTagKey:(nonnull id)key value:(id _Nullable)value {
+    
+}
+
+
+- (void)setTagValue:(id _Nullable)value {
+    
+}
+
+
+- (void)setTranslationXValue:(float)value {
+    self.dTranslationX = value;
+    self._view.transform = CGAffineTransformTranslate(self._view.transform, self.dTranslationX, self.dTranslationY);
+}
+
+
+- (void)setTranslationYValue:(float)value {
+    self.dTranslationY = value;
+    self._view.transform = CGAffineTransformTranslate(self._view.transform, self.dTranslationX, self.dTranslationY);
+}
+
+
+- (void)setTranslationZValue:(float)value {
+    self.dTranslationZ = value;
+}
+
+
+- (void)setVisibilityValue:(int32_t)value {
+    [self setVisibility:value];
+}
+
+
+- (void)swizzleFunctionFuncName:(nonnull NSString *)funcName block_:(nonnull id  _Nullable (^)(id<IOSKHTView> _Nonnull, id _Nullable))block {
+    [self.methodEventMap setObject:block forKey:funcName];
 }
 
 @end

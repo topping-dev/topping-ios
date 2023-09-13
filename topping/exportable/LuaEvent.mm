@@ -2,6 +2,7 @@
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LuaValues.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
 #import <topping/topping-Swift.h>
 
 @implementation LuaEvent

@@ -6,11 +6,12 @@
 #import "LuaFormIntent.h"
 
 @class LuaForm;
+@protocol IOSKHTContext;
 
 /**
  * Context class that stores various operating system data.
  */
-@interface LuaContext : NSObject <LuaClass, LuaInterface>
+@interface LuaContext : NSObject <LuaClass, LuaInterface, IOSKHTContext>
 {
 	NSString *lua_id;
 	UINavigationController *navController;

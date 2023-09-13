@@ -11,6 +11,8 @@
 @protocol LuaInterface;
 @class NavController;
 @class LuaNavController;
+@protocol IOSKHTView;
+@class IOSKHViewGroupLayoutParams;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
 {
@@ -91,7 +93,7 @@ enum MEASURE_SPEC
 
 @end
 
-@interface LGView : NSObject <LuaClass, LuaInterface>
+@interface LGView : NSObject <LuaClass, LuaInterface, IOSKHTView>
 {
     NSArray *propertyNameCache;
 }
@@ -172,6 +174,9 @@ enum MEASURE_SPEC
 -(NavController*)findNavController;
 -(LuaNavController*)findNavControllerInternal;
 
+-(void)callTMethodArr:(NSString *)methodName :(NSArray *)arr;
+-(void)callTMethod:(NSString*)methodName :(NSObject *)arg, ...;
+
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 @property (nonatomic, strong) NSArray *attrs;
 
@@ -190,6 +195,7 @@ enum MEASURE_SPEC
 @property (nonatomic, retain) NSString* android_padding;
 @property (nonatomic, retain) NSString* android_visibility;
 @property (nonatomic, retain) NSString* android_enabled;
+@property (nonatomic, retain) NSString* android_elevation;
 
 //Viewgroup
 @property(nonatomic, retain) NSString* android_layout_width;
@@ -228,6 +234,16 @@ enum MEASURE_SPEC
 @property (nonatomic) int dPaddingTop;
 @property (nonatomic) int dX;
 @property (nonatomic) int dY;
+@property (nonatomic) int dPivotX;
+@property (nonatomic) int dPivotY;
+@property (nonatomic) int dRotation;
+@property (nonatomic) int dRotationX;
+@property (nonatomic) int dRotationY;
+@property (nonatomic) int dScaleX;
+@property (nonatomic) int dScaleY;
+@property (nonatomic) int dTranslationX;
+@property (nonatomic) int dTranslationY;
+@property (nonatomic) int dTranslationZ;
 
 @property(nonatomic) int dMarginBottom;
 @property(nonatomic) int dMarginLeft;
@@ -250,6 +266,13 @@ enum MEASURE_SPEC
 @property(nonatomic, strong) LuaFragment *fragment;
 
 @property(nonatomic, strong) NavController *navController;
+
+@property(nonatomic, strong) LuaRef *lrBackground;
+
+@property(nonatomic, strong) IOSKHViewGroupLayoutParams *kLayoutParams;
+@property(nonatomic, strong) id kParentType;
+
+@property (nonatomic, strong) NSMutableDictionary *methodEventMap;
 
 @end
 

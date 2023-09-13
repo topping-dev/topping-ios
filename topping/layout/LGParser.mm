@@ -41,6 +41,7 @@
     self.pFont = [[LGFontParser alloc] init];
     self.pNavigation = [[LGNavigationParser alloc] init];
     self.pMenu = [[LGMenuParser alloc] init];
+    self.pXml = [[LGXmlParser alloc] init];
     self.pId = [[LGIdParser alloc] init];
     
     self.MatchStringStart = [NSMutableArray array];
@@ -106,6 +107,7 @@
     [self.pValue initialize];
     [self.pNavigation initialize];
     [self.pMenu initialize];
+    [self.pXml initialize];
     [self.pId initialize];
     [self.pColor initialize];
     [self ParseValues];
@@ -214,6 +216,9 @@
     directoryList = [LuaResource getResourceDirectories:LUA_MENU_FOLDER];
     clearedDirectoryList = [self tester:directoryList :LUA_MENU_FOLDER];
     [self.pId parse:LUA_MENU_FOLDER :clearedDirectoryList];
+    directoryList = [LuaResource getResourceDirectories:LUA_XML_FOLDER];
+    clearedDirectoryList = [self tester:directoryList :LUA_XML_FOLDER];
+    [self.pId parse:LUA_XML_FOLDER :clearedDirectoryList];
 }
 
 -(NSMutableArray *)tester:(NSArray*)directoryList :(NSString*)directoryType

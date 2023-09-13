@@ -6,6 +6,8 @@
 #import "LGStyleParser.h"
 #import "LGValueParser.h"
 #import "LGColorParser.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import <Topping/Topping-Swift.h>
 
 @implementation LuaContext
 
@@ -78,6 +80,60 @@
     InstanceMethodNoRet(startForm:, @[[LuaFormIntent class]], @"startForm")
         
 	return dict;
+}
+
+#pragma IOSKHTContext
+
+- (id<IOSKHTDrawable>)createLayerDrawableLayers:(IOSKHKotlinArray<id<IOSKHTDrawable>> *)layers {
+    LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
+    int maxWidth;
+    int maxHeight;
+    for(int i = 0; i < layers.size; i++) {
+        LGDrawableReturn *ldrLayer = (LGDrawableReturn*)[layers getIndex:i];
+        UIImage *img = [ldrLayer getImage];
+        if(img == nil)
+            continue;
+        maxWidth = MAX(maxWidth, [ldrLayer getImage].size.width);
+        maxHeight = MAX(maxHeight, [ldrLayer getImage].size.height);
+    }
+    CGRect bounds = CGRectMake(0, 0, maxWidth, maxHeight);
+    UIGraphicsBeginImageContext(CGSizeMake(maxWidth, maxHeight));
+    for(int i = 0; i < layers.size; i++) {
+        LGDrawableReturn *ldrLayer = (LGDrawableReturn*)[layers getIndex:i];
+        UIImage *img = [ldrLayer getImage];
+        if(img == nil)
+            continue;
+        UIRectFill(bounds);
+        [img drawInRect:bounds];
+    }
+    ldr.img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return ldr;
+}
+
+- (nonnull id<IOSKHTPaint>)createPaint {
+    return (id<IOSKHTPaint>)[[ToppingPaint alloc] initWithFont:nil];
+}
+
+- (nonnull id<IOSKHTView>)createView {
+    return [[LGView alloc] init];
+}
+
+- (nonnull id<IOSKHTLayoutInflater>)getLayoutInflater {
+    return (LuaViewInflator*)[LuaViewInflator create:self];
+}
+
+- (nonnull NSString *)getPackageName {
+    return self.packageName;
+}
+
+- (nonnull id<IOSKHTResources>)getResources {
+    return (id<IOSKHTResources>)[ToppingResources new];
+}
+
+- (id<IOSKHInterpolator> _Nullable)loadInterpolatorId:(nonnull NSString *)id {
+    //TODO:
+    return nil;
 }
 
 @end

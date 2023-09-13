@@ -5,6 +5,7 @@
 #import "LuaTranslator.h"
 #import "Defines.h"
 #import "LuaRef.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
 
 @implementation LuaViewInflator
 
@@ -68,6 +69,12 @@
                                        :MakeArray([LuaRef class]C [LGView class]C nil)]
              forKey:@"inflate"];
 	return dict;
+}
+
+#pragma IOSKHTLayoutInflater
+
+-(id<IOSKHTView>)inflateResId:(NSString *)resId parent:(id<IOSKHTView>)parent {
+    return [self inflate:[LuaRef withValue:resId] :(LGView*)parent];
 }
 
 @end

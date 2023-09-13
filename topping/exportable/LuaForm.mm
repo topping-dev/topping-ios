@@ -7,6 +7,7 @@
 #import "CommonDelegate.h"
 #import "DisplayMetrics.h"
 #import "LuaTranslator.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
 #import <topping/topping-Swift.h>
 
 @implementation LuaForm

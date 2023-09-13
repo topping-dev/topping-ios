@@ -5,7 +5,7 @@
 @class GDataXMLElement;
 @class LGView;
 
-@interface LGLayoutParser : NSObject
+@interface LGLayoutParser : NSObject 
 {
 }
 

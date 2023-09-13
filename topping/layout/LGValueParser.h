@@ -12,7 +12,9 @@
 -(void)parseXML:(int)orientation :(GDataXMLElement *)element;
 -(NSObject*)getValue:(NSString *)key;
 -(NSObject*)getValueDirect:(NSString *)key;
+-(NSString*)getValueType:(NSString *)key;
 -(BOOL)getBoolValueDirect:(NSString *)key;
+-(BOOL)getBoolValueDirect:(NSString *)key :(BOOL)def;
 -(NSMutableDictionary *)getAllKeys;
 
 @property (nonatomic, retain) NSMutableDictionary *valueMap;

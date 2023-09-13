@@ -191,7 +191,81 @@
             return val;
     }
     
-    return key;
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    if ([keyT rangeOfCharacterFromSet:notDigits].location == NSNotFound)
+    {
+        return keyT;
+    }
+    
+    return nil;
+}
+
+- (BOOL) isBoolNumber:(NSNumber *)num
+{
+   CFTypeID boolID = CFBooleanGetTypeID(); // the type ID of CFBoolean
+   CFTypeID numID = CFGetTypeID((__bridge CFTypeRef)(num)); // the type ID of num
+   return numID == boolID;
+}
+
+-(NSString *)getValueType:(NSString *)key {
+    if(key == nil)
+        return @"nil";
+    
+    if(COMPARE(key, @"@null"))
+    {
+        return @"color";
+    }
+    if(STARTS_WITH(key, @"@id/") ||
+       STARTS_WITH(key, @"+@id/"))
+    {
+        return @"id";
+    }
+    else if(STARTS_WITH(key, @"@string/") ||
+            STARTS_WITH(key, @"@android:string/"))
+    {
+        return @"string";
+    }
+    else if(STARTS_WITH(key, @"@drawable/") ||
+            STARTS_WITH(key, @"@android:drawable/"))
+    {
+        return @"drawable";
+    }
+    else if(STARTS_WITH(key, @"@color/") || STARTS_WITH(key, @"@android:color/") || STARTS_WITH(key, @"#"))
+    {
+        return @"color";
+    }
+    else if(STARTS_WITH(key, @"@style/"))
+    {
+        return @"style";
+    }
+    else if(STARTS_WITH(key, @"@layout/"))
+    {
+        return @"layout";
+    }
+    else if(STARTS_WITH(key, @"@xml/"))
+    {
+        return @"xml";
+    }
+    else {
+        NSNumber *number = (NSNumber*)[self getValueDirect:key];
+        if(number == nil)
+            return @"nil";
+        if([self isBoolNumber:number])
+            return @"boolean";
+        if (![number isKindOfClass:[NSDecimalNumber class]]) {
+            CFNumberType numberType = CFNumberGetType((CFNumberRef)number);
+            if (numberType == kCFNumberFloat32Type ||
+                numberType == kCFNumberFloat64Type ||
+                numberType == kCFNumberCGFloatType)
+            {
+                return @"float";
+            } else {
+                return @"int";
+            }
+        }
+        else
+            return @"float";
+    }
 }
 
 -(BOOL)getBoolValueDirect:(NSString *)key
@@ -204,6 +278,16 @@
     return false;
 }
 
+-(BOOL)getBoolValueDirect:(NSString *)key :(BOOL)def
+{
+    @try {
+        NSObject *obj = [self getValueDirect:key];
+        return [((NSNumber*)obj) boolValue];
+    } @catch (NSException *exception) {
+    }
+    return def;
+}
+
 -(NSObject *)getValue:(NSString *)key
 {
     if(key == nil)
@@ -212,6 +296,12 @@
     if(COMPARE(key, @"@null"))
     {
         return [UIColor clearColor];
+    }
+    else if(STARTS_WITH(key, @"@id/") ||
+            STARTS_WITH(key, @"@+id/"))
+    {
+        NSArray *arr = SPLIT(key, @"/");
+        return [arr objectAtIndex:[arr count] - 1];
     }
     else if(STARTS_WITH(key, @"@string/") || 
             STARTS_WITH(key, @"@android:string/"))
@@ -238,7 +328,7 @@
         return [self getValueDirect:key];
     }
     
-    return key;
+    return nil;
 }
 
 -(NSMutableDictionary *)getAllKeys

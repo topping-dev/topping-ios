@@ -5,6 +5,7 @@
 @class GDataXMLElement;
 @protocol ThemeProviding;
 @protocol ResourceProviding;
+@protocol IOSKHTDrawable;
 
 @interface VectorTheme : NSObject <ThemeProviding, ResourceProviding>
 
@@ -14,10 +15,11 @@
 
 @end
 
-@interface LGDrawableReturn : NSObject
+@interface LGDrawableReturn : NSObject <IOSKHTDrawable>
 {
 };
 
+-(UIImage*)getImage;
 -(UIImage*)getImage:(CGSize)size;
 -(UIImage*)getImageForState:(CGSize)size :(int)state :(UIImage*)def;
 

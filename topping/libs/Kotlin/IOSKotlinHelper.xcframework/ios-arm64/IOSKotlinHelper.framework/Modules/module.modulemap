@@ -1,0 +1,8 @@
+framework module IOSKotlinHelper {
+    umbrella header "IOSKotlinHelper.h"
+
+    export *
+    module * { export * }
+
+    use Foundation
+}

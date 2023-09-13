@@ -2,6 +2,8 @@
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LGValueParser.h"
+#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import "Swizzlean.h"
 
 @implementation LGViewGroup
 
@@ -22,8 +24,8 @@
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap setObject:val forKey:[val GetId]];
     }
-    /*else
-        NSLog(@"Null child");*/
+    
+    [self callTMethod:@"onViewAdded" :val, nil];
 }
 
 -(void)addSubview:(LGView*)val :(NSInteger)index
@@ -39,8 +41,8 @@
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap setObject:val forKey:[val GetId]];
     }
-    /*else
-        NSLog(@"Null child");*/
+    
+    [self callTMethod:@"onViewAdded" :val, nil];
 }
 
 -(void)removeSubview:(LGView*)val
@@ -53,6 +55,7 @@
         [val._view removeFromSuperview];
         val.parent = nil;
         [self resize];
+        [self callTMethod:@"onViewRemoved" :val, nil];
     }
 }
 
@@ -60,15 +63,9 @@
     for(LGView *subview in self.subviews)
     {
         [self removeSubview:subview];
+        [self callTMethod:@"onViewRemoved" :subview, nil];
     }
-}
-
--(void)clearSubviews
-{
-    for(LGView *w in self.subviews)
-        [w._view removeFromSuperview];
-    [self.subviews removeAllObjects];
-    [self resize];
+    [self resizeAndInvalidate];
 }
 
 -(void)clearDimensions
@@ -391,6 +388,33 @@
 
     [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getBindings)) :@selector(getBindings) :nil :MakeArray(nil)] forKey:@"getBindings"];
     return dict;
+}
+
+#pragma IOSKHTView Start
+
+-(void)swizzleFunctionFuncName:(NSString *)funcName block_:(id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))block
+{
+    [self.methodEventMap setObject:block forKey:funcName];
+}
+
+-(void)addViewView:(id<IOSKHTView>)view param:(IOSKHViewGroupLayoutParams *)param {
+    [self addSubview:(LGView*)view];
+}
+
+- (void)dispatchDrawCanvas:(id<IOSKHTCanvas>)canvas {
+    
+}
+
+- (id<IOSKHTView>)getChildAtIndex:(int32_t)index {
+    return [self.subviews objectAtIndex:index];
+}
+
+-(int32_t)getChildCount {
+    return (int32_t)self.subviews.count;
+}
+
+-(void)onViewAddedView:(id<IOSKHTView>)view {
+    
 }
 
 @end

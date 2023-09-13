@@ -152,7 +152,7 @@ function MenuFragment_Create_View(pFragment, luacontext, inflater, container, sa
 end
 
 function ReceiveFragment_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)
-    return inflater:inflate(LR.layout.frame, container)
+    return inflater:inflate(LR.layout.constraint, container)
 end
 
 function FormTest_Create_View(pFragment, luacontext, inflater, container, savedInstanceState)

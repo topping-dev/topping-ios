@@ -12,6 +12,8 @@
 +(void)setBaseFrame:(CGRect)frame;
 +(float)getStatusBarHeight;
 +(void)setStatusBarHeight:(float)height;
++(float)getDensity;
++(float)getScaledDensity;
 +(void)setDensity:(float)d :(float)sd;
 +(float)dpToSp:(float)value;
 +(float)spToDp:(float)value;

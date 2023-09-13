@@ -35,6 +35,7 @@
 #define LUA_NAVIGATION_FOLDER @"navigation"
 #define LUA_MENU_FOLDER @"menu"
 #define LUA_COLOR_FOLDER @"color"
+#define LUA_XML_FOLDER @"xml"
 
 typedef struct lua_State lua_State;
 

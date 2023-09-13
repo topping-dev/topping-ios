@@ -112,6 +112,74 @@ class Utils: NSObject {
     }
 }
 
+extension UIFont {
+    func sizeOfString (string: String, constrainedToWidth width: Double) -> CGSize {
+        return NSString(string: string).boundingRect(
+            with: CGSize(width: width, height: .greatestFiniteMagnitude),
+            options: .usesLineFragmentOrigin,
+            attributes: [.font: self],
+            context: nil).size
+    }
+}
+
+public extension String {
+    func substring(startIndex: Int, length: Int) -> String {
+        let start = index(self.startIndex, offsetBy: startIndex)
+        let end = index(self.startIndex, offsetBy: startIndex + length)
+        return String(self[start..<end])
+    }
+}
+
+private enum ThreadLocalIdentifier {
+    case DateFormatter(String)
+
+    case DefaultNumberFormatter
+    case LocaleNumberFormatter(Locale)
+
+    var objcDictKey: String {
+        switch self {
+        case .DateFormatter(let format):
+            return "SS\(self)\(format)"
+        case .LocaleNumberFormatter(let l):
+            return "SS\(self)\(l.identifier)"
+        default:
+            return "SS\(self)"
+        }
+    }
+}
+
+private func threadLocalInstance<T: AnyObject>(identifier: ThreadLocalIdentifier, initialValue: @autoclosure () -> T) -> T {
+    let storage = Thread.current.threadDictionary
+    let k = identifier.objcDictKey
+
+    let instance: T = storage[k] as? T ?? initialValue()
+    if storage[k] == nil {
+        storage[k] = instance
+    }
+
+    return instance
+}
+
+private func dateFormatter(format: String) -> DateFormatter {
+    return threadLocalInstance(identifier: .DateFormatter(format), initialValue: {
+        let df = DateFormatter()
+        df.dateFormat = format
+        return df
+    }())
+}
+
+private func defaultNumberFormatter() -> NumberFormatter {
+    return threadLocalInstance(identifier: .DefaultNumberFormatter, initialValue: NumberFormatter())
+}
+
+private func localeNumberFormatter(locale: Locale) -> NumberFormatter {
+    return threadLocalInstance(identifier: .LocaleNumberFormatter(locale), initialValue: {
+        let nf = NumberFormatter()
+        nf.locale = locale
+        return nf
+    }())
+}
+
 struct RuntimeError: Error {
     let message: String
 
