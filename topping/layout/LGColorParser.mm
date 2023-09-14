@@ -235,6 +235,8 @@
 }
 
 -(LGColorState*)getColorState:(NSString*)ref {
+    if(STARTS_WITH(ref, @"#"))
+        return nil;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     NSString *orient = ORIENTATION_LANDSCAPE_S;
     int orientI = ORIENTATION_LANDSCAPE;
