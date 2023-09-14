@@ -6,6 +6,8 @@
 #import "LuaRef.h"
 #import "LuaRect.h"
 
+#define CALL_RET(V) if(V) { return; }
+
 @class LuaForm;
 @class LuaFragment;
 @protocol LuaInterface;
@@ -174,8 +176,8 @@ enum MEASURE_SPEC
 -(NavController*)findNavController;
 -(LuaNavController*)findNavControllerInternal;
 
--(void)callTMethodArr:(NSString *)methodName :(NSArray *)arr;
--(void)callTMethod:(NSString*)methodName :(NSObject *)arg, ...;
+-(BOOL)callTMethodArr:(NSString *)methodName :(NSArray *)arr;
+-(BOOL)callTMethod:(NSString*)methodName :(id)arg, ...;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 @property (nonatomic, strong) NSArray *attrs;
@@ -272,6 +274,7 @@ enum MEASURE_SPEC
 @property(nonatomic, strong) IOSKHViewGroupLayoutParams *kLayoutParams;
 @property(nonatomic, strong) id kParentType;
 
+@property (nonatomic, strong) NSMutableArray *methodSkip;
 @property (nonatomic, strong) NSMutableDictionary *methodEventMap;
 
 @end

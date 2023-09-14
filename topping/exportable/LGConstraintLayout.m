@@ -6,11 +6,43 @@
 
 @implementation LGConstraintLayout
 
--(void)initComponent:(UIView *)view :(LuaContext *)lc
-{
-    [super initComponent:view :lc];
+-(void)applyStyles {
+    [super applyStyles];
+    
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
-    self.wrapper = [[IOSKHConstraintLayout alloc] initWithContext:lc attrs:dict self:self];
+    self.wrapper = [[IOSKHConstraintLayout alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(void)addSubview:(LGView *)val {
+    val.kLayoutParams = [self.wrapper generateLayoutParamsAttrs:[[IOSKHMutableDictionary alloc] initWithDictionary:val.xmlProperties copyItems:YES]];
+    [super addSubview:val];
+}
+
+-(void)addSubview:(LGView *)val :(NSInteger)index {
+    val.kLayoutParams = [self.wrapper generateLayoutParamsAttrs:[[IOSKHMutableDictionary alloc] initWithDictionary:val.xmlProperties copyItems:YES]];
+    [super addSubview:val :index];
+}
+
+-(void)resize
+{
+    if(!self.widthSpecSet) {
+        self.dWidthSpec = [self getParentWidthSpec];
+        self.widthSpecSet = true;
+    }
+    if(!self.heightSpecSet) {
+        self.dHeightSpec = [self getParentHeightSpec];
+        self.heightSpecSet = true;
+    }
+    [self resizeInternal];
+}
+
+-(void)resizeInternal
+{
+    [self readWidthHeight];
+    int widthSpec = [self getParentWidthSpec];
+    int heightSpec = [self getParentHeightSpec];
+    [self.wrapper onMeasureSup:nil widthMeasureSpec:widthSpec heightMeasureSpec:heightSpec];
+    [self.wrapper onLayoutSup:nil changed:true left:self.getLeft top:self.getTop right:self.getRight bottom:self.getBottom];
 }
 
 +(LGConstraintLayout*)create:(LuaContext *)context

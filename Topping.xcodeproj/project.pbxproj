@@ -713,6 +713,7 @@
 		5C9ED84E2900022A00305A74 /* LuaLifecycle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9ED84C2900022A00305A74 /* LuaLifecycle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9ED84F2900022A00305A74 /* LuaLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ED84D2900022A00305A74 /* LuaLifecycle.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
+		5CAEA8402AB2F053009EB7C2 /* constraintlayoutValues.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CAEA83F2AB2F053009EB7C2 /* constraintlayoutValues.xml */; };
 		5CB5E13825822C7C00BF2EF5 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5E13725822C7C00BF2EF5 /* Empty.swift */; };
 		5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8582F24E3E6AD006E6B65 /* Empty.swift */; };
 		5CB8585424E43007006E6B65 /* URLDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8585224E43007006E6B65 /* URLDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1631,6 +1632,9 @@
 		5C9ED84C2900022A00305A74 /* LuaLifecycle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaLifecycle.h; sourceTree = "<group>"; };
 		5C9ED84D2900022A00305A74 /* LuaLifecycle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaLifecycle.m; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		5CAEA83D2AB1D239009EB7C2 /* iosMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iosMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/iosMain"; sourceTree = "<group>"; };
+		5CAEA83E2AB1D239009EB7C2 /* commonMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = commonMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain"; sourceTree = "<group>"; };
+		5CAEA83F2AB2F053009EB7C2 /* constraintlayoutValues.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = constraintlayoutValues.xml; sourceTree = "<group>"; };
 		5CB29C602535B49C000E39A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5CB5E13625822C7C00BF2EF5 /* toppingtest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toppingtest-Bridging-Header.h"; sourceTree = "<group>"; };
 		5CB5E13725822C7C00BF2EF5 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
@@ -1801,8 +1805,6 @@
 		5CD92590252CA48300EC0A1D /* NSStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		5CD92591252CA48300EC0A1D /* NSStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 		5CEE6382257100A500D80B59 /* Topping.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Topping.podspec; sourceTree = "<group>"; };
-		5CF8F64C2AB1CBD900ACA9EA /* iosMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iosMain; path = ../../../AndroidStudioProjects/IOSKotlinHelper/IOSKotlinHelper/src/iosMain; sourceTree = "<group>"; };
-		5CF8F64D2AB1CBD900ACA9EA /* commonMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = commonMain; path = ../../../AndroidStudioProjects/IOSKotlinHelper/IOSKotlinHelper/src/commonMain; sourceTree = "<group>"; };
 		687002D891F8709DD32AB747 /* Pods_Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-topping.release.xcconfig"; path = "Target Support Files/Pods-topping/Pods-topping.release.xcconfig"; sourceTree = "<group>"; };
 		6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingtest.debug.xcconfig"; path = "Target Support Files/Pods-toppingtest/Pods-toppingtest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3433,6 +3435,7 @@
 			children = (
 				5CCBECDA2A1CBD35008AE6A1 /* colors.xml */,
 				5CCA827F250604AC005689D8 /* themes.xml */,
+				5CAEA83F2AB2F053009EB7C2 /* constraintlayoutValues.xml */,
 			);
 			path = DefaultResources;
 			sourceTree = "<group>";
@@ -3440,8 +3443,8 @@
 		5CF8F64B2AB1CBB500ACA9EA /* IOSKotlinHelper */ = {
 			isa = PBXGroup;
 			children = (
-				5CF8F64D2AB1CBD900ACA9EA /* commonMain */,
-				5CF8F64C2AB1CBD900ACA9EA /* iosMain */,
+				5CAEA83E2AB1D239009EB7C2 /* commonMain */,
+				5CAEA83D2AB1D239009EB7C2 /* iosMain */,
 			);
 			name = IOSKotlinHelper;
 			sourceTree = "<group>";
@@ -4027,6 +4030,7 @@
 				5C18BAB229866A2D00C4A929 /* MaterialTextFields.bundle in Resources */,
 				5C2B615E254AA82B003A9705 /* README.md in Resources */,
 				5C2B6160254AA83A003A9705 /* LICENSE in Resources */,
+				5CAEA8402AB2F053009EB7C2 /* constraintlayoutValues.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

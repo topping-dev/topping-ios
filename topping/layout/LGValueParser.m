@@ -32,6 +32,26 @@
          else
              return NSOrderedDescending;
      }];
+    
+    /*{
+        NSBundle *bund = [NSBundle bundleWithIdentifier:@"dev.topping.ios"];
+        NSString *themePath = [bund pathForResource:@"constraintlayoutValues" ofType:@"xml"];
+        NSData *resourceData = [NSData dataWithContentsOfFile:themePath];
+        
+        GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:resourceData error:nil];
+        
+        GDataXMLElement *root = [xml rootElement];
+        
+        
+        if(COMPARE(root.name, @"resources"))
+        {
+            for(GDataXMLElement *child in root.children)
+            {
+                [self parseXML:ORIENTATION_PORTRAIT :child];
+                [self parseXML:ORIENTATION_LANDSCAPE :child];
+            }
+        }
+    }*/
 }
 
 +(LGValueParser *) getInstance
@@ -50,6 +70,7 @@
     GDataXMLNode *nameAttr;
     GDataXMLNode *typeAttr;
     GDataXMLNode *parentAttr;
+    GDataXMLNode *formatAttr;
     for(GDataXMLNode *attr in element.attributes)
     {
         if(COMPARE(attr.name, @"name"))
@@ -64,6 +85,10 @@
         {
             parentAttr = attr;
         }
+        /*else if(COMPARE(attr.name, @"format"))
+        {
+            formatAttr = attr;
+        }*/
     }
     
     if(nameAttr != nil)
@@ -79,7 +104,14 @@
         if(valueDict == nil)
             valueDict = [NSMutableDictionary dictionary];
         
-        NSObject *val = [self getValue:element :typeAttr.stringValue :orientation :nameAttr.stringValue];
+        NSString *type = typeAttr.stringValue;
+        if(formatAttr != nil && CONTAINS(formatAttr.stringValue, @"enum")) {
+            type = @"enum";
+        } else {
+            return;
+        }
+        
+        NSObject *val = [self getValue:element :type :orientation :nameAttr.stringValue];
         if(val != nil)
         {
             [valueDict setObject:val forKey:nameAttr.stringValue];
@@ -95,7 +127,7 @@
 -(NSObject*)getValue:(GDataXMLElement *)element
                     :(NSString *)type :(int)orientation :(NSString *)name
 {
-    if(type != nil && COMPARE(element.name, @"item"))
+    if(type != nil && (COMPARE(element.name, @"item") || COMPARE(type, @"enum")))
         return [self getValueIn:type :element :orientation :name];
     else
         return [self getValueIn:element.name :element :orientation :name];
@@ -163,6 +195,26 @@
         [[self.valueKeyMap objectForKey:@"array"] setObject:arr forKey:name];
         
         return arr;
+    }
+    else if(COMPARE(type, @"enum")) {
+        NSMutableDictionary *dict = nil;
+        if(element.childCount > 0)
+        {
+            dict = [NSMutableDictionary dictionaryWithCapacity:element.childCount];
+            for(int i = 0; i < element.children.count; i++)
+            {
+                GDataXMLElement *child = [element.children objectAtIndex:i];
+                if(![child respondsToSelector:NSSelectorFromString(@"attributes")])
+                    continue;
+                if(child.attributes != nil) {
+                    [dict setObject:[NSNumber numberWithInt:STOI([child attributeForName:@"value"].stringValue)] forKey:[child attributeForName:@"name"].stringValue];
+                }
+            }
+        }
+        if(dict == nil)
+            dict = [NSMutableDictionary dictionary];
+        
+        return dict;
     }
     
     return nil;

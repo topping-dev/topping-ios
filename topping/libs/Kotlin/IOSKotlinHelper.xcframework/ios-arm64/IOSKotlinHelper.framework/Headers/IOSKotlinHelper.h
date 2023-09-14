@@ -524,6 +524,7 @@ __attribute__((swift_name("ViewGroup.LayoutParams")))
 __attribute__((swift_name("MarginLayoutParams")))
 @interface IOSKHMarginLayoutParams : IOSKHViewGroupLayoutParams
 - (instancetype)initWithWidth:(int32_t)width height:(int32_t)height __attribute__((swift_name("init(width:height:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithC:(id<IOSKHTContext>)c attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs __attribute__((swift_name("init(c:attrs:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSource:(IOSKHMarginLayoutParams *)source __attribute__((swift_name("init(source:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSource_:(IOSKHViewGroupLayoutParams *)source __attribute__((swift_name("init(source_:)"))) __attribute__((objc_designated_initializer));
 - (void)doCopyMarginsFromSource:(IOSKHMarginLayoutParams *)source __attribute__((swift_name("doCopyMarginsFrom(source:)")));
@@ -2472,8 +2473,8 @@ __attribute__((swift_name("ConstraintLayout")))
 - (id<IOSKHTView> _Nullable)getViewByIdId:(NSString *)id __attribute__((swift_name("getViewById(id:)")));
 - (IOSKHConstraintWidget * _Nullable)getViewWidgetView:(id<IOSKHTView> _Nullable)view __attribute__((swift_name("getViewWidget(view:)")));
 - (void)loadLayoutDescriptionLayoutDescription:(NSString *)layoutDescription __attribute__((swift_name("loadLayoutDescription(layoutDescription:)")));
-- (void)onLayoutChanged:(BOOL)changed left:(int32_t)left top:(int32_t)top right:(int32_t)right bottom:(int32_t)bottom __attribute__((swift_name("onLayout(changed:left:top:right:bottom:)")));
-- (void)onMeasureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(widthMeasureSpec:heightMeasureSpec:)")));
+- (void)onLayoutSup:(id<IOSKHTView> _Nullable)sup changed:(BOOL)changed left:(int32_t)left top:(int32_t)top right:(int32_t)right bottom:(int32_t)bottom __attribute__((swift_name("onLayout(sup:changed:left:top:right:bottom:)")));
+- (void)onMeasureSup:(id<IOSKHTView> _Nullable)sup widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(sup:widthMeasureSpec:heightMeasureSpec:)")));
 - (void)onViewAddedSup:(id<IOSKHTView> _Nullable)sup view:(id<IOSKHTView>)view __attribute__((swift_name("onViewAdded(sup:view:)")));
 - (void)onViewRemovedSup:(id<IOSKHTView> _Nullable)sup view:(id<IOSKHTView>)view __attribute__((swift_name("onViewRemoved(sup:view:)")));
 - (void)parseLayoutDescriptionId:(NSString *)id __attribute__((swift_name("parseLayoutDescription(id:)")));
@@ -2540,7 +2541,7 @@ __attribute__((swift_name("MotionLayout")))
 - (id<IOSKHMotionLayoutMotionTracker>)obtainVelocityTracker __attribute__((swift_name("obtainVelocityTracker()")));
 - (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
 - (BOOL)onInterceptTouchEventSup:(id<IOSKHTView> _Nullable)sup event:(IOSKHMotionEvent *)event __attribute__((swift_name("onInterceptTouchEvent(sup:event:)")));
-- (void)onLayoutChanged:(BOOL)changed left:(int32_t)left top:(int32_t)top right:(int32_t)right bottom:(int32_t)bottom __attribute__((swift_name("onLayout(changed:left:top:right:bottom:)")));
+- (void)onLayoutSup:(id<IOSKHTView> _Nullable)sup changed:(BOOL)changed left:(int32_t)left top:(int32_t)top right:(int32_t)right bottom:(int32_t)bottom __attribute__((swift_name("onLayout(sup:changed:left:top:right:bottom:)")));
 - (void)onMeasureSup:(id<IOSKHTView> _Nullable)sup widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(sup:widthMeasureSpec:heightMeasureSpec:)")));
 - (BOOL)onNestedFlingTarget:(id<IOSKHTView>)target velocityX:(float)velocityX velocityY:(float)velocityY consumed:(BOOL)consumed __attribute__((swift_name("onNestedFling(target:velocityX:velocityY:consumed:)")));
 - (BOOL)onNestedPreFlingTarget:(id<IOSKHTView>)target velocityX:(float)velocityX velocityY:(float)velocityY __attribute__((swift_name("onNestedPreFling(target:velocityX:velocityY:)")));

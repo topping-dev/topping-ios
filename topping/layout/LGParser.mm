@@ -155,7 +155,8 @@
                                 || COMPARE(childName, @"integer")
                                 || COMPARE(childName, @"item")
                                 || COMPARE(childName, @"integer-array")
-                                || COMPARE(childName, @"array"))
+                                || COMPARE(childName, @"array")
+                                /*|| COMPARE(childName, @"attr")*/)
                         {
                             [self.pValue parseXML:dr.orientation :child];
                         }

@@ -29,6 +29,7 @@ static BOOL rtl = false;
 	self.baseLine = -1;
 	self.android_layout_width = @"wrap_content";
 	self.android_layout_height = @"wrap_content";
+    self.methodSkip = [NSMutableArray array];
     self.methodEventMap = [NSMutableDictionary dictionary];
     
     self.dScaleX = 1;
@@ -289,6 +290,8 @@ static BOOL rtl = false;
 }
 
 -(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
+    if([self callTMethod:@"onMeasure" :[NSNumber numberWithInt:widthMeasureSpec], [NSNumber numberWithInt:heightMeasureSpec], nil])
+        return;
     int newWidthSpec = widthMeasureSpec;
     int newHeightSpec = heightMeasureSpec;
     if(![self isKindOfClass:[LGLinearLayout class]]
@@ -679,6 +682,10 @@ static BOOL rtl = false;
 }
 
 -(void)layout:(int)l :(int)t :(int)r :(int)b {
+    if([self callTMethod:@"onLayout" :[NSNumber numberWithBool:false],
+     [NSNumber numberWithInt:l], [NSNumber numberWithInt:t],
+     [NSNumber numberWithInt:r], [NSNumber numberWithInt:b], nil])
+        return;
     self._view.frame = CGRectMake(l, t, r - l, b - t);
 }
 
@@ -892,21 +899,29 @@ static BOOL rtl = false;
 
 #pragma IOSKHView start
 
--(void)callTMethodArr:(NSString *)methodName :(NSArray *)arr {
-    IOSKHKotlinArray *___arr___ = [IOSKHKotlinArray arrayWithSize:1 init:^id _Nullable(IOSKHInt * _Nonnull index) { return nil; }];
-    for(int i = 0; i < arr.count; i++) {
-        [___arr___ setIndex:i value:[arr objectAtIndex:i]];
-    }
+-(BOOL)callTMethodArr:(NSString *)methodName :(NSArray *)arr {
+    if([self.methodSkip containsObject:methodName])
+        return false;
     
     if([self.methodEventMap objectForKey:methodName] != nil) {
+        IOSKHKotlinArray *___arr___ = [IOSKHKotlinArray arrayWithSize:(int)arr.count init:^id _Nullable(IOSKHInt * _Nonnull index) { return nil; }];
+        for(int i = 0; i < arr.count; i++) {
+            [___arr___ setIndex:i value:[arr objectAtIndex:i]];
+        }
+        
+        [self.methodSkip addObject:methodName];
         ((id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))[self.methodEventMap objectForKey:methodName])(self, ___arr___);
+        [self.methodSkip removeObject:methodName];
+        return true;
     }
+    
+    return false;
 }
 
--(void)callTMethod:(NSString *)methodName :(NSObject *)arg, ... {
+-(BOOL)callTMethod:(NSString *)methodName :(id)arg, ... {
     NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:VarArgs2(arg)];
     
-    [self callTMethodArr:methodName :arr];
+    return [self callTMethodArr:methodName :arr];
 }
 
 - (void)addViewView:(nonnull id<IOSKHTView>)view param:(nonnull IOSKHViewGroupLayoutParams *)param {
@@ -940,8 +955,7 @@ static BOOL rtl = false;
 
 
 - (void)forceLayout {
-    [self._view setNeedsLayout];
-    [self._view layoutIfNeeded];
+    [self resizeAndInvalidate];
 }
 
 
@@ -971,7 +985,7 @@ static BOOL rtl = false;
 }
 
 
-- (int32_t)getChildMeasureSpecMLayoutWidthSpec:(int32_t)mLayoutWidthSpec i:(int32_t)i matchParent:(int32_t)matchParent {
+-(int32_t)getChildMeasureSpecSpec:(int32_t)spec padding:(int32_t)padding dimension:(int32_t)dimension {
     return 0;
 }
 
@@ -1017,6 +1031,7 @@ static BOOL rtl = false;
 
 
 - (nonnull NSString *)getId {
+    NSString *idVal = REPLACE([self GetId], @"+", @"");
     return [self GetId];
 }
 
@@ -1243,7 +1258,7 @@ static BOOL rtl = false;
 
 - (BOOL)isLayoutRequested {
     //TODO:
-    return false;
+    return true;
 }
 
 

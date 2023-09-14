@@ -398,6 +398,7 @@
 }
 
 -(void)addViewView:(id<IOSKHTView>)view param:(IOSKHViewGroupLayoutParams *)param {
+    [view setLayoutParamsParams:param];
     [self addSubview:(LGView*)view];
 }
 
@@ -413,8 +414,8 @@
     return (int32_t)self.subviews.count;
 }
 
--(void)onViewAddedView:(id<IOSKHTView>)view {
-    
+- (int32_t)getChildMeasureSpecSpec:(int32_t)spec padding:(int32_t)padding dimension:(int32_t)dimension {
+    return [LGViewGroup getChildMeasureSpec:spec :padding :dimension];
 }
 
 @end
