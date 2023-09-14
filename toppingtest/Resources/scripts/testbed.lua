@@ -88,6 +88,9 @@ function ListViewTest_Constructor(pGUI, luacontext)
         elseif index == 9 then
             local to = LuaForm.createWithUI(form:getContext(), LR.id.constraintTest, LR.layout.constraint);
             luacontext:startForm(to)
+        elseif index == 10 then
+            local to = LuaForm.createWithUI(form:getContext(), LR.id.relativeTest, LR.layout.relative);
+            luacontext:startForm(to)
         end
     end);
     pAdapter:setOnCreateViewHolder(function(adapter, parent, type, context)
@@ -113,6 +116,7 @@ function ListViewTest_Constructor(pGUI, luacontext)
 	pAdapter:addValue("Toast");
     pAdapter:addValue("FrameLayout");
     pAdapter:addValue("ConstraintLayout");
+    pAdapter:addValue("RelativeLayout");
 	pGUI:setAdapter(pAdapter);
     pAdapter:notify();
 end

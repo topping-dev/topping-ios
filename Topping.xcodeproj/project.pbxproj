@@ -324,6 +324,7 @@
 		5C4F82A0298FA3880013620E /* LGNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F829E298FA3880013620E /* LGNavigationView.m */; };
 		5C4F831129AD267D0013620E /* LGTextInputLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C4F830F29AD267D0013620E /* LGTextInputLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C4F831229AD267D0013620E /* LGTextInputLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F831029AD267D0013620E /* LGTextInputLayout.m */; };
+		5C51B9B42A838F4F009F4D2C /* CGRect+Ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C51B9B22A838F4F009F4D2C /* CGRect+Ext.h */; };
 		5C55EACA2A125ACE00634F26 /* GDataXMLNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C55EAC82A125ACE00634F26 /* GDataXMLNode.h */; };
 		5C55EACB2A125ACE00634F26 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C55EAC92A125ACE00634F26 /* GDataXMLNode.m */; };
 		5C55EAE32A125B8A00634F26 /* CoreActionSheetPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C55EACD2A125B8A00634F26 /* CoreActionSheetPicker.h */; };
@@ -1237,6 +1238,7 @@
 		5C4F829E298FA3880013620E /* LGNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGNavigationView.m; sourceTree = "<group>"; };
 		5C4F830F29AD267D0013620E /* LGTextInputLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGTextInputLayout.h; sourceTree = "<group>"; };
 		5C4F831029AD267D0013620E /* LGTextInputLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGTextInputLayout.m; sourceTree = "<group>"; };
+		5C51B9B22A838F4F009F4D2C /* CGRect+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGRect+Ext.h"; sourceTree = "<group>"; };
 		5C55EAC82A125ACE00634F26 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		5C55EAC92A125ACE00634F26 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		5C55EACD2A125B8A00634F26 /* CoreActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreActionSheetPicker.h; sourceTree = "<group>"; };
@@ -2707,6 +2709,7 @@
 			children = (
 				5C27FCDA2AB0AE7200066429 /* Swizzlean */,
 				5C27FCC42AB04E7500066429 /* Kotlin */,
+				5C51B9B22A838F4F009F4D2C /* CGRect+Ext.h */,
 				5C55EAF82A125BB400634F26 /* MBProgressHUD */,
 				5C55EACC2A125AD600634F26 /* ActionSheetPicker */,
 				5C55EAC72A125A7600634F26 /* GDataXML */,
@@ -3849,6 +3852,7 @@
 				5C64F03D262C3F280074EEFE /* CheckBox.h in Headers */,
 				5C18BAFC29866BEC00C4A929 /* MaterialContainerScheme.h in Headers */,
 				5C07C38A29879AF20085B536 /* MDCBaseTextArea.h in Headers */,
+				5C51B9B42A838F4F009F4D2C /* CGRect+Ext.h in Headers */,
 				5C9EC7B72935FBE3008D2909 /* MDCActivityIndicator+Subclassing.h in Headers */,
 				5C9EC80D29360141008D2909 /* CAMediaTimingFunction+MotionAnimator.h in Headers */,
 				5C5A991E24E16BCC002A22EA /* LuaFloat.h in Headers */,

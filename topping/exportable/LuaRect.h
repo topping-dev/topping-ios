@@ -15,6 +15,7 @@
 -(float)getRight;
 -(float)getTop;
 -(float)getBottom;
+-(void)setCGRect:(CGRect)rectP;
 -(CGRect)getCGRect;
 
 @property (nonatomic) float left, right, top, bottom;

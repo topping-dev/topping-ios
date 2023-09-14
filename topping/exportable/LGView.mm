@@ -11,6 +11,7 @@
 #import "IOSKotlinHelper/IOSKotlinHelper.h"
 #import <Topping/Topping-Swift.h>
 #import "GDataXMLNode.h"
+#import "LGRelativeLayout.h"
 
 static BOOL rtl = false;
 
@@ -185,7 +186,7 @@ static BOOL rtl = false;
     if(![self._view isKindOfClass:[UILabelPadding class]])
         view.layoutMargins = UIEdgeInsetsMake(self.dPaddingTop, self.dPaddingLeft, self.dPaddingBottom, self.dPaddingRight);
     if(self.android_enabled != nil) {
-        NSString *enabled = [[LGValueParser getInstance] getValue:self.android_enabled];
+        NSString *enabled = (NSString*)[[LGValueParser getInstance] getValue:self.android_enabled];
         [self setEnabled:SSTOB(enabled)];
     }
     
@@ -353,6 +354,10 @@ static BOOL rtl = false;
         }
     }*/
     return suggestedMinWidth;
+}
+
++(int)resolveSize:(int)size :(int) measureSpec {
+    return [LGView resolveSizeAndState:size :measureSpec :0] & MEASURED_SIZE_MASK;
 }
 
 +(int)resolveSizeAndState:(int)size :(int)measureSpec :(int)childMeasuredState {

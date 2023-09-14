@@ -207,7 +207,7 @@
             [child measure:childWidthMeasureSpec :childHeightMeasureSpec];
         }
     }
-    [self layoutChildren:self.getLeft :self.getTop :self.getRight :self.getBottom];
+    [self layoutChildren:[self getLeft] :[self getTop] :[self getRight] :[self getBottom]];
 }
 
 - (void)resize {

@@ -71,16 +71,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C0277BA7-7BA5-49C3-9BEA-7AC3C2DD6C8C"
+            uuid = "04B08A3D-D86C-4C52-BA08-AD9C560F4B63"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "topping/exportable/LGLinearLayout.mm"
+            filePath = "topping/layout/LGColorParser.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "-layoutHorizontal::::"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
+            landmarkName = "-parseColorStateXML::"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "04B08A3D-D86C-4C52-BA08-AD9C560F4B63 - 7d5b4bd144fb1642"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[LGColorParser parseColorStateXML::]"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/layout/LGColorParser.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "305"
+                  endingLineNumber = "305"
+                  offsetFromSymbolStart = "568">
+               </Location>
+               <Location
+                  uuid = "04B08A3D-D86C-4C52-BA08-AD9C560F4B63 - 7d5b4bd144fb1600"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[LGColorParser parseColorStateXML::]"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/layout/LGColorParser.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "303"
+                  endingLineNumber = "303"
+                  offsetFromSymbolStart = "376">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B295AAFF-8292-4FB4-B0A1-E3D829BE82DF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topping/layout/LGDrawableParser.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-parseXML::"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -3,6 +3,7 @@
 #import "LGColorParser.h"
 #import "LGValueParser.h"
 #import "LGDrawableParser.h"
+#import "LGStringParser.h"
 #import "LuaFunction.h"
 #import "LuaTranslator.h"
 #import "UIColor+Lum.h"
@@ -60,12 +61,9 @@
     but.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     but.titleLabel.numberOfLines = 0;
     but.titleLabel.textAlignment = NSTextAlignmentCenter;
+    NSString *text = [[LGStringParser getInstance] getString:self.android_text];
     NSString *myNewLineStr = @"\n";
-    self.android_text = REPLACE(self.android_text, @"\\n", myNewLineStr);
-	[but setTitle:self.android_text forState:UIControlStateNormal];
-	[but setTitle:self.android_text forState:UIControlStateSelected];
-	[but setTitle:self.android_text forState:UIControlStateDisabled];
-	[but setTitle:self.android_text forState:UIControlStateHighlighted];
+    [self setTextInternal:REPLACE(text, @"\\n", myNewLineStr)];
     if(self.colorAccent != nil)
     {
         [self setTextColor:self.colorAccent];
