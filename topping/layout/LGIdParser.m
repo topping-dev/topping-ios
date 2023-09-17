@@ -85,4 +85,17 @@
     [self.idMap setObject:value forKey:key];
 }
 
+-(BOOL)hasId:(NSString *)idVal
+{
+    NSArray *arr = SPLIT(idVal, @"/");
+    NSString *name = [arr objectAtIndex:[arr count] - 1];
+    
+    return self.idMap[name] != nil;
+}
+
+-(NSString *)getId:(NSString *)idVal
+{
+    return REPLACE(idVal, @"+", @"");
+}
+
 @end

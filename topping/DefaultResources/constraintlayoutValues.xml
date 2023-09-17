@@ -33,7 +33,7 @@
     <attr format="string" name="circularflow_radiusInDP"/>
     <attr format="reference" name="circularflow_viewCenter"/>
     <attr format="reference" name="constraintSet"/>
-    <attr format="string" name="constraint_referenced_ids"/>
+    <attr format="string" name="constraFint_referenced_ids"/>
     <attr format="string" name="constraint_referenced_tags"/>
     <attr format="reference" name="content"/>
     <attr format="enum" name="curveFit">

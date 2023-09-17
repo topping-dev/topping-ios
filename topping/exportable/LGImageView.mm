@@ -125,6 +125,12 @@
 
 -(void)setImageDrawable:(LGDrawableReturn*)ldr {
     UIImageView *iv = ((UIImageView *)self._view);
+    if(ldr == nil)
+    {
+        iv.image = nil;
+        self.ldr = nil;
+        return;
+    }
     CGSize size = CGSizeZero;
     VectorView *vv = nil;
     for(UIView *subView in self._view.subviews) {
@@ -165,6 +171,7 @@
     if(vv != nil) {
         vv.frame = CGRectMake(0, 0, self.dWidth, self.dHeight);
     }
+    self.ldr = ldr;
 }
 
 -(void)setImageRef:(LuaRef*)ref
@@ -204,17 +211,91 @@
 #pragma IOSKHTView
 
 - (void)setImageDrawableDrawable:(id<IOSKHTDrawable> _Nullable)drawable {
-    if(drawable == nil)
-    {
-        ((UIImageView *)self._view).image = nil;
-        return;
-    }
     LGDrawableReturn *ldr = (LGDrawableReturn *)drawable;
     [self setImageDrawable:ldr];
 }
 
 - (void)setImageResourceResourceId:(nonnull NSString *)resourceId {
     [self setImageRef:[LuaRef withValue:resourceId]];
+}
+
+- (void)clearColorFilter {
+    if(self.orgImage != nil) {
+        ((UIImageView*)self._view).image = self.orgImage;
+        self.orgImage = nil;
+    }
+}
+
+-(id<IOSKHTDrawable>)getDrawable {
+    return (id<IOSKHTDrawable>)self.ldr;
+}
+
+-(void)setColorFilterColorMatrixColorFilter:(IOSKHColorMatrixColorFilter *)colorMatrixColorFilter {
+    //https://developer.android.com/reference/android/graphics/ColorMatrix
+    UIImageView *iv = (UIImageView*)self._view;
+    if(self.orgImage == nil)
+        self.orgImage = iv.image;
+    
+    IOSKHColorMatrix *matrix = [[IOSKHColorMatrix alloc] init];
+    [colorMatrixColorFilter getColorMatrixColorMatrix:matrix];
+    IOSKHKotlinFloatArray *arr = matrix.array;
+    
+    // Make the input image recipe
+    CIImage *inputImage = [CIImage imageWithCGImage:iv.image.CGImage];
+
+    // Make the filter
+    CIFilter *colorMatrixFilter = [CIFilter filterWithName:@"CIColorMatrix"];
+    [colorMatrixFilter setDefaults];
+    [colorMatrixFilter setValue:inputImage forKey:kCIInputImageKey];
+    [colorMatrixFilter setValue:[CIVector vectorWithX:[arr getIndex:0] Y:[arr getIndex:1] Z:[arr getIndex:2] W:[arr getIndex:3]] forKey:@"inputRVector"];
+    [colorMatrixFilter setValue:[CIVector vectorWithX:[arr getIndex:5] Y:[arr getIndex:6] Z:[arr getIndex:7] W:[arr getIndex:8]] forKey:@"inputGVector"];
+    [colorMatrixFilter setValue:[CIVector vectorWithX:[arr getIndex:10] Y:[arr getIndex:11] Z:[arr getIndex:12] W:[arr getIndex:13]] forKey:@"inputBVector"];
+    [colorMatrixFilter setValue:[CIVector vectorWithX:[arr getIndex:15] Y:[arr getIndex:16] Z:[arr getIndex:17] W:[arr getIndex:18]] forKey:@"inputAVector"];
+
+    // Get the output image recipe
+    CIImage *outputImage = [colorMatrixFilter outputImage];
+
+    // Create the context and instruct CoreImage to draw the output image recipe into a CGImage
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
+    
+    iv.image = [UIImage imageWithCGImage:cgimg];
+}
+
+-(void)setImageMatrixImageMatrix:(IOSKHSkikoMatrix33 *)imageMatrix {
+    CGAffineTransform matrix;
+    matrix.a = [imageMatrix getIndex:0];
+    matrix.b = [imageMatrix getIndex:1];
+    matrix.c = [imageMatrix getIndex:3];
+    matrix.d = [imageMatrix getIndex:4];
+    matrix.tx = [imageMatrix getIndex:6];
+    matrix.ty = [imageMatrix getIndex:7];
+    
+    self._view.transform = matrix;
+}
+
+-(void)setImageResourceResId:(NSString *)resId {
+    [self setImageRef:[LuaRef withValue:resId]];
+}
+
+-(void)setScaleTypeScaleType:(IOSKHScaleType *)scaleType {
+    UIImageView *iv = (UIImageView*)self._view;
+    
+    if(scaleType == IOSKHScaleType.fitXy
+       || scaleType == IOSKHScaleType.matrix)
+        [iv setContentMode:UIViewContentModeScaleToFill];
+    else if(scaleType == IOSKHScaleType.fitStart)
+        [iv setContentMode:UIViewContentModeScaleAspectFit];
+    else if(scaleType == IOSKHScaleType.fitCenter)
+        [iv setContentMode:UIViewContentModeScaleAspectFit];
+    else if(scaleType == IOSKHScaleType.fitEnd)
+        [iv setContentMode:UIViewContentModeScaleAspectFit];
+    else if(scaleType == IOSKHScaleType.center)
+        [iv setContentMode:UIViewContentModeCenter];
+    else if(scaleType == IOSKHScaleType.centerInside)
+        [iv setContentMode:UIViewContentModeScaleAspectFit];
+    else if(scaleType == IOSKHScaleType.centerCrop)
+        [iv setContentMode:UIViewContentModeScaleAspectFill];
 }
 
 @end

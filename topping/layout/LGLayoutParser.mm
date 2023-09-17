@@ -282,7 +282,14 @@
         rootView = [[LGRelativeLayout alloc] init];
     else
     {
-        return nil;
+        //Lets try parent to do job for us
+        if(parent != nil && [parent isKindOfClass:[LGViewGroup class]])
+        {
+            rootView = [parent generateLGViewForName:name :attrs];
+        }
+        else {
+            return nil;
+        }
     }
     
     [rootView initProperties];
@@ -311,7 +318,7 @@
 	}
     rootView.attrs = attrs;
     [rootView applyStyles];
-	
+    [rootView beforeInitSubviews];
     if([rootView isKindOfClass:[LGViewGroup class]])
     {
         for(GDataXMLElement *child in [view children])
@@ -327,6 +334,7 @@
 -(UIView*) generateUIViewFromLGView:(LGView*)view :(UIView*)parentView :(LGView*)parent :(LuaForm*)cont;
 {
     view.parent = parent;
+    [view beforeInitComponent];
     [view resize];
     UIView *viewRoot = [view createComponent];
 		

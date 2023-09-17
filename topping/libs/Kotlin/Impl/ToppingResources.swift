@@ -56,16 +56,23 @@ public class ToppingResources : NSObject, TResources {
         return LGDrawableParser.getInstance().parseDrawableRef(LuaRef.withValue(resId))
     }
     
+    func isNumber(val: String) -> Bool {
+        let digitsCharacters = CharacterSet(charactersIn: "0123456789.")
+        return CharacterSet(charactersIn: val).isSubset(of: digitsCharacters)
+    }
+    
     public func getFloat(value: String, def: Float) -> Float {
-        let v = LGValueParser.getInstance().getValue(value) as? NSNumber
-        if(v != nil) {
-            return v!.floatValue
+        let vObj = LGValueParser.getInstance().getValue(value)
+        if(vObj != nil && vObj is NSString) {
+            if(isNumber(val: vObj as! String)) {
+                return Float(vObj as! String)!
+            }
         }
         return def
     }
     
     public func getIdentifier(id: String, type: String, packageName: String) -> String {
-        return id;
+        return LGIdParser.getInstance().getId(id);
     }
     
     public func getInt(value: String, def: Int32) -> Int32 {
@@ -86,7 +93,10 @@ public class ToppingResources : NSObject, TResources {
     }
     
     public func getResourceId(id: String, def: String) -> String {
-        return id
+        if(LGIdParser.getInstance().hasId(id)) {
+            return LGIdParser.getInstance().getId(id)
+        }
+        return def
     }
     
     public func getResourceName(key: String) -> String {
@@ -117,8 +127,8 @@ public class ToppingResources : NSObject, TResources {
         }
     }
     
-    public func getString(value: String) -> String {
-        return LGStringParser.getInstance().getString(value)
+    public func getString(key: String?, value: String) -> String {
+        return String(LGValueParser.getInstance().getValue(value, key) as! NSString)
     }
     
     public func getType(value: String) -> String {

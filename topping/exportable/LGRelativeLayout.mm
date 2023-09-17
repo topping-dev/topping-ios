@@ -1115,11 +1115,6 @@ static NSMapTable *pool = [NSMapTable strongToStrongObjectsMapTable];
     [super removeAllSubViews];
 }
 
--(void)clearSubviews {
-    self.mDirtyHierarchy = true;
-    [super clearSubviews];
-}
-
 -(NSString*)GetId
 {
     if(self.lua_id != nil)

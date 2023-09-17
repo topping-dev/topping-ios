@@ -283,7 +283,7 @@
                 {
                     if(COMPARE([nodeChild name], @"android:id"))
                     {
-                        lna.idVal = REPLACE([nodeChild stringValue], @"+", @"");
+                        lna.idVal = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:destination"))
                     {
@@ -341,7 +341,7 @@
             }
         }
         lne.mParent = lnr;
-        [lnr.mNodes setObject:lne forKey:REPLACE(lne.idVal, @"+", @"")];
+        [lnr.mNodes setObject:lne forKey:[[LGIdParser getInstance] getId:lne.idVal]];
     }
     
     return lnr;

@@ -23,9 +23,10 @@
         [self.subviews addObject:val];
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap setObject:val forKey:[val GetId]];
+        
+        [self callTMethod:@"onViewAdded" :val, nil];
+        [val resolveLayoutDirection];
     }
-    
-    [self callTMethod:@"onViewAdded" :val, nil];
 }
 
 -(void)addSubview:(LGView*)val :(NSInteger)index
@@ -40,9 +41,10 @@
         [self.subviews insertObject:val atIndex:index];
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap setObject:val forKey:[val GetId]];
+        
+        [self callTMethod:@"onViewAdded" :val, nil];
+        [val resolveLayoutDirection];
     }
-    
-    [self callTMethod:@"onViewAdded" :val, nil];
 }
 
 -(void)removeSubview:(LGView*)val

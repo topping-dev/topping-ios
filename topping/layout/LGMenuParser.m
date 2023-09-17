@@ -110,7 +110,7 @@
             {
                 if(COMPARE([node name], @"android:id"))
                 {
-                    item.idVal = REPLACE([node stringValue], @"+", @"");
+                    item.idVal = [[LGIdParser getInstance] getId:[node stringValue]];
                 }
                 else if(COMPARE([node name], @"android:checkableBehavior"))
                 {
@@ -144,7 +144,7 @@
             {
                 if(COMPARE([node name], @"android:id"))
                 {
-                    item.idVal = REPLACE([node stringValue], @"+", @"");
+                    item.idVal = [[LGIdParser getInstance] getId:[node stringValue]];
                 }
                 else if(COMPARE([node name], @"android:title"))
                 {

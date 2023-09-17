@@ -714,7 +714,8 @@
 		5C9ED84E2900022A00305A74 /* LuaLifecycle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9ED84C2900022A00305A74 /* LuaLifecycle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9ED84F2900022A00305A74 /* LuaLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ED84D2900022A00305A74 /* LuaLifecycle.m */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
-		5CAEA8402AB2F053009EB7C2 /* constraintlayoutValues.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CAEA83F2AB2F053009EB7C2 /* constraintlayoutValues.xml */; };
+		5CAEA8422AB3072C009EB7C2 /* constraintlayoutValues.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CAEA8412AB3072C009EB7C2 /* constraintlayoutValues.xml */; };
+		5CAEA8462AB6D2F2009EB7C2 /* values.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CAEA8452AB6D2F2009EB7C2 /* values.xml */; };
 		5CB5E13825822C7C00BF2EF5 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5E13725822C7C00BF2EF5 /* Empty.swift */; };
 		5CB8583024E3E6AD006E6B65 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB8582F24E3E6AD006E6B65 /* Empty.swift */; };
 		5CB8585424E43007006E6B65 /* URLDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CB8585224E43007006E6B65 /* URLDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1636,7 +1637,8 @@
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		5CAEA83D2AB1D239009EB7C2 /* iosMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iosMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/iosMain"; sourceTree = "<group>"; };
 		5CAEA83E2AB1D239009EB7C2 /* commonMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = commonMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain"; sourceTree = "<group>"; };
-		5CAEA83F2AB2F053009EB7C2 /* constraintlayoutValues.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = constraintlayoutValues.xml; sourceTree = "<group>"; };
+		5CAEA8412AB3072C009EB7C2 /* constraintlayoutValues.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = constraintlayoutValues.xml; sourceTree = "<group>"; };
+		5CAEA8452AB6D2F2009EB7C2 /* values.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = values.xml; sourceTree = "<group>"; };
 		5CB29C602535B49C000E39A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5CB5E13625822C7C00BF2EF5 /* toppingtest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toppingtest-Bridging-Header.h"; sourceTree = "<group>"; };
 		5CB5E13725822C7C00BF2EF5 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
@@ -3436,9 +3438,10 @@
 		5CCA827E25060491005689D8 /* DefaultResources */ = {
 			isa = PBXGroup;
 			children = (
+				5CAEA8412AB3072C009EB7C2 /* constraintlayoutValues.xml */,
 				5CCBECDA2A1CBD35008AE6A1 /* colors.xml */,
 				5CCA827F250604AC005689D8 /* themes.xml */,
-				5CAEA83F2AB2F053009EB7C2 /* constraintlayoutValues.xml */,
+				5CAEA8452AB6D2F2009EB7C2 /* values.xml */,
 			);
 			path = DefaultResources;
 			sourceTree = "<group>";
@@ -4029,12 +4032,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C64F03A262C3C660074EEFE /* CheckBox.xib in Resources */,
+				5CAEA8462AB6D2F2009EB7C2 /* values.xml in Resources */,
 				5CCBECDB2A1CBD35008AE6A1 /* colors.xml in Resources */,
 				5CCA8280250604AC005689D8 /* themes.xml in Resources */,
 				5C18BAB229866A2D00C4A929 /* MaterialTextFields.bundle in Resources */,
 				5C2B615E254AA82B003A9705 /* README.md in Resources */,
 				5C2B6160254AA83A003A9705 /* LICENSE in Resources */,
-				5CAEA8402AB2F053009EB7C2 /* constraintlayoutValues.xml in Resources */,
+				5CAEA8422AB3072C009EB7C2 /* constraintlayoutValues.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

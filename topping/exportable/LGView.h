@@ -20,9 +20,9 @@
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
 {
-	VISIBLE,
-	INVISIBILE,
-	GONE
+	VISIBLE = 0,
+	INVISIBILE = 4,
+	GONE = 8
 };
 
 enum LAYOUTDIMENSION
@@ -111,15 +111,19 @@ enum MEASURE_SPEC
 
 -(void)addSelfToParent:(UIView*)par :(LuaForm*)cont;
 -(void)addSelfToParentNoSetup:(UIView *)par :(LuaForm*)cont;
+-(void)beforeInitSubviews;
+-(void)beforeInitComponent;
 -(UIView*)createComponent;
 -(void)initComponent:(UIView *)view :(LuaContext *)lc;
 -(void)setupComponent:(UIView *)view;
 -(void)componentAddMethod:(UIView*)par :(UIView *)me;
+-(LGView*)generateLGViewForName:(NSString*)name :(NSArray*)attrs;
 
 //Positioning
 -(void)clearDimensions;
 -(void)resize;
 -(void)resizeAndInvalidate;
+-(void)resolveLayoutDirection;
 -(void)readWidth;
 -(void)readHeight;
 -(void)readWidthHeight;
@@ -272,6 +276,7 @@ enum MEASURE_SPEC
 @property (nonatomic) int dVisibility;
 
 @property(nonatomic) BOOL layout;
+@property(nonatomic) BOOL layoutRequested;
 @property(nonatomic) int baseLine;
 
 @property(nonatomic) BOOL widthSpecSet, heightSpecSet;

@@ -33,7 +33,7 @@
              return NSOrderedDescending;
      }];
     
-    /*{
+    {
         NSBundle *bund = [NSBundle bundleWithIdentifier:@"dev.topping.ios"];
         NSString *themePath = [bund pathForResource:@"constraintlayoutValues" ofType:@"xml"];
         NSData *resourceData = [NSData dataWithContentsOfFile:themePath];
@@ -51,7 +51,7 @@
                 [self parseXML:ORIENTATION_LANDSCAPE :child];
             }
         }
-    }*/
+    }
 }
 
 +(LGValueParser *) getInstance
@@ -85,10 +85,10 @@
         {
             parentAttr = attr;
         }
-        /*else if(COMPARE(attr.name, @"format"))
+        else if(COMPARE(attr.name, @"format"))
         {
             formatAttr = attr;
-        }*/
+        }
     }
     
     if(nameAttr != nil)
@@ -105,10 +105,12 @@
             valueDict = [NSMutableDictionary dictionary];
         
         NSString *type = typeAttr.stringValue;
-        if(formatAttr != nil && CONTAINS(formatAttr.stringValue, @"enum")) {
-            type = @"enum";
-        } else {
-            return;
+        if(formatAttr != nil) {
+            if(CONTAINS(formatAttr.stringValue, @"enum")) {
+                type = formatAttr.stringValue;
+            } else {
+                return;
+            }
         }
         
         NSObject *val = [self getValue:element :type :orientation :nameAttr.stringValue];
@@ -127,7 +129,7 @@
 -(NSObject*)getValue:(GDataXMLElement *)element
                     :(NSString *)type :(int)orientation :(NSString *)name
 {
-    if(type != nil && (COMPARE(element.name, @"item") || COMPARE(type, @"enum")))
+    if(type != nil && (COMPARE(element.name, @"item") || CONTAINS(type, @"enum")))
         return [self getValueIn:type :element :orientation :name];
     else
         return [self getValueIn:element.name :element :orientation :name];
@@ -196,7 +198,14 @@
         
         return arr;
     }
-    else if(COMPARE(type, @"enum")) {
+    else if(CONTAINS(type, @"enum")) {
+        NSArray *types = SPLIT(type, @"|");
+        BOOL isReference = false;
+        for(NSString *t in types) {
+            if(COMPARE(t, @"reference")) {
+                isReference = true;
+            }
+        }
         NSMutableDictionary *dict = nil;
         if(element.childCount > 0)
         {
@@ -207,7 +216,11 @@
                 if(![child respondsToSelector:NSSelectorFromString(@"attributes")])
                     continue;
                 if(child.attributes != nil) {
-                    [dict setObject:[NSNumber numberWithInt:STOI([child attributeForName:@"value"].stringValue)] forKey:[child attributeForName:@"name"].stringValue];
+                    if(isReference) {
+                        [dict setObject:[child attributeForName:@"value"].stringValue forKey:[child attributeForName:@"name"].stringValue];
+                    } else {
+                        [dict setObject:[NSNumber numberWithInt:STOI([child attributeForName:@"value"].stringValue)] forKey:[child attributeForName:@"name"].stringValue];
+                    }
                 }
             }
         }
@@ -220,8 +233,7 @@
     return nil;
 }
 
--(NSObject *)getValueDirect:(NSString *)keyT
-{
+-(NSObject *)getValueDirect:(NSString *)keyT :(NSString *)header {
     if(keyT == nil)
         return nil;
     
@@ -239,17 +251,23 @@
     if(dict != nil)
     {
         NSObject *val = [dict objectForKey:key];
-        if(val != nil)
+        if(val != nil) {
             return val;
+        }
+        else if(header != nil) { //Lets check attributes
+            NSMutableDictionary *dictIn = [dict objectForKey:header];
+            val = [dictIn objectForKey:key];
+            if(val != nil)
+                return val;
+        }
     }
     
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    if ([keyT rangeOfCharacterFromSet:notDigits].location == NSNotFound)
-    {
-        return keyT;
-    }
-    
-    return nil;
+    return keyT;
+}
+
+-(NSObject *)getValueDirect:(NSString *)keyT
+{
+    return [self getValueDirect:keyT :nil];
 }
 
 - (BOOL) isBoolNumber:(NSNumber *)num
@@ -299,24 +317,28 @@
         return @"xml";
     }
     else {
-        NSNumber *number = (NSNumber*)[self getValueDirect:key];
-        if(number == nil)
+        NSObject* obj = [self getValueDirect:key];
+        if(obj == nil)
             return @"nil";
-        if([self isBoolNumber:number])
-            return @"boolean";
-        if (![number isKindOfClass:[NSDecimalNumber class]]) {
-            CFNumberType numberType = CFNumberGetType((CFNumberRef)number);
-            if (numberType == kCFNumberFloat32Type ||
-                numberType == kCFNumberFloat64Type ||
-                numberType == kCFNumberCGFloatType)
-            {
-                return @"float";
-            } else {
-                return @"int";
+        if([obj isKindOfClass:[NSNumber class]]) {
+            NSNumber *number = (NSNumber*)obj;
+            if([self isBoolNumber:number])
+                return @"boolean";
+            if (![number isKindOfClass:[NSDecimalNumber class]]) {
+                CFNumberType numberType = CFNumberGetType((CFNumberRef)number);
+                if (numberType == kCFNumberFloat32Type ||
+                    numberType == kCFNumberFloat64Type ||
+                    numberType == kCFNumberCGFloatType)
+                {
+                    return @"float";
+                } else {
+                    return @"int";
+                }
             }
+            else
+                return @"float";
         }
-        else
-            return @"float";
+        return @"string";
     }
 }
 
@@ -340,7 +362,7 @@
     return def;
 }
 
--(NSObject *)getValue:(NSString *)key
+-(NSObject *)getValue:(NSString *)key :(NSString*)header
 {
     if(key == nil)
         return nil;
@@ -377,10 +399,14 @@
     }
     else
     {
-        return [self getValueDirect:key];
+        return [self getValueDirect:key :header];
     }
     
     return nil;
+}
+
+-(NSObject *)getValue:(NSString *)key {
+    return [self getValue:key :nil];
 }
 
 -(NSMutableDictionary *)getAllKeys

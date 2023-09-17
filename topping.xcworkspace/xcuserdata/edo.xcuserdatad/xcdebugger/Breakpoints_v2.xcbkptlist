@@ -71,64 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "04B08A3D-D86C-4C52-BA08-AD9C560F4B63"
+            uuid = "C0277BA7-7BA5-49C3-9BEA-7AC3C2DD6C8C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "topping/layout/LGColorParser.mm"
+            filePath = "topping/exportable/LGLinearLayout.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
-            landmarkName = "-parseColorStateXML::"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "04B08A3D-D86C-4C52-BA08-AD9C560F4B63 - 7d5b4bd144fb1642"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGColorParser parseColorStateXML::]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/layout/LGColorParser.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
-                  offsetFromSymbolStart = "568">
-               </Location>
-               <Location
-                  uuid = "04B08A3D-D86C-4C52-BA08-AD9C560F4B63 - 7d5b4bd144fb1600"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LGColorParser parseColorStateXML::]"
-                  moduleName = "Topping"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/layout/LGColorParser.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "376">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B295AAFF-8292-4FB4-B0A1-E3D829BE82DF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "topping/layout/LGDrawableParser.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
-            landmarkName = "-parseXML::"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "-layoutHorizontal::::"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -151,38 +103,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C566D253-CBE4-4AB8-AB54-B8C053A7B753"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "topping/exportable/LGView.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1362"
-            endingLineNumber = "1362"
-            landmarkName = "-setLayoutParamsParams:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "73D59880-6D32-43CB-A633-DAA47F852963"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "topping/exportable/LGView.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "958"
-            endingLineNumber = "958"
-            landmarkName = "-forceLayout"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "595FE8AC-4C1E-4F35-9243-AAB9A520FDCC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -190,40 +110,24 @@
             filePath = "topping/exportable/LGView.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1234"
-            endingLineNumber = "1234"
-            landmarkName = "-invalidate"
+            startingLineNumber = "1260"
+            endingLineNumber = "1260"
+            landmarkName = "-getY"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AE6AF5BD-10C6-4DC5-82D2-001AEB7C958B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "topping/exportable/LGView.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1322"
-            endingLineNumber = "1322"
-            landmarkName = "-requestLayout"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6E654CEA-FF12-42BC-8E6F-E29E36DBC77C"
+            uuid = "28702F3E-B973-4192-A770-ADB8278A3842"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintLayout.kt"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1357"
-            endingLineNumber = "1357"
+            startingLineNumber = "2729"
+            endingLineNumber = "2729"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -231,49 +135,865 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C8588180-BAF6-404F-9F91-2A0109ABE534"
+            uuid = "39FB6D25-669E-45AA-B181-7FF599469EB0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "topping/layout/LGValueParser.m"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
-            landmarkName = "-getValue:"
-            landmarkType = "7">
+            startingLineNumber = "561"
+            endingLineNumber = "561"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40128D55-B720-4386-9BB0-B54F811C398E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1391"
+            endingLineNumber = "1391"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6928AF8F-0D4A-4AA5-ADD0-4BE27F18BF7D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3829"
+            endingLineNumber = "3829"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7A0C9C5-9FEB-49D0-BC47-B830A28CDCD0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5566"
+            endingLineNumber = "5566"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5225E0B8-FC7A-4BDA-8136-F368FDFE5C8D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5613"
+            endingLineNumber = "5613"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5C3FF001-9601-4257-92D8-3B56DDA0305F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1061"
+            endingLineNumber = "1061"
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "C8588180-BAF6-404F-9F91-2A0109ABE534 - ab54eb57ff51371e"
+                  uuid = "5C3FF001-9601-4257-92D8-3B56DDA0305F - 159e3ddf1e7b30f0"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[LGValueParser getValue:]"
-                  moduleName = "Topping"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#&lt;get-optimizerWrapHeight&gt;(){}kotlin.Int"
+                  moduleName = "IOSKotlinHelper"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/layout/LGValueParser.m"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "355"
-                  endingLineNumber = "355"
-                  offsetFromSymbolStart = "76">
+                  startingLineNumber = "1061"
+                  endingLineNumber = "1061"
+                  offsetFromSymbolStart = "860">
                </Location>
                <Location
-                  uuid = "C8588180-BAF6-404F-9F91-2A0109ABE534 - ab54eb57ff51371e"
+                  uuid = "5C3FF001-9601-4257-92D8-3B56DDA0305F - e4310b70d86c13e5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[LGValueParser getValue:]"
-                  moduleName = "Topping"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#&lt;init&gt;(kotlin.String){}"
+                  moduleName = "IOSKotlinHelper"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/layout/LGValueParser.m"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "355"
-                  endingLineNumber = "355"
-                  offsetFromSymbolStart = "232">
+                  startingLineNumber = "1061"
+                  endingLineNumber = "1061"
+                  offsetFromSymbolStart = "132">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "88D87341-8091-4489-94FB-D93D221A4C0F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1422"
+            endingLineNumber = "1422"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DA2309C-657C-43BB-9882-06C5119FEB83"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1436"
+            endingLineNumber = "1436"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "2DA2309C-657C-43BB-9882-06C5119FEB83 - 7d7c879c9ba6e263"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#setDimensionRatio(kotlin.String?){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1437"
+                  endingLineNumber = "1437"
+                  offsetFromSymbolStart = "2412">
+               </Location>
+               <Location
+                  uuid = "2DA2309C-657C-43BB-9882-06C5119FEB83 - b7ae3c2a8c113a92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#getLength(kotlin.Int){}kotlin.Int"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1436"
+                  endingLineNumber = "1436"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0ED93E20-23E4-4820-BA3E-2813C1E4B1CC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1513"
+            endingLineNumber = "1513"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "0ED93E20-23E4-4820-BA3E-2813C1E4B1CC - 8046f2b5ac30b0f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#setFrame(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1513"
+                  endingLineNumber = "1513"
+                  offsetFromSymbolStart = "1288">
+               </Location>
+               <Location
+                  uuid = "0ED93E20-23E4-4820-BA3E-2813C1E4B1CC - 2cdbdd2cb3f70be3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#getBottom(){}kotlin.Int"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1514"
+                  endingLineNumber = "1514"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "236BBB29-6431-422E-94BA-39058BB54F71"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1515"
+            endingLineNumber = "1515"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "236BBB29-6431-422E-94BA-39058BB54F71 - 8046f2b5ac30b03f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#setFrame(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1515"
+                  endingLineNumber = "1515"
+                  offsetFromSymbolStart = "3072">
+               </Location>
+               <Location
+                  uuid = "236BBB29-6431-422E-94BA-39058BB54F71 - 2cdbdd2cb3f70b04"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#getBottom(){}kotlin.Int"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1515"
+                  endingLineNumber = "1515"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB370B58-233A-4DAE-89DC-0997E1CF8800"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1528"
+            endingLineNumber = "1528"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "EB370B58-233A-4DAE-89DC-0997E1CF8800 - 8046f2b5ac30b6ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#setFrame(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1528"
+                  endingLineNumber = "1528"
+                  offsetFromSymbolStart = "2780">
+               </Location>
+               <Location
+                  uuid = "EB370B58-233A-4DAE-89DC-0997E1CF8800 - 440024d8b8d0e9d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#getHorizontalMargin(){}kotlin.Int"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1529"
+                  endingLineNumber = "1529"
+                  offsetFromSymbolStart = "212">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E657170-7DEF-4654-880B-EDF5BD02C96B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1581"
+            endingLineNumber = "1581"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "9E657170-7DEF-4654-880B-EDF5BD02C96B - 1bb0609a9d9bbd2d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#setVerticalDimension(kotlin.Int;kotlin.Int){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1581"
+                  endingLineNumber = "1581"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "9E657170-7DEF-4654-880B-EDF5BD02C96B - f753196a3d741749"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#getBiasPercent(kotlin.Int){}kotlin.Float"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1581"
+                  endingLineNumber = "1581"
+                  offsetFromSymbolStart = "600">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03A8C6CC-7515-45FA-ADBA-F7CCA377F1CA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1583"
+            endingLineNumber = "1583"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A7CF3C73-E63E-44B7-917B-80F796E43FB9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3469"
+            endingLineNumber = "3469"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "A7CF3C73-E63E-44B7-917B-80F796E43FB9 - 29fcaf66b07b866f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#updateFromRuns(kotlin.Boolean;kotlin.Boolean){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "3469"
+                  endingLineNumber = "3469"
+                  offsetFromSymbolStart = "2664">
+               </Location>
+               <Location
+                  uuid = "A7CF3C73-E63E-44B7-917B-80F796E43FB9 - e241942e448191e2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget.applyConstraints#internal"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "3470"
+                  endingLineNumber = "3470"
+                  offsetFromSymbolStart = "23520">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "78552743-8BE0-44C5-B9FB-B35616C08C31"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3471"
+            endingLineNumber = "3471"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "78552743-8BE0-44C5-B9FB-B35616C08C31 - 29fcaf66b07b86a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget#updateFromRuns(kotlin.Boolean;kotlin.Boolean){}"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "3471"
+                  endingLineNumber = "3471"
+                  offsetFromSymbolStart = "2752">
+               </Location>
+               <Location
+                  uuid = "78552743-8BE0-44C5-B9FB-B35616C08C31 - e241942e448191ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kfun:dev.topping.ios.constraint.core.widgets.ConstraintWidget.applyConstraints#internal"
+                  moduleName = "IOSKotlinHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/ConstraintWidget.kt"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "3472"
+                  endingLineNumber = "3472"
+                  offsetFromSymbolStart = "21016">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AA4CEB1C-EDC5-4EA6-8084-7246DAC31DA1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01389B97-59C2-44A7-AD8A-C875CE9E941F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0720EBB6-F0AB-4A0F-A9AD-82E4D13DE756"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintProperties.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F54E6D76-9A30-4EE0-BC06-0E14C9273580"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintProperties.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01D31F94-B368-4FBF-84D8-BA5D7F24E012"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintProperties.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90B2CB6E-3311-4E1E-9160-E5F3A4CC743C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1464"
+            endingLineNumber = "1464"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A1F32B02-AD62-4498-A2E5-5E765D0D2DFA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1857"
+            endingLineNumber = "1857"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52AA03BD-76F9-4192-BC94-A499AD9569FD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1922"
+            endingLineNumber = "1922"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DE813485-E7EF-449E-9760-113567B8FF46"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2489"
+            endingLineNumber = "2489"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0377621-AA1C-4C7F-A547-40B29748161C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3749"
+            endingLineNumber = "3749"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3AA08EA0-4E0B-4D87-B741-52844E4C7998"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5814"
+            endingLineNumber = "5814"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1841D0A2-DA63-4DED-9161-59398B74D027"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/state/ConstraintReference.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "667"
+            endingLineNumber = "667"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "731812D4-0E3B-4B0A-8386-AA621B42742B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/state/ConstraintReference.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "681"
+            endingLineNumber = "681"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "500092EA-76DF-48FD-9337-FAEFD929B967"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/state/ConstraintReference.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "971"
+            endingLineNumber = "971"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB43752A-F232-4D07-A8D3-F7DAD3325FE5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "6152"
+            endingLineNumber = "6152"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "35A1057E-2563-4650-BD1D-035216B71A26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5CFA6F42-0805-46F7-8912-F0491D566EAF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintSet.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3692"
+            endingLineNumber = "3692"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3447634B-5A5B-4999-9530-51EE43A9FDB8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/Guideline.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "469DE753-1C6B-4E24-ACFB-66B71BB0197A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/LinearSystem.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7378E985-40E2-4197-B826-84E773C5E684"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/LinearSystem.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D3D385C-1934-40C9-9C83-CBAA7EF97874"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/LinearSystem.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1395"
+            endingLineNumber = "1395"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE40657A-CF17-4804-9801-9CE9397C585A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/constraintlayout/widget/ConstraintLayout.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3282"
+            endingLineNumber = "3282"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0D3F0BBB-56CE-4940-B3C4-38CA892BB68E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain/kotlin/dev/topping/ios/constraint/core/widgets/analyzer/Direct.kt"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

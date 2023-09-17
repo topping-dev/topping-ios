@@ -25,8 +25,8 @@ static BOOL rtl = false;
 
 -(void)initProperties
 {
-	//self.layout_weight = [NSNumber numberWithFloat:0.0f];
 	self.layout = NO;
+    self.layoutRequested = true;
 	self.baseLine = -1;
 	self.android_layout_width = @"wrap_content";
 	self.android_layout_height = @"wrap_content";
@@ -157,7 +157,16 @@ static BOOL rtl = false;
 	return view;
 }
 
-//Will always called
+-(void)beforeInitSubviews {
+    
+}
+
+-(void)beforeInitComponent {
+    rtl = [self._view isRTL];
+    [self resolveLayoutDirection];
+}
+
+//Will always calle
 -(void)initComponent:(UIView *)view :(LuaContext *)lc
 {
 	if(view == nil)
@@ -189,8 +198,6 @@ static BOOL rtl = false;
         NSString *enabled = (NSString*)[[LGValueParser getInstance] getValue:self.android_enabled];
         [self setEnabled:SSTOB(enabled)];
     }
-    
-    rtl = [self._view isRTL];
 }
 
 -(void)addSelfToParent:(UIView*)par :(LuaForm*)cont
@@ -232,6 +239,10 @@ static BOOL rtl = false;
 	[par addSubview:me];
 }
 
+-(LGView *)generateLGViewForName:(NSString *)name :(NSArray *)attrs {
+    return nil;
+}
+
 -(void)clearDimensions
 {
     self.dX = self.dY = self.dWidth = self.dHeight = 0;
@@ -240,6 +251,15 @@ static BOOL rtl = false;
 -(void)resize
 {
 	[self readWidthHeight];
+}
+
+-(void)resolveLayoutDirection {
+    int layoutDirection = 0;
+    if([LGView isRtl])
+        layoutDirection = 1;
+    if(self.kLayoutParams != nil) {
+        [self.kLayoutParams resolveLayoutDirectionLayoutDirection:layoutDirection];
+    }
 }
 
 -(void)resizeAndInvalidate
@@ -279,10 +299,11 @@ static BOOL rtl = false;
 }
 
 -(void)measure:(int)widthMeasureSpec :(int)heightMeasureSpec {
-    if(self.layout || self.dWidthSpec != widthMeasureSpec || self.dHeightSpec != heightMeasureSpec)
+    if(self.layoutRequested || self.layout || self.dWidthSpec != widthMeasureSpec || self.dHeightSpec != heightMeasureSpec)
     {
         self.layout = NO;
         [self onMeasure:widthMeasureSpec :heightMeasureSpec];
+        self.layoutRequested = false;
     }
     self.widthSpecSet = true;
     self.heightSpecSet = true;
@@ -763,6 +784,8 @@ static BOOL rtl = false;
 }
 
 -(NSInteger)getVisibility {
+    if(self._view == nil)
+        return self.dVisibility;
     if(self._view.isHidden)
         return GONE;
     else {
@@ -960,7 +983,9 @@ static BOOL rtl = false;
 
 
 - (void)forceLayout {
+    self.layoutRequested = true;
     [self resizeAndInvalidate];
+    self.layoutRequested = false;
 }
 
 
@@ -1036,8 +1061,10 @@ static BOOL rtl = false;
 
 
 - (nonnull NSString *)getId {
-    NSString *idVal = REPLACE([self GetId], @"+", @"");
-    return [self GetId];
+    if([[LGIdParser getInstance] hasId:[self GetId]])
+        return [[LGIdParser getInstance] getId:[self GetId]];
+    else
+        return @"";
 }
 
 
@@ -1090,11 +1117,6 @@ static BOOL rtl = false;
 
 - (id _Nullable)getObjCPropertyName:(nonnull NSString *)name {
     return [self valueForKey:name];
-}
-
-
-- (int32_t)getOptimizationLevel {
-    return 0;
 }
 
 
@@ -1216,7 +1238,11 @@ static BOOL rtl = false;
 
 
 - (id<IOSKHTView> _Nullable)getViewByIdId:(nonnull NSString *)id {
-    return [self getViewById:[LuaRef withValue:id]];
+    NSString *idVal = id;
+    if(!CONTAINS(idVal, @"id/"))
+        idVal = APPEND(@"@id/", idVal);
+        
+    return [self getViewById:[LuaRef withValue:idVal]];
 }
 
 
@@ -1236,7 +1262,9 @@ static BOOL rtl = false;
 
 
 - (void)invalidate {
+    self.layoutRequested = true;
     [self resizeAndInvalidate];
+    self.layoutRequested = false;
 }
 
 
@@ -1262,8 +1290,7 @@ static BOOL rtl = false;
 
 
 - (BOOL)isLayoutRequested {
-    //TODO:
-    return true;
+    return self.layoutRequested;
 }
 
 
@@ -1324,7 +1351,9 @@ static BOOL rtl = false;
 
 
 - (void)requestLayout {
+    self.layoutRequested = true;
     [self resizeAndInvalidate];
+    self.layoutRequested = false;
 }
 
 
@@ -1486,8 +1515,7 @@ static BOOL rtl = false;
     [self setVisibility:value];
 }
 
-
-- (void)swizzleFunctionFuncName:(nonnull NSString *)funcName block_:(nonnull id  _Nullable (^)(id<IOSKHTView> _Nonnull, id _Nullable))block {
+-(void)swizzleFunctionFuncName:(NSString *)funcName block:(id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))block {
     [self.methodEventMap setObject:block forKey:funcName];
 }
 

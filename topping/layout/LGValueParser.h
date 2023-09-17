@@ -10,7 +10,9 @@
 +(LGValueParser*) getInstance;
 -(void)initialize;
 -(void)parseXML:(int)orientation :(GDataXMLElement *)element;
+-(NSObject*)getValue:(NSString *)key :(NSString *)header;
 -(NSObject*)getValue:(NSString *)key;
+-(NSObject*)getValueDirect:(NSString *)keyT :(NSString *)header;
 -(NSObject*)getValueDirect:(NSString *)key;
 -(NSString*)getValueType:(NSString *)key;
 -(BOOL)getBoolValueDirect:(NSString *)key;

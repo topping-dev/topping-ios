@@ -13,6 +13,8 @@
 -(void) parseXML:(NSString*)path :(NSString *)filename;
 -(NSDictionary *)getKeys;
 -(void) addKey:(NSString*)key :(NSString*)value;
+-(BOOL) hasId:(NSString*)idVal;
+-(NSString *)getId:(NSString *)idVal;
 
 @property (nonatomic, retain) NSMutableDictionary *idMap;
 

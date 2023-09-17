@@ -5,7 +5,9 @@
 #import "LuaStream.h"
 #import "LuaRef.h"
 
-@interface LGImageView : LGView 
+@protocol IOSKHTImageView;
+
+@interface LGImageView : LGView <IOSKHTImageView>
 {
 }
 
@@ -21,5 +23,8 @@
 @property(nonatomic, retain) NSString *android_maxWidth;
 @property(nonatomic, retain) NSString *android_scaleType;
 @property(nonatomic, retain) NSString *android_src;
+
+@property(nonatomic, retain) UIImage *orgImage;
+@property(nonatomic, retain) NSObject *ldr;
 
 @end
