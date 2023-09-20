@@ -86,22 +86,22 @@ static float statusBarHeight;
 			size = [[sz substringToIndex:[sz length] - 2] floatValue];
 		
 		if ([sz hasSuffix:@"px"]) {
-			return (int)size;
+			return (int)size * density;
 		}
 		else if ([sz hasSuffix:@"in"]) {
-			return (int)(size*xdpi);
+			return (int)(size * xdpi * density);
 		}
 		else if ([sz hasSuffix:@"mm"]) {
-			return (int)(size*MM_TO_IN*xdpi);
+			return (int)(size * MM_TO_IN * xdpi * density);
 		}
 		else if ([sz hasSuffix:@"pt"]) {
-			return (int)(size*PT_TO_IN*xdpi);
+			return (int)(size * PT_TO_IN * xdpi * density);
 		}
 		else if ([sz hasSuffix:@"dp"] || [sz hasSuffix:@"dip"]) {
-			return (int)(size*density);
+			return (int)(size);
 		}
 		else if ([sz hasSuffix:@"sp"]) {
-			return (int)(size*scaledDensity);
+			return (int)(size);
 		}
 		else {
 			if([sz compare:@"fill_parent"] == 0 || [sz compare:@"match_parent"] == 0)

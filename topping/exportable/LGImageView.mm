@@ -97,7 +97,7 @@
 +(LGImageView*)create:(LuaContext *)context :(NSString*)lid
 {
 	LGImageView *liv = [[LGImageView alloc] init];
-    liv.lua_id = lid;
+    [liv SetId:lid];
 	[liv initProperties];
 	return liv;
 }

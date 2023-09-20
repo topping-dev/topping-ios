@@ -2548,7 +2548,6 @@
 		5C5A97FA24E16A4B002A22EA = {
 			isa = PBXGroup;
 			children = (
-				5CF8F64B2AB1CBB500ACA9EA /* IOSKotlinHelper */,
 				5CC17C0E2954D033000B5BB0 /* Toppingtest.entitlements */,
 				5CB29C602535B49C000E39A5 /* .gitignore */,
 				5CB5E13125821D3F00BF2EF5 /* include */,
@@ -2558,6 +2557,7 @@
 				5C5ECFCE24EA6474007659B8 /* toppingtest */,
 				5C5A980524E16A4B002A22EA /* Products */,
 				DA6757BC4C1AC94A2DB57F7E /* Pods */,
+				5CF8F64B2AB1CBB500ACA9EA /* IOSKotlinHelper */,
 				E1C82AE459CF65C2AE4A42DC /* Frameworks */,
 			);
 			sourceTree = "<group>";

@@ -3,7 +3,6 @@
 #import "LuaFunction.h"
 #import "LGValueParser.h"
 #import "IOSKotlinHelper/IOSKotlinHelper.h"
-#import "Swizzlean.h"
 
 @implementation LGViewGroup
 
@@ -24,7 +23,7 @@
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap setObject:val forKey:[val GetId]];
         
-        [self callTMethod:@"onViewAdded" :val, nil];
+        [self callTMethod:@"onViewAdded" :nil :val, nil];
         [val resolveLayoutDirection];
     }
 }
@@ -42,7 +41,7 @@
         if(val.android_id != nil || val.lua_id != nil)
             [self.subviewMap setObject:val forKey:[val GetId]];
         
-        [self callTMethod:@"onViewAdded" :val, nil];
+        [self callTMethod:@"onViewAdded" :nil :val, nil];
         [val resolveLayoutDirection];
     }
 }
@@ -57,7 +56,8 @@
         [val._view removeFromSuperview];
         val.parent = nil;
         [self resize];
-        [self callTMethod:@"onViewRemoved" :val, nil];
+        [self callTMethod:@"onViewRemoved" :nil :val, nil];
+        [val callTMethod:@"onDetachedFromWindow" :nil :nil];
     }
 }
 
@@ -65,7 +65,8 @@
     for(LGView *subview in self.subviews)
     {
         [self removeSubview:subview];
-        [self callTMethod:@"onViewRemoved" :subview, nil];
+        [self callTMethod:@"onViewRemoved" :nil :subview, nil];
+        [subview callTMethod:@"onDetachedFromWindow" :nil :nil];
     }
     [self resizeAndInvalidate];
 }
@@ -363,6 +364,40 @@
     {
         [w viewDidLayoutSubviews];
     }
+}
+
+
+- (BOOL)onInterceptTouchEvent:(CGPoint)point :(UIEvent *)event :(UIGestureRecognizerState)state {
+    //CGPoint tappedPoint = [gesture locationInView:self._view];
+    CGFloat xCoordinate = point.x;
+    CGFloat yCoordinate = point.y;
+    NSNumber *num = [NSNumber numberWithBool:false];
+    if(state == UIGestureRecognizerStateBegan) {
+        tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
+        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+                                   obtainDownTime:tapDownTime
+                                   eventTime:tapDownTime
+                                   action:[IOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
+        [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
+    } else if(state == UIGestureRecognizerStateChanged) {
+        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+                                   obtainDownTime:tapDownTime
+                                   eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
+                                   action:[IOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
+        [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
+    } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
+        
+    } else {
+        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+                                   obtainDownTime:tapDownTime
+                                   eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
+                                   action:[IOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
+        [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
+        tapDownTime = 0;
+    }
+    interceptTouchEventResult = [num boolValue];
+    
+    return interceptTouchEventResult;
 }
 
 -(NSDictionary*)getBindings

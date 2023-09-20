@@ -52,6 +52,26 @@
             }
         }
     }
+    
+    {
+        NSBundle *bund = [NSBundle bundleWithIdentifier:@"dev.topping.ios"];
+        NSString *themePath = [bund pathForResource:@"values" ofType:@"xml"];
+        NSData *resourceData = [NSData dataWithContentsOfFile:themePath];
+        
+        GDataXMLDocument *xml = [[GDataXMLDocument alloc] initWithData:resourceData error:nil];
+        
+        GDataXMLElement *root = [xml rootElement];
+        
+        
+        if(COMPARE(root.name, @"resources"))
+        {
+            for(GDataXMLElement *child in root.children)
+            {
+                [self parseXML:ORIENTATION_PORTRAIT :child];
+                [self parseXML:ORIENTATION_LANDSCAPE :child];
+            }
+        }
+    }
 }
 
 +(LGValueParser *) getInstance
@@ -174,8 +194,8 @@
     }
     else if(COMPARE(type, @"id"))
     {
-        NSString *value = APPEND(@"id/", name);
-        [[LGIdParser getInstance] addKey:name :value];
+        NSString *value = APPEND(@"@id/", name);
+        [[LGIdParser getInstance] addKey:value];
     }
     else if(COMPARE(type, @"array"))
     {
@@ -374,8 +394,7 @@
     else if(STARTS_WITH(key, @"@id/") ||
             STARTS_WITH(key, @"@+id/"))
     {
-        NSArray *arr = SPLIT(key, @"/");
-        return [arr objectAtIndex:[arr count] - 1];
+        return [[LGIdParser getInstance] getId:key];
     }
     else if(STARTS_WITH(key, @"@string/") || 
             STARTS_WITH(key, @"@android:string/"))

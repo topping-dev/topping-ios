@@ -129,7 +129,6 @@ function Main_Constructor(pForm, luacontext)
     local navController = pForm:getFragmentManager():findFragmentById(LR.id.nav_host_fragment):getNavController()
     local toolbar = pForm:getViewById(LR.id.ToolbarTest)
     LuaNavigationUI.setupWithNavController(toolbar, navController)
-    LuaNavigationUI.setupWithNavController(toolbar, navController)
 end
 
 function Pager_Constructor(pViewPager, luacontext)

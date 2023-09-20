@@ -20,7 +20,7 @@
     if(!horizontalProgress && width == 0)
     {
         MDCActivityIndicator *temp = [MDCActivityIndicator new];
-        width = [[LGDimensionParser getInstance] getDimension:[NSString stringWithFormat:@"%ddp", (int)temp.radius]];
+        width = [[LGDimensionParser getInstance] getDimension:[NSString stringWithFormat:@"%dpx", (int)temp.radius]];
     }
 	if(self.android_maxWidth != nil)
 	{
@@ -44,11 +44,11 @@
             horizontalProgress = [self.iosHorizontalProgress boolValue];
         
         if(horizontalProgress)
-            height = [[LGDimensionParser getInstance] getDimension:@"5dp"];
+            height = [[LGDimensionParser getInstance] getDimension:@"5px"];
         else
         {
             MDCActivityIndicator *temp = [MDCActivityIndicator new];
-            height = [[LGDimensionParser getInstance] getDimension:[NSString stringWithFormat:@"%ddp", (int)temp.radius]];
+            height = [[LGDimensionParser getInstance] getDimension:[NSString stringWithFormat:@"%dpx", (int)temp.radius]];
         }
     }
 	if(self.android_maxHeight != nil)
@@ -123,7 +123,7 @@
         if(self.android_progress != nil)
             [pv setProgress:[self.android_progress floatValue] / (float)self.maxProgress animated:NO];
         if(smallProgress)
-            pv.radius = [[LGDimensionParser getInstance] getDimension:@"6dp"];
+            pv.radius = [[LGDimensionParser getInstance] getDimension:@"6px"];
         if(darkProgress)
             pv.cycleColors = @[ UIColor.whiteColor ];
         

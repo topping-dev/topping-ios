@@ -1,4 +1,5 @@
 #import "LuaForm.h"
+#import "LGView.h"
 #import "LuaEvent.h"
 #import "Defines.h"
 #import "LuaFunction.h"
@@ -34,7 +35,7 @@
 +(LuaFormIntent*)create:(LuaContext*)context :(LuaRef*)luaId
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = [luaId getCleanId];
+    form.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
     LuaFormIntent *formIntent = [[LuaFormIntent alloc] initWithBundle:[LuaBundle new]];
     formIntent.form = form;
     return formIntent;
@@ -43,7 +44,7 @@
 +(LuaFormIntent*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui
 {
 	LuaForm *form = [[LuaForm alloc] initWithContext:context];
-	form.luaId = [luaId getCleanId];
+    form.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
     form.ui = ui;
     LuaFormIntent *formIntent = [[LuaFormIntent alloc] initWithBundle:[LuaBundle new]];
     formIntent.form = form;

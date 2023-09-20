@@ -495,7 +495,7 @@ open class FragmentNavigator: Navigator {
             className = mContext.packageName + className
         }
         let frag = instantiateFragment(context: mContext, fragmentManager: mFragmentManager, className: className, args: args?.objcDictionary)
-        frag.luaId = fDestination.idVal.components(separatedBy: "/").last
+        frag.luaId = fDestination.idVal
         frag.mArguments = args?.objcDictionary
         let ft = mFragmentManager.beginTransaction()
         

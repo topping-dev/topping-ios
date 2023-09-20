@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "LGView.h"
 
-@interface LGViewGroup : LGView
+@interface LGViewGroup : LGView <UIGestureRecognizerDelegate>
 
 -(void)addSubview:(LGView*)val;
 -(void)addSubview:(LGView*)val :(NSInteger)index;

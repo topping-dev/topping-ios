@@ -61,12 +61,15 @@ public class ToppingResources : NSObject, TResources {
         return CharacterSet(charactersIn: val).isSubset(of: digitsCharacters)
     }
     
-    public func getFloat(value: String, def: Float) -> Float {
-        let vObj = LGValueParser.getInstance().getValue(value)
-        if(vObj != nil && vObj is NSString) {
-            if(isNumber(val: vObj as! String)) {
-                return Float(vObj as! String)!
+    public func getFloat(key: String?, value: String, def: Float) -> Float {
+        let vObj = LGValueParser.getInstance().getValue(value, key)
+        if(vObj != nil) {
+            if(vObj is NSString) {
+                if(isNumber(val: vObj as! String)) {
+                    return Float(vObj as! String)!
+                }
             }
+            return Float(vObj as! Float)
         }
         return def
     }
@@ -75,8 +78,8 @@ public class ToppingResources : NSObject, TResources {
         return LGIdParser.getInstance().getId(id);
     }
     
-    public func getInt(value: String, def: Int32) -> Int32 {
-        return Int32(self.getFloat(value: value, def: Float(def)))
+    public func getInt(key: String?, value: String, def: Int32) -> Int32 {
+        return Int32(self.getFloat(key: key, value: value, def: Float(def)))
     }
     
     public func getLayoutDimension(attr: String, def: Int32) -> Int32 {

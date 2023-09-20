@@ -66,7 +66,7 @@
         {
             NSArray *arr = SPLIT(attr.stringValue, @"/");
             NSString *name = [arr objectAtIndex:[arr count] - 1];
-            [self.idMap setObject:attr.stringValue forKey:name];
+            [self.idMap setObject:name forKey:name];
         }
     }
     
@@ -80,21 +80,27 @@
     return self.idMap;
 }
 
--(void)addKey:(NSString *)key :(NSString *)value
+-(void)addKey:(NSString *)key
 {
-    [self.idMap setObject:value forKey:key];
+    NSArray *arr = SPLIT(key, @"/");
+    NSString *name = [arr objectAtIndex:[arr count] - 1];
+    [self.idMap setObject:name forKey:name];
 }
 
 -(BOOL)hasId:(NSString *)idVal
 {
     NSArray *arr = SPLIT(idVal, @"/");
     NSString *name = [arr objectAtIndex:[arr count] - 1];
-    
     return self.idMap[name] != nil;
 }
 
 -(NSString *)getId:(NSString *)idVal
 {
+    if(!CONTAINS(idVal, @"/"))
+    {
+        return APPEND(@"@id/", idVal);
+    }
+    
     return REPLACE(idVal, @"+", @"");
 }
 

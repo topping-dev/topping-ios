@@ -89,7 +89,7 @@
             self.mDefaultNavHost = true;
             [[[[self getParentFragmentManager] beginTransaction] setPrimaryNavigationFragmentWithFragment:self] commit];
         }
-        self.mGraphId = [savedInsanceState objectForKey:@"android-support-nav:fragment:graphId"];
+        self.mGraphId = [[LGIdParser getInstance] getId:[savedInsanceState objectForKey:@"android-support-nav:fragment:graphId"]];
     }
     
     if(navState != nil) {
@@ -99,7 +99,7 @@
         [self.mNavController setGraphWithGraphResId:self.mGraphId];
     } else {
         NSMutableDictionary *args = self.mArguments;
-        NSString *graphId = args != nil ? [args objectForKey:@"android-support-nav:fragment:graphId"] : nil;
+        NSString *graphId = args != nil ? [[LGIdParser getInstance] getId:[args objectForKey:@"android-support-nav:fragment:graphId"]] : nil;
         NSMutableDictionary *startDestinationArgs = args != nil ? [args objectForKey:@"android-support-nav:fragment:startDestinationArgs"] : nil;
         if(graphId != nil) {
             [self.mNavController setGraphWithGraphResId:graphId startDestinationArgsP:startDestinationArgs];
@@ -179,7 +179,7 @@
 -(void)onInflate:(LuaContext *)context :(NSDictionary *)attrs :(NSMutableDictionary *)savedInstanceState {
     [super onInflate:context :attrs :savedInstanceState];
     
-    self.mGraphId = [attrs objectForKey:@"navGraph"];
+    self.mGraphId = [[LGIdParser getInstance] getId:[attrs objectForKey:@"navGraph"]];
     NSString *defaultNavHost = [attrs objectForKey:@"defaultNavHost"];
     if(defaultNavHost != nil) {
         self.mDefaultNavHost = SSTOB(defaultNavHost);

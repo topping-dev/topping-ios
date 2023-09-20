@@ -97,9 +97,23 @@ enum MEASURE_SPEC
 
 @end
 
+@class LGView;
+
+@interface UIView(Extension)
+
+-(void)overload_touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+-(void)overload_touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+-(void)overload_touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
+
+@property (nonatomic, retain) LGView *wrapper;
+
+@end
+
 @interface LGView : NSObject <LuaClass, LuaInterface, IOSKHTView>
 {
     NSArray *propertyNameCache;
+    long tapDownTime;
+    BOOL interceptTouchEventResult;
 }
 
 +(BOOL)isRtl;
@@ -148,6 +162,8 @@ enum MEASURE_SPEC
 -(int)getCalculatedWidth;
 -(void)configChange;
 -(void)layout:(int)l :(int)t :(int)r :(int)b;
+-(BOOL)onTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
+-(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
 -(NSString *) debugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;
@@ -169,6 +185,7 @@ enum MEASURE_SPEC
 -(float)getAlpha;
 -(void)setOnClickListener:(LuaTranslator *)lt;
 -(NSDictionary*)getBindings;
+-(void)SetId:(NSString*)idVal;
 
 -(int)getLeft;
 -(int)getRight;
@@ -183,8 +200,9 @@ enum MEASURE_SPEC
 -(NavController*)findNavController;
 -(LuaNavController*)findNavControllerInternal;
 
--(BOOL)callTMethodArr:(NSString *)methodName :(NSArray *)arr;
--(BOOL)callTMethod:(NSString*)methodName :(id)arg, ...;
+-(BOOL)callTMethodArr:(NSString *)methodName :(NSObject**)result :(NSArray *)arr;
+-(BOOL)callTMethod:(NSString*)methodName :(NSObject**)result :(id)arg, ...;
+-(void)swizzleMethods:(SEL)original :(SEL)swizzled;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 @property (nonatomic, strong) NSArray *attrs;
@@ -199,7 +217,9 @@ enum MEASURE_SPEC
 @property (nonatomic, retain) NSString* android_minWidth;
 @property (nonatomic, retain) NSString* android_paddingBottom;
 @property (nonatomic, retain) NSString* android_paddingLeft;
+@property (nonatomic, retain) NSString* android_paddingStart;
 @property (nonatomic, retain) NSString* android_paddingRight;
+@property (nonatomic, retain) NSString* android_paddingEnd;
 @property (nonatomic, retain) NSString* android_paddingTop;
 @property (nonatomic, retain) NSString* android_padding;
 @property (nonatomic, retain) NSString* android_visibility;
@@ -213,7 +233,9 @@ enum MEASURE_SPEC
 @property(nonatomic, retain) NSString* android_layout_margin;
 @property(nonatomic, retain) NSString* android_layout_marginBottom;
 @property(nonatomic, retain) NSString* android_layout_marginLeft;
+@property(nonatomic, retain) NSString* android_layout_marginStart;
 @property(nonatomic, retain) NSString* android_layout_marginRight;
+@property(nonatomic, retain) NSString* android_layout_marginEnd;
 @property(nonatomic, retain) NSString* android_layout_marginTop;
 
 @property(nonatomic, retain) NSString *android_gravity;

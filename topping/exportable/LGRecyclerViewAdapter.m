@@ -6,6 +6,7 @@
 #import "LuaTranslator.h"
 #import "LGViewPager.h"
 #import "ILGRecyclerViewAdapter.h"
+#import "LGIdParser.h"
 
 @implementation LGViewUICollectionViewCell
 
@@ -18,7 +19,7 @@
     self = [super init];
     if (self) {
         self.lc = context;
-        self.lua_id = lua_id;
+        self.lua_id = [[LGIdParser getInstance] getId:lua_id];
         self.cells = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -235,7 +236,7 @@
         self.headers = [[NSMutableDictionary alloc] init];
     
     LGRecyclerViewAdapter *view = [[LGRecyclerViewAdapter alloc] init];
-    view.lua_id = idV;
+    view.lua_id = [[LGIdParser getInstance] getId:idV];
     [self.sections setObject:view forKey:header];
     [self.headers setObject:header forKey:idV];
     

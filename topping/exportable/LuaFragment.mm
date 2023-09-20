@@ -64,7 +64,7 @@
 +(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = [luaId getCleanId];
+    lf.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
     lf.context = context;
     return lf;
 }
@@ -72,7 +72,7 @@
 +(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = [luaId getCleanId];
+    lf.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
     lf.context = context;
     lf.mArguments = arguments;
     return lf;
@@ -81,7 +81,7 @@
 +(LuaFragment*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui :(NSMutableDictionary*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
-    lf.luaId = [luaId getCleanId];
+    lf.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
     lf.context = context;
     lf.ui = ui;
     lf.mArguments = arguments;
@@ -132,7 +132,7 @@
 
 -(void)setViewId:(NSString *)luaId
 {
-    self.luaId = luaId;
+    self.luaId = [[LGIdParser getInstance] getId:luaId];
 }
 
 -(void)setTitle:(NSString *)str
@@ -274,8 +274,8 @@
     self.mFragmentManager = nil;
     self.mChildFragmentManager = [[FragmentManager alloc] init];
     self.mHost = nil;
-    self.mFragmentId = 0;
-    self.mContainerId = 0;
+    self.mFragmentId = @"";
+    self.mContainerId = @"";
     self.mTag = nil;
     self.mHidden = false;
     self.mDetached = false;

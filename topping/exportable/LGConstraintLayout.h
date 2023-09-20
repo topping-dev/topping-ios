@@ -75,12 +75,69 @@
 
 @end
 
+@class IOSKHCarousel;
+
+@interface LGConstraintCarousel : LGView
+
+@property (nonatomic, strong) IOSKHCarousel *wrapper;
+
+@end
+
+@class IOSKHCircularFlow;
+
+@interface LGConstraintCircularFlow : LGView
+
+@property (nonatomic, strong) IOSKHCircularFlow *wrapper;
+
+@end
+
+@class IOSKHFlow;
+
+@interface LGConstraintFlow : LGView
+
+@property (nonatomic, strong) IOSKHFlow *wrapper;
+
+@end
+
+@class IOSKHGrid;
+
+@interface LGConstraintGrid : LGView
+
+@property (nonatomic, strong) IOSKHGrid *wrapper;
+
+@end
+
+@class IOSKHLayer;
+
+@interface LGConstraintLayer : LGView
+
+@property (nonatomic, strong) IOSKHLayer *wrapper;
+
+@end
+
+@class IOSKHMotionEffect;
+
+@interface LGConstraintMotionEffect : LGView
+
+@property (nonatomic, strong) IOSKHMotionEffect *wrapper;
+
+@end
+
+@class IOSKHMotionPlaceholder;
+
+@interface LGConstraintMotionPlaceholder : LGView
+
+@property (nonatomic, strong) IOSKHMotionPlaceholder *wrapper;
+
+@end
+
 @class IOSKHConstraintLayout;
 
 @interface LGConstraintLayout : LGViewGroup
 
 +(LGConstraintLayout*)create:(LuaContext *)context;
 
+@property (nonatomic) BOOL initComponent;
 @property (nonatomic, strong) IOSKHConstraintLayout *wrapper;
 
 @end

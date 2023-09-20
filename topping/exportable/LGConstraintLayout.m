@@ -122,9 +122,13 @@
 
 @implementation LGConstraintBarrier
 
+-(UIView *)createComponent {
+    return nil;
+}
+
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
-    self.wrapper = [[IOSKHBarrier alloc] initWithMyContext:[LuaForm getActiveForm].context attrs:dict self:self];
+    self.wrapper = [[IOSKHBarrier alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
 }
 
 -(NSString*)GetId
@@ -151,9 +155,13 @@
 
 @implementation LGConstraintGroup
 
+-(UIView *)createComponent {
+    return nil;
+}
+
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
-    self.wrapper = [[IOSKHGroup alloc] initWithMyContext:[LuaForm getActiveForm].context attrs:dict self:self];
+    self.wrapper = [[IOSKHGroup alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
 }
 
 -(NSString*)GetId
@@ -179,6 +187,10 @@
 @end
 
 @implementation LGConstraintGuideline
+
+-(UIView *)createComponent {
+    return nil;
+}
 
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
@@ -209,6 +221,10 @@
 
 @implementation LGConstraintPlaceholder
 
+-(UIView *)createComponent {
+    return nil;
+}
+
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
     self.wrapper = [[IOSKHPlaceholder alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
@@ -238,6 +254,10 @@
 
 @implementation LGConstraintReactiveGuide
 
+-(UIView *)createComponent {
+    return nil;
+}
+
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
     self.wrapper = [[IOSKHReactiveGuide alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
@@ -265,11 +285,254 @@
 
 @end
 
+@implementation LGConstraintCarousel
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHCarousel alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintCarousel className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintCarousel";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
+@implementation LGConstraintCircularFlow
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHCircularFlow alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintCircularFlow className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintCircularFlow";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
+@implementation LGConstraintFlow
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHFlow alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintFlow className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintFlow";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
+@implementation LGConstraintGrid
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHGrid alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintGrid className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintGrid";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
+@implementation LGConstraintLayer
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHLayer alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintLayer className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintLayer";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
+@implementation LGConstraintMotionEffect
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHMotionEffect alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintMotionEffect className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintMotionEffect";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
+@implementation LGConstraintMotionPlaceholder
+
+-(UIView *)createComponent {
+    return nil;
+}
+
+-(void)beforeInitSubviews {
+    IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
+    self.wrapper = [[IOSKHMotionPlaceholder alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(NSString*)GetId
+{
+    if(self.lua_id != nil)
+        return self.lua_id;
+    if(self.android_id != nil)
+        return self.android_id;
+    return [LGConstraintMotionPlaceholder className];
+}
+
++ (NSString*)className
+{
+    return @"LGConstraintMotionPlaceholder";
+}
+
++(NSMutableDictionary*)luaMethods
+{
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    return dict;
+}
+
+@end
+
 @implementation LGConstraintMotionLayout
 
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
     self.wrapper = [[IOSKHMotionLayout alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
+}
+
+-(LGView *)generateLGViewForName:(NSString *)name :(NSArray *)attrs {
+    if(COMPARE(name, @"androidx.constraintlayout.helper.widget.Carousel")) {
+        return [[LGConstraintCarousel alloc] init];
+    } else if(COMPARE(name, @"androidx.constraintlayout.helper.widget.MotionEffect")) {
+        return [[LGConstraintMotionEffect alloc] init];
+    } else if(COMPARE(name, @"androidx.constraintlayout.helper.widget.MotionPlaceholder")) {
+        return [[LGConstraintMotionPlaceholder alloc] init];
+    }
+    
+    return [super generateLGViewForName:name :attrs];
 }
 
 -(NSString*)GetId
@@ -296,11 +559,28 @@
 
 @implementation LGConstraintLayout
 
+-(void)initComponent:(UIView *)view :(LuaContext *)lc {
+    [super initComponent:view :lc];
+    self.initComponent = true;
+}
+
 -(void)beforeInitSubviews {
     IOSKHMutableDictionary *dict = [[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:true];
     self.wrapper = [[IOSKHConstraintLayout alloc] initWithContext:[LuaForm getActiveForm].context attrs:dict self:self];
     self.kLayoutParams = [self.wrapper generateLayoutParamsAttrs:[[IOSKHMutableDictionary alloc] initWithDictionary:self.xmlProperties copyItems:YES]];
 }
+
+-(void)readWidthHeight {
+    [super readWidthHeight];
+    for(LGView *subView in self.subviews) {
+        [subView readWidthHeight];
+    }
+}
+
+/*-(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
+    if([self callTMethod:@"onMeasure" :[NSNumber numberWithInt:widthMeasureSpec], [NSNumber numberWithInt:heightMeasureSpec], nil])
+        return;
+}*/
 
 -(LGView *)generateLGViewForName:(NSString *)name :(NSArray *)attrs {
     if(COMPARE(name, @"androidx.constraintlayout.widget.Barrier")) {
@@ -324,6 +604,15 @@
     } /*else if(COMPARE(name, @"androidx.constraintlayout.widget.utils.MotionLabel")) {
         return [[LGConstraintMotionLabel alloc] init];
     }*/
+    else if(COMPARE(name, @"androidx.constraintlayout.helper.widget.CircularFlow")) {
+        return [[LGConstraintCircularFlow alloc] init];
+    } else if(COMPARE(name, @"androidx.constraintlayout.helper.widget.Flow")) {
+        return [[LGConstraintFlow alloc] init];
+    } else if(COMPARE(name, @"androidx.constraintlayout.helper.widget.Grid")) {
+        return [[LGConstraintGrid alloc] init];
+    } else if(COMPARE(name, @"androidx.constraintlayout.helper.widget.Layer")) {
+        return [[LGConstraintLayer alloc] init];
+    }
     return nil;
 }
 
@@ -353,11 +642,13 @@
 -(void)resizeInternal
 {
     [self readWidthHeight];
-    int widthSpec = [self getParentWidthSpec];
-    int heightSpec = [self getParentHeightSpec];
-    [self.wrapper setMDirtyHierarchy:true];
-    [self.wrapper onMeasureSup:nil widthMeasureSpec:widthSpec heightMeasureSpec:heightSpec];
-    [self.wrapper onLayoutSup:nil changed:true left:self.getLeft top:self.getTop right:self.getRight bottom:self.getBottom];
+    if(self.initComponent) {
+        int widthSpec = [self getParentWidthSpec];
+        int heightSpec = [self getParentHeightSpec];
+        [self.wrapper setMDirtyHierarchy:true];
+        [self.wrapper onMeasureSup:nil widthMeasureSpec:widthSpec heightMeasureSpec:heightSpec];
+        [self.wrapper onLayoutSup:nil changed:true left:self.getLeft top:self.getTop right:self.getRight bottom:self.getBottom];
+    }
 }
 
 +(LGConstraintLayout*)create:(LuaContext *)context

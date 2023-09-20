@@ -291,10 +291,6 @@ int readOnlyTable (lua_State *L) {
     return lr;
 }
 
--(NSString *)getCleanId {
-    return [[self.idRef componentsSeparatedByString:@"/"] lastObject];
-}
-
 -(NSString*)GetId
 {
     return @"LuaRef";

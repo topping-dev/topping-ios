@@ -25,7 +25,7 @@
     
     LuaFragment *existingFragment = [self.fm findFragmentByIdWithId:idVal];
     if(name != nil && existingFragment == nil) {
-        if(idVal < 0) {
+        if([idVal isEqual: @""]) {
             //TODO: Excep
             return;
         }

@@ -6,9 +6,9 @@
 #import <Foundation/NSString.h>
 #import <Foundation/NSValue.h>
 
-@class IOSKHKotlinEnumCompanion, IOSKHKotlinEnum<E>, IOSKHAINPUT_SOURCE, IOSKHKotlinArray<T>, IOSKHAMOTION, IOSKHAnimationUtilsCompanion, IOSKHArraysCompanion, IOSKHKotlinFloatArray, IOSKHKotlinDoubleArray, IOSKHKotlinBooleanArray, IOSKHKotlinIntArray, IOSKHPointer<T>, IOSKHBitSet32Companion, IOSKHDISPLAY_ORIENTATION, IOSKHEstimatorCompanion, IOSKHBitSet32, IOSKHVelocityTrackerNPosition, IOSKHEstimator, IOSKHLeastSquaresVelocityTrackerStrategyWeighting, IOSKHLeastSquaresVelocityTrackerStrategyCompanion, IOSKHLogCompanion, IOSKHKotlinException, IOSKHViewGroupLayoutParams, IOSKHMarginLayoutParams, IOSKHMeasureSpec, IOSKHMotionEventCompanion, IOSKHMotionEvent, IOSKHMotionEventPointerCoords, IOSKHSkikoMatrix33, IOSKHMotionEventPointerProperties, IOSKHMotionEventNPointerCoords, IOSKHMotionEventNPointerProperties, IOSKHMotionEventPointerCoordsCompanion, IOSKHMotionEventPointerPropertiesCompanion, IOSKHMotionEventNCompanion, IOSKHMotionEventN, IOSKHTransform, IOSKHvec2, IOSKHMotionEventNPointerCoordsCompanion, IOSKHKotlinThrowable, IOSKHScaleType, IOSKHRect, IOSKHTColorCompanion, UIColor, IOSKHTColor, IOSKHTDisplayMetricsCompanion, IOSKHTDisplayMetrics, IOSKHOutline, IOSKHColorMatrixColorFilter, IOSKHCoreXmlBufferedReader, IOSKHAndroidMatrix33, IOSKHViewOutlineProvider, IOSKHTViewCompanion, IOSKHTViewMeasureSpecCompanion, IOSKHTransformCompanion, IOSKHRectF, IOSKHvec3, IOSKHTransformRotationFlags, IOSKHTransformType_mask, IOSKHTypedValueCompanion, IOSKHTypedValue, IOSKHVelocityTrackerCompanion, IOSKHVelocityTracker, IOSKHVelocityTrackerNCompanion, IOSKHLeastSquaresVelocityTrackerStrategy, IOSKHVelocityTrackerStateCompanion, IOSKHVelocityTrackerStateVelocity, IOSKHVelocityTrackerN, IOSKHViewOutlineProviderCompanion, IOSKHXmlCompanion, IOSKHDebug, IOSKHMotionLayout, IOSKHDesignToolCompanion, IOSKHKotlinPair<__covariant A, __covariant B>, IOSKHKeyCompanion, IOSKHViewSpline, IOSKHKey, IOSKHConstraintAttribute, IOSKHKeyAttributesCompanion, IOSKHKeyCycleCompanion, IOSKHViewOscillator, IOSKHKeyFramesCompanion, IOSKHMotionController, IOSKHKeyPositionBaseCompanion, IOSKHKeyPositionBase, IOSKHKeyPositionCompanion, IOSKHKeyTimeCycleCompanion, IOSKHViewTimeCycle, IOSKHKeyTriggerCompanion, IOSKHMotionControllerCompanion, IOSKHMotionPaths, IOSKHKeyCache, IOSKHConstraintSet, IOSKHViewState, IOSKHConstraintHelperCompanion, IOSKHConstraintLayout, IOSKHConstraintSetConstraint, IOSKHHelperWidget, IOSKHConstraintLayoutLayoutParams, IOSKHConstraintWidget, IOSKHConstraintWidgetContainer, IOSKHConstraintHelper, IOSKHConstraintLayoutCompanion, IOSKHMetrics, IOSKHConstraintsChangedListener, IOSKHConstraintLayoutStates, IOSKHMotionLayoutCompanion, IOSKHMotionSceneTransition, IOSKHMotionLayoutTransitionState, IOSKHDesignTool, IOSKHMotionLayoutModel, IOSKHMotionScene, IOSKHBundle, IOSKHKeyPosition, IOSKHMotionPathsCompanion, IOSKHEasing, IOSKHMotionSceneCompanion, IOSKHStateSet, IOSKHViewTransitionController, IOSKHMotionSceneTransitionCompanion, IOSKHKeyFrames, IOSKHOnSwipe, IOSKHMotionSceneTransitionTransitionOnClick, IOSKHTouchResponse, IOSKHMotionSceneTransitionTransitionOnClickCompanion, IOSKHOnSwipeCompanion, IOSKHTouchResponseCompanion, IOSKHTransitionBuilder, IOSKHViewTransitionCompanion, IOSKHViewTransition, IOSKHViewTransitionAnimate, IOSKHCustomSupport, IOSKHMotionInterpolator, IOSKHKeyCycleOscillatorCompanion, IOSKHMotionWidget, IOSKHCurveFit, IOSKHKeyCycleOscillatorWavePoint, IOSKHKeyCycleOscillator, IOSKHViewOscillatorCompanion, IOSKHSplineSetCompanion, IOSKHSplineSet, IOSKHViewSplineCompanion, IOSKHTimeCycleSplineSetCompanion, IOSKHTimeCycleSplineSet, IOSKHViewTimeCycleCompanion, IOSKHBarrierCompanion, IOSKHConstraintAttributeAttributeType, IOSKHConstraintAttributeCompanion, IOSKHSharedValues, IOSKHConstraintLayoutLayoutParamsCompanion, IOSKHBasicMeasureMeasure, IOSKHConstraintLayoutStatesCompanion, IOSKHConstraintLayoutStatistics, IOSKHConstraintLayoutStatisticsCompanion, IOSKHConstraintPropertiesCompanion, IOSKHConstraintProperties, IOSKHConstraintSetCompanion, IOSKHConstraints, IOSKHCoreWriter, IOSKHConstraintsLayoutParams, IOSKHConstraintSetLayout, IOSKHConstraintSetConstraintDelta, IOSKHConstraintSetMotion, IOSKHConstraintSetPropertySet, IOSKHConstraintSetTransform, IOSKHConstraintSetConstraintDeltaCompanion, IOSKHConstraintSetLayoutCompanion, IOSKHKotlinStringBuilder, IOSKHConstraintSetMotionCompanion, IOSKHConstraintSetTransformCompanion, IOSKHConstraintsCompanion, IOSKHSharedValuesCompanion, IOSKHStateSetCompanion, IOSKHVirtualLayout, IOSKHColorMatrix, IOSKHOutlineCompanion, IOSKHPath, IOSKHPathCompanion, IOSKHPathDirection, IOSKHSkikoPath, IOSKHPathOp, IOSKHPathFillType, IOSKHRegion, IOSKHSkikoPoint, IOSKHkVectorPointer<T>, IOSKHSkikoPathVerb, IOSKHRegionCompanion, IOSKHSkikoRegion, IOSKHRegionOp, IOSKHRegionOpCompanion, IOSKHSkikoRegionOp, IOSKHregion_operatorRegion, IOSKHregion_operatorCompanion, IOSKHregion_operatorRegion_rasterizer, IOSKHregion_operatorSpanner, IOSKHregion_operatorSpannerBaseCompanion, IOSKHregion_operatorSpannerBase, IOSKHregion_operatorSpannerCompanion, IOSKHSolverVariable, IOSKHArrayRow, IOSKHArrayLinkedVariablesCompanion, IOSKHCache, IOSKHLinearSystem, IOSKHArrayRowCompanion, IOSKHLinearSystemCompanion, IOSKHSolverVariableType, IOSKHPools, IOSKHPriorityGoalRowCompanion, IOSKHPriorityGoalRowGoalVariableAccessor, IOSKHPriorityGoalRow, IOSKHSolverVariableCompanion, IOSKHSolverVariableValuesCompanion, IOSKHConstraintWidgetCompanion, IOSKHConstraintAnchor, IOSKHConstraintAnchorType, IOSKHConstraintWidgetDimensionBehaviour, IOSKHWidgetRun, IOSKHWidgetFrame, IOSKHChainRun, IOSKHHorizontalWidgetRun, IOSKHVerticalWidgetRun, IOSKHWidgetGroup, IOSKHBarrier_Companion, IOSKHChain, IOSKHChainHead, IOSKHChainHeadCompanion, IOSKHConstraintAnchorCompanion, IOSKHWidgetContainer, IOSKHConstraintWidgetContainerCompanion, IOSKHGuideline_, IOSKHBasicMeasure, IOSKHDependencyGraph, IOSKHFlowCompanion, IOSKHGuideline_Companion, IOSKHOptimizer, IOSKHRectangle, IOSKHBasicMeasureCompanion, IOSKHBasicMeasureMeasureCompanion, IOSKHDependencyNode, IOSKHDimensionDependency, IOSKHRunGroup, IOSKHWidgetRunRunType, IOSKHDependencyGraphCompanion, IOSKHDependencyNodeType, IOSKHDirect, IOSKHGrouping, IOSKHHorizontalWidgetRunCompanion, IOSKHRunGroupCompanion, IOSKHVerticalWidgetRunCompanion, IOSKHWidgetGroupCompanion, IOSKHWidgetGroupMeasureResult, IOSKHKotlinWeakReference<T>, IOSKHHelperHelperType, IOSKHHelperCompanion, IOSKHHelper, IOSKHBarrier__, IOSKHRef, IOSKHConstraintSide, IOSKHChain_Companion, IOSKHChain_, IOSKHChain_Style, IOSKHConstraintAnchor_, IOSKHConstraintCompanion, IOSKHConstraintVAnchor, IOSKHConstraintHAnchor, IOSKHConstraintBehaviour, IOSKHConstraintChainMode, IOSKHConstraint, IOSKHConstraintHSide, IOSKHConstraintVSide, IOSKHHChainHAnchor, IOSKHChain_Anchor, IOSKHHelperType, IOSKHKeys, IOSKHKeyAttributeFit, IOSKHKeyAttributeVisibility, IOSKHKeyAttributes_Visibility, IOSKHKeyAttributes_Fit, IOSKHKeyAttribute, IOSKHKeyCycle_Companion, IOSKHKeyCycle_Wave, IOSKHKeyAttributes_, IOSKHKeyCyclesWave, IOSKHKeyPosition_Type, IOSKHKeyPositionsType, IOSKHConstraintSet_, IOSKHTransition, IOSKHOnSwipe_Side, IOSKHOnSwipe_Drag, IOSKHOnSwipe_Companion, IOSKHOnSwipe_, IOSKHOnSwipe_TouchUp, IOSKHOnSwipe_Boundary, IOSKHOnSwipe_Mode, IOSKHRefCompanion, IOSKHVChainVAnchor, IOSKHGuideline__, IOSKHGridCoreCompanion, IOSKHGridEngineCompanion, IOSKHCloneable, IOSKHKotlinCharArray, IOSKHCLElementCompanion, IOSKHCLElement, IOSKHCLContainer, IOSKHCLContainerCompanion, IOSKHCLArray, IOSKHCLObject, IOSKHCLArrayCompanion, IOSKHCLKeyCompanion, IOSKHCLNumberCompanion, IOSKHCLObjectCompanion, IOSKHCLParserCompanion, IOSKHCLStringCompanion, IOSKHCLString, IOSKHCLTokenCompanion, IOSKHCLTokenType, IOSKHState, IOSKHConstraintReference, IOSKHDimension, IOSKHStateConstraint, IOSKHTypedBundle, IOSKHConstraintSetParser, IOSKHConstraintSetParserLayoutVariables, IOSKHTransition_, IOSKHConstraintSetParserMotionLayoutDebugFlags, IOSKHDimensionCompanion, IOSKHDimensionType, IOSKHStateHelper, IOSKHHelperReference, IOSKHRegistryCompanion, IOSKHRegistry, IOSKHStateCompanion, IOSKHBarrierReference, IOSKHStateDirection, IOSKHAlignHorizontallyReference, IOSKHAlignVerticallyReference, IOSKHFlowReference, IOSKHGridReference, IOSKHGuidelineReference, IOSKHHorizontalChainReference, IOSKHVerticalChainReference, IOSKHStateChainCompanion, IOSKHStateChain, IOSKHStateWrapCompanion, IOSKHStateWrap, IOSKHTransition_Companion, IOSKHCustomVariable, IOSKHTransition_OnSwipe, IOSKHTransition_KeyPosition, IOSKHMotion, IOSKHTransition_WidgetState, IOSKHTransition_OnSwipeCompanion, IOSKHTransitionParser, IOSKHWidgetFrameCompanion, IOSKHCustomAttribute, IOSKHAnticipateOvershootInterpolatorCompanion, IOSKHBounceInterpolatorCompanion, IOSKHChainReference, IOSKHFlow, IOSKHGridReferenceCompanion, IOSKHCustomAttributeAttributeType, IOSKHCustomAttributeCompanion, IOSKHCustomVariableCompanion, IOSKHMotionCompanion, IOSKHMotionKey, IOSKHMotionPaths_, IOSKHMotionKeyPosition, IOSKHViewState_, IOSKHMotionPaths_Companion, IOSKHMotionWidgetCompanion, IOSKHMotionWidgetMotion, IOSKHMotionWidgetPropertySet, IOSKHMotionWidgetMotionCompanion, IOSKHMotionConstraintSetCompanion, IOSKHMotionKeyCompanion, IOSKHMotionKeyAttributesCompanion, IOSKHMotionKeyCycleCompanion, IOSKHMotionKeyPositionCompanion, IOSKHFloatRect, IOSKHMotionKeyTimeCycleCompanion, IOSKHMotionKeyTimeCycle, IOSKHMotionKeyTriggerCompanion, IOSKHMotionKeyTrigger, IOSKHCurveFitCompanion, IOSKHArcCurveFitCompanion, IOSKHArcCurveFitArc, IOSKHArcCurveFitArcCompanion, IOSKHEasingCompanion, IOSKHHyperSplineCompanion, IOSKHHyperSplineCubic, IOSKHKeyFrameArrayCustomArrayCompanion, IOSKHKeyFrameArrayCustomVarCompanion, IOSKHKeyFrameArrayFloatArrayCompanion, IOSKHLinearCurveFitCompanion, IOSKHMonotonicCurveFitCompanion, IOSKHMonotonicCurveFit, IOSKHOscillatorCompanion, IOSKHRectCompanion, IOSKHSchlickCompanion, IOSKHKeyFrameArrayCustomArray, IOSKHKeyFrameArrayCustomVar, IOSKHSpringStopEngineCompanion, IOSKHStepCurveCompanion, IOSKHStopLogicEngineCompanion, IOSKHKeyFrameArrayFloatArray, IOSKHTimeCycleSplineSetSort, IOSKHTypedBundleCompanion, IOSKHTypedValuesAttributesTypeCompanion, IOSKHTypedValuesCompanion, IOSKHTypedValuesCustomCompanion, IOSKHTypedValuesCycleTypeCompanion, IOSKHTypedValuesMotionSceneCompanion, IOSKHTypedValuesMotionTypeCompanion, IOSKHTypedValuesOnSwipeCompanion, IOSKHTypedValuesPositionTypeCompanion, IOSKHTypedValuesTransitionTypeCompanion, IOSKHTypedValuesTriggerTypeCompanion, IOSKHUtilsCompanion, IOSKHVelocityMatrixCompanion, IOSKHKeyParserCompanion, IOSKHKotlinByteIterator, IOSKHKotlinByteArray, IOSKHKotlinIntIterator, IOSKHKotlinLongIterator, IOSKHKotlinLongArray, IOSKHKotlinShortIterator, IOSKHKotlinShortArray, IOSKHKotlinBooleanIterator, IOSKHKotlinCharIterator, IOSKHKotlinDoubleIterator, IOSKHKotlinFloatIterator, IOSKHKotlinDoubleCompanion, IOSKHKotlinFloatCompanion, IOSKHKotlinIntCompanion, IOSKHSkikoMatrix33Companion, IOSKHSkikoMatrix44, IOSKHSkikoIRect, IOSKHSkikoIRectCompanion, IOSKHSkikoIPoint, IOSKHSkikoRect, IOSKHSkikoRectCompanion, IOSKHCoreQName, IOSKHCoreEventType, IOSKHCoreXmlEvent, IOSKHCoreXmlBufferedReaderBase, IOSKHSkikoNativeCompanion, IOSKHSkikoNative, IOSKHSkikoManaged, IOSKHSkikoPathCompanion, IOSKHSkikoPathDirection, IOSKHSkikoRRect, IOSKHSkikoPathEllipseArc, IOSKHSkikoPathSegmentIterator, IOSKHSkikoPathFillMode, IOSKHSkikoPointCompanion, IOSKHSkikoRegionCompanion, IOSKHSkikoRegionOpCompanion, IOSKHSkikoMatrix44Companion, IOSKHSkikoIPointCompanion, IOSKHCoreXmlEventTextEvent, IOSKHCoreXmlEventCompanion, IOSKHSkikoPathOp, IOSKHSkikoRRectCompanion, IOSKHSkikoPathSegmentIteratorCompanion, IOSKHSkikoPathSegment;
+@class IOSKHKotlinEnumCompanion, IOSKHKotlinEnum<E>, IOSKHAINPUT_SOURCE, IOSKHKotlinArray<T>, IOSKHAMOTION, IOSKHAnimationUtilsCompanion, IOSKHArraysCompanion, IOSKHKotlinFloatArray, IOSKHKotlinDoubleArray, IOSKHKotlinBooleanArray, IOSKHKotlinIntArray, IOSKHPointer<T>, IOSKHBitSet32Companion, IOSKHDISPLAY_ORIENTATION, IOSKHEstimatorCompanion, IOSKHBitSet32, IOSKHVelocityTrackerNPosition, IOSKHEstimator, IOSKHLeastSquaresVelocityTrackerStrategyWeighting, IOSKHLeastSquaresVelocityTrackerStrategyCompanion, IOSKHLogCompanion, IOSKHKotlinException, IOSKHViewGroupLayoutParams, IOSKHMarginLayoutParams, IOSKHMeasureSpec, IOSKHMotionEventCompanion, IOSKHMotionEvent, IOSKHMotionEventPointerCoords, IOSKHSkikoMatrix33, IOSKHMotionEventPointerProperties, IOSKHMotionEventNPointerCoords, IOSKHMotionEventNPointerProperties, IOSKHMotionEventPointerCoordsCompanion, IOSKHMotionEventPointerPropertiesCompanion, IOSKHMotionEventNCompanion, IOSKHMotionEventN, IOSKHTransform, IOSKHvec2, IOSKHMotionEventNPointerCoordsCompanion, IOSKHKotlinThrowable, IOSKHScaleType, IOSKHRect, IOSKHTColorCompanion, UIColor, IOSKHTColor, IOSKHTDisplayMetricsCompanion, IOSKHTDisplayMetrics, IOSKHOutline, IOSKHColorMatrixColorFilter, IOSKHCoreXmlBufferedReader, IOSKHAndroidMatrix33, IOSKHViewOutlineProvider, IOSKHTViewCompanion, IOSKHTViewMeasureSpecCompanion, IOSKHTransformCompanion, IOSKHRectF, IOSKHvec3, IOSKHTransformRotationFlags, IOSKHTransformType_mask, IOSKHTypedValueCompanion, IOSKHTypedValue, IOSKHVelocityTrackerCompanion, IOSKHVelocityTracker, IOSKHVelocityTrackerNCompanion, IOSKHLeastSquaresVelocityTrackerStrategy, IOSKHVelocityTrackerStateCompanion, IOSKHVelocityTrackerStateVelocity, IOSKHVelocityTrackerN, IOSKHViewOutlineProviderCompanion, IOSKHXmlCompanion, IOSKHDebug, IOSKHMotionLayout, IOSKHDesignToolCompanion, IOSKHKotlinPair<__covariant A, __covariant B>, IOSKHKeyCompanion, IOSKHViewSpline, IOSKHKey, IOSKHConstraintAttribute, IOSKHKeyAttributesCompanion, IOSKHKeyCycleCompanion, IOSKHViewOscillator, IOSKHKeyFramesCompanion, IOSKHMotionController, IOSKHKeyPositionBaseCompanion, IOSKHKeyPositionBase, IOSKHKeyPositionCompanion, IOSKHKeyTimeCycleCompanion, IOSKHViewTimeCycle, IOSKHKeyTriggerCompanion, IOSKHMotionControllerCompanion, IOSKHMotionPaths, IOSKHKeyCache, IOSKHConstraintSet, IOSKHViewState, IOSKHConstraintHelperCompanion, IOSKHConstraintLayout, IOSKHConstraintSetConstraint, IOSKHHelperWidget, IOSKHConstraintLayoutLayoutParams, IOSKHConstraintWidget, IOSKHConstraintWidgetContainer, IOSKHConstraintHelper, IOSKHConstraintLayoutCompanion, IOSKHMetrics, IOSKHConstraintsChangedListener, IOSKHConstraintLayoutStates, IOSKHMotionLayoutCompanion, IOSKHMotionSceneTransition, IOSKHMotionLayoutTransitionState, IOSKHDesignTool, IOSKHMotionLayoutModel, IOSKHMotionScene, IOSKHBundle, IOSKHKeyPosition, IOSKHMotionPathsCompanion, IOSKHEasing, IOSKHMotionSceneCompanion, IOSKHStateSet, IOSKHViewTransitionController, IOSKHMotionSceneTransitionCompanion, IOSKHKeyFrames, IOSKHOnSwipe, IOSKHMotionSceneTransitionTransitionOnClick, IOSKHTouchResponse, IOSKHMotionSceneTransitionTransitionOnClickCompanion, IOSKHOnSwipeCompanion, IOSKHTouchResponseCompanion, IOSKHTransitionBuilder, IOSKHViewTransitionCompanion, IOSKHViewTransition, IOSKHViewTransitionAnimate, IOSKHCustomSupport, IOSKHMotionInterpolator, IOSKHKeyCycleOscillatorCompanion, IOSKHMotionWidget, IOSKHCurveFit, IOSKHKeyCycleOscillatorWavePoint, IOSKHKeyCycleOscillator, IOSKHViewOscillatorCompanion, IOSKHSplineSetCompanion, IOSKHSplineSet, IOSKHViewSplineCompanion, IOSKHTimeCycleSplineSetCompanion, IOSKHTimeCycleSplineSet, IOSKHViewTimeCycleCompanion, IOSKHBarrierCompanion, IOSKHConstraintAttributeAttributeType, IOSKHConstraintAttributeCompanion, IOSKHSharedValues, IOSKHConstraintLayoutLayoutParamsCompanion, IOSKHBasicMeasureMeasure, IOSKHConstraintLayoutStatesCompanion, IOSKHConstraintLayoutStatistics, IOSKHConstraintLayoutStatisticsCompanion, IOSKHConstraintPropertiesCompanion, IOSKHConstraintProperties, IOSKHConstraintSetCompanion, IOSKHConstraints, IOSKHCoreWriter, IOSKHConstraintsLayoutParams, IOSKHConstraintSetLayout, IOSKHConstraintSetConstraintDelta, IOSKHConstraintSetMotion, IOSKHConstraintSetPropertySet, IOSKHConstraintSetTransform, IOSKHConstraintSetConstraintDeltaCompanion, IOSKHConstraintSetLayoutCompanion, IOSKHKotlinStringBuilder, IOSKHConstraintSetMotionCompanion, IOSKHConstraintSetTransformCompanion, IOSKHConstraintsCompanion, IOSKHSharedValuesCompanion, IOSKHStateSetCompanion, IOSKHVirtualLayout, IOSKHMotionHelper, IOSKHCarouselCompanion, IOSKHVirtualLayout_, IOSKHCircularFlowCompanion, IOSKHFlowCompanion, IOSKHGridCompanion, IOSKHLayerCompanion, IOSKHMotionEffectCompanion, IOSKHMotionPlaceholderCompanion, IOSKHPlaceholder_, IOSKHColorMatrix, IOSKHOutlineCompanion, IOSKHPath, IOSKHPathCompanion, IOSKHPathDirection, IOSKHSkikoPath, IOSKHPathOp, IOSKHPathFillType, IOSKHRegion, IOSKHSkikoPoint, IOSKHkVectorPointer<T>, IOSKHSkikoPathVerb, IOSKHRegionCompanion, IOSKHSkikoRegion, IOSKHRegionOp, IOSKHRegionOpCompanion, IOSKHSkikoRegionOp, IOSKHregion_operatorRegion, IOSKHregion_operatorCompanion, IOSKHregion_operatorRegion_rasterizer, IOSKHregion_operatorSpanner, IOSKHregion_operatorSpannerBaseCompanion, IOSKHregion_operatorSpannerBase, IOSKHregion_operatorSpannerCompanion, IOSKHSolverVariable, IOSKHArrayRow, IOSKHArrayLinkedVariablesCompanion, IOSKHCache, IOSKHLinearSystem, IOSKHArrayRowCompanion, IOSKHLinearSystemCompanion, IOSKHSolverVariableType, IOSKHPools, IOSKHPriorityGoalRowCompanion, IOSKHPriorityGoalRowGoalVariableAccessor, IOSKHPriorityGoalRow, IOSKHSolverVariableCompanion, IOSKHSolverVariableValuesCompanion, IOSKHConstraintWidgetCompanion, IOSKHConstraintAnchor, IOSKHConstraintAnchorType, IOSKHConstraintWidgetDimensionBehaviour, IOSKHWidgetRun, IOSKHWidgetFrame, IOSKHChainRun, IOSKHHorizontalWidgetRun, IOSKHVerticalWidgetRun, IOSKHWidgetGroup, IOSKHBarrier_Companion, IOSKHChain, IOSKHChainHead, IOSKHChainHeadCompanion, IOSKHConstraintAnchorCompanion, IOSKHWidgetContainer, IOSKHConstraintWidgetContainerCompanion, IOSKHGuideline_, IOSKHBasicMeasure, IOSKHDependencyGraph, IOSKHFlow_Companion, IOSKHGuideline_Companion, IOSKHOptimizer, IOSKHRectangle, IOSKHBasicMeasureCompanion, IOSKHBasicMeasureMeasureCompanion, IOSKHDependencyNode, IOSKHDimensionDependency, IOSKHRunGroup, IOSKHWidgetRunRunType, IOSKHDependencyGraphCompanion, IOSKHDependencyNodeType, IOSKHDirect, IOSKHGrouping, IOSKHHorizontalWidgetRunCompanion, IOSKHRunGroupCompanion, IOSKHVerticalWidgetRunCompanion, IOSKHWidgetGroupCompanion, IOSKHWidgetGroupMeasureResult, IOSKHKotlinWeakReference<T>, IOSKHHelperHelperType, IOSKHHelperCompanion, IOSKHHelper, IOSKHBarrier__, IOSKHRef, IOSKHConstraintSide, IOSKHChain_Companion, IOSKHChain_, IOSKHChain_Style, IOSKHConstraintAnchor_, IOSKHConstraintCompanion, IOSKHConstraintVAnchor, IOSKHConstraintHAnchor, IOSKHConstraintBehaviour, IOSKHConstraintChainMode, IOSKHConstraint, IOSKHConstraintHSide, IOSKHConstraintVSide, IOSKHHChainHAnchor, IOSKHChain_Anchor, IOSKHHelperType, IOSKHKeys, IOSKHKeyAttributeFit, IOSKHKeyAttributeVisibility, IOSKHKeyAttributes_Visibility, IOSKHKeyAttributes_Fit, IOSKHKeyAttribute, IOSKHKeyCycle_Companion, IOSKHKeyCycle_Wave, IOSKHKeyAttributes_, IOSKHKeyCyclesWave, IOSKHKeyPosition_Type, IOSKHKeyPositionsType, IOSKHConstraintSet_, IOSKHTransition, IOSKHOnSwipe_Side, IOSKHOnSwipe_Drag, IOSKHOnSwipe_Companion, IOSKHOnSwipe_, IOSKHOnSwipe_TouchUp, IOSKHOnSwipe_Boundary, IOSKHOnSwipe_Mode, IOSKHRefCompanion, IOSKHVChainVAnchor, IOSKHGuideline__, IOSKHGridCoreCompanion, IOSKHGridEngineCompanion, IOSKHCloneable, IOSKHKotlinCharArray, IOSKHCLElementCompanion, IOSKHCLElement, IOSKHCLContainer, IOSKHCLContainerCompanion, IOSKHCLArray, IOSKHCLObject, IOSKHCLArrayCompanion, IOSKHCLKeyCompanion, IOSKHCLNumberCompanion, IOSKHCLObjectCompanion, IOSKHCLParserCompanion, IOSKHCLStringCompanion, IOSKHCLString, IOSKHCLTokenCompanion, IOSKHCLTokenType, IOSKHState, IOSKHConstraintReference, IOSKHDimension, IOSKHStateConstraint, IOSKHTypedBundle, IOSKHConstraintSetParser, IOSKHConstraintSetParserLayoutVariables, IOSKHTransition_, IOSKHConstraintSetParserMotionLayoutDebugFlags, IOSKHDimensionCompanion, IOSKHDimensionType, IOSKHStateHelper, IOSKHHelperReference, IOSKHRegistryCompanion, IOSKHRegistry, IOSKHStateCompanion, IOSKHBarrierReference, IOSKHStateDirection, IOSKHAlignHorizontallyReference, IOSKHAlignVerticallyReference, IOSKHFlowReference, IOSKHGridReference, IOSKHGuidelineReference, IOSKHHorizontalChainReference, IOSKHVerticalChainReference, IOSKHStateChainCompanion, IOSKHStateChain, IOSKHStateWrapCompanion, IOSKHStateWrap, IOSKHTransition_Companion, IOSKHCustomVariable, IOSKHTransition_OnSwipe, IOSKHTransition_KeyPosition, IOSKHMotion, IOSKHTransition_WidgetState, IOSKHTransition_OnSwipeCompanion, IOSKHTransitionParser, IOSKHWidgetFrameCompanion, IOSKHCustomAttribute, IOSKHAnticipateOvershootInterpolatorCompanion, IOSKHBounceInterpolatorCompanion, IOSKHChainReference, IOSKHFlow_, IOSKHGridReferenceCompanion, IOSKHCustomAttributeAttributeType, IOSKHCustomAttributeCompanion, IOSKHCustomVariableCompanion, IOSKHMotionCompanion, IOSKHMotionKey, IOSKHMotionPaths_, IOSKHMotionKeyPosition, IOSKHViewState_, IOSKHMotionPaths_Companion, IOSKHMotionWidgetCompanion, IOSKHMotionWidgetMotion, IOSKHMotionWidgetPropertySet, IOSKHMotionWidgetMotionCompanion, IOSKHMotionConstraintSetCompanion, IOSKHMotionKeyCompanion, IOSKHMotionKeyAttributesCompanion, IOSKHMotionKeyCycleCompanion, IOSKHMotionKeyPositionCompanion, IOSKHFloatRect, IOSKHMotionKeyTimeCycleCompanion, IOSKHMotionKeyTimeCycle, IOSKHMotionKeyTriggerCompanion, IOSKHMotionKeyTrigger, IOSKHCurveFitCompanion, IOSKHArcCurveFitCompanion, IOSKHArcCurveFitArc, IOSKHArcCurveFitArcCompanion, IOSKHEasingCompanion, IOSKHHyperSplineCompanion, IOSKHHyperSplineCubic, IOSKHKeyFrameArrayCustomArrayCompanion, IOSKHKeyFrameArrayCustomVarCompanion, IOSKHKeyFrameArrayFloatArrayCompanion, IOSKHLinearCurveFitCompanion, IOSKHMonotonicCurveFitCompanion, IOSKHMonotonicCurveFit, IOSKHOscillatorCompanion, IOSKHRectCompanion, IOSKHSchlickCompanion, IOSKHKeyFrameArrayCustomArray, IOSKHKeyFrameArrayCustomVar, IOSKHSpringStopEngineCompanion, IOSKHStepCurveCompanion, IOSKHStopLogicEngineCompanion, IOSKHKeyFrameArrayFloatArray, IOSKHTimeCycleSplineSetSort, IOSKHTypedBundleCompanion, IOSKHTypedValuesAttributesTypeCompanion, IOSKHTypedValuesCompanion, IOSKHTypedValuesCustomCompanion, IOSKHTypedValuesCycleTypeCompanion, IOSKHTypedValuesMotionSceneCompanion, IOSKHTypedValuesMotionTypeCompanion, IOSKHTypedValuesOnSwipeCompanion, IOSKHTypedValuesPositionTypeCompanion, IOSKHTypedValuesTransitionTypeCompanion, IOSKHTypedValuesTriggerTypeCompanion, IOSKHUtilsCompanion, IOSKHVelocityMatrixCompanion, IOSKHKeyParserCompanion, IOSKHKotlinByteIterator, IOSKHKotlinByteArray, IOSKHKotlinIntIterator, IOSKHKotlinLongIterator, IOSKHKotlinLongArray, IOSKHKotlinShortIterator, IOSKHKotlinShortArray, IOSKHKotlinBooleanIterator, IOSKHKotlinCharIterator, IOSKHKotlinDoubleIterator, IOSKHKotlinFloatIterator, IOSKHKotlinDoubleCompanion, IOSKHKotlinFloatCompanion, IOSKHKotlinIntCompanion, IOSKHKeyAttributes, IOSKHSkikoMatrix33Companion, IOSKHSkikoMatrix44, IOSKHSkikoIRect, IOSKHSkikoIRectCompanion, IOSKHSkikoIPoint, IOSKHSkikoRect, IOSKHSkikoRectCompanion, IOSKHCoreQName, IOSKHCoreEventType, IOSKHCoreXmlEvent, IOSKHCoreXmlBufferedReaderBase, IOSKHSkikoNativeCompanion, IOSKHSkikoNative, IOSKHSkikoManaged, IOSKHSkikoPathCompanion, IOSKHSkikoPathDirection, IOSKHSkikoRRect, IOSKHSkikoPathEllipseArc, IOSKHSkikoPathSegmentIterator, IOSKHSkikoPathFillMode, IOSKHSkikoPointCompanion, IOSKHSkikoRegionCompanion, IOSKHSkikoRegionOpCompanion, IOSKHSkikoMatrix44Companion, IOSKHSkikoIPointCompanion, IOSKHCoreXmlEventTextEvent, IOSKHCoreXmlEventCompanion, IOSKHSkikoPathOp, IOSKHSkikoRRectCompanion, IOSKHSkikoPathSegmentIteratorCompanion, IOSKHSkikoPathSegment;
 
-@protocol IOSKHKotlinComparable, IOSKHInterpolator, IOSKHTContext, IOSKHVelocityTrackerStrategy, IOSKHTPaint, IOSKHTDrawable, IOSKHTView, IOSKHTLayoutInflater, IOSKHTResources, IOSKHTOnScrollChangeListener, IOSKHTOnTouchListener, IOSKHTNestedScrollView, IOSKHTCanvas, IOSKHTClass, IOSKHTDisplay, IOSKHTRunnable, IOSKHTViewOnClickListener, IOSKHKotlinKClass, IOSKHHelper, IOSKHAnimatable, IOSKHMotionLayoutTransitionListener, IOSKHMotionHelperInterface, IOSKHConstraintLayoutValueModifier, IOSKHMotionLayoutMotionTracker, IOSKHTypedValues, IOSKHBasicMeasureMeasurer, IOSKHSharedValuesSharedValuesListener, IOSKHTImageView, IOSKHArrayRowArrayRowVariables, IOSKHLinearSystemRow, IOSKHPoolsPool, IOSKHDependency, IOSKHKotlinIterator, IOSKHKotlinIterable, IOSKHFacade, IOSKHReference, IOSKHCoreMotionScene, IOSKHCorePixelDp, IOSKHConstraintSetParserGeneratedValue, IOSKHRegistryCallback, IOSKHStopEngine, IOSKHUtilsDebugHandle, IOSKHCoreIterableNamespaceContext, IOSKHCoreNamespace, IOSKHCoreAutoCloseable, IOSKHCoreCloseable, IOSKHCoreXmlReader, IOSKHKotlinKDeclarationContainer, IOSKHKotlinKAnnotatedElement, IOSKHKotlinKClassifier, IOSKHKotlinAppendable, IOSKHKotlinCharSequence, IOSKHCoreXmlWriter, IOSKHCoreNamespaceContext, IOSKHCoreNamespaceContextImpl, IOSKHKotlinMutableIterator;
+@protocol IOSKHKotlinComparable, IOSKHInterpolator, IOSKHTContext, IOSKHVelocityTrackerStrategy, IOSKHTPaint, IOSKHTDrawable, IOSKHTView, IOSKHTLayoutInflater, IOSKHTResources, IOSKHTOnScrollChangeListener, IOSKHTOnTouchListener, IOSKHTNestedScrollView, IOSKHTCanvas, IOSKHTClass, IOSKHTDisplay, IOSKHTRunnable, IOSKHTViewOnClickListener, IOSKHKotlinKClass, IOSKHHelper, IOSKHAnimatable, IOSKHMotionLayoutTransitionListener, IOSKHMotionHelperInterface, IOSKHConstraintLayoutValueModifier, IOSKHMotionLayoutMotionTracker, IOSKHTypedValues, IOSKHBasicMeasureMeasurer, IOSKHSharedValuesSharedValuesListener, IOSKHCarouselAdapter, IOSKHTImageView, IOSKHArrayRowArrayRowVariables, IOSKHLinearSystemRow, IOSKHPoolsPool, IOSKHDependency, IOSKHKotlinIterator, IOSKHKotlinIterable, IOSKHFacade, IOSKHReference, IOSKHCoreMotionScene, IOSKHCorePixelDp, IOSKHConstraintSetParserGeneratedValue, IOSKHRegistryCallback, IOSKHStopEngine, IOSKHUtilsDebugHandle, IOSKHCoreIterableNamespaceContext, IOSKHCoreNamespace, IOSKHCoreAutoCloseable, IOSKHCoreCloseable, IOSKHCoreXmlReader, IOSKHKotlinKDeclarationContainer, IOSKHKotlinKAnnotatedElement, IOSKHKotlinKClassifier, IOSKHKotlinAppendable, IOSKHKotlinCharSequence, IOSKHCoreXmlWriter, IOSKHCoreNamespaceContext, IOSKHCoreNamespaceContextImpl, IOSKHKotlinMutableIterator;
 
 NS_ASSUME_NONNULL_BEGIN
 #pragma clang diagnostic push
@@ -512,6 +512,8 @@ __attribute__((swift_name("Log.Companion")))
 
 __attribute__((swift_name("ViewGroup.LayoutParams")))
 @interface IOSKHViewGroupLayoutParams : IOSKHBase
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
++ (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (instancetype)initWithWidth:(int32_t)width height:(int32_t)height __attribute__((swift_name("init(width:height:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSource:(IOSKHViewGroupLayoutParams *)source __attribute__((swift_name("init(source:)"))) __attribute__((objc_designated_initializer));
 - (void)resolveLayoutDirectionLayoutDirection:(int32_t)layoutDirection __attribute__((swift_name("resolveLayoutDirection(layoutDirection:)")));
@@ -528,6 +530,8 @@ __attribute__((swift_name("MarginLayoutParams")))
 - (instancetype)initWithC:(id<IOSKHTContext>)c attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs __attribute__((swift_name("init(c:attrs:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSource:(IOSKHMarginLayoutParams *)source __attribute__((swift_name("init(source:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)initWithSource_:(IOSKHViewGroupLayoutParams *)source __attribute__((swift_name("init(source_:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
++ (instancetype)new __attribute__((unavailable));
 - (void)doCopyMarginsFromSource:(IOSKHMarginLayoutParams *)source __attribute__((swift_name("doCopyMarginsFrom(source:)")));
 - (int32_t)getLayoutDirection __attribute__((swift_name("getLayoutDirection()")));
 - (int32_t)getMarginEnd __attribute__((swift_name("getMarginEnd()")));
@@ -1273,9 +1277,9 @@ __attribute__((swift_name("TResources")))
 - (int32_t)getDimensionPixelSizeValue:(NSString *)value def:(int32_t)def __attribute__((swift_name("getDimensionPixelSize(value:def:)")));
 - (IOSKHTDisplayMetrics *)getDisplayMetrics __attribute__((swift_name("getDisplayMetrics()")));
 - (id<IOSKHTDrawable> _Nullable)getDrawableResId:(NSString *)resId __attribute__((swift_name("getDrawable(resId:)")));
-- (float)getFloatValue:(NSString *)value def:(float)def __attribute__((swift_name("getFloat(value:def:)")));
+- (float)getFloatKey:(NSString * _Nullable)key value:(NSString *)value def:(float)def __attribute__((swift_name("getFloat(key:value:def:)")));
 - (NSString *)getIdentifierId:(NSString *)id type:(NSString *)type packageName:(NSString *)packageName __attribute__((swift_name("getIdentifier(id:type:packageName:)")));
-- (int32_t)getIntValue:(NSString *)value def:(int32_t)def __attribute__((swift_name("getInt(value:def:)")));
+- (int32_t)getIntKey:(NSString * _Nullable)key value:(NSString *)value def:(int32_t)def __attribute__((swift_name("getInt(key:value:def:)")));
 - (int32_t)getLayoutDimensionAttr:(NSString *)attr def:(int32_t)def __attribute__((swift_name("getLayoutDimension(attr:def:)")));
 - (NSString *)getResourceEntryNameId:(NSString *)id __attribute__((swift_name("getResourceEntryName(id:)")));
 - (NSString *)getResourceIdId:(NSString *)id def:(NSString *)def __attribute__((swift_name("getResourceId(id:def:)")));
@@ -1301,6 +1305,7 @@ __attribute__((swift_name("TView")))
 - (float)dpToPixelDp:(float)dp __attribute__((swift_name("dpToPixel(dp:)")));
 - (id<IOSKHTView> _Nullable)findViewByIdId:(NSString *)id __attribute__((swift_name("findViewById(id:)")));
 - (void)forceLayout __attribute__((swift_name("forceLayout()")));
+- (NSString *)generateViewId __attribute__((swift_name("generateViewId()")));
 - (float)getAlpha __attribute__((swift_name("getAlpha()")));
 - (id<IOSKHTDrawable> _Nullable)getBackground __attribute__((swift_name("getBackground()")));
 - (int32_t)getBaseline __attribute__((swift_name("getBaseline()")));
@@ -1364,12 +1369,14 @@ __attribute__((swift_name("TView")))
 - (int32_t)makeMeasureSpecMeasureSpec:(int32_t)measureSpec type:(int32_t)type __attribute__((swift_name("makeMeasureSpec(measureSpec:type:)")));
 - (void)measureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("measure(widthMeasureSpec:heightMeasureSpec:)")));
 - (void)onAttachedToWindow __attribute__((swift_name("onAttachedToWindow()")));
+- (void)onDetachedFromWindow __attribute__((swift_name("onDetachedFromWindow()")));
 - (void)onDrawCanvas:(id<IOSKHTCanvas>)canvas __attribute__((swift_name("onDraw(canvas:)")));
 - (void)onMeasureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(widthMeasureSpec:heightMeasureSpec:)")));
 - (BOOL)onTouchEventEvent:(IOSKHMotionEvent *)event __attribute__((swift_name("onTouchEvent(event:)")));
 - (void)onViewAddedView:(id<IOSKHTView>)view __attribute__((swift_name("onViewAdded(view:)")));
 - (void)onViewRemovedView:(id<IOSKHTView>)view __attribute__((swift_name("onViewRemoved(view:)")));
 - (void)postRunnable:(id<IOSKHTRunnable>)runnable __attribute__((swift_name("post(runnable:)")));
+- (void)removeViewView:(id<IOSKHTView>)view __attribute__((swift_name("removeView(view:)")));
 - (void)requestLayout __attribute__((swift_name("requestLayout()")));
 - (int32_t)resolveSizeAndStateSize:(int32_t)size measureSpec:(int32_t)measureSpec childState:(int32_t)childState __attribute__((swift_name("resolveSizeAndState(size:measureSpec:childState:)")));
 - (void)setAlphaValue:(float)value __attribute__((swift_name("setAlpha(value:)")));
@@ -2345,21 +2352,22 @@ __attribute__((swift_name("MotionController.Companion")))
 
 __attribute__((swift_name("ConstraintHelper")))
 @interface IOSKHConstraintHelper : IOSKHBase
-- (instancetype)initWithMyContext:(id<IOSKHTContext> _Nullable)myContext attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(myContext:attrs:self:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) IOSKHConstraintHelperCompanion *companion __attribute__((swift_name("companion")));
 - (void)addViewView:(id<IOSKHTView>)view __attribute__((swift_name("addView(view:)")));
 - (void)applyHelperParams __attribute__((swift_name("applyHelperParams()")));
 - (void)applyLayoutFeatures __attribute__((swift_name("applyLayoutFeatures()")));
 - (void)applyLayoutFeaturesContainer:(IOSKHConstraintLayout *)container __attribute__((swift_name("applyLayoutFeatures(container:)")));
-- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout * _Nullable)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
+- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout *)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
 - (BOOL)containsIdId:(NSString *)id __attribute__((swift_name("containsId(id:)")));
 - (IOSKHKotlinArray<id<IOSKHTView>> * _Nullable)getViewsLayout:(IOSKHConstraintLayout * _Nullable)layout __attribute__((swift_name("getViews(layout:)")));
 - (int32_t)indexFromIdId:(NSString *)id __attribute__((swift_name("indexFromId(id:)")));
 - (void)loadParametersConstraint:(IOSKHConstraintSetConstraint *)constraint child:(IOSKHHelperWidget * _Nullable)child layoutParams:(IOSKHConstraintLayoutLayoutParams * _Nullable)layoutParams mapIdToWidget:(IOSKHMutableDictionary<NSString *, IOSKHConstraintWidget *> *)mapIdToWidget __attribute__((swift_name("loadParameters(constraint:child:layoutParams:mapIdToWidget:)")));
 - (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
+- (void)onDetachedFromWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onDetachedFromWindow(sup:)")));
 - (void)onMeasureSup:(id<IOSKHTView> _Nullable)sup widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(sup:widthMeasureSpec:heightMeasureSpec:)")));
-- (int32_t)removeViewView:(id<IOSKHTView>)view __attribute__((swift_name("removeView(view:)")));
-- (void)resolveRtlWidget:(IOSKHConstraintWidget * _Nullable)widget isRtl:(BOOL)isRtl __attribute__((swift_name("resolveRtl(widget:isRtl:)")));
+- (int32_t)removeViewView_:(id<IOSKHTView>)view __attribute__((swift_name("removeView(view_:)")));
+- (void)resolveRtlWidget:(IOSKHConstraintWidget *)widget isRtl:(BOOL)isRtl __attribute__((swift_name("resolveRtl(widget:isRtl:)")));
 - (void)setIdsIdList:(NSString * _Nullable)idList __attribute__((swift_name("setIds(idList:)")));
 - (void)setReferenceTagsTagList:(NSString * _Nullable)tagList __attribute__((swift_name("setReferenceTags(tagList:)")));
 - (void)setTagSup:(id<IOSKHTView> _Nullable)sup key:(NSString *)key tag:(id _Nullable)tag __attribute__((swift_name("setTag(sup:key:tag:)")));
@@ -2371,6 +2379,7 @@ __attribute__((swift_name("ConstraintHelper")))
 - (void)updatePreLayoutContainer:(IOSKHConstraintWidgetContainer * _Nullable)container helper:(id<IOSKHHelper>)helper map:(IOSKHMutableDictionary<NSString *, IOSKHConstraintWidget *> *)map __attribute__((swift_name("updatePreLayout(container:helper:map:)")));
 - (void)validateParams __attribute__((swift_name("validateParams()")));
 @property (readonly) IOSKHMutableDictionary<NSString *, NSString *> *attrs __attribute__((swift_name("attrs")));
+@property (readonly) id<IOSKHTContext> context __attribute__((swift_name("context")));
 @property int32_t mCount __attribute__((swift_name("mCount")));
 @property id<IOSKHHelper> _Nullable mHelperWidget __attribute__((swift_name("mHelperWidget")));
 @property IOSKHKotlinArray<NSString *> *mIds __attribute__((swift_name("mIds")));
@@ -2378,7 +2387,6 @@ __attribute__((swift_name("ConstraintHelper")))
 @property NSString * _Nullable mReferenceIds __attribute__((swift_name("mReferenceIds")));
 @property NSString * _Nullable mReferenceTags __attribute__((swift_name("mReferenceTags")));
 @property BOOL mUseViewMeasure __attribute__((swift_name("mUseViewMeasure")));
-@property (readonly) id<IOSKHTContext> _Nullable myContext __attribute__((swift_name("myContext")));
 @property IOSKHKotlinArray<NSString *> * _Nullable referencedIds __attribute__((swift_name("referencedIds")));
 @property (readonly) id<IOSKHTView> self __attribute__((swift_name("self")));
 @end;
@@ -2404,11 +2412,9 @@ __attribute__((swift_name("MotionHelperInterface")))
 @property (readonly) BOOL isUsedOnShow __attribute__((swift_name("isUsedOnShow")));
 @end;
 
-__attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MotionHelper")))
 @interface IOSKHMotionHelper : IOSKHConstraintHelper <IOSKHMotionHelperInterface>
 - (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
-- (instancetype)initWithMyContext:(id<IOSKHTContext> _Nullable)myContext attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(myContext:attrs:self:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 - (void)onFinishedMotionSceneMotionLayout:(IOSKHMotionLayout *)motionLayout __attribute__((swift_name("onFinishedMotionScene(motionLayout:)")));
 - (void)onPostDrawCanvas:(id<IOSKHTCanvas>)canvas __attribute__((swift_name("onPostDraw(canvas:)")));
 - (void)onPreDrawCanvas:(id<IOSKHTCanvas>)canvas __attribute__((swift_name("onPreDraw(canvas:)")));
@@ -2419,8 +2425,8 @@ __attribute__((swift_name("MotionHelper")))
 - (void)onTransitionTriggerMotionLayout:(IOSKHMotionLayout *)motionLayout triggerId:(NSString *)triggerId positive:(BOOL)positive progress:(float)progress __attribute__((swift_name("onTransitionTrigger(motionLayout:triggerId:positive:progress:)")));
 - (void)setProgressView:(id<IOSKHTView> _Nullable)view progress:(float)progress __attribute__((swift_name("setProgress(view:progress:)")));
 @property (readonly) BOOL isDecorator __attribute__((swift_name("isDecorator")));
-@property (readonly) BOOL isUseOnHide __attribute__((swift_name("isUseOnHide")));
-@property (readonly) BOOL isUsedOnShow __attribute__((swift_name("isUsedOnShow")));
+@property BOOL isUseOnHide __attribute__((swift_name("isUseOnHide")));
+@property BOOL isUsedOnShow __attribute__((swift_name("isUsedOnShow")));
 @property float progress __attribute__((swift_name("progress")));
 @property IOSKHKotlinArray<id<IOSKHTView>> * _Nullable views __attribute__((swift_name("views")));
 @end;
@@ -3432,9 +3438,10 @@ __attribute__((swift_name("ViewTimeCycle.PathRotate")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Barrier")))
 @interface IOSKHBarrier : IOSKHConstraintHelper
-- (instancetype)initWithMyContext:(id<IOSKHTContext> _Nullable)myContext attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(myContext:attrs:self:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
 @property (class, readonly, getter=companion) IOSKHBarrierCompanion *companion __attribute__((swift_name("companion")));
 - (void)loadParametersConstraint:(IOSKHConstraintSetConstraint *)constraint child:(IOSKHHelperWidget * _Nullable)child layoutParams:(IOSKHConstraintLayoutLayoutParams * _Nullable)layoutParams mapIdToWidget:(IOSKHMutableDictionary<NSString *, IOSKHConstraintWidget *> *)mapIdToWidget __attribute__((swift_name("loadParameters(constraint:child:layoutParams:mapIdToWidget:)")));
+- (void)resolveRtlWidget:(IOSKHConstraintWidget *)widget isRtl:(BOOL)isRtl __attribute__((swift_name("resolveRtl(widget:isRtl:)")));
 - (void)setDpMarginMargin:(int32_t)margin __attribute__((swift_name("setDpMargin(margin:)")));
 @property BOOL allowsGoneWidget __attribute__((swift_name("allowsGoneWidget")));
 @property int32_t margin __attribute__((swift_name("margin")));
@@ -4290,8 +4297,8 @@ __attribute__((swift_name("ConstraintsChangedListener")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Group")))
 @interface IOSKHGroup : IOSKHConstraintHelper
-- (instancetype)initWithMyContext:(id<IOSKHTContext> _Nullable)myContext attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(myContext:attrs:self:)"))) __attribute__((objc_designated_initializer));
-- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout * _Nullable)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout *)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
 - (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
 - (void)setElevationSup:(id<IOSKHTView> _Nullable)sup elevation:(float)elevation __attribute__((swift_name("setElevation(sup:elevation:)")));
 - (void)setVisibilitySup:(id<IOSKHTView> _Nullable)sup visibility:(int32_t)visibility __attribute__((swift_name("setVisibility(sup:visibility:)")));
@@ -4316,13 +4323,13 @@ __attribute__((swift_name("Guideline")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Placeholder")))
 @interface IOSKHPlaceholder : IOSKHBase
-- (instancetype)initWithContext:(id<IOSKHTContext> _Nullable)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
 - (void)setContentIdId:(NSString *)id __attribute__((swift_name("setContentId(id:)")));
 - (void)updatePostMeasureContainer:(IOSKHConstraintLayout * _Nullable)container __attribute__((swift_name("updatePostMeasure(container:)")));
 - (void)updatePreLayoutContainer:(IOSKHConstraintLayout *)container __attribute__((swift_name("updatePreLayout(container:)")));
 @property (readonly) IOSKHMutableDictionary<NSString *, NSString *> *attrs __attribute__((swift_name("attrs")));
 @property (readonly) id<IOSKHTView> _Nullable content __attribute__((swift_name("content")));
-@property (readonly) id<IOSKHTContext> _Nullable context __attribute__((swift_name("context")));
+@property (readonly) id<IOSKHTContext> context __attribute__((swift_name("context")));
 @property int32_t emptyVisibility __attribute__((swift_name("emptyVisibility")));
 @property (readonly) id<IOSKHTView> self __attribute__((swift_name("self")));
 @end;
@@ -4336,7 +4343,7 @@ __attribute__((swift_name("SharedValuesSharedValuesListener")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("ReactiveGuide")))
 @interface IOSKHReactiveGuide : IOSKHBase <IOSKHSharedValuesSharedValuesListener>
-- (instancetype)initWithContext:(id<IOSKHTContext> _Nullable)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
 - (void)onMeasureSup:(id<IOSKHTView>)sup widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(sup:widthMeasureSpec:heightMeasureSpec:)")));
 - (void)onNewValueKey:(NSString *)key newValue:(int32_t)newValue oldValue:(int32_t)oldValue __attribute__((swift_name("onNewValue(key:newValue:oldValue:)")));
 - (void)setAnimateChangeAnimate:(BOOL)animate __attribute__((swift_name("setAnimateChange(animate:)")));
@@ -4347,7 +4354,7 @@ __attribute__((swift_name("ReactiveGuide")))
 @property NSString *applyToConstraintSetId __attribute__((swift_name("applyToConstraintSetId")));
 @property NSString *attributeId __attribute__((swift_name("attributeId")));
 @property (readonly) IOSKHMutableDictionary<NSString *, NSString *> *attrs __attribute__((swift_name("attrs")));
-@property (readonly) id<IOSKHTContext> _Nullable context __attribute__((swift_name("context")));
+@property (readonly) id<IOSKHTContext> context __attribute__((swift_name("context")));
 @property (readonly) BOOL isAnimatingChange __attribute__((swift_name("isAnimatingChange")));
 @property (readonly) id<IOSKHTView> self __attribute__((swift_name("self")));
 @end;
@@ -4407,12 +4414,256 @@ __attribute__((swift_name("StateSet.Companion")))
 
 __attribute__((swift_name("VirtualLayout_")))
 @interface IOSKHVirtualLayout_ : IOSKHConstraintHelper
-- (instancetype)initWithMyContext:(id<IOSKHTContext> _Nullable)myContext attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(myContext:attrs:self:)"))) __attribute__((objc_designated_initializer));
-- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout * _Nullable)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout *)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
 - (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
 - (void)onMeasureLayout:(IOSKHVirtualLayout * _Nullable)layout widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(layout:widthMeasureSpec:heightMeasureSpec:)")));
 - (void)setElevationSup:(id<IOSKHTView> _Nullable)sup elevation:(float)elevation __attribute__((swift_name("setElevation(sup:elevation:)")));
 - (void)setVisibilitySup:(id<IOSKHTView> _Nullable)sup visibility:(int32_t)visibility __attribute__((swift_name("setVisibility(sup:visibility:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Carousel")))
+@interface IOSKHCarousel : IOSKHMotionHelper
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHCarouselCompanion *companion __attribute__((swift_name("companion")));
+- (void)jumpToIndexIndex:(int32_t)index __attribute__((swift_name("jumpToIndex(index:)")));
+- (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
+- (void)onDetachedFromWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onDetachedFromWindow(sup:)")));
+- (void)onTransitionChangeMotionLayout:(IOSKHMotionLayout * _Nullable)motionLayout startId:(NSString *)startId endId:(NSString *)endId progress_:(float)progress __attribute__((swift_name("onTransitionChange(motionLayout:startId:endId:progress_:)")));
+- (void)onTransitionCompletedMotionLayout:(IOSKHMotionLayout * _Nullable)motionLayout currentId_:(NSString *)currentId __attribute__((swift_name("onTransitionCompleted(motionLayout:currentId_:)")));
+- (void)refresh __attribute__((swift_name("refresh()")));
+- (void)setAdapterAdapter:(id<IOSKHCarouselAdapter> _Nullable)adapter __attribute__((swift_name("setAdapter(adapter:)")));
+- (void)transitionToIndexIndex:(int32_t)index delay:(int32_t)delay __attribute__((swift_name("transitionToIndex(index:delay:)")));
+@property (readonly) int32_t count __attribute__((swift_name("count")));
+@property (readonly) int32_t currentIndex __attribute__((swift_name("currentIndex")));
+@property NSString *mLastStartId __attribute__((swift_name("mLastStartId")));
+@property id<IOSKHTRunnable> mUpdateRunnable __attribute__((swift_name("mUpdateRunnable")));
+@end;
+
+__attribute__((swift_name("CarouselAdapter")))
+@protocol IOSKHCarouselAdapter
+@required
+- (int32_t)count __attribute__((swift_name("count()")));
+- (void)onNewItemIndex:(int32_t)index __attribute__((swift_name("onNewItem(index:)")));
+- (void)populateView:(id<IOSKHTView>)view index:(int32_t)index __attribute__((swift_name("populate(view:index:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Carousel.Companion")))
+@interface IOSKHCarouselCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHCarouselCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) int32_t TOUCH_UP_CARRY_ON __attribute__((swift_name("TOUCH_UP_CARRY_ON")));
+@property (readonly) int32_t TOUCH_UP_IMMEDIATE_STOP __attribute__((swift_name("TOUCH_UP_IMMEDIATE_STOP")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CircularFlow")))
+@interface IOSKHCircularFlow : IOSKHVirtualLayout_
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHCircularFlowCompanion *companion __attribute__((swift_name("companion")));
+- (void)addViewToCircularFlowView:(id<IOSKHTView>)view radius:(int32_t)radius angle:(float)angle __attribute__((swift_name("addViewToCircularFlow(view:radius:angle:)")));
+- (BOOL)isUpdatableView:(id<IOSKHTView>)view __attribute__((swift_name("isUpdatable(view:)")));
+- (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
+- (int32_t)removeViewView_:(id<IOSKHTView>)view __attribute__((swift_name("removeView(view_:)")));
+- (void)setDefaultAngleAngle:(float)angle __attribute__((swift_name("setDefaultAngle(angle:)")));
+- (void)setDefaultRadiusRadius:(int32_t)radius __attribute__((swift_name("setDefaultRadius(radius:)")));
+- (void)updateAngleView:(id<IOSKHTView>)view angle:(float)angle __attribute__((swift_name("updateAngle(view:angle:)")));
+- (void)updateRadiusView:(id<IOSKHTView>)view radius:(int32_t)radius __attribute__((swift_name("updateRadius(view:radius:)")));
+- (void)updateReferenceView:(id<IOSKHTView>)view radius:(int32_t)radius angle:(float)angle __attribute__((swift_name("updateReference(view:radius:angle:)")));
+@property (readonly) IOSKHKotlinFloatArray *angles __attribute__((swift_name("angles")));
+@property IOSKHConstraintLayout * _Nullable mContainer __attribute__((swift_name("mContainer")));
+@property NSString *mViewCenter __attribute__((swift_name("mViewCenter")));
+@property (readonly) IOSKHKotlinIntArray *radius __attribute__((swift_name("radius")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("CircularFlow.Companion")))
+@interface IOSKHCircularFlowCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHCircularFlowCompanion *shared __attribute__((swift_name("shared")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Flow")))
+@interface IOSKHFlow : IOSKHVirtualLayout_
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHFlowCompanion *companion __attribute__((swift_name("companion")));
+- (void)loadParametersConstraint:(IOSKHConstraintSetConstraint *)constraint child:(IOSKHHelperWidget * _Nullable)child layoutParams:(IOSKHConstraintLayoutLayoutParams * _Nullable)layoutParams mapIdToWidget:(IOSKHMutableDictionary<NSString *, IOSKHConstraintWidget *> *)mapIdToWidget __attribute__((swift_name("loadParameters(constraint:child:layoutParams:mapIdToWidget:)")));
+- (void)onMeasureLayout:(IOSKHVirtualLayout * _Nullable)layout widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(layout:widthMeasureSpec:heightMeasureSpec:)")));
+- (void)onMeasureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(widthMeasureSpec:heightMeasureSpec:)")));
+- (void)resolveRtlWidget:(IOSKHConstraintWidget *)widget isRtl:(BOOL)isRtl __attribute__((swift_name("resolveRtl(widget:isRtl:)")));
+- (void)setFirstHorizontalBiasBias:(float)bias __attribute__((swift_name("setFirstHorizontalBias(bias:)")));
+- (void)setFirstHorizontalStyleStyle:(int32_t)style __attribute__((swift_name("setFirstHorizontalStyle(style:)")));
+- (void)setFirstVerticalBiasBias:(float)bias __attribute__((swift_name("setFirstVerticalBias(bias:)")));
+- (void)setFirstVerticalStyleStyle:(int32_t)style __attribute__((swift_name("setFirstVerticalStyle(style:)")));
+- (void)setHorizontalAlignAlign:(int32_t)align __attribute__((swift_name("setHorizontalAlign(align:)")));
+- (void)setHorizontalBiasBias:(float)bias __attribute__((swift_name("setHorizontalBias(bias:)")));
+- (void)setHorizontalGapGap:(int32_t)gap __attribute__((swift_name("setHorizontalGap(gap:)")));
+- (void)setHorizontalStyleStyle:(int32_t)style __attribute__((swift_name("setHorizontalStyle(style:)")));
+- (void)setLastHorizontalBiasBias:(float)bias __attribute__((swift_name("setLastHorizontalBias(bias:)")));
+- (void)setLastHorizontalStyleStyle:(int32_t)style __attribute__((swift_name("setLastHorizontalStyle(style:)")));
+- (void)setLastVerticalBiasBias:(float)bias __attribute__((swift_name("setLastVerticalBias(bias:)")));
+- (void)setLastVerticalStyleStyle:(int32_t)style __attribute__((swift_name("setLastVerticalStyle(style:)")));
+- (void)setMaxElementsWrapMax:(int32_t)max __attribute__((swift_name("setMaxElementsWrap(max:)")));
+- (void)setOrientationOrientation:(int32_t)orientation __attribute__((swift_name("setOrientation(orientation:)")));
+- (void)setPaddingPadding:(int32_t)padding __attribute__((swift_name("setPadding(padding:)")));
+- (void)setPaddingBottomPaddingBottom:(int32_t)paddingBottom __attribute__((swift_name("setPaddingBottom(paddingBottom:)")));
+- (void)setPaddingLeftPaddingLeft:(int32_t)paddingLeft __attribute__((swift_name("setPaddingLeft(paddingLeft:)")));
+- (void)setPaddingRightPaddingRight:(int32_t)paddingRight __attribute__((swift_name("setPaddingRight(paddingRight:)")));
+- (void)setPaddingTopPaddingTop:(int32_t)paddingTop __attribute__((swift_name("setPaddingTop(paddingTop:)")));
+- (void)setVerticalAlignAlign:(int32_t)align __attribute__((swift_name("setVerticalAlign(align:)")));
+- (void)setVerticalBiasBias:(float)bias __attribute__((swift_name("setVerticalBias(bias:)")));
+- (void)setVerticalGapGap:(int32_t)gap __attribute__((swift_name("setVerticalGap(gap:)")));
+- (void)setVerticalStyleStyle:(int32_t)style __attribute__((swift_name("setVerticalStyle(style:)")));
+- (void)setWrapModeMode:(int32_t)mode __attribute__((swift_name("setWrapMode(mode:)")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Flow.Companion")))
+@interface IOSKHFlowCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHFlowCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) int32_t CHAIN_PACKED __attribute__((swift_name("CHAIN_PACKED")));
+@property (readonly) int32_t CHAIN_SPREAD __attribute__((swift_name("CHAIN_SPREAD")));
+@property (readonly) int32_t CHAIN_SPREAD_INSIDE __attribute__((swift_name("CHAIN_SPREAD_INSIDE")));
+@property (readonly) int32_t HORIZONTAL __attribute__((swift_name("HORIZONTAL")));
+@property (readonly) int32_t HORIZONTAL_ALIGN_CENTER __attribute__((swift_name("HORIZONTAL_ALIGN_CENTER")));
+@property (readonly) int32_t HORIZONTAL_ALIGN_END __attribute__((swift_name("HORIZONTAL_ALIGN_END")));
+@property (readonly) int32_t HORIZONTAL_ALIGN_START __attribute__((swift_name("HORIZONTAL_ALIGN_START")));
+@property (readonly) int32_t VERTICAL __attribute__((swift_name("VERTICAL")));
+@property (readonly) int32_t VERTICAL_ALIGN_BASELINE __attribute__((swift_name("VERTICAL_ALIGN_BASELINE")));
+@property (readonly) int32_t VERTICAL_ALIGN_BOTTOM __attribute__((swift_name("VERTICAL_ALIGN_BOTTOM")));
+@property (readonly) int32_t VERTICAL_ALIGN_CENTER __attribute__((swift_name("VERTICAL_ALIGN_CENTER")));
+@property (readonly) int32_t VERTICAL_ALIGN_TOP __attribute__((swift_name("VERTICAL_ALIGN_TOP")));
+@property (readonly) int32_t WRAP_ALIGNED __attribute__((swift_name("WRAP_ALIGNED")));
+@property (readonly) int32_t WRAP_CHAIN __attribute__((swift_name("WRAP_CHAIN")));
+@property (readonly) int32_t WRAP_NONE __attribute__((swift_name("WRAP_NONE")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Grid")))
+@interface IOSKHGrid : IOSKHVirtualLayout_
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHGridCompanion *companion __attribute__((swift_name("companion")));
+- (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
+- (void)onDrawSup:(id<IOSKHTView> _Nullable)sup canvas:(id<IOSKHTCanvas>)canvas __attribute__((swift_name("onDraw(sup:canvas:)")));
+- (void)setColumnWeightsColumnWeights:(NSString *)columnWeights __attribute__((swift_name("setColumnWeights(columnWeights:)")));
+- (void)setRowWeightsRowWeights:(NSString *)rowWeights __attribute__((swift_name("setRowWeights(rowWeights:)")));
+- (void)setSkipsSkips:(NSString *)skips __attribute__((swift_name("setSkips(skips:)")));
+- (void)setSpansSpans:(id)spans __attribute__((swift_name("setSpans(spans:)")));
+@property (readonly) NSString * _Nullable columnWeights __attribute__((swift_name("columnWeights")));
+@property int32_t columns __attribute__((swift_name("columns")));
+@property float horizontalGaps __attribute__((swift_name("horizontalGaps")));
+@property IOSKHConstraintLayout * _Nullable mContainer __attribute__((swift_name("mContainer")));
+@property IOSKHMutableSet<NSString *> *mSpanIds __attribute__((swift_name("mSpanIds")));
+@property int32_t orientation __attribute__((swift_name("orientation")));
+@property (readonly) NSString * _Nullable rowWeights __attribute__((swift_name("rowWeights")));
+@property int32_t rows __attribute__((swift_name("rows")));
+@property (readonly) NSString * _Nullable skips __attribute__((swift_name("skips")));
+@property (readonly) NSString * _Nullable spans __attribute__((swift_name("spans")));
+@property float verticalGaps __attribute__((swift_name("verticalGaps")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Grid.Companion")))
+@interface IOSKHGridCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHGridCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) int32_t HORIZONTAL __attribute__((swift_name("HORIZONTAL")));
+@property (readonly) int32_t VERTICAL __attribute__((swift_name("VERTICAL")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Layer")))
+@interface IOSKHLayer : IOSKHConstraintHelper
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHLayerCompanion *companion __attribute__((swift_name("companion")));
+- (void)applyLayoutFeaturesInConstraintSetContainer:(IOSKHConstraintLayout *)container __attribute__((swift_name("applyLayoutFeaturesInConstraintSet(container:)")));
+- (void)calcCenters __attribute__((swift_name("calcCenters()")));
+- (void)onAttachedToWindowSup:(id<IOSKHTView> _Nullable)sup __attribute__((swift_name("onAttachedToWindow(sup:)")));
+- (void)setElevationElevation:(float)elevation __attribute__((swift_name("setElevation(elevation:)")));
+- (void)setPivotXPivotX:(float)pivotX __attribute__((swift_name("setPivotX(pivotX:)")));
+- (void)setPivotYPivotY:(float)pivotY __attribute__((swift_name("setPivotY(pivotY:)")));
+- (void)setRotationAngle:(float)angle __attribute__((swift_name("setRotation(angle:)")));
+- (void)setScaleXScaleX:(float)scaleX __attribute__((swift_name("setScaleX(scaleX:)")));
+- (void)setScaleYScaleY:(float)scaleY __attribute__((swift_name("setScaleY(scaleY:)")));
+- (void)setTranslationXDx:(float)dx __attribute__((swift_name("setTranslationX(dx:)")));
+- (void)setTranslationYDy:(float)dy __attribute__((swift_name("setTranslationY(dy:)")));
+- (void)setVisibilityVisibility:(int32_t)visibility __attribute__((swift_name("setVisibility(visibility:)")));
+- (void)updatePostLayoutContainer:(IOSKHConstraintLayout * _Nullable)container __attribute__((swift_name("updatePostLayout(container:)")));
+- (void)updatePreDrawContainer:(IOSKHConstraintLayout * _Nullable)container __attribute__((swift_name("updatePreDraw(container:)")));
+@property float mComputedCenterX __attribute__((swift_name("mComputedCenterX")));
+@property float mComputedCenterY __attribute__((swift_name("mComputedCenterY")));
+@property float mComputedMaxX __attribute__((swift_name("mComputedMaxX")));
+@property float mComputedMaxY __attribute__((swift_name("mComputedMaxY")));
+@property float mComputedMinX __attribute__((swift_name("mComputedMinX")));
+@property float mComputedMinY __attribute__((swift_name("mComputedMinY")));
+@property IOSKHConstraintLayout * _Nullable mContainer __attribute__((swift_name("mContainer")));
+@property BOOL mNeedBounds __attribute__((swift_name("mNeedBounds")));
+@property IOSKHKotlinArray<id<IOSKHTView>> * _Nullable mViews __attribute__((swift_name("mViews")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("Layer.Companion")))
+@interface IOSKHLayerCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHLayerCompanion *shared __attribute__((swift_name("shared")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MotionEffect")))
+@interface IOSKHMotionEffect : IOSKHMotionHelper
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHMotionEffectCompanion *companion __attribute__((swift_name("companion")));
+- (void)onPreSetupMotionLayout:(IOSKHMotionLayout *)motionLayout controllerMap:(IOSKHMutableDictionary<id<IOSKHTView>, IOSKHMotionController *> *)controllerMap __attribute__((swift_name("onPreSetup(motionLayout:controllerMap:)")));
+@property (readonly) BOOL isDecorator __attribute__((swift_name("isDecorator")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MotionEffect.Companion")))
+@interface IOSKHMotionEffectCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHMotionEffectCompanion *shared __attribute__((swift_name("shared")));
+@property (readonly) int32_t AUTO __attribute__((swift_name("AUTO")));
+@property (readonly) int32_t EAST __attribute__((swift_name("EAST")));
+@property (readonly) int32_t NORTH __attribute__((swift_name("NORTH")));
+@property (readonly) int32_t SOUTH __attribute__((swift_name("SOUTH")));
+@property (readonly) NSString *TAG __attribute__((swift_name("TAG")));
+@property (readonly) int32_t WEST __attribute__((swift_name("WEST")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MotionPlaceholder")))
+@interface IOSKHMotionPlaceholder : IOSKHVirtualLayout_
+- (instancetype)initWithContext:(id<IOSKHTContext>)context attrs:(IOSKHMutableDictionary<NSString *, NSString *> *)attrs self:(id<IOSKHTView>)self __attribute__((swift_name("init(context:attrs:self:)"))) __attribute__((objc_designated_initializer));
+@property (class, readonly, getter=companion) IOSKHMotionPlaceholderCompanion *companion __attribute__((swift_name("companion")));
+- (void)onMeasureSup:(id<IOSKHTView> _Nullable)sup widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(sup:widthMeasureSpec:heightMeasureSpec:)")));
+- (void)onMeasureLayout:(IOSKHVirtualLayout * _Nullable)layout widthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec __attribute__((swift_name("onMeasure(layout:widthMeasureSpec:heightMeasureSpec:)")));
+- (void)updatePreLayoutContainer:(IOSKHConstraintWidgetContainer * _Nullable)container helper:(id<IOSKHHelper>)helper map:(IOSKHMutableDictionary<NSString *, IOSKHConstraintWidget *> *)map __attribute__((swift_name("updatePreLayout(container:helper:map:)")));
+@property IOSKHPlaceholder_ * _Nullable mPlaceholder __attribute__((swift_name("mPlaceholder")));
+@end;
+
+__attribute__((objc_subclassing_restricted))
+__attribute__((swift_name("MotionPlaceholder.Companion")))
+@interface IOSKHMotionPlaceholderCompanion : IOSKHBase
++ (instancetype)alloc __attribute__((unavailable));
++ (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
++ (instancetype)companion __attribute__((swift_name("init()")));
+@property (class, readonly, getter=shared) IOSKHMotionPlaceholderCompanion *shared __attribute__((swift_name("shared")));
 @end;
 
 __attribute__((objc_subclassing_restricted))
@@ -5972,11 +6223,11 @@ __attribute__((swift_name("VirtualLayout")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Flow")))
-@interface IOSKHFlow : IOSKHVirtualLayout
+__attribute__((swift_name("Flow_")))
+@interface IOSKHFlow_ : IOSKHVirtualLayout
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-@property (class, readonly, getter=companion) IOSKHFlowCompanion *companion __attribute__((swift_name("companion")));
+@property (class, readonly, getter=companion) IOSKHFlow_Companion *companion __attribute__((swift_name("companion")));
 - (void)addToSolverSystem:(IOSKHLinearSystem *)system optimize:(BOOL)optimize __attribute__((swift_name("addToSolver(system:optimize:)")));
 - (void)doCopySrc:(IOSKHConstraintWidget *)src map:(IOSKHMutableDictionary<IOSKHConstraintWidget *, IOSKHConstraintWidget *> *)map __attribute__((swift_name("doCopy(src:map:)")));
 - (void)measureWidthMode:(int32_t)widthMode widthSize:(int32_t)widthSize heightMode:(int32_t)heightMode heightSize:(int32_t)heightSize __attribute__((swift_name("measure(widthMode:widthSize:heightMode:heightSize:)")));
@@ -6003,12 +6254,12 @@ __attribute__((swift_name("Flow")))
 @end;
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("Flow.Companion")))
-@interface IOSKHFlowCompanion : IOSKHBase
+__attribute__((swift_name("Flow_.Companion")))
+@interface IOSKHFlow_Companion : IOSKHBase
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companion __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) IOSKHFlowCompanion *shared __attribute__((swift_name("shared")));
+@property (class, readonly, getter=shared) IOSKHFlow_Companion *shared __attribute__((swift_name("shared")));
 @property (readonly) int32_t HORIZONTAL_ALIGN_CENTER __attribute__((swift_name("HORIZONTAL_ALIGN_CENTER")));
 @property (readonly) int32_t HORIZONTAL_ALIGN_END __attribute__((swift_name("HORIZONTAL_ALIGN_END")));
 @property (readonly) int32_t HORIZONTAL_ALIGN_START __attribute__((swift_name("HORIZONTAL_ALIGN_START")));
@@ -8808,7 +9059,7 @@ __attribute__((swift_name("FlowReference")))
 @property int32_t lastHorizontalStyle __attribute__((swift_name("lastHorizontalStyle")));
 @property float lastVerticalBias __attribute__((swift_name("lastVerticalBias")));
 @property int32_t lastVerticalStyle __attribute__((swift_name("lastVerticalStyle")));
-@property IOSKHFlow * _Nullable mFlow __attribute__((swift_name("mFlow")));
+@property IOSKHFlow_ * _Nullable mFlow __attribute__((swift_name("mFlow")));
 @property IOSKHMutableDictionary<NSString *, IOSKHFloat *> * _Nullable mMapPostMargin __attribute__((swift_name("mMapPostMargin")));
 @property IOSKHMutableDictionary<NSString *, IOSKHFloat *> * _Nullable mMapPreMargin __attribute__((swift_name("mMapPreMargin")));
 @property IOSKHMutableDictionary<NSString *, IOSKHFloat *> * _Nullable mMapWeights __attribute__((swift_name("mMapWeights")));
@@ -11023,6 +11274,14 @@ __attribute__((swift_name("KotlinInt.Companion")))
 
 @interface IOSKHKotlinIntCompanion (Extensions)
 - (NSString *)toHexStringValue:(int32_t)value __attribute__((swift_name("toHexString(value:)")));
+@end;
+
+@interface IOSKHKeyAttributes (Extensions)
+- (void)setFramePositionValue:(int32_t)value __attribute__((swift_name("setFramePosition(value:)")));
+@end;
+
+@interface IOSKHKeyPosition (Extensions)
+- (void)setFramePositionValue:(int32_t)value __attribute__((swift_name("setFramePosition(value:)")));
 @end;
 
 __attribute__((objc_subclassing_restricted))

@@ -101,7 +101,7 @@ static LuaForm *sActiveForm;
     [CommonDelegate setActiveForm:self.startForm];
     [context setup:self.startForm];
     self.startForm.context = context;
-    self.startForm.luaId = [sToppingEngine getMainForm];
+    self.startForm.luaId = [[LGIdParser getInstance] getId:[sToppingEngine getMainForm]];
     self.window.rootViewController = self.startForm.context.navController;
     if(!self.startForm.context.navController.isNavigationBarHidden)
     {
@@ -153,7 +153,7 @@ static LuaForm *sActiveForm;
     }
     //Apply styles end
     
-	self.startForm.luaId = [sToppingEngine getMainForm];
+    self.startForm.luaId = [[LGIdParser getInstance] getId:[sToppingEngine getMainForm]];
 	NSString *initUI = [sToppingEngine getMainUI];
     [self.window makeKeyAndVisible];
 	if([initUI compare:@""] != 0)

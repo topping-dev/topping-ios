@@ -14,6 +14,61 @@
 #import "LGRelativeLayout.h"
 
 static BOOL rtl = false;
+static BOOL swizzled = false;
+
+@implementation UIView(Extension)
+
+static char UIB_PROPERTY_KEY;
+
+@dynamic wrapper;
+
+-(void)setWrapper:(LGView *)wrapper
+{
+    objc_setAssociatedObject(self, &UIB_PROPERTY_KEY, wrapper, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(LGView *)wrapper
+{
+    return (LGView*)objc_getAssociatedObject(self, &UIB_PROPERTY_KEY);
+}
+
+-(void)overload_touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    /*if([self respondsToSelector:@selector(overload_touchesBegan:withEvent:)])
+        [self overload_touchesBegan:touches withEvent:event];*/
+}
+
+-(void)overload_touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if(self.wrapper != nil)
+    {
+        if(touches.count > 0) {
+            CGPoint point = [[[touches allObjects] objectAtIndex:0] locationInView:self.wrapper._view];
+            [self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateChanged];
+        }
+    }
+    /*if([self respondsToSelector:@selector(overload_touchesMoved:withEvent:)])
+        [self overload_touchesMoved:touches withEvent:event];*/
+}
+
+-(void)overload_touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if(self.wrapper != nil)
+    {
+        if(touches.count > 0) {
+            CGPoint point = [[[touches allObjects] objectAtIndex:0] locationInView:self.wrapper._view];
+            [self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateEnded];
+        }
+    }
+    /*if([self respondsToSelector:@selector(overload_touchesEnded:withEvent:)])
+        [self overload_touchesEnded:touches withEvent:event];*/
+}
+
+-(UIView *)overload_hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if(self.wrapper == nil || ![self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateBegan])
+        return [self overload_hitTest:point withEvent:event];
+    
+    return [[UIView alloc] init];
+}
+
+@end
 
 @implementation LGView
 
@@ -176,11 +231,14 @@ static BOOL rtl = false;
 		self._view = nil;
 	}
 	self._view = view;
+    self._view.wrapper = self;
+    [self swizzleFunctionFuncName:@"didMoveToWindow" block:^id _Nullable(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull) {
+        [self callTMethod:@"onAttachedToWindow" :nil :nil];
+        return 0;
+    }];
 	if(self.android_id != nil)
 	{
-		NSArray *arr = SPLIT(self.android_id, @"/");
-		if([arr count] > 1)
-			self.android_id = [arr objectAtIndex:1];
+        self.android_id = [[LGIdParser getInstance] getId:self.android_id];
 	}
 	
 	//Setup background
@@ -188,6 +246,14 @@ static BOOL rtl = false;
         [self setBackground:[LuaRef withValue:self.android_background]];
     
     self.lc = lc;
+    
+    if(!swizzled) {
+        swizzled = true;
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"hitTest:withEvent:") :NSSelectorFromString(@"overload_hitTest:withEvent:")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesBegan:withEvent:") :NSSelectorFromString(@"overload_touchesBegan:withEvent:")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesMoved:withEvent:") :NSSelectorFromString(@"overload_touchesMoved:withEvent:")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesEnded:withEvent:") :NSSelectorFromString(@"overload_touchesEnded:withEvent:")];
+    }
 }
 
 -(void)setupComponent:(UIView *)view
@@ -312,7 +378,7 @@ static BOOL rtl = false;
 }
 
 -(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec {
-    if([self callTMethod:@"onMeasure" :[NSNumber numberWithInt:widthMeasureSpec], [NSNumber numberWithInt:heightMeasureSpec], nil])
+    if([self callTMethod:@"onMeasure" :nil :[NSNumber numberWithInt:widthMeasureSpec], [NSNumber numberWithInt:heightMeasureSpec], nil])
         return;
     int newWidthSpec = widthMeasureSpec;
     int newHeightSpec = heightMeasureSpec;
@@ -443,6 +509,20 @@ static BOOL rtl = false;
 		self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_paddingRight];
 		self.dPaddingTop = [[LGDimensionParser getInstance] getDimension:self.android_paddingTop];
 		self.dPaddingBottom = [[LGDimensionParser getInstance] getDimension:self.android_paddingBottom];
+        if(self.android_paddingStart != nil) {
+            if(![LGView isRtl]) {
+                self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_paddingStart];
+            } else {
+                self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_paddingStart];
+            }
+        }
+        if(self.android_paddingEnd != nil) {
+            if(![LGView isRtl]) {
+                self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_paddingEnd];
+            } else {
+                self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_paddingEnd];
+            }
+        }
 		if(self.android_padding != nil)
 		{
 			self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_padding];
@@ -465,6 +545,20 @@ static BOOL rtl = false;
 		self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginRight];
 		self.dMarginTop = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginTop];
 		self.dMarginBottom = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginBottom];
+        if(self.android_layout_marginStart != nil) {
+            if(![LGView isRtl]) {
+                self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginStart];
+            } else {
+                self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginStart];
+            }
+        }
+        if(self.android_layout_marginEnd != nil) {
+            if(![LGView isRtl]) {
+                self.dMarginRight = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginEnd];
+            } else {
+                self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_marginEnd];
+            }
+        }
 		if(self.android_layout_margin != nil)
 		{
 			self.dMarginLeft = [[LGDimensionParser getInstance] getDimension:self.android_layout_margin];
@@ -708,11 +802,47 @@ static BOOL rtl = false;
 }
 
 -(void)layout:(int)l :(int)t :(int)r :(int)b {
-    if([self callTMethod:@"onLayout" :[NSNumber numberWithBool:false],
+    if([self callTMethod:@"onLayout" :nil :[NSNumber numberWithBool:false],
      [NSNumber numberWithInt:l], [NSNumber numberWithInt:t],
      [NSNumber numberWithInt:r], [NSNumber numberWithInt:b], nil])
         return;
     self._view.frame = CGRectMake(l, t, r - l, b - t);
+}
+
+-(BOOL)onTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state {
+    CGFloat xCoordinate = point.x;
+    CGFloat yCoordinate = point.y;
+    NSNumber *num = [NSNumber numberWithBool:false];
+    if(state == UIGestureRecognizerStateBegan) {
+        tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
+        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+                                   obtainDownTime:tapDownTime
+                                   eventTime:tapDownTime
+                                   action:[IOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
+        [self callTMethod:@"onTouchEvent" :&num :event, nil];
+    } else if(state == UIGestureRecognizerStateChanged) {
+        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+                                   obtainDownTime:tapDownTime
+                                   eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
+                                   action:[IOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
+        [self callTMethod:@"onTouchEvent" :&num :event, nil];
+    } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
+        
+    } else {
+        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+                                   obtainDownTime:tapDownTime
+                                   eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
+                                   action:[IOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
+        [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        tapDownTime = 0;
+    }
+    interceptTouchEventResult = [num boolValue];
+    
+    return interceptTouchEventResult;
+}
+
+-(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state {
+    return false;
 }
 
 -(NSString *) debugDescription:(NSString *)val
@@ -797,6 +927,8 @@ static BOOL rtl = false;
 }
 
 -(void)setVisibility:(NSInteger)visibility {
+    if([self callTMethod:@"setVisibility" :nil :[NSNumber numberWithInt:(int)visibility], nil])
+        return;
     self.dVisibility = (int)visibility;
     if(visibility == VISIBLE)
     {
@@ -827,6 +959,10 @@ static BOOL rtl = false;
     if([self isKindOfClass:[LGViewGroup class]])
         return [((LGViewGroup*)self) getBindings];
     return @{};
+}
+
+-(void)SetId:(NSString *)idVal {
+    self.lua_id = [[LGIdParser getInstance] getId:idVal];
 }
 
 -(LuaFragment*)findFragment {
@@ -927,7 +1063,7 @@ static BOOL rtl = false;
 
 #pragma IOSKHView start
 
--(BOOL)callTMethodArr:(NSString *)methodName :(NSArray *)arr {
+-(BOOL)callTMethodArr:(NSString *)methodName :(NSObject**)result :(NSArray *)arr {
     if([self.methodSkip containsObject:methodName])
         return false;
     
@@ -938,7 +1074,11 @@ static BOOL rtl = false;
         }
         
         [self.methodSkip addObject:methodName];
-        ((id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))[self.methodEventMap objectForKey:methodName])(self, ___arr___);
+        if(result != nil) {
+            *result = ((id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))[self.methodEventMap objectForKey:methodName])(self, ___arr___);
+        } else {
+            ((id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))[self.methodEventMap objectForKey:methodName])(self, ___arr___);
+        }
         [self.methodSkip removeObject:methodName];
         return true;
     }
@@ -946,10 +1086,34 @@ static BOOL rtl = false;
     return false;
 }
 
--(BOOL)callTMethod:(NSString *)methodName :(id)arg, ... {
+-(BOOL)callTMethod:(NSString *)methodName :(NSObject**)result :(id)arg, ... {
     NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:VarArgs2(arg)];
     
-    return [self callTMethodArr:methodName :arr];
+    return [self callTMethodArr:methodName :result :arr];
+}
+
+-(void)swizzleMethods:(Class)cls :(SEL)original :(SEL)swizzled {
+    SEL originalSelector = original;
+    SEL swizzledSelector = swizzled;
+
+    Method originalMethod = class_getInstanceMethod(cls, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(cls, swizzledSelector);
+
+    // When swizzling a class method, use the following:
+    // Method originalMethod = class_getClassMethod(class, originalSelector);
+    // Method swizzledMethod = class_getClassMethod(class, swizzledSelector);
+
+    IMP originalImp = method_getImplementation(originalMethod);
+    IMP swizzledImp = method_getImplementation(swizzledMethod);
+
+    class_replaceMethod(cls,
+            swizzledSelector,
+            originalImp,
+            method_getTypeEncoding(originalMethod));
+    class_replaceMethod(cls,
+            originalSelector,
+            swizzledImp,
+            method_getTypeEncoding(swizzledMethod));
 }
 
 - (void)addViewView:(nonnull id<IOSKHTView>)view param:(nonnull IOSKHViewGroupLayoutParams *)param {
@@ -1063,8 +1227,8 @@ static BOOL rtl = false;
 - (nonnull NSString *)getId {
     if([[LGIdParser getInstance] hasId:[self GetId]])
         return [[LGIdParser getInstance] getId:[self GetId]];
-    else
-        return @"";
+
+    return @"";
 }
 
 
@@ -1238,11 +1402,7 @@ static BOOL rtl = false;
 
 
 - (id<IOSKHTView> _Nullable)getViewByIdId:(nonnull NSString *)id {
-    NSString *idVal = id;
-    if(!CONTAINS(idVal, @"id/"))
-        idVal = APPEND(@"@id/", idVal);
-        
-    return [self getViewById:[LuaRef withValue:idVal]];
+    return [self getViewById:[LuaRef withValue:id]];
 }
 
 
@@ -1378,7 +1538,7 @@ static BOOL rtl = false;
 
 
 - (void)setIdId:(nonnull NSString *)id {
-    self.lua_id = id;
+    [self SetId:id];
 }
 
 

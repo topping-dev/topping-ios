@@ -337,8 +337,8 @@
     [self.cells setObject:cell atIndexedSubscript:indexPath.row];
     [self ensureFragment:indexPath.row];
     
-    NSString *itemId = [cell.fragment.luaId stringByAppendingString:LTOS(indexPath.row)];
-    NSString *viewHolderId = cell.frameLayout.lua_id;
+    NSString *itemId = [[cell.fragment GetId] stringByAppendingString:LTOS(indexPath.row)];
+    NSString *viewHolderId = [cell.frameLayout GetId];
     NSString *boundItemId = [self itemForViewHolder:viewHolderId];
     if(boundItemId != nil && boundItemId != itemId) {
         [self removeFragment:boundItemId];
@@ -386,12 +386,12 @@
 
 -(void)ensureFragment:(int)position {
     LuaFragmentUICollectionViewCell *cell = (LuaFragmentUICollectionViewCell*)[self.cells objectAtIndex:position];
-    NSString *itemId = [cell.fragment.luaId stringByAppendingString:ITOS(position)];
+    NSString *itemId = [[cell.fragment GetId] stringByAppendingString:ITOS(position)];
     if(itemId == nil || [self.fragments objectForKey:itemId] == nil)
     {
         LuaFragment *fragment = [self createFragment:position];
         if(itemId == nil) {
-            itemId = [fragment.luaId stringByAppendingString:ITOS(position)];
+            itemId = [[fragment GetId] stringByAppendingString:ITOS(position)];
         }
         SavedState *state = [self.savedStates objectAtIndex:position];
         if(state != nil && state.mState != nil)
@@ -403,7 +403,7 @@
         LGFrameLayout *frameLayout = [LGFrameLayout create:self.lc];
         frameLayout.android_layout_width = @"match_parent";
         frameLayout.android_layout_height = @"match_parent";
-        frameLayout.lua_id = [[NSUUID UUID] UUIDString];
+        [frameLayout SetId:[[NSUUID UUID] UUIDString]];
         frameLayout._view = [frameLayout createComponent];
         [frameLayout setupComponent:frameLayout._view];
         
@@ -549,7 +549,7 @@
 }
 
 -(NSString*)getItemId:(int)position {
-    return ((LuaFragmentUICollectionViewCell*)[self.cells objectAtIndex:position]).fragment.luaId;
+    return [((LuaFragmentUICollectionViewCell*)[self.cells objectAtIndex:position]).fragment GetId];
 }
 
 - (void)restoreState:(NSMutableDictionary *)savedState {

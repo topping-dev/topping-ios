@@ -2,6 +2,7 @@
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LuaValues.h"
+#import "LGIdParser.h"
 #import "IOSKotlinHelper/IOSKotlinHelper.h"
 #import <topping/topping-Swift.h>
 
@@ -28,7 +29,7 @@ static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
 
 +(void)registerUIEvent:(LuaRef *)luaId :(int)event :(LuaTranslator *)lt
 {
-    [LuaEvent registerUIEventInternal:[luaId getCleanId] :event :lt];
+    [LuaEvent registerUIEventInternal:[[LGIdParser getInstance] getId:luaId.idRef] :event :lt];
 }
 
 +(void)registerUIEventInternal:(NSString *)luaId :(int)event :(LuaTranslator *)lt

@@ -11,7 +11,6 @@
 +(void)resourceLoader;
 +(LuaRef*)withValue:(NSString*)val;
 +(LuaRef*)getRef:(LuaContext*)lc :(NSString *)ids;
--(NSString*)getCleanId;
 
 @property (nonatomic, strong) NSString *idRef;
 

@@ -46,7 +46,7 @@
 {
     self = [super init];
     if (self) {
-        self.mDestinationId = destinationId;
+        self.mDestinationId = [[LGIdParser getInstance] getId:destinationId];
         self.mNavOptions = nil;
     }
     return self;
@@ -56,7 +56,7 @@
 {
     self = [super init];
     if (self) {
-        self.mDestinationId = destinationId;
+        self.mDestinationId = [[LGIdParser getInstance] getId:destinationId];
         self.mNavOptions = navOptions;
     }
     return self;
@@ -66,7 +66,7 @@
 {
     self = [super init];
     if (self) {
-        self.mDestinationId = destinationId;
+        self.mDestinationId = [[LGIdParser getInstance] getId:destinationId];
         self.mNavOptions = navOptions;
         self.mDefaultArguments = defaultArgs;
     }
@@ -234,10 +234,10 @@
     
     for(GDataXMLNode *rootNode in [root attributes]) {
         if(COMPARE([rootNode name], @"android:id")) {
-            lnr.idVal = [rootNode stringValue];
+            lnr.idVal = [[LGIdParser getInstance] getId:[rootNode stringValue]];
         }
         else if(COMPARE([rootNode name], @"app:startDestination")) {
-            lnr.mStartDestinationId = [rootNode stringValue];
+            lnr.mStartDestinationId = [[LGIdParser getInstance] getId:[rootNode stringValue]];
         }
     }
        
@@ -259,7 +259,7 @@
         {
             if(COMPARE([node name], @"android:id"))
             {
-                lne.idVal = [node stringValue];
+                lne.idVal = [[LGIdParser getInstance] getId:[node stringValue]];
             }
             else if(COMPARE([node name], @"android:name"))
             {
@@ -287,27 +287,27 @@
                     }
                     else if(COMPARE([nodeChild name], @"app:destination"))
                     {
-                        lna.mDestinationId = [nodeChild stringValue];
+                        lna.mDestinationId = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:enterAnim"))
                     {
-                        lna.mNavOptions.mEnterAnim = [nodeChild stringValue];
+                        lna.mNavOptions.mEnterAnim = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:exitAnim"))
                     {
-                        lna.mNavOptions.mExitAnim = [nodeChild stringValue];
+                        lna.mNavOptions.mExitAnim = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:popEnterAnim"))
                     {
-                        lna.mNavOptions.mPopEnterAnim = [nodeChild stringValue];
+                        lna.mNavOptions.mPopEnterAnim = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:popExitAnim"))
                     {
-                        lna.mNavOptions.mPopExitAnim = [nodeChild stringValue];
+                        lna.mNavOptions.mPopExitAnim = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:popUpTo"))
                     {
-                        lna.mNavOptions.mPopUpTo = [nodeChild stringValue];
+                        lna.mNavOptions.mPopUpTo = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:popUpInclusive"))
                     {
