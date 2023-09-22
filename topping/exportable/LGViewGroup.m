@@ -423,7 +423,10 @@
 {
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
 
-    [dict setObject:[LuaFunction Create:class_getInstanceMethod([self class], @selector(getBindings)) :@selector(getBindings) :nil :MakeArray(nil)] forKey:@"getBindings"];
+    InstanceMethodNoArg(getBindings, NSDictionary, @"getBindings")
+    InstanceMethodNoRet(addSubview:, @[[LGView class]], @"addView")
+    InstanceMethodNoRet(removeSubview:, @[[LGView class]], @"removeView")
+    
     return dict;
 }
 
