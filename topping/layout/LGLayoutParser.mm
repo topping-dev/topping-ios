@@ -273,13 +273,13 @@
     else if([name compare:@"android.support.design.widget.NavigationView"] == 0
             || [name compare:@"com.google.android.material.navigation.NavigationView"] == 0)
         rootView = [[LGNavigationView alloc] init];
+    else if([name compare:@"RelativeLayout"] == 0
+            || [name compare:@"LGRelativeLayout"] == 0)
+        rootView = [[LGRelativeLayout alloc] init];
     else if([ToppingEngine getViewPlugins] != nil && (pluginClass = [self ContainsClassNameStringInArray:[ToppingEngine getViewPlugins] :name]) != nil)
     {
         rootView = [[pluginClass alloc] init];
     }
-    else if([name compare:@"RelativeLayout"] == 0
-            || [name compare:@"LGRelativeLayout"] == 0)
-        rootView = [[LGRelativeLayout alloc] init];
     else
     {
         //Lets try parent to do job for us
