@@ -1,5 +1,5 @@
 import Foundation
-import IOSKotlinHelper
+import ToppingIOSKotlinHelper
 
 @objc(ToppingClass)
 public class ToppingClass : NSObject, TClass {

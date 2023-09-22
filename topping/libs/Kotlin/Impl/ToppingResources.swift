@@ -1,5 +1,5 @@
 import Foundation
-import IOSKotlinHelper
+import ToppingIOSKotlinHelper
 
 @objc
 public class ToppingResources : NSObject, TResources {

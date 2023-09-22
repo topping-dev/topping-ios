@@ -7,6 +7,7 @@ FOUNDATION_EXPORT double toppingVersionNumber;
 //! Project version string for topping.
 FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <topping/CommonDelegate.h>
 #import <topping/LuaClass.h>
 #import <topping/LuaFunction.h>

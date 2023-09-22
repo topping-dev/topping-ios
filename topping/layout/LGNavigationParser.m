@@ -5,7 +5,8 @@
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
 #import "LuaValues.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 
 @implementation NavArgument
 

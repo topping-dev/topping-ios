@@ -3,7 +3,8 @@
 #import "LuaTranslator.h"
 #import "LuaValues.h"
 
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 
 @implementation LuaToast
 

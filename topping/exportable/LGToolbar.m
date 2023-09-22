@@ -1,5 +1,6 @@
 #import "LGToolbar.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 #import "Topping.h"
 #import "LGColorParser.h"
 #import "LGDimensionParser.h"

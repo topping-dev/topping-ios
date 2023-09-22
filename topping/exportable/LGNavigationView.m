@@ -2,6 +2,7 @@
 #import "LuaFunction.h"
 #import "LuaViewInflator.h"
 #import "LGDrawerLayout.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LGNavigationView

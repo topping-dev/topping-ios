@@ -3,150 +3,150 @@
 #import "LGImageView.h"
 #import "LGButton.h"
 
-@class IOSKHImageFilterButton;
+@class TIOSKHImageFilterButton;
 
 @interface LGConstraintImageFilterButton : LGImageView
 
-@property (nonatomic, strong) IOSKHImageFilterButton *wrapper;
+@property (nonatomic, strong) TIOSKHImageFilterButton *wrapper;
 
 @end
 
-@class IOSKHImageFilterView;
+@class TIOSKHImageFilterView;
 
 @interface LGConstraintImageFilterView : LGImageView
 
-@property (nonatomic, strong) IOSKHImageFilterView *wrapper;
+@property (nonatomic, strong) TIOSKHImageFilterView *wrapper;
 
 @end
 
-@class IOSKHMotionButton;
+@class TIOSKHMotionButton;
 
 @interface LGConstraintMotionButton : LGButton
 
-@property (nonatomic, strong) IOSKHMotionButton *wrapper;
+@property (nonatomic, strong) TIOSKHMotionButton *wrapper;
 
 @end
 
-/*@class IOSKHMotionLabel;
+/*@class TIOSKHMotionLabel;
 
 @interface LGConstraintMotionLabel : LGTextView
 
-@property (nonatomic, strong) IOSKHMotionLabel *wrapper;
+@property (nonatomic, strong) TIOSKHMotionLabel *wrapper;
 
 @end*/
 
-@class IOSKHBarrier;
+@class TIOSKHBarrier;
 
 @interface LGConstraintBarrier : LGView
 
-@property (nonatomic, strong) IOSKHBarrier *wrapper;
+@property (nonatomic, strong) TIOSKHBarrier *wrapper;
 
 @end
 
-@class IOSKHGroup;
+@class TIOSKHGroup;
 
 @interface LGConstraintGroup : LGView
 
-@property (nonatomic, strong) IOSKHGroup *wrapper;
+@property (nonatomic, strong) TIOSKHGroup *wrapper;
 
 @end
 
-@class IOSKHGuideline;
+@class TIOSKHGuideline;
 
 @interface LGConstraintGuideline : LGView
 
-@property (nonatomic, strong) IOSKHGuideline *wrapper;
+@property (nonatomic, strong) TIOSKHGuideline *wrapper;
 
 @end
 
-@class IOSKHPlaceholder;
+@class TIOSKHPlaceholder;
 
 @interface LGConstraintPlaceholder : LGView
 
-@property (nonatomic, strong) IOSKHPlaceholder *wrapper;
+@property (nonatomic, strong) TIOSKHPlaceholder *wrapper;
 
 @end
 
-@class IOSKHReactiveGuide;
+@class TIOSKHReactiveGuide;
 
 @interface LGConstraintReactiveGuide : LGView
 
-@property (nonatomic, strong) IOSKHReactiveGuide *wrapper;
+@property (nonatomic, strong) TIOSKHReactiveGuide *wrapper;
 
 @end
 
-@class IOSKHCarousel;
+@class TIOSKHCarousel;
 
 @interface LGConstraintCarousel : LGView
 
-@property (nonatomic, strong) IOSKHCarousel *wrapper;
+@property (nonatomic, strong) TIOSKHCarousel *wrapper;
 
 @end
 
-@class IOSKHCircularFlow;
+@class TIOSKHCircularFlow;
 
 @interface LGConstraintCircularFlow : LGView
 
-@property (nonatomic, strong) IOSKHCircularFlow *wrapper;
+@property (nonatomic, strong) TIOSKHCircularFlow *wrapper;
 
 @end
 
-@class IOSKHFlow;
+@class TIOSKHFlow;
 
 @interface LGConstraintFlow : LGView
 
-@property (nonatomic, strong) IOSKHFlow *wrapper;
+@property (nonatomic, strong) TIOSKHFlow *wrapper;
 
 @end
 
-@class IOSKHGrid;
+@class TIOSKHGrid;
 
 @interface LGConstraintGrid : LGView
 
-@property (nonatomic, strong) IOSKHGrid *wrapper;
+@property (nonatomic, strong) TIOSKHGrid *wrapper;
 
 @end
 
-@class IOSKHLayer;
+@class TIOSKHLayer;
 
 @interface LGConstraintLayer : LGView
 
-@property (nonatomic, strong) IOSKHLayer *wrapper;
+@property (nonatomic, strong) TIOSKHLayer *wrapper;
 
 @end
 
-@class IOSKHMotionEffect;
+@class TIOSKHMotionEffect;
 
 @interface LGConstraintMotionEffect : LGView
 
-@property (nonatomic, strong) IOSKHMotionEffect *wrapper;
+@property (nonatomic, strong) TIOSKHMotionEffect *wrapper;
 
 @end
 
-@class IOSKHMotionPlaceholder;
+@class TIOSKHMotionPlaceholder;
 
 @interface LGConstraintMotionPlaceholder : LGView
 
-@property (nonatomic, strong) IOSKHMotionPlaceholder *wrapper;
+@property (nonatomic, strong) TIOSKHMotionPlaceholder *wrapper;
 
 @end
 
-@class IOSKHConstraintLayout;
+@class TIOSKHConstraintLayout;
 
 @interface LGConstraintLayout : LGViewGroup
 
 +(LGConstraintLayout*)create:(LuaContext *)context;
 
 @property (nonatomic) BOOL initComponent;
-@property (nonatomic, strong) IOSKHConstraintLayout *wrapper;
+@property (nonatomic, strong) TIOSKHConstraintLayout *wrapper;
 
 @end
 
-@class IOSKHMotionLayout;
+@class TIOSKHMotionLayout;
 
 @interface LGConstraintMotionLayout : LGConstraintLayout
 
-@property (nonatomic, strong) IOSKHMotionLayout *wrapper;
+@property (nonatomic, strong) TIOSKHMotionLayout *wrapper;
 
 @end
 

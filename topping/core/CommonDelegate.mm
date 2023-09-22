@@ -19,7 +19,7 @@
 
 #import "UIColor+Lum.h"
 
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 static CommonDelegate *sCommonDelegate;

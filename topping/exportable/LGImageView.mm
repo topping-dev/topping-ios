@@ -4,7 +4,7 @@
 #import "LGDrawableParser.h"
 #import "LGValueParser.h"
 #import "LuaFunction.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LGImageView
@@ -208,9 +208,9 @@
 	return dict;
 }
 
-#pragma IOSKHTView
+#pragma TIOSKHTView
 
-- (void)setImageDrawableDrawable:(id<IOSKHTDrawable> _Nullable)drawable {
+- (void)setImageDrawableDrawable:(id<TIOSKHTDrawable> _Nullable)drawable {
     LGDrawableReturn *ldr = (LGDrawableReturn *)drawable;
     [self setImageDrawable:ldr];
 }
@@ -226,19 +226,19 @@
     }
 }
 
--(id<IOSKHTDrawable>)getDrawable {
-    return (id<IOSKHTDrawable>)self.ldr;
+-(id<TIOSKHTDrawable>)getDrawable {
+    return (id<TIOSKHTDrawable>)self.ldr;
 }
 
--(void)setColorFilterColorMatrixColorFilter:(IOSKHColorMatrixColorFilter *)colorMatrixColorFilter {
+-(void)setColorFilterColorMatrixColorFilter:(TIOSKHColorMatrixColorFilter *)colorMatrixColorFilter {
     //https://developer.android.com/reference/android/graphics/ColorMatrix
     UIImageView *iv = (UIImageView*)self._view;
     if(self.orgImage == nil)
         self.orgImage = iv.image;
     
-    IOSKHColorMatrix *matrix = [[IOSKHColorMatrix alloc] init];
+    TIOSKHColorMatrix *matrix = [[TIOSKHColorMatrix alloc] init];
     [colorMatrixColorFilter getColorMatrixColorMatrix:matrix];
-    IOSKHKotlinFloatArray *arr = matrix.array;
+    TIOSKHKotlinFloatArray *arr = matrix.array;
     
     // Make the input image recipe
     CIImage *inputImage = [CIImage imageWithCGImage:iv.image.CGImage];
@@ -262,7 +262,7 @@
     iv.image = [UIImage imageWithCGImage:cgimg];
 }
 
--(void)setImageMatrixImageMatrix:(IOSKHSkikoMatrix33 *)imageMatrix {
+-(void)setImageMatrixImageMatrix:(TIOSKHSkikoMatrix33 *)imageMatrix {
     CGAffineTransform matrix;
     matrix.a = [imageMatrix getIndex:0];
     matrix.b = [imageMatrix getIndex:1];
@@ -278,23 +278,23 @@
     [self setImageRef:[LuaRef withValue:resId]];
 }
 
--(void)setScaleTypeScaleType:(IOSKHScaleType *)scaleType {
+-(void)setScaleTypeScaleType:(TIOSKHScaleType *)scaleType {
     UIImageView *iv = (UIImageView*)self._view;
     
-    if(scaleType == IOSKHScaleType.fitXy
-       || scaleType == IOSKHScaleType.matrix)
+    if(scaleType == TIOSKHScaleType.fitXy
+       || scaleType == TIOSKHScaleType.matrix)
         [iv setContentMode:UIViewContentModeScaleToFill];
-    else if(scaleType == IOSKHScaleType.fitStart)
+    else if(scaleType == TIOSKHScaleType.fitStart)
         [iv setContentMode:UIViewContentModeScaleAspectFit];
-    else if(scaleType == IOSKHScaleType.fitCenter)
+    else if(scaleType == TIOSKHScaleType.fitCenter)
         [iv setContentMode:UIViewContentModeScaleAspectFit];
-    else if(scaleType == IOSKHScaleType.fitEnd)
+    else if(scaleType == TIOSKHScaleType.fitEnd)
         [iv setContentMode:UIViewContentModeScaleAspectFit];
-    else if(scaleType == IOSKHScaleType.center)
+    else if(scaleType == TIOSKHScaleType.center)
         [iv setContentMode:UIViewContentModeCenter];
-    else if(scaleType == IOSKHScaleType.centerInside)
+    else if(scaleType == TIOSKHScaleType.centerInside)
         [iv setContentMode:UIViewContentModeScaleAspectFit];
-    else if(scaleType == IOSKHScaleType.centerCrop)
+    else if(scaleType == TIOSKHScaleType.centerCrop)
         [iv setContentMode:UIViewContentModeScaleAspectFill];
 }
 

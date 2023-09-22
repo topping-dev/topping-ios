@@ -14,8 +14,8 @@
 @protocol LuaInterface;
 @class NavController;
 @class LuaNavController;
-@protocol IOSKHTView;
-@class IOSKHViewGroupLayoutParams;
+@protocol TIOSKHTView;
+@class TIOSKHViewGroupLayoutParams;
 @class LGRelativeLayoutParams;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
@@ -109,7 +109,7 @@ enum MEASURE_SPEC
 
 @end
 
-@interface LGView : NSObject <LuaClass, LuaInterface, IOSKHTView>
+@interface LGView : NSObject <LuaClass, LuaInterface, TIOSKHTView>
 {
     NSArray *propertyNameCache;
     long tapDownTime;
@@ -311,7 +311,7 @@ enum MEASURE_SPEC
 
 @property(nonatomic, strong) LuaRef *lrBackground;
 
-@property(nonatomic, strong) IOSKHViewGroupLayoutParams *kLayoutParams;
+@property(nonatomic, strong) TIOSKHViewGroupLayoutParams *kLayoutParams;
 @property(nonatomic, strong) id kParentType;
 
 @property (nonatomic, strong) NSMutableArray *methodSkip;

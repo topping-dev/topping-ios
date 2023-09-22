@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "KotlinExports.h"
 
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LuaAppBarConfiguration

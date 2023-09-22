@@ -74,6 +74,7 @@
 #import "LuaForm.h"
 #import "LuaFragment.h"
 
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation ToppingEngine

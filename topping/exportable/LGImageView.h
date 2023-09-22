@@ -5,9 +5,9 @@
 #import "LuaStream.h"
 #import "LuaRef.h"
 
-@protocol IOSKHTImageView;
+@protocol TIOSKHTImageView;
 
-@interface LGImageView : LGView <IOSKHTImageView>
+@interface LGImageView : LGView <TIOSKHTImageView>
 {
 }
 

@@ -6,7 +6,7 @@
 #import "LGStyleParser.h"
 #import "LGValueParser.h"
 #import "LGColorParser.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LuaContext
@@ -82,9 +82,9 @@
 	return dict;
 }
 
-#pragma IOSKHTContext
+#pragma TIOSKHTContext
 
-- (id<IOSKHTDrawable>)createLayerDrawableLayers:(IOSKHKotlinArray<id<IOSKHTDrawable>> *)layers {
+- (id<TIOSKHTDrawable>)createLayerDrawableLayers:(TIOSKHKotlinArray<id<TIOSKHTDrawable>> *)layers {
     LGDrawableReturn *ldr = [[LGDrawableReturn alloc] init];
     int maxWidth;
     int maxHeight;
@@ -111,15 +111,15 @@
     return ldr;
 }
 
-- (nonnull id<IOSKHTPaint>)createPaint {
-    return (id<IOSKHTPaint>)[[ToppingPaint alloc] initWithFont:nil];
+- (nonnull id<TIOSKHTPaint>)createPaint {
+    return (id<TIOSKHTPaint>)[[ToppingPaint alloc] initWithFont:nil];
 }
 
-- (nonnull id<IOSKHTView>)createView {
+- (nonnull id<TIOSKHTView>)createView {
     return [[LGView alloc] init];
 }
 
-- (nonnull id<IOSKHTLayoutInflater>)getLayoutInflater {
+- (nonnull id<TIOSKHTLayoutInflater>)getLayoutInflater {
     return (LuaViewInflator*)[LuaViewInflator create:self];
 }
 
@@ -127,11 +127,11 @@
     return self.packageName;
 }
 
-- (nonnull id<IOSKHTResources>)getResources {
-    return (id<IOSKHTResources>)[ToppingResources new];
+- (nonnull id<TIOSKHTResources>)getResources {
+    return (id<TIOSKHTResources>)[ToppingResources new];
 }
 
-- (id<IOSKHInterpolator> _Nullable)loadInterpolatorId:(nonnull NSString *)id {
+- (id<TIOSKHInterpolator> _Nullable)loadInterpolatorId:(nonnull NSString *)id {
     //TODO:
     return nil;
 }

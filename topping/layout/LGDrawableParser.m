@@ -5,8 +5,8 @@
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
 #import "UIColor+Lum.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
 
 @implementation LGDrawableReturn
 
@@ -127,21 +127,21 @@
 
 -(LGDrawableReturn *) parseDrawableRef:(LuaRef *)drawable
 {
-    return [self parseDrawableRef:drawable :0];
+    return [self parseDrawableRefWithTile:drawable :0];
 }
 
--(LGDrawableReturn *) parseDrawableRef:(LuaRef *)drawable :(int)tileMode
+-(LGDrawableReturn *) parseDrawableRefWithTile:(LuaRef *)drawable :(int)tileMode
 {
     NSString *val = (NSString*)[[LGValueParser getInstance] getValue:drawable.idRef];
-    return [self parseDrawable:val :tileMode];
+    return [self parseDrawableWithTile:val :tileMode];
 }
 
 -(LGDrawableReturn *) parseDrawable:(NSString *)drawable
 {
-	return [self parseDrawable:drawable :0];
+	return [self parseDrawableWithTile:drawable :0];
 }
 
--(LGDrawableReturn *) parseDrawable:(NSString *)drawable :(int)tileMode
+-(LGDrawableReturn *) parseDrawableWithTile:(NSString *)drawable :(int)tileMode
 {
     if(drawable == nil)
         return nil;
@@ -290,7 +290,7 @@
     int tileModeInt = 0;
     if(COMPARE(tileMode, @"repeat"))
         tileModeInt = 1;
-    LGDrawableReturn *ret = [self parseDrawable:imgPath :tileModeInt];
+    LGDrawableReturn *ret = [self parseDrawableWithTile:imgPath :tileModeInt];
     return ret;
 }
 

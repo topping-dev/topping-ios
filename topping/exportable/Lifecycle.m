@@ -2,6 +2,7 @@
 #import "LuaAll.h"
 #import "LuaLifecycleObserver.h"
 #import "CoroutineScope.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation Lifecycle

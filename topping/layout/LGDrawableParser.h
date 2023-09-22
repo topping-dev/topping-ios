@@ -5,7 +5,7 @@
 @class GDataXMLElement;
 @protocol ThemeProviding;
 @protocol ResourceProviding;
-@protocol IOSKHTDrawable;
+@protocol TIOSKHTDrawable;
 
 @interface VectorTheme : NSObject <ThemeProviding, ResourceProviding>
 
@@ -15,7 +15,7 @@
 
 @end
 
-@interface LGDrawableReturn : NSObject <IOSKHTDrawable>
+@interface LGDrawableReturn : NSObject <TIOSKHTDrawable>
 {
 };
 
@@ -47,9 +47,9 @@
 +(LGDrawableParser*) getInstance;
 -(void)initialize;
 -(LGDrawableReturn*) parseDrawableRef:(LuaRef *)drawable;
--(LGDrawableReturn*) parseDrawableRef:(LuaRef *)drawable :(int)tileMode;
+-(LGDrawableReturn*) parseDrawableRefWithTile:(LuaRef *)drawable :(int)tileMode;
 -(LGDrawableReturn*) parseDrawable:(NSString *)drawable;
--(LGDrawableReturn*) parseDrawable:(NSString *)drawable :(int)tileMode;
+-(LGDrawableReturn*) parseDrawableWithTile:(NSString *)drawable :(int)tileMode;
 -(LGDrawableReturn*) parseXML:(NSString *)filename :(int)tileMode;
 -(LGDrawableReturn*) parseVector:(NSData*)data;
 -(LGDrawableReturn*) parseBitmap:(GDataXMLElement*)root;

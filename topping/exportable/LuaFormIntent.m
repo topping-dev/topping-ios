@@ -1,5 +1,6 @@
 #import "LuaFormIntent.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 #import "Topping.h"
 
 @implementation LuaFormIntent

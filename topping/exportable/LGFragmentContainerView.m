@@ -2,7 +2,8 @@
 #import "LuaFunction.h"
 #import "Defines.h"
 #import "LuaNavHostFragment.h"
-#import "Topping/Topping-Swift.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 
 @implementation LGFragmentContainerView
 

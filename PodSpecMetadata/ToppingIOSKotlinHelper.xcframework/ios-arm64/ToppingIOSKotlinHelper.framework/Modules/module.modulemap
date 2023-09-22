@@ -1,0 +1,8 @@
+framework module ToppingIOSKotlinHelper {
+    umbrella header "ToppingIOSKotlinHelper.h"
+
+    export *
+    module * { export * }
+
+    use Foundation
+}

@@ -9,7 +9,7 @@
 #import "DisplayMetrics.h"
 #import "LuaTranslator.h"
 #import "LuaMutableLiveData.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LuaFragmentContainer

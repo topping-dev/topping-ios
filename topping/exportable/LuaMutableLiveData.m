@@ -1,6 +1,7 @@
 #import "LuaMutableLiveData.h"
 #import "LuaAll.h"
 #import "LuaThread.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @class LuaTranslatorObserver;

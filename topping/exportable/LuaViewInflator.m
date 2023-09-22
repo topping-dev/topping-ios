@@ -5,7 +5,7 @@
 #import "LuaTranslator.h"
 #import "Defines.h"
 #import "LuaRef.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import "ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h"
 
 @implementation LuaViewInflator
 
@@ -71,9 +71,9 @@
 	return dict;
 }
 
-#pragma IOSKHTLayoutInflater
+#pragma TIOSKHTLayoutInflater
 
--(id<IOSKHTView>)inflateResId:(NSString *)resId parent:(id<IOSKHTView>)parent {
+-(id<TIOSKHTView>)inflateResId:(NSString *)resId parent:(id<TIOSKHTView>)parent {
     return [self inflate:[LuaRef withValue:resId] :(LGView*)parent];
 }
 

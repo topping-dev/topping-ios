@@ -4,7 +4,8 @@
 #import "DisplayMetrics.h"
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 
 @implementation LGIdParser
 

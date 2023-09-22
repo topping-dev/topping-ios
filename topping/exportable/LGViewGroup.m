@@ -2,7 +2,7 @@
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LGValueParser.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
+#import "ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h"
 
 @implementation LGViewGroup
 
@@ -374,24 +374,24 @@
     NSNumber *num = [NSNumber numberWithBool:false];
     if(state == UIGestureRecognizerStateBegan) {
         tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
-        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+        TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:tapDownTime
-                                   action:[IOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
+                                   action:[TIOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
         [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
     } else if(state == UIGestureRecognizerStateChanged) {
-        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+        TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
-                                   action:[IOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
+                                   action:[TIOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
         [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
     } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
         
     } else {
-        IOSKHMotionEvent *event = [[IOSKHMotionEvent companion]
+        TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
-                                   action:[IOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
+                                   action:[TIOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
         [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
         tapDownTime = 0;
     }
@@ -430,23 +430,23 @@
     return dict;
 }
 
-#pragma IOSKHTView Start
+#pragma TIOSKHTView Start
 
--(void)swizzleFunctionFuncName:(NSString *)funcName block_:(id  _Nullable (^)(id<IOSKHTView> _Nonnull, IOSKHKotlinArray<id> * _Nonnull))block
+-(void)swizzleFunctionFuncName:(NSString *)funcName block_:(id  _Nullable (^)(id<TIOSKHTView> _Nonnull, TIOSKHKotlinArray<id> * _Nonnull))block
 {
     [self.methodEventMap setObject:block forKey:funcName];
 }
 
--(void)addViewView:(id<IOSKHTView>)view param:(IOSKHViewGroupLayoutParams *)param {
+-(void)addViewView:(id<TIOSKHTView>)view param:(TIOSKHViewGroupLayoutParams *)param {
     [view setLayoutParamsParams:param];
     [self addSubview:(LGView*)view];
 }
 
-- (void)dispatchDrawCanvas:(id<IOSKHTCanvas>)canvas {
+- (void)dispatchDrawCanvas:(id<TIOSKHTCanvas>)canvas {
     
 }
 
-- (id<IOSKHTView>)getChildAtIndex:(int32_t)index {
+- (id<TIOSKHTView>)getChildAtIndex:(int32_t)index {
     return [self.subviews objectAtIndex:index];
 }
 

@@ -57,7 +57,7 @@
 	return dict;
 }
 
-#pragma IOSKHView start
+#pragma TIOSKHView start
 
 -(BOOL)canScrollVerticallyVert:(int32_t)vert {
     return true;

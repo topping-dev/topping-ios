@@ -8,8 +8,8 @@
 #import "CommonDelegate.h"
 #import "DisplayMetrics.h"
 #import "LuaTranslator.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 
 @implementation LuaForm
 

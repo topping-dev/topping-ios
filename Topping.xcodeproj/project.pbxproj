@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -178,7 +178,6 @@
 		5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */; };
 		5C25F4E025076B8E0074B6AF /* UIColor+Lum.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */; };
 		5C27FCC22AB0493300066429 /* ToppingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCC12AB0493300066429 /* ToppingClass.swift */; };
-		5C27FCC62AB04E8600066429 /* IOSKotlinHelper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C27FCC52AB04E8600066429 /* IOSKotlinHelper.xcframework */; };
 		5C27FCCD2AB053F500066429 /* ToppingPaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCCC2AB053F500066429 /* ToppingPaint.swift */; };
 		5C27FCCF2AB06ABE00066429 /* ToppingResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */; };
 		5C27FCD22AB070B600066429 /* LGXmlParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27FCD02AB070B600066429 /* LGXmlParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -910,7 +909,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 10;
+			dstSubfolderSpec = 16;
 			files = (
 			);
 			name = "Embed Frameworks";
@@ -1093,7 +1092,6 @@
 		5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Lum.h"; sourceTree = "<group>"; };
 		5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Lum.m"; sourceTree = "<group>"; };
 		5C27FCC12AB0493300066429 /* ToppingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingClass.swift; sourceTree = "<group>"; };
-		5C27FCC52AB04E8600066429 /* IOSKotlinHelper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = IOSKotlinHelper.xcframework; sourceTree = "<group>"; };
 		5C27FCCC2AB053F500066429 /* ToppingPaint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingPaint.swift; sourceTree = "<group>"; };
 		5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingResources.swift; sourceTree = "<group>"; };
 		5C27FCD02AB070B600066429 /* LGXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGXmlParser.h; sourceTree = "<group>"; };
@@ -1830,7 +1828,6 @@
 				5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */,
 				5C5A9A4024E16F0D002A22EA /* UIKit.framework in Frameworks */,
 				4FD173E093462938CD3C2ADB /* Pods_Topping.framework in Frameworks */,
-				5C27FCC62AB04E8600066429 /* IOSKotlinHelper.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2249,7 +2246,6 @@
 			isa = PBXGroup;
 			children = (
 				5C27FCC72AB04FE400066429 /* Impl */,
-				5C27FCC52AB04E8600066429 /* IOSKotlinHelper.xcframework */,
 			);
 			path = Kotlin;
 			sourceTree = "<group>";
@@ -3977,6 +3973,7 @@
 				5C5ECFCA24EA6474007659B8 /* Frameworks */,
 				5C5ECFCB24EA6474007659B8 /* Resources */,
 				5C5ECFEE24EA85C7007659B8 /* Embed Frameworks */,
+				855DC3C25580291021070341 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4083,6 +4080,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		855DC3C25580291021070341 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		94A6E7703A5B96A3274AD2FA /* [CP] Check Pods Manifest.lock */ = {

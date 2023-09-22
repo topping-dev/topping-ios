@@ -3,8 +3,8 @@
 #import "LuaFunction.h"
 #import "LuaValues.h"
 #import "LGIdParser.h"
-#import "IOSKotlinHelper/IOSKotlinHelper.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 
 @implementation LuaEvent
 

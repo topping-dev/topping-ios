@@ -2,10 +2,12 @@
 platform :ios, '13.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Deadknight/dk-specs.git'
 
 target 'Topping' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
+  pod 'ToppingIOSKotlinHelper', '0.6.0'
   use_frameworks! :linkage => :static
   #use_modular_headers!
 end
@@ -13,6 +15,7 @@ end
 target 'Toppingtest' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
+  pod 'ToppingIOSKotlinHelper', '0.6.0'
   use_frameworks! :linkage => :static
   #use_modular_headers!
 end

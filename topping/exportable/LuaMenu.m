@@ -1,5 +1,6 @@
 #import "LuaMenu.h"
-#import <topping/topping-Swift.h>
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import <Topping/Topping-Swift.h>
 #import "Topping.h"
 #import "LGParser.h"
 #import "LuaViewInflator.h"

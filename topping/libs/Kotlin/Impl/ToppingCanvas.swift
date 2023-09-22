@@ -1,5 +1,5 @@
 import Foundation
-import IOSKotlinHelper
+import ToppingIOSKotlinHelper
 
 class ToppingCanvas : TCanvas {
     func drawLine(startX: Int32, startY: Int32, stopX: Int32, stopY: Int32, paint: TPaint) {

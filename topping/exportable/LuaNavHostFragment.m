@@ -1,6 +1,7 @@
 #import "LuaNavHostFragment.h"
 #import "LuaFunction.h"
 #import "Defines.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LuaNavHostFragment
