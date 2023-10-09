@@ -6,6 +6,7 @@
 #import "LuaRef.h"
 
 @protocol TIOSKHTImageView;
+@class LGDrawableReturn;
 
 @interface LGImageView : LGView <TIOSKHTImageView>
 {
@@ -15,6 +16,7 @@
 +(LGImageView*)create:(LuaContext *)context :(NSString*)lid;
 -(void)setImage:(LuaStream *)stream;
 -(void)setImageRef:(LuaRef *)ref;
+-(void)setImageDrawable:(LGDrawableReturn*)ldr;
 
 @property(nonatomic, retain) NSString *android_adjustViewBounds;
 @property(nonatomic, retain) NSString *android_baselineAlignBottom;

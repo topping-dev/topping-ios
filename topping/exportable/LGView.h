@@ -132,14 +132,13 @@ enum MEASURE_SPEC
 -(void)setupComponent:(UIView *)view;
 -(void)componentAddMethod:(UIView*)par :(UIView *)me;
 -(LGView*)generateLGViewForName:(NSString*)name :(NSArray*)attrs;
+-(void)fullInit;
 
 //Positioning
 -(void)clearDimensions;
 -(void)resize;
 -(void)resizeAndInvalidate;
 -(void)resolveLayoutDirection;
--(void)readWidth;
--(void)readHeight;
 -(void)readWidthHeight;
 -(void)measure:(int)widthMeasureSpec :(int)heightMeasureSpec;
 -(void)onMeasure:(int)widthMeasureSpec :(int)heightMeasureSpec;
@@ -164,6 +163,7 @@ enum MEASURE_SPEC
 -(void)layout:(int)l :(int)t :(int)r :(int)b;
 -(BOOL)onTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
 -(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
+-(void)postOnAnimation:(void (^)(void))block;
 -(NSString *) debugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;
@@ -195,6 +195,10 @@ enum MEASURE_SPEC
 -(int)getMRight;
 -(int)getMTop;
 -(int)getMBottom;
+-(void)setTag:(NSString*)key :(NSObject*)value;
+-(NSObject*)getTag:(NSString*)key;
+-(void)setViewTreeLifecycleOwner:(id<LifecycleOwner>)lifecycleOwner;
+-(id<LifecycleOwner>)findViewTreeLifecycleOwner;
 
 -(LuaFragment*)findFragment;
 -(NavController*)findNavController;
@@ -269,6 +273,8 @@ enum MEASURE_SPEC
 @property (nonatomic) int dHeightDimension;
 @property (nonatomic) int dWidthSpec;
 @property (nonatomic) int dHeightSpec;
+@property (nonatomic) int dWidthMin;
+@property (nonatomic) int dHeightMin;
 @property (nonatomic) int dPaddingBottom;
 @property (nonatomic) int dPaddingLeft;
 @property (nonatomic) int dPaddingRight;
@@ -316,6 +322,10 @@ enum MEASURE_SPEC
 
 @property (nonatomic, strong) NSMutableArray *methodSkip;
 @property (nonatomic, strong) NSMutableDictionary *methodEventMap;
+
+@property (nonatomic, strong) void (^postOnAnimationBlock)(void);
+
+@property (nonatomic, strong) NSMutableDictionary *tagMap;
 
 @end
 

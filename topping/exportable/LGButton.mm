@@ -91,6 +91,7 @@
 +(LGButton*)create:(LuaContext *)context
 {
 	LGButton *lst = [[LGButton alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

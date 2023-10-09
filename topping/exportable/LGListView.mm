@@ -51,6 +51,7 @@
 +(LGListView *)create:(LuaContext *)context
 {
 	LGListView *lst = [[LGListView alloc] init];
+    lst.lc = context;
 	return lst;
 }
 

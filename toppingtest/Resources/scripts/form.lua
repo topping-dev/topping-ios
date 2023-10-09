@@ -21,8 +21,11 @@ function TestCheckBox_CheckedChanged(pGUI, context, isChecked)
 end
 
 function TestButton_Click(pGUI, context)
-	LuaToast.show(context, LR.string.test_button_clicked, 1000);
-    pGUI:findNavController():navigate(LR.id.action_menuFragment_to_receiveFragment)
+            local x = LuaDialog.create(context, LuaDialog.DIALOG_TYPE_CUSTOM);
+            x:setCustomViewRef(LR.layout.form);
+            x:show();
+	--LuaToast.show(context, LR.string.test_button_clicked, 1000);
+    --pGUI:findNavController():navigate(LR.id.action_menuFragment_to_receiveFragment)
 end
 
 function TestComboBox_Changed(pGUI, context, name, value)

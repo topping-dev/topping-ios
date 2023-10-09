@@ -116,6 +116,7 @@
 +(LGBottomNavigationView*)create:(LuaContext *)context
 {
     LGBottomNavigationView *lst = [[LGBottomNavigationView alloc] init];
+    lst.lc = context;
     [lst initProperties];
     return lst;
 }

@@ -3,5 +3,7 @@ Pods/**
 PodSpecMetadata/Topping.framework
 PodSpecMetadata/Topping.xcframework
 PodSpecMetadata/topping.zip
+PodSpecMetadata/ToppingIOSKotlinHelper.xcframework
+PodSpecMetadata/ToppingIOSKotlinHelper.zip
 **/xcuserdata/
 Podfile.lock

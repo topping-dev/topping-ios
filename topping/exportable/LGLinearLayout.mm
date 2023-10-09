@@ -251,6 +251,7 @@
             i += [self getChildrenSkipCount:child :i];
         }
     }
+    [super layout:l :t :r :b];
 }
 
 -(void)layoutHorizontal:(int)l :(int)t :(int)r :(int)b {
@@ -357,6 +358,7 @@
             i += [self getChildrenSkipCount:child :childIndex];
         }
     }
+    [super layout:l :t :r :b];
 }
 
 -(void)resizeInternalVertical:(int)widthSpec :(int)heightSpec {
@@ -1090,9 +1092,10 @@
 //Lua
 +(LGLinearLayout*)create:(LuaContext *)context
 {
-	LGLinearLayout *lst = [[LGLinearLayout alloc] init];
-	[lst initProperties];
-	return lst;
+	LGLinearLayout *ll = [[LGLinearLayout alloc] init];
+    ll.lc = context;
+	[ll initProperties];
+	return ll;
 }
 
 -(NSString*)GetId

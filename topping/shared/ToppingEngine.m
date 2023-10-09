@@ -993,6 +993,14 @@ int RegisterTag(lua_State *L)
 	[Lunar register:lu :[LGComboBox class]];
 	[Lunar register:lu :[LGCompoundButton class]];
     [Lunar register:lu :[LGConstraintLayout class]];
+    [Lunar register:lu :[LGConstraintBarrier class]];
+    [Lunar register:lu :[LGConstraintCarousel class]];
+    [Lunar register:lu :[LGConstraintCircularFlow class]];
+    [Lunar register:lu :[LGConstraintFlow class]];
+    [Lunar register:lu :[LGConstraintLayout class]];
+    [Lunar register:lu :[LGConstraintLayout class]];
+    [Lunar register:lu :[LGConstraintLayout class]];
+    [Lunar register:lu :[LGConstraintLayout class]];
 	[Lunar register:lu :[LGDatePicker class]];
     [Lunar register:lu :[LGDrawerLayout class]];
 	[Lunar register:lu :[LGEditText class]];

@@ -36,6 +36,7 @@
 +(LGWebView*)create:(LuaContext *)context
 {
     LGWebView *lst = [[LGWebView alloc] init];
+    lst.lc = context;
 	return lst;
 }
 

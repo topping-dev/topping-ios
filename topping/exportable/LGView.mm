@@ -68,6 +68,14 @@ static char UIB_PROPERTY_KEY;
     return [[UIView alloc] init];
 }
 
+-(void)overload_didMoveToWindow {
+    [self overload_didMoveToWindow];
+    if(self.window != nil)
+        [self.wrapper onAttachedToWindow];
+    else
+        [self.wrapper onDetachedFromWindow];
+}
+
 @end
 
 @implementation LGView
@@ -175,7 +183,11 @@ static char UIB_PROPERTY_KEY;
 }
 
 -(void)viewDidLayoutSubviews {
-    
+    if(self.postOnAnimationBlock != nil)
+    {
+        self.postOnAnimationBlock();
+        self.postOnAnimationBlock = nil;
+    }
 }
 
 -(void)applyStyles
@@ -232,10 +244,6 @@ static char UIB_PROPERTY_KEY;
 	}
 	self._view = view;
     self._view.wrapper = self;
-    [self swizzleFunctionFuncName:@"didMoveToWindow" block:^id _Nullable(id<TIOSKHTView> _Nonnull, TIOSKHKotlinArray<id> * _Nonnull) {
-        [self callTMethod:@"onAttachedToWindow" :nil :nil];
-        return 0;
-    }];
 	if(self.android_id != nil)
 	{
         self.android_id = [[LGIdParser getInstance] getId:self.android_id];
@@ -253,6 +261,7 @@ static char UIB_PROPERTY_KEY;
         [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesBegan:withEvent:") :NSSelectorFromString(@"overload_touchesBegan:withEvent:")];
         [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesMoved:withEvent:") :NSSelectorFromString(@"overload_touchesMoved:withEvent:")];
         [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesEnded:withEvent:") :NSSelectorFromString(@"overload_touchesEnded:withEvent:")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"didMoveToWindow") :NSSelectorFromString(@"overload_didMoveToWindow")];
     }
 }
 
@@ -307,6 +316,16 @@ static char UIB_PROPERTY_KEY;
 
 -(LGView *)generateLGViewForName:(NSString *)name :(NSArray *)attrs {
     return nil;
+}
+
+-(void)fullInit
+{
+    [self applyStyles];
+    [self beforeInitComponent];
+    [self readWidthHeight];
+    UIView *_view = [self createComponent];
+    [self initComponent:_view :self.lc];
+    [self setupComponent:_view];
 }
 
 -(void)clearDimensions
@@ -382,6 +401,8 @@ static char UIB_PROPERTY_KEY;
         return;
     int newWidthSpec = widthMeasureSpec;
     int newHeightSpec = heightMeasureSpec;
+    
+    //TODO: Check this if later
     if(![self isKindOfClass:[LGLinearLayout class]]
        && ![self isKindOfClass:[LGAbsListView class]]
        && ![NSStringFromClass(self.class) isEqualToString:@"LGView"]) {
@@ -418,7 +439,7 @@ static char UIB_PROPERTY_KEY;
 -(int)getSuggestedMinimumHeight {
     int suggestedMinHeight = 0;
     if(self.android_minHeight != nil)
-        suggestedMinHeight = STOI((NSString*)[[LGValueParser getInstance] getValue:self.android_minHeight]);
+        suggestedMinHeight = self.dHeightMin;
     /*if(self.android_background != nil)
     if (mBGDrawable != null) {
         final int bgMinWidth = mBGDrawable.getMinimumWidth();
@@ -432,7 +453,7 @@ static char UIB_PROPERTY_KEY;
 -(int)getSuggestedMinimumWidth {
     int suggestedMinWidth = 0;
     if(self.android_minWidth != nil)
-        suggestedMinWidth = STOI((NSString*)[[LGValueParser getInstance] getValue:self.android_minWidth]);
+        suggestedMinWidth = self.dWidthMin;
     /*if(self.android_background != nil)
     if (mBGDrawable != null) {
         final int bgMinWidth = mBGDrawable.getMinimumWidth();
@@ -503,7 +524,9 @@ static char UIB_PROPERTY_KEY;
 	if (h < 0) {
 		h = self.dHeight;
 	}
-	
+    self.dWidthMin = [[LGDimensionParser getInstance] getDimension:self.android_minWidth];
+    self.dHeightMin = [[LGDimensionParser getInstance] getDimension:self.android_minHeight];
+    
 	@try {
 		self.dPaddingLeft = [[LGDimensionParser getInstance] getDimension:self.android_paddingLeft];
 		self.dPaddingRight = [[LGDimensionParser getInstance] getDimension:self.android_paddingRight];
@@ -845,6 +868,10 @@ static char UIB_PROPERTY_KEY;
     return false;
 }
 
+-(void)postOnAnimation:(void (^)())block {
+    self.postOnAnimationBlock = block;
+}
+
 -(NSString *) debugDescription:(NSString *)val
 {
 	NSString *retVal = @"";
@@ -864,9 +891,10 @@ static char UIB_PROPERTY_KEY;
 }
 
 //Lua part
-+(LGView *) create:(LuaContext *)context
++(LGView *)create:(LuaContext *)context
 {
 	LGView *lst = [[LGView alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst; 
 }
@@ -1025,6 +1053,33 @@ static char UIB_PROPERTY_KEY;
 
 -(int)getMBottom {
     return [self getBottom];
+}
+
+-(void)setTag:(NSString*)key :(NSObject*)value {
+    if(self.tagMap == nil)
+        self.tagMap = [NSMutableDictionary dictionary];
+    
+    [self.tagMap setObject:value forKey:key];
+}
+
+-(NSObject*)getTag:(NSString*)key {
+    return self.tagMap[key];
+}
+
+-(void)setViewTreeLifecycleOwner:(id<LifecycleOwner>)lifecycleOwner {
+    [self setTag:@"view_tree_lifecycle_owner" :lifecycleOwner];
+}
+
+-(id<LifecycleOwner>)findViewTreeLifecycleOwner {
+    id<LifecycleOwner> found = (id<LifecycleOwner>)[self getTag:@"view_tree_lifecycle_owner"];
+    if (found != nil) return found;
+    LGView *parent = self.parent;
+    while (found == nil && parent != nil) {
+        found = (id<LifecycleOwner>)[parent getTag:@"view_tree_lifecycle_owner"];
+        parent = parent.parent;
+    }
+    
+    return found;
 }
 
 -(NSString*)GetId
@@ -1475,7 +1530,11 @@ static char UIB_PROPERTY_KEY;
 
 
 - (void)onAttachedToWindow {
-    [self._view didMoveToWindow];
+    [self callTMethod:@"onAttachedToWindow" :nil :nil];
+}
+
+-(void)onDetachedFromWindow {
+    [self callTMethod:@"onDetachedFromWindow" :nil :nil];
 }
 
 - (void)onDrawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
@@ -1501,7 +1560,6 @@ static char UIB_PROPERTY_KEY;
 - (void)onViewRemovedView:(nonnull id<TIOSKHTView>)view {
    
 }
-
 
 - (void)postRunnable:(nonnull id<TIOSKHTRunnable>)runnable {
     [LuaThread runOnUIThreadInternal:^{

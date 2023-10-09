@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -595,6 +595,11 @@
 		5C65695229659F1B002EA9C8 /* ParserPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694929659F1B002EA9C8 /* ParserPrimitives.swift */; };
 		5C65695329659F1B002EA9C8 /* VectorDrawableParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694A29659F1B002EA9C8 /* VectorDrawableParser.swift */; };
 		5C65695429659F1B002EA9C8 /* DrawingCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C65694B29659F1B002EA9C8 /* DrawingCommand.swift */; };
+		5C6923912AD0371900A8C9F1 /* DialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6923902AD0371900A8C9F1 /* DialogController.swift */; };
+		5C6923932AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6923922AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift */; };
+		5C6923982AD0416000A8C9F1 /* LuaComponentDialog.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C6923962AD0416000A8C9F1 /* LuaComponentDialog.mm */; };
+		5C6923992AD0416000A8C9F1 /* LuaComponentDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6923972AD0416000A8C9F1 /* LuaComponentDialog.h */; };
+		5C69239B2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C69239A2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift */; };
 		5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */; };
 		5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */; };
 		5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C78BA2128460152003EC02A /* ArrayExtension.swift */; };
@@ -1515,6 +1520,11 @@
 		5C65694929659F1B002EA9C8 /* ParserPrimitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserPrimitives.swift; sourceTree = "<group>"; };
 		5C65694A29659F1B002EA9C8 /* VectorDrawableParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorDrawableParser.swift; sourceTree = "<group>"; };
 		5C65694B29659F1B002EA9C8 /* DrawingCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCommand.swift; sourceTree = "<group>"; };
+		5C6923902AD0371900A8C9F1 /* DialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogController.swift; sourceTree = "<group>"; };
+		5C6923922AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogTransitioningDelegate.swift; sourceTree = "<group>"; };
+		5C6923962AD0416000A8C9F1 /* LuaComponentDialog.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LuaComponentDialog.mm; sourceTree = "<group>"; };
+		5C6923972AD0416000A8C9F1 /* LuaComponentDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaComponentDialog.h; sourceTree = "<group>"; };
+		5C69239A2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearLayoutDialogController.swift; sourceTree = "<group>"; };
 		5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		5C78BA2128460152003EC02A /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
@@ -2705,6 +2715,7 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5C69238F2AD0370900A8C9F1 /* Dialog */,
 				5C27FCDA2AB0AE7200066429 /* Swizzlean */,
 				5C27FCC42AB04E7500066429 /* Kotlin */,
 				5C51B9B22A838F4F009F4D2C /* CGRect+Ext.h */,
@@ -2858,6 +2869,16 @@
 			path = Cyborg;
 			sourceTree = "<group>";
 		};
+		5C69238F2AD0370900A8C9F1 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				5C6923902AD0371900A8C9F1 /* DialogController.swift */,
+				5C6923922AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift */,
+				5C69239A2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
 		5C810AF9295C3B9200C2A93D /* MaterialRipple */ = {
 			isa = PBXGroup;
 			children = (
@@ -2895,6 +2916,8 @@
 		5C95FAF92508A16500CAE66A /* exportable */ = {
 			isa = PBXGroup;
 			children = (
+				5C6923972AD0416000A8C9F1 /* LuaComponentDialog.h */,
+				5C6923962AD0416000A8C9F1 /* LuaComponentDialog.mm */,
 				5CD05248297321D8005E4960 /* ILGRecyclerViewAdapter.h */,
 				5CD05247297321D8005E4960 /* ILGRecyclerViewAdapter.mm */,
 				5CD0524329730703005E4960 /* ILuaForm.h */,
@@ -3554,6 +3577,7 @@
 				5CC1BFD629866EF7000C544A /* MDCShapeCategory.h in Headers */,
 				5CBD36ED24F1652F00EB167E /* UILabelPadding.h in Headers */,
 				5C2F9A9D29641F2900C443A8 /* UIFont+MaterialSimpleEquality.h in Headers */,
+				5C6923992AD0416000A8C9F1 /* LuaComponentDialog.h in Headers */,
 				5C2F9A6A29641CB900C443A8 /* MDCPalettes.h in Headers */,
 				5CD343FE285CBAC900343C6B /* LGNavigationParser.h in Headers */,
 				5C5A991724E16BCC002A22EA /* LuaBool.h in Headers */,
@@ -4269,6 +4293,7 @@
 				5C2CA83F2559728E00C03879 /* LuaFragment.mm in Sources */,
 				5CB9B68D29866DF8003B3A67 /* UIImage+MaterialRTL.m in Sources */,
 				5C5A992E24E16BCC002A22EA /* LuaBool.m in Sources */,
+				5C6923912AD0371900A8C9F1 /* DialogController.swift in Sources */,
 				5CD344162861D42B00343C6B /* Deque.swift in Sources */,
 				5C2F99ED295C3A9600C443A8 /* MDCDotBadgeView.m in Sources */,
 				5C5A99DC24E16BEC002A22EA /* ltablib.c in Sources */,
@@ -4321,6 +4346,7 @@
 				5CC17C40295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.m in Sources */,
 				5C5A99E724E16BEC002A22EA /* buffer.c in Sources */,
 				5C27FCDF2AB0AEA800066429 /* Swizzlean.m in Sources */,
+				5C6923982AD0416000A8C9F1 /* LuaComponentDialog.mm in Sources */,
 				5C43E6D424FE41E7005BEA07 /* LGRecyclerView.m in Sources */,
 				5CD052512977BA59005E4960 /* LuaFormIntent.m in Sources */,
 				5C07C38E29879AF20085B536 /* MDCBaseTextAreaLayout.m in Sources */,
@@ -4366,6 +4392,7 @@
 				5C5A98DD24E16BCC002A22EA /* CommonDelegate.mm in Sources */,
 				5C07C3E129879BDC0085B536 /* MDCTextControlVerticalPositioningReferenceBase.m in Sources */,
 				5C5A99C224E16BEC002A22EA /* lua.c in Sources */,
+				5C6923932AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift in Sources */,
 				5C91BD78283E15FF00D4C94F /* LuaViewModelProvider.m in Sources */,
 				5C07C3EA29879BDC0085B536 /* MDCTextControlVerticalPositioningReferenceFilled.m in Sources */,
 				5C07C3EE29879BDC0085B536 /* MDCTextControlHorizontalPositioningReference.m in Sources */,
@@ -4426,6 +4453,7 @@
 				5C65694E29659F1B002EA9C8 /* VectorDrawable.swift in Sources */,
 				5C2F9A6C29641CB900C443A8 /* MDCPaletteExpansions.m in Sources */,
 				5C9EC7DC2935FD42008D2909 /* MDMSpringTimingCurveGenerator.m in Sources */,
+				5C69239B2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift in Sources */,
 				5C2F9AA229641F2900C443A8 /* MDCTypography.m in Sources */,
 				5CB8585924E4306A006E6B65 /* CustomURLConnection.m in Sources */,
 				5C27FCE52AB192D200066429 /* ToppingDisplay.swift in Sources */,

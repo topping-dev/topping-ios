@@ -433,6 +433,7 @@
 +(LGEditText*)create:(LuaContext *)context
 {
 	LGEditText *lst = [[LGEditText alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

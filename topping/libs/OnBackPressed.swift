@@ -52,11 +52,13 @@ open class OnBackPressedDispatcher : NSObject {
     
     var mOnBackPressedCallbacks = Array<OnBackPressedCallback>()
     
-    override init() {
+    @objc
+    override public init() {
         mFallbackOnBackPressed = nil
     }
     
-    init(fallbackOnBackPressed:(() -> ())?) {
+    @objc
+    public init(fallbackOnBackPressed:(() -> ())?) {
         mFallbackOnBackPressed = fallbackOnBackPressed
     }
     

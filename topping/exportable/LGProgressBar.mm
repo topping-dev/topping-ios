@@ -147,6 +147,7 @@
 +(LGProgressBar*)create:(LuaContext *)context
 {
 	LGProgressBar *lst = [[LGProgressBar alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

@@ -92,6 +92,7 @@
 +(LGRadioButton*)create:(LuaContext *)context
 {
 	LGRadioButton *lst = [[LGRadioButton alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

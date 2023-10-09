@@ -240,6 +240,7 @@
 +(LGTextView*)create:(LuaContext *)context
 {
 	LGTextView *lst = [[LGTextView alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

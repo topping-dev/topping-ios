@@ -21,6 +21,7 @@
 +(LGRadioGroup*)create:(LuaContext *)context
 {
 	LGRadioGroup *lst = [[LGRadioGroup alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

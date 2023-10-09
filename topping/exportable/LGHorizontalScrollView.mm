@@ -27,6 +27,7 @@
 +(LGHorizontalScrollView*)create:(LuaContext *)context
 {
 	LGHorizontalScrollView *lst = [[LGHorizontalScrollView alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

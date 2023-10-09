@@ -397,7 +397,13 @@ static int sThunk(lua_State *L)
 		}
 	}*/
 	NSMethodSignature *nms = [lf->classOfMethod methodSignatureForSelector:lf->selector];
-	NSInvocation *ni = [NSInvocation invocationWithMethodSignature:nms];
+    NSInvocation *ni;
+    @try {
+        ni = [NSInvocation invocationWithMethodSignature:nms];
+    } @catch (NSException *exception) {
+        NSLog(@"exception in invocation, is %@ an instance function?", lf.description);
+        return 0;
+    }
     [ni retainArguments];
 	[ni setTarget:lf->classOfMethod];
 	[ni setSelector:lf->selector];	
@@ -659,7 +665,14 @@ static int thunk(lua_State *L)
     LuaFunction	*lf = lua_touserdata(L, lua_upvalueindex(1));
 	int count = 1;
     NSMethodSignature *nms = [object_getClass(obj) instanceMethodSignatureForSelector:lf->selector];
-	NSInvocation *ni = [NSInvocation invocationWithMethodSignature:nms];
+    NSInvocation *ni;
+    @try {
+        ni = [NSInvocation invocationWithMethodSignature:nms];
+    } @catch (NSException *exception) {
+        NSLog(@"exception in invocation, is %@ an instance function?", lf.description);
+        return 0;
+    }
+        
     [ni retainArguments];
 	[ni setTarget:obj];
 	[ni setSelector:lf->selector];	

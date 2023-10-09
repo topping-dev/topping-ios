@@ -11,6 +11,7 @@
 
 @class ActionSheetDatePicker;
 @class MBProgressHUD;
+@class LGView;
 
 @interface _NoButtonAlertControllerCover : UIView
 @property (nonatomic,assign) UIAlertController *delegate;
@@ -25,6 +26,7 @@
 #define DIALOG_TYPE_PROGRESSINDETERMINATE 6
 #define DIALOG_TYPE_DATEPICKER 8
 #define DIALOG_TYPE_TIMEPICKER 16
+#define DIALOG_TYPE_CUSTOM 32
 
 @interface LuaDialog : NSObject<LuaClass, LuaInterface, UIAlertViewDelegate>
 {
@@ -52,6 +54,8 @@
 -(void)dismiss;
 -(void)setDateSelectedListener:(LuaTranslator*)action;
 -(void)setTimeSelectedListener:(LuaTranslator*)action;
+-(void)setCustomViewRef:(LuaRef*)ref;
+-(void)setCustomView:(LGView*)view;
 
 @property(nonatomic) int dialogType;
 @property(nonatomic, retain) MBProgressHUD *progressView;
@@ -67,5 +71,6 @@
 @property(nonatomic) int progress_;
 @property(nonatomic) int maximum_;
 @property(nonatomic) bool cancellable_;
+@property(nonatomic, strong) NSObject *componentDialog;
 
 @end

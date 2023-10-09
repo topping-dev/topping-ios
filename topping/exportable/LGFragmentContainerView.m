@@ -53,6 +53,7 @@
 +(LGFragmentContainerView*)create:(LuaContext *)context
 {
     LGFragmentContainerView *lfcv = [[LGFragmentContainerView alloc] init];
+    lfcv.lc = context;
     [lfcv initProperties];
     return lfcv;
 }

@@ -383,6 +383,7 @@ static NSMapTable *pool = [NSMapTable strongToStrongObjectsMapTable];
 +(LGRelativeLayout*)create:(LuaContext *)context
 {
     LGRelativeLayout *lfl = [[LGRelativeLayout alloc] init];
+    lfl.lc = context;
     [lfl initProperties];
     return lfl;
 }

@@ -2,7 +2,7 @@
 #import "Log.h"
 #import "ToppingEngine.h"
 
-//#define DEBUG_DESCRIPTION
+#define DEBUG_DESCRIPTION
 
 #define SET_SEPERATOR_COLOR(V) [V setSeparatorColor:[UIColor darkGrayColor]]
 

@@ -69,6 +69,7 @@
 +(LGDatePicker*)create:(LuaContext *)context
 {
 	LGDatePicker *lst = [[LGDatePicker alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

@@ -654,6 +654,7 @@
 +(LGConstraintLayout*)create:(LuaContext *)context
 {
     LGConstraintLayout *lcl = [[LGConstraintLayout alloc] init];
+    lcl.lc = context;
     [lcl initProperties];
     return lcl;
 }

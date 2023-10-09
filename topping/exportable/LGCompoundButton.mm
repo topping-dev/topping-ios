@@ -8,6 +8,7 @@
 +(LGCompoundButton*)create:(LuaContext *)context
 {
 	LGCompoundButton *lst = [[LGCompoundButton alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

@@ -100,6 +100,7 @@
 +(LGCheckBox*)create:(LuaContext *)context
 {
 	LGCheckBox *lst = [[LGCheckBox alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

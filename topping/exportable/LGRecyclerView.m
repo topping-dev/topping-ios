@@ -51,6 +51,7 @@
 +(LGRecyclerView *)create:(LuaContext *)context
 {
     LGRecyclerView *lst = [[LGRecyclerView alloc] init];
+    lst.lc = context;
     return lst;
 }
 

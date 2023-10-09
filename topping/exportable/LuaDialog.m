@@ -7,6 +7,7 @@
 #import "ActionSheetDatePicker.h"
 #import "MBProgressHUD.h"
 #import "LGValueParser.h"
+#import "LuaComponentDialog.h"
 
 @implementation _NoButtonAlertControllerCover
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -149,6 +150,10 @@
              } origin:[currentForm view]];
             [((UIDatePicker*)ld.datePicker.pickerView) addTarget:self action:@selector(eventForPicker:) forControlEvents:UIControlEventValueChanged];
         } break;
+        case DIALOG_TYPE_CUSTOM:
+        {
+            ld.componentDialog = [[LuaComponentDialog alloc] initWithContext:context];
+        } break;
         default:
             break;
     }
@@ -157,7 +162,7 @@
 
 -(void)setCancellable:(bool)val
 {
-    self.cancellable = val;
+    self.cancellable_ = val;
 }
 
 -(void)setPositiveButtonInternal:(NSString *)title :(LuaTranslator *)action
@@ -301,6 +306,11 @@
 
 -(void)show
 {
+    if(self.dialogType == DIALOG_TYPE_CUSTOM)
+    {
+        [((LuaComponentDialog*)self.componentDialog) show];
+        return;
+    }
     UIViewController *rootVC = (UIViewController*)[CommonDelegate getActiveForm];
     if(self.dialogType == DIALOG_TYPE_PROGRESS)
     {
@@ -342,6 +352,11 @@
 
 -(void)dismiss
 {
+    if(self.dialogType == DIALOG_TYPE_CUSTOM)
+    {
+        [((LuaComponentDialog*)self.componentDialog) dismiss];
+        return;
+    }
     if(self.alertController != nil)
         [self.alertController dismissModalViewControllerAnimated:YES];
     else
@@ -356,6 +371,20 @@
 -(void)setTimeSelectedListener:(LuaTranslator *)lt
 {
     self.ltTimeSelectedListener = lt;
+}
+
+-(void)setCustomViewRef:(LuaRef *)ref {
+    if(self.dialogType != DIALOG_TYPE_CUSTOM)
+        return;
+    
+    [((LuaComponentDialog*)self.componentDialog) setContentViewRef:ref];
+}
+
+-(void)setCustomView:(LGView*)view {
+    if(self.dialogType != DIALOG_TYPE_CUSTOM)
+        return;
+    
+    [((LuaComponentDialog*)self.componentDialog) setContentView:view];
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -407,6 +436,8 @@
     InstanceMethodNoRetNoArg(dismiss, @"dismiss")
     InstanceMethodNoRet(setDateSelectedListener:, @[[LuaTranslator class]], @"setDateSelectedListener")
     InstanceMethodNoRet(setTimeSelectedListener:, @[[LuaTranslator class]], @"setTimeSelectedListener")
+    InstanceMethodNoRet(setCustomViewRef:, @[[LuaRef class]], @"setCustomViewRef")
+    InstanceMethodNoRet(setCustomView:, @[[LGView class]], @"setCustomView")
 	
 	return dict;
 }
@@ -419,6 +450,7 @@
 	[dict setObject:[NSNumber numberWithInt:DIALOG_TYPE_PROGRESSINDETERMINATE] forKey:@"DIALOG_TYPE_PROGRESSINDETERMINATE"];
     [dict setObject:[NSNumber numberWithInt:DIALOG_TYPE_DATEPICKER] forKey:@"DIALOG_TYPE_DATEPICKER"];
     [dict setObject:[NSNumber numberWithInt:DIALOG_TYPE_TIMEPICKER] forKey:@"DIALOG_TYPE_TIMEPICKER"];
+    [dict setObject:[NSNumber numberWithInt:DIALOG_TYPE_CUSTOM] forKey:@"DIALOG_TYPE_CUSTOM"];
 	return dict;
 }
 

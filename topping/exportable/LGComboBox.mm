@@ -49,6 +49,7 @@
 +(LGComboBox*)create:(LuaContext *)context
 {
 	LGComboBox *lst = [[LGComboBox alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }

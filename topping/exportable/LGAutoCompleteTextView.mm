@@ -9,6 +9,7 @@
 +(LGAutoCompleteTextView*)create:(LuaContext *)context
 {
 	LGAutoCompleteTextView *lst = [[LGAutoCompleteTextView alloc] init];
+    lst.lc = context;
 	[lst initProperties];
 	return lst;
 }
