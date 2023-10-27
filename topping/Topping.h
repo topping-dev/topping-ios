@@ -56,6 +56,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGWebView.h>
 #import <topping/LuaBuffer.h>
 #import <topping/LuaColor.h>
+#import <topping/LuaComponentDialog.h>
 #import <topping/LuaContext.h>
 #import <topping/LuaDatabase.h>
 #import <topping/LuaDate.h>
@@ -97,7 +98,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <topping/LGViewPager.h>
 #import <topping/LuaBundle.h>
 #import <topping/LuaFormIntent.h>
-#import <topping/LGTextInputLayout.h>>
+#import <topping/LGTextInputLayout.h>
 #import <topping/LGTextInputEditText.h>
 #import <topping/LGNavigationView.h>
 #import <topping/LGDrawerLayout.h>
@@ -107,6 +108,7 @@ FOUNDATION_EXPORT const unsigned char toppingVersionString[];
 #import <Topping/ILGRecyclerViewAdapter.h>
 
 #import <topping/KotlinExports.h>
+#import <topping/Configuration.h>
 
 #import <topping/ToppingEngine.h>
 #import <topping/LuaGlobalFunction.h>

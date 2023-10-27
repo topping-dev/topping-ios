@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -178,11 +178,9 @@
 		5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */; };
 		5C25F4E025076B8E0074B6AF /* UIColor+Lum.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */; };
 		5C27FCC22AB0493300066429 /* ToppingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCC12AB0493300066429 /* ToppingClass.swift */; };
-		5C27FCCD2AB053F500066429 /* ToppingPaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCCC2AB053F500066429 /* ToppingPaint.swift */; };
 		5C27FCCF2AB06ABE00066429 /* ToppingResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */; };
 		5C27FCD22AB070B600066429 /* LGXmlParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27FCD02AB070B600066429 /* LGXmlParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C27FCD32AB070B600066429 /* LGXmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCD12AB070B600066429 /* LGXmlParser.m */; };
-		5C27FCD52AB0946A00066429 /* ToppingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCD42AB0946A00066429 /* ToppingCanvas.swift */; };
 		5C27FCD82AB0A0A800066429 /* UIView+Util.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27FCD62AB0A0A800066429 /* UIView+Util.h */; };
 		5C27FCD92AB0A0A800066429 /* UIView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCD72AB0A0A800066429 /* UIView+Util.m */; };
 		5C27FCDF2AB0AEA800066429 /* Swizzlean.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCDC2AB0AEA800066429 /* Swizzlean.m */; };
@@ -598,7 +596,7 @@
 		5C6923912AD0371900A8C9F1 /* DialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6923902AD0371900A8C9F1 /* DialogController.swift */; };
 		5C6923932AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6923922AD0372E00A8C9F1 /* DialogTransitioningDelegate.swift */; };
 		5C6923982AD0416000A8C9F1 /* LuaComponentDialog.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C6923962AD0416000A8C9F1 /* LuaComponentDialog.mm */; };
-		5C6923992AD0416000A8C9F1 /* LuaComponentDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6923972AD0416000A8C9F1 /* LuaComponentDialog.h */; };
+		5C6923992AD0416000A8C9F1 /* LuaComponentDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6923972AD0416000A8C9F1 /* LuaComponentDialog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C69239B2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C69239A2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift */; };
 		5C6B3CE028DC73C5007B86D3 /* UIImage+Resize.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C6B3CDE28DC73C5007B86D3 /* UIImage+Resize.h */; };
 		5C6B3CE128DC73C5007B86D3 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B3CDF28DC73C5007B86D3 /* UIImage+Resize.m */; };
@@ -717,6 +715,11 @@
 		5C9ED84B28FFE89B00305A74 /* LuaDispatchers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9ED84928FFE89B00305A74 /* LuaDispatchers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9ED84E2900022A00305A74 /* LuaLifecycle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C9ED84C2900022A00305A74 /* LuaLifecycle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C9ED84F2900022A00305A74 /* LuaLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C9ED84D2900022A00305A74 /* LuaLifecycle.m */; };
+		5CA0B3A82AE2A1010001325D /* BWJSONMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0B3A32AE2A1000001325D /* BWJSONMatcher.m */; };
+		5CA0B3A92AE2A1010001325D /* BWJSONValueObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CA0B3A42AE2A1000001325D /* BWJSONValueObject.h */; };
+		5CA0B3AA2AE2A1010001325D /* NSObject+BWJSONMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0B3A52AE2A1000001325D /* NSObject+BWJSONMatcher.m */; };
+		5CA0B3AB2AE2A1010001325D /* BWJSONMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CA0B3A62AE2A1000001325D /* BWJSONMatcher.h */; };
+		5CA0B3AC2AE2A1010001325D /* NSObject+BWJSONMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CA0B3A72AE2A1000001325D /* NSObject+BWJSONMatcher.h */; };
 		5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAA030524F26CA200CD7CB4 /* CoreText.framework */; };
 		5CAEA8422AB3072C009EB7C2 /* constraintlayoutValues.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CAEA8412AB3072C009EB7C2 /* constraintlayoutValues.xml */; };
 		5CAEA8462AB6D2F2009EB7C2 /* values.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CAEA8452AB6D2F2009EB7C2 /* values.xml */; };
@@ -862,6 +865,8 @@
 		5CD052522977BA59005E4960 /* LuaFormIntent.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD052502977BA59005E4960 /* LuaFormIntent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD05255297FD334005E4960 /* CoroutineScope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD05253297FD334005E4960 /* CoroutineScope.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD05256297FD334005E4960 /* CoroutineScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD05254297FD334005E4960 /* CoroutineScope.m */; };
+		5CD286C42AE6779500BABBA4 /* ToppingIOSKotlinHelper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CD286C32AE6779500BABBA4 /* ToppingIOSKotlinHelper.xcframework */; };
+		5CD286C82AE6B87C00BABBA4 /* ToppingPaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD286C72AE6B87C00BABBA4 /* ToppingPaint.swift */; };
 		5CD343D728464EAD00343C6B /* FragmentStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D628464EAD00343C6B /* FragmentStateStore.swift */; };
 		5CD343D92846649F00343C6B /* FragmentManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */; };
 		5CD343DC2847886900343C6B /* ViewModelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD343DA2847886900343C6B /* ViewModelStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -885,6 +890,10 @@
 		5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD34417286D9C5C00343C6B /* NavControllerExtra.swift */; };
 		5CD92592252CA48300EC0A1D /* NSStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD92590252CA48300EC0A1D /* NSStack.h */; };
 		5CD92593252CA48300EC0A1D /* NSStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD92591252CA48300EC0A1D /* NSStack.m */; };
+		5CFEA0632ADFCE570053EB9F /* Configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFEA0612ADFCE570053EB9F /* Configuration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CFEA0642ADFCE570053EB9F /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEA0622ADFCE570053EB9F /* Configuration.m */; };
+		5CFEA0672AE058E50053EB9F /* ViewTreeObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CFEA0652AE058E50053EB9F /* ViewTreeObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CFEA0682AE058E50053EB9F /* ViewTreeObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CFEA0662AE058E50053EB9F /* ViewTreeObserver.m */; };
 		764968FC99A00A4E89C9B3C8 /* Pods_Toppingtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B2484CC659E360986E1CCC /* Pods_Toppingtest.framework */; };
 /* End PBXBuildFile section */
 
@@ -1097,11 +1106,9 @@
 		5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Lum.h"; sourceTree = "<group>"; };
 		5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Lum.m"; sourceTree = "<group>"; };
 		5C27FCC12AB0493300066429 /* ToppingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingClass.swift; sourceTree = "<group>"; };
-		5C27FCCC2AB053F500066429 /* ToppingPaint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingPaint.swift; sourceTree = "<group>"; };
 		5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingResources.swift; sourceTree = "<group>"; };
 		5C27FCD02AB070B600066429 /* LGXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGXmlParser.h; sourceTree = "<group>"; };
 		5C27FCD12AB070B600066429 /* LGXmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGXmlParser.m; sourceTree = "<group>"; };
-		5C27FCD42AB0946A00066429 /* ToppingCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingCanvas.swift; sourceTree = "<group>"; };
 		5C27FCD62AB0A0A800066429 /* UIView+Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Util.h"; sourceTree = "<group>"; };
 		5C27FCD72AB0A0A800066429 /* UIView+Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Util.m"; sourceTree = "<group>"; };
 		5C27FCDC2AB0AEA800066429 /* Swizzlean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Swizzlean.m; sourceTree = "<group>"; };
@@ -1642,6 +1649,11 @@
 		5C9ED84928FFE89B00305A74 /* LuaDispatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaDispatchers.h; sourceTree = "<group>"; };
 		5C9ED84C2900022A00305A74 /* LuaLifecycle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuaLifecycle.h; sourceTree = "<group>"; };
 		5C9ED84D2900022A00305A74 /* LuaLifecycle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaLifecycle.m; sourceTree = "<group>"; };
+		5CA0B3A32AE2A1000001325D /* BWJSONMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWJSONMatcher.m; sourceTree = "<group>"; };
+		5CA0B3A42AE2A1000001325D /* BWJSONValueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWJSONValueObject.h; sourceTree = "<group>"; };
+		5CA0B3A52AE2A1000001325D /* NSObject+BWJSONMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BWJSONMatcher.m"; sourceTree = "<group>"; };
+		5CA0B3A62AE2A1000001325D /* BWJSONMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWJSONMatcher.h; sourceTree = "<group>"; };
+		5CA0B3A72AE2A1000001325D /* NSObject+BWJSONMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BWJSONMatcher.h"; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		5CAEA83D2AB1D239009EB7C2 /* iosMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iosMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/iosMain"; sourceTree = "<group>"; };
 		5CAEA83E2AB1D239009EB7C2 /* commonMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = commonMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain"; sourceTree = "<group>"; };
@@ -1793,6 +1805,8 @@
 		5CD052502977BA59005E4960 /* LuaFormIntent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaFormIntent.h; sourceTree = "<group>"; };
 		5CD05253297FD334005E4960 /* CoroutineScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoroutineScope.h; sourceTree = "<group>"; };
 		5CD05254297FD334005E4960 /* CoroutineScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoroutineScope.m; sourceTree = "<group>"; };
+		5CD286C32AE6779500BABBA4 /* ToppingIOSKotlinHelper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ToppingIOSKotlinHelper.xcframework; path = Pods/ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.xcframework; sourceTree = "<group>"; };
+		5CD286C72AE6B87C00BABBA4 /* ToppingPaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToppingPaint.swift; sourceTree = "<group>"; };
 		5CD343D628464EAD00343C6B /* FragmentStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentStateStore.swift; sourceTree = "<group>"; };
 		5CD343D82846649F00343C6B /* FragmentManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentManagerViewModel.swift; sourceTree = "<group>"; };
 		5CD343DA2847886900343C6B /* ViewModelStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewModelStore.h; sourceTree = "<group>"; };
@@ -1817,6 +1831,10 @@
 		5CD92590252CA48300EC0A1D /* NSStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSStack.h; sourceTree = "<group>"; };
 		5CD92591252CA48300EC0A1D /* NSStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStack.m; sourceTree = "<group>"; };
 		5CEE6382257100A500D80B59 /* Topping.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Topping.podspec; sourceTree = "<group>"; };
+		5CFEA0612ADFCE570053EB9F /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		5CFEA0622ADFCE570053EB9F /* Configuration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
+		5CFEA0652AE058E50053EB9F /* ViewTreeObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewTreeObserver.h; sourceTree = "<group>"; };
+		5CFEA0662AE058E50053EB9F /* ViewTreeObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewTreeObserver.m; sourceTree = "<group>"; };
 		687002D891F8709DD32AB747 /* Pods_Topping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Topping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ACB007950408D12A26F8F54 /* Pods-topping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-topping.release.xcconfig"; path = "Target Support Files/Pods-topping/Pods-topping.release.xcconfig"; sourceTree = "<group>"; };
 		6D6C09B2668439F4169AC341 /* Pods-toppingtest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toppingtest.debug.xcconfig"; path = "Target Support Files/Pods-toppingtest/Pods-toppingtest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1836,6 +1854,7 @@
 			files = (
 				5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */,
 				5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */,
+				5CD286C42AE6779500BABBA4 /* ToppingIOSKotlinHelper.xcframework in Frameworks */,
 				5C5A9A4024E16F0D002A22EA /* UIKit.framework in Frameworks */,
 				4FD173E093462938CD3C2ADB /* Pods_Topping.framework in Frameworks */,
 			);
@@ -2263,10 +2282,9 @@
 		5C27FCC72AB04FE400066429 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				5CD286C72AE6B87C00BABBA4 /* ToppingPaint.swift */,
 				5C27FCC12AB0493300066429 /* ToppingClass.swift */,
-				5C27FCCC2AB053F500066429 /* ToppingPaint.swift */,
 				5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */,
-				5C27FCD42AB0946A00066429 /* ToppingCanvas.swift */,
 				5C27FCE42AB192D200066429 /* ToppingDisplay.swift */,
 			);
 			path = Impl;
@@ -2715,6 +2733,7 @@
 		5C5A9A4324E1B8D5002A22EA /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				5CA0B3A22AE2A0DF0001325D /* BWJSONMatcher */,
 				5C69238F2AD0370900A8C9F1 /* Dialog */,
 				5C27FCDA2AB0AE7200066429 /* Swizzlean */,
 				5C27FCC42AB04E7500066429 /* Kotlin */,
@@ -2798,6 +2817,10 @@
 				5CBB56B1298A9F820080FEF1 /* UIImage+Dropdown.m */,
 				5C27FCD62AB0A0A800066429 /* UIView+Util.h */,
 				5C27FCD72AB0A0A800066429 /* UIView+Util.m */,
+				5CFEA0612ADFCE570053EB9F /* Configuration.h */,
+				5CFEA0622ADFCE570053EB9F /* Configuration.m */,
+				5CFEA0652AE058E50053EB9F /* ViewTreeObserver.h */,
+				5CFEA0662AE058E50053EB9F /* ViewTreeObserver.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -3241,6 +3264,18 @@
 			path = MotionAnimator;
 			sourceTree = "<group>";
 		};
+		5CA0B3A22AE2A0DF0001325D /* BWJSONMatcher */ = {
+			isa = PBXGroup;
+			children = (
+				5CA0B3A62AE2A1000001325D /* BWJSONMatcher.h */,
+				5CA0B3A32AE2A1000001325D /* BWJSONMatcher.m */,
+				5CA0B3A42AE2A1000001325D /* BWJSONValueObject.h */,
+				5CA0B3A72AE2A1000001325D /* NSObject+BWJSONMatcher.h */,
+				5CA0B3A52AE2A1000001325D /* NSObject+BWJSONMatcher.m */,
+			);
+			path = BWJSONMatcher;
+			sourceTree = "<group>";
+		};
 		5CB5E13125821D3F00BF2EF5 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -3496,6 +3531,7 @@
 		E1C82AE459CF65C2AE4A42DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CD286C32AE6779500BABBA4 /* ToppingIOSKotlinHelper.xcframework */,
 				5CD052352967FAFE005E4960 /* WebKit.framework */,
 				5CAA030524F26CA200CD7CB4 /* CoreText.framework */,
 				5C5A9A4C24E1BDEF002A22EA /* CoreLocation.framework */,
@@ -3523,6 +3559,7 @@
 				5C18BAB529866A2D00C4A929 /* MDCTextInputControllerLegacyDefault.h in Headers */,
 				5C5A99B424E16BEC002A22EA /* lzio.h in Headers */,
 				5C07C40829879BDC0085B536 /* MDCTextControlVerticalPositioningReferenceOutlined.h in Headers */,
+				5CA0B3A92AE2A1010001325D /* BWJSONValueObject.h in Headers */,
 				5C5A98BA24E16BCC002A22EA /* LGDrawableParser.h in Headers */,
 				5C2F9A2929641A4500C443A8 /* MDCBottomNavigationSystemDialogView.h in Headers */,
 				5CD052332967F8BF005E4960 /* LGWebView.h in Headers */,
@@ -3540,6 +3577,7 @@
 				5C07C3DE29879BDC0085B536 /* MDCTextControlVerticalPositioningReferenceUnderlined.h in Headers */,
 				5C07C3E429879BDC0085B536 /* MDCTextControlStyleBase.h in Headers */,
 				5C5A98C624E16BCC002A22EA /* ToppingEngine.h in Headers */,
+				5CFEA0632ADFCE570053EB9F /* Configuration.h in Headers */,
 				5C07C3E029879BDC0085B536 /* MDCTextControlStyleUnderlined.h in Headers */,
 				5C18BABA29866A2D00C4A929 /* MDCTextInputBorderView.h in Headers */,
 				5C18BACF29866A2E00C4A929 /* MDCTextInputControllerLegacyFullWidth.h in Headers */,
@@ -3648,6 +3686,7 @@
 				5C55EAEB2A125B8A00634F26 /* DistancePickerView.h in Headers */,
 				5C5A9A0024E16BEC002A22EA /* socket.h in Headers */,
 				5CC17C39295C38F1000B5BB0 /* MDCTabBarView.h in Headers */,
+				5CFEA0672AE058E50053EB9F /* ViewTreeObserver.h in Headers */,
 				5C07C40529879BDC0085B536 /* MDCTextControlAssistiveLabelView.h in Headers */,
 				5CC17C3C295C38F1000B5BB0 /* MDCTabBarViewIndicatorView.h in Headers */,
 				5C2F9AB22964207E00C443A8 /* MDFTextAccessibility-Bridging-Header.h in Headers */,
@@ -3663,6 +3702,7 @@
 				5C18BAC629866A2E00C4A929 /* MDCTextInputControllerOutlined.h in Headers */,
 				5CB9B68829866DF8003B3A67 /* MDFInternationalization.h in Headers */,
 				5CB9B68629866DF8003B3A67 /* UIImage+MaterialRTL.h in Headers */,
+				5CA0B3AB2AE2A1010001325D /* BWJSONMatcher.h in Headers */,
 				5C07C37E29879AF20085B536 /* MDCTextControlLabelBehavior.h in Headers */,
 				5C5A98EA24E16BCC002A22EA /* CommonDelegate.h in Headers */,
 				5C18BAD229866A2E00C4A929 /* MaterialTextFields.h in Headers */,
@@ -3824,6 +3864,7 @@
 				5CC17C44295C38F1000B5BB0 /* MDCTabBarViewItemView.h in Headers */,
 				5CC1BFC829866EE4000C544A /* MDCSemanticColorScheme.h in Headers */,
 				5C86213625C0477D00BF23CA /* LuaNativeCall.h in Headers */,
+				5CA0B3AC2AE2A1010001325D /* NSObject+BWJSONMatcher.h in Headers */,
 				5C2F9AA929641FDC00C443A8 /* MaterialApplication.h in Headers */,
 				5C07C37A29879AF20085B536 /* MaterialTextControls+UnderlinedTextFieldsTheming.h in Headers */,
 				5C9EC7B12935FBE3008D2909 /* MaterialActivityIndicator.h in Headers */,
@@ -3997,7 +4038,7 @@
 				5C5ECFCA24EA6474007659B8 /* Frameworks */,
 				5C5ECFCB24EA6474007659B8 /* Resources */,
 				5C5ECFEE24EA85C7007659B8 /* Embed Frameworks */,
-				855DC3C25580291021070341 /* [CP] Embed Pods Frameworks */,
+				C6CE437948416A3EB5F9082D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4106,23 +4147,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		855DC3C25580291021070341 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		94A6E7703A5B96A3274AD2FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4143,6 +4167,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6CE437948416A3EB5F9082D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Toppingtest/Pods-Toppingtest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4182,11 +4223,9 @@
 				5CD34418286D9C5C00343C6B /* NavControllerExtra.swift in Sources */,
 				5C5A99CD24E16BEC002A22EA /* ltable.c in Sources */,
 				5C2F99F4295C3AA300C443A8 /* MDCDotBadgeAppearance.m in Sources */,
-				5C27FCCD2AB053F500066429 /* ToppingPaint.swift in Sources */,
 				5C91BD8B2844B58300D4C94F /* FragmentManager.swift in Sources */,
 				5CC17C172959C85F000B5BB0 /* Toast.swift in Sources */,
 				5C5A98C724E16BCC002A22EA /* Lunar.m in Sources */,
-				5C27FCD52AB0946A00066429 /* ToppingCanvas.swift in Sources */,
 				5C18BAC929866A2E00C4A929 /* MDCTextInputControllerLegacyFullWidth.m in Sources */,
 				5C07C3F429879BDC0085B536 /* MDCTextControlPlaceholderSupport.m in Sources */,
 				5C4F831229AD267D0013620E /* LGTextInputLayout.m in Sources */,
@@ -4396,6 +4435,7 @@
 				5C91BD78283E15FF00D4C94F /* LuaViewModelProvider.m in Sources */,
 				5C07C3EA29879BDC0085B536 /* MDCTextControlVerticalPositioningReferenceFilled.m in Sources */,
 				5C07C3EE29879BDC0085B536 /* MDCTextControlHorizontalPositioningReference.m in Sources */,
+				5CFEA0642ADFCE570053EB9F /* Configuration.m in Sources */,
 				5CD343E7284A386C00343C6B /* OnBackPressed.swift in Sources */,
 				5C18BAD829866A4E00C4A929 /* MDCFilledTextFieldColorThemer.m in Sources */,
 				5C5A993424E16BCC002A22EA /* LGScrollView.mm in Sources */,
@@ -4441,6 +4481,7 @@
 				5C78BA2A2846221B003EC02A /* FragmentStore.swift in Sources */,
 				5C5A9A4724E1B8EA002A22EA /* Singleton.m in Sources */,
 				5C5A992324E16BCC002A22EA /* LuaBuffer.m in Sources */,
+				5CFEA0682AE058E50053EB9F /* ViewTreeObserver.m in Sources */,
 				5C2F9A9F29641F2900C443A8 /* MDCTypographyUtilities.m in Sources */,
 				5C286DF525582B4900198DA5 /* LuaLog.mm in Sources */,
 				5C91BD892843649B00D4C94F /* FragmentHostCallback.swift in Sources */,
@@ -4451,6 +4492,7 @@
 				5C91BD79283E15FF00D4C94F /* LuaViewModel.m in Sources */,
 				5C5A9A0524E16BEC002A22EA /* ldo.c in Sources */,
 				5C65694E29659F1B002EA9C8 /* VectorDrawable.swift in Sources */,
+				5CA0B3A82AE2A1010001325D /* BWJSONMatcher.m in Sources */,
 				5C2F9A6C29641CB900C443A8 /* MDCPaletteExpansions.m in Sources */,
 				5C9EC7DC2935FD42008D2909 /* MDMSpringTimingCurveGenerator.m in Sources */,
 				5C69239B2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift in Sources */,
@@ -4461,6 +4503,7 @@
 				5CB9B6A829866F4F003B3A67 /* MDCShapeMediator.m in Sources */,
 				5C5A9A5124E1D3B1002A22EA /* DatabaseHelper.m in Sources */,
 				5C78BA2228460152003EC02A /* ArrayExtension.swift in Sources */,
+				5CA0B3AA2AE2A1010001325D /* NSObject+BWJSONMatcher.m in Sources */,
 				5C55EAED2A125B8A00634F26 /* ActionSheetCustomPicker.m in Sources */,
 				5C9ED84328FECF4200305A74 /* KotlinExports.m in Sources */,
 				5C5A98E624E16BCC002A22EA /* LuaStore.m in Sources */,
@@ -4488,6 +4531,7 @@
 				5C2F9A5E29641C4B00C443A8 /* MaterialShadowElevationsDummy.m in Sources */,
 				5C2F9A2329641A4500C443A8 /* MDCBottomNavigationSystemDialogView.m in Sources */,
 				5CC17C1A2959C85F000B5BB0 /* UIApplication+Load.swift in Sources */,
+				5CD286C82AE6B87C00BABBA4 /* ToppingPaint.swift in Sources */,
 				5C2F9A4D29641BCD00C443A8 /* UIView+MDCShadowAnimations.m in Sources */,
 				5CC1BFC729866EE4000C544A /* MDCLegacyColorScheme.m in Sources */,
 				5C91BD74283E15FF00D4C94F /* LuaLifecycleOwner.m in Sources */,

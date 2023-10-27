@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(void)runOnBackgroundInternal:(dispatch_block_t)block;
 +(void)runOnUIThreadInternal:(dispatch_block_t)block;
++(dispatch_queue_t)createConcurrentInternal:(NSString *)label;
++(void)synchronized:(NSObject*)obj :(void (^)(void))block;
 +(void)runOnUIThread:(LuaTranslator *)runnable;
 +(void)runOnBackground:(LuaTranslator *)runnable;
 +(LuaThread*)create:(LuaTranslator *)runnable;

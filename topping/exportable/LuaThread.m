@@ -17,6 +17,16 @@
         dispatch_async(dispatch_get_main_queue(), block);
 }
 
++(dispatch_queue_t)createConcurrentInternal:(NSString *)label {
+    return dispatch_queue_create(label.UTF8String, DISPATCH_QUEUE_CONCURRENT);
+}
+
++(void)synchronized:(NSObject *)obj :(void (^)(void))block {
+    @synchronized (obj) {
+        block();
+    }
+}
+
 +(void)runOnUIThread:(LuaTranslator *)runnable
 {
     [LuaThread runOnUIThreadInternal:^{

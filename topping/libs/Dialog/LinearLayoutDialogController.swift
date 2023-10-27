@@ -6,6 +6,7 @@ public class LinearLayoutDialogController : DialogController {
     
     @objc public var context: LuaContext?
     @objc public var linearLayout: LGLinearLayout?
+    @objc public var dialog: LuaComponentDialog?
     
     @objc
     public func initialize() {
@@ -18,5 +19,10 @@ public class LinearLayoutDialogController : DialogController {
     
     public override func loadView() {
         self.view = self.linearLayout!._view
+    }
+    
+    @objc
+    public func cancel() {
+        dialog?.cancel()
     }
 }

@@ -12,6 +12,7 @@
     if (self) {
         self.controller = [[LinearLayoutDialogController alloc] init];
         self.controller.context = context;
+        self.controller.dialog = self;
         [self.controller initialize];
         self.lifecycleRegistry = [[LifecycleRegistry alloc] initWithOwner:self];
         self.savedStateRegistryController = [[SavedStateRegistryController alloc] initWithOwner:self];
@@ -57,6 +58,16 @@
     [self.controller dismissViewControllerAnimated:true completion:^{
         
     }];
+}
+
+-(void)cancel {
+    [self.controller dismissViewControllerAnimated:true completion:^{
+        
+    }];
+}
+
+-(BOOL)onTouchEvent:(TIOSKHMotionEvent *)event {
+    return true;
 }
 
 -(NSString*)GetId

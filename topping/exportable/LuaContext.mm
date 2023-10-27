@@ -43,6 +43,7 @@
     
     self.form = (LuaForm*)controller;
     self.packageName = [[NSBundle mainBundle] bundleIdentifier];
+    self._resources = [ToppingResources new];
 }
 
 -(void)setup:(UIViewController*)controller
@@ -112,7 +113,7 @@
 }
 
 - (nonnull id<TIOSKHTPaint>)createPaint {
-    return (id<TIOSKHTPaint>)[[ToppingPaint alloc] initWithFont:nil];
+    return [[ToppingPaint alloc] initWithFontInternal:nil];
 }
 
 - (nonnull id<TIOSKHTView>)createView {
@@ -128,7 +129,7 @@
 }
 
 - (nonnull id<TIOSKHTResources>)getResources {
-    return (id<TIOSKHTResources>)[ToppingResources new];
+    return self._resources;
 }
 
 - (id<TIOSKHInterpolator> _Nullable)loadInterpolatorId:(nonnull NSString *)id {

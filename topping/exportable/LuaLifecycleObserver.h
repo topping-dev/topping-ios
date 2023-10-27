@@ -23,6 +23,7 @@
 
 @property (nonatomic, copy) void (^onStateChangedO)(id<LifecycleOwner>, LifecycleEvent);
 @property (nonatomic, retain) NSObject *myself;
+@property (nonatomic, retain) NSString *key;
 
 @end
 
@@ -45,11 +46,11 @@
 
 @end
 
-@interface DefaultLifecycleObserver : NSObject <FullLifecycleObserver>
+@protocol DefaultLifecycleObserver <FullLifecycleObserver>
 
 @end
 
-@interface LuaLifecycleObserver : DefaultLifecycleObserver <LuaClass, LuaInterface>
+@interface LuaLifecycleObserver : NSObject <LuaClass, LuaInterface, DefaultLifecycleObserver>
 
 +(LuaLifecycleObserver*)create:(LuaTranslator*)lt;
 

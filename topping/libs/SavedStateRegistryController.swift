@@ -392,7 +392,8 @@ open class SavedStateRegistry : NSObject {
     private var mRecreatorProvider: RecreatorSavedStateProvider?
     private var mAllowingSavingState = false
     
-    func consumeRestoredStateForKey(key: String) -> Dictionary<String, NSObject>? {
+    @objc
+    public func consumeRestoredStateForKey(key: String) -> Dictionary<String, NSObject>? {
         if(!mRestored) {
             return nil
         }
@@ -416,6 +417,7 @@ open class SavedStateRegistry : NSObject {
         }
     }
     
+    @objc
     func unregisterSavedStateProvider(key: String) {
         mComponents.removeObject(forKey: key)
     }

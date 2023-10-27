@@ -3,41 +3,28 @@ import ToppingIOSKotlinHelper
 import UIKit
 
 @objc
-public class ToppingPaint : NSObject, TPaint {
-    var font: UIFont
-    var antiAlias = false
-    var color = TColor.init(a: 255.0, r: 255.0, g: 255.0, b: 255.0)
-    var strokeWidth = 1
+public class ToppingPaint : SkiaPaint {
+    public var fontInternal: UIFont? = nil
     
     @objc
-    public init(font: UIFont?) {
+    public init(fontInternal: UIFont?) {
+        super.init(skia: SkikoPaint())
         if(font != nil) {
-            self.font = font!
+            self.fontInternal = fontInternal!
         }
         else {
-            self.font = UIFont.systemFont(ofSize: UIFont.labelFontSize)
+            self.fontInternal = UIFont.systemFont(ofSize: UIFont.labelFontSize)
         }
     }
 
     @objc
-    public func getTextBounds(text: String, start: Int32, end: Int32, bounds: Rect) {
+    public override func getTextBounds(text: String, start: Int32, end: Int32, bounds: Rect) {
+        if(fontInternal == nil) {
+            bounds.setEmpty()
+            return
+        }
         let toCalculate = text.substring(startIndex: Int(start), length: Int(end))
-        let size = self.font.sizeOfString(string: toCalculate, constrainedToWidth: Double.infinity)
+        let size = self.fontInternal!.sizeOfString(string: toCalculate, constrainedToWidth: Double.infinity)
         bounds.set(left: 0, top: 0, right: size.width, bottom: size.height)
-    }
-    
-    @objc
-    public func setAntiAlias(value: Bool) {
-        antiAlias = value
-    }
-    
-    @objc
-    public func setColor(color: TColor) {
-        self.color = color
-    }
-    
-    @objc
-    public func setStrokeWidth(value: Int32) {
-        self.strokeWidth = Int(value)
     }
 }

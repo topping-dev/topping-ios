@@ -13,6 +13,14 @@
     self.onStateChangedO(source, event);
 }
 
+- (NSString *)getKey {
+    if(self.key == nil) {
+        self.key = [[NSUUID UUID] UUIDString];
+    }
+    return self.key;
+}
+
+
 @end
 
 @implementation LifecycleObserver
@@ -25,34 +33,6 @@
 
 -(void)onStateChanged:(id<LifecycleOwner>)source :(LifecycleEvent)event {
 
-}
-
-@end
-
-@implementation DefaultLifecycleObserver
-
-- (void)onCreate:(id<LifecycleOwner>)owner {
-    
-}
-
-- (void)onDestroy:(id<LifecycleOwner>)owner {
-    
-}
-
-- (void)onPause:(id<LifecycleOwner>)owner {
-    
-}
-
-- (void)onResume:(id<LifecycleOwner>)owner {
-    
-}
-
-- (void)onStart:(id<LifecycleOwner>)owner {
-    
-}
-
-- (void)onStop:(id<LifecycleOwner>)owner {
-    
 }
 
 @end

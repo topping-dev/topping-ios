@@ -212,6 +212,19 @@
     [super didReceiveMemoryWarning];
 }
 
+-(void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    Configuration *oldConfiguration = [self.context._resources getConfiguration];
+    [self.context._resources initConfig];
+    Configuration *newConfiguration = [self.context._resources getConfiguration];
+    int diff = [oldConfiguration diff:[self.context._resources getConfiguration]];
+    if(diff > 0) {
+        [self.lgview onConfigurationChanged:[self.context._resources getConfiguration]];
+        if(diff & ACTIVITY_INFO_CONFIG_LAYOUT_DIRECTION) {
+            [self.lgview onRtlPropertiesChanged:[newConfiguration getLayoutDirection]];
+        }
+    }
+}
+
 -(void)setConstraints {
     self.rootConstraintsSet = true;
     [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];

@@ -55,49 +55,112 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9B05709B-DE99-49FD-A9D4-4E659FE89EB0"
+            uuid = "9D21DFC9-D300-406A-A4B8-F0CB231BF549"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "topping/libs/Dialog/DialogTransitioningDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "presentationTransitionWillBegin()"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "onTap(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D21DFC9-D300-406A-A4B8-F0CB231BF549 - d2815b366319367c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Topping.DialogPresentationController.onTap(__C.UITapGestureRecognizer) -&gt; ()"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/Dialog/DialogTransitioningDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "580">
+               </Location>
+               <Location
+                  uuid = "9D21DFC9-D300-406A-A4B8-F0CB231BF549 - d2815b366319367c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Topping.DialogPresentationController.onTap(__C.UITapGestureRecognizer) -&gt; ()"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/Dialog/DialogTransitioningDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "800">
+               </Location>
+               <Location
+                  uuid = "9D21DFC9-D300-406A-A4B8-F0CB231BF549 - d2815b366319367c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Topping.DialogPresentationController.onTap(__C.UITapGestureRecognizer) -&gt; ()"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/Dialog/DialogTransitioningDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "856">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FC60612E-2BFA-4062-AA24-764B175E558A"
+            uuid = "98209640-227A-4B74-8859-929FA6A864D8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "topping/exportable/LGLinearLayout.mm"
+            filePath = "topping/libs/Dialog/DialogTransitioningDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
-            landmarkName = "-resizeInternalVertical::"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "onTap(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "88B5C41A-B497-468D-853A-9CED17681FE7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "topping/exportable/LGCheckBox.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "-getContentW"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "98209640-227A-4B74-8859-929FA6A864D8 - f0b2e3ecc17ef42c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Topping.DialogPresentationController.presentationTransitionWillBegin() -&gt; ()"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/Dialog/DialogTransitioningDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "98209640-227A-4B74-8859-929FA6A864D8 - d2815b3663193155"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Topping.DialogPresentationController.onTap(__C.UITapGestureRecognizer) -&gt; ()"
+                  moduleName = "Topping"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/edo/Documents/Code/topping-ios/topping/libs/Dialog/DialogTransitioningDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "1200">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

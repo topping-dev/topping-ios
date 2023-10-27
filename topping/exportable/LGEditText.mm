@@ -543,6 +543,60 @@
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(self.imeAction != nil) {
+        self.imeAction();
+    }
+    return true;
+}
+
+-(void)setImeOption:(IME_OPTION)option {
+    UIReturnKeyType returnTypeKey = UIReturnKeyDefault;
+    switch (option) {
+        case IME_OPTION_GO:
+            returnTypeKey = UIReturnKeyGo;
+            break;
+        case IME_OPTION_SEARCH:
+            returnTypeKey = UIReturnKeySearch;
+            break;
+        case IME_OPTION_SEND:
+            returnTypeKey = UIReturnKeySend;
+            break;
+        case IME_OPTION_PREVIOUS:
+            
+            break;
+        case IME_OPTION_NEXT:
+            returnTypeKey = UIReturnKeyNext;
+            break;
+        case IME_OPTION_DONE:
+            returnTypeKey = UIReturnKeyDone;
+            break;
+        default:
+            break;
+    }
+    
+    if(self.multiLine)
+    {
+        UITextView *field = (UITextView*)self._view;
+        field.returnKeyType = returnTypeKey;
+    }
+    else
+    {
+        UITextField *field = (UITextField*)self._view;
+        field.returnKeyType = returnTypeKey;
+    }
+}
+
+-(void)setSelection:(int)start :(int)end {
+    id<UITextInput> field = (id<UITextInput>)self._view;
+    UITextPosition *firstCharacterPosition = [field beginningOfDocument];
+    UITextPosition *startCharacterPosition = [field positionFromPosition:firstCharacterPosition offset:start];
+    UITextPosition *endCharacterPosition = [field positionFromPosition:firstCharacterPosition offset:end];
+    UITextRange *range = [field textRangeFromPosition:startCharacterPosition toPosition:endCharacterPosition];
+    
+    [field setSelectedTextRange:range];
+}
+
 -(NSString*)GetId
 {
     if(self.lua_id != nil)

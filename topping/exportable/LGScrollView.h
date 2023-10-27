@@ -3,7 +3,7 @@
 #import "LuaContext.h"
 #import "LGFrameLayout.h"
 
-@interface LGScrollView : LGFrameLayout
+@interface LGScrollView : LGFrameLayout <UIScrollViewDelegate>
 {
 	
 }

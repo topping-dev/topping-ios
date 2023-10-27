@@ -16,6 +16,20 @@
 static BOOL rtl = false;
 static BOOL swizzled = false;
 
+@implementation DragEvent
+
++(DragEvent *)obtain:(int)action :(float)x :(float)y :(NSString *)data {
+    DragEvent *event = [DragEvent new];
+    event.action = action;
+    event.x = x;
+    event.y = y;
+    event.clipData = data;
+    
+    return event;
+}
+
+@end
+
 @implementation UIView(Extension)
 
 static char UIB_PROPERTY_KEY;
@@ -62,18 +76,74 @@ static char UIB_PROPERTY_KEY;
 }
 
 -(UIView *)overload_hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if(self.wrapper == nil || ![self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateBegan])
-        return [self overload_hitTest:point withEvent:event];
-    
-    return [[UIView alloc] init];
+    [self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateBegan];
+    return [self overload_hitTest:point withEvent:event];
 }
 
 -(void)overload_didMoveToWindow {
     [self overload_didMoveToWindow];
     if(self.window != nil)
+    {
+        self.wrapper.viewTreeObserver = [ViewTreeObserver new];
         [self.wrapper onAttachedToWindow];
+    }
     else
         [self.wrapper onDetachedFromWindow];
+}
+
+/*-(void)overload_layoutSublayersOfLayer:(CALayer *)layer {
+    [self overload_layoutSublayersOfLayer:layer];
+}*/
+
+-(void)overload_layoutSubviews {
+    [self overload_layoutSubviews];
+    
+    [self.wrapper.viewTreeObserver dispatchGlobalLayout];
+}
+
+-(BOOL)overload_canBecomeFocused {
+    return self.wrapper.isFocusable;
+}
+
+-(void)overload_didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator {
+    TIOSKHRect *rect = [[TIOSKHRect alloc] init];
+    if (@available(iOS 12.0, *)) {
+        if(context.previouslyFocusedItem != nil) {
+            rect.left = context.previouslyFocusedItem.frame.origin.x;
+            rect.top = context.previouslyFocusedItem.frame.origin.y;
+            rect.right = rect.left + context.previouslyFocusedItem.frame.size.width;
+            rect.bottom = rect.top + context.previouslyFocusedItem.frame.size.height;
+        }
+    }
+    [self.wrapper onFocusChanged:(context.nextFocusedView == self) :0 : rect];
+}
+
+/*
+ https://stackoverflow.com/questions/506622/cgcontextdrawimage-draws-image-upside-down-when-passed-uiimage-cgimage
+ */
+
+-(void)overload_drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
+    CGImageRef imgRef = CGBitmapContextCreateImage(ctx);
+    UIImage* img = [UIImage imageWithCGImage:imgRef];
+    
+    TIOSKHSkikoImage *skImage = [TIOSKHSkiaCanvasKt toSkiaImage:img];
+    TIOSKHSkikoBitmap *skBitmap = [skImage toBitmap];
+    TIOSKHSkiaCanvas *canvas = [[TIOSKHSkiaCanvas alloc] initWithBitmap:skBitmap];
+    [self.wrapper onDrawCanvas:canvas];
+    
+    img = [canvas toUIImageScale:1];
+    /*CGRect imageRect = CGRectMake(0, 0, img.size.width, img.size.height);
+    CGContextTranslateCTM(ctx, 0, img.size.height);
+    CGContextScaleCTM(ctx, 1.0, -1.0);
+    CGContextDrawImage(ctx, imageRect, img.CGImage);
+    CGContextScaleCTM(ctx, 1.0, -1.0);
+    CGContextTranslateCTM(ctx, 0, -imageRect.size.height);*/
+    
+    UIGraphicsPushContext(ctx);
+    [img drawAtPoint:CGPointZero]; // UIImage will handle all especial cases!
+    UIGraphicsPopContext();
+    
+    CGImageRelease(imgRef);
 }
 
 @end
@@ -84,13 +154,14 @@ static char UIB_PROPERTY_KEY;
     return rtl;
 }
 
-@synthesize layout, baseLine;
+@synthesize layout, baseLine, onDragListener = _onDragListener;
 
 -(void)initProperties
 {
 	self.layout = NO;
     self.layoutRequested = true;
 	self.baseLine = -1;
+    self.isFocusable = true;
 	self.android_layout_width = @"wrap_content";
 	self.android_layout_height = @"wrap_content";
     self.methodSkip = [NSMutableArray array];
@@ -262,6 +333,10 @@ static char UIB_PROPERTY_KEY;
         [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesMoved:withEvent:") :NSSelectorFromString(@"overload_touchesMoved:withEvent:")];
         [self swizzleMethods:[UIView class] :NSSelectorFromString(@"touchesEnded:withEvent:") :NSSelectorFromString(@"overload_touchesEnded:withEvent:")];
         [self swizzleMethods:[UIView class] :NSSelectorFromString(@"didMoveToWindow") :NSSelectorFromString(@"overload_didMoveToWindow")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"layoutSubviews") :NSSelectorFromString(@"overload_layoutSubviews")]; 
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"canBecomeFocused") :NSSelectorFromString(@"overload_canBecomeFocused")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"didUpdateFocusInContext:withAnimationCoordinator:") :NSSelectorFromString(@"overload_didUpdateFocusInContext:withAnimationCoordinator:")];
+        [self swizzleMethods:[UIView class] :NSSelectorFromString(@"drawLayer:inContext:") :NSSelectorFromString(@"overload_drawLayer:inContext:")];
     }
 }
 
@@ -836,19 +911,20 @@ static char UIB_PROPERTY_KEY;
     CGFloat xCoordinate = point.x;
     CGFloat yCoordinate = point.y;
     NSNumber *num = [NSNumber numberWithBool:false];
+    BOOL innerResult = false;
     if(state == UIGestureRecognizerStateBegan) {
         tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
         TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:tapDownTime
                                    action:[TIOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
-        [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        innerResult = [self callTMethod:@"onTouchEvent" :&num :event, nil];
     } else if(state == UIGestureRecognizerStateChanged) {
         TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
                                    action:[TIOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
-        [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        innerResult = [self callTMethod:@"onTouchEvent" :&num :event, nil];
     } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
         
     } else {
@@ -857,15 +933,17 @@ static char UIB_PROPERTY_KEY;
                                    eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
                                    action:[TIOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
         [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        innerResult = [self onTouchEventEvent:event];
         tapDownTime = 0;
     }
     interceptTouchEventResult = [num boolValue];
     
-    return interceptTouchEventResult;
+    return interceptTouchEventResult | innerResult;
 }
 
 -(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state {
-    return false;
+    [self onTouchEvent:point :state];
+    return true;
 }
 
 -(void)postOnAnimation:(void (^)())block {
@@ -919,7 +997,7 @@ static char UIB_PROPERTY_KEY;
 
 -(void)setFocusable:(BOOL)focusable
 {
-    //self._view  = focusable;
+    self.isFocusable = focusable;
 }
 
 -(void)setBackground:(LuaRef*)background
@@ -980,7 +1058,17 @@ static char UIB_PROPERTY_KEY;
 -(void)setOnClickListener:(LuaTranslator *)lt
 {
     self.ltOnClickListener = lt;
-    [self._view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self._view action:lt.selector]];
+    if(lt == nil) {
+        if(self.tapGesture != nil)
+            [self._view removeGestureRecognizer:self.tapGesture];
+        self.tapGesture = nil;
+        return;
+    }
+    if(self.tapGesture != nil) {
+        [self._view removeGestureRecognizer:self.tapGesture];
+    }
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self._view action:lt.selector];
+    [self._view addGestureRecognizer:self.tapGesture];
 }
 
 -(NSDictionary *)getBindings {
@@ -1082,6 +1170,76 @@ static char UIB_PROPERTY_KEY;
     return found;
 }
 
+-(void)onFocusChanged:(BOOL)gainFocus :(int)direction :(TIOSKHRect *)previouslyFocusedRect {}
+
+-(void)onConfigurationChanged:(Configuration *)configuration {}
+
+-(void)startDragAndDrop:(NSString *)data {
+    self.dragData = data;
+}
+
+//Drag
+-(void)dragInteraction:(UIDragInteraction *)interaction sessionWillBegin:(id<UIDragSession>)session {
+    CGPoint point = [session locationInView:self._view];
+    [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DRAG_LOCATION :point.x :point.y :nil]];
+}
+
+-(NSArray<UIDragItem *> *)dragInteraction:(UIDragInteraction *)interaction itemsForBeginningSession:(id<UIDragSession>)session {
+    NSItemProvider *provider = [[NSItemProvider alloc] initWithObject:self.dragData];
+    UIDragItem *item = [[UIDragItem alloc] initWithItemProvider:provider];
+
+    return @[item];
+}
+
+//Drop
+-(BOOL)dropInteraction:(UIDropInteraction *)interaction canHandleSession:(id<UIDropSession>)session {
+    CGPoint point = [session locationInView:self._view];
+    return [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DRAG_STARTED :point.x :point.y :nil]];
+}
+
+-(void)dropInteraction:(UIDropInteraction *)interaction sessionDidEnter:(id<UIDropSession>)session {
+    CGPoint point = [session locationInView:self._view];
+    [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DRAG_ENTERED :point.x :point.y :nil]];
+}
+
+-(UIDropProposal *)dropInteraction:(UIDropInteraction *)interaction sessionDidUpdate:(id<UIDropSession>)session {
+    CGPoint point = [session locationInView:self._view];
+    [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DRAG_LOCATION :point.x :point.y :nil]];
+    return [[UIDropProposal alloc] initWithDropOperation:UIDropOperationCopy];
+}
+
+- (void)dropInteraction:(UIDropInteraction *)interaction performDrop:(id<UIDropSession>)session {
+    __block CGPoint point = [session locationInView:self._view];
+    [session loadObjectsOfClass:[NSObject class] completion:^(NSArray<__kindof id<NSItemProviderReading>> * _Nonnull objects) {
+        NSString *data = [objects firstObject];
+        [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DROP :point.x :point.y :data]];
+    }];
+}
+
+-(void)dropInteraction:(UIDropInteraction *)interaction sessionDidExit:(id<UIDropSession>)session {
+    CGPoint point = [session locationInView:self._view];
+    [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DRAG_EXITED :point.x :point.y :nil]];
+}
+
+- (void)dropInteraction:(UIDropInteraction *)interaction sessionDidEnd:(id<UIDropSession>)session {
+    CGPoint point = [session locationInView:self._view];
+    [self.onDragListener onDrag:self :[DragEvent obtain:ACTION_DRAG_ENDED :point.x :point.y :nil]];
+}
+
+-(void)setOnDragListener:(id<OnDragListener>)onDragListener {
+    _onDragListener = onDragListener;
+    if(_onDragListener != nil) {
+        self.dragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
+        [self._view addInteraction:self.dragInteraction];
+        
+        self.dropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
+        [self._view addInteraction:self.dropInteraction];
+    } else {
+        [self._view removeInteraction:self.dragInteraction];
+        [self._view removeInteraction:self.dropInteraction];
+    }
+}
+
 -(NSString*)GetId
 {
 	if(self.lua_id != nil)
@@ -1171,42 +1329,35 @@ static char UIB_PROPERTY_KEY;
             method_getTypeEncoding(swizzledMethod));
 }
 
+-(void)swizzleMethods:(SEL)original :(SEL)swizzled {
+    [self swizzleMethods:[LGView class] :original :swizzled];
+}
+
 - (void)addViewView:(nonnull id<TIOSKHTView>)view param:(nonnull TIOSKHViewGroupLayoutParams *)param {
     
 }
-
 
 - (BOOL)canScrollVerticallyVert:(int32_t)vert {
     return false;
 }
 
-
 - (void)dispatchDrawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
     
 }
-
 
 - (float)dpToPixelDp:(float)dp {
     return [DisplayMetrics dpToSp:dp];
 }
 
-
-- (void)drawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
-    
-}
-
-
 - (id<TIOSKHTView> _Nullable)findViewByIdId:(nonnull NSString *)id {
     return [self getViewByIdId:id];
 }
-
 
 - (void)forceLayout {
     self.layoutRequested = true;
     [self resizeAndInvalidate];
     self.layoutRequested = false;
 }
-
 
 - (id<TIOSKHTDrawable> _Nullable)getBackground {
     NSObject *obj = [[LGValueParser getInstance] getValue:self.lrBackground.idRef];
@@ -1218,51 +1369,41 @@ static char UIB_PROPERTY_KEY;
     return nil;
 }
 
-
 - (int32_t)getBaseline {
     return self.baseLine;
 }
-
 
 - (nonnull id<TIOSKHTView>)getChildAtIndex:(int32_t)index {
     return (id<TIOSKHTView>)[UIView new];
 }
 
-
 - (int32_t)getChildCount {
     return 0;
 }
-
 
 -(int32_t)getChildMeasureSpecSpec:(int32_t)spec padding:(int32_t)padding dimension:(int32_t)dimension {
     return 0;
 }
 
-
 - (nonnull id<TIOSKHTClass>)getClass {
     return (id<TIOSKHTClass>)[[ToppingClass alloc] initWithCls:[self class]];
 }
-
 
 - (nonnull id<TIOSKHTContext>)getContext {
     return self.lc;
 }
 
-
 - (nonnull id<TIOSKHTDisplay>)getDisplay {
     return [ToppingDisplay new];
 }
-
 
 - (float)getElevation {
     return ((NSNumber*)[[LGValueParser getInstance] getValue:self.android_elevation]).floatValue;
 }
 
-
 - (int32_t)getHeight {
     return self.dHeight;
 }
-
 
 - (void)getHitRectTempRec:(nonnull TIOSKHRect *)tempRec {
     CGPoint topLeft = CGPointMake(self._view.bounds.origin.x,
@@ -1278,7 +1419,6 @@ static char UIB_PROPERTY_KEY;
     tempRec.bottom = cBottomRight.y;
 }
 
-
 - (nonnull NSString *)getId {
     if([[LGIdParser getInstance] hasId:[self GetId]])
         return [[LGIdParser getInstance] getId:[self GetId]];
@@ -1286,23 +1426,19 @@ static char UIB_PROPERTY_KEY;
     return @"";
 }
 
-
 - (int32_t)getLayoutDirection {
     return [LGView isRtl] ? 1 : 0;
 }
 
-
 - (TIOSKHViewGroupLayoutParams * _Nullable)getLayoutParams {
     return self.kLayoutParams;
 }
-
 
 - (void)getLocationOnScreenTempLoc:(nonnull TIOSKHKotlinIntArray *)tempLoc {
     CGPoint p = [self._view convertPoint:self._view.frame.origin toView:nil];
     [tempLoc setIndex:0 value:p.x];
     [tempLoc setIndex:1 value:p.y];
 }
-
 
 - (nonnull TIOSKHAndroidMatrix33 *)getMatrix {
     CGAffineTransform transform = self._view.transform;
@@ -1323,158 +1459,125 @@ static char UIB_PROPERTY_KEY;
     return matrix;
 }
 
-
 - (int32_t)getMeasuredHeight {
     return self.dHeight;
 }
-
 
 - (int32_t)getMeasuredWidth {
     return self.dWidth;
 }
 
-
 - (id _Nullable)getObjCPropertyName:(nonnull NSString *)name {
     return [self valueForKey:name];
 }
-
 
 - (int32_t)getPaddingBottom {
     return self.dPaddingBottom;
 }
 
-
 - (int32_t)getPaddingEnd {
     return self.dPaddingRight;
 }
-
 
 - (int32_t)getPaddingLeft {
     return self.dPaddingLeft;
 }
 
-
 - (int32_t)getPaddingRight {
     return self.dPaddingRight;
 }
-
 
 - (int32_t)getPaddingStart {
     return self.dPaddingLeft;
 }
 
-
 - (int32_t)getPaddingTop {
     return self.dPaddingTop;
 }
-
 
 - (id<TIOSKHTView> _Nullable)getParent {
     return self.parent;
 }
 
-
 - (nonnull id)getParentType {
     return self.kParentType;
 }
-
 
 - (float)getPivotX {
     return self.dPivotX;
 }
 
-
 - (float)getPivotY {
     return self.dPivotY;
 }
 
-
 - (nonnull id<TIOSKHTResources>)getResources {
-    return (id<TIOSKHTResources>)[[ToppingResources alloc] init];
+    return self.lc._resources;
 }
-
 
 - (float)getRotationX {
     return self.dRotationX;
 }
 
-
 - (float)getRotationY {
     return self.dRotationY;
 }
-
 
 - (float)getRotation_ {
     return self.dRotation;
 }
 
-
 - (float)getScaleX {
     return self.dScaleX;
 }
-
 
 - (float)getScaleY {
     return self.dScaleY;
 }
 
-
 - (float)getScrollX {
     return 0;
 }
-
 
 - (float)getScrollY {
     return 0;
 }
 
-
 - (id _Nullable)getTag {
-    //TODO:
-    return nil;
+    return [self.tagMap objectForKey:@""];
 }
-
 
 - (id _Nullable)getTagKey:(nonnull id)key {
-    //TODO:
-    return nil;
+    return [self.tagMap objectForKey:key];
 }
-
 
 - (float)getTranslationX {
     return self.dTranslationX;
 }
 
-
 - (float)getTranslationY {
     return self.dTranslationY;
 }
-
 
 - (float)getTranslationZ {
     return self.dTranslationZ;
 }
 
-
 - (id<TIOSKHTView> _Nullable)getViewByIdId:(nonnull NSString *)id {
     return [self getViewById:[LuaRef withValue:id]];
 }
-
 
 - (int32_t)getWidth {
     return self.dWidth;
 }
 
-
 - (int32_t)getX {
     return self.dX;
 }
 
-
 - (int32_t)getY {
     return self.dY;
 }
-
 
 - (void)invalidate {
     self.layoutRequested = true;
@@ -1482,52 +1585,42 @@ static char UIB_PROPERTY_KEY;
     self.layoutRequested = false;
 }
 
-
 - (void)invalidateOutline {
     
 }
-
 
 - (void)invokeMethodMethod:(nonnull NSString *)method value:(nonnull id)value {
     SEL selector = NSSelectorFromString(method);
     [self performSelector:selector withObject:value];
 }
 
-
 - (BOOL)isAttachedToWindow {
-    return true;
+    return self._view.window != nil;
 }
-
 
 - (BOOL)isInEditMode {
     return false;
 }
 
-
 - (BOOL)isLayoutRequested {
     return self.layoutRequested;
 }
-
 
 - (BOOL)isRtl {
     return [LGView isRtl];
 }
 
-
 - (void)layoutL:(int32_t)l t:(int32_t)t r:(int32_t)r b:(int32_t)b {
     [self layout:l :t :r :b];
 }
-
 
 - (int32_t)makeMeasureSpecMeasureSpec:(int32_t)measureSpec type:(int32_t)type {
     return [MeasureSpec makeMeasureSpec:measureSpec :type];
 }
 
-
 - (void)measureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec {
     [self measure:widthMeasureSpec :heightMeasureSpec];
 }
-
 
 - (void)onAttachedToWindow {
     [self callTMethod:@"onAttachedToWindow" :nil :nil];
@@ -1537,28 +1630,28 @@ static char UIB_PROPERTY_KEY;
     [self callTMethod:@"onDetachedFromWindow" :nil :nil];
 }
 
-- (void)onDrawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
-    //TODO:
+- (void)draw:(nonnull id<TIOSKHTCanvas>)canvas {
+    
 }
 
+- (void)onDrawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
+
+}
 
 - (void)onMeasureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec {
     [self onMeasure:widthMeasureSpec :heightMeasureSpec];
 }
 
-
 - (BOOL)onTouchEventEvent:(nonnull TIOSKHMotionEvent *)event {
     return false;
 }
 
-
 - (void)onViewAddedView:(nonnull id<TIOSKHTView>)view {
-    
+    //NOT needed by lgview
 }
 
-
 - (void)onViewRemovedView:(nonnull id<TIOSKHTView>)view {
-   
+    //NOT needed by lgview
 }
 
 - (void)postRunnable:(nonnull id<TIOSKHTRunnable>)runnable {
@@ -1567,73 +1660,71 @@ static char UIB_PROPERTY_KEY;
     }];
 }
 
-
 - (void)requestLayout {
     self.layoutRequested = true;
     [self resizeAndInvalidate];
     self.layoutRequested = false;
 }
 
-
 - (int32_t)resolveSizeAndStateSize:(int32_t)size measureSpec:(int32_t)measureSpec childState:(int32_t)childState {
     return [LGView resolveSizeAndState:size :measureSpec :childState];
 }
-
 
 - (void)setAlphaValue:(float)value {
     self._view.alpha = value / 255.0f;
 }
 
-
 - (void)setClipToOutlineClip:(BOOL)clip {
     
 }
-
 
 - (void)setElevationValue:(float)value {
 
 }
 
-
 - (void)setIdId:(nonnull NSString *)id {
     [self SetId:id];
 }
 
-
 - (void)setImageDrawableDrawable:(id<TIOSKHTDrawable> _Nullable)drawable {
-    
+    //NOT needed by lgview
 }
-
 
 - (void)setImageResourceResourceId:(nonnull NSString *)resourceId {
-    
+    //NOT needed by lgview
 }
-
 
 - (void)setLayoutParamsParams:(nonnull TIOSKHViewGroupLayoutParams *)params {
     self.kLayoutParams = params;
 }
 
-
 - (void)setMeasuredDimensionWidth:(int32_t)width height:(int32_t)height {
     [self setMeasuredDimension:width :height];
 }
-
 
 - (void)setObjCPropertyMethodName:(nonnull NSString *)methodName value:(nonnull id)value {
     [self setValue:value forKey:methodName];
 }
 
-
-- (void)setOnClickListenerListener:(id<TIOSKHTViewOnClickListener> _Nullable)listener {
-    
+- (void)onClickInternal {
+    [self.internalClickListener onClickView:self];
 }
 
+- (void)setOnClickListenerListener:(id<TIOSKHTViewOnClickListener> _Nullable)listener {
+    if(self.tapGesture != nil)
+        [self._view removeGestureRecognizer:self.tapGesture];
+    self.tapGesture = nil;
+    if(listener == nil) {
+        self.internalClickListener = nil;
+        return;
+    }
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickInternal)];
+    [self._view addGestureRecognizer:self.tapGesture];
+}
 
 - (void)setOutlineProviderViewOutlineProvider:(TIOSKHViewOutlineProvider * _Nullable)viewOutlineProvider {
     
 }
-
 
 - (void)setPaddingLeft:(int32_t)left top:(int32_t)top right:(int32_t)right bottom:(int32_t)bottom {
     self.dPaddingLeft = left;
@@ -1642,21 +1733,17 @@ static char UIB_PROPERTY_KEY;
     self.dPaddingBottom = bottom;
 }
 
-
 - (void)setParentTypeObj:(nonnull id)obj {
     self.kParentType = obj;
 }
-
 
 - (void)setPivotXValue:(float)value {
     self.dPivotX = value;
 }
 
-
 - (void)setPivotYValue:(float)value {
     self.dPivotY = value;
 }
-
 
 - (void)setReflectionColorDrawableMethodName:(nonnull NSString *)methodName r:(int32_t)r g:(int32_t)g b:(int32_t)b a:(int32_t)a {
     
@@ -1666,68 +1753,56 @@ static char UIB_PROPERTY_KEY;
     
 }
 
-
 - (void)setReflectionValueMethodName:(nonnull NSString *)methodName value:(nonnull id)value {
     [self setValue:value forKey:methodName];
 }
-
 
 - (void)setRotationValue:(float)value {
     self.dRotation = value;
     self._view.transform = CGAffineTransformMakeRotation(value * M_PI/180);
 }
 
-
 - (void)setRotationXValue:(float)value {
     self.dRotationX = value;
     self._view.layer.transform = CATransform3DMakeRotation(value * M_PI/180, 1.0, 0.0, 0.0);
 }
-
 
 - (void)setRotationYValue:(float)value {
     self.dRotationY = value;
     self._view.layer.transform = CATransform3DMakeRotation(value * M_PI/180, 0.0, 1.0, 0.0);
 }
 
-
 - (void)setScaleXValue:(float)value {
     self.dScaleX = value;
     self._view.transform = CGAffineTransformConcat(self._view.transform, CGAffineTransformMakeScale(self.dScaleX, self.dScaleY));
 }
-
 
 - (void)setScaleYValue:(float)value {
     self.dScaleY = value;
     self._view.transform = CGAffineTransformConcat(self._view.transform, CGAffineTransformMakeScale(self.dScaleX, self.dScaleY));
 }
 
-
 - (void)setTagKey:(nonnull id)key value:(id _Nullable)value {
-    
+    [self setTag:key :value];
 }
-
 
 - (void)setTagValue:(id _Nullable)value {
-    
+    [self setTag:@"" :value];
 }
-
 
 - (void)setTranslationXValue:(float)value {
     self.dTranslationX = value;
     self._view.transform = CGAffineTransformTranslate(self._view.transform, self.dTranslationX, self.dTranslationY);
 }
 
-
 - (void)setTranslationYValue:(float)value {
     self.dTranslationY = value;
     self._view.transform = CGAffineTransformTranslate(self._view.transform, self.dTranslationX, self.dTranslationY);
 }
 
-
 - (void)setTranslationZValue:(float)value {
     self.dTranslationZ = value;
 }
-
 
 - (void)setVisibilityValue:(int32_t)value {
     [self setVisibility:value];

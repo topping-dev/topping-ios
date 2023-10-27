@@ -366,7 +366,6 @@
     }
 }
 
-
 - (BOOL)onInterceptTouchEvent:(CGPoint)point :(UIEvent *)event :(UIGestureRecognizerState)state {
     //CGPoint tappedPoint = [gesture locationInView:self._view];
     CGFloat xCoordinate = point.x;
@@ -397,7 +396,20 @@
     }
     interceptTouchEventResult = [num boolValue];
     
+    if(interceptTouchEventResult) {
+        [self onTouchEvent:point :state];
+    }
+    for(LGView *view in self.subviews) {
+        [view onInterceptTouchEvent:point :state];
+    }
+    
     return interceptTouchEventResult;
+}
+
+- (void)onConfigurationChanged:(Configuration *)configuration {
+    for(LGView *view in self.subviews) {
+        [view onConfigurationChanged:configuration];
+    }
 }
 
 -(NSDictionary*)getBindings

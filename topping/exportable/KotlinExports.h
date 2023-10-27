@@ -6,6 +6,11 @@
 @class FragmentManager;
 @class LuaFragment;
 @class LGView;
+@class TIOSKHSkiaCanvas;
+@class TIOSKHSkiaBitmap;
+@class TIOSKHSkikoPath;
+@class TIOSKHSkikoRect;
+@class TIOSKHSkikoPoint;
 
 @protocol KotlinProtocol <NSObject>
 

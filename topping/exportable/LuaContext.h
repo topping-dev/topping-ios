@@ -7,6 +7,8 @@
 
 @class LuaForm;
 @protocol TIOSKHTContext;
+@protocol TIOSKHTResources;
+@class ToppingResources;
 
 /**
  * Context class that stores various operating system data.
@@ -26,5 +28,6 @@
 @property (nonatomic, retain) NSString *lua_id;
 @property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, strong) LuaForm *form;
+@property (nonatomic, strong) ToppingResources *_resources;
 
 @end

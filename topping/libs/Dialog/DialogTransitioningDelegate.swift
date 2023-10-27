@@ -117,6 +117,10 @@ final class DialogPresentationController: UIPresentationController {
     }
 
     @objc private func onTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        if(presentedView?.wrapper != nil) {
+            let point = gestureRecognizer.location(in: presentedView)
+            presentedView?.wrapper.onInterceptTouchEvent(point, gestureRecognizer.state)
+        }
         guard
             let presentedView = presentedView,
             let containerView = containerView,
@@ -125,7 +129,11 @@ final class DialogPresentationController: UIPresentationController {
             return
         }
 
-        presentedViewController.dismiss(animated: true)
+        if(presentedViewController.responds(to: NSSelectorFromString("cancel"))) {
+            presentedViewController.perform(NSSelectorFromString("cancel"))
+        } else {
+            presentedViewController.dismiss(animated: true)
+        }
     }
 
     // MARK: UIPresentationController

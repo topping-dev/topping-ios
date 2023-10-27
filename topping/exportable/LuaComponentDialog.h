@@ -6,6 +6,7 @@
 #import "LuaRef.h"
 
 @class TIOSKHViewGroupLayoutParams;
+@class TIOSKHMotionEvent;
 @class LinearLayoutDialogController;
 @protocol OnBackPressedDispatcherOwner;
 @protocol SavedStateRegistryOwner;
@@ -29,6 +30,8 @@
 -(void)addContentView:(LGView *)view :(TIOSKHViewGroupLayoutParams*)params;
 -(void)show;
 -(void)dismiss;
+-(void)cancel;
+-(BOOL)onTouchEvent:(TIOSKHMotionEvent*)event;
 
 
 @end

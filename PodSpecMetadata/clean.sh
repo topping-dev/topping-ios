@@ -7,3 +7,5 @@ rm -rf ../../topping-kotlin-sample/iosApp/Pods
 rm -rf ../../topping-kotlin/toppingKotlin/build
 rm -rf /Users/edo/Documents/androidx-main/frameworks/support/.gradle
 rm -rf /Users/edo/Documents/androidx-main/out
+rm -rf /Users/edo/Documents/androidx-main/frameworks/out
+rm -rf /Users/edo/Documents/androidx-main/frameworks/support/buildSrc/.gradle

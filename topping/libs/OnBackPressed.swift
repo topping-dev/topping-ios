@@ -62,8 +62,9 @@ open class OnBackPressedDispatcher : NSObject {
         mFallbackOnBackPressed = fallbackOnBackPressed
     }
     
+    @objc
     func addCallback(onBackPressedCallback: OnBackPressedCallback) {
-        
+        addCancellableCallback(onBackPressedCallback: onBackPressedCallback)
     }
     
     func addCancellableCallback(onBackPressedCallback: OnBackPressedCallback) -> Cancellable {
@@ -74,8 +75,12 @@ open class OnBackPressedDispatcher : NSObject {
     }
     
     func addCallback(owner: LifecycleOwner, onBackPressedCallback: OnBackPressedCallback) {
-/*        var lifecycle = owner.getLifecycle()
-        if(lifecycle.)*/
+        let lifecycle = owner.getLifecycle()!
+        if (lifecycle.getCurrentState() == LifecycleState.LIFECYCLESTATE_DESTROYED) {
+            return;
+        }
+        
+        onBackPressedCallback.addCancellable(cancellable: LifecycleOnBackPressedCancellable(lifecycle: lifecycle, onBackPressedCallback: onBackPressedCallback, onBackPressedDispatcher: nil))
     }
     
     func hasEnabledCallbacks() -> Bool {
@@ -138,9 +143,9 @@ open class OnBackPressedDispatcher : NSObject {
         private var mOnBackPressedCallback: OnBackPressedCallback
         private var mCurrentCancellable: Cancellable?
         
-        private var mOnBackPressedDispatcher: OnBackPressedDispatcher
+        private var mOnBackPressedDispatcher: OnBackPressedDispatcher?
         
-        init(lifecycle: Lifecycle, onBackPressedCallback: OnBackPressedCallback, onBackPressedDispatcher: OnBackPressedDispatcher) {
+        init(lifecycle: Lifecycle, onBackPressedCallback: OnBackPressedCallback, onBackPressedDispatcher: OnBackPressedDispatcher?) {
             mLifecycle = lifecycle
             mOnBackPressedCallback = onBackPressedCallback
             mOnBackPressedDispatcher = onBackPressedDispatcher
@@ -154,7 +159,7 @@ open class OnBackPressedDispatcher : NSObject {
         
         public func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
             if(event == LifecycleEvent.LIFECYCLEEVENT_ON_START) {
-                mCurrentCancellable = mOnBackPressedDispatcher.addCancellableCallback(onBackPressedCallback: mOnBackPressedCallback)
+                mCurrentCancellable = mOnBackPressedDispatcher?.addCancellableCallback(onBackPressedCallback: mOnBackPressedCallback)
             } else if(event == LifecycleEvent.LIFECYCLEEVENT_ON_STOP) {
                 mCurrentCancellable?.cancel()
             } else if(event == LifecycleEvent.LIFECYCLEEVENT_ON_DESTROY) {

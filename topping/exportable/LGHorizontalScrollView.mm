@@ -6,10 +6,11 @@
 
 -(UIView*)createComponent
 {
-	UIScrollView *iv = [[UIScrollView alloc] init];
-	iv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
-    iv.contentSize = CGSizeMake(self.dWidth, self.dHeight);
-	return iv;
+	UIScrollView *sv = [[UIScrollView alloc] init];
+    sv.delegate = self;
+	sv.frame = CGRectMake(self.dX, self.dY, self.dWidth, self.dHeight);
+    sv.contentSize = CGSizeMake(self.dWidth, self.dHeight);
+	return sv;
 }
 
 -(void) componentAddMethod:(UIView *)par :(UIView *)me
@@ -21,6 +22,20 @@
 		totalWidth += [v getContentW];
 	}
 	((UIScrollView*)me).contentSize = CGSizeMake(totalWidth + 10, ((UIScrollView*)me).contentSize.height);
+}
+
+- (float)getScrollX {
+    UIScrollView *sv = (UIScrollView*)self._view;
+    return sv.contentOffset.x;
+}
+
+- (float)getScrollY {
+    UIScrollView *sv = (UIScrollView*)self._view;
+    return sv.contentOffset.y;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.viewTreeObserver dispatchScrollChanged];
 }
 
 //Lua

@@ -5,6 +5,7 @@
 #import "LuaForm.h"
 #import "LuaRef.h"
 #import "LuaRect.h"
+#import "ViewTreeObserver.h"
 
 #define CALL_RET(V) if(V) { return; }
 #define IS_VIEW_NO_ID(X) (X == nil || [X isEqualToString:@""])
@@ -16,7 +17,11 @@
 @class LuaNavController;
 @protocol TIOSKHTView;
 @class TIOSKHViewGroupLayoutParams;
+@protocol TIOSKHTViewOnClickListener;
+@protocol TIOSKHTCanvas;
+@class TIOSKHRect;
 @class LGRelativeLayoutParams;
+@class Configuration;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
 {
@@ -29,6 +34,12 @@ enum LAYOUTDIMENSION
 {
 	MATCH_PARENT = -1,
 	WRAP_CONTENT = -2
+};
+
+enum LAYOUTDIRECTION
+{
+    LAYOUT_DIRECTION_LTR = 0,
+    LAYOUT_DIRECTION_RTL = 1
 };
 
 enum GRAVITY
@@ -99,6 +110,32 @@ enum MEASURE_SPEC
 
 @class LGView;
 
+typedef NS_ENUM(NSInteger, ACTION_DRAG) {
+    ACTION_DRAG_STARTED = 1,
+    ACTION_DRAG_LOCATION,
+    ACTION_DROP,
+    ACTION_DRAG_ENDED,
+    ACTION_DRAG_ENTERED,
+    ACTION_DRAG_EXITED
+};
+
+@interface DragEvent : NSObject
+
++(DragEvent*)obtain:(int)action :(float)x :(float)y :(NSString*)data;
+
+@property(nonatomic) int action;
+@property(nonatomic) float x;
+@property(nonatomic) float y;
+@property(nonatomic, strong) NSString *clipData;
+
+@end
+
+@protocol OnDragListener <NSObject>
+
+-(BOOL)onDrag:(LGView*)view :(DragEvent*)event;
+
+@end
+
 @interface UIView(Extension)
 
 -(void)overload_touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
@@ -109,7 +146,7 @@ enum MEASURE_SPEC
 
 @end
 
-@interface LGView : NSObject <LuaClass, LuaInterface, TIOSKHTView>
+@interface LGView : NSObject <LuaClass, LuaInterface, TIOSKHTView, UIDragInteractionDelegate, UIDropInteractionDelegate>
 {
     NSArray *propertyNameCache;
     long tapDownTime;
@@ -164,6 +201,7 @@ enum MEASURE_SPEC
 -(BOOL)onTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
 -(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
 -(void)postOnAnimation:(void (^)(void))block;
+-(void)draw:(id<TIOSKHTCanvas>)canvas;
 -(NSString *) debugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;
@@ -204,9 +242,15 @@ enum MEASURE_SPEC
 -(NavController*)findNavController;
 -(LuaNavController*)findNavControllerInternal;
 
+-(void)onFocusChanged:(BOOL)gainFocus :(int)direction :(TIOSKHRect*)previouslyFocusedRect;
+-(void)onConfigurationChanged:(Configuration*)configuration;
+-(void)onRtlPropertiesChanged:(int)layoutDirection;
+
 -(BOOL)callTMethodArr:(NSString *)methodName :(NSObject**)result :(NSArray *)arr;
 -(BOOL)callTMethod:(NSString*)methodName :(NSObject**)result :(id)arg, ...;
 -(void)swizzleMethods:(SEL)original :(SEL)swizzled;
+
+-(void)startDragAndDrop:(NSString*)data;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 @property (nonatomic, strong) NSArray *attrs;
@@ -266,6 +310,8 @@ enum MEASURE_SPEC
 @property (nonatomic, retain) UIViewController *cont;
 @property (nonatomic, retain) LGView *parent;
 @property (nonatomic, retain) NSString *transitionName;
+@property (nonatomic, retain) UIGestureRecognizer *tapGesture;
+@property (nonatomic, retain) id<TIOSKHTViewOnClickListener> internalClickListener;
 
 @property (nonatomic) int dWidth;
 @property (nonatomic) int dHeight;
@@ -306,6 +352,7 @@ enum MEASURE_SPEC
 @property(nonatomic) BOOL layout;
 @property(nonatomic) BOOL layoutRequested;
 @property(nonatomic) int baseLine;
+@property(nonatomic) BOOL isFocusable;
 
 @property(nonatomic) BOOL widthSpecSet, heightSpecSet;
 
@@ -326,6 +373,13 @@ enum MEASURE_SPEC
 @property (nonatomic, strong) void (^postOnAnimationBlock)(void);
 
 @property (nonatomic, strong) NSMutableDictionary *tagMap;
+
+@property (nonatomic, strong) ViewTreeObserver *viewTreeObserver;
+
+@property (nonatomic, strong) NSString *dragData;
+@property (nonatomic, strong) id<OnDragListener> onDragListener;
+@property (nonatomic, strong) UIDragInteraction *dragInteraction;
+@property (nonatomic, strong) UIDropInteraction *dropInteraction;
 
 @end
 

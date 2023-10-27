@@ -41,6 +41,7 @@
     [self.layer removeFromSuperlayer];
     
     MDCBaseTextField *btf = (MDCBaseTextField*)self._view;
+    btf.delegate = self;
     btf.placeholder = @"";
     
     if(self.android_hint != nil) {
@@ -389,6 +390,35 @@
     self.ltAfterTextChangedListener = lt;
     MDCBaseTextField *btf = (MDCBaseTextField*)self._view;
     [btf addTarget:lt action:lt.selector forControlEvents:UIControlEventEditingDidEnd];
+}
+
+-(void)setImeOption:(IME_OPTION)option {
+    UIReturnKeyType returnTypeKey = UIReturnKeyDefault;
+    switch (option) {
+        case IME_OPTION_GO:
+            returnTypeKey = UIReturnKeyGo;
+            break;
+        case IME_OPTION_SEARCH:
+            returnTypeKey = UIReturnKeySearch;
+            break;
+        case IME_OPTION_SEND:
+            returnTypeKey = UIReturnKeySend;
+            break;
+        case IME_OPTION_PREVIOUS:
+            
+            break;
+        case IME_OPTION_NEXT:
+            returnTypeKey = UIReturnKeyNext;
+            break;
+        case IME_OPTION_DONE:
+            returnTypeKey = UIReturnKeyDone;
+            break;
+        default:
+            break;
+    }
+    
+    MDCBaseTextField *btf = (MDCBaseTextField*)self._view;
+    btf.returnKeyType = returnTypeKey;
 }
 
 -(void)setOnDropdownClickListemer:(LuaTranslator*)lt
