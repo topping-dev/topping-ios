@@ -4,10 +4,9 @@
 #import "LuaClass.h"
 #import "LuaInterface.h"
 #import "LuaFormIntent.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
 @class LuaForm;
-@protocol TIOSKHTContext;
-@protocol TIOSKHTResources;
 @class ToppingResources;
 
 /**

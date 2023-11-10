@@ -8,7 +8,6 @@
 #import "LGValueParser.h"
 #import "LuaNavHostFragment.h"
 #import "KotlinExports.h"
-#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 #import "GDataXMLNode.h"
 #import "LGRelativeLayout.h"
@@ -26,6 +25,26 @@ static BOOL swizzled = false;
     event.clipData = data;
     
     return event;
+}
+
+@end
+
+@implementation Transformation
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.alpha = 1;
+        self.matrix = CATransform3DIdentity;
+    }
+    return self;
+}
+
+-(void)clear {
+    self.matrix = CATransform3DIdentity;
+    self.alpha = 1;
+    self.transformationType = TRANSFORMATION_TYPE_BOTH;
 }
 
 @end
@@ -56,7 +75,7 @@ static char UIB_PROPERTY_KEY;
     {
         if(touches.count > 0) {
             CGPoint point = [[[touches allObjects] objectAtIndex:0] locationInView:self.wrapper._view];
-            [self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateChanged];
+            [self.wrapper onIOSTouchEvent:point :UIGestureRecognizerStateChanged];
         }
     }
     /*if([self respondsToSelector:@selector(overload_touchesMoved:withEvent:)])
@@ -68,7 +87,7 @@ static char UIB_PROPERTY_KEY;
     {
         if(touches.count > 0) {
             CGPoint point = [[[touches allObjects] objectAtIndex:0] locationInView:self.wrapper._view];
-            [self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateEnded];
+            [self.wrapper onIOSTouchEvent:point :UIGestureRecognizerStateEnded];
         }
     }
     /*if([self respondsToSelector:@selector(overload_touchesEnded:withEvent:)])
@@ -76,7 +95,7 @@ static char UIB_PROPERTY_KEY;
 }
 
 -(UIView *)overload_hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    [self.wrapper onInterceptTouchEvent:point :UIGestureRecognizerStateBegan];
+    [self.wrapper onIOSTouchEvent:point :UIGestureRecognizerStateBegan];
     return [self overload_hitTest:point withEvent:event];
 }
 
@@ -166,9 +185,6 @@ static char UIB_PROPERTY_KEY;
 	self.android_layout_height = @"wrap_content";
     self.methodSkip = [NSMutableArray array];
     self.methodEventMap = [NSMutableDictionary dictionary];
-    
-    self.dScaleX = 1;
-    self.dScaleY = 1;
 }
 
 -(void)copyAttributesTo:(LGView*)viewToCopy {
@@ -323,6 +339,18 @@ static char UIB_PROPERTY_KEY;
 	//Setup background
     if(self.android_background != nil)
         [self setBackground:[LuaRef withValue:self.android_background]];
+    
+    if(self.android_alpha != nil) {
+        self.dAlpha = ((NSNumber*)[[LGValueParser getInstance] getValue:self.android_alpha]).floatValue / 255.0f;
+        self._view.alpha = self.dAlpha;
+    }
+    else
+        self.dAlpha = 1;
+    
+    if(self.android_transitionAlpha != nil)
+        self.dTransitionAlpha = ((NSNumber*)[[LGValueParser getInstance] getValue:self.android_transitionAlpha]).floatValue / 255.0f;
+    else
+        self.dTransitionAlpha = 1;
     
     self.lc = lc;
     
@@ -517,7 +545,7 @@ static char UIB_PROPERTY_KEY;
         suggestedMinHeight = self.dHeightMin;
     /*if(self.android_background != nil)
     if (mBGDrawable != null) {
-        final int bgMinWidth = mBGDrawable.getMinimumWidth();
+        int bgMinWidth = mBGDrawable.getMinimumWidth();
         if (suggestedMinWidth < bgMinWidth) {
             suggestedMinWidth = bgMinWidth;
         }
@@ -531,7 +559,7 @@ static char UIB_PROPERTY_KEY;
         suggestedMinWidth = self.dWidthMin;
     /*if(self.android_background != nil)
     if (mBGDrawable != null) {
-        final int bgMinWidth = mBGDrawable.getMinimumWidth();
+        int bgMinWidth = mBGDrawable.getMinimumWidth();
         if (suggestedMinWidth < bgMinWidth) {
             suggestedMinWidth = bgMinWidth;
         }
@@ -907,24 +935,43 @@ static char UIB_PROPERTY_KEY;
     self._view.frame = CGRectMake(l, t, r - l, b - t);
 }
 
--(BOOL)onTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state {
+-(BOOL)onIOSTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state {
+    BOOL result = false;
+    TIOSKHMotionEvent *event;
+    if(state == UIGestureRecognizerStateBegan) {
+        tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
+        event = [self convertToMotionEvent:point :state];
+    } else if(state == UIGestureRecognizerStateChanged) {
+        event = [self convertToMotionEvent:point :state];
+    } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
+        
+    } else {
+        event = [self convertToMotionEvent:point :state];
+        tapDownTime = 0;
+    }
+    if(event != nil) {
+        result = [self dispatchTouchEvent:event];
+    }
+    
+    return result;
+}
+
+-(TIOSKHMotionEvent *)convertToMotionEvent:(CGPoint)point :(UIGestureRecognizerState)state {
     CGFloat xCoordinate = point.x;
     CGFloat yCoordinate = point.y;
-    NSNumber *num = [NSNumber numberWithBool:false];
-    BOOL innerResult = false;
     if(state == UIGestureRecognizerStateBegan) {
         tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
         TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:tapDownTime
                                    action:[TIOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
-        innerResult = [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        return event;
     } else if(state == UIGestureRecognizerStateChanged) {
         TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
                                    obtainDownTime:tapDownTime
                                    eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
                                    action:[TIOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
-        innerResult = [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        return event;
     } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
         
     } else {
@@ -932,18 +979,71 @@ static char UIB_PROPERTY_KEY;
                                    obtainDownTime:tapDownTime
                                    eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
                                    action:[TIOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
-        [self callTMethod:@"onTouchEvent" :&num :event, nil];
-        innerResult = [self onTouchEventEvent:event];
         tapDownTime = 0;
+        return event;
     }
-    interceptTouchEventResult = [num boolValue];
     
-    return interceptTouchEventResult | innerResult;
+    return nil;
 }
 
--(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state {
-    [self onTouchEvent:point :state];
-    return true;
+-(BOOL)dispatchTouchEvent:(TIOSKHMotionEvent*)event {
+    BOOL result = false;
+    
+    int actionMasked = event.actionMasked;
+    if(actionMasked == TIOSKHMotionEvent.companion.ACTION_DOWN) {
+        //stop scroll?
+    }
+    
+    //TODO:Add touch listeners?
+    //if(self.onTouchListener)
+    
+    if(!result && [self onTouchEvent:event]) {
+        result = true;
+    }
+    
+    if(actionMasked == TIOSKHMotionEvent.companion.ACTION_UP
+       || actionMasked == TIOSKHMotionEvent.companion.ACTION_CANCEL
+       || (actionMasked == TIOSKHMotionEvent.companion.ACTION_DOWN && !result)) {
+        //stop scroll?
+    }
+    
+    return false;
+}
+
+- (BOOL)onTouchEvent:(TIOSKHMotionEvent *)event {
+    BOOL result = false;
+    
+    result = [self onTouchEventEvent:event];
+    
+    if(!result) {
+        NSNumber *num = [NSNumber numberWithBool:false];
+        [self callTMethod:@"onTouchEvent" :&num :event, nil];
+        result = [num boolValue];
+    }
+    
+    return result;
+}
+
+-(BOOL)dispatchGenericMotionEvent:(TIOSKHMotionEvent*)event {
+    int source = event.source;
+    /*if((source & TIOSKHAINPUT_SOURCE.ainputSourceClassPointer.value) != 0) {
+        int action = event.action;
+        if(action == TIOSKHMotionEvent.companion.ACTION_HOVER_ENTER
+           || action == TIOSKHMotionEvent.companion.ACTION_HOVER_MOVE
+           || action == TIOSKHMotionEvent.companion.ACTION_HOVER_EXIT) {
+            //dispatchHover
+        }
+    }*/
+    
+    if([self dispatchGenericMotionEventInternal:event]) {
+        return true;
+    }
+    return false;
+}
+
+-(BOOL)dispatchGenericMotionEventInternal:(TIOSKHMotionEvent*)event {
+    //TODO:
+    return false;
 }
 
 -(void)postOnAnimation:(void (^)())block {
@@ -1240,6 +1340,14 @@ static char UIB_PROPERTY_KEY;
     }
 }
 
+-(BOOL)hasIdentityMatrix {
+    return CATransform3DIsIdentity(self._view.layer.transform);
+}
+
+-(BOOL)onSetAlpha:(float)value {
+    return false;
+}
+
 -(NSString*)GetId
 {
 	if(self.lua_id != nil)
@@ -1440,23 +1548,8 @@ static char UIB_PROPERTY_KEY;
     [tempLoc setIndex:1 value:p.y];
 }
 
-- (nonnull TIOSKHAndroidMatrix33 *)getMatrix {
-    CGAffineTransform transform = self._view.transform;
-    
-    TIOSKHKotlinFloatArray *arr = [TIOSKHKotlinFloatArray arrayWithSize:9 init:^TIOSKHFloat * _Nonnull(TIOSKHInt * _Nonnull index) {
-        return 0;
-    }];
-    [arr setIndex:0 value:transform.a];
-    [arr setIndex:1 value:transform.b];
-    [arr setIndex:2 value:0];
-    [arr setIndex:3 value:transform.c];
-    [arr setIndex:4 value:transform.d];
-    [arr setIndex:5 value:0];
-    [arr setIndex:6 value:transform.tx];
-    [arr setIndex:7 value:transform.ty];
-    [arr setIndex:8 value:1];
-    TIOSKHAndroidMatrix33 *matrix = [[TIOSKHAndroidMatrix33 alloc] initWithData:arr];
-    return matrix;
+- (nonnull TIOSKHSkikoMatrix33 *)getMatrix {
+    return [KotlinMatrixConvertor skikoMatrixFromCATransform3D:self._view.layer.transform];
 }
 
 - (int32_t)getMeasuredHeight {
@@ -1504,11 +1597,11 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (float)getPivotX {
-    return self.dPivotX;
+    return self._view.layer.anchorPoint.x;
 }
 
 - (float)getPivotY {
-    return self.dPivotY;
+    return self._view.layer.anchorPoint.y;
 }
 
 - (nonnull id<TIOSKHTResources>)getResources {
@@ -1516,23 +1609,23 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (float)getRotationX {
-    return self.dRotationX;
+    return [[self._view valueForKeyPath:@"rotation.x"] floatValue];
 }
 
 - (float)getRotationY {
-    return self.dRotationY;
+    return [[self._view valueForKeyPath:@"rotation.y"] floatValue];
 }
 
 - (float)getRotation_ {
-    return self.dRotation;
+    return [[self._view valueForKeyPath:@"rotation.z"] floatValue];
 }
 
 - (float)getScaleX {
-    return self.dScaleX;
+    return [[self._view valueForKeyPath:@"scale.x"] floatValue];
 }
 
 - (float)getScaleY {
-    return self.dScaleY;
+    return [[self._view valueForKeyPath:@"scale.y"] floatValue];
 }
 
 - (float)getScrollX {
@@ -1552,15 +1645,15 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (float)getTranslationX {
-    return self.dTranslationX;
+    return [[self._view valueForKeyPath:@"translation.x"] floatValue];
 }
 
 - (float)getTranslationY {
-    return self.dTranslationY;
+    return [[self._view valueForKeyPath:@"translation.y"] floatValue];
 }
 
 - (float)getTranslationZ {
-    return self.dTranslationZ;
+    return [[self._view valueForKeyPath:@"translation.z"] floatValue];
 }
 
 - (id<TIOSKHTView> _Nullable)getViewByIdId:(nonnull NSString *)id {
@@ -1630,8 +1723,188 @@ static char UIB_PROPERTY_KEY;
     [self callTMethod:@"onDetachedFromWindow" :nil :nil];
 }
 
-- (void)draw:(nonnull id<TIOSKHTCanvas>)canvas {
+- (BOOL)draw:(nonnull id<TIOSKHTCanvas>)canvas :(LGViewGroup*)parent :(int)drawingTime {
+    BOOL more = false;
+    BOOL childHasIdentityMatrix = [self hasIdentityMatrix];
+    int parentFlags = parent.mGroupFlags;
+    if ((parentFlags & GROUP_FLAG_CLEAR_TRANSFORMATION) != 0) {
+        [parent.childTransformation clear];
+        parent.mGroupFlags &= ~GROUP_FLAG_CLEAR_TRANSFORMATION;
+    }
+    Transformation *transformToApply = nil;
+    BOOL concatMatrix = false;
+    /*Animation a = getAnimation();
+    if (a != null) {
+        more = applyLegacyAnimation(parent, drawingTime, a, scalingRequired);
+        concatMatrix = a.willChangeTransformationMatrix();
+        if (concatMatrix) {
+            mPrivateFlags3 |= PFLAG3_VIEW_IS_ANIMATING_TRANSFORM;
+        }
+        transformToApply = parent.getChildTransformation();
+    } else {
+        if ((mPrivateFlags3 & PFLAG3_VIEW_IS_ANIMATING_TRANSFORM) != 0) {
+            // No longer animating: clear out old animation matrix
+            mRenderNode.setAnimationMatrix(null);
+            mPrivateFlags3 &= ~PFLAG3_VIEW_IS_ANIMATING_TRANSFORM;
+        }*/
+        if ((parentFlags & GROUP_FLAG_SUPPORT_STATIC_TRANSFORMATIONS) != 0) {
+            Transformation *t = parent.childTransformation;
+            BOOL hasTransform = [parent getChildStaticTransformation:self :t];
+            if (hasTransform) {
+                int transformType = t.transformationType;
+                transformToApply = transformType != TRANSFORMATION_TYPE_IDENTITY ? t : nil;
+                concatMatrix = (transformType & TRANSFORMATION_TYPE_MATRIX) != 0;
+            }
+        }
+    /*}*/
+    concatMatrix |= !childHasIdentityMatrix;
+    // Sets the flag as early as possible to allow draw() implementations
+    // to call invalidate() successfully when doing animations
+    //TODO:Enable this over invalidate
+    self.dPrivateFlags |= PFLAG_DRAWN;
+    /*if (!concatMatrix &&
+            (parentFlags & (GROUP_FLAG_SUPPORT_STATIC_TRANSFORMATIONS |
+                    GROUP_FLAG_CLIP_CHILDREN)) == GROUP_FLAG_CLIP_CHILDREN &&
+            canvas.quickReject(mLeft, mTop, mRight, mBottom) &&
+            (mPrivateFlags & PFLAG_DRAW_ANIMATION) == 0) {
+        mPrivateFlags2 |= PFLAG2_VIEW_QUICK_REJECTED;
+        return more;
+    }
+    mPrivateFlags2 &= ~PFLAG2_VIEW_QUICK_REJECTED;
+    if (hardwareAcceleratedCanvas) {
+        // Clear INVALIDATED flag to allow invalidation to occur during rendering, but
+        // retain the flag's value temporarily in the mRecreateDisplayList flag
+        mRecreateDisplayList = (mPrivateFlags & PFLAG_INVALIDATED) != 0;
+        mPrivateFlags &= ~PFLAG_INVALIDATED;
+    }
+    RenderNode renderNode = null;
+    Bitmap cache = null;
+    int layerType = getLayerType(); // TODO: signify cache state with just 'cache' local
+    if (layerType == LAYER_TYPE_SOFTWARE || !drawingWithRenderNode) {
+         if (layerType != LAYER_TYPE_NONE) {
+             // If not drawing with RenderNode, treat HW layers as SW
+             layerType = LAYER_TYPE_SOFTWARE;
+             buildDrawingCache(true);
+        }
+        cache = getDrawingCache(true);
+    }
+    if (drawingWithRenderNode) {
+        // Delay getting the display list until animation-driven alpha values are
+        // set up and possibly passed on to the view
+        renderNode = updateDisplayListIfDirty();
+        if (!renderNode.hasDisplayList()) {
+            // Uncommon, but possible. If a view is removed from the hierarchy during the call
+            // to getDisplayList(), the display list will be marked invalid and we should not
+            // try to use it again.
+            renderNode = null;
+            drawingWithRenderNode = false;
+        }
+    }*/
+    int sx = self.mScrollX;
+    int sy = self.mScrollY;
+    if (transformToApply != nil) {
+        [canvas save];
+    }
+    [canvas translateDx:(self.getMLeft - sx) dy:(self.getMTop - sy)];
+    float alpha = self.dAlpha * self.dTransitionAlpha;
+    if (transformToApply != nil
+            || alpha < 1
+            || ![self hasIdentityMatrix]
+            || (self.dPrivateFlags3 & PFLAG3_VIEW_IS_ANIMATING_ALPHA) != 0) {
+        if (transformToApply != nil || !childHasIdentityMatrix) {
+            int transX = -sx;
+            int transY = -sy;
+            if (transformToApply != nil) {
+                if (concatMatrix) {
+                    // Undo the scroll translation, apply the transformation matrix,
+                    // then redo the scroll translate to get the correct result.
+                    [canvas translateDx:-transX dy:-transY];
+                    [canvas concatMatrix:[KotlinMatrixConvertor skikoMatrixFromCATransform3D:transformToApply.matrix]];
+                    [canvas translateDx:transX dy:transY];
+                    parent.mGroupFlags |= GROUP_FLAG_CLEAR_TRANSFORMATION;
+                }
+                float transformAlpha = transformToApply.alpha;
+                if (transformAlpha < 1) {
+                    alpha *= transformAlpha;
+                    parent.mGroupFlags |= GROUP_FLAG_CLEAR_TRANSFORMATION;
+                }
+            }
+            if (!childHasIdentityMatrix) {
+                [canvas translateDx:-transX dy:-transY];
+                [canvas concatMatrix:[KotlinMatrixConvertor skikoMatrixFromCATransform3D:self._view.layer.transform]];
+                [canvas translateDx:transX dy:transY];
+            }
+        }
+        // Deal with alpha if it is or used to be <1
+        if (alpha < 1 || (self.dPrivateFlags3 & PFLAG3_VIEW_IS_ANIMATING_ALPHA) != 0) {
+            if (alpha < 1) {
+                self.dPrivateFlags3 |= PFLAG3_VIEW_IS_ANIMATING_ALPHA;
+            } else {
+                self.dPrivateFlags3 &= ~PFLAG3_VIEW_IS_ANIMATING_ALPHA;
+            }
+            parent.mGroupFlags |= GROUP_FLAG_CLEAR_TRANSFORMATION;
+        
+            int multipliedAlpha = (int) (255 * alpha);
+            if (![self onSetAlpha:multipliedAlpha]) {
+                TIOSKHSkikoRect *rect = [[TIOSKHSkikoRect alloc] initWithLeft:sx top:sy right:sx + self.dWidth bottom:sy + self.dHeight];
+                ToppingPaint *tp = (ToppingPaint*)[self.lc createPaint];
+                [canvas saveLayerBounds:rect paint:tp];
+            } else {
+                // Alpha is handled by the child directly, clobber the layer's alpha
+                self.dPrivateFlags |= PFLAG_ALPHA_SET;
+            }
+        }
+    } else if ((self.dPrivateFlags & PFLAG_ALPHA_SET) == PFLAG_ALPHA_SET) {
+        [self onSetAlpha:255];
+        self.dPrivateFlags &= ~PFLAG_ALPHA_SET;
+    }
     
+    // apply clips directly, since RenderNode won't do it for this draw
+    if ((parentFlags & GROUP_FLAG_CLIP_CHILDREN) != 0) {
+        [canvas clipRectLeft:sx top:sy right:sx + self.dWidth bottom:sy + self.dHeight clipOp:TIOSKHSkikoClipMode.difference];
+    }
+    if (self.clipBounds != nil) {
+        [canvas clipRectLeft:self.clipBounds.left top:self.clipBounds.top right:self.clipBounds.right bottom:self.clipBounds.bottom clipOp:TIOSKHSkikoClipMode.difference];
+        // clip bounds ignore scroll
+    }
+    
+    
+    // Fast path for layouts with no backgrounds
+    if ((self.dPrivateFlags & PFLAG_SKIP_DRAW) == PFLAG_SKIP_DRAW) {
+        self.dPrivateFlags &= ~PFLAG_DIRTY_MASK;
+        [self dispatchDrawCanvas:canvas];
+    } else {
+        [self draw:canvas];
+    }
+
+    [canvas restore];
+    
+    /*if (a != null && !more) {
+        if (!hardwareAcceleratedCanvas && !a.getFillAfter()) {
+            onSetAlpha(255);
+        }
+        parent.finishAnimatingView(this, a);
+    }
+    if (more && hardwareAcceleratedCanvas) {
+        if (a.hasAlpha() && (mPrivateFlags & PFLAG_ALPHA_SET) == PFLAG_ALPHA_SET) {
+            // alpha animations should cause the child to recreate its display list
+            invalidate(true);
+        }
+    }
+    mRecreateDisplayList = false;*/
+    return more;
+}
+
+- (void)draw:(nonnull id<TIOSKHTCanvas>)canvas {
+    UIGraphicsBeginImageContextWithOptions(self._view.bounds.size, self._view.opaque, 0.0f);
+    [self._view drawViewHierarchyInRect:self._view.bounds afterScreenUpdates:NO];
+    UIImage *snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    TIOSKHSkikoImage *skImage = [TIOSKHSkiaCanvasKt toSkiaImage:snapshotImageFromMyView];
+    TIOSKHSkikoBitmap *skBitmap = [skImage toBitmap];
+    TIOSKHSkikoPoint *point = [[TIOSKHSkikoPoint alloc] initWithX:0 y:0];
+    [canvas drawImageImage:skBitmap topLeftOffset:point paint:[self.lc createPaint]];
 }
 
 - (void)onDrawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
@@ -1671,15 +1944,23 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (void)setAlphaValue:(float)value {
-    self._view.alpha = value / 255.0f;
+    //TODO:Add onsetalpha
+    self.dAlpha = value;
+    self.dPrivateFlags |= PFLAG_ALPHA_SET;
+    if([self onSetAlpha:self.dAlpha * 255.0f]) {
+        [self._view layoutIfNeeded];
+    } else {
+        self._view.alpha = value;
+    }
 }
 
 - (void)setClipToOutlineClip:(BOOL)clip {
     
 }
 
+//Can we move this to CATransform3D
 - (void)setElevationValue:(float)value {
-
+    self.android_elevation = FTOS(value);
 }
 
 - (void)setIdId:(nonnull NSString *)id {
@@ -1738,11 +2019,11 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (void)setPivotXValue:(float)value {
-    self.dPivotX = value;
+    self._view.layer.anchorPoint = CGPointMake(value, self._view.layer.anchorPoint.y);
 }
 
 - (void)setPivotYValue:(float)value {
-    self.dPivotY = value;
+    self._view.layer.anchorPoint = CGPointMake(self._view.layer.anchorPoint.x, value);
 }
 
 - (void)setReflectionColorDrawableMethodName:(nonnull NSString *)methodName r:(int32_t)r g:(int32_t)g b:(int32_t)b a:(int32_t)a {
@@ -1758,28 +2039,35 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (void)setRotationValue:(float)value {
-    self.dRotation = value;
-    self._view.transform = CGAffineTransformMakeRotation(value * M_PI/180);
+    self._view.layer.affineTransform = CGAffineTransformMakeRotation(value * M_PI/180);
 }
 
 - (void)setRotationXValue:(float)value {
-    self.dRotationX = value;
     self._view.layer.transform = CATransform3DMakeRotation(value * M_PI/180, 1.0, 0.0, 0.0);
 }
 
 - (void)setRotationYValue:(float)value {
-    self.dRotationY = value;
     self._view.layer.transform = CATransform3DMakeRotation(value * M_PI/180, 0.0, 1.0, 0.0);
 }
 
 - (void)setScaleXValue:(float)value {
-    self.dScaleX = value;
-    self._view.transform = CGAffineTransformConcat(self._view.transform, CGAffineTransformMakeScale(self.dScaleX, self.dScaleY));
+    self._view.layer.transform = CATransform3DScale(self._view.layer.transform, value, [self getScaleY], 1);
 }
 
 - (void)setScaleYValue:(float)value {
-    self.dScaleY = value;
-    self._view.transform = CGAffineTransformConcat(self._view.transform, CGAffineTransformMakeScale(self.dScaleX, self.dScaleY));
+    self._view.layer.transform = CATransform3DScale(self._view.layer.transform, [self getScaleX], value, 1);
+}
+
+- (void)setTranslationXValue:(float)value {
+    self._view.layer.transform = CATransform3DTranslate(self._view.layer.transform, value, [self getTranslationY], [self getTranslationZ]);
+}
+
+- (void)setTranslationYValue:(float)value {
+    self._view.layer.transform = CATransform3DTranslate(self._view.layer.transform, [self getTranslationX], value, [self getTranslationZ]);
+}
+
+- (void)setTranslationZValue:(float)value {
+    self._view.layer.transform = CATransform3DTranslate(self._view.layer.transform, [self getTranslationX], [self getTranslationY], value);
 }
 
 - (void)setTagKey:(nonnull id)key value:(id _Nullable)value {
@@ -1788,20 +2076,6 @@ static char UIB_PROPERTY_KEY;
 
 - (void)setTagValue:(id _Nullable)value {
     [self setTag:@"" :value];
-}
-
-- (void)setTranslationXValue:(float)value {
-    self.dTranslationX = value;
-    self._view.transform = CGAffineTransformTranslate(self._view.transform, self.dTranslationX, self.dTranslationY);
-}
-
-- (void)setTranslationYValue:(float)value {
-    self.dTranslationY = value;
-    self._view.transform = CGAffineTransformTranslate(self._view.transform, self.dTranslationX, self.dTranslationY);
-}
-
-- (void)setTranslationZValue:(float)value {
-    self.dTranslationZ = value;
 }
 
 - (void)setVisibilityValue:(int32_t)value {

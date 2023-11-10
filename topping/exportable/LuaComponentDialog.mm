@@ -1,7 +1,6 @@
 #import "LuaComponentDialog.h"
 #import "Defines.h"
 #import "LuaFunction.h"
-#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LuaComponentDialog

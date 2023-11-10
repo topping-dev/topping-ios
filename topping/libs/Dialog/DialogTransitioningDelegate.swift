@@ -119,7 +119,7 @@ final class DialogPresentationController: UIPresentationController {
     @objc private func onTap(_ gestureRecognizer: UITapGestureRecognizer) {
         if(presentedView?.wrapper != nil) {
             let point = gestureRecognizer.location(in: presentedView)
-            presentedView?.wrapper.onInterceptTouchEvent(point, gestureRecognizer.state)
+            presentedView?.wrapper.onIOSTouchEvent(point, gestureRecognizer.state)
         }
         guard
             let presentedView = presentedView,

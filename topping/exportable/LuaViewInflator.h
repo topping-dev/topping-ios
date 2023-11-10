@@ -3,12 +3,11 @@
 #import "LuaClass.h"
 #import "LuaInterface.h"
 #import "LuaContext.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
 @class LGView;
 @class LGLayoutParser;
 @class LuaRef;
-@protocol TIOSKHTLayoutInflater;
-
 @interface LuaViewInflator : NSObject <LuaClass, LuaInterface, TIOSKHTLayoutInflater> 
 {
 	

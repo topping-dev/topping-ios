@@ -4,8 +4,8 @@
 #import "LuaContext.h"
 #import "LuaStream.h"
 #import "LuaRef.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
-@protocol TIOSKHTImageView;
 @class LGDrawableReturn;
 
 @interface LGImageView : LGView <TIOSKHTImageView>

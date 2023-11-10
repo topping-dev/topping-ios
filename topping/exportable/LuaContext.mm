@@ -6,7 +6,6 @@
 #import "LGStyleParser.h"
 #import "LGValueParser.h"
 #import "LGColorParser.h"
-#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LuaContext

@@ -5,7 +5,6 @@
 #import "LuaResource.h"
 #import "GDataXMLNode.h"
 #import "UIColor+Lum.h"
-#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LGDrawableReturn

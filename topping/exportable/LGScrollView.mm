@@ -35,6 +35,9 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    UIScrollView *sv = (UIScrollView*)self._view;
+    self.mScrollX = sv.contentOffset.x;
+    self.mScrollY = sv.contentOffset.y;
     [self.viewTreeObserver dispatchScrollChanged];
 }
 

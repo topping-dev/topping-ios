@@ -4,7 +4,6 @@
 #import "LGDrawableParser.h"
 #import "LGValueParser.h"
 #import "LuaFunction.h"
-#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
 @implementation LGImageView

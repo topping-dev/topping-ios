@@ -2,9 +2,32 @@
 #import "Defines.h"
 #import "LuaFunction.h"
 #import "LGValueParser.h"
-#import "ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h"
+
+@implementation TouchTarget
+
++(TouchTarget *)obtain:(LGView *)child :(int)pointerIdBits {
+    if(child == nil)
+        @throw [NSException new];
+    
+    TouchTarget *target = [TouchTarget new];
+    target.child = child;
+    target.pointerIdBits = pointerIdBits;
+    
+    return target;
+}
+
+@end
 
 @implementation LGViewGroup
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.childTransformation = [Transformation new];
+    }
+    return self;
+}
 
 - (void)initProperties
 {
@@ -366,44 +389,327 @@
     }
 }
 
-- (BOOL)onInterceptTouchEvent:(CGPoint)point :(UIEvent *)event :(UIGestureRecognizerState)state {
-    //CGPoint tappedPoint = [gesture locationInView:self._view];
-    CGFloat xCoordinate = point.x;
-    CGFloat yCoordinate = point.y;
-    NSNumber *num = [NSNumber numberWithBool:false];
-    if(state == UIGestureRecognizerStateBegan) {
-        tapDownTime = [[NSDate new] timeIntervalSince1970] * 1000;
-        TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
-                                   obtainDownTime:tapDownTime
-                                   eventTime:tapDownTime
-                                   action:[TIOSKHMotionEvent companion].ACTION_DOWN x:xCoordinate y:yCoordinate metaState:0];
-        [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
-    } else if(state == UIGestureRecognizerStateChanged) {
-        TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
-                                   obtainDownTime:tapDownTime
-                                   eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
-                                   action:[TIOSKHMotionEvent companion].ACTION_MOVE x:xCoordinate y:yCoordinate metaState:0];
-        [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
-    } else if(state == UIGestureRecognizerStatePossible || state == UIGestureRecognizerStateRecognized) {
+-(BOOL)getChildStaticTransformation:(LGView *)child :(Transformation *)t {
+    return false;
+}
+
+-(void)resetTouchState {
+    [self clearTouchTargets];
+    [LGViewGroup resetCancelNextUpFlag:self];
+}
+
++(BOOL)resetCancelNextUpFlag:(LGView*)view {
+    return false;
+}
+
+-(void)clearTouchTargets {
+    TouchTarget *target = self.mFirstTouchTarget;
+    if(target != nil) {
+        do {
+            TouchTarget *next = target.next;
+            target = nil;
+        } while(target != nil);
+        self.mFirstTouchTarget = nil;
+    }
+}
+
+-(void)cancelAndClearTouchTargets:(TIOSKHMotionEvent *)event {
+    if(self.mFirstTouchTarget != nil) {
+        BOOL syntheticEvent = false;
+        if(event == nil) {
+            long now = [[NSDate new] timeIntervalSince1970] * 1000;
+            event = [[TIOSKHMotionEvent companion] obtainDownTime:now eventTime:now action:TIOSKHMotionEvent.companion.ACTION_CANCEL x:0 y:0 metaState:0];
+            event.source = TIOSKHAINPUT_SOURCE.ainputSourceTouchscreen.value;
+            syntheticEvent = true;
+        }
         
+        for(TouchTarget *target = self.mFirstTouchTarget; target != nil; target = target.next) {
+            [LGViewGroup resetCancelNextUpFlag:target.child];
+            [self dispatchTransformedTouchEvent:event :true :target.child :target.pointerIdBits];
+        }
+        [self clearTouchTargets];
+    }
+}
+
+-(TouchTarget*)getTouchTarget:(LGView*)child {
+    for(TouchTarget *target = self.mFirstTouchTarget; target != nil; target = target.next) {
+        if(target.child == child) {
+            return target;
+        }
+    }
+    return nil;
+}
+
+-(TouchTarget*)addTouchTarget:(LGView*)child :(int)pointerIdBits {
+    TouchTarget *target = [TouchTarget obtain:child :pointerIdBits];
+    target.next = self.mFirstTouchTarget;
+    self.mFirstTouchTarget = target;
+    return target;
+}
+
+-(void)removePointersFromTouchTargets:(int)pointerIdBits {
+    TouchTarget *predecessor = nil;
+    TouchTarget *target = self.mFirstTouchTarget;
+    while (target != nil) {
+        TouchTarget *next = target.next;
+        if((target.pointerIdBits & pointerIdBits) != 0) {
+            target.pointerIdBits &= ~pointerIdBits;
+            if(target.pointerIdBits == 0) {
+                if(predecessor == nil) {
+                    self.mFirstTouchTarget = next;
+                } else {
+                    predecessor.next = next;
+                }
+                target = next;
+                continue;
+            }
+        }
+        predecessor = target;
+        target = next;
+    }
+}
+
+-(void)cancelTouchTarget:(LGView*) view {
+    TouchTarget *predecessor = nil;
+    TouchTarget *target = self.mFirstTouchTarget;
+    while (target != nil) {
+        TouchTarget *next = target.next;
+        if (target.child == view) {
+            if (predecessor == nil) {
+                self.mFirstTouchTarget = next;
+            } else {
+                predecessor.next = next;
+            }
+            long now = [[NSDate new] timeIntervalSince1970] * 1000;
+            TIOSKHMotionEvent *event = [TIOSKHMotionEvent.companion obtainDownTime:now eventTime:now action:TIOSKHMotionEvent.companion.ACTION_CANCEL x:0 y:0 metaState:0];
+            event.source = TIOSKHAINPUT_SOURCE.ainputSourceTouchscreen.value;
+            [view dispatchTouchEvent:event];
+            return;
+        }
+        predecessor = target;
+        target = next;
+    }
+}
+
+-(BOOL)dispatchTransformedTouchEvent:(TIOSKHMotionEvent*)event :(BOOL)cancel :(LGView*) child :(int)desiredPointerIdBits {
+    BOOL handled = false;
+    
+    int oldAction = event.action;
+    if (cancel || oldAction == TIOSKHMotionEvent.companion.ACTION_CANCEL) {
+        event.action = TIOSKHMotionEvent.companion.ACTION_CANCEL;
+        if (child == nil) {
+            handled = [super dispatchTouchEvent:event];
+        } else {
+            handled = [child dispatchTouchEvent:event];
+        }
+        event.action = oldAction;
+        return handled;
+    }
+    // Calculate the number of pointers to deliver.
+    int oldPointerIdBits = event.pointerIdBits;
+    int newPointerIdBits = oldPointerIdBits & desiredPointerIdBits;
+    // If for some reason we ended up in an inconsistent state where it looks like we
+    // might produce a motion event with no pointers in it, then drop the event.
+    if (newPointerIdBits == 0) {
+        return false;
+    }
+    // If the number of pointers is the same and we don't need to perform any fancy
+    // irreversible transformations, then we can reuse the motion event for this
+    // dispatch as long as we are careful to revert any changes we make.
+    // Otherwise we need to make a copy.
+    TIOSKHMotionEvent *transformedEvent;
+    if (newPointerIdBits == oldPointerIdBits) {
+        //TODO?
+        /*if (child == nil || child.hasIdentityMatrix()) {
+            if (child == nil) {
+                handled = super.dispatchTouchEvent(event);
+            } else {
+                final float offsetX = mScrollX - child.mLeft;
+                final float offsetY = mScrollY - child.mTop;
+                event.offsetLocation(offsetX, offsetY);
+                handled = child.dispatchTouchEvent(event);
+                event.offsetLocation(-offsetX, -offsetY);
+            }
+            return handled;
+        }*/
+        if(child == nil) {
+            handled = [super dispatchTouchEvent:event];
+            return handled;
+        }
+        transformedEvent = [TIOSKHMotionEvent.companion obtainOther:event];
+    }
+    else {
+        transformedEvent = [event splitIdBits:newPointerIdBits];
+    }
+    // Perform any necessary transformations and dispatch.
+    if (child == nil) {
+        handled = [super dispatchTouchEvent:transformedEvent];
     } else {
-        TIOSKHMotionEvent *event = [[TIOSKHMotionEvent companion]
-                                   obtainDownTime:tapDownTime
-                                   eventTime:([[NSDate new] timeIntervalSince1970] * 1000)
-                                   action:[TIOSKHMotionEvent companion].ACTION_UP x:xCoordinate y:yCoordinate metaState:0];
-        [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
-        tapDownTime = 0;
+        float offsetX = self.mScrollX - child.getMLeft;
+        float offsetY = self.mScrollY - child.getMTop;
+        [transformedEvent offsetLocationDeltaX:offsetX deltaY:offsetY];
+        /*if (! child.hasIdentityMatrix()) {
+            transformedEvent.transform(child.getInverseMatrix());
+        }*/
+        handled = [child dispatchTouchEvent:transformedEvent];
     }
-    interceptTouchEventResult = [num boolValue];
+    return handled;
+}
+
+-(NSMutableArray*)buildOrderedChildList {
+    return nil;
+    //return self.subviews;
+}
+
+-(NSMutableArray*)buildTouchDispatchChildList {
+    return [self buildOrderedChildList];
+}
+
+-(BOOL)dispatchTouchEvent:(TIOSKHMotionEvent *)event {
+    BOOL handled = false;
+    int action = event.action;
+    int actionMasked = action & TIOSKHMotionEvent.companion.ACTION_MASK;
     
-    if(interceptTouchEventResult) {
-        [self onTouchEvent:point :state];
-    }
-    for(LGView *view in self.subviews) {
-        [view onInterceptTouchEvent:point :state];
+    if(actionMasked == TIOSKHMotionEvent.companion.ACTION_DOWN) {
+        [self cancelAndClearTouchTargets:event];
+        [self resetTouchState];
     }
     
-    return interceptTouchEventResult;
+    BOOL intercepted;
+    if(actionMasked == TIOSKHMotionEvent.companion.ACTION_DOWN
+       && self.mFirstTouchTarget != nil) {
+        BOOL disallowIntercept = (self.mGroupFlags & GROUP_FLAG_DISALLOW_INTERCEPT) != 0;
+        intercepted = [self onInterceptTouchEvent:event];
+        event.action = action;
+    } else {
+        intercepted = true;
+    }
+    
+    BOOL cancelled = [LGViewGroup resetCancelNextUpFlag:self] || actionMasked == TIOSKHMotionEvent.companion.ACTION_CANCEL;
+    
+    BOOL isMouseEvent = event.source == TIOSKHAINPUT_SOURCE.ainputSourceMouse.value;
+    BOOL split = (self.mGroupFlags & GROUP_FLAG_SPLIT_MOTION_EVENTS) != 0 && !isMouseEvent;
+    
+    TouchTarget *newTouchTarget;
+    BOOL alreadyDispatchedToNewTouchTarget = false;
+    if(!cancelled && !intercepted) {
+        if(actionMasked == TIOSKHMotionEvent.companion.ACTION_DOWN
+           || (split && actionMasked == TIOSKHMotionEvent.companion.ACTION_POINTER_DOWN)
+           || actionMasked == TIOSKHMotionEvent.companion.ACTION_HOVER_MOVE)
+        {
+            int actionIndex = event.actionIndex;
+            int idBitsToAssign = split ? 1 << [event getPointerIdPointerIndex:actionIndex] : -1;
+            
+            [self removePointersFromTouchTargets:idBitsToAssign];
+            
+            int childCount = self.subviews.count;
+            if(newTouchTarget == nil && childCount != 0) {
+                float x = [event getX];
+                float y = [event getY];
+                NSMutableArray *preorderedList = [self buildTouchDispatchChildList];
+                for(int i = 0; i < childCount; i++) {
+                    int childIndex = i; //[self getAndVerifyPreorderIndex]
+                    LGView *child = self.subviews[i];
+                    newTouchTarget = [self getTouchTarget:child];
+                    if(newTouchTarget != nil) {
+                        newTouchTarget.pointerIdBits |= idBitsToAssign;
+                        break;
+                    }
+                    
+                    [LGViewGroup resetCancelNextUpFlag:child];
+                    if([self dispatchTransformedTouchEvent:event :false :child :idBitsToAssign]) {
+                        self.mLastTouchDownTime = event.downTime;
+                        if(preorderedList != nil) {
+                            /*for(int j = 0; j < childCount; j++) {
+                                if(self.subviews[j] != )
+                            }*/
+                        } else {
+                            self.mLastTouchDownIndex = childIndex;
+                        }
+                        self.mLastTouchDownX = x;
+                        self.mLastTouchDownY = y;
+                        newTouchTarget = [self addTouchTarget:child :idBitsToAssign];
+                        alreadyDispatchedToNewTouchTarget = true;
+                        break;
+                    }
+                    
+                    if(preorderedList != nil) [preorderedList removeAllObjects];
+                }
+                
+                if(newTouchTarget == nil && self.mFirstTouchTarget != nil) {
+                    newTouchTarget = self.mFirstTouchTarget;
+                    while (newTouchTarget.next != nil) {
+                        newTouchTarget = newTouchTarget.next;
+                    }
+                    newTouchTarget.pointerIdBits |= idBitsToAssign;
+                }
+            }
+        }
+        
+        if(self.mFirstTouchTarget == nil) {
+            handled = [self dispatchTransformedTouchEvent:event :cancelled :nil :-1];
+        } else {
+            TouchTarget *predecessor = nil;
+            TouchTarget *target = self.mFirstTouchTarget;
+            while (target != nil) {
+                TouchTarget *next = target.next;
+                if(alreadyDispatchedToNewTouchTarget && target == newTouchTarget) {
+                    handled = true;
+                } else {
+                    BOOL cancelChild = [LGViewGroup resetCancelNextUpFlag:target.child] || intercepted;
+                    if([self dispatchTransformedTouchEvent:event :cancelChild :target.child :target.pointerIdBits]) {
+                        handled = true;
+                    }
+                    if(cancelChild) {
+                        if(predecessor == nil) {
+                            self.mFirstTouchTarget = next;
+                        } else {
+                            predecessor.next = next;
+                        }
+                        //target.recycle
+                        target = next;
+                        continue;
+                    }
+                }
+                predecessor = target;
+                target = next;
+            }
+        }
+        
+        if(cancelled
+           || actionMasked == TIOSKHMotionEvent.companion.ACTION_UP
+           || actionMasked == TIOSKHMotionEvent.companion.ACTION_HOVER_MOVE) {
+            [self resetTouchState];
+        } else if(split && actionMasked == TIOSKHMotionEvent.companion.ACTION_POINTER_UP) {
+            int actionIndex = event.actionIndex;
+            int idBitsToRemove = 1 << [event getPointerIdPointerIndex:actionIndex];
+            [self removePointersFromTouchTargets:idBitsToRemove];
+        }
+    }
+    
+    return handled;
+}
+
+-(BOOL)onInterceptTouchEvent:(TIOSKHMotionEvent *)event {
+    NSNumber *num = [NSNumber numberWithBool:false];
+    [self callTMethod:@"onInterceptTouchEvent" :&num :event, nil];
+    return [num boolValue];
+}
+
+-(void)requestDisallowInterceptTouchEvent:(BOOL)disallowIntercept {
+    if(disallowIntercept == ((self.mGroupFlags & GROUP_FLAG_DISALLOW_INTERCEPT) != 0)) {
+        return;
+    }
+    
+    if(disallowIntercept) {
+        self.mGroupFlags |= GROUP_FLAG_DISALLOW_INTERCEPT;
+    } else {
+        self.mGroupFlags &= ~GROUP_FLAG_DISALLOW_INTERCEPT;
+    }
+    
+    if(self.parent != nil && [self.parent isKindOfClass:[LGViewGroup class]]) {
+        [((LGViewGroup*)self.parent) requestDisallowInterceptTouchEvent:disallowIntercept];
+    }
 }
 
 - (void)onConfigurationChanged:(Configuration *)configuration {

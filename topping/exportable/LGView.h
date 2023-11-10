@@ -6,6 +6,7 @@
 #import "LuaRef.h"
 #import "LuaRect.h"
 #import "ViewTreeObserver.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
 #define CALL_RET(V) if(V) { return; }
 #define IS_VIEW_NO_ID(X) (X == nil || [X isEqualToString:@""])
@@ -15,11 +16,6 @@
 @protocol LuaInterface;
 @class NavController;
 @class LuaNavController;
-@protocol TIOSKHTView;
-@class TIOSKHViewGroupLayoutParams;
-@protocol TIOSKHTViewOnClickListener;
-@protocol TIOSKHTCanvas;
-@class TIOSKHRect;
 @class LGRelativeLayoutParams;
 @class Configuration;
 
@@ -136,6 +132,37 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 
 @end
 
+typedef NS_ENUM(NSInteger, PFLAG)
+{
+    PFLAG_DRAWN             = 0x00000020,
+    PFLAG_SKIP_DRAW         = 0x00000080,
+    PFLAG_ALPHA_SET         = 0x00040000,
+    PFLAG_DIRTY             = 0x00200000,
+    PFLAG_DIRTY_MASK        = 0x00200000,
+};
+
+typedef NS_ENUM(NSInteger, PFLAG3)
+{
+    PFLAG3_VIEW_IS_ANIMATING_ALPHA = 0x2,
+};
+
+typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
+    TRANSFORMATION_TYPE_IDENTITY = 0x0,
+    TRANSFORMATION_TYPE_ALPHA = 0x1,
+    TRANSFORMATION_TYPE_MATRIX = 0x2,
+    TRANSFORMATION_TYPE_BOTH = TRANSFORMATION_TYPE_ALPHA | TRANSFORMATION_TYPE_MATRIX
+};
+
+@interface Transformation : NSObject
+
+-(void)clear;
+
+@property(nonatomic) CATransform3D matrix;
+@property(nonatomic) float alpha;
+@property(nonatomic) int transformationType;
+
+@end
+
 @interface UIView(Extension)
 
 -(void)overload_touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
@@ -150,7 +177,6 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 {
     NSArray *propertyNameCache;
     long tapDownTime;
-    BOOL interceptTouchEventResult;
 }
 
 +(BOOL)isRtl;
@@ -198,8 +224,12 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 -(int)getCalculatedWidth;
 -(void)configChange;
 -(void)layout:(int)l :(int)t :(int)r :(int)b;
--(BOOL)onTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
--(BOOL)onInterceptTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
+-(BOOL)onIOSTouchEvent:(CGPoint)point :(UIGestureRecognizerState)state;
+-(TIOSKHMotionEvent*)convertToMotionEvent:(CGPoint)point :(UIGestureRecognizerState)state;
+-(BOOL)dispatchTouchEvent:(TIOSKHMotionEvent*)event;
+-(BOOL)onTouchEvent:(TIOSKHMotionEvent*)event;
+-(BOOL)dispatchGenericMotionEvent:(TIOSKHMotionEvent*)event;
+-(BOOL)onInterceptTouchEvent:(TIOSKHMotionEvent*)event;
 -(void)postOnAnimation:(void (^)(void))block;
 -(void)draw:(id<TIOSKHTCanvas>)canvas;
 -(NSString *) debugDescription:(NSString *)val;
@@ -251,11 +281,14 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 -(void)swizzleMethods:(SEL)original :(SEL)swizzled;
 
 -(void)startDragAndDrop:(NSString*)data;
+-(BOOL)hasIdentityMatrix;
+-(BOOL)onSetAlpha:(float)value;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 @property (nonatomic, strong) NSArray *attrs;
 
 @property (nonatomic, strong) NSString* android_alpha;
+@property (nonatomic, strong) NSString* android_transitionAlpha;
 @property (nonatomic, retain) NSString* android_background;
 @property (nonatomic, retain) NSString* android_clickable;
 @property (nonatomic, retain) NSString* android_id;
@@ -313,6 +346,9 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 @property (nonatomic, retain) UIGestureRecognizer *tapGesture;
 @property (nonatomic, retain) id<TIOSKHTViewOnClickListener> internalClickListener;
 
+@property (nonatomic) int mScrollX;
+@property (nonatomic) int mScrollY;
+
 @property (nonatomic) int dWidth;
 @property (nonatomic) int dHeight;
 @property (nonatomic) int dWidthDimension;
@@ -327,16 +363,12 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 @property (nonatomic) int dPaddingTop;
 @property (nonatomic) int dX;
 @property (nonatomic) int dY;
-@property (nonatomic) int dPivotX;
-@property (nonatomic) int dPivotY;
-@property (nonatomic) int dRotation;
-@property (nonatomic) int dRotationX;
-@property (nonatomic) int dRotationY;
-@property (nonatomic) int dScaleX;
-@property (nonatomic) int dScaleY;
-@property (nonatomic) int dTranslationX;
-@property (nonatomic) int dTranslationY;
-@property (nonatomic) int dTranslationZ;
+
+@property (nonatomic) float dAlpha;
+@property (nonatomic) float dTransitionAlpha;
+
+@property (nonatomic) int dPrivateFlags;
+@property (nonatomic) int dPrivateFlags3;
 
 @property(nonatomic) int dMarginBottom;
 @property(nonatomic) int dMarginLeft;
@@ -380,6 +412,9 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 @property (nonatomic, strong) id<OnDragListener> onDragListener;
 @property (nonatomic, strong) UIDragInteraction *dragInteraction;
 @property (nonatomic, strong) UIDropInteraction *dropInteraction;
+
+@property (nonatomic, strong) Transformation *transformationInfo;
+@property (nonatomic, strong) TIOSKHSkikoRect *clipBounds;
 
 @end
 

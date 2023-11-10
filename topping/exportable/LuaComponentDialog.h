@@ -4,9 +4,8 @@
 #import "LuaContext.h"
 #import "LuaForm.h"
 #import "LuaRef.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
-@class TIOSKHViewGroupLayoutParams;
-@class TIOSKHMotionEvent;
 @class LinearLayoutDialogController;
 @protocol OnBackPressedDispatcherOwner;
 @protocol SavedStateRegistryOwner;

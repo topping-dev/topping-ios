@@ -1,11 +1,11 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "LuaRef.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
 @class GDataXMLElement;
 @protocol ThemeProviding;
 @protocol ResourceProviding;
-@protocol TIOSKHTDrawable;
 
 @interface VectorTheme : NSObject <ThemeProviding, ResourceProviding>
 

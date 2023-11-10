@@ -1,16 +1,35 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "LuaRef.h"
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
 @class AppBarConfiguration;
 @class FragmentManager;
 @class LuaFragment;
 @class LGView;
-@class TIOSKHSkiaCanvas;
-@class TIOSKHSkiaBitmap;
-@class TIOSKHSkikoPath;
-@class TIOSKHSkikoRect;
-@class TIOSKHSkikoPoint;
+
+@interface KotlinMatrixConvertor : NSObject
+
++(CATransform3D)cATransfrom3DMatrixFromSkiko:(TIOSKHSkikoMatrix33*)matrix;
++(TIOSKHSkikoMatrix33*)skikoMatrixFromCATransform3D:(CATransform3D)transform;
+
+@end
+
+@interface NSObject (KotlinExtension)
+
+-(void)setValueForKeyPath:(id)value :(NSString*)key;
+
+@end
+
+/*
+ Kotlin native generator do not extend
+ */
+@protocol KNG <NSObject>
+
+-(TIOSKHSkiaCanvas*)getCanvas;
+-(TIOSKHSkiaCanvasKt*)getCanvasKt;
+
+@end
 
 @protocol KotlinProtocol <NSObject>
 

@@ -2,8 +2,7 @@
 #import "LGViewGroup.h"
 #import "LGImageView.h"
 #import "LGButton.h"
-
-@class TIOSKHImageFilterButton;
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>s
 
 @interface LGConstraintImageFilterButton : LGImageView
 
@@ -11,15 +10,11 @@
 
 @end
 
-@class TIOSKHImageFilterView;
-
 @interface LGConstraintImageFilterView : LGImageView
 
 @property (nonatomic, strong) TIOSKHImageFilterView *wrapper;
 
 @end
-
-@class TIOSKHMotionButton;
 
 @interface LGConstraintMotionButton : LGButton
 
@@ -27,15 +22,12 @@
 
 @end
 
-/*@class TIOSKHMotionLabel;
-
+/*
 @interface LGConstraintMotionLabel : LGTextView
 
 @property (nonatomic, strong) TIOSKHMotionLabel *wrapper;
 
 @end*/
-
-@class TIOSKHBarrier;
 
 @interface LGConstraintBarrier : LGView
 
@@ -43,15 +35,11 @@
 
 @end
 
-@class TIOSKHGroup;
-
 @interface LGConstraintGroup : LGView
 
 @property (nonatomic, strong) TIOSKHGroup *wrapper;
 
 @end
-
-@class TIOSKHGuideline;
 
 @interface LGConstraintGuideline : LGView
 
@@ -59,15 +47,11 @@
 
 @end
 
-@class TIOSKHPlaceholder;
-
 @interface LGConstraintPlaceholder : LGView
 
 @property (nonatomic, strong) TIOSKHPlaceholder *wrapper;
 
 @end
-
-@class TIOSKHReactiveGuide;
 
 @interface LGConstraintReactiveGuide : LGView
 
@@ -75,15 +59,11 @@
 
 @end
 
-@class TIOSKHCarousel;
-
 @interface LGConstraintCarousel : LGView
 
 @property (nonatomic, strong) TIOSKHCarousel *wrapper;
 
 @end
-
-@class TIOSKHCircularFlow;
 
 @interface LGConstraintCircularFlow : LGView
 
@@ -91,15 +71,11 @@
 
 @end
 
-@class TIOSKHFlow;
-
 @interface LGConstraintFlow : LGView
 
 @property (nonatomic, strong) TIOSKHFlow *wrapper;
 
 @end
-
-@class TIOSKHGrid;
 
 @interface LGConstraintGrid : LGView
 
@@ -107,15 +83,11 @@
 
 @end
 
-@class TIOSKHLayer;
-
 @interface LGConstraintLayer : LGView
 
 @property (nonatomic, strong) TIOSKHLayer *wrapper;
 
 @end
-
-@class TIOSKHMotionEffect;
 
 @interface LGConstraintMotionEffect : LGView
 
@@ -123,15 +95,11 @@
 
 @end
 
-@class TIOSKHMotionPlaceholder;
-
 @interface LGConstraintMotionPlaceholder : LGView
 
 @property (nonatomic, strong) TIOSKHMotionPlaceholder *wrapper;
 
 @end
-
-@class TIOSKHConstraintLayout;
 
 @interface LGConstraintLayout : LGViewGroup
 
@@ -141,8 +109,6 @@
 @property (nonatomic, strong) TIOSKHConstraintLayout *wrapper;
 
 @end
-
-@class TIOSKHMotionLayout;
 
 @interface LGConstraintMotionLayout : LGConstraintLayout
 

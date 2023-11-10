@@ -5,7 +5,6 @@
 #import "LuaTranslator.h"
 #import "Defines.h"
 #import "LuaRef.h"
-#import "ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h"
 
 @implementation LuaViewInflator
 
