@@ -137,7 +137,7 @@ typedef enum {
 +(Configuration*) generateDelta:(Configuration*)base :(Configuration*)change;
 
 @property (nonatomic) float fontScale;
-@property (nonatomic, retain) NSLocale *locale;
+@property (nonatomic, retain) NSLocale *mLocale;
 @property (nonatomic) int screenLayout;
 @property (nonatomic) int fontWeightAdjustment;
 @property (nonatomic) int touchscreen;

@@ -22,7 +22,7 @@ public class ToppingResources : NSObject, TResources {
     public func initConfig() {
         _configuration = Configuration()
         _configuration.fontScale = 1
-        _configuration.locale = NSLocale.init(localeIdentifier: NSLocale.preferredLanguages[0]) as Locale
+        _configuration.mLocale = NSLocale.init(localeIdentifier: NSLocale.preferredLanguages[0]) as Locale
         _configuration.touchscreen = Int32(CONFIGURATION_TOUCHSCREEN_FINGER.rawValue)
         let interfaceOrientation = UIApplication.shared.statusBarOrientation
         _configuration.orientation = Int32(CONFIGURATION_ORIENTATION_LANDSCAPE.rawValue)
@@ -37,7 +37,7 @@ public class ToppingResources : NSObject, TResources {
         long = Int32(DisplayMetrics.sp(toDp: Float(long)))
         short = Int32(DisplayMetrics.sp(toDp: Float(short)))
         _configuration.screenLayout = Configuration.reduceScreenLayout(_configuration.screenLayout, long, short)
-        _configuration.setLayoutDirection(_configuration.locale)
+        _configuration.setLayoutDirection(_configuration.mLocale)
         let nightMode: UInt32
         if #available(iOS 12.0, *) {
             switch UIScreen.main.traitCollection.userInterfaceStyle {
@@ -151,6 +151,17 @@ public class ToppingResources : NSObject, TResources {
     @objc
     public func getInt(key: String?, value: String, def: Int32) -> Int32 {
         return Int32(getFloat(key: key, value: value, def: Float(def)))
+    }
+    
+    @objc
+    public func getIntArray(key: String?, value: String) -> NSMutableArray {
+        let vObj = LGValueParser.getInstance().getValue(value, key)
+        if(vObj != nil) {
+            if(vObj is NSMutableArray) {
+                return vObj as! NSMutableArray
+            }
+        }
+        return NSMutableArray()
     }
     
     @objc

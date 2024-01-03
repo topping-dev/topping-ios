@@ -42,7 +42,9 @@ static NSMutableDictionary *eventMap = [NSMutableDictionary dictionary];
 }
 
 +(ILuaForm*)getFormInstance:(NSString*)name :(LuaForm*)form {
-    LuaTranslator* ltInit = [formMap objectForKey:name];
+    NSArray *arr = SPLIT(name, @"/");
+    NSString *nameClean = [arr objectAtIndex:[arr count] - 1];
+    LuaTranslator* ltInit = [formMap objectForKey:nameClean];
     return (ILuaForm*)[ltInit call:form];
 }
 

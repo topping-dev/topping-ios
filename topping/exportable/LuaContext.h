@@ -8,6 +8,15 @@
 
 @class LuaForm;
 @class ToppingResources;
+@class Configuration;
+
+@protocol ComponentCallbacks
+
+-(void)onConfigurationChanged:(Configuration*)configuration;
+-(void)onLowMemory;
+-(void)onTrimMemory:(int)level;
+
+@end
 
 /**
  * Context class that stores various operating system data.
@@ -28,5 +37,6 @@
 @property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, strong) LuaForm *form;
 @property (nonatomic, strong) ToppingResources *_resources;
+@property (nonatomic, strong) id<ComponentCallbacks> componentCallbacks;
 
 @end

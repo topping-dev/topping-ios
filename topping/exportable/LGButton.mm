@@ -130,7 +130,7 @@
         [but setTitleColor:[lcs getColorForState:UIControlStateDisabled :[but titleColorForState:UIControlStateDisabled]] forState:UIControlStateDisabled];
         [but setTitleColor:[lcs getColorForState:UIControlStateSelected :[but titleColorForState:UIControlStateSelected]] forState:UIControlStateSelected];
         [but setTitleColor:[lcs getColorForState:UIControlStateHighlighted :[but titleColorForState:UIControlStateHighlighted]] forState:UIControlStateHighlighted];
-        [but setTitleColor:lcs.color forState:[lcs getUIControlStateFlag]];
+        //[but setTitleColor:lcs.color forState:[lcs getUIControlStateFlag]];
     } else {
         UIColor *val = (UIColor*)[[LGValueParser getInstance] getValue:color];
         [but setTitleColor:val forState:UIControlStateNormal];

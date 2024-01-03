@@ -48,6 +48,9 @@
         
         [self callTMethod:@"onViewAdded" :nil :val, nil];
         [val resolveLayoutDirection];
+        if([self isAttachedToWindow]) {
+            [val onAttachedToWindow];
+        }
     }
 }
 
@@ -66,6 +69,9 @@
         
         [self callTMethod:@"onViewAdded" :nil :val, nil];
         [val resolveLayoutDirection];
+        if([self isAttachedToWindow]) {
+            [val onAttachedToWindow];
+        }
     }
 }
 
@@ -80,7 +86,7 @@
         val.parent = nil;
         [self resize];
         [self callTMethod:@"onViewRemoved" :nil :val, nil];
-        [val callTMethod:@"onDetachedFromWindow" :nil :nil];
+        [val onDetachedFromWindow];
     }
 }
 
@@ -718,6 +724,10 @@
     }
 }
 
+-(BOOL)drawChild:(id<TIOSKHTCanvas>)canvas :(LGView *)child :(long)drawingTime {
+    return [child draw:canvas :self :drawingTime];
+}
+
 -(NSDictionary*)getBindings
 {
     return self.subviewMap;
@@ -760,8 +770,133 @@
     [self addSubview:(LGView*)view];
 }
 
+- (void)onAttachedToWindow {
+    [super onAttachedToWindow];
+    for(LGView *subview in self.subviews) {
+        [subview onAttachedToWindow];
+    }
+}
+
+- (void)onDetachedFromWindow {
+    [super onDetachedFromWindow];
+    for(LGView *subview in self.subviews) {
+        [subview onDetachedFromWindow];
+    }
+}
+
 - (void)dispatchDrawCanvas:(id<TIOSKHTCanvas>)canvas {
-    
+    int childrenCount = self.subviews.count;
+    NSMutableArray *children = self.subviews;
+    int flags = self.mGroupFlags;
+    /*if ((flags & FLAG_RUN_ANIMATION) != 0 && canAnimate()) {
+        for (int i = 0; i < childrenCount; i++) {
+            final View child = children[i];
+            if ((child.mViewFlags & VISIBILITY_MASK) == VISIBLE) {
+                final LayoutParams params = child.getLayoutParams();
+                attachLayoutAnimationParameters(child, params, i, childrenCount);
+                bindLayoutAnimation(child);
+            }
+        }
+        final LayoutAnimationController controller = mLayoutAnimationController;
+        if (controller.willOverlap()) {
+            mGroupFlags |= FLAG_OPTIMIZE_INVALIDATE;
+        }
+        controller.start();
+        mGroupFlags &= ~FLAG_RUN_ANIMATION;
+        mGroupFlags &= ~FLAG_ANIMATION_DONE;
+        if (mAnimationListener != null) {
+            mAnimationListener.onAnimationStart(controller.getAnimation());
+        }
+    }*/
+    /*int clipSaveCount = 0;
+    BOOL clipToPadding = (flags & CLIP_TO_PADDING_MASK) == CLIP_TO_PADDING_MASK;
+    if (clipToPadding) {
+        clipSaveCount = canvas.save(Canvas.CLIP_SAVE_FLAG);
+        canvas.clipRect(mScrollX + mPaddingLeft, mScrollY + mPaddingTop,
+                mScrollX + mRight - mLeft - mPaddingRight,
+                mScrollY + mBottom - mTop - mPaddingBottom);
+    }*/
+    // We will draw our child's animation, let's reset the flag
+    self.dPrivateFlags &= ~PFLAG_DRAW_ANIMATION;
+    self.mGroupFlags &= ~GROUP_FLAG_INVALIDATE_REQUIRED;
+    BOOL more = false;
+    //long drawingTime = getDrawingTime();
+    long drawingTime = 0;
+    [canvas enableZ];
+    //int transientCount = mTransientIndices == null ? 0 : mTransientIndices.size();
+    int transientCount = 0;
+    int transientIndex = transientCount != 0 ? 0 : -1;
+    // Only use the preordered list if not HW accelerated, since the HW pipeline will do the
+    // draw reordering internally
+    NSMutableArray *preorderedList = [self buildOrderedChildList];
+    //final boolean customOrder = preorderedList == null && isChildrenDrawingOrderEnabled();
+    BOOL customOrder = false;
+    for (int i = 0; i < childrenCount; i++) {
+        /*while (transientIndex >= 0 && mTransientIndices.get(transientIndex) == i) {
+            final View transientChild = mTransientViews.get(transientIndex);
+            if ((transientChild.mViewFlags & VISIBILITY_MASK) == VISIBLE ||
+                    transientChild.getAnimation() != null) {
+                more |= drawChild(canvas, transientChild, drawingTime);
+            }
+            transientIndex++;
+            if (transientIndex >= transientCount) {
+                transientIndex = -1;
+            }
+        }*/
+        /*int childIndex = getAndVerifyPreorderedIndex(childrenCount, i, customOrder);
+        LGView *child = getAndVerifyPreorderedView(preorderedList, children, childIndex);*/
+        LGView *child = [preorderedList objectAtIndex:i];
+        //if ((child.mViewFlags & VISIBILITY_MASK) == VISIBLE || child.getAnimation() != null) {
+        if(child.dVisibility == VISIBLE) {
+            more |= [self drawChild:canvas :child :drawingTime];
+        }
+    }
+    /*while (transientIndex >= 0) {
+        // there may be additional transient views after the normal views
+        final View transientChild = mTransientViews.get(transientIndex);
+        if ((transientChild.mViewFlags & VISIBILITY_MASK) == VISIBLE ||
+                transientChild.getAnimation() != null) {
+            more |= drawChild(canvas, transientChild, drawingTime);
+        }
+        transientIndex++;
+        if (transientIndex >= transientCount) {
+            break;
+        }
+    }*/
+    if (preorderedList != nil) [preorderedList removeAllObjects];
+    // Draw any disappearing views that have animations
+    /*if (mDisappearingChildren != null) {
+        final ArrayList<View> disappearingChildren = mDisappearingChildren;
+        final int disappearingCount = disappearingChildren.size() - 1;
+        // Go backwards -- we may delete as animations finish
+        for (int i = disappearingCount; i >= 0; i--) {
+            final View child = disappearingChildren.get(i);
+            more |= drawChild(canvas, child, drawingTime);
+        }
+    }*/
+    [canvas disableZ];
+    /*if (clipToPadding) {
+        canvas.restoreToCount(clipSaveCount);
+    }*/
+    // mGroupFlags might have been updated by drawChild()
+    flags = self.mGroupFlags;
+    if ((flags & GROUP_FLAG_INVALIDATE_REQUIRED) == GROUP_FLAG_INVALIDATE_REQUIRED) {
+        [self invalidate];
+    }
+    /*if ((flags & FLAG_ANIMATION_DONE) == 0 && (flags & FLAG_NOTIFY_ANIMATION_LISTENER) == 0 &&
+            mLayoutAnimationController.isDone() && !more) {
+        // We want to erase the drawing cache and notify the listener after the
+        // next frame is drawn because one extra invalidate() is caused by
+        // drawChild() after the animation is over
+        mGroupFlags |= FLAG_NOTIFY_ANIMATION_LISTENER;
+        final Runnable end = new Runnable() {
+           @Override
+           public void run() {
+               notifyAnimationListener();
+           }
+        };
+        post(end);
+    }*/
 }
 
 - (id<TIOSKHTView>)getChildAtIndex:(int32_t)index {

@@ -8,6 +8,7 @@
 #import "CommonDelegate.h"
 #import "DisplayMetrics.h"
 #import "LuaTranslator.h"
+#import "ViewModelStore.h"
 #import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 #import <Topping/Topping-Swift.h>
 
@@ -18,8 +19,8 @@
     self = [super init];
     if (self) {
         self.context = context;
-        self.viewModelProvider = [LuaViewModelProvider new];
-        self.lifecycleOwner = [LuaLifecycleOwner new];
+        self.viewModelProvider = [LuaViewModelProvider ofForm:self];
+        self.lifecycleOwner = [[LuaLifecycleOwner alloc] initWithLifecycleOwner:self];
         self.lifecycleRegistry = [[LifecycleRegistry alloc] initWithOwner:self.lifecycleOwner];
         self.onBackPressedDispatcher = [[LuaFormOnBackPressedDispatcher alloc] initWithForm: self];
         self.mFragments = [FragmentController createControllerWithFragmentHostCallback:[[LuaFormHostCallback alloc] initWithForm:self]];
@@ -210,6 +211,9 @@
 -(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    if(self.context != nil && self.context.componentCallbacks != nil) {
+        [self.context.componentCallbacks onLowMemory];
+    }
 }
 
 -(void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -221,6 +225,9 @@
         [self.lgview onConfigurationChanged:[self.context._resources getConfiguration]];
         if(diff & ACTIVITY_INFO_CONFIG_LAYOUT_DIRECTION) {
             [self.lgview onRtlPropertiesChanged:[newConfiguration getLayoutDirection]];
+        }
+        if(self.context != nil && self.context.componentCallbacks != nil) {
+            [self.context.componentCallbacks onConfigurationChanged:[self.context._resources getConfiguration]];
         }
     }
 }
@@ -290,6 +297,7 @@
 -(void)setLuaView:(LGView*)v
 {
 	self.lgview = v;
+    [self.lgview setViewTreeLifecycleOwner:self];
     [self addMainView:[v getView]];
 }
 
@@ -298,6 +306,7 @@
 	LGView *lgview;
     [self addMainView:[[LGLayoutParser getInstance] parseRef:xml :[DisplayMetrics getMasterView] :nil :self :&lgview]];
 	self.lgview = lgview;
+    [self.lgview setViewTreeLifecycleOwner:self];
 }
 
 -(void)setTitle:(NSString *)str
@@ -343,7 +352,7 @@
     return self.viewModelStore;
 }
 
--(SavedStateRegistry*)getSavedStateRegistry {
+-(SavedStateRegistry *)getSavedStateRegistry {
     return [self.savedStateRegistryController getSavedStateRegistry];
 }
 
@@ -385,7 +394,7 @@
 }
 
 -(Lifecycle *)getLifecycle {
-    return [self.lifecycleOwner getLifecycle];
+    return self.lifecycleRegistry;
 }
 
 -(LuaLifecycle *)getLifecycleInner {
@@ -393,7 +402,7 @@
 }
 
 - (LuaLifecycleOwner *)getLifecycleOwner {
-    return [[LuaLifecycleOwner alloc] initWithLifecycleOwner:self.lifecycleOwner];
+    return self.lifecycleOwner;
 }
 
 -(void)addMainView:(UIView *)viewToAdd {

@@ -90,20 +90,20 @@
 }
 
 -(void)fixUpLocaleList {
-    if ((self.locale == nil && self.mLocaleList.count != 0) ||
-            (self.locale != nil && ![self.locale isEqual:[self.mLocaleList objectAtIndex:0]])) {
-        self.mLocaleList = self.locale == nil ? [NSLocale preferredLanguages] : [NSArray array];
+    if ((self.mLocale == nil && self.mLocaleList.count > 0) ||
+            (self.mLocale != nil && (self.mLocaleList.count > 0 && ![self.mLocale isEqual:[self.mLocaleList objectAtIndex:0]]))) {
+        self.mLocaleList = self.mLocale == nil ? [NSLocale preferredLanguages] : [NSArray array];
     }
 }
 
 -(void)setTo:(Configuration*) o {
     self.fontScale = o.fontScale;
-    if (o.locale == nil) {
+    if (o.mLocale == nil) {
         self.locale = nil;
-    } else if (![o.locale isEqual:self.locale]) {
+    } else if (![o.mLocale isEqual:self.mLocale]) {
         // Only clone a new Locale instance if we need to:  the clone() is
         // both CPU and GC intensive.
-        self.locale = o.locale.copy;
+        self.locale = o.mLocale.copy;
     }
     [o fixUpLocaleList];
     self.mLocaleList = o.mLocaleList;
@@ -163,13 +163,13 @@
         changed |= ACTIVITY_INFO_CONFIG_LOCALE;
         self.mLocaleList = delta.mLocaleList;
         // delta.locale can't be null, since delta.mLocaleList is not empty.
-        if (![delta.locale isEqual:self.locale]) {
-            self.locale = delta.locale.copy;
+        if (![delta.mLocale isEqual:self.mLocale]) {
+            self.locale = delta.mLocale.copy;
             // If locale has changed, then layout direction is also changed ...
             changed |= ACTIVITY_INFO_CONFIG_LAYOUT_DIRECTION;
             // ... and we need to update the layout direction (represented by the first
             // 2 most significant bits in screenLayout).
-            [self setLayoutDirection:self.locale];
+            [self setLayoutDirection:self.mLocale];
         }
     }
     __block int deltaScreenLayoutDir = delta.screenLayout & CONFIGURATION_SCREENLAYOUT_LAYOUTDIR_MASK;
@@ -293,9 +293,9 @@
     if ((mask & ACTIVITY_INFO_CONFIG_LOCALE) != 0) {
         self.mLocaleList = delta.mLocaleList;
         if (self.mLocaleList.count != 0) {
-            if (![delta.locale isEqual:self.locale]) {
+            if (![delta.mLocale isEqual:self.mLocale]) {
                 // Don't churn a new Locale clone unless we're actually changing it
-                self.locale = delta.locale.copy;
+                self.mLocale = delta.mLocale.copy;
             }
         }
     }
@@ -450,8 +450,8 @@
 
 -(void)setLocales:(NSArray *)locales {
     self.mLocaleList = locales == nil ? [NSLocale preferredLanguages] : locales;
-    self.locale = [self.mLocaleList objectAtIndex:0];
-    [self setLayoutDirection:self.locale];
+    self.mLocale = [self.mLocaleList objectAtIndex:0];
+    [self setLayoutDirection:self.mLocale];
 }
 
 -(void)setLocale:(NSLocale*)loc {
@@ -460,7 +460,7 @@
 
 -(void)clearLocales {
     self.mLocaleList = [NSLocale preferredLanguages];
-    self.locale = nil;
+    self.mLocale = nil;
 }
 
 -(int)getLayoutDirection {
@@ -493,7 +493,7 @@
     [change fixUpLocaleList];
     if (![base.mLocaleList isEqualToArray:change.mLocaleList])  {
         delta.mLocaleList = change.mLocaleList;
-        delta.locale = change.locale;
+        delta.mLocale = change.mLocale;
     }
     if (base.touchscreen != change.touchscreen) {
         delta.touchscreen = change.touchscreen;

@@ -22,8 +22,9 @@
 @class LuaLifecycle;
 @class LuaRef;
 @protocol ViewModelStoreOwner;
+@protocol SavedStateRegistryOwner;
 
-@interface LuaForm : UIViewController <LuaClass, LuaInterface, ViewModelStoreOwner>
+@interface LuaForm : UIViewController <LuaClass, LuaInterface, ViewModelStoreOwner, LifecycleOwner, SavedStateRegistryOwner>
 {
 }
 

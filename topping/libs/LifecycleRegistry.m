@@ -6,7 +6,8 @@
 {
     LifecycleState newState = [Lifecycle getTargetState:event];
     self.state = [LifecycleRegistry min:self.state :newState];
-    [self.observer onStateChanged:owner :event];
+    if([self.observer respondsToSelector:@selector(onStateChanged::)])
+        [self.observer onStateChanged:owner :event];
     self.state = newState;
 }
 

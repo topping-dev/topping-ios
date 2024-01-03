@@ -14,10 +14,12 @@
 @class LuaForm;
 @class LuaFragment;
 @protocol LuaInterface;
+@class LGViewGroup;
 @class NavController;
 @class LuaNavController;
 @class LGRelativeLayoutParams;
 @class Configuration;
+@protocol OnAttachStateChangeListener;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
 {
@@ -135,6 +137,7 @@ typedef NS_ENUM(NSInteger, ACTION_DRAG) {
 typedef NS_ENUM(NSInteger, PFLAG)
 {
     PFLAG_DRAWN             = 0x00000020,
+    PFLAG_DRAW_ANIMATION    = 0x00000020,
     PFLAG_SKIP_DRAW         = 0x00000080,
     PFLAG_ALPHA_SET         = 0x00040000,
     PFLAG_DIRTY             = 0x00200000,
@@ -232,6 +235,7 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 -(BOOL)onInterceptTouchEvent:(TIOSKHMotionEvent*)event;
 -(void)postOnAnimation:(void (^)(void))block;
 -(void)draw:(id<TIOSKHTCanvas>)canvas;
+-(BOOL)draw:(id<TIOSKHTCanvas>)canvas :(LGViewGroup*)parent :(int)drawingTime;
 -(NSString *) debugDescription:(NSString *)val;
 
 -(NSArray*)allPropertyNames;
@@ -283,6 +287,9 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 -(void)startDragAndDrop:(NSString*)data;
 -(BOOL)hasIdentityMatrix;
 -(BOOL)onSetAlpha:(float)value;
+
+-(void)addOnAttachStateChangeListener:(id<OnAttachStateChangeListener>)listener;
+-(void)removeOnAttachStateChangeListener:(id<OnAttachStateChangeListener>)listener;
 
 @property (nonatomic, strong) NSMutableDictionary *xmlProperties;
 @property (nonatomic, strong) NSArray *attrs;
@@ -416,10 +423,20 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 @property (nonatomic, strong) Transformation *transformationInfo;
 @property (nonatomic, strong) TIOSKHSkikoRect *clipBounds;
 
+@property (nonatomic, strong) NSMutableArray *mOnAttachStateChangeListeners;
+@property (nonatomic) BOOL onAttachToWindowCalled;
+
 @end
 
 @protocol OnClickListenerInternal <NSObject>
 
 -onClick:(LGView*)view;
+
+@end
+
+@protocol OnAttachStateChangeListener <NSObject>
+
+-(void)onViewAttachedToWindow:(LGView*)v;
+-(void)onViewDetachedFromWindow:(LGView*)v;
 
 @end

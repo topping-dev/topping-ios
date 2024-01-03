@@ -60,6 +60,8 @@ typedef enum {
 
 -(BOOL)getChildStaticTransformation:(LGView*)child :(Transformation*)t;
 
+-(BOOL)drawChild:(id<TIOSKHTCanvas>)canvas :(LGView*)child :(long)drawingTime;
+
 @property (nonatomic, strong) NSMutableArray *subviews;
 @property (nonatomic, strong) NSMutableDictionary *subviewMap;
 @property (nonatomic, retain) TouchTarget *mFirstTouchTarget;

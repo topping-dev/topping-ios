@@ -101,13 +101,25 @@ static char UIB_PROPERTY_KEY;
 
 -(void)overload_didMoveToWindow {
     [self overload_didMoveToWindow];
+    
+    if(self.wrapper == nil)
+        return;
+    
     if(self.window != nil)
     {
-        self.wrapper.viewTreeObserver = [ViewTreeObserver new];
         [self.wrapper onAttachedToWindow];
+        
+        for(id<OnAttachStateChangeListener> listener in self.wrapper.mOnAttachStateChangeListeners) {
+            [listener onViewAttachedToWindow:self.wrapper];
+        }
     }
-    else
+    else {
         [self.wrapper onDetachedFromWindow];
+        
+        for(id<OnAttachStateChangeListener> listener in self.wrapper.mOnAttachStateChangeListeners) {
+            [listener onViewDetachedFromWindow:self.wrapper];
+        }
+    }
 }
 
 /*-(void)overload_layoutSublayersOfLayer:(CALayer *)layer {
@@ -135,6 +147,8 @@ static char UIB_PROPERTY_KEY;
         }
     }
     [self.wrapper onFocusChanged:(context.nextFocusedView == self) :0 : rect];
+    
+    [self overload_didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
 }
 
 /*
@@ -142,27 +156,35 @@ static char UIB_PROPERTY_KEY;
  */
 
 -(void)overload_drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
-    CGImageRef imgRef = CGBitmapContextCreateImage(ctx);
-    UIImage* img = [UIImage imageWithCGImage:imgRef];
-    
-    TIOSKHSkikoImage *skImage = [TIOSKHSkiaCanvasKt toSkiaImage:img];
-    TIOSKHSkikoBitmap *skBitmap = [skImage toBitmap];
-    TIOSKHSkiaCanvas *canvas = [[TIOSKHSkiaCanvas alloc] initWithBitmap:skBitmap];
-    [self.wrapper onDrawCanvas:canvas];
-    
-    img = [canvas toUIImageScale:1];
-    /*CGRect imageRect = CGRectMake(0, 0, img.size.width, img.size.height);
-    CGContextTranslateCTM(ctx, 0, img.size.height);
-    CGContextScaleCTM(ctx, 1.0, -1.0);
-    CGContextDrawImage(ctx, imageRect, img.CGImage);
-    CGContextScaleCTM(ctx, 1.0, -1.0);
-    CGContextTranslateCTM(ctx, 0, -imageRect.size.height);*/
-    
-    UIGraphicsPushContext(ctx);
-    [img drawAtPoint:CGPointZero]; // UIImage will handle all especial cases!
-    UIGraphicsPopContext();
-    
-    CGImageRelease(imgRef);
+    [self overload_drawLayer:layer inContext:ctx];
+    if([self.wrapper respondsToSelector:@selector(onDrawCanvas:)])
+    {
+        CGImageRef imgRef = CGBitmapContextCreateImage(ctx);
+        UIImage* img = [UIImage imageWithCGImage:imgRef];
+        if(img == nil)
+        {
+            return;
+        }
+        
+        TIOSKHSkikoImage *skImage = [TIOSKHSkiaCanvasKt toSkiaImage:img];
+        TIOSKHSkikoBitmap *skBitmap = [skImage toBitmap];
+        TIOSKHSkiaCanvas *canvas = [[TIOSKHSkiaCanvas alloc] initWithBitmap:skBitmap];
+        [self.wrapper onDrawCanvas:canvas];
+        
+        img = [canvas toUIImageScale:1];
+        /*CGRect imageRect = CGRectMake(0, 0, img.size.width, img.size.height);
+        CGContextTranslateCTM(ctx, 0, img.size.height);
+        CGContextScaleCTM(ctx, 1.0, -1.0);
+        CGContextDrawImage(ctx, imageRect, img.CGImage);
+        CGContextScaleCTM(ctx, 1.0, -1.0);
+        CGContextTranslateCTM(ctx, 0, -imageRect.size.height);*/
+        
+        UIGraphicsPushContext(ctx);
+        [img drawAtPoint:CGPointZero]; // UIImage will handle all especial cases!
+        UIGraphicsPopContext();
+        
+        CGImageRelease(imgRef);
+    }
 }
 
 @end
@@ -175,16 +197,25 @@ static char UIB_PROPERTY_KEY;
 
 @synthesize layout, baseLine, onDragListener = _onDragListener;
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.layout = NO;
+        self.layoutRequested = true;
+        self.baseLine = -1;
+        self.isFocusable = true;
+        self.android_layout_width = @"wrap_content";
+        self.android_layout_height = @"wrap_content";
+        self.methodSkip = [NSMutableArray array];
+        self.methodEventMap = [NSMutableDictionary dictionary];
+        self.viewTreeObserver = [ViewTreeObserver new];
+    }
+    return self;
+}
+
 -(void)initProperties
 {
-	self.layout = NO;
-    self.layoutRequested = true;
-	self.baseLine = -1;
-    self.isFocusable = true;
-	self.android_layout_width = @"wrap_content";
-	self.android_layout_height = @"wrap_content";
-    self.methodSkip = [NSMutableArray array];
-    self.methodEventMap = [NSMutableDictionary dictionary];
 }
 
 -(void)copyAttributesTo:(LGView*)viewToCopy {
@@ -1348,6 +1379,22 @@ static char UIB_PROPERTY_KEY;
     return false;
 }
 
+-(void)addOnAttachStateChangeListener:(id<OnAttachStateChangeListener>)listener {
+    if(self.mOnAttachStateChangeListeners == nil) {
+        self.mOnAttachStateChangeListeners = [NSMutableArray new];
+    }
+    
+    [self.mOnAttachStateChangeListeners addObject:listener];
+}
+
+-(void)removeOnAttachStateChangeListener:(id<OnAttachStateChangeListener>)listener {
+    if(self.mOnAttachStateChangeListeners == nil) {
+        return;
+    }
+    
+    [self.mOnAttachStateChangeListeners removeObject:listener];
+}
+
 -(NSString*)GetId
 {
 	if(self.lua_id != nil)
@@ -1688,7 +1735,16 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (BOOL)isAttachedToWindow {
-    return self._view.window != nil;
+    BOOL result = self._view.window != nil;
+    if(!result) {
+        LGView *parent = self.parent;
+        while(parent != nil) {
+            result = parent._view.window != nil;
+            parent = parent.parent;
+        }
+    }
+    
+    return result;
 }
 
 - (BOOL)isInEditMode {
@@ -1716,11 +1772,15 @@ static char UIB_PROPERTY_KEY;
 }
 
 - (void)onAttachedToWindow {
+    self.onAttachToWindowCalled = true;
     [self callTMethod:@"onAttachedToWindow" :nil :nil];
+    [self.viewTreeObserver dispatchWindowAttach:true];
 }
 
 -(void)onDetachedFromWindow {
+    self.onAttachToWindowCalled = false;
     [self callTMethod:@"onDetachedFromWindow" :nil :nil];
+    [self.viewTreeObserver dispatchWindowAttach:false];
 }
 
 - (BOOL)draw:(nonnull id<TIOSKHTCanvas>)canvas :(LGViewGroup*)parent :(int)drawingTime {
@@ -1905,10 +1965,6 @@ static char UIB_PROPERTY_KEY;
     TIOSKHSkikoBitmap *skBitmap = [skImage toBitmap];
     TIOSKHSkikoPoint *point = [[TIOSKHSkikoPoint alloc] initWithX:0 y:0];
     [canvas drawImageImage:skBitmap topLeftOffset:point paint:[self.lc createPaint]];
-}
-
-- (void)onDrawCanvas:(nonnull id<TIOSKHTCanvas>)canvas {
-
 }
 
 - (void)onMeasureWidthMeasureSpec:(int32_t)widthMeasureSpec heightMeasureSpec:(int32_t)heightMeasureSpec {
