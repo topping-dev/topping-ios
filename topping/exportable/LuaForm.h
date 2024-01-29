@@ -56,6 +56,8 @@
 -(LuaLifecycle*)getLifecycleInner;
 -(LuaLifecycleOwner*)getLifecycleOwner;
 
+-(BOOL)dispatchTouchEvent:(TIOSKHMotionEvent*)motionEvent;
+
 -(void)addMainView:(UIView*)viewToAdd;
 
 KEYBOARD_FUNCTIONS

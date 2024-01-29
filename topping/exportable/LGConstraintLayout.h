@@ -2,7 +2,7 @@
 #import "LGViewGroup.h"
 #import "LGImageView.h"
 #import "LGButton.h"
-#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>s
+#import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
 
 @interface LGConstraintImageFilterButton : LGImageView
 

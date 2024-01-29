@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <MetalKit/MetalKit.h>
 #import "LuaClass.h"
 #import "LuaContext.h"
 #import "LuaForm.h"
@@ -19,6 +20,7 @@
 @class LuaNavController;
 @class LGRelativeLayoutParams;
 @class Configuration;
+@class MetalView;
 @protocol OnAttachStateChangeListener;
 
 typedef NS_ENUM(NSInteger, VISIBILITY)
@@ -173,16 +175,18 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 -(void)overload_touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event;
 
 @property (nonatomic, retain) LGView *wrapper;
+@property (nonatomic, retain) LuaForm *form;
 
 @end
 
 @interface LGView : NSObject <LuaClass, LuaInterface, TIOSKHTView, UIDragInteractionDelegate, UIDropInteractionDelegate>
 {
     NSArray *propertyNameCache;
-    long tapDownTime;
 }
 
 +(BOOL)isRtl;
++(BOOL)onIOSTouchEvent:(LGView*)view :(CGPoint)point :(UIGestureRecognizerState)state;
++(TIOSKHMotionEvent *)convertToMotionEvent:(LGView*)view :(CGPoint)point :(UIGestureRecognizerState)state;
 
 -(void)initProperties;
 -(void)copyAttributesTo:(LGView*)viewToCopy;
@@ -393,6 +397,8 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 @property(nonatomic) int baseLine;
 @property(nonatomic) BOOL isFocusable;
 
+@property(nonatomic) long tapDownTime;
+
 @property(nonatomic) BOOL widthSpecSet, heightSpecSet;
 
 @property(nonatomic, strong) LuaTranslator *ltOnClickListener;
@@ -425,6 +431,12 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 
 @property (nonatomic, strong) NSMutableArray *mOnAttachStateChangeListeners;
 @property (nonatomic) BOOL onAttachToWindowCalled;
+
+@property (nonatomic) BOOL forceOverrideDrawRect;
+@property (nonatomic, strong) BOOL (^forceOverrideDrawRectBlock)(CGRect);
+@property (nonatomic) CGRect lastCanvasSize;
+@property (nonatomic, retain) TIOSKHSkiaCanvas *canvas;
+@property (nonatomic, retain) id<MTLDevice> metalDevice;
 
 @end
 

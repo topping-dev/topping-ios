@@ -9,7 +9,7 @@ public class ToppingPaint : SkiaPaint {
     @objc
     public init(fontInternal: UIFont?) {
         super.init(skia: SkikoPaint())
-        if(font != nil) {
+        if(fontInternal != nil) {
             self.fontInternal = fontInternal!
         }
         else {

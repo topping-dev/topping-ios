@@ -25,6 +25,8 @@
     self = [super init];
     if (self) {
         self.childTransformation = [Transformation new];
+        self.subviews = [NSMutableArray array];
+        self.subviewMap = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -32,9 +34,6 @@
 - (void)initProperties
 {
     [super initProperties];
-    
-    self.subviews = [NSMutableArray array];
-    self.subviewMap = [NSMutableDictionary dictionary];
 }
 
 -(void)addSubview:(LGView*)val
@@ -583,7 +582,7 @@
     
     BOOL intercepted;
     if(actionMasked == TIOSKHMotionEvent.companion.ACTION_DOWN
-       && self.mFirstTouchTarget != nil) {
+       || self.mFirstTouchTarget != nil) {
         BOOL disallowIntercept = (self.mGroupFlags & GROUP_FLAG_DISALLOW_INTERCEPT) != 0;
         intercepted = [self onInterceptTouchEvent:event];
         event.action = action;
@@ -651,46 +650,46 @@
                 }
             }
         }
+    }
         
-        if(self.mFirstTouchTarget == nil) {
-            handled = [self dispatchTransformedTouchEvent:event :cancelled :nil :-1];
-        } else {
-            TouchTarget *predecessor = nil;
-            TouchTarget *target = self.mFirstTouchTarget;
-            while (target != nil) {
-                TouchTarget *next = target.next;
-                if(alreadyDispatchedToNewTouchTarget && target == newTouchTarget) {
+    if(self.mFirstTouchTarget == nil) {
+        handled = [self dispatchTransformedTouchEvent:event :cancelled :nil :-1];
+    } else {
+        TouchTarget *predecessor = nil;
+        TouchTarget *target = self.mFirstTouchTarget;
+        while (target != nil) {
+            TouchTarget *next = target.next;
+            if(alreadyDispatchedToNewTouchTarget && target == newTouchTarget) {
+                handled = true;
+            } else {
+                BOOL cancelChild = [LGViewGroup resetCancelNextUpFlag:target.child] || intercepted;
+                if([self dispatchTransformedTouchEvent:event :cancelChild :target.child :target.pointerIdBits]) {
                     handled = true;
-                } else {
-                    BOOL cancelChild = [LGViewGroup resetCancelNextUpFlag:target.child] || intercepted;
-                    if([self dispatchTransformedTouchEvent:event :cancelChild :target.child :target.pointerIdBits]) {
-                        handled = true;
-                    }
-                    if(cancelChild) {
-                        if(predecessor == nil) {
-                            self.mFirstTouchTarget = next;
-                        } else {
-                            predecessor.next = next;
-                        }
-                        //target.recycle
-                        target = next;
-                        continue;
-                    }
                 }
-                predecessor = target;
-                target = next;
+                if(cancelChild) {
+                    if(predecessor == nil) {
+                        self.mFirstTouchTarget = next;
+                    } else {
+                        predecessor.next = next;
+                    }
+                    //target.recycle
+                    target = next;
+                    continue;
+                }
             }
+            predecessor = target;
+            target = next;
         }
-        
-        if(cancelled
-           || actionMasked == TIOSKHMotionEvent.companion.ACTION_UP
-           || actionMasked == TIOSKHMotionEvent.companion.ACTION_HOVER_MOVE) {
-            [self resetTouchState];
-        } else if(split && actionMasked == TIOSKHMotionEvent.companion.ACTION_POINTER_UP) {
-            int actionIndex = event.actionIndex;
-            int idBitsToRemove = 1 << [event getPointerIdPointerIndex:actionIndex];
-            [self removePointersFromTouchTargets:idBitsToRemove];
-        }
+    }
+    
+    if(cancelled
+       || actionMasked == TIOSKHMotionEvent.companion.ACTION_UP
+       || actionMasked == TIOSKHMotionEvent.companion.ACTION_HOVER_MOVE) {
+        [self resetTouchState];
+    } else if(split && actionMasked == TIOSKHMotionEvent.companion.ACTION_POINTER_UP) {
+        int actionIndex = event.actionIndex;
+        int idBitsToRemove = 1 << [event getPointerIdPointerIndex:actionIndex];
+        [self removePointersFromTouchTargets:idBitsToRemove];
     }
     
     return handled;

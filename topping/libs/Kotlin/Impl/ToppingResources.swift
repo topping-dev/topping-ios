@@ -5,12 +5,15 @@ import SwiftUI
 @objc
 public class ToppingResources : NSObject, TResources {
     var _configuration: Configuration
+    var _displayMetrics: TDisplayMetrics
     
     @objc
     public override init() {
         _configuration = Configuration()
+        _displayMetrics = TDisplayMetrics(deviceDensityParam: Int32(DisplayMetrics.getDensity() * 160))
         super.init()
         initConfig()
+        initDisplayMetrics()
     }
     
     @objc
@@ -60,6 +63,11 @@ public class ToppingResources : NSObject, TResources {
         _configuration.uiMode = Int32(CONFIGURATION_UI_MODE_TYPE_NORMAL.rawValue | nightMode)
         _configuration.screenWidthDp = Int32(DisplayMetrics.sp(toDp: Float(screenWidth)))
         _configuration.screenHeightDp = Int32(DisplayMetrics.sp(toDp: Float(screenHeight)))
+    }
+    
+    @objc
+    public func initDisplayMetrics() {
+        //TODO: Find ppi
     }
     
     @objc
@@ -115,7 +123,7 @@ public class ToppingResources : NSObject, TResources {
     
     @objc
     public func getDisplayMetrics() -> TDisplayMetrics {
-        return TDisplayMetrics(deviceDensity: Int32(DisplayMetrics.getDensity()))
+        return _displayMetrics
     }
     
     @objc

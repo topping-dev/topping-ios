@@ -87,12 +87,15 @@ static LuaForm *sActiveForm;
     CGFloat topPadding = 0;
     CGFloat bottomPadding = 0;
     if (@available(iOS 11.0, *)) {
-        topPadding = self.window.safeAreaInsets.top;
-        bottomPadding = self.window.safeAreaInsets.bottom;
+        if([sToppingEngine useSafeArea]) {
+            topPadding = self.window.safeAreaInsets.top;
+            bottomPadding = self.window.safeAreaInsets.bottom;
+        }
     }
     else
     {
-        height -= sbarHeight;
+        if([sToppingEngine useSafeArea])
+            height -= sbarHeight;
     }
     height -= topPadding;
     height -= bottomPadding;

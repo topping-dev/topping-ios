@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 #import "LuaRef.h"
 #import <ToppingIOSKotlinHelper/ToppingIOSKotlinHelper.h>
+#import "MetalView.h"
 
 @class AppBarConfiguration;
 @class FragmentManager;
@@ -28,6 +29,35 @@
 
 -(TIOSKHSkiaCanvas*)getCanvas;
 -(TIOSKHSkiaCanvasKt*)getCanvasKt;
+-(TIOSKHSkikoPathMeasure*)getPathMeasure;
+-(TIOSKHSkikoAlignment*)getAlignment;
+-(TIOSKHSkikoBaselineMode*)getBaselineMode;
+-(TIOSKHSkikoDecorationStyle*)getDecorationStyle;
+-(TIOSKHSkikoDirection*)getDirection;
+-(TIOSKHSkikoParagraph*)getParagraph;
+-(TIOSKHSkikoParagraphBuilder*)getParagraphBuilder;
+-(TIOSKHSkikoParagraphStyle*)getParagraphStyle;
+-(TIOSKHSkikoPlaceholderAlignment*)getPlaceholderAlignment;
+-(TIOSKHSkikoPlaceholderStyle*)getPlaceholderStyle;
+-(TIOSKHSkikoShadow*)getShadow;
+-(TIOSKHSkikoStrutStyle*)getStrutStyle;
+-(TIOSKHSkikoTextBox*)getTextBox;
+-(TIOSKHSkikoTextStyle*)getTextStyle;
+-(TIOSKHSkikoFontMgr*)getFontMgr;
+-(TIOSKHSkikoFontCollection*)getFontCollection;
+-(TIOSKHSkikoTypeface*)getTypeface;
+-(TIOSKHSkikoTypefaceFontProvider*)getTypefaceFontProvider;
+-(TIOSKHSkikoFontFamilyName*)getFontFamilyName;
+-(TIOSKHSkikoLineMetrics*)getLineMetrics;
+-(TIOSKHSkikoBreakIterator*)getBreakIterator;
+-(TIOSKHToppingSkiaLayer*)getToppingSkiaLayer;
+-(TIOSKHMetalRedrawer*)getMetalRedrawer;
+-(TIOSKHToppingSkikoView*)getToppingSkikoView;
+-(id<TIOSKHISkikoView>)getISkikoView;
+-(TIOSKHSkikoPictureRecorder*)getPictureRecorder;
+-(MetalView*)getMetalView;
+-(MetalViewInternalDelegate*)getMetalViewInternalDelegate;
+-(id<MetalViewDelegate>)getMetalViewDelegate;
 
 @end
 

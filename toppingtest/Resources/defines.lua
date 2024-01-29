@@ -24,5 +24,9 @@ MainForm = "Main";
 
 AppStyle = "AppTheme";
 
+-- For compose
+SafeArea = false;
+SkipLua = true;
+
 --initconnection = require"debugger"
 --initconnection("192.168.1.28", "10000", "luaidekey")

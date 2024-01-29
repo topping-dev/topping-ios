@@ -80,6 +80,7 @@
 	//CGRect fullFrame = [[UIScreen mainScreen] applicationFrame];
 	//self.view.frame  = fullFrame;
 	self.view.frame = [DisplayMetrics getMasterView].frame;
+    self.view.form = self;
 	if(self.ui != nil)
 		[self setViewXML:self.ui];
     
@@ -235,6 +236,8 @@
 -(void)setConstraints {
     self.rootConstraintsSet = true;
     [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    if(![sToppingEngine useSafeArea])
+        return;
     NSLayoutConstraint *constraint;
     if(self.context.navController.isNavigationBarHidden)
     {
@@ -323,6 +326,10 @@
 -(void)close
 {
 	[self.context.navController popViewControllerAnimated:YES];
+}
+
+-(BOOL)dispatchTouchEvent:(TIOSKHMotionEvent *)motionEvent {
+    return [self.lgview dispatchTouchEvent:motionEvent];
 }
 
 - (BOOL)isChangingConfigurations {
@@ -414,27 +421,29 @@
     }
     [self.view addSubview:viewToAdd];
     [viewToAdd setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSLayoutConstraint *constraint;
-    constraint = [self.view.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:viewToAdd.topAnchor];
-    constraint.priority = UILayoutPriority(999);
-    constraint.active = true;
-    constraint = [self.view.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:viewToAdd.rightAnchor];
-    constraint.priority = UILayoutPriority(999);
-    constraint.active = true;
-    NSString *val = (NSString*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"iosBottomSafeArea"];
-    if([val isEqualToString:@"true"]) {
-        constraint = [self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
+    if([sToppingEngine useSafeArea]) {
+        NSLayoutConstraint *constraint;
+        constraint = [self.view.safeAreaLayoutGuide.topAnchor constraintEqualToAnchor:viewToAdd.topAnchor];
+        constraint.priority = UILayoutPriority(999);
+        constraint.active = true;
+        constraint = [self.view.safeAreaLayoutGuide.rightAnchor constraintEqualToAnchor:viewToAdd.rightAnchor];
+        constraint.priority = UILayoutPriority(999);
+        constraint.active = true;
+        NSString *val = (NSString*)[[LGStyleParser getInstance] getStyleValue:[sToppingEngine getAppStyle] :@"iosBottomSafeArea"];
+        if([val isEqualToString:@"true"]) {
+            constraint = [self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
+            constraint.priority = UILayoutPriority(999);
+            constraint.active = true;
+        }
+        else {
+            constraint = [self.view.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
+            constraint.priority = UILayoutPriority(999);
+            constraint.active = true;
+        }
+        constraint = [self.view.safeAreaLayoutGuide.leftAnchor constraintEqualToAnchor:viewToAdd.leftAnchor];
         constraint.priority = UILayoutPriority(999);
         constraint.active = true;
     }
-    else {
-        constraint = [self.view.bottomAnchor constraintEqualToAnchor:viewToAdd.bottomAnchor];
-        constraint.priority = UILayoutPriority(999);
-        constraint.active = true;
-    }
-    constraint = [self.view.safeAreaLayoutGuide.leftAnchor constraintEqualToAnchor:viewToAdd.leftAnchor];
-    constraint.priority = UILayoutPriority(999);
-    constraint.active = true;
 }
 
 -(NSString*)GetId

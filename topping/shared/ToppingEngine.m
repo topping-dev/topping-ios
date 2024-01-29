@@ -214,8 +214,6 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
 -(void)loadScripts
 {
 	luaL_openlibs(lu);
-	[self registerCoreFunctions];
-	[self registerGlobals];
 	
 	NSFileManager *fm = [NSFileManager defaultManager];	
 	//NSString  *scriptPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/LuaScripts/"];
@@ -303,6 +301,25 @@ int lua_mypcall( lua_State* L, int nargs, int nret ) {
     else
         self.appStyle = lua_tonsstring(lua_tostring(lu, -1));
     lua_pop(lu, 1);
+    
+    self.useSafeArea = true;
+    lua_getglobal(lu, "SafeArea");
+    if(lua_isboolean(lu, -1) == 0)
+        NSLog(@"LuaEngine: SafeArea must be boolean");
+    else
+        self.useSafeArea = lua_toboolean(lu, -1);
+    
+    BOOL skipLua = false;
+    lua_getglobal(lu, "SkipLua");
+    if(lua_isboolean(lu, -1) == 0)
+        NSLog(@"LuaEngine: SkipLua must be boolean");
+    else
+        skipLua = lua_toboolean(lu, -1);
+    
+    if(!skipLua) {
+        [self registerCoreFunctions];
+        [self registerGlobals];
+    }
 	
 	[[LGParser getInstance] initialize];
     

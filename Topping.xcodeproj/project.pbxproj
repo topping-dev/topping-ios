@@ -177,6 +177,9 @@
 		5C251C8A24EBF6EB00CCA3B4 /* socket in Resources */ = {isa = PBXBuildFile; fileRef = 5C251C8124EBF6EA00CCA3B4 /* socket */; };
 		5C25F4DF25076B8E0074B6AF /* UIColor+Lum.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */; };
 		5C25F4E025076B8E0074B6AF /* UIColor+Lum.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */; };
+		5C2644DB2B5DAF3C0036C570 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2644DA2B5DAF3C0036C570 /* MetalKit.framework */; };
+		5C2644DE2B5FA5E70036C570 /* MetalView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C2644DC2B5FA5E70036C570 /* MetalView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C2644DF2B5FA5E70036C570 /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C2644DD2B5FA5E70036C570 /* MetalView.m */; };
 		5C27FCC22AB0493300066429 /* ToppingClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCC12AB0493300066429 /* ToppingClass.swift */; };
 		5C27FCCF2AB06ABE00066429 /* ToppingResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */; };
 		5C27FCD22AB070B600066429 /* LGXmlParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C27FCD02AB070B600066429 /* LGXmlParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1103,6 +1106,9 @@
 		5C251C8124EBF6EA00CCA3B4 /* socket */ = {isa = PBXFileReference; lastKnownFileType = folder; path = socket; sourceTree = "<group>"; };
 		5C25F4DD25076B8E0074B6AF /* UIColor+Lum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Lum.h"; sourceTree = "<group>"; };
 		5C25F4DE25076B8E0074B6AF /* UIColor+Lum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Lum.m"; sourceTree = "<group>"; };
+		5C2644DA2B5DAF3C0036C570 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/iOSSupport/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		5C2644DC2B5FA5E70036C570 /* MetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
+		5C2644DD2B5FA5E70036C570 /* MetalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalView.m; sourceTree = "<group>"; };
 		5C27FCC12AB0493300066429 /* ToppingClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingClass.swift; sourceTree = "<group>"; };
 		5C27FCCE2AB06ABE00066429 /* ToppingResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppingResources.swift; sourceTree = "<group>"; };
 		5C27FCD02AB070B600066429 /* LGXmlParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGXmlParser.h; sourceTree = "<group>"; };
@@ -1653,8 +1659,6 @@
 		5CA0B3A62AE2A1000001325D /* BWJSONMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWJSONMatcher.h; sourceTree = "<group>"; };
 		5CA0B3A72AE2A1000001325D /* NSObject+BWJSONMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BWJSONMatcher.h"; sourceTree = "<group>"; };
 		5CAA030524F26CA200CD7CB4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
-		5CAEA83D2AB1D239009EB7C2 /* iosMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = iosMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/iosMain"; sourceTree = "<group>"; };
-		5CAEA83E2AB1D239009EB7C2 /* commonMain */ = {isa = PBXFileReference; lastKnownFileType = folder; name = commonMain; path = "../topping-ios-kotlin-helper/IOSKotlinHelper/src/commonMain"; sourceTree = "<group>"; };
 		5CAEA8412AB3072C009EB7C2 /* constraintlayoutValues.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = constraintlayoutValues.xml; sourceTree = "<group>"; };
 		5CAEA8452AB6D2F2009EB7C2 /* values.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = values.xml; sourceTree = "<group>"; };
 		5CB29C602535B49C000E39A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -1845,6 +1849,7 @@
 				5CD052362967FAFE005E4960 /* WebKit.framework in Frameworks */,
 				5CAA030624F26CA200CD7CB4 /* CoreText.framework in Frameworks */,
 				5C5A9A4024E16F0D002A22EA /* UIKit.framework in Frameworks */,
+				5C2644DB2B5DAF3C0036C570 /* MetalKit.framework in Frameworks */,
 				797F03E6DBEEBF58D23F2CBE /* Pods_Topping.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2570,7 +2575,6 @@
 				5C5ECFCE24EA6474007659B8 /* toppingtest */,
 				5C5A980524E16A4B002A22EA /* Products */,
 				DA6757BC4C1AC94A2DB57F7E /* Pods */,
-				5CF8F64B2AB1CBB500ACA9EA /* IOSKotlinHelper */,
 				E1C82AE459CF65C2AE4A42DC /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -2810,6 +2814,8 @@
 				5CFEA0622ADFCE570053EB9F /* Configuration.m */,
 				5CFEA0652AE058E50053EB9F /* ViewTreeObserver.h */,
 				5CFEA0662AE058E50053EB9F /* ViewTreeObserver.m */,
+				5C2644DC2B5FA5E70036C570 /* MetalView.h */,
+				5C2644DD2B5FA5E70036C570 /* MetalView.m */,
 			);
 			path = libs;
 			sourceTree = "<group>";
@@ -3489,15 +3495,6 @@
 			path = DefaultResources;
 			sourceTree = "<group>";
 		};
-		5CF8F64B2AB1CBB500ACA9EA /* IOSKotlinHelper */ = {
-			isa = PBXGroup;
-			children = (
-				5CAEA83E2AB1D239009EB7C2 /* commonMain */,
-				5CAEA83D2AB1D239009EB7C2 /* iosMain */,
-			);
-			name = IOSKotlinHelper;
-			sourceTree = "<group>";
-		};
 		DA6757BC4C1AC94A2DB57F7E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3512,6 +3509,7 @@
 		E1C82AE459CF65C2AE4A42DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C2644DA2B5DAF3C0036C570 /* MetalKit.framework */,
 				5CD052352967FAFE005E4960 /* WebKit.framework */,
 				5CAA030524F26CA200CD7CB4 /* CoreText.framework */,
 				5C5A9A4C24E1BDEF002A22EA /* CoreLocation.framework */,
@@ -3779,6 +3777,7 @@
 				5CC1BFCB29866EE4000C544A /* MDCLegacyTonalColorScheme.h in Headers */,
 				5C91BD7E283E25B500D4C94F /* LifecycleRegistry.h in Headers */,
 				5C9EC7FD29360141008D2909 /* CATransaction+MotionAnimator.h in Headers */,
+				5C2644DE2B5FA5E70036C570 /* MetalView.h in Headers */,
 				5CC1BFD529866EF7000C544A /* MDCShapeScheme.h in Headers */,
 				5C5A99D224E16BEC002A22EA /* lopcodes.h in Headers */,
 				5C07C3FB29879BDC0085B536 /* MDCTextControlHorizontalPositioningReference.h in Headers */,
@@ -4477,6 +4476,7 @@
 				5C9EC7DC2935FD42008D2909 /* MDMSpringTimingCurveGenerator.m in Sources */,
 				5C69239B2AD0433F00A8C9F1 /* LinearLayoutDialogController.swift in Sources */,
 				5C2F9AA229641F2900C443A8 /* MDCTypography.m in Sources */,
+				5C2644DF2B5FA5E70036C570 /* MetalView.m in Sources */,
 				5CB8585924E4306A006E6B65 /* CustomURLConnection.m in Sources */,
 				5C27FCE52AB192D200066429 /* ToppingDisplay.swift in Sources */,
 				5C4F82A0298FA3880013620E /* LGNavigationView.m in Sources */,

@@ -108,5 +108,6 @@ typedef struct lua_State lua_State;
 @property (nonatomic, retain) NSString* mainUI;
 @property (nonatomic, retain) NSString* mainForm;
 @property (nonatomic, retain) NSString* appStyle;
+@property (nonatomic) BOOL useSafeArea;
 
 @end
