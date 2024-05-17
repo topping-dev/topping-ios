@@ -2,6 +2,22 @@
 #import "ToppingEngine.h"
 #import "LuaFunction.h"
 
+@implementation VarArgsConvertor
+
++(NSMutableArray *)VarArgs:(va_list)ap :(NSObject *)val {
+    id obj;
+    NSMutableArray* array = [NSMutableArray array];
+    if(val == nil)
+        return array;
+    [array addObject:val];
+    while ((obj = va_arg(ap, id))) {
+        [array addObject:obj];
+    }
+    return array;
+}
+
+@end
+
 @implementation LuaTranslator
 
 @synthesize obj, func;

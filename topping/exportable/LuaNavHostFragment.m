@@ -70,7 +70,7 @@
     }
 }
 
--(void)onCreate:(NSMutableDictionary *)savedInsanceState {
+-(void)onCreate:(LuaBundle*)savedInsanceState {
     LuaContext *context = [self getContext];
     
     self.mNavController = [[NavHostController alloc] initWithContext:context];
@@ -82,19 +82,19 @@
     [self.mNavController setViewModelStoreWithViewModelStore:[self getViewModelStore]];
     [self onCreateNavController:self.mNavController];
     
-    NSMutableDictionary* navState = nil;
+    LuaBundle* navState = nil;
     if(savedInsanceState != nil) {
-        navState = (NSMutableDictionary*)[savedInsanceState objectForKey:@"android-support-nav:fragment:navControllerState"];
-        NSNumber *defHost = [savedInsanceState objectForKey:@"android-support-nav:fragment:defaultHost"];
-        if(defHost != nil && [defHost boolValue] == true) {
+        navState = [savedInsanceState getBundle:@"android-support-nav:fragment:navControllerState"];
+        BOOL defHost = [savedInsanceState getBoolean:@"android-support-nav:fragment:defaultHost"];
+        if(defHost) {
             self.mDefaultNavHost = true;
             [[[[self getParentFragmentManager] beginTransaction] setPrimaryNavigationFragmentWithFragment:self] commit];
         }
-        self.mGraphId = [[LGIdParser getInstance] getId:[savedInsanceState objectForKey:@"android-support-nav:fragment:graphId"]];
+        self.mGraphId = [[LGIdParser getInstance] getId:[savedInsanceState getString:@"android-support-nav:fragment:graphId"]];
     }
     
     if(navState != nil) {
-        [self.mNavController restoreStateWithNavStateP:navState];
+        [self.mNavController restoreStateWithNavState:navState];
     }
     if(self.mGraphId != nil) {
         [self.mNavController setGraphWithGraphResId:self.mGraphId];
@@ -187,17 +187,17 @@
     }
 }
 
-- (void)onSaveInstanceState:(NSMutableDictionary *)outState {
+- (void)onSaveInstanceState:(LuaBundle *)outState {
     [super onSaveInstanceState:outState];
-    NSMutableDictionary *navState = [self.mNavController saveState];
+    LuaBundle *navState = [self.mNavController saveState];
     if(navState == nil) {
-        [outState setObject:navState forKey:@"android-support-nav:fragment:navControllerState"];
+        [outState putObject:@"android-support-nav:fragment:navControllerState" :navState];
     }
     if(self.mDefaultNavHost) {
-        [outState setObject:[NSNumber numberWithBool:true] forKey:@"android-support-nav:fragment:defaultHost"];
+        [outState putBoolean:@"android-support-nav:fragment:defaultHost" :true];
     }
     if(self.mGraphId != nil) {
-        [outState setObject:self.mGraphId forKey:@"android-support-nav:fragment:graphId"];
+        [outState putString:@"android-support-nav:fragment:graphId" :self.mGraphId];
     }
 }
 

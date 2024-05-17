@@ -1,49 +1,59 @@
 import UIKit
 
-class SavedStateProviderI : SavedStateProvider {
+@objc
+public class SavedStateProviderI : NSObject, SavedStateProvider {
     
-    var saveStateO:() -> (Dictionary<String, Any>) = {
-        return Dictionary()
+    var saveStateO:() -> (LuaBundle) = {
+        return LuaBundle()
     }
     
-    init(overrides: (SavedStateProviderI) -> SavedStateProviderI) {
+    @objc
+    public init(overrides: (SavedStateProviderI) -> SavedStateProviderI) {
+        super.init()
         overrides(self)
     }
     
-    func saveState() -> Dictionary<String, Any> {
+    @objc
+    public func saveState() -> LuaBundle {
         return saveStateO()
     }
 }
 
-class SavingStateLiveData : LuaMutableLiveData {
+@objc
+public class SavingStateLiveData : LuaMutableLiveData {
     var mKey: String
     var mHandle: SavedStateHandle?
     
-    init(handle: SavedStateHandle, key: String, val: NSObject) {
+    @objc
+    public init(handle: SavedStateHandle, key: String, val: NSObject) {
         mKey = key
         mHandle = handle
         super.init(data: val)
     }
     
-    init(handle: SavedStateHandle, key: String) {
+    @objc
+    public init(handle: SavedStateHandle, key: String) {
         mKey = key
         mHandle = handle
         super.init()
     }
     
-    func setValue(value: NSObject) {
+    @objc
+    public func setValue(value: NSObject) {
         if(mHandle != nil) {
             mHandle!.mRegular[mKey] = value
         }
         super.setValue(value)
     }
     
-    func detach() {
+    @objc
+    public func detach() {
         mHandle = nil
     }
 }
 
-class SavedStateHandle {
+@objc
+public class SavedStateHandle : NSObject {
     var mRegular: Dictionary<String, NSObject>
     var mSavedStateProviders = Dictionary<String, SavedStateProvider>()
     var mLiveDatas = Dictionary<String, SavingStateLiveData>()
@@ -51,17 +61,19 @@ class SavedStateHandle {
     static let VALUES = "values"
     static let KEYS = "keys"
     
-    var mSavedStateProivder: SavedStateProvider? = nil
+    var mSavedStateProvider: SavedStateProvider? = nil
     
-    init() {
+    @objc
+    public override init() {
         mRegular = Dictionary()
-        mSavedStateProivder = SavedStateProviderI { ssp in
+        super.init()
+        mSavedStateProvider = SavedStateProviderI { ssp in
             ssp.saveStateO = {
                 let map: Dictionary<String, SavedStateProvider> = self.mSavedStateProviders
                 for key in map.keys {
                     let value = map[key]
                     let savedState = value!.saveState()
-                    self.set(key: key, value: savedState.objcDictionary)
+                    self.set(key: key, value: savedState)
                 }
                 let keys = self.mRegular.keys
                 var value = Array<NSObject>()
@@ -69,21 +81,22 @@ class SavedStateHandle {
                     value.append(self.mRegular[key] ?? NSObject())
                 }
                 
-                var res = Dictionary<String, Any>()
-                res["keys"] = keys
-                res["values"] = value
-                
+                var res = LuaBundle()
+                res.putObject("keys", keys)
+                res.putObject("values", value)
                 return res
             }
             return ssp
         }
     }
     
-    init(initialState: Dictionary<String, NSObject>) {
+    @objc
+    public init(initialState: Dictionary<String, NSObject>) {
         mRegular = initialState
     }
     
-    static func createHandle(restoredState: Dictionary<String, NSObject>?, defaultState: Dictionary<String, NSObject>?) -> SavedStateHandle {
+    @objc
+    public static func createHandle(restoredState: LuaBundle?, defaultState: Dictionary<String, NSObject>?) -> SavedStateHandle {
         if(restoredState == nil && defaultState == nil) {
             return SavedStateHandle()
         }
@@ -99,8 +112,8 @@ class SavedStateHandle {
             return SavedStateHandle(initialState: state)
         }
         
-        let keys = restoredState![SavedStateHandle.KEYS] as! Array<String>?
-        let values = restoredState![SavedStateHandle.VALUES] as! Array<NSObject>?
+        let keys = restoredState!.getObject(SavedStateHandle.KEYS) as! Array<String>?
+        let values = restoredState!.getObject(SavedStateHandle.VALUES) as! Array<NSObject>?
         if(keys == nil || values == nil || keys!.count != values!.count) {
             return SavedStateHandle()
         }
@@ -110,23 +123,28 @@ class SavedStateHandle {
         return SavedStateHandle(initialState: state)
     }
     
-    func savedStateProvider() -> SavedStateProvider? {
-        return mSavedStateProivder
+    @objc
+    public func savedStateProvider() -> SavedStateProvider? {
+        return mSavedStateProvider
     }
     
-    func contains(key: String) -> Bool {
+    @objc
+    public func contains(key: String) -> Bool {
         return mRegular[key] != nil
     }
     
-    func getLiveData(key: String) -> LuaMutableLiveData {
+    @objc
+    public func getLiveData(key: String) -> LuaMutableLiveData {
         return getLiveDataInternal(key: key, hasInitialValue: false, initialValue: nil)
     }
     
-    func getLiveData(key: String, initialValue: NSObject?) -> LuaMutableLiveData {
+    @objc
+    public func getLiveData(key: String, initialValue: NSObject?) -> LuaMutableLiveData {
         return getLiveDataInternal(key: key, hasInitialValue: true, initialValue: initialValue)
     }
     
-    func getLiveDataInternal(key: String, hasInitialValue: Bool, initialValue: NSObject?) -> LuaMutableLiveData {
+    @objc
+    public func getLiveDataInternal(key: String, hasInitialValue: Bool, initialValue: NSObject?) -> LuaMutableLiveData {
         let liveData = mLiveDatas[key]
         if(liveData != nil) {
             return liveData!
@@ -145,7 +163,8 @@ class SavedStateHandle {
         return mutableLd
     }
     
-    func keys() -> Set<String> {
+    @objc
+    public func keys() -> Set<String> {
         var allKeys = Set<String>(mRegular.keys)
         for key in mSavedStateProviders.keys {
             allKeys.insert(key)
@@ -156,11 +175,13 @@ class SavedStateHandle {
         return allKeys
     }
     
-    func get(key: String) -> NSObject? {
+    @objc
+    public func get(key: String) -> NSObject? {
         return mRegular[key]
     }
     
-    func set(key: String, value: NSObject?) {
+    @objc
+    public func set(key: String, value: NSObject?) {
         if(value == nil) {
             return
         }
@@ -172,18 +193,21 @@ class SavedStateHandle {
         }
     }
     
-    func remove(key: String) -> NSObject? {
+    @objc
+    public func remove(key: String) -> NSObject? {
         let latestValue = mRegular.removeValue(forKey: key)
         let liveData = mLiveDatas.removeValue(forKey: key)
         liveData?.detach()
         return latestValue
     }
     
-    func setSavedStateProvider(key: String, provider: SavedStateProvider) {
+    @objc
+    public func setSavedStateProvider(key: String, provider: SavedStateProvider) {
         mSavedStateProviders[key] = provider
     }
     
-    func clearSavedStateProvider(key: String) {
+    @objc
+    public func clearSavedStateProvider(key: String) {
         mSavedStateProviders.removeValue(forKey: key)
     }
 }
@@ -287,7 +311,7 @@ open class SavedStateHandleController : NSObject, LifecycleEventObserver {
 open class SavedStateViewModelFactory : ViewModelProviderKeyedFactory {
     var mContext: LuaContext?
     var mFactory: ViewModelProviderFactory
-    var mDefaultArgs: Dictionary<String, Any>?
+    var mDefaultArgs: LuaBundle?
     var mLifecycle: Lifecycle?
     var mSavedStateRegistry: SavedStateRegistry?
     
@@ -295,12 +319,12 @@ open class SavedStateViewModelFactory : ViewModelProviderKeyedFactory {
         self.init(context: context, owner: owner, defaultArgs: nil)
     }
     
-    @objc public init(context: LuaContext?, owner: SavedStateRegistryOwner, defaultArgs: NSMutableDictionary?) {
+    @objc public init(context: LuaContext?, owner: SavedStateRegistryOwner, defaultArgs: LuaBundle?) {
         mSavedStateRegistry = owner.getSavedStateRegistry()
         mLifecycle = owner.getLifecycle()
         mContext = context
         mFactory = ViewModelProviderAndroidViewModelFactory()
-        mDefaultArgs = defaultArgs?.swiftDictionary
+        mDefaultArgs = defaultArgs
         if(context != nil) {
             mFactory = ViewModelProviderAndroidViewModelFactory()
         }
@@ -340,7 +364,7 @@ open class Recreator : NSObject, LifecycleEventObserver {
         if(bundle == nil) {
             return
         }
-        let classes: Array<String>? = bundle?[Recreator.CLASSES_KEY] as! Array<String>?
+        let classes: Array<String>? = bundle?.getObject(Recreator.CLASSES_KEY) as! Array<String>?
         if(classes == nil) {
             return
         }
@@ -367,9 +391,9 @@ class RecreatorSavedStateProvider : SavedStateProvider {
         registry.registerSavedStateProvider(key: Recreator.COMPONENT_KEY, provider: self)
     }
     
-    func saveState() -> Dictionary<String, Any> {
-        var bundle = Dictionary<String, Any>()
-        bundle[Recreator.CLASSES_KEY] = Array(mClasses)
+    func saveState() -> LuaBundle {
+        let bundle = LuaBundle()
+        bundle.putObject(Recreator.CLASSES_KEY, mClasses)
         return bundle
     }
     
@@ -387,20 +411,20 @@ protocol AutoCreated {
 open class SavedStateRegistry : NSObject {
     private static let SAVED_COMPONENTS_KEY = "androidx.lifecycle.BundlableSavedStateRegistry.key"
     private var mComponents = MutableOrderedDictionary()
-    private var mRestoredState: Dictionary<String, Any>?
+    private var mRestoredState: LuaBundle?
     private var mRestored = false
     private var mRecreatorProvider: RecreatorSavedStateProvider?
     private var mAllowingSavingState = false
     
     @objc
-    public func consumeRestoredStateForKey(key: String) -> Dictionary<String, NSObject>? {
+    public func consumeRestoredStateForKey(key: String) -> LuaBundle? {
         if(!mRestored) {
             return nil
         }
         if(mRestoredState != nil) {
-            let result: Dictionary<String, NSObject>? = mRestoredState?[key] as! Dictionary<String, NSObject>?
-            mRestoredState?.removeValue(forKey: key)
-            if((mRestoredState?.isEmpty) != nil) {
+            let result: LuaBundle? = mRestoredState?.getBundle(key)
+            mRestoredState?.bundle.removeObject(forKey: key)
+            if(mRestoredState?.bundle.count == 0) {
                 mRestoredState = nil;
             }
             return result
@@ -436,12 +460,12 @@ open class SavedStateRegistry : NSObject {
         mRecreatorProvider?.add(className: NSStringFromClass(clazz as! AnyClass))
     }
     
-    func performRestore(lifecycle: Lifecycle, savedState: Dictionary<String, Any>?) {
+    func performRestore(lifecycle: Lifecycle, savedState: LuaBundle?) {
         if(mRestored) {
             return
         }
         if(savedState != nil) {
-            mRestoredState = savedState?[SavedStateRegistry.SAVED_COMPONENTS_KEY] as! Dictionary<String, Any>?
+            mRestoredState = savedState?.getBundle(SavedStateRegistry.SAVED_COMPONENTS_KEY)
         }
         
         let observer = LifecycleEventObserverI { leo in
@@ -460,22 +484,22 @@ open class SavedStateRegistry : NSObject {
         mRestored = true
     }
     
-    func performSave(outBundle: inout Dictionary<String, Any>) {
-        var components = Dictionary<String, Any>()
+    func performSave(outBundle: inout LuaBundle) {
+        let components = LuaBundle()
         if(mRestoredState != nil) {
-            components["bundle"] = mRestoredState
+            components.putBundle("bundle", mRestoredState)
         }
         for key in mComponents.keyEnumerator() {
             let val = mComponents.object(forKey: key) as! SavedStateProvider
-            components[key as! String] = val.saveState()
+            components.putBundle(key as? String, val.saveState())
         }
-        outBundle[SavedStateRegistry.SAVED_COMPONENTS_KEY] = components
+        outBundle.putBundle(SavedStateRegistry.SAVED_COMPONENTS_KEY, components)
     }
 }
 
 @objc(SavedStateProvider)
 public protocol SavedStateProvider {
-    func saveState() -> Dictionary<String, Any>
+    func saveState() -> LuaBundle
 }
 
 @objc(SavedStateRegistryOwner)
@@ -500,7 +524,7 @@ open class SavedStateRegistryController: NSObject {
     }
     
     @objc
-    public func performRestore(savedStrate: Dictionary<String, Any>?) {
+    public func performRestore(savedStrate: LuaBundle?) {
         let lifecycle = mOwner.getLifecycle()
         if(lifecycle?.getCurrentState() != LifecycleState.LIFECYCLESTATE_INITIALIZED) {
             return
@@ -510,7 +534,7 @@ open class SavedStateRegistryController: NSObject {
     }
     
     @objc
-    public func performSave(outBundle: Dictionary<String, Any>) -> Dictionary<String, Any> {
+    public func performSave(outBundle: LuaBundle) -> LuaBundle {
         var outBundleC = outBundle
         mRegistry.performSave(outBundle: &outBundleC)
         return outBundleC

@@ -1,17 +1,18 @@
-typealias Bundle = Dictionary<String, NSObject>
-
 import UIKit
 
-protocol Keyable {
+@objc
+public protocol Keyable {
     var key:String { get }
 }
 
-protocol Runnable : Keyable {
-    func run()
+@objc
+public protocol Runnable : Keyable {
+    @objc func run()
 }
 
-protocol Cancellable : Keyable {
-    func cancel()
+@objc
+public protocol Cancellable : Keyable {
+    @objc func cancel()
 }
 
 func synced(_ lock: Any, closure: () -> ()) {

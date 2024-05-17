@@ -1,17 +1,26 @@
 import Foundation
+
+@objc
+public protocol NavViewModelStoreProvider {
+    func getViewModelStore(backStackEntryId: String) -> ViewModelStore
+}
+
+@objc
 open class AbstractSavedStateViewModelFactory: ViewModelProviderKeyedFactory {
     let TAG_SAVED_STATE_HANDLE_COTNROLLER = "androidx.lifecycle.savedstate.vm.tag"
     
     let mSavedStateRegistry: SavedStateRegistry
     let mLifecycle: Lifecycle
-    let mDefaultArgs: Bundle?
+    let mDefaultArgs: Dictionary<String, NSObject>?
     
-    init(owner: SavedStateRegistryOwner, defaultArgs: Bundle?) {
+    @objc
+    public init(owner: SavedStateRegistryOwner, defaultArgs: Dictionary<String, NSObject>?) {
         mSavedStateRegistry = owner.getSavedStateRegistry()
         mLifecycle = owner.getLifecycle()
         mDefaultArgs = defaultArgs
     }
     
+    @objc
     public override func create(key: String) -> LuaViewModel {
         let controller = SavedStateHandleController.create(registry: mSavedStateRegistry, lifecycle: mLifecycle, key: key, defaultArgs: mDefaultArgs)
         let viewModel: LuaViewModel = create(key: key, handle: controller.getHandle())
@@ -19,15 +28,18 @@ open class AbstractSavedStateViewModelFactory: ViewModelProviderKeyedFactory {
         return viewModel
     }
     
+    @objc
     public override func create() -> LuaViewModel {
         return create(key: "LuaViewModel")
     }
     
-    func create(key: String, handle: SavedStateHandle) -> LuaViewModel {
+    @objc
+    public func create(key: String, handle: SavedStateHandle) -> LuaViewModel {
         return LuaViewModel()
     }
     
-    override func onRequery(viewModel: LuaViewModel) {
+    @objc
+    public override func onRequery(viewModel: LuaViewModel) {
         SavedStateHandleController.attachHandleIfNeeded(viewModel: viewModel, registry: mSavedStateRegistry, lifecycle: mLifecycle)
     }
 }
@@ -73,41 +85,50 @@ open class Navigation: NSObject {
     }
 }
 
-class NavControllerViewModel : LuaViewModel {
-    class NavControllerViewModelProviderFactory : NSObject, ViewModelProviderFactory {
-        func create() -> LuaViewModel {
+@objc
+public class NavControllerViewModel : LuaViewModel {
+    @objc
+    public class NavControllerViewModelProviderFactory : NSObject, ViewModelProviderFactory {
+        @objc
+        public func create() -> LuaViewModel {
             return NavControllerViewModel()
         }
         
-        func create(cls: NSObject.Type) -> NSObject {
+        @objc
+        public func create(cls: NSObject.Type) -> NSObject {
             return NavControllerViewModel()
         }
         
-        func create(ptr: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
+        @objc
+        public func create(ptr: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer {
             return UnsafeMutableRawPointer.allocate(byteCount: 0, alignment: 0)
         }
     }
     
-    static func getInstance(viewModelStore: ViewModelStore) -> NavControllerViewModel {
+    @objc
+    public static func getInstance(viewModelStore: ViewModelStore) -> NavControllerViewModel {
         let vmp = ViewModelProvider(store: viewModelStore, factory: NavControllerViewModelProviderFactory())
         return vmp.get() as! NavControllerViewModel
     }
     
     var mViewModelStores = Dictionary<UUID, ViewModelStore>()
     
-    func clear(backStackEntryUUID: UUID) {
+    @objc
+    public func clear(backStackEntryUUID: UUID) {
         let viewModelStore = mViewModelStores.removeValue(forKey: backStackEntryUUID)
         viewModelStore?.clear()
     }
     
-    override func onCleared() {
+    @objc
+    public override func onCleared() {
         for store in mViewModelStores.values {
             store.clear()
         }
         mViewModelStores.removeAll()
     }
     
-    func getViewModelStore(backStackEntryUUID: UUID) -> ViewModelStore {
+    @objc
+    public func getViewModelStore(backStackEntryUUID: UUID) -> ViewModelStore {
         var viewModelStore = mViewModelStores[backStackEntryUUID]
         if(viewModelStore == nil) {
             viewModelStore = ViewModelStore()
@@ -132,29 +153,47 @@ open class NavBackStackEntry : NSObject, LifecycleOwner, ViewModelStoreOwner, Ha
         }
     }
     
-    class NavResultSavedStateFactory : AbstractSavedStateViewModelFactory {
-        override func create(key: String, handle: SavedStateHandle) -> LuaViewModel {
+    @objc
+    public class NavResultSavedStateFactory : AbstractSavedStateViewModelFactory {
+        @objc
+        public override func create(key: String, handle: SavedStateHandle) -> LuaViewModel {
             let savedStateViewModel = SavedStateViewModel(handle: handle)
             return savedStateViewModel
         }
     }
     
-    var mContext: LuaContext
-    var mDestination: NavDestination
-    var mArgs: Bundle?
-    var mLifecycle: LifecycleRegistry
-    var mSavedStateRegistryController: SavedStateRegistryController?
-    var mId: UUID
-    var mHostLifecycle = LifecycleState.LIFECYCLESTATE_CREATED
-    var mMaxLifecycle = LifecycleState.LIFECYCLESTATE_RESUMED
-    var mNavControllerViewModel: NavControllerViewModel?
-    var mDefaultFactory: ViewModelProviderFactory?
-    var mSavedStateHandle: SavedStateHandle?
+    @objc
+    public var mContext: LuaContext
+    @objc
+    public var mDestination: NavDestination
+    @objc
+    public var mArgs: LuaBundle?
+    @objc
+    public var mLifecycle: LifecycleRegistry
+    @objc
+    public var mSavedStateRegistryController: SavedStateRegistryController?
+    @objc
+    public var mId: UUID
+    @objc
+    public var mHostLifecycle = LifecycleState.LIFECYCLESTATE_CREATED
+    @objc
+    public var mMaxLifecycle = LifecycleState.LIFECYCLESTATE_RESUMED
+    @objc
+    public var mNavControllerViewModel: NavControllerViewModel?
+    @objc
+    public var mDefaultFactory: ViewModelProviderFactory?
+    @objc
+    public var mSavedStateHandle: SavedStateHandle?
+    @objc
+    public var viewModelStoreProvider: Any? = nil
+    @objc
+    public var savedState: LuaBundle? = nil
     
-    init(context: LuaContext,
-         destination: NavDestination, args: Bundle?,
+    @objc
+    public init(context: LuaContext,
+         destination: NavDestination, args: LuaBundle?,
          navControllerLifecycleOwner: LifecycleOwner?, navControllerViewModel: NavControllerViewModel?,
-         uuid: UUID, savedState: Bundle?) {
+         uuid: UUID, savedState: LuaBundle?) {
         mContext = context
         mId = uuid
         mDestination = destination
@@ -170,43 +209,57 @@ open class NavBackStackEntry : NSObject, LifecycleOwner, ViewModelStoreOwner, Ha
         mLifecycle = LifecycleRegistry(owner: self)
     }
     
-    convenience init(context: LuaContext,
-                     destination: NavDestination, args: Bundle?,
+    @objc
+    public convenience init(context: LuaContext,
+                     destination: NavDestination, args: LuaBundle?,
                      navControllerLifecycleOwner: LifecycleOwner?, navControllerViewModel: NavControllerViewModel?) {
         self.init(context: context, destination: destination, args: args, navControllerLifecycleOwner: navControllerLifecycleOwner, navControllerViewModel: navControllerViewModel, uuid: UUID.init(), savedState: nil)
     }
     
-    func getDestination() -> NavDestination {
+    @objc
+    public func getId() -> NSString {
+        return mId.uuidString as NSString
+    }
+    
+    @objc
+    public func getDestination() -> NavDestination {
         return mDestination
     }
     
-    func getArguments() -> Bundle? {
+    @objc
+    public func getArguments() -> LuaBundle? {
         return mArgs
     }
     
-    func replaceArguments(newArgs: Bundle?) {
+    @objc
+    public func replaceArguments(newArgs: LuaBundle?) {
         mArgs = newArgs
     }
     
+    @objc
     public func getLifecycle() -> Lifecycle! {
         return mLifecycle
     }
     
-    func setMaxLifecycle(maxState: LifecycleState) {
+    @objc
+    public func setMaxLifecycle(maxState: LifecycleState) {
         mMaxLifecycle = maxState
         updateState()
     }
     
-    func getMaxLifecycle() -> LifecycleState {
+    @objc
+    public func getMaxLifecycle() -> LifecycleState {
         return mMaxLifecycle
     }
     
-    func handleLifecycleEvent(event: LifecycleEvent) {
+    @objc
+    public func handleLifecycleEvent(event: LifecycleEvent) {
         mHostLifecycle = NavBackStackEntry.getStateAfter(event: event)
         updateState()
     }
     
-    func updateState() {
+    @objc
+    public func updateState() {
         if(mHostLifecycle.rawValue < mMaxLifecycle.rawValue) {
             mLifecycle.setCurrentState(mHostLifecycle)
         } else {
@@ -214,33 +267,39 @@ open class NavBackStackEntry : NSObject, LifecycleOwner, ViewModelStoreOwner, Ha
         }
     }
     
+    @objc
     public func getViewModelStore() -> ViewModelStore! {
         return mNavControllerViewModel!.getViewModelStore(backStackEntryUUID: mId)
     }
     
-    func getDefaultViewModelProviderFactory() -> ViewModelProviderFactory {
+    @objc
+    public func getDefaultViewModelProviderFactory() -> ViewModelProviderFactory {
         if(mDefaultFactory == nil) {
-            mDefaultFactory = SavedStateViewModelFactory(context: mContext, owner: self, defaultArgs: mArgs?.objcDictionary)
+            mDefaultFactory = SavedStateViewModelFactory(context: mContext, owner: self, defaultArgs: mArgs)
         }
         return mDefaultFactory!
     }
     
+    @objc
     public func getSavedStateRegistry() -> SavedStateRegistry {
         return mSavedStateRegistryController!.getSavedStateRegistry()
     }
     
-    func saveState(outBundle: Bundle)  {
+    @objc
+    public func saveState(outBundle: LuaBundle)  {
         mSavedStateRegistryController!.performSave(outBundle: outBundle)
     }
     
-    func getSavedStateHandle() -> SavedStateHandle {
+    @objc
+    public func getSavedStateHandle() -> SavedStateHandle {
         if(mSavedStateHandle == nil) {
             mSavedStateHandle = (ViewModelProvider(owner: self, factory: NavResultSavedStateFactory(owner: self, defaultArgs: nil)).get() as! SavedStateViewModel).getHandle()
         }
         return mSavedStateHandle!
     }
     
-    static func getStateAfter(event: LifecycleEvent) -> LifecycleState {
+    @objc
+    public static func getStateAfter(event: LifecycleEvent) -> LifecycleState {
         switch(event) {
         case .LIFECYCLEEVENT_ON_CREATE:
             return LifecycleState.LIFECYCLESTATE_CREATED
@@ -267,8 +326,42 @@ public protocol NavigatorExtras {
     
 }
 
+@objc(TNavigatorState)
+public protocol TNavigatorState : NSObjectProtocol {
+    func getBackStack() -> Any
+    func push(backStackEntry: NavBackStackEntry)
+    func pushWithTransition(backStackEntry: NavBackStackEntry)
+    func createBackStackEntry(destination: NavDestination, arguments: LuaBundle?) -> NavBackStackEntry
+    func pop(popUpTo: NavBackStackEntry, saveState: Bool)
+    func popWithTransition(popUpTo: NavBackStackEntry, saveState: Bool)
+    func onLaunchSingleTop(backStackEntry: NavBackStackEntry)
+    func onLaunchSingleTopWithTransition(backStackEntry: NavBackStackEntry)
+    func markTransitionComplete(entry: NavBackStackEntry)
+    func prepareForTransition(entry: NavBackStackEntry)
+}
+
 @objc(Navigator)
 open class Navigator : NSObject {
+    private var _state: TNavigatorState? = nil
+    private var _isAttached = false
+    
+    @objc public func setState(state: TNavigatorState) {
+        _state = state
+    }
+    
+    @objc public func getState() -> TNavigatorState? {
+        return _state
+    }
+    
+    @objc public func onAttach(state: TNavigatorState) {
+        _state = state
+        _isAttached = true
+    }
+    
+    @objc public func isAttached() -> Bool {
+        return _isAttached
+    }
+    
     @objc public func getName() -> String {
         return ""
     }
@@ -277,25 +370,75 @@ open class Navigator : NSObject {
         return NavDestination()
     }
     
-    func navigate(destination: NavDestination, args: Bundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
-        return nil;
+    @objc
+    public func navigate(destination: NavDestination, args: LuaBundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
+        return destination;
     }
     
-    func popBackStack() -> Bool {
+    @objc
+    public func navigate(
+        entries: Array<NavBackStackEntry>,
+        navOptions: NavOptions?,
+        navigatorExtras: NavigatorExtras?
+    ) {
+        var arr = Array<NavBackStackEntry>();
+        entries.forEach { backStackEntry in
+            let destination = backStackEntry.getDestination()
+            let navigatedToDestination = navigate(destination: destination, args: backStackEntry.getArguments(), navOptions: navOptions, navigatorExtras: navigatorExtras)
+            if(navigatedToDestination == nil) {
+                
+            }
+            else if(navigatedToDestination == destination) {
+                arr.append(backStackEntry)
+            }
+            else {
+                let entry = _state?.createBackStackEntry(destination: navigatedToDestination!, arguments: navigatedToDestination!.add(inDefaultArgs: backStackEntry.getArguments()))
+                if(entry != nil) {
+                    arr.append(entry!)
+                }
+            }
+        }
+        arr.forEach { entry in
+            _state?.push(backStackEntry: entry)
+        }
+    }
+    
+    @objc
+    public func onLaunchSingleTop(backStackEntry: NavBackStackEntry) {
+        let destination = backStackEntry.getDestination()
+        let navOptions = NavOptions()
+        navOptions.mSingleTop = true
+        navigate(destination: destination, args: nil, navOptions: navOptions, navigatorExtras: nil)
+        _state?.onLaunchSingleTop(backStackEntry: backStackEntry)
+    }
+    
+    @objc
+    public func popBackStack(popUpTo: NavBackStackEntry, savedState: Bool) {
+    }
+    
+    @objc
+    public func popBackStack() -> Bool {
         return false
     }
     
-    func onSaveState() -> Bundle? {
+    @objc
+    public func onSaveState() -> LuaBundle? {
         return nil
     }
     
-    func onRestoreState(savedState: Bundle?) {
+    @objc
+    public func onRestoreState(savedState: LuaBundle?) {
         
     }
 }
 
+@objc
+public protocol TNavigatorProvider {
+    func getNavigator(name: String) -> Navigator
+}
+
 @objc(NavigationProvider)
-open class NavigatorProvider: NSObject {
+open class NavigatorProvider: NSObject, TNavigatorProvider {
     var mNavigators = Dictionary<String, Navigator>()
     
     @objc
@@ -332,55 +475,71 @@ public protocol OnDestinationChangedListener: NSObjectProtocol {
     func onDestinationChanged(controller: NavController, destination: NavDestination, arguments: NSMutableDictionary?)
 }
 
-class OnBackPressedCallbackN: OnBackPressedCallback {
+@objc
+public class OnBackPressedCallbackN: OnBackPressedCallback {
     var handleOnBackPressedO:() -> () = { }
     
-    init(enabled: Bool, overrides: (OnBackPressedCallbackN) -> OnBackPressedCallbackN) {
+    @objc
+    public init(enabled: Bool, overrides: (OnBackPressedCallbackN) -> OnBackPressedCallbackN) {
         super.init(enabled: enabled)
         overrides(self)
     }
     
-    override func handleOnBackPressed() {
+    @objc
+    public override func handleOnBackPressed() {
         self.handleOnBackPressedO()
     }
 }
 
-class NavGraphNavigator : Navigator
+@objc
+public class NavGraphNavigator : Navigator
 {
     let mNavigationProvider: NavigatorProvider
     
-    init(navigationProvider: NavigatorProvider) {
+    @objc
+    public init(navigationProvider: NavigatorProvider) {
         mNavigationProvider = navigationProvider
     }
     
-    override func getName() -> String {
+    @objc
+    public override func getName() -> String {
         return "navigation"
     }
     
-    override func createDestination() -> NavDestination {
+    @objc
+    public override func createDestination() -> NavDestination {
         return NavGraph(navigator: self)
     }
     
-    override func navigate(destination: NavDestination, args: Bundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
+    @objc
+    public override func navigate(destination: NavDestination, args: LuaBundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
         if(destination is NavGraph) {
             let startId = (destination as! NavGraph).mStartDestinationId
-            if(startId == nil || startId == "") {
+            let startRoute = (destination as! NavGraph).mStartDestinationRoute
+            if((startId == nil || startId == "" || startId == "0") && startRoute == nil) {
                 return nil
             }
-            let startDestination = (destination as! NavGraph).findNode(startId, false)
+            var startDestination: NavDestination?
+            if(startRoute != nil) {
+                startDestination = (destination as! NavGraph).findNodeRoute(startRoute, false)
+            }
+            else {
+                startDestination = (destination as! NavGraph).findNode(startId, false)
+            }
             if(startDestination == nil) {
                 return nil
             }
             let navigator: Navigator = mNavigationProvider.getNavigator(name: startDestination!.mNavigatorName)
             return navigator.navigate(destination: startDestination!,
-                                      args: startDestination!.add(inDefaultArgs: args?.objcDictionary)?.swiftDictionaryObj,
+                                      args: startDestination!.add(inDefaultArgs: args),
                                       navOptions: navOptions,
                                       navigatorExtras: navigatorExtras)
         }
         return nil
     }
     
-    override func popBackStack() -> Bool {
+    @objc
+    public override func popBackStack() -> Bool {
         return true
     }
 }
@@ -399,18 +558,42 @@ class NavGraphNavigator : Navigator
     }
 }*/
 
-class NavBackStackEntryState : NSObject {
+@objc
+public class NavBackStackEntryState : NSObject {
     let mUUID: UUID
     let mDestinationId: String
-    let mArgs: Bundle?
-    let mSavedState: Bundle
+    var mArgs: LuaBundle?
+    let mSavedState: LuaBundle
     
-    init(entry: NavBackStackEntry) {
+    @objc
+    public init(entry: NavBackStackEntry) {
         mUUID = entry.mId
         mDestinationId = entry.getDestination().idVal
         mArgs = entry.getArguments()
-        mSavedState = Bundle()
+        mSavedState =  LuaBundle()
         entry.saveState(outBundle: mSavedState)
+    }
+    
+    @objc
+    public func getId() -> String {
+        return mUUID.uuidString
+    }
+    
+    @objc
+    public func getDestinationId() -> String {
+        return mDestinationId
+    }
+    
+    @objc
+    public func getArguments() -> LuaBundle?
+    {
+        return mArgs
+    }
+    
+    @objc
+    public func getSavedState() -> LuaBundle
+    {
+        return mSavedState
     }
 }
 
@@ -458,11 +641,13 @@ open class FragmentNavigator: Navigator {
         mContainerId = containerId
     }
     
+    @objc
     public override func getName() -> String {
         return "fragment"
     }
     
-    override func popBackStack() -> Bool {
+    @objc
+    public override func popBackStack() -> Bool {
         if(mBackStack.isEmpty) {
             return false
         }
@@ -474,15 +659,18 @@ open class FragmentNavigator: Navigator {
         return true
     }
     
+    @objc
     public override func createDestination() -> NavDestination {
         return FragmentDestination(navigator: self)
     }
     
-    func instantiateFragment(context: LuaContext, fragmentManager: FragmentManager, className: String, args: NSMutableDictionary?) -> LuaFragment {
+    @objc
+    public func instantiateFragment(context: LuaContext, fragmentManager: FragmentManager, className: String, args: NSMutableDictionary?) -> LuaFragment {
         return (fragmentManager.getFragmentFactory()?.instantiate(className: className)!)!
     }
     
-    override func navigate(destination: NavDestination, args: Bundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
+    @objc
+    public override func navigate(destination: NavDestination, args: LuaBundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
         if(mFragmentManager.isStateSaved()) {
             return nil
         }
@@ -494,9 +682,9 @@ open class FragmentNavigator: Navigator {
         if(className[0] == ".") {
             className = mContext.packageName + className
         }
-        let frag = instantiateFragment(context: mContext, fragmentManager: mFragmentManager, className: className, args: args?.objcDictionary)
+        let frag = instantiateFragment(context: mContext, fragmentManager: mFragmentManager, className: className, args: args?.bundle)
         frag.luaId = fDestination.idVal
-        frag.mArguments = args?.objcDictionary
+        frag.mArguments = args
         let ft = mFragmentManager.beginTransaction()
         
         var enterAnim = navOptions != nil ? navOptions?.mEnterAnim : ""
@@ -547,22 +735,31 @@ open class FragmentNavigator: Navigator {
         }
     }
     
-    override func onSaveState() -> Bundle? {
-        var b = Bundle()
+    @objc
+    public override func onSaveState() -> LuaBundle? {
+        var b = LuaBundle()
         var backStack = Array<String>()
         for id in mBackStack {
             backStack.append(id)
         }
-        b[FragmentNavigator.BACK_STACK_STACK_IDS] = backStack.objcArray
+        let arr = KotlinArray<NSString>(size: Int32(backStack.count)) { index in
+            backStack[index.intValue] as NSString
+        }
+        b.putStringArray(FragmentNavigator.BACK_STACK_STACK_IDS, arr)
         return b
     }
     
-    override func onRestoreState(savedState: Bundle?) {
+    @objc
+    public override func onRestoreState(savedState: LuaBundle?) {
         if(savedState != nil) {
-            var backStack = savedState![FragmentNavigator.BACK_STACK_STACK_IDS] as? NSArray
-            if(backStack != nil) {
+            let arr = savedState!.getStringArray(FragmentNavigator.BACK_STACK_STACK_IDS)
+            var backStack = Array<String>()
+            for i in 0...(arr!.size - 1) {
+                backStack[Int(i)] = arr!.get(index: i) as! String
+            }
+            if(backStack.count > 0) {
                 mBackStack.removeAll()
-                var sArr = backStack!.swiftArrayObj
+                let sArr = backStack
                 for destId in sArr {
                     mBackStack.append((destId as? NSString)! as String)
                 }
@@ -574,7 +771,8 @@ open class FragmentNavigator: Navigator {
         return String(backStackIndex) + "-" + destId
     }
     
-    class FragmentNavigatorExtras : NavigatorExtras {
+    @objc
+    public class FragmentNavigatorExtras : NSObject, NavigatorExtras {
         let mSharedElements: Dictionary<LGView, String> = Dictionary()
     }
 }
@@ -608,11 +806,13 @@ open class DialogFragmentNavigator: Navigator {
         }
     }
     
+    @objc
     public override func getName() -> String {
         return "dialog"
     }
     
-    override func popBackStack() -> Bool {
+    @objc
+    public override func popBackStack() -> Bool {
         if(mDialogCount == 0) {
             return false
         }
@@ -629,39 +829,38 @@ open class DialogFragmentNavigator: Navigator {
         return true
     }
     
+    @objc
     public override func createDestination() -> NavDestination {
         return DialogDestination(navigator: self)
     }
     
-    override func navigate(destination: NavDestination, args: Bundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
+    @objc
+    public override func navigate(destination: NavDestination, args: LuaBundle?, navOptions: NavOptions?, navigatorExtras: NavigatorExtras?) -> NavDestination? {
         if(mFragmentManager.isStateSaved()) {
             return nil
         }
         let frag = mFragmentManager.getFragmentFactory()?.instantiate()
-        frag?.mArguments = args?.objcDictionary
+        frag?.mArguments = args
         frag?.getLifecycle().add(mObserver)
         
         //TODO:Show
         return destination
     }
     
-    override func onSaveState() -> Bundle? {
+    @objc
+    public override func onSaveState() -> LuaBundle? {
         if(mDialogCount == 0) {
             return nil
         }
-        var b = Bundle()
-        b[DialogFragmentNavigator.KEY_DIALOG_COUNT] = NSNumber(value: mDialogCount)
+        let b = LuaBundle()
+        b.putInt(DialogFragmentNavigator.KEY_DIALOG_COUNT, Int32(mDialogCount))
         return b
     }
     
-    override func onRestoreState(savedState: Bundle?) {
+    @objc
+    public override func onRestoreState(savedState: LuaBundle?) {
         if(savedState != nil) {
-            let mDialogCountN = savedState![DialogFragmentNavigator.KEY_DIALOG_COUNT] as? NSNumber
-            if(mDialogCountN != nil) {
-                mDialogCount = mDialogCountN!.intValue
-            } else {
-                mDialogCount = 0
-            }
+            mDialogCount = Int(savedState!.getInt(DialogFragmentNavigator.KEY_DIALOG_COUNT))
             for index in 0..<mDialogCount {
                 let fragment = mFragmentManager.findFragmentByTag(tag: DialogFragmentNavigator.DIALOG_TAG + String(index))
                 if(fragment != nil) {
@@ -673,7 +872,8 @@ open class DialogFragmentNavigator: Navigator {
         }
     }
     
-    func onAttachFragment(childFragment: LuaFragment) {
+    @objc
+    public func onAttachFragment(childFragment: LuaFragment) {
         let needToAddObserver = mRestoredTagsAwaitingAttach.remove(childFragment.mTag)
         if(needToAddObserver != nil) {
             childFragment.getLifecycle().add(mObserver)

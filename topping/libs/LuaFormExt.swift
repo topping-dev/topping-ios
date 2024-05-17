@@ -20,13 +20,13 @@ open class LuaFormSavedStateProvider: NSObject, SavedStateProvider {
         self.form = form
     }
     
-    public func saveState() -> Dictionary<String, Any> {
-        var outState = Dictionary<String, Any>()
+    public func saveState() -> LuaBundle {
+        var outState = LuaBundle()
         form.markFragmentsCreated()
         form.lifecycleRegistry.handle(LifecycleEvent.LIFECYCLEEVENT_ON_STOP)
         var p = form.mFragments.saveAllState()
         if(p != nil) {
-            outState["android:support:fragments"] = p
+            outState.putObject("android:support:fragments", p)
         }
         return outState
     }

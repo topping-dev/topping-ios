@@ -2,6 +2,15 @@
 
 @implementation ViewModelStore
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.mMap = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
 -(void)put:(NSString*)key :(NSObject*)viewModel
 {
     [self.mMap setObject:viewModel forKey:key];

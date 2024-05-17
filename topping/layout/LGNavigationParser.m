@@ -17,7 +17,7 @@
 +(NavOptions*)create:(BOOL)singleTop :(LuaRef *)popUpTo :(BOOL)popUpToInclusive :(LuaRef *)enterAnim :(LuaRef *)exitAnim :(LuaRef *)popEnterAnim :(LuaRef *)popExitAnim {
     NavOptions *no = [NavOptions new];
     no.mSingleTop = singleTop;
-    no.mPopUpTo = popUpTo.idRef;
+    no.mPopUpToId = popUpTo.idRef;
     no.mPopUpToInclusive = popUpToInclusive;
     no.mEnterAnim = enterAnim.idRef;
     no.mExitAnim = exitAnim.idRef;
@@ -63,7 +63,7 @@
     return self;
 }
 
-- (instancetype)initWithDestination:(NSString*)destinationId NavOptions:(NavOptions*)navOptions DefaultArgs:(NSMutableDictionary*)defaultArgs
+- (instancetype)initWithDestination:(NSString*)destinationId NavOptions:(NavOptions*)navOptions DefaultArgs:(LuaBundle*)defaultArgs
 {
     self = [super init];
     if (self) {
@@ -76,13 +76,89 @@
 
 @end
 
+@implementation DeepLinkMatch
+
+- (instancetype)initWithDestination:(NavDestination*)destination
+                                    :(LuaBundle*)matchingArgs
+                                    :(BOOL)isExactDeepLink
+                                    :(int)matchingPathSegments
+                                    :(BOOL)hasMatchingAction
+                                    :(int)mimeTypeMatchLevel
+{
+    self = [super init];
+    if (self) {
+        self.destination = destination;
+        self.matchingArgs = matchingArgs;
+        self.isExactDeepLink = isExactDeepLink;
+        self.matchingPathSegments = matchingPathSegments;
+        self.hasMatchingAction = hasMatchingAction;
+        self.mimeTypeMatchLevel = mimeTypeMatchLevel;
+    }
+    return self;
+}
+
+-(NSComparisonResult)compare:(DeepLinkMatch*)other {
+    if (self.isExactDeepLink && !other.isExactDeepLink) {
+        return 1;
+    } else if (!self.isExactDeepLink && other.isExactDeepLink) {
+        return -1;
+    }
+    // Then prefer most exact match path segments
+    int pathSegmentDifference = self.matchingPathSegments - other.matchingPathSegments;
+    if (pathSegmentDifference > 0) {
+        return 1;
+    } else if (pathSegmentDifference < 0) {
+        return -1;
+    }
+    if (self.matchingArgs != nil && other.matchingArgs == nil) {
+        return 1;
+    } else if (self.matchingArgs == nil && other.matchingArgs != nil) {
+        return -1;
+    }
+    if (self.matchingArgs != nil) {
+        long sizeDifference = self.matchingArgs.bundle.count - other.matchingArgs.bundle.count;
+        if (sizeDifference > 0) {
+            return 1;
+        } else if (sizeDifference < 0) {
+            return -1;
+        }
+    }
+    if (self.hasMatchingAction && !other.hasMatchingAction) {
+        return 1;
+    } else if (!self.hasMatchingAction && other.hasMatchingAction) {
+        return -1;
+    }
+    return self.mimeTypeMatchLevel - other.mimeTypeMatchLevel;
+}
+
+-(BOOL)hasMatchingArgs:(LuaBundle*)arguments {
+    return false;
+    /*if (arguments == nil || self.matchingArgs == nil) return false;
+
+    for(NSString *key in self.matchingArgs.allKeys) {
+        // the arguments must at least contain every argument stored in this deep link
+        if ([arguments objectForKey:key] == nil) return false;
+
+        [self.destination.mArguments objectForKey:key];
+        val matchingArgValue = type?.get(matchingArgs, key)
+        val entryArgValue = type?.get(arguments, key)
+        // fine if both argValues are null, i.e. arguments/params with nullable values
+        if (matchingArgValue != entryArgValue) return false
+    }
+    return true;*/
+}
+
+@end
+
 @implementation NavDestination
 
 - (instancetype)initWithNavigator:(Navigator*) navigator
 {
     self = [super init];
     if (self) {
+        self.idVal = @"0";
         self.mNavigatorName = [navigator getName];
+        self.deepLinks = [NSMutableArray array];
     }
     return self;
 }
@@ -91,13 +167,24 @@
 {
     self = [super init];
     if (self) {
+        self.idVal = @"0";
         self.mNavigatorName = name;
+        self.deepLinks = [NSMutableArray array];
     }
     return self;
 }
 
--(NSMutableDictionary *)addInDefaultArgs:(NSMutableDictionary *)args {
-    //TODO check this
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.idVal = @"0";
+        self.deepLinks = [NSMutableArray array];
+    }
+    return self;
+}
+
+-(LuaBundle *)addInDefaultArgs:(LuaBundle *)args {
     /*if(args == nil && (self.mArguments == nil || self.mArguments.count == 0)) {
         return nil;
     }
@@ -116,9 +203,68 @@
     return destination != nil ? destination : (self.mParent != nil) ? [self.mParent getAction:idVal] : nil;
 }
 
+-(DeepLinkMatch*)matchDeepLink:(NSString*)route {
+    /*val request = NavDeepLinkRequest.Builder.fromUri(createRoute(route).toUri()).build()
+            val matchingDeepLink = if (this is NavGraph) {
+                matchDeepLinkExcludingChildren(request)
+            } else {
+                matchDeepLink(request)
+            }
+            return matchingDeepLink*/
+    return nil;
+}
+
+-(BOOL)hasRoute:(NSString *)route :(LuaBundle *)arguments {
+    if([self.route isEqualToString:route])
+        return true;
+    
+    DeepLinkMatch *matchingDeepLink = [self matchDeepLink:route];
+    if(matchingDeepLink == nil)
+        return false;
+    
+    if(matchingDeepLink.destination != self) return false;
+    
+    return [matchingDeepLink hasMatchingArgs:arguments];
+}
+
+-(NSString *)createRoute:(NSString *)route {
+    NSString *routeVal = @"";
+    if (route != nil)
+        routeVal = APPEND(@"android-app://androidx.navigation/", route);
+    return routeVal;
+}
+
+-(void)setRoute:(NSString *)route {
+    _route = route;
+}
+
 @end
 
 @implementation NavGraph
+
+-(instancetype)initWithNavigator:(Navigator *)navigator {
+    self = [super initWithNavigator:navigator];
+    self.idVal = @"0";
+    self.mNodes = [NSMutableDictionary dictionary];
+    return self;
+}
+
+-(instancetype)initWithName:(NSString *)name {
+    self = [super initWithName:name];
+    self.idVal = @"0";
+    self.mNodes = [NSMutableDictionary dictionary];
+    return self;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.idVal = @"0";
+        self.mNodes = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
 
 -(NavDestination*) findNode:(NSString*) resId {
     return [self findNode:resId :true];
@@ -127,6 +273,16 @@
 -(NavDestination*) findNode:(NSString*) resId :(BOOL)searchParents {
     NavDestination *destination = [self.mNodes objectForKey:resId];
     return destination != nil ? destination : (searchParents && self.mParent != nil) ? [self.mParent findNode:resId] : nil;
+}
+
+-(NavDestination*) findNodeRoute:(NSString*) route {
+    return [self findNodeRoute:route :true];
+}
+
+-(NavDestination*) findNodeRoute:(NSString*) route :(BOOL)searchParents {
+    NSString *internalRoute = [self createRoute:route];
+    NavDestination *destination = [self.mNodes objectForKey:internalRoute];
+    return destination != nil ? destination : (searchParents && self.mParent != nil) ? [self.mParent findNodeRoute:internalRoute] : nil;
 }
 
 @end
@@ -213,7 +369,7 @@
             NSString *name = [arr objectAtIndex:1];
             for(DynamicResource *dr in self.clearedDirectoryList)
             {
-                retVal = [self parseXML:controller :(NSString*)dr.data :APPEND(name, @".xml")];
+                retVal = [self parseXML:[controller getNavigationProvider] :(NSString*)dr.data :APPEND(name, @".xml")];
                 if(retVal != nil)
                 {
                     break;
@@ -225,7 +381,37 @@
     return retVal;
 }
 
--(NavGraph*)ParseNavigation:(NavController*)controller :(GDataXMLElement*)root
+-(NavGraph *)getNavigationProvider:(NSString *)key :(id<TNavigatorProvider>)provider {
+    if(key == nil)
+        return nil;
+    if(self.navigationCache == nil) {
+        self.navigationCache = [NSMutableDictionary dictionary];
+    }
+    
+    NSArray *arr = SPLIT(key, @"/");
+    NavGraph *retVal = [self.navigationCache objectForKey:key];
+    if(retVal != nil)
+        return retVal;
+    if(CONTAINS([arr objectAtIndex:0], @"navigation"))
+    {
+        if([arr count] > 1)
+        {
+            NSString *name = [arr objectAtIndex:1];
+            for(DynamicResource *dr in self.clearedDirectoryList)
+            {
+                retVal = [self parseXML:provider :(NSString*)dr.data :APPEND(name, @".xml")];
+                if(retVal != nil)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    [self.navigationCache setObject:retVal forKey:key];
+    return retVal;
+}
+
+-(NavGraph*)ParseNavigation:(id<TNavigatorProvider>)provider :(GDataXMLElement*)root
 {
     NSArray *children = [root children];
     
@@ -248,7 +434,7 @@
            || [[child name] isEqualToString:@"dialog"]))
             continue;
         
-        Navigator *navigator = [[controller getNavigationProvider] getNavigatorWithName:[child name]];
+        Navigator *navigator = [provider getNavigatorWithName:[child name]];
         NavDestination *lne = [navigator createDestination];
         lne.mActions = [NSMutableDictionary dictionary];
         lne.mArguments = [NSMutableDictionary dictionary];
@@ -308,7 +494,7 @@
                     }
                     else if(COMPARE([nodeChild name], @"app:popUpTo"))
                     {
-                        lna.mNavOptions.mPopUpTo = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
+                        lna.mNavOptions.mPopUpToId = [[LGIdParser getInstance] getId:[nodeChild stringValue]];
                     }
                     else if(COMPARE([nodeChild name], @"app:popUpInclusive"))
                     {
@@ -338,7 +524,7 @@
                     }
                 }
                 
-                [lne.mArguments setObject:lna forKey:lna.name];
+                [lne.mArguments.bundle setObject:lna forKey:lna.name];
             }
         }
         lne.mParent = lnr;

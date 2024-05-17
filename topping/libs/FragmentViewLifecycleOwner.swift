@@ -44,7 +44,8 @@ open class FragmentViewLifecycleOwner: NSObject, HasDefaultViewModelProviderFact
         mLifecycleRegistry?.handle(event)
     }
     
-    func getDefaultViewModelProviderFactory() -> ViewModelProviderFactory {
+    @objc
+    public func getDefaultViewModelProviderFactory() -> ViewModelProviderFactory {
         let currentFactory = mFragment.getDefaultViewModelProviderFactory()
         
         if(currentFactory != nil && !currentFactory!.isEqual(mFragment.mDefaultFactory)) {
@@ -59,16 +60,17 @@ open class FragmentViewLifecycleOwner: NSObject, HasDefaultViewModelProviderFact
         return mDefaultFactory!
     }
     
+    @objc
     public func getSavedStateRegistry() -> SavedStateRegistry {
         initialize()
         return (mSavedStateRegistryController?.getSavedStateRegistry())!
     }
     
-    @objc public func performRestore(savedState: Dictionary<String, NSObject>?) {
+    @objc public func performRestore(savedState: LuaBundle?) {
         mSavedStateRegistryController?.performRestore(savedStrate: savedState)
     }
     
-    @objc public func performSave(savedState: Dictionary<String, NSObject>) {
+    @objc public func performSave(savedState: LuaBundle) {
         mSavedStateRegistryController?.performSave(outBundle: savedState)
     }
 }

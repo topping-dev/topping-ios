@@ -4,7 +4,7 @@ import UIKit
 public protocol FragmentContainer {
     @objc func onFindViewById(idVal: String?) -> LGView?
     @objc func onHasView() -> Bool
-    @objc func instantiate(context: LuaContext, arguments: Dictionary<String, Any>?) -> LuaFragment
+    @objc func instantiate(context: LuaContext, arguments: LuaBundle?) -> LuaFragment
 }
 
 @objc(LuaFormHostCallback)
@@ -193,12 +193,12 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
     }
     
     @objc
-    public func instantiate(context: LuaContext, arguments: Dictionary<String, Any>?) -> LuaFragment {
-        return LuaFragment.create(context, LuaRef.withValue(""), arguments?.objcDictionary)
+    public func instantiate(context: LuaContext, arguments: LuaBundle?) -> LuaFragment {
+        return LuaFragment.create(context, LuaRef.withValue(""), arguments)
     }
     
     @objc
-    public func instantiate(context: LuaContext, className: String, arguments: Dictionary<String, Any>?) -> LuaFragment {
+    public func instantiate(context: LuaContext, className: String, arguments: LuaBundle?) -> LuaFragment {
         let cls: LuaFragment.Type? = Utils.getClassForClassName(className: className)
         if(cls == nil)
         {
@@ -206,7 +206,7 @@ open class FragmentHostCallback: NSObject, FragmentContainer {
             return LuaFragment.create(context, LuaRef.withValue(className))
         }
         let val = cls!.init()
-        val.setArguments(arguments?.objcDictionary)
+        val.setArguments(arguments)
         return val
     }
 }

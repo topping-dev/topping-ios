@@ -53,8 +53,8 @@ typedef NS_ENUM(NSInteger, FragmentState)
 }
 
 +(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId;
-+(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments;
-+(LuaFragment*)createWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui :(NSMutableDictionary*)arguments;
++(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(LuaBundle*)arguments;
++(LuaFragment*)createWithUI:(LuaContext*)context :(LuaRef*)luaId :(LuaRef *)ui :(LuaBundle*)arguments;
 -(LuaContext*)getContext;
 -(LuaForm*)getForm;
 -(FragmentManager*)getFragmentManager;
@@ -71,19 +71,18 @@ typedef NS_ENUM(NSInteger, FragmentState)
 -(BOOL)isInitialized;
 -(NSDictionary*)getBindings;
 
--(void)onCreate:(NSMutableDictionary*)savedInstanceState;
--(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup*)container :(NSMutableDictionary*)savedInstanceState;
--(void)onViewCreated:(LGView*)view :(NSMutableDictionary*)savedInstanceState;
--(void)onActivityCreated:(NSMutableDictionary*)savedInstanceState;
+-(void)onCreate:(LuaBundle*)savedInstanceState;
+-(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup*)container :(LuaBundle*)savedInstanceState;
+-(void)onViewCreated:(LGView*)view :(LuaBundle*)savedInstanceState;
+-(void)onActivityCreated:(LuaBundle*)savedInstanceState;
 
 -(void)initState;
 -(FragmentManager*)getParentFragmentManager;
 -(FragmentManager*)getChildFragmentManager;
 -(LuaFragment*)findFragmentByWho:(NSString*)who;
 -(BOOL)isInBackStack;
--(void)setArguments:(NSMutableDictionary*)args;
--(NSMutableDictionary*)getArguments;
--(LuaBundle*)getArgumentsBundle;
+-(void)setArguments:(LuaBundle*)args;
+-(LuaBundle*)getArguments;
 -(BOOL)isStateSaved;
 -(void)onHiddenChanged:(BOOL) hidden;
 -(BOOL)isHidden;
@@ -91,37 +90,37 @@ typedef NS_ENUM(NSInteger, FragmentState)
 -(void)setNextTransition:(NSInteger) transition;
 -(void)setAnimations:(NSString*)enter :(NSString*)exit :(NSString*)popEnter :(NSString*)popExit;
 -(LGLayoutParser*)getLayoutInflater;
--(LGLayoutParser*)getLayoutInflater:(NSMutableDictionary*) savedInstanceState;
--(LGLayoutParser*)performGetLayoutInflater:(NSMutableDictionary*) savedInstanceState;
--(LGLayoutParser*)onGetLayoutInflater:(NSMutableDictionary*) savedInstanceState;
+-(LGLayoutParser*)getLayoutInflater:(LuaBundle*) savedInstanceState;
+-(LGLayoutParser*)performGetLayoutInflater:(LuaBundle*) savedInstanceState;
+-(LGLayoutParser*)onGetLayoutInflater:(LuaBundle*) savedInstanceState;
 -(id<ViewModelProviderFactory>)getDefaultViewModelProviderFactory;
 
 -(id<FragmentContainer>)createFragmentContainer;
--(void)onInflate:(LuaContext*)context :(NSDictionary*)attrs :(NSMutableDictionary*)savedInstanceState;
--(void)onInflateForm:(LuaForm*)form :(NSDictionary*)attrs :(NSMutableDictionary*)savedInstanceState;
+-(void)onInflate:(LuaContext*)context :(NSDictionary*)attrs :(LuaBundle*)savedInstanceState;
+-(void)onInflateForm:(LuaForm*)form :(NSDictionary*)attrs :(LuaBundle*)savedInstanceState;
 -(void)onAttachFragment:(LuaFragment *)fragment;
 -(void)onPrimaryNavigationFragmentChanged:(BOOL)isPrimaryNavigationFragment;
 -(void)onAttach:(LuaContext *)context;
--(void)restoreChildFragmentState:(NSMutableDictionary*) savedInstanceState;
+-(void)restoreChildFragmentState:(LuaBundle*) savedInstanceState;
 -(void)onStart;
 -(void)onResume;
--(void)onSaveInstanceState:(NSMutableDictionary*) outState;
+-(void)onSaveInstanceState:(LuaBundle*) outState;
 -(void)onPause;
 -(void)onStop;
 -(void)onLowMemory;
 -(void)onDestroyView;
 -(void)onDestroy;
 -(void)performAttach;
--(void)performCreate:(NSMutableDictionary*) savedInstanceState;
--(void)performCreateView:(LGLayoutParser*) inflater :(LGViewGroup*) container :(NSMutableDictionary *)savedInstanceState;
+-(void)performCreate:(LuaBundle*) savedInstanceState;
+-(void)performCreateView:(LGLayoutParser*) inflater :(LGViewGroup*) container :(LuaBundle *)savedInstanceState;
 -(void)performViewCreated;
--(void)performActivityCreated:(NSMutableDictionary *)savedInstanceState;
+-(void)performActivityCreated:(LuaBundle *)savedInstanceState;
 -(void)restoreViewState;
 -(void)performStart;
 -(void)performResume;
 -(void)noteStateNotSaved;
 -(void)performPrimaryNavigationFragmentChanged;
--(void)performSaveInsanceState:(NSMutableDictionary*)outState;
+-(void)performSaveInsanceState:(LuaBundle*)outState;
 -(void)performPause;
 -(void)performStop;
 -(void)performDestroyView;
@@ -143,13 +142,13 @@ typedef NS_ENUM(NSInteger, FragmentState)
 @property (nonatomic, retain) id<ViewModelProviderFactory> mDefaultFactory;
 @property (nonatomic, retain) SavedStateRegistryController *mSavedStateRegistryController;
 @property (nonatomic, retain) NSMutableDictionary *mOnPreAttachedListeners;
-@property (nonatomic, retain) NSMutableDictionary *mSavedFragmentState;
-@property (nonatomic, retain) NSMutableDictionary *mSavedViewState;
+@property (nonatomic, retain) LuaBundle *mSavedFragmentState;
+@property (nonatomic, retain) LuaBundle *mSavedViewState;
 @property (nonatomic, retain) NSMutableDictionary *mSavedViewRegistryState;
 @property (nonatomic, retain) NSNumber *mSavedUserVisibleHint;
 @property LifecycleState mMaxState;
 @property (nonatomic, retain) LifecycleRegistry *mLifecycleRegistry;
-@property (nonatomic, retain) NSMutableDictionary *mArguments;
+@property (nonatomic, retain) LuaBundle *mArguments;
 @property (nonatomic, retain) LuaFragment *mTarget;
 @property NSInteger mTargetRequestCode;
 @property (nonatomic, retain) NSString *mTargetWho;
@@ -180,5 +179,6 @@ typedef NS_ENUM(NSInteger, FragmentState)
 @property Boolean mCalled;
 @property (nonatomic, retain) NSNumber *mIsPrimaryNavigationFragment;
 @property (nonatomic, retain) ILuaFragment *kotlinInterface;
+@property (nonatomic, retain) LuaViewModelProvider *viewModelProvider;
 
 @end

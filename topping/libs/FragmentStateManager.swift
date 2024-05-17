@@ -2,9 +2,9 @@ import UIKit
 
 @objc(SavedState)
 open class SavedState: NSObject {
-    @objc public var mState: Dictionary<String, Any>
+    @objc public var mState: LuaBundle
     
-    @objc public init(state: Dictionary<String, Any>) {
+    @objc public init(state: LuaBundle) {
         mState = state
     }
 }
@@ -42,10 +42,10 @@ class FragmentStateManager: NSObject {
         mFragment.mTargetWho = mFragment.mTarget != nil ? mFragment.mTargetWho : nil
         mFragment.mTarget = nil
         if(fs.mSavedFragmentState != nil) {
-            mFragment.mSavedFragmentState = fs.mSavedFragmentState?.objcDictionary
+            mFragment.mSavedFragmentState = fs.mSavedFragmentState
         }
         else {
-            mFragment.mSavedFragmentState = Dictionary<String, Any>().objcDictionary
+            mFragment.mSavedFragmentState = LuaBundle()
         }
     }
     
@@ -243,7 +243,7 @@ class FragmentStateManager: NSObject {
                 mFragment.lgview.fragment = mFragment
                 if(mFragment.mHidden) { mFragment.lgview.setVisibility(VISIBILITY.GONE.rawValue) }
                 mFragment.performViewCreated()
-                mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState?.swiftDictionary, onlyRecursive: false)
+                mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState, onlyRecursive: false)
                 mFragment.mState = FragmentState.FS_VIEW_CREATED.rawValue
             }
         }
@@ -286,9 +286,9 @@ class FragmentStateManager: NSObject {
     
     func create() {
         if(!mFragment.mIsCreated) {
-            mDispatcher.dispatchOnFragmentPreCreated(f: mFragment, savedInstanceState: mFragment.mSavedFragmentState?.swiftDictionary, onlyRecursive: false)
+            mDispatcher.dispatchOnFragmentPreCreated(f: mFragment, savedInstanceState: mFragment.mSavedFragmentState, onlyRecursive: false)
             mFragment.performCreate(mFragment.mSavedFragmentState)
-            mDispatcher.dispatchOnFragmentCreated(f: mFragment, savedInstanceState: mFragment.mSavedFragmentState?.swiftDictionary, onlyRecursive: false)
+            mDispatcher.dispatchOnFragmentCreated(f: mFragment, savedInstanceState: mFragment.mSavedFragmentState, onlyRecursive: false)
         } else {
             mFragment.restoreChildFragmentState(mFragment.mSavedFragmentState)
             mFragment.mState = FragmentState.FS_CREATED.rawValue
@@ -327,7 +327,7 @@ class FragmentStateManager: NSObject {
             }
             //TODO attach work
             mFragment.performViewCreated()
-            mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState?.swiftDictionary, onlyRecursive: false)
+            mDispatcher.dispatchOnFragmentViewCreated(f: mFragment, view: mFragment.lgview, savedInstanceState: mFragment.mSavedFragmentState, onlyRecursive: false)
             var postOnViewCreatedVisibility = mFragment.lgview.getVisibility()
             var postOnViewCreatedAlpha = mFragment.lgview.getAlpha()
             /*mFragment.setPostOnViewCreatedAlpha(postOnViewCreatedAlpha)
@@ -378,16 +378,16 @@ class FragmentStateManager: NSObject {
             if(mFragment.mTargetWho != nil) {
                 if(fs.mSavedFragmentState == nil)
                 {
-                    fs.mSavedFragmentState = Dictionary<String, Any>()
+                    fs.mSavedFragmentState = LuaBundle()
                 }
-                fs.mSavedFragmentState?["TARGET_STATE_TAG"] = mFragment.mTargetWho
+                fs.mSavedFragmentState?.put("TARGET_STATE_TAG", mFragment.mTargetWho)
                 if(mFragment.mTargetRequestCode != 0) {
-                    fs.mSavedFragmentState?["TARGET_REQUEST_CODE_STATE_TAG"] = mFragment.mTargetRequestCode
+                    fs.mSavedFragmentState?.putInt("TARGET_REQUEST_CODE_STATE_TAG", Int32(mFragment.mTargetRequestCode))
                 }
             }
         }
         else {
-            fs.mSavedFragmentState = mFragment.mSavedFragmentState?.swiftDictionary
+            fs.mSavedFragmentState = mFragment.mSavedFragmentState
         }
         mFragmentStore.setSavedState(who: mFragment.mWho, fragmentState: fs)
     }
@@ -401,15 +401,11 @@ class FragmentStateManager: NSObject {
         return nil
     }
     
-    func saveBasicState() -> Dictionary<String, Any>? {
-        var result: Dictionary<String, Any>? = Dictionary<String, Any>()
+    func saveBasicState() -> LuaBundle? {
+        let result = LuaBundle()
         
-        mFragment.performSaveInsanceState(result?.objcDictionary)
-        mDispatcher.dispatchOnFragmentSaveInstanceState(f: mFragment, outState: result!, onlyRecursive: false)
-        if(result == nil || ((result?.isEmpty) != nil))
-        {
-            result = nil
-        }
+        mFragment.performSaveInsanceState(result)
+        mDispatcher.dispatchOnFragmentSaveInstanceState(f: mFragment, outState: result, onlyRecursive: false)
         
         /*if(mFragment.lgview != nil) {
             saveViewState()

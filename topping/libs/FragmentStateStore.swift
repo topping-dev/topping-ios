@@ -9,11 +9,11 @@ class FragmentStateStore: NSObject {
     var mRetainInstance: Bool
     var mRemoving: Bool
     var mDetached: Bool
-    var mArguments: Dictionary<String, Any>
+    var mArguments: LuaBundle
     var mHidden: Bool
     var mMaxLifecycleState: Int
     
-    var mSavedFragmentState: Dictionary<String, Any>?
+    var mSavedFragmentState: LuaBundle?
     
     init(frag: LuaFragment) {
         mWho = frag.mWho
@@ -24,7 +24,7 @@ class FragmentStateStore: NSObject {
         mRetainInstance = frag.mRetainInstance
         mRemoving = frag.mRemoving
         mDetached = frag.mDetached
-        mArguments = frag.mArguments.swiftDictionary
+        mArguments = frag.mArguments
         mHidden = frag.mHidden
         mMaxLifecycleState = frag.mMaxState.rawValue
     }
@@ -39,14 +39,14 @@ class FragmentStateStore: NSObject {
         fragment?.mRetainInstance = mRetainInstance
         fragment?.mRemoving = mRemoving
         fragment?.mDetached = mDetached
-        fragment?.mArguments = mArguments.objcDictionary
+        fragment?.mArguments = mArguments
         fragment?.mHidden = mHidden
         fragment?.mMaxState = LifecycleState(rawValue: mMaxLifecycleState)!
         if(mSavedFragmentState != nil) {
-            fragment?.mSavedFragmentState = mSavedFragmentState?.objcDictionary
+            fragment?.mSavedFragmentState = mSavedFragmentState
         }
         else {
-            fragment?.mSavedFragmentState = Dictionary<String, Any>().objcDictionary
+            fragment?.mSavedFragmentState = LuaBundle()
         }
         return fragment
     }

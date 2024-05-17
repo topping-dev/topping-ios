@@ -69,7 +69,7 @@
     return lf;
 }
 
-+(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(NSMutableDictionary*)arguments
++(LuaFragment*)create:(LuaContext*)context :(LuaRef*)luaId :(LuaBundle*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
     lf.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
@@ -78,7 +78,7 @@
     return lf;
 }
 
-+(LuaFragment*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui :(NSMutableDictionary*)arguments
++(LuaFragment*)createWithUI:(LuaContext *)context :(LuaRef *)luaId :(LuaRef*)ui :(LuaBundle*)arguments
 {
     LuaFragment *lf = [[LuaFragment alloc] init];
     lf.luaId = [[LGIdParser getInstance] getId:luaId.idRef];
@@ -176,43 +176,43 @@
     return @{};
 }
 
--(NSMutableDictionary*)requireSavedInstanceState:(NSMutableDictionary*)dict {
+-(LuaBundle*)requireSavedInstanceState:(LuaBundle*)dict {
     if(dict == nil)
-        return [NSMutableDictionary new];
+        return [LuaBundle new];
     else
         return dict;
 }
 
--(void)onCreate:(NSMutableDictionary *)savedInstanceState {
+-(void)onCreate:(LuaBundle *)savedInstanceState {
     self.kotlinInterface = [LuaEvent getFragmentInstance:self.luaId :self];
     if(self.kotlinInterface != nil) {
-        [self.kotlinInterface.ltOnCreate call:[[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]]];
+        [self.kotlinInterface.ltOnCreate call:[self requireSavedInstanceState:savedInstanceState]];
     }
-    [LuaEvent onUIEvent:self :UI_EVENT_CREATE :self.context :1, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_CREATE :self.context :1, [self requireSavedInstanceState:savedInstanceState], nil];
 }
 
--(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(NSMutableDictionary *)savedInstanceState {
+-(LGView*)onCreateView:(LGLayoutParser*)inflater :(LGViewGroup *)container :(LuaBundle *)savedInstanceState {
     LGView *viewToRet = nil;
     viewToRet = (LGView*)[LuaEvent onUIEvent:self :UI_EVENT_FRAGMENT_CREATE_VIEW :self.context :3,
-                     [LuaViewInflator from:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+                     [LuaViewInflator from:inflater], container, [self requireSavedInstanceState:savedInstanceState], nil];
     if(viewToRet == nil && self.kotlinInterface != nil) {
-        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView callIn:self.context, [LuaViewInflator from:inflater], container, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+        viewToRet = (LGView*)[self.kotlinInterface.ltOnCreateView callIn:self.context, [LuaViewInflator from:inflater], container, [self requireSavedInstanceState:savedInstanceState], nil];
     }
     return viewToRet;
 }
 
--(void)onViewCreated:(LGView *)view :(NSMutableDictionary *)savedInstanceState {
+-(void)onViewCreated:(LGView *)view :(LuaBundle *)savedInstanceState {
     if(self.kotlinInterface != nil) {
         [self.kotlinInterface.ltOnViewCreated call:view :[self requireSavedInstanceState:savedInstanceState]];
     }
-    [LuaEvent onUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [[LuaBundle alloc] initWithBundle:[self requireSavedInstanceState:savedInstanceState]], nil];
+    [LuaEvent onUIEvent:self :UI_EVENT_FRAGMENT_VIEW_CREATED :self.context :2, view, [self requireSavedInstanceState:savedInstanceState], nil];
 }
 
--(void)onActivityCreated:(NSMutableDictionary *)savedInstanceState {
+-(void)onActivityCreated:(LuaBundle *)savedInstanceState {
     self.mCalled = true;
 }
 
--(void)onViewStateRestored:(NSMutableDictionary *)savedInstanceState {
+-(void)onViewStateRestored:(LuaBundle *)savedInstanceState {
     self.mCalled = true;
 }
 
@@ -228,8 +228,8 @@
     [LuaEvent onUIEvent:self :UI_EVENT_RESUME :self.context :0, nil];
 }
 
-- (void)onSaveInstanceState:(NSMutableDictionary *)outState {
-    [outState addEntriesFromDictionary:[self.lgview onSaveInstanceState]];
+- (void)onSaveInstanceState:(LuaBundle *)outState {
+    [outState putObject:@"savedstate" :[self.lgview onSaveInstanceState]];
 }
 
 -(void)onPause {
@@ -317,19 +317,15 @@
     return self.mBackStackNesting > 0;
 }
 
--(void)setArguments:(NSMutableDictionary*)args {
+-(void)setArguments:(LuaBundle*)args {
     if(self.mFragmentManager != nil && [self isStateSaved]) {
         return;
     }
     self.mArguments = args;
 }
 
--(NSMutableDictionary*)getArguments {
+-(LuaBundle*)getArguments {
     return self.mArguments;
-}
-
--(LuaBundle *)getArgumentsBundle {
-    return [[LuaBundle alloc] initWithBundle:[self getArguments]];
 }
 
 -(BOOL)isStateSaved {
@@ -355,11 +351,11 @@
     return [LGLayoutParser getInstance];
 }
 
--(LGLayoutParser *)getLayoutInflater:(NSMutableDictionary *)savedInstanceState {
+-(LGLayoutParser *)getLayoutInflater:(LuaBundle *)savedInstanceState {
     return [LGLayoutParser getInstance];
 }
 
--(LGLayoutParser *)onGetLayoutInflater:(NSMutableDictionary *)savedInstanceState {
+-(LGLayoutParser *)onGetLayoutInflater:(LuaBundle *)savedInstanceState {
     return [self getLayoutInflater:savedInstanceState];
 }
 
@@ -374,11 +370,11 @@
     return self.mDefaultFactory;
 }
 
--(LGLayoutParser *)performGetLayoutInflater:(NSMutableDictionary *)savedInstanceState {
+-(LGLayoutParser *)performGetLayoutInflater:(LuaBundle *)savedInstanceState {
     return [self onGetLayoutInflater:savedInstanceState];
 }
 
--(void)onInflate:(LuaContext*)context :(NSDictionary*)attrs :(NSMutableDictionary*)savedInstanceState {
+-(void)onInflate:(LuaContext*)context :(NSDictionary*)attrs :(LuaBundle*)savedInstanceState {
     self.mCalled = true;
     LuaForm *form = self.mHost == nil ? nil : [self.mHost getActivity];
     if(form != nil) {
@@ -387,7 +383,7 @@
     }
 }
 
--(void)onInflateForm:(LuaForm*)form :(NSDictionary*)attrs :(NSMutableDictionary*)savedInstanceState {
+-(void)onInflateForm:(LuaForm*)form :(NSDictionary*)attrs :(LuaBundle*)savedInstanceState {
     self.mCalled = true;
 }
 
@@ -407,9 +403,9 @@
     }
 }
 
--(void)restoreChildFragmentState:(NSMutableDictionary *)savedInstanceState {
+-(void)restoreChildFragmentState:(LuaBundle *)savedInstanceState {
     if(savedInstanceState != nil) {
-        NSObject *data = [savedInstanceState objectForKey:SAVED_STATE_TAG];
+        NSObject *data = [savedInstanceState getObject:SAVED_STATE_TAG];
         if(data != nil) {
             [self.mChildFragmentManager restoreSaveStateInternalWithState:(FragmentManagerState*)data];
             [self.mChildFragmentManager dispatchCreate];
@@ -455,7 +451,7 @@
     [self.mChildFragmentManager dispatchAttach];
 }
 
--(void)performCreate:(NSMutableDictionary *)savedInstanceState {
+-(void)performCreate:(LuaBundle *)savedInstanceState {
     [self.mChildFragmentManager noteStateNotSaved];
     self.mState = FS_CREATED;
     self.mCalled = false;
@@ -468,7 +464,7 @@
         }
     };
     [self.mLifecycleRegistry addObserver:leo];
-    [self .mSavedStateRegistryController performRestoreWithSavedStrate:savedInstanceState];
+    [self.mSavedStateRegistryController performRestoreWithSavedStrate:savedInstanceState];
     [self onCreate:savedInstanceState];
     self.mIsCreated = true;
     if(!self.mCalled) {
@@ -477,7 +473,7 @@
     [self.mLifecycleRegistry handleLifecycleEvent:LIFECYCLEEVENT_ON_CREATE];
 }
 
--(void)performCreateView:(LGLayoutParser*) inflater :(LGViewGroup*) container :(NSMutableDictionary *)savedInstanceState {
+-(void)performCreateView:(LGLayoutParser*) inflater :(LGViewGroup*) container :(LuaBundle *)savedInstanceState {
     [self.mChildFragmentManager noteStateNotSaved];
     self.mPerformedCreateView = true;
     self.mViewLifecycleOwner = [[FragmentViewLifecycleOwner alloc] initWithFragment:self viewModelStore:[self getViewModelStore]];
@@ -500,7 +496,7 @@
     [self.mChildFragmentManager dispatchViewCreated];
 }
 
--(void)performActivityCreated:(NSMutableDictionary *)savedInstanceState {
+-(void)performActivityCreated:(LuaBundle *)savedInstanceState {
     [self.mChildFragmentManager noteStateNotSaved];
     self.mState = FS_AWAITING_EXIT_EFFECTS;
     self.mCalled = false;
@@ -519,7 +515,7 @@
     self.mSavedFragmentState = nil;
 }
 
--(void)restoreViewState:(NSMutableDictionary*)savedInstanceState {
+-(void)restoreViewState:(LuaBundle*)savedInstanceState {
     if(self.mSavedViewState != nil) {
         //TODO
         //[self.lgview restoreHierarchyState:self.mSavedViewState];
@@ -584,13 +580,13 @@
     }
 }
 
--(void)performSaveInsanceState:(NSMutableDictionary *)outState {
+-(void)performSaveInsanceState:(LuaBundle *)outState {
     [self onSaveInstanceState:outState];
     outState = [self.mSavedStateRegistryController performSaveWithOutBundle:outState].mutableCopy;
 
     FragmentManagerState *p = [self.mChildFragmentManager saveAllStateInternal];
     if(p != nil) {
-        [outState setObject:p forKey:SAVED_STATE_TAG];
+        [outState putObject:SAVED_STATE_TAG :p];
     }
 }
 

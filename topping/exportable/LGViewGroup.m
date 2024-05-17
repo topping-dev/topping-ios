@@ -377,14 +377,16 @@
     return retVal;
 }
 
--(NSMutableDictionary *)onSaveInstanceState {
-    NSMutableDictionary *dict = [NSMutableDictionary new];
+-(LuaBundle *)onSaveInstanceState {
+    LuaBundle *b = [LuaBundle new];
+    NSMutableArray *arr = [NSMutableArray new];
     for(LGView *w in self.subviews)
     {
-        [dict addEntriesFromDictionary:[w onSaveInstanceState]];
+        [arr addObject:[w onSaveInstanceState]];
     }
     
-    return dict;
+    [b putObject:@"savesstate" :arr];
+    return b;
 }
 
 -(void)viewDidLayoutSubviews {

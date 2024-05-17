@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger, TRANSFORMATION_TYPE) {
 
 -(NSArray*)allPropertyNames;
 
--(NSMutableDictionary*)onSaveInstanceState;
+-(LuaBundle*)onSaveInstanceState;
 
 -(void)viewDidLayoutSubviews;
 

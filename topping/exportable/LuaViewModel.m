@@ -39,6 +39,21 @@
 {
 }
 
+-(void)clear:(NSString*) idVal
+{
+    if (self.mBagOfTags != nil) {
+        @synchronized (self) {
+            for(NSObject *value in [self.mBagOfTags allKeys])
+            {
+                if(value == idVal) {
+                    [self closeWithRuntimeException:value];
+                    break;
+                }
+            }
+        }
+    }
+}
+
 -(void)clear
 {
     self.mCleared = true;

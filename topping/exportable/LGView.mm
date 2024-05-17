@@ -357,8 +357,8 @@ static char UIB_PROPERTY_KEY_FORM;
     return rv;
 }
 
--(NSMutableDictionary*)onSaveInstanceState {
-    return [NSMutableDictionary new];
+-(LuaBundle*)onSaveInstanceState {
+    return [LuaBundle new];
 }
 
 -(void)viewDidLayoutSubviews {

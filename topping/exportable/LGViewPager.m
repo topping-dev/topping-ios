@@ -88,8 +88,8 @@
     [self notify];
 }
 
--(NSMutableDictionary *)onSaveInstanceState {
-    NSMutableDictionary *superState = [super onSaveInstanceState];
+-(LuaBundle *)onSaveInstanceState {
+    LuaBundle *superState = [super onSaveInstanceState];
     //TODO:Fix state
     return superState;
 }

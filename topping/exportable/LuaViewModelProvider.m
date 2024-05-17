@@ -8,13 +8,17 @@
 @implementation LuaViewModelProvider
 
 +(LuaViewModelProvider*)ofForm:(LuaForm*)form
-{    
-    return [[LuaViewModelProvider alloc] initWithViewModelProvider:[[ViewModelProvider alloc] initWithOwner:form]];
+{
+    if(form.viewModelProvider == nil)
+        form.viewModelProvider = [[LuaViewModelProvider alloc] initWithViewModelProvider:[[ViewModelProvider alloc] initWithOwner:form]];
+    return form.viewModelProvider;
 }
 
 +(LuaViewModelProvider*)ofFragment:(LuaFragment*)fragment
 {
-    return [[LuaViewModelProvider alloc] initWithViewModelProvider:[[ViewModelProvider alloc] initWithOwner:fragment]];
+    if(fragment.viewModelProvider == nil)
+        fragment.viewModelProvider = [[LuaViewModelProvider alloc] initWithViewModelProvider:[[ViewModelProvider alloc] initWithOwner:fragment]];
+    return fragment.viewModelProvider;
 }
 
 - (instancetype)initWithViewModelProvider:(ViewModelProvider*)viewModelProvider

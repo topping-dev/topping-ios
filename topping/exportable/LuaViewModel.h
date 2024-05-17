@@ -18,6 +18,7 @@
 -(void)setObject:(NSString*)key :(NSObject*)obj;
 -(NSObject*)getObject:(NSString*)key;
 -(void)onCleared;
+-(void)clear:(NSString*)idVal;
 -(void)clear;
 -(NSObject*)setTagIfAbsent:(NSString*)key :(NSObject*)value;
 -(NSObject*)getTag:(NSString*)key;

@@ -1,38 +1,46 @@
 import Foundation
 
 @objc public protocol OnBackPressedDispatcherOwner : LifecycleOwner {
-    func getOnBackPressedDispatcher() -> OnBackPressedDispatcher
+    @objc func getOnBackPressedDispatcher() -> OnBackPressedDispatcher
 }
 
-class OnBackPressedCallback : NSObject, Keyable {
-    var key: String = UUID.init().uuidString
+@objc
+public class OnBackPressedCallback : NSObject, Keyable {
+    public var key: String = UUID.init().uuidString
     
     private var mEnabled: Bool
     private var mCancellables = Array<Cancellable>()
     
-    init(enabled: Bool) {
+    @objc
+    public init(enabled: Bool) {
         mEnabled = enabled
     }
     
-    func setEnabled(enabled: Bool) { mEnabled = enabled }
+    @objc
+    public func setEnabled(enabled: Bool) { mEnabled = enabled }
     
-    func isEnabled() -> Bool { return mEnabled }
+    @objc
+    public func isEnabled() -> Bool { return mEnabled }
     
-    func remove() {
+    @objc
+    public func remove() {
         for cancellable in mCancellables {
             cancellable.cancel()
         }
     }
     
-    func handleOnBackPressed() {
+    @objc
+    public func handleOnBackPressed() {
         
     }
     
-    func addCancellable(cancellable: Cancellable) {
+    @objc
+    public func addCancellable(cancellable: Cancellable) {
         mCancellables.append(cancellable)
     }
     
-    func removeCancellable(cancellable: Cancellable) {
+    @objc
+    public func removeCancellable(cancellable: Cancellable) {
         var indexToRemove = -1
         for (index, v) in mCancellables.enumerated() {
             if(v.key == cancellable.key) {
@@ -63,18 +71,20 @@ open class OnBackPressedDispatcher : NSObject {
     }
     
     @objc
-    func addCallback(onBackPressedCallback: OnBackPressedCallback) {
+    public func addCallback(onBackPressedCallback: OnBackPressedCallback) {
         addCancellableCallback(onBackPressedCallback: onBackPressedCallback)
     }
     
-    func addCancellableCallback(onBackPressedCallback: OnBackPressedCallback) -> Cancellable {
+    @objc
+    public func addCancellableCallback(onBackPressedCallback: OnBackPressedCallback) -> Cancellable {
         mOnBackPressedCallbacks.append(onBackPressedCallback)
         var cancellable = OnBackPressedCancellable(onBackPressedCallbacks: mOnBackPressedCallbacks, onBackPressedCallback: onBackPressedCallback)
         onBackPressedCallback.addCancellable(cancellable: cancellable)
         return cancellable
     }
     
-    func addCallback(owner: LifecycleOwner, onBackPressedCallback: OnBackPressedCallback) {
+    @objc
+    public func addCallback(owner: LifecycleOwner, onBackPressedCallback: OnBackPressedCallback) {
         let lifecycle = owner.getLifecycle()!
         if (lifecycle.getCurrentState() == LifecycleState.LIFECYCLESTATE_DESTROYED) {
             return;
@@ -83,7 +93,8 @@ open class OnBackPressedDispatcher : NSObject {
         onBackPressedCallback.addCancellable(cancellable: LifecycleOnBackPressedCancellable(lifecycle: lifecycle, onBackPressedCallback: onBackPressedCallback, onBackPressedDispatcher: nil))
     }
     
-    func hasEnabledCallbacks() -> Bool {
+    @objc
+    public func hasEnabledCallbacks() -> Bool {
         var iterator = mOnBackPressedCallbacks.reversed().makeIterator()
         var obj = iterator.next()
         while(obj != nil) {
@@ -95,7 +106,8 @@ open class OnBackPressedDispatcher : NSObject {
         return false
     }
     
-    func onBackPressed() {
+    @objc
+    public func onBackPressed() {
         var iterator = mOnBackPressedCallbacks.reversed().makeIterator()
         var obj = iterator.next()
         while(obj != nil) {
@@ -110,18 +122,21 @@ open class OnBackPressedDispatcher : NSObject {
         }
     }
     
-    class OnBackPressedCancellable : Cancellable {
-        var key: String = UUID.init().uuidString
+    @objc
+    public class OnBackPressedCancellable : NSObject, Cancellable {
+        public var key: String = UUID.init().uuidString
         
         private var mOnBackPressedCallbacks: Array<OnBackPressedCallback>
         private var mOnBackPressedCallback: OnBackPressedCallback
         
-        init(onBackPressedCallbacks: Array<OnBackPressedCallback>, onBackPressedCallback: OnBackPressedCallback) {
+        @objc
+        public init(onBackPressedCallbacks: Array<OnBackPressedCallback>, onBackPressedCallback: OnBackPressedCallback) {
             mOnBackPressedCallbacks = onBackPressedCallbacks
             mOnBackPressedCallback = onBackPressedCallback
         }
         
-        func cancel() {
+        @objc
+        public func cancel() {
             var indexToRemove = -1
             for (index, v) in mOnBackPressedCallbacks.enumerated() {
                 if(v.key == mOnBackPressedCallback.key) {
@@ -137,7 +152,7 @@ open class OnBackPressedDispatcher : NSObject {
     
     @objc(LifecycleOnBackPressedCancellable)
     open class LifecycleOnBackPressedCancellable : NSObject, LifecycleEventObserver, Cancellable {
-        var key: String = UUID.init().uuidString
+        public var key: String = UUID.init().uuidString
         
         private var mLifecycle: Lifecycle
         private var mOnBackPressedCallback: OnBackPressedCallback
@@ -145,7 +160,8 @@ open class OnBackPressedDispatcher : NSObject {
         
         private var mOnBackPressedDispatcher: OnBackPressedDispatcher?
         
-        init(lifecycle: Lifecycle, onBackPressedCallback: OnBackPressedCallback, onBackPressedDispatcher: OnBackPressedDispatcher?) {
+        @objc
+        public init(lifecycle: Lifecycle, onBackPressedCallback: OnBackPressedCallback, onBackPressedDispatcher: OnBackPressedDispatcher?) {
             mLifecycle = lifecycle
             mOnBackPressedCallback = onBackPressedCallback
             mOnBackPressedDispatcher = onBackPressedDispatcher
@@ -153,10 +169,12 @@ open class OnBackPressedDispatcher : NSObject {
             lifecycle.add(self)
         }
         
+        @objc
         public func getKey() -> String! {
             return key
         }
         
+        @objc
         public func onStateChanged(_ source: LifecycleOwner!, _ event: LifecycleEvent) {
             if(event == LifecycleEvent.LIFECYCLEEVENT_ON_START) {
                 mCurrentCancellable = mOnBackPressedDispatcher?.addCancellableCallback(onBackPressedCallback: mOnBackPressedCallback)
@@ -166,8 +184,9 @@ open class OnBackPressedDispatcher : NSObject {
                 cancel()
             }
         }
-                
-        func cancel() {
+        
+        @objc
+        public func cancel() {
             mLifecycle.remove(self)
             mOnBackPressedCallback.removeCancellable(cancellable: self)
             mCurrentCancellable?.cancel()

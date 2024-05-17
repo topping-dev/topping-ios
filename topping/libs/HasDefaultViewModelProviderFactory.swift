@@ -1,6 +1,6 @@
 import UIKit
 
 @objc(HasDefaultViewModelProviderFactory)
-protocol HasDefaultViewModelProviderFactory {
+public protocol HasDefaultViewModelProviderFactory {
     @objc func getDefaultViewModelProviderFactory() -> ViewModelProviderFactory
 }

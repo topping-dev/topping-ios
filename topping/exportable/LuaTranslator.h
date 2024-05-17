@@ -3,25 +3,17 @@
 #import "LuaInterface.h"
 #import "LuaClass.h"
 
-static NSMutableArray* VarArgs(va_list ap, NSObject* val);
-static NSMutableArray* VarArgs(va_list ap, NSObject* val)
-{
-	id obj;
-	NSMutableArray* array = [NSMutableArray array];
-	if(val == nil)
-		return array;
-	[array addObject:val];
-	while ((obj = va_arg(ap, id))) {
-		[array addObject:obj];
-	}
-	return array;
-}
+@interface VarArgsConvertor : NSObject
+
++(NSMutableArray*)VarArgs:(va_list)ap :(NSObject*)val;
+
+@end
 
 #ifndef	VarArgs2
 #define VarArgs2(_last_) ({ \
 va_list ap; \
 va_start(ap, _last_); \
-NSArray* __args = VarArgs(ap, _last_); \
+NSArray* __args = [VarArgsConvertor VarArgs:ap :_last_]; \
 va_end(ap); \
 if (([__args count] == 1) && ([[__args objectAtIndex:0] isKindOfClass:[NSArray class]])) { \
 __args = [__args objectAtIndex:0]; \
@@ -31,7 +23,7 @@ __args; })
 
 #ifndef VarArgs3
 #define VarArgs3(ap, _last_) ({ \
-NSMutableArray* __args = VarArgs(ap, _last_); \
+NSMutableArray* __args = [VarArgsConvertor VarArgs:ap :_last_]; \
 if (([__args count] == 1) && ([[__args objectAtIndex:0] isKindOfClass:[NSArray class]])) { \
 __args = [__args objectAtIndex:0]; \
 } \

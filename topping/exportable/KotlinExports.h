@@ -58,6 +58,17 @@
 -(MetalView*)getMetalView;
 -(MetalViewInternalDelegate*)getMetalViewInternalDelegate;
 -(id<MetalViewDelegate>)getMetalViewDelegate;
+-(TIOSKHRect*)getTIOSKHRect;
+-(TIOSKHPoint*)getTIOSKHPoint;
+-(TIOSKHTColorCompanion*)getTIOSKHTColorCompanion;
+-(id<TIOSKHTResources>)getTIOSKHTResourcesProtocol;
+-(TIOSKHCoreXmlBufferedReader*)getTIOSKHCoreXmlBufferedReader;
+-(TIOSKHXml*)getTIOSKHXml;
+-(TIOSKHTViewCompanion*)getTIOSKHTViewCompanion;
+-(TIOSKHTypedValueCompanion*)getTIOSKHTypedValueCompanion;
+-(TIOSKHXmlCompanion*)getTIOSKHXmlCompanion;
+-(TIOSKHCoreEventType*)getTIOSKHCoreEventType;
+
 
 @end
 

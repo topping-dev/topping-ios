@@ -3,6 +3,10 @@
 #import <Topping/Topping-Swift.h>
 #import "Topping.h"
 
+@implementation BundleWrapper
+
+@end
+
 @implementation LuaBundle
 
 - (instancetype)init
@@ -21,6 +25,19 @@
         self.bundle = bundle;
     }
     return self;
+}
+
+-(BOOL)getBoolean:(NSString *)key {
+    return [self getBoolean:key :false];
+}
+
+-(BOOL)getBoolean:(NSString *)key :(BOOL)def {
+    NSNumber *num = [self getNumber:key :def];
+    return [num boolValue];
+}
+
+-(void)putBoolean:(NSString *)key :(BOOL)value {
+    [self.bundle setObject:[NSNumber numberWithBool:value] forKey:key];
 }
 
 -(NSString *)getString:(NSString *)key {
@@ -134,6 +151,186 @@
 
 -(void)putDouble:(NSString*)key :(double)value {
     [self.bundle setObject:[NSNumber numberWithDouble:value] forKey:key];
+}
+
+-(TIOSKHKotlinShortArray *)getShortArray:(NSString *)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinShortArray *)getShortArray:(NSString *)key :(TIOSKHKotlinShortArray *)def {
+    TIOSKHKotlinShortArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+- (void)putShortArray:(NSString *)key :(TIOSKHKotlinShortArray *)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinBooleanArray *)getBooleanArray:(NSString *)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinBooleanArray *)getBooleanArray:(NSString *)key :(TIOSKHKotlinBooleanArray *)def {
+    TIOSKHKotlinBooleanArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putBooleanArray:(NSString *)key :(TIOSKHKotlinBooleanArray *)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinByteArray *)getByteArray:(NSString *)key {
+    return [self.bundle objectForKey:key];
+}
+
+- (TIOSKHKotlinByteArray *)getByteArray:(NSString *)key :(TIOSKHKotlinByteArray *)def {
+    TIOSKHKotlinByteArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+- (void)putByteArray:(NSString *)key :(TIOSKHKotlinByteArray *)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinCharArray *)getCharArray:(NSString *)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinCharArray *)getCharArray:(NSString *)key :(TIOSKHKotlinCharArray *)def {
+    TIOSKHKotlinCharArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putCharArray:(NSString *)key :(TIOSKHKotlinCharArray *)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinIntArray*)getIntArray:(NSString*)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinIntArray*)getIntArray:(NSString*)key :(TIOSKHKotlinIntArray*)def {
+    TIOSKHKotlinIntArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putIntArray:(NSString*)key :(TIOSKHKotlinIntArray*)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinLongArray*)getLongArray:(NSString*)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinLongArray*)getLongArray:(NSString*)key :(TIOSKHKotlinLongArray*)def {
+    TIOSKHKotlinLongArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putLongArray:(NSString*)key :(TIOSKHKotlinFloatArray*)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinFloatArray*)getFloatArray:(NSString*)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinFloatArray*)getFloatArray:(NSString*)key :(TIOSKHKotlinFloatArray*)def {
+    TIOSKHKotlinFloatArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putFloatArray:(NSString*)key :(TIOSKHKotlinFloatArray*)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinDoubleArray *)getDoubleArray:(NSString *)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinDoubleArray *)getDoubleArray:(NSString *)key :(TIOSKHKotlinDoubleArray *)def {
+    TIOSKHKotlinDoubleArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putDoubleArray:(NSString *)key :(TIOSKHKotlinDoubleArray *)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinArray<NSString*>*)getStringArray:(NSString*)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinArray<NSString*>*)getStringArray:(NSString*)key :(TIOSKHKotlinArray<NSString*>*)def {
+    TIOSKHKotlinArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putStringArray:(NSString*)key :(TIOSKHKotlinArray<NSString*>*)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(TIOSKHKotlinArray*)getArray:(TIOSKHKotlinArray*)key {
+    return [self.bundle objectForKey:key];
+}
+
+-(TIOSKHKotlinArray*)getArray:(NSString*)key :(TIOSKHKotlinArray*)def {
+    TIOSKHKotlinArray *arr = [self.bundle objectForKey:key];
+    if(arr == nil)
+        return def;
+    return arr;
+}
+
+-(void)putArray:(NSString*)key :(TIOSKHKotlinArray*)value {
+    [self.bundle setObject:value forKey:key];
+}
+
+-(id)getObject:(NSString*)key {
+    BundleWrapper *objWrapper = [self.bundle objectForKey:key];
+    return objWrapper.obj;
+}
+
+-(id)getObject:(NSString*)key :(id)def {
+    BundleWrapper *objWrapper = [self.bundle objectForKey:key];
+    if(objWrapper == nil)
+        return def;
+    return objWrapper.obj;
+}
+
+-(void)putObject:(NSString*)key :(id)value {
+    BundleWrapper *wrapper = [[BundleWrapper alloc] init];
+    wrapper.obj = value;
+    [self.bundle setObject:wrapper forKey:key];
+}
+
+-(LuaBundle *)getBundle:(NSString *)key {
+    return [self getObject:key];
+}
+
+-(LuaBundle *)getBundle:(NSString *)key :(LuaBundle *)def {
+    return [self getObject:key :def];
+}
+
+-(void)putBundle:(NSString *)key :(LuaBundle *)value {
+    [self putObject:key :value];
 }
 
 + (NSString *)className {

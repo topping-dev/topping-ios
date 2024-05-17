@@ -54,13 +54,13 @@ public protocol FragmentLifecycleCallbacks: NSObjectProtocol {
     
     @objc func onFragmentAttached(fm: FragmentManager, f:LuaFragment, context:LuaContext)
 
-    @objc func onFragmentPreCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?)
+    @objc func onFragmentPreCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:LuaBundle?)
 
-    @objc func onFragmentCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?)
+    @objc func onFragmentCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:LuaBundle?)
 
-    @objc func onFragmentActivityCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:Dictionary<String, Any>?)
+    @objc func onFragmentActivityCreated(fm: FragmentManager, f:LuaFragment, savedInstanceState:LuaBundle?)
 
-    @objc func onFragmentViewCreated(fm: FragmentManager, f:LuaFragment, v:LGView, savedInstanceState:Dictionary<String, Any>?)
+    @objc func onFragmentViewCreated(fm: FragmentManager, f:LuaFragment, v:LGView, savedInstanceState:LuaBundle?)
 
     @objc func onFragmentStarted(fm: FragmentManager, f:LuaFragment)
 
@@ -70,7 +70,7 @@ public protocol FragmentLifecycleCallbacks: NSObjectProtocol {
 
     @objc func onFragmentStopped(fm: FragmentManager, f:LuaFragment)
 
-    @objc func onFragmentSaveInstanceState(fm: FragmentManager, f:LuaFragment, outState:Dictionary<String, Any>)
+    @objc func onFragmentSaveInstanceState(fm: FragmentManager, f:LuaFragment, outState:LuaBundle)
 
     @objc func onFragmentViewDestroyed(fm: FragmentManager, f:LuaFragment)
 
