@@ -7,7 +7,7 @@ source 'https://github.com/Deadknight/dk-specs.git'
 target 'Topping' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
-  pod 'ToppingIOSKotlinHelper', '0.6.0'
+  pod 'ToppingIOSKotlinHelper', '0.6.1'
   use_frameworks! :linkage => :static
   #use_modular_headers!
 end
@@ -15,7 +15,7 @@ end
 target 'Toppingtest' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
-  pod 'ToppingIOSKotlinHelper', '0.6.0'
+  pod 'ToppingIOSKotlinHelper', '0.6.1'
   use_frameworks! :linkage => :static
   #use_modular_headers!
 end
